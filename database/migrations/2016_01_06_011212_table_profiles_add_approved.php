@@ -11,7 +11,7 @@ class TableProfilesAddApproved extends Migration {
      */
     public function up() {
         Schema::table('profiles', function(Blueprint $table) {
-            $table->boolean('approved')->default(false)->after('hero_photo_id');
+            $table->boolean('approved')->default(false)->after('description');
         });
     }
 
