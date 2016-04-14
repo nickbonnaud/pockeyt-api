@@ -16,12 +16,11 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('profiles.update', ['profiles' => $profile->id]) }}" enctype="multipart/form-data" class="col-md-6">
-                <input type="hidden" name="_method" value="PUT">
-                @include ('errors.form')
-                @include ('profiles.form')
-            </form>
-
+            <div class="col-md-6">
+                {!! Form::model($profile, ['method' => 'PATCH', 'route' => ['profiles.update', $profile->id]]) !!}
+                    @include ('profiles.form')
+                {!! Form::close() !!}
+            </div>
         </div>
 
     </div>

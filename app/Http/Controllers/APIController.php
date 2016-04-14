@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Profile;
+use App\Tags;
 
 class APIController extends Controller {
 
@@ -27,7 +28,7 @@ class APIController extends Controller {
     }
 
     public function getProfiles() {
-        $profiles = Profile::approved()->with(['logo', 'hero', 'posts'])->orderBy('business_name', 'ASC')->get()->map(function(Profile $profile) {
+        $profiles = Profile::approved()->with(['logo', 'hero', 'posts', 'tags'])->orderBy('business_name', 'ASC')->get()->map(function(Profile $profile) {
             return $profile->toDetailedArray();
         });
         return response()->json($profiles);
@@ -35,7 +36,7 @@ class APIController extends Controller {
 
     public function getProfile($id) {
         /** @var Profile $profile */
-        $profile = Profile::approved()->with(['logo', 'hero', 'posts'])->find($id);
+        $profile = Profile::approved()->with(['logo', 'hero', 'posts', 'tags'])->find($id);
         if(is_null($profile)) {
             return response()->json(['error' => 'Profile not found.'], 404);
         } else {

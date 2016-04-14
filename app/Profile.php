@@ -16,9 +16,11 @@ class Profile extends Model {
         'business_name',
         'website',
         'description',
+        'review_url',
+        'review_intro',
         'logo_photo_id',
         'hero_photo_id',
-        'featured'
+        'featured',
     ];
 
     protected $casts = [
@@ -29,7 +31,7 @@ class Profile extends Model {
     protected $appends = ['formatted_description'];
 
     public function toDetailedArray() {
-        $data = array_only($this->toArray(), ['id', 'business_name', 'website', 'description', 'formatted_description', 'created_at', 'updated_at', 'posts', 'featured']);
+        $data = array_only($this->toArray(), ['id', 'business_name', 'website', 'description', 'review_url', 'review_intro', 'formatted_description', 'created_at', 'updated_at', 'posts', 'tags', 'featured']);
         $data['logo_thumbnail'] = is_null($this->logo) ? '' : $this->logo->thumbnail_url;
         $data['logo'] = is_null($this->logo) ? '' : $this->logo->url;
         $data['hero_thumbnail'] = is_null($this->hero) ? '' : $this->hero->thumbnail_url;
@@ -92,6 +94,26 @@ class Profile extends Model {
      */
     public function owns($relation) {
         return $relation->profile_id == $this->id;
+    }
+
+    /**
+     * Get the tags associated with the given article
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+
+    
+    /**
+     * Get a list of tag ids associated with the current profile
+     * @return array
+     */
+    public function getTagListAttribute()
+    {
+        return $this->tags->lists('id')->all();
+
     }
 
     public function getFormattedDescriptionAttribute() {

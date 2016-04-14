@@ -17,11 +17,10 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('profiles.store') }}" enctype="multipart/form-data" class="col-md-6">
+            {!! Form::open(['route' => 'profiles.store']) !!}
                 @include ('errors.form')
                 @include ('profiles.form')
-            </form>
-
+            {!! Form::close() !!}
         </div>
 
     </div>

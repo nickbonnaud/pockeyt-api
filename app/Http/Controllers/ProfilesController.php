@@ -45,7 +45,8 @@ class ProfilesController extends Controller {
         if(!is_null($this->user->profile))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
-        return view('profiles.create');
+        $tags = \App\Tag::lists('name', 'id');
+        return view('profiles.create', compact('tags'));
     }
 
     /**
@@ -61,6 +62,12 @@ class ProfilesController extends Controller {
         $profile = $this->user->publish(
             new Profile($request->all())
         );
+
+        if(is_null($this->user->profile))
+            $this->syncTags($profile, $request->input('tags'));
+        else
+            $this->syncTags($profile, $request->input('tag_list'));
+
 
         flash()->overlay('Welcome Aboard', 'Thank you for creating a profile!');
 
@@ -87,7 +94,8 @@ class ProfilesController extends Controller {
      */
     public function edit(EditProfileRequest $request, $id) {
         $profile = Profile::findOrFail($id);
-        return view('profiles.edit', compact('profile'));
+        $tags = \App\Tag::lists('name', 'id');
+        return view('profiles.edit', compact('profile', 'tags'));
     }
 
     /**
@@ -101,6 +109,8 @@ class ProfilesController extends Controller {
         /** @var Profile $profile */
         $profile = Profile::findOrFail($id);
         $profile->update($request->all());
+
+        $this->syncTags($profile, $request->input('tag_list'));
 
         flash()->success('Success!', 'Profile has been updated.');
 
@@ -159,6 +169,16 @@ class ProfilesController extends Controller {
         $profile->featured = false;
         $profile->save();
         return redirect()->to(\URL::previous() . '#profile-' . $profile->id);
+    }
+
+    /**
+     * Sync up the list of tags in the database
+     * @param Profile $profile
+     * @param array $tags
+     */
+    private function syncTags(Profile $profile, array $tags)
+    {
+        $profile->tags()->sync($tags);      
     }
 
 }

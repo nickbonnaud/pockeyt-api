@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css"  />
 </head>
 
 <body>
@@ -52,19 +53,20 @@
 </nav>
 
 <div class="wrapper">
-	<div class="container">
-	    @yield('content')
-	</div>
+    <div class="container">
+        @yield('content')
+    </div>
 </div>
 
 <footer>
-	<p>Made in Raleigh, NC</p>
-	<p>In affiliation with NCSU and Mentorship from endUp</p>
+    <p>Made in Raleigh, NC</p>
+    <p>In affiliation with NCSU and Mentorship from endUp</p>
 </footer>
 
 <script src="{{ asset('/vendor/jquery/jquery-1.12.0.min.js') }}"></script>
 <script src="{{ asset('/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/js/libs.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
 @yield('scripts.footer')
 
 @include('flash')

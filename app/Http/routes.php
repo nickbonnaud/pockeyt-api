@@ -18,6 +18,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Posts routes...
+Route::post('posts/{posts}/photos', 'PostsController@postPhotos')->name('posts.photos');
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
 // Profile routes...

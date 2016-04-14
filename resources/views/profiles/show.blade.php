@@ -48,6 +48,20 @@
 
                 <hr>
 
+                <h4>Tags:</h4>
+                <ul>
+                    @foreach ($profile->tags as $tag)
+                        <li>{{ $tag->name }}</li>
+                    @endforeach
+                </ul>
+
+                <hr>
+
+                <p>Review URL: {{ $profile->review_url }}</p>
+                <p>Review Intro: {{ $profile->review_intro }}</p>
+
+                <hr>
+
                 <a href="{{ $profile->website }}" class="btn btn-block btn-primary">Visit website</a>
 
                 @if($signedIn && ($user->owns($profile) || $user->is_admin))
