@@ -7,7 +7,7 @@
 		    <div class="col-sm-8">
 		        <h1>Pockeyt Business</h1>
 		
-		        <p>An easier way to find and connect with your customers</p>
+		        <p>An easier way to find and connect with your Customers</p>
 		    </div>
 		    <div class="col-sm-4 loginbuttons">
 		        @if ($signedIn)
