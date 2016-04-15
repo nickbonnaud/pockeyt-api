@@ -16,8 +16,8 @@
 </div>
 
 <div class="form-group">
-    <label for="review_url">Review URL:</label>
-    <input type="text" name="review_url" id="review_url" class="form-control"
+    <label for="website">Review URL:</label>
+    <input type="text" name="review_url" id="website" class="form-control"
            value="{{ old('review_url') !== null ? old('review_url') : ((isset($profile) && $profile->review_url) ? $profile->review_url : '') }}" >
 </div>
 
@@ -31,7 +31,7 @@
 @if(isset($profile))
   <div class="form-group">
       {!! Form::label('tag_list', 'Tag:') !!}
-      {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'multiple']) !!}
+      {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'multiple', 'required']) !!}
   </div>
 @else
   <div class="form-group">
