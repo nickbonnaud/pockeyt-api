@@ -12,7 +12,9 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "~2.3",
         "mailgun/mailgun-php": "~1.7.2",
-        "laravelcollective/html": "~5.1"
+        "laravelcollective/html": "~5.1",
+        "league/fractal": "^0.13.0",
+        "spatie/laravel-fractal": "^1.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

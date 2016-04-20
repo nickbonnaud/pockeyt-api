@@ -36,4 +36,6 @@ Route::controller('api', 'APIController', [
     'getPost' => 'api.post',
     'getProfiles' => 'api.profiles',
     'getProfile' => 'api.profile',
+
+    'getProfilesv1' => 'api.profilesv1'
 ]);
