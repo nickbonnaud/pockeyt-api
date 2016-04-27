@@ -108,33 +108,38 @@ class APIController extends Controller {
     }
 
     public function getFavs(Request $request) {
-        if ($request->has('profile_id')) {
-            $paginator = Post::where('profile_id', $request->profile_id)->visible()->with([])->latest()->paginate(10);
+        if ($request->has('profiles')) {
+            $input = $request->all();
+            $profiles = $input['profiles'];
+            $profiles = explode(',', $profiles);
+           
+            $paginator = Post::whereIn('profile_id', $profiles)->visible()->with([])->latest()->paginate(10);
+            $paginator->appends($input)->render();
             $posts = $paginator->getCollection();
             return fractal()
-                ->collection($posts, function(Post $post) {
-                        return [
-                            'id' => $post->profile->id,
-                            'post_id' => (int) $post->id,
-                            'title' => $post->title,
-                            'body' => $post->body,
-                            'published_at' => $post->published_at,
-                            'business_name' => $post->profile->business_name,
-                            'website' => $post->profile->website,
-                            'description' => $post->profile->description,
-                            'review_url' => $post->profile->review_url,
-                            'review_intro' => $post->profile->review_intro,
-                            'formatted_description' => $post->profile->formatted_description,
-                            'tags' => $post->profile->tags,
-                            'featured' => $post->profile->featured,
-                            'logo_thumbnail' => is_null($post->profile->logo) ? '' : $post->profile->logo->thumbnail_url,
-                            'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
-                            'hero_thumbnail' => is_null($post->profile->hero) ? '' : $post->profile->hero->thumbnail_url,
-                            'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
-                        ];
-                })
-            ->paginateWith(new IlluminatePaginatorAdapter($paginator))
-            ->toArray();
+            ->collection($posts, function(Post $post) {
+                    return [
+                        'post_id' => (int) $post->id,
+                        'title' => $post->title,
+                        'body' => $post->body,
+                        'published_at' => $post->published_at,
+                        'id' => $post->profile->id,
+                        'business_name' => $post->profile->business_name,
+                        'website' => $post->profile->website,
+                        'description' => $post->profile->description,
+                        'review_url' => $post->profile->review_url,
+                        'review_intro' => $post->profile->review_intro,
+                        'formatted_description' => $post->profile->formatted_description,
+                        'tags' => $post->profile->tags,
+                        'featured' => $post->profile->featured,
+                        'logo_thumbnail' => is_null($post->profile->logo) ? '' : $post->profile->logo->thumbnail_url,
+                        'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
+                        'hero_thumbnail' => is_null($post->profile->hero) ? '' : $post->profile->hero->thumbnail_url,
+                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
         }
     }
 }
