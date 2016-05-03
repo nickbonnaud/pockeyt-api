@@ -112,7 +112,7 @@ class APIController extends Controller {
             $input = $request->all();
             $profiles = $input['profiles'];
             $profiles = explode(',', $profiles);
-           
+
             $paginator = Post::whereIn('profile_id', $profiles)->visible()->with([])->latest()->paginate(10);
             $paginator->appends($input)->render();
             $posts = $paginator->getCollection();
@@ -136,6 +136,27 @@ class APIController extends Controller {
                         'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
                         'hero_thumbnail' => is_null($post->profile->hero) ? '' : $post->profile->hero->thumbnail_url,
                         'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
+        }
+    }
+
+    public function getFeed(Request $request) {
+        if ($request->has('profile')) {
+            $input = $request->all();
+
+            $paginator = Post::whereIn('profile_id', $input)->latest()->paginate(10);
+            $paginator->appends($input)->render();
+            $feed = $paginator->getCollection();
+            return fractal()
+            ->collection($feed, function(Post $post) {
+                    return [
+                        'post_id' => (int) $post->id,
+                        'title' => $post->title,
+                        'body' => $post->body,
+                        'published_at' => $post->published_at,
                     ];
             })
         ->paginateWith(new IlluminatePaginatorAdapter($paginator))
