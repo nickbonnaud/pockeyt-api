@@ -50,7 +50,7 @@ class APIController extends Controller {
 
     public function getProfilesv1()
     {
-        $paginator = Profile::approved()->orderBy('updated_at', 'DESC')->paginate(5);
+        $paginator = Profile::approved()->orderBy('business_name', 'ASC')->paginate(10);
         $profiles = $paginator->getCollection();
 
         return fractal()
@@ -65,7 +65,7 @@ class APIController extends Controller {
                         'formatted_description' => $profile->formatted_description,
                         'created_at' => $profile->created_at,
                         'updated_at' => $profile->updated_at,
-                        'posts' => $profile->posts,
+                        'posts' => $profile->posts->reverse()->take(10),
                         'tags' => $profile->tags,
                         'featured' => $profile->featured,
                         'logo_thumbnail' => is_null($profile->logo) ? '' : $profile->logo->thumbnail_url,
