@@ -58,7 +58,7 @@
                 <hr>
 
                 <p>Review URL: {{ $profile->review_url }}</p>
-                <p>Review Teaser: {{ $profile->review_intro }}</p>
+                <p>Review Intro: {{ $profile->review_intro }}</p>
 
                 <hr>
 
