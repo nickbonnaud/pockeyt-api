@@ -37,8 +37,8 @@ Route::controller('api', 'APIController', [
     'getProfiles' => 'api.profiles',
     'getProfile' => 'api.profile',
 
-    'getProfilesv1' => 'api.profilesv1',
-    'getpostsv1' => 'api.postsv1',
-    'getfavs' => 'api.favs',
-    'getfeed' => 'api.feed'
+    // 'getProfilesv1' => 'api.profilesv1',
+    // 'getpostsv1' => 'api.postsv1',
+    // 'getfavs' => 'api.favs',
+    // 'getfeed' => 'api.feed'
 ]);
