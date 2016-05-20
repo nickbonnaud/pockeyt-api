@@ -150,8 +150,12 @@ class APIController extends Controller {
             $search = $request->all();
             $input = $search['input'];
 
+            $paginator = Profile::approved()->where('business_name','LIKE', "%$input%")
+            ->orWhereHas('tags', function ($q) use ($input) {
+                $q->where('name', 'LIKE', "%$input%");
+            })
+            ->orderBy('business_name', 'ASC')->paginate(10);
 
-            $paginator = Profile::approved()->where('business_name','LIKE', "%$input%")->orderBy('business_name', 'ASC')->paginate(10);
             $paginator->appends($search)->render();
             $profiles = $paginator->getCollection();
 
