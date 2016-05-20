@@ -145,24 +145,39 @@ class APIController extends Controller {
         }
     }
 
-    public function getFeed(Request $request) {
-        if ($request->has('profile')) {
-            $input = $request->all();
+    public function getSearch(Request $request) {
+        if ($request->has('input')) {
+            $search = $request->all();
+            $input = $search['input'];
 
-            $paginator = Post::whereIn('profile_id', $input)->latest()->paginate(10);
-            $paginator->appends($input)->render();
-            $feed = $paginator->getCollection();
+
+            $paginator = Profile::approved()->where('business_name','LIKE', "%$input%")->orderBy('business_name', 'ASC')->paginate(10);
+            $paginator->appends($search)->render();
+            $profiles = $paginator->getCollection();
+
             return fractal()
-            ->collection($feed, function(Post $post) {
-                    return [
-                        'post_id' => (int) $post->id,
-                        'title' => $post->title,
-                        'body' => $post->body,
-                        'published_at' => $post->published_at,
-                    ];
-            })
-        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
-        ->toArray();
+                ->collection($profiles, function(Profile $profile) {
+                        return [
+                            'id' => (int) $profile->id,
+                            'business_name' => $profile->business_name,
+                            'website' => $profile->website,
+                            'description' => $profile->description,
+                            'review_url' => $profile->review_url,
+                            'review_intro' => $profile->review_intro,
+                            'formatted_description' => $profile->formatted_description,
+                            'created_at' => $profile->created_at,
+                            'updated_at' => $profile->updated_at,
+                            'posts' => $profile->posts->reverse()->take(10),
+                            'tags' => $profile->tags,
+                            'featured' => $profile->featured,
+                            'logo_thumbnail' => is_null($profile->logo) ? '' : $profile->logo->thumbnail_url,
+                            'logo' =>  is_null($profile->logo) ? '' : $profile->logo->url,
+                            'hero_thumbnail' => is_null($profile->hero) ? '' : $profile->hero->thumbnail_url,
+                            'hero' => is_null($profile->hero) ? '' : $profile->hero->url,
+                        ];
+                    })
+                ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+                ->toArray();
         }
     }
 }
