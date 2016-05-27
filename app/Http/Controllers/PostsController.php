@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DeletePostRequest;
 use App\Post;
+use App\Photo;
 use App\Profile;
 use Carbon\Carbon;
 use DateTimeZone;
@@ -55,6 +56,17 @@ class PostsController extends Controller {
      */
     public function store(PostRequest $request) {
         $post = new Post($request->all());
+        $file = $request->photo;
+        
+        if($file != null) {
+            $photo = Photo::fromForm($file);
+            $photo->save();
+
+            $post['photo_name'] = $photo->name;
+            $post['photo_path'] = url($photo->path);
+            $post['thumb_path'] = url($photo->thumbnail_path);
+        }
+
         $post['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
 
         $this->user->profile->posts()->save($post);

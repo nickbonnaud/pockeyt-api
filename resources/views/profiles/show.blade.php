@@ -122,7 +122,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h2>Create a Post</h2>
-                            <form method="POST" action="{{ route('posts.store') }}">
+                            <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                                 @include ('posts.form')
                                 @include ('errors.form')
                             </form>

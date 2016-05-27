@@ -13,6 +13,11 @@
         </div>
 
         <div class="form-group">
+            <label for="photo">Add Photo</label>
+            <input type="file" name="photo" id="photo" class="form-control">
+        </div>
+
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Create Your Post!</button>
         </div>
     </div>

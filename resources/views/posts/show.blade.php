@@ -20,6 +20,8 @@
 
                 <hr>
 
+                <p><img src="{{ $post->photo_path }}"></p>
+
                 <article>
                     {!!  $post->formatted_body !!}
                 </article>

@@ -16,7 +16,10 @@ class Post extends Model {
     protected $fillable = [
         'title',
         'body',
-        'published_at'
+        'published_at',
+        'photo_name',
+        'photo_path',
+        'thumb_path'
     ];
 
     /**
