@@ -19,7 +19,7 @@
                 </h1>
 
                 <hr>
-
+                <h4>Post Photo</h4>
                 <p><img src="{{ $post->photo_path }}"></p>
 
                 <article>
