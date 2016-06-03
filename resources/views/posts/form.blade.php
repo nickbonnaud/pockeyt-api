@@ -12,10 +12,10 @@
             <textarea type="text" name="body" id="body" class="form-control" rows="10" required></textarea>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="photo">Add Photo</label>
             <input type="file" name="photo" id="photo" class="form-control">
-        </div>
+        </div> -->
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Create Your Post!</button>
