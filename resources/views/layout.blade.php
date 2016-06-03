@@ -60,7 +60,7 @@
 
 <footer>
     <p>Made in Raleigh, NC</p>
-    <p>In affiliation with NCSU and Mentorship from endUp</p>
+    <p>With Mentorship from endUp</p>
 </footer>
 
 <script src="{{ asset('/vendor/jquery/jquery-1.12.0.min.js') }}"></script>
