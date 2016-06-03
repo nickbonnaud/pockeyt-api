@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPictureToPostsTable extends Migration
+class AddPicturesToPostsTable extends Migration
 {
     /**
      * Run the migrations.
