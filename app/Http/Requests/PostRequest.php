@@ -23,7 +23,8 @@ class PostRequest extends Request {
     public function rules() {
         return [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'photo' => 'mimes:jpg,jpeg,png,bmp'
         ];
     }
 }
