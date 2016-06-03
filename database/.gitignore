@@ -1,3 +1,4 @@
 *.sqlite
 /vendor
 .env
+/public/images/photos
