@@ -166,5 +166,13 @@
                 });
             }
         };
+
+             $(function() {
+        $( "#event_date_pretty" ).datepicker({
+            dateFormat: "DD, d MM, yy",
+            altField: "#event_date",
+            altFormat: "yy-mm-dd"
+        });
+     });
     </script>
 @stop

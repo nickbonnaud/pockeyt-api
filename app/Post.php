@@ -19,7 +19,8 @@ class Post extends Model {
         'published_at',
         'photo_name',
         'photo_path',
-        'thumb_path'
+        'thumb_path',
+        'event_date'
     ];
 
     /**

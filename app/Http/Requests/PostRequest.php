@@ -24,7 +24,8 @@ class PostRequest extends Request {
         return [
             'title' => 'required',
             'body' => 'required',
-            'photo' => 'mimes:jpg,jpeg,png,bmp'
+            'photo' => 'mimes:jpg,jpeg,png,bmp',
+            'event_date' => 'date_format: Y-m-d'
         ];
     }
 }

@@ -188,4 +188,79 @@ class APIController extends Controller {
                 ->toArray();
         }
     }
+
+     public function getEvents(Request $request) {
+        if ($request->has('calendar')) {
+            $events = $request->all();
+            $calendar = $events['calendar'];
+
+            switch ($calendar) {
+                case 'today':
+                    $today = date("Y-m-d");
+                    $paginator = Post::where('event_date', '=', $today)->visible()->with([])->latest()->paginate(2);
+                    break;
+
+                case "tomorrow":
+                    $tomorrow = date('Y-m-d', strtotime('tomorrow'));
+                    $paginator = Post::where('event_date', '=', $tomorrow)->visible()->with([])->latest()->paginate(2);
+                    break;
+
+                case "week":
+                    $days = [];
+                    $i = 0;
+                    $date = date("Y-m-d");
+                    $endDate = date('Y-m-d', strtotime('saturday'));
+                    while (strtotime($date) <= strtotime($endDate)) {
+                        $days = array_add($days, $i, $date);
+                        $i = $i + 1;
+                        $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+                    }
+                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(2);
+                    break;
+
+                case "weekend":
+                    $days = [];
+                    $i = 0;
+                    $date = date('Y-m-d', strtotime('friday'));
+                    $endDate = date('Y-m-d', strtotime('sunday'));
+                    while (strtotime($date) <= strtotime($endDate)) {
+                        $days = array_add($days, $i, $date);
+                        $i = $i + 1;
+                        $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+                    }
+                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(2);
+                    break;
+            }
+
+            $paginator->appends($events)->render();
+            $posts = $paginator->getCollection();
+            return fractal()
+            ->collection($posts, function(Post $post) {
+                    return [
+                        'post_id' => (int) $post->id,
+                        'title' => $post->title,
+                        'body' => $post->body,
+                        'thumbnail_url' => $post->thumb_path,
+                        'photo_url' => $post->photo_path,
+                        'published_at' => $post->published_at,
+                        'id' => $post->profile->id,
+                        'business_name' => $post->profile->business_name,
+                        'website' => $post->profile->website,
+                        'description' => $post->profile->description,
+                        'review_url' => $post->profile->review_url,
+                        'review_intro' => $post->profile->review_intro,
+                        'formatted_description' => $post->profile->formatted_description,
+                        'posts' => $post->profile->posts->reverse()->take(10),
+                        'tags' => $post->profile->tags,
+                        'featured' => $post->profile->featured,
+                        'logo_thumbnail' => is_null($post->profile->logo) ? '' : $post->profile->logo->thumbnail_url,
+                        'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
+                        'hero_thumbnail' => is_null($post->profile->hero) ? '' : $post->profile->hero->thumbnail_url,
+                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
+                    ];
+            })
+                ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+                ->toArray();
+        }
+    }
 }

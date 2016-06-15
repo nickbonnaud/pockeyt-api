@@ -40,5 +40,6 @@ Route::controller('api', 'APIController', [
     'getProfilesv1' => 'api.profilesv1',
     'getpostsv1' => 'api.postsv1',
     'getfavs' => 'api.favs',
-    'getsearch' => 'api.search'
+    'getsearch' => 'api.search',
+    'getEvents' => 'api.events'
 ]);

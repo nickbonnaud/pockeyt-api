@@ -12,10 +12,17 @@
             <textarea type="text" name="body" id="body" class="form-control" rows="10" required></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="photo">Add Photo</label>
+        <div class="photo-input">
+            <label for="photo">Add Photo (optional)</label>
             <input type="file" name="photo" id="photo" class="form-control">
         </div>
+
+        <div class="form-group">
+            <label for="event_date_pretty">Event Date (optional)</label>
+            <input type="text" id="event_date_pretty">
+        </div>
+
+        <input type="hidden" id="event_date" name="event_date">
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Create Your Post!</button>

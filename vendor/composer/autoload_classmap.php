@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddEventDateToPostsTable' => $baseDir . '/database/migrations/2016_06_13_233113_add_event_date_to_posts_table.php',
     'AddPicturesToPostsTable' => $baseDir . '/database/migrations/2016_05_26_190131_add_pictures_to_posts_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePhotosTable' => $baseDir . '/database/migrations/2015_12_17_194650_create_photos_table.php',
