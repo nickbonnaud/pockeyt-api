@@ -197,12 +197,12 @@ class APIController extends Controller {
             switch ($calendar) {
                 case 'today':
                     $today = date("Y-m-d");
-                    $paginator = Post::where('event_date', '=', $today)->visible()->with([])->latest()->paginate(10);
+                    $paginator = Post::where('event_date', '=', $today)->visible()->with([])->latest()->paginate(2);
                     break;
 
                 case "tomorrow":
                     $tomorrow = date('Y-m-d', strtotime('tomorrow'));
-                    $paginator = Post::where('event_date', '=', $tomorrow)->visible()->with([])->latest()->paginate(10);
+                    $paginator = Post::where('event_date', '=', $tomorrow)->visible()->with([])->latest()->paginate(2);
                     break;
 
                 case "week":
@@ -215,7 +215,7 @@ class APIController extends Controller {
                         $i = $i + 1;
                         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
                     }
-                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(10);
+                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(2);
                     break;
 
                 case "weekend":
@@ -228,7 +228,7 @@ class APIController extends Controller {
                         $i = $i + 1;
                         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
                     }
-                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(10);
+                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(2);
                     break;
             }
 
