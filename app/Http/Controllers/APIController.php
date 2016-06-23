@@ -216,7 +216,7 @@ class APIController extends Controller {
                         $i = $i + 1;
                         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
                     }
-                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(10);
+                    $paginator = Post::whereIn('event_date', $days)->orderBy('event_date', 'asc')->visible()->with([])->paginate(10);
                     break;
 
                 case "weekend":
@@ -229,7 +229,7 @@ class APIController extends Controller {
                         $i = $i + 1;
                         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
                     }
-                    $paginator = Post::whereIn('event_date', $days)->visible()->with([])->paginate(10);
+                    $paginator = Post::whereIn('event_date', $days)->orderBy('event_date', 'asc')->visible()->with([])->paginate(10);
                     break;
             }
 
