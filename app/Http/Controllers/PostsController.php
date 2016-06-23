@@ -43,9 +43,9 @@ class PostsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $post = Post::visible()->find($id);
-
-        return view('posts.show', compact('post'));
+        $post = Post::visible()->with(['profile'])->find($id);
+        $profile = Profile::approved()->with(['logo'])->find($post->profile_id);
+        return view('posts.show', compact('post', 'profile'));
     }
 
     /**

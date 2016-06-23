@@ -43,6 +43,8 @@
                     @if($isAdmin)
                         <li><a href="{{ route('profiles.index') }}">All Profiles</a></li>
                         <li><a href="{{ route('posts.index') }}">All Posts</a></li>
+                        <li><a href="{{ route('blogs.create') }}">Create Blog</a></li>
+                        <li><a href="{{ route('blogs.index') }}">All Blogs</a></li>
                     @endif
                     <li><a href="{{ route('auth.logout') }}">Logout</a></li>
                 @else 

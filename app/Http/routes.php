@@ -30,6 +30,9 @@ Route::post('profiles/{profiles}/feature', 'ProfilesController@postFeature')->na
 Route::post('profiles/{profiles}/unfeature', 'ProfilesController@postUnfeature')->name('profiles.unfeature');
 Route::resource('profiles', 'ProfilesController');
 
+// Blog routes
+Route::resource('blogs', 'BlogsController');
+
 // API Routes
 Route::controller('api', 'APIController', [
     'getPosts' => 'api.posts',
@@ -41,5 +44,6 @@ Route::controller('api', 'APIController', [
     'getpostsv1' => 'api.postsv1',
     'getfavs' => 'api.favs',
     'getsearch' => 'api.search',
-    'getEvents' => 'api.events'
+    'getEvents' => 'api.events',
+    'getBlogs' => 'api.blogs'
 ]);

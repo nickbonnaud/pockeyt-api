@@ -8,6 +8,10 @@
             @endif
             <div style="display:inline-block;">
                 <h3><a href="{{ route('posts.show', ['posts' => $post->id]) }}">{{ $post->title }}</a></h3>
+                @if($post->event_date !== '0000-00-00')
+
+                    <p>Event date: {{ $post->event_date }}</p>
+                @endif
                 <div>
                     {{ $post->published_at->diffForHumans() }}
                     by

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutPost')
 
 @section('content')
 
@@ -7,23 +7,22 @@
 
             @if(is_null($post))
 
-                <h2 class="text-center">Post not found.</h2>
+                <h2 class="text-center">Sorry! Looks like this post was deleted! :(</h2>
 
             @else
 
-                <h1>
-                    {{ $post->title }}
-                    <div class="pull-right">
-                        @include('partials.posts.delete')
-                    </div>
-                </h1>
+                <img class="photoLogo" src="{{ $profile->logo->url }}">
+                <p class="partnername">{{ $profile->business_name }}</p>
+                <p class="postTitle">{{ $post->title }}</p>
 
+                <p><img class="postPhoto" src="{{ $post->photo_path }}"></p>
                 <hr>
-                <p><img src="{{ $post->photo_path }}"></p>
-
-                <article>
+                <article class="postText">
                     {!!  $post->formatted_body !!}
                 </article>
+                <hr>
+                <div class="footer-date">{{ $post->published_at->diffForHumans() }}</div>
+                <p class="signature">- Brought to you by <a href="http://www.pockeyt.com/">Pockeyt</a>
 
             @endif
 

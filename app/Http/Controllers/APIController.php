@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Blog;
 use App\Profile;
 use App\Tags;
 use App\Http\Requests;
@@ -189,7 +190,7 @@ class APIController extends Controller {
         }
     }
 
-     public function getEvents(Request $request) {
+    public function getEvents(Request $request) {
         if ($request->has('calendar')) {
             $events = $request->all();
             $calendar = $events['calendar'];
@@ -243,6 +244,7 @@ class APIController extends Controller {
                         'thumbnail_url' => $post->thumb_path,
                         'photo_url' => $post->photo_path,
                         'published_at' => $post->published_at,
+                        'event_date' => $post->event_date,
                         'id' => $post->profile->id,
                         'business_name' => $post->profile->business_name,
                         'website' => $post->profile->website,
@@ -263,4 +265,37 @@ class APIController extends Controller {
                 ->toArray();
         }
     }
+
+    public function getBlogs() {
+        $paginator = Blog::with([])->latest()->paginate(10);
+        $blogs = $paginator->getCollection();
+        return fractal()
+            ->collection($blogs, function(Blog $blog) {
+                    return [
+                        'blog_id' => (int) $blog->id,
+                        'author' => $blog->author,
+                        'description' => $blog->description,
+                        'blog_title' => $blog->blog_title,
+                        'blog_body' => $blog->blog_body,
+                        'blog_hero_name' => $blog->blog_hero_name,
+                        'blog_hero_url' => $blog->blog_hero_url,
+                        'blog_profile_name' => $blog->blog_profile_name,
+                        'blog_profile_url' => $blog->blog_profile_url,
+                        'published_at' => $blog->published_at,
+                        'blog_formatted_body' => $blog->formatted_body
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
+    }
+
+
+
+
+
+
+
+
+
+
 }

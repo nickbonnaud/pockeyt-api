@@ -5293,9 +5293,6 @@ tbody.collapse.in {
   clear: both;
 }
 
-.navbar-collapse.in {
-  overflow-y: auto;
-}
 
 @media (min-width: 768px) {
   .navbar-collapse {
