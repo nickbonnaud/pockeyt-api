@@ -289,13 +289,43 @@ class APIController extends Controller {
         ->toArray();
     }
 
+    public function getBookmarks(Request $request) {
+        if ($request->has('posts')) {
+            $input = $request->all();
+            $posts = $input['posts'];
+            $posts = explode(',', $posts);
 
-
-
-
-
-
-
-
+            $paginator = Post::whereIn('id', $posts)->visible()->with([])->latest()->paginate(10);
+            $paginator->appends($input)->render();
+            $posts = $paginator->getCollection();
+            return fractal()
+            ->collection($posts, function(Post $post) {
+                    return [
+                        'post_id' => (int) $post->id,
+                        'title' => $post->title,
+                        'body' => $post->body,
+                        'thumbnail_url' => $post->thumb_path,
+                        'photo_url' => $post->photo_path,
+                        'published_at' => $post->published_at,
+                        'id' => $post->profile->id,
+                        'business_name' => $post->profile->business_name,
+                        'website' => $post->profile->website,
+                        'description' => $post->profile->description,
+                        'review_url' => $post->profile->review_url,
+                        'review_intro' => $post->profile->review_intro,
+                        'formatted_description' => $post->profile->formatted_description,
+                        'posts' => $post->profile->posts->reverse()->take(10),
+                        'tags' => $post->profile->tags,
+                        'featured' => $post->profile->featured,
+                        'logo_thumbnail' => is_null($post->profile->logo) ? '' : $post->profile->logo->thumbnail_url,
+                        'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
+                        'hero_thumbnail' => is_null($post->profile->hero) ? '' : $post->profile->hero->thumbnail_url,
+                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
+        }
+    }
 
 }

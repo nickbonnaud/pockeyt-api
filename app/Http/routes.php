@@ -45,5 +45,6 @@ Route::controller('api', 'APIController', [
     'getfavs' => 'api.favs',
     'getsearch' => 'api.search',
     'getEvents' => 'api.events',
-    'getBlogs' => 'api.blogs'
+    'getBlogs' => 'api.blogs',
+    'getBookmarks' => 'api.bookmarks'
 ]);

@@ -33,7 +33,7 @@
 <footer class="postFooter">
     <p>Want to find more deals, specials, and events just like this?</p>
     <div class="callAction">
-    	<a href="https://bnc.lt/igem/py4BFjI1ou" target="_blank"><p>Download Pockeyt now.</p></a>
+    	<a href="https://bnc.lt/igem/py4BFjI1ou" target="_blank"><p>Download Pockeyt Now - Free.</p></a>
     </div>
     <a href="https://bnc.lt/igem/py4BFjI1ou" target="_blank"><img src="{{ asset('/images/googlePlayBadge.png') }}" class="storeBadge"></a>
     <a href="https://bnc.lt/igem/py4BFjI1ou" target="_blank"><img src="{{ asset('/images/iosStoreBadge.png') }}" class="storeBadge"></a>
