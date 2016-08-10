@@ -21,6 +21,8 @@ class Profile extends Model {
         'logo_photo_id',
         'hero_photo_id',
         'featured',
+        'lat',
+        'lng',
     ];
 
     protected $casts = [
@@ -31,7 +33,7 @@ class Profile extends Model {
     protected $appends = ['formatted_description'];
 
     public function toDetailedArray() {
-        $data = array_only($this->toArray(), ['id', 'business_name', 'website', 'description', 'review_url', 'review_intro', 'formatted_description', 'created_at', 'updated_at', 'posts', 'tags', 'featured']);
+        $data = array_only($this->toArray(), ['id', 'business_name', 'website', 'description', 'review_url', 'review_intro', 'formatted_description', 'created_at', 'updated_at', 'posts', 'tags', 'featured', 'lat', 'long']);
         $data['logo_thumbnail'] = is_null($this->logo) ? '' : $this->logo->thumbnail_url;
         $data['logo'] = is_null($this->logo) ? '' : $this->logo->url;
         $data['hero_thumbnail'] = is_null($this->hero) ? '' : $this->hero->thumbnail_url;

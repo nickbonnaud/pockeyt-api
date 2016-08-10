@@ -33,6 +33,11 @@ Route::resource('profiles', 'ProfilesController');
 // Blog routes
 Route::resource('blogs', 'BlogsController');
 
+Route::group(['prefix' => 'api'], function() {
+    Route::resource('authenticate', 'AuthenticateController');
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+});
+
 // API Routes
 Route::controller('api', 'APIController', [
     'getPosts' => 'api.posts',
