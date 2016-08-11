@@ -34,7 +34,6 @@ Route::resource('profiles', 'ProfilesController');
 Route::resource('blogs', 'BlogsController');
 
 Route::group(['prefix' => 'api'], function() {
-    Route::resource('authenticate', 'AuthenticateController');
     Route::post('authenticate', 'AuthenticateController@authenticate');
 });
 
