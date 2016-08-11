@@ -34,8 +34,11 @@ Route::resource('profiles', 'ProfilesController');
 Route::resource('blogs', 'BlogsController');
 
 Route::group(['prefix' => 'api'], function() {
-    Route::resource('authenticate', 'AuthenticateController');
-    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::post('auth/login', 'AuthController@login');
+    Route::post('auth/signup', 'AuthController@signup');
+    Route::post('auth/facebook', 'AuthController@facebook');
+    Route::post('auth/instagram', 'AuthController@instagram');
+
 });
 
 // API Routes

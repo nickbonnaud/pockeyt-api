@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use JWTAuth;
+use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -10,7 +11,8 @@ use App\Http\Controllers\Controller;
 
 class AuthenticateController extends Controller
 {
-    public function authenticate(Request $request)
+
+    public function login(Request $request)
     {
         // grab credentials from the request
         $credentials = $request->only('email', 'password');
