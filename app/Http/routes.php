@@ -33,8 +33,12 @@ Route::resource('profiles', 'ProfilesController');
 // Blog routes
 Route::resource('blogs', 'BlogsController');
 
+// JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
     Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+    Route::post('facebook', 'AuthenticateController@facebook');
+    Route::post('instagram', 'AuthenticateController@instagram');
 });
 
 // API Routes
