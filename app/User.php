@@ -69,4 +69,22 @@ class User extends Model implements AuthenticatableContract,
     public function publish(Profile $profile) {
         return $this->profile()->save($profile);
     }
+
+    /**
+     * A user has one account
+     * @return HasOne
+     */
+    public function account() {
+        return $this->hasOne(Account::class);
+    }
+
+    /**
+     * current user saves and associates with account
+     *
+     * @param Account $account
+     * @return Account
+     */
+    public function publishAccount(Account $account) {
+        return $this->account()->save($account);
+    }
 }

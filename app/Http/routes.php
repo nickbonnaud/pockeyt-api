@@ -30,13 +30,22 @@ Route::post('profiles/{profiles}/feature', 'ProfilesController@postFeature')->na
 Route::post('profiles/{profiles}/unfeature', 'ProfilesController@postUnfeature')->name('profiles.unfeature');
 Route::resource('profiles', 'ProfilesController');
 
+// Accounts routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('accounts/{accounts}/photos', 'AccountsController@postPhotos')->name('accounts.photos');
+    Route::delete('accounts/{accounts}/photos', 'AccountsController@deletePhotos');
+    Route::resource('accounts', 'AccountsController', ['only' => ['store', 'show', 'update', 'destroy']]);
+});
+
 // Blog routes
 Route::resource('blogs', 'BlogsController');
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
+    Route::post('register', 'AuthenticateController@register');
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+
     Route::post('facebook', 'AuthenticateController@facebook');
     Route::post('instagram', 'AuthenticateController@instagram');
 });
