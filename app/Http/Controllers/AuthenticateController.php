@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Config;
 use JWTAuth;
 use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -13,19 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticateController extends Controller
 {
-    
-     /**
-     * Generate JSON Web Token.
-     */
-    protected function createToken($user)
-    {
-        $payload = [
-            'sub' => $user->id,
-            'iat' => time(),
-            'exp' => time() + (2 * 7 * 24 * 60 * 60)
-        ];
-        return JWT::encode($payload, Config::get('app.token_secret'));
-    }
 
     public function authenticate(Request $request)
     {
