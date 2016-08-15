@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-class UpdateAccountRequest extends Request {
+class DeleteAccountRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize() {
-        return !is_null($user = \Auth::user()) &&  $this->route('accounts') == $user->account->id;
+        return !is_null($user = \Auth::user()) && $this->route('accounts') == $user->account->id;
     }
 
     /**
@@ -18,6 +18,6 @@ class UpdateAccountRequest extends Request {
      * @return array
      */
     public function rules() {
-        return with(new AccountRequest())->rules();
+        return [];
     }
 }

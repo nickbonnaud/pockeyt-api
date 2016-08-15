@@ -34,7 +34,7 @@ Route::resource('profiles', 'ProfilesController');
 Route::group(['prefix' => 'api'], function() {
     Route::post('accounts/{accounts}/photos', 'AccountsController@postPhotos')->name('accounts.photos');
     Route::delete('accounts/{accounts}/photos', 'AccountsController@deletePhotos');
-    Route::resource('accounts', 'AccountsController', ['only' => ['store', 'show', 'update', 'destroy']]);
+    Route::resource('accounts', 'AccountsController', ['only' => ['store', 'update', 'destroy']]);
 });
 
 // Blog routes

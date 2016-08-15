@@ -50,7 +50,6 @@ class AuthenticateController extends Controller
     }
 
     public function register(Request $request){
- 
         $newuser= $request->all();
         $password=Hash::make($request->input('password'));
  

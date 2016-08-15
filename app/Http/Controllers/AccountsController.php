@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAccountPhotoRequest;
 use App\Http\Requests\DeleteAccountPhotoRequest;
-use App\Http\Requests\EditAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Photo;
 use App\Account;
@@ -18,32 +17,12 @@ class AccountsController extends Controller {
      * Create a new AccountsController instance
      */
     public function __construct() {
-        $this->middleware('auth', []);
-        $this->middleware('auth:admin', ['only' => ['index']]);
-
-        parent::__construct();
+        $this->middleware('jwt.auth', []);
     }
 
     /**************************
      * Resource actions
      */
-
-    public function index() {
-        $accounts = Account::with(['owner', 'user_photo'])->latest()->get();
-
-        return view('accounts.index', compact('accounts'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        if(!is_null($this->user->account))
-            return redirect()->route('accounts.show', ['accounts' => $this->user->account->id]);
-        return view('accounts.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,38 +31,16 @@ class AccountsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(AccountRequest $request) {
+        $user = JWTAuth::parseToken()->authenticate();
         if(!is_null($this->user->account))
-            return redirect()->route('accounts.show', ['accounts' => $this->user->account->id]);
+            return response('Account already exists');
 
-        $account = $this->user->publish(
-            new Account($request->all())
-        );
-
-        return redirect(account_path($account));
+            $account = $this->user->publishAccount(
+                new Account($request->all())
+            );
+        return response('success', 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id) {
-        $account = (!is_null($this->user) && $this->user->is_admin) ? Account::find($id) : Account::find($id);
-
-        return view('accounts.show', compact('account'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(EditAccountRequest $request, $id) {
-        $account = Account::findOrFail($id);
-        return view('accounts.edit', compact('account'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -93,11 +50,32 @@ class AccountsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAccountRequest $request, $id) {
+        $user = JWTAuth::parseToken()->authenticate();
         /** @var Profile $account */
         $account = Account::findOrFail($id);
-        $account>update($request->all());
+        $account->update($request->all());
 
-        return redirect()->route('accounts.show', ['accounts' => $id]);
+        return $account;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(DeleteAccountRequest $request, $id) {
+        $user = JWTAuth::parseToken()->authenticate();
+        /** @var Profile $account */
+        $account = Account::findOrFail($id);
+        
+        if($account) {
+            $account->delete();
+            return response('success', 200);
+        } else {
+            return response('unauthorized', 403);
+        }
     }
 
     /**************************

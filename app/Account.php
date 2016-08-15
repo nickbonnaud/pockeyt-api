@@ -23,18 +23,6 @@ class Account extends Model {
         return $data;
     }
 
-    /**
-     * Gets profile with the given $business_name
-     *
-     * @param string $business_name
-     * @return Profile
-     */
-    public static function locatedAt($business_name) {
-        $business_name = str_replace('-', ' ', $business_name);
-
-        return static::where(compact('business_name'))->firstOrFail();
-    }
-
     public function userPhoto() {
         return $this->belongsTo('App\Photo', 'user_photo_id');
     }
