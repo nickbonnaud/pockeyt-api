@@ -55,7 +55,9 @@ class AuthenticateController extends Controller
         $password=Hash::make($request->input('password'));
  
         $newuser['password'] = $password;
-        User::create($newuser);
+        $user = User::create($newuser);
+
+        $user->account()->publishAccount();
 
         $credentials = $request->only('email', 'password');
 
