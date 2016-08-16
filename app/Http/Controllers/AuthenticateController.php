@@ -57,7 +57,6 @@ class AuthenticateController extends Controller
         $newuser['password'] = $password;
         $user = User::create($newuser);
 
-        $user->account()->publishAccount();
 
         $credentials = $request->only('email', 'password');
 
@@ -72,6 +71,7 @@ class AuthenticateController extends Controller
         }
 
         // all good so return the token
+        $user->account()->publishAccount();
         return response()->json(compact('token'));
     }
 }
