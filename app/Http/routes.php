@@ -37,10 +37,15 @@ Route::resource('blogs', 'BlogsController');
 Route::group(['prefix' => 'api'], function() {
     Route::post('register', 'AuthenticateController@register');
     Route::post('authenticate', 'AuthenticateController@authenticate');
-    Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
-
     Route::post('facebook', 'AuthenticateController@facebook');
     Route::post('instagram', 'AuthenticateController@instagram');
+});
+
+// User Routes
+Route::group(['prefix' => 'api'], function() {
+    Route::get('authenticate/user', 'UsersController@getAuthenticatedUser');
+    Route::put('authenticate/user', 'UsersController@updateAuthenticatedUser');
+    Route::delete('authenticate/user', 'UsersController@destroyAuthenticatedUser');
 });
 
 // API Routes
