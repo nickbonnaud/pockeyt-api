@@ -50,7 +50,7 @@ Route::group(['prefix' => 'api'], function() {
 
 // Payment Routes
 Route::group(['prefix' => 'api'], function() {
-    Route::post('token\client', 'PaymentController@createToken');
+    Route::post('token/client', 'PaymentController@createToken');
 });
 
 // API Routes
