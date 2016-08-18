@@ -155,6 +155,7 @@ return [
         Spatie\Fractal\FractalServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Oureastudios\Laravel\BraintreeServiceProvider::class,
 
     ],
 

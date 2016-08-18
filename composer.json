@@ -17,7 +17,8 @@
         "spatie/laravel-fractal": "^1.9",
         "components/jqueryui": "^1.11",
         "alexpechkarev/google-maps": "1.0.5",
-        "tymon/jwt-auth": "0.5.*"
+        "tymon/jwt-auth": "0.5.*",
+        "oureastudios/laravel5-braintree": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

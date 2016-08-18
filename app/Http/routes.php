@@ -48,6 +48,11 @@ Route::group(['prefix' => 'api'], function() {
     Route::delete('authenticate/user', 'UsersController@destroyAuthenticatedUser');
 });
 
+// Payment Routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('token\client', 'PaymentController@createToken');
+});
+
 // API Routes
 Route::controller('api', 'APIController', [
     'getPosts' => 'api.posts',
