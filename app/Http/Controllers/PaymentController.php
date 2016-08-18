@@ -11,7 +11,7 @@ class PaymentController extends Controller
 {
     
     public function clientToken() {
-        $clientToken = Braintree\ClientToken::generate();
+        $clientToken = \Braintree_ClientToken::generate();
         return $clientToken;
     }
 
