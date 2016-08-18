@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class PaymentController extends Controller
 {
     
-    public function createToken() {
+    public function clientToken() {
         $clientToken = Braintree_ClientToken::generate();
         return $clientToken;
     }
