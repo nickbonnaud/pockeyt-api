@@ -2,14 +2,19 @@
 
 namespace App\Http\Requests;
 
-class UpdateAccountRequest extends Request {
+use JWTAuth;
+use App\User;
+use App\Http\Requests\Request;
+
+class AddUserPhotoRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize() {
-        return !is_null($user = \Auth::user()) &&  $this->route('accounts') == $user->account->id;
+    	return true;
     }
 
     /**
@@ -18,6 +23,8 @@ class UpdateAccountRequest extends Request {
      * @return array
      */
     public function rules() {
-        return with(new AccountRequest())->rules();
+        return [
+            'file' => 'required|mimes:jpg,jpeg,png,bmp'
+        ];
     }
 }

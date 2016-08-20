@@ -46,6 +46,9 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('authenticate/user', 'UsersController@getAuthenticatedUser');
     Route::put('authenticate/user', 'UsersController@updateAuthenticatedUser');
     Route::delete('authenticate/user', 'UsersController@destroyAuthenticatedUser');
+
+    Route::put('authenticate/user/photo', 'UsersController@postPhoto');
+    Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
 });
 
 // Payment Routes

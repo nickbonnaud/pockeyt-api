@@ -48,7 +48,7 @@ class UsersController extends Controller
             $new_user = $user->update($request->all());
             return $new_user;
         } else {
-            return response('Unauthorized'. 403);
+            return response('Unauthorized', 403);
         }
     }
 
@@ -67,5 +67,30 @@ class UsersController extends Controller
         } else {
             return response('Unauthorized', 403);
         }
+    }
+
+    public function postPhoto(AddUserPhotoRequest $request) {
+        console.log($request);
+        $authUser = JWTAuth::parseToken()->authenticate();
+        if($authUser) {
+            $file = $request->file('file');
+            $photo = Photo::fromForm($file);
+            $photo->save();
+
+            $dbUser = User::findOrFail($authUser->id);
+            $dbUser['photo_path'] = url($photo->path);
+            $dbUser->save();
+
+            return response('ok');
+        }
+    }
+
+     public function deletePhoto(DeleteUserPhotoRequest $request) {
+        $authUser = JWTAuth::parseToken()->authenticate();
+        $dbUser = User::findOrFail($user->id);
+        $photo = $dbUser->{$type};
+        $profile->{$type}()->dissociate()->save();
+        $photo->delete();
+        return back();
     }
 }
