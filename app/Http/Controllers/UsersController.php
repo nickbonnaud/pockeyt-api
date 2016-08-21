@@ -71,7 +71,6 @@ class UsersController extends Controller
     }
 
     public function postPhoto(AddUserPhotoRequest $request) {
-        console.log($request);
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
             $file = $request->file('file');
