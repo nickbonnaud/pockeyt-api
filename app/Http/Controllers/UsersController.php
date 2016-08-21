@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
 use App\Http\Requests;
+use App\Http\Requests\AddUserPhotoRequest;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
