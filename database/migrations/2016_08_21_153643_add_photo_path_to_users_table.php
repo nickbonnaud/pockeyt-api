@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProfilePhotoToUsersTable extends Migration
+class AddPhotoPathToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddProfilePhotoToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('photo_path')->nullable()->after('is_admin');
+            $table->string('photo_path')->nullable()->after('customer');
         });
     }
 
