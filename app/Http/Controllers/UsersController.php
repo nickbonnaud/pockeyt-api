@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
+use App\Photo;
 use App\Http\Requests;
 use App\Http\Requests\AddUserPhotoRequest;
 use App\Http\Controllers\Controller;
