@@ -74,11 +74,18 @@ class UsersController extends Controller
     public function postPhoto(AddUserPhotoRequest $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
+            $dbUser = User::findOrFail($authUser->id);
+            $oldPhoto = $dbUser->photo_path;
+
+            if(isset($oldPhoto)) {
+                $photo = Photo::where('path', '=', $oldPhoto);
+                $photo->delete();
+            }
+
             $file = $request->file('file');
             $photo = Photo::fromForm($file);
             $photo->save();
 
-            $dbUser = User::findOrFail($authUser->id);
             $dbUser['photo_path'] = $photo->path;
             $dbUser->save();
 
