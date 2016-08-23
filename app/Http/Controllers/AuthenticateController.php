@@ -58,6 +58,6 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->all();
-        return response()->json(compact('token'));
+        return $token->token;
     }
 }
