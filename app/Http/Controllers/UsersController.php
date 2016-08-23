@@ -89,7 +89,7 @@ class UsersController extends Controller
             $dbUser['photo_path'] = $photo->path;
             $dbUser->save();
 
-            return response()->json(compact('authUser'));
+            return response('Success', 200);
         }
     }
 
