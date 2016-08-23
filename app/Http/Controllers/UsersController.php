@@ -86,7 +86,7 @@ class UsersController extends Controller
             $photo = Photo::fromForm($file);
             $photo->save();
 
-            $dbUser['photo_path'] = $photo->path;
+            $dbUser['photo_path'] = url($photo->path);
             $dbUser->save();
 
             return response('Success', 200);
