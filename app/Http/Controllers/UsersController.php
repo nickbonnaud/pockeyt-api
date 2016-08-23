@@ -43,12 +43,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateAuthenticatedUser(Request $request, $id)
+    public function updateAuthenticatedUser(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate();
-        if($user) {
-            $new_user = $user->update($request->all());
-            return $new_user;
+        $authUser = JWTAuth::parseToken()->authenticate();
+        if($authUser) {
+            $dbUser = User::findOrFail($authUser->id);
+            $dbUser->update($request->all());
+            return response()->json(compact('dbUser'));
         } else {
             return response('Unauthorized', 403);
         }
