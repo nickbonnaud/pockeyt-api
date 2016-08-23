@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use App\User;
 use App\Account;
+use GuzzleHttp\Client;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -57,6 +58,6 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->all();
-        return response()->json(compact('token'));
+        return $request;
     }
 }
