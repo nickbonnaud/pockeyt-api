@@ -54,4 +54,9 @@ class AuthenticateController extends Controller
         }
         return response()->json(compact('token'));
     }
+
+    public function facebook(Request $request) {
+        $token = $request->all();
+        return response()->json(compact('token'));
+    }
 }
