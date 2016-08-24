@@ -70,6 +70,6 @@ class AuthenticateController extends Controller
                 return $e->getResponse();
             }
         }
-        return $response->statusCode;
+        return $response;
     }
 }
