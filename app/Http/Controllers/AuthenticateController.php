@@ -37,6 +37,7 @@ class AuthenticateController extends Controller
 
     public function register(Request $request){
         $newuser= $request->all();
+        return $newuser;
         $password=Hash::make($request->input('password'));
  
         $newuser['password'] = $password;
