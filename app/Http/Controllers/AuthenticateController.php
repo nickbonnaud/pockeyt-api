@@ -92,9 +92,9 @@ class AuthenticateController extends Controller
         }
         $user->fbID = $userfbID;
 
-        $user->save();
+        // $user->save();
 
-        $credentials = $user->only('email', 'id');
+        $credentials = $user->pluck('email', 'id');
         return $credentials;
 
         try {
