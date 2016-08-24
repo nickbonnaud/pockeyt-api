@@ -99,6 +99,6 @@ class AuthenticateController extends Controller
         $payload = JWTFactory::make($credentials);
         $token = JWTAuth::encode($payload);
         
-        return (['token' => $token]);
+        return Response::json(['token' => $token->get()]);
     }
 }
