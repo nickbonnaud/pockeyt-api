@@ -9,6 +9,8 @@ use GuzzleHttp\Client;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
@@ -58,13 +60,18 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->input('token');
-
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://graph.facebook.com/me', [
-            'query' => ['access_token' => $token]
-        ]);
-
+        try {
+            $response = $client->request('GET', 'https://graph.facebook.com/me', [
+                'query' => ['access_token' => $token]
+            ]);
+        } catch (RequestException $e) {
+            echo Psr7\str($e->getRequest());
+            if ($e->hasResponse()) {
+                echo Psr7\str($e->getResponse());
+            }
+        }
         return $response;
     }
 }
