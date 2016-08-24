@@ -36,7 +36,6 @@ class AuthenticateController extends Controller
     }
 
     public function register(Request $request){
-        return $request;
         $newuser= $request->all();
         $password=Hash::make($request->input('password'));
  
@@ -74,7 +73,7 @@ class AuthenticateController extends Controller
 
         $data = $response->getBody();
         $newData = json_decode($data);
-
+        return gettype($newData);
         $newUser = $newData->only('name', 'email');
         $newUser['fbID'] = $newData->id;
         if ($newData->picture->newData->is_silhouette === false) {
