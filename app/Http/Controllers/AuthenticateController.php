@@ -70,7 +70,25 @@ class AuthenticateController extends Controller
                 return $e->getResponse();
             }
         }
+        $newUser = $response->only('name', 'email');
+        $newUser['fbID'] = $response->id;
+        if ($response->picture->data->is_silhouette === false) {
+            $userPhoto = $response->picture->data->url;
+            $newUser['photo_path'] = $userPhoto;
+        }
+        $user = User::create($newUser);
 
-        return $response;
+        $credentials = $response->only('email', 'id');
+
+        try {
+            // attempt to verify the credentials and create a token for the user
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+        return response()->json(compact('token'));
     }
 }
