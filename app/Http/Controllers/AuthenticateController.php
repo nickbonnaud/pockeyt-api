@@ -71,7 +71,7 @@ class AuthenticateController extends Controller
             }
         }
 
-        $data = $response->getBody(true);
+        $data = $response->json();
 
         return gettype($data);
 
