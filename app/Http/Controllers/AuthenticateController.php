@@ -63,6 +63,6 @@ class AuthenticateController extends Controller
 
         // $response = $client->request('GET', 'https://graph.facebook.com/me', ['query' => 'access_token=' + $token]);
 
-        return $token;
+        return gettype($token);
     }
 }
