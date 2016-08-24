@@ -72,20 +72,27 @@ class AuthenticateController extends Controller
         }
 
         $data = json_decode($response->getBody());
+
         $userName = $data->name;
-        return $userName;
+        if($data->email) {
+            $userEmail = $data->email;
+        }
+        $userfbID = $data->id;
+        if($data->picture->data->is_silhouette === false) {
+            $userPhoto = $data->picture->data->url;
+        }
 
         $user = new User;
-        $user->name = $data['name'];
-        $user->fbID = $data['id'];
-        if ($data['email']) {
-            $user->email = $data['email'];
+        $user->name = $userName;
+        if($userEmail) {
+            $user->email = $userEmail;
         }
-        if ($data->picture->data->is_silhouette === false) {
-            $userPhoto = $data->picture->data->url;
-            $newUser['photo_path'] = $userPhoto;
+        if($userEmail) {
+            $user->photo_path = $userPhoto;
         }
-        $user = User::create($newUser);
+        $user->fbID = $userfbID;
+
+        return $user;
 
         $credentials = $data->only('email', 'id');
 
