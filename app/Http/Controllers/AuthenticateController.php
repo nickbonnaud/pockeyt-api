@@ -39,6 +39,7 @@ class AuthenticateController extends Controller
 
     public function register(Request $request){
         $newuser= $request->all();
+        return $newuser;
         $password=Hash::make($request->input('password'));
  
         $newuser['password'] = $password;
@@ -94,7 +95,7 @@ class AuthenticateController extends Controller
         }
         $user->fbID = $userfbID;
 
-        // $user->save();
+        $user->save();
         $credentials = ['email' => $userEmail, 'id' => $userfbID ];
 
         $payload = JWTFactory::make($credentials);
