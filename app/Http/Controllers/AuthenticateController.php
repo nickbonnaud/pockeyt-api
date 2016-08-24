@@ -61,8 +61,8 @@ class AuthenticateController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://graph.facebook.com/me', ['query' => 'access_token=' + $token]);
+        // $response = $client->request('GET', 'https://graph.facebook.com/me', ['query' => 'access_token=' + $token]);
 
-        return $response;
+        return $token;
     }
 }
