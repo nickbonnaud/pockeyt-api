@@ -97,9 +97,8 @@ class AuthenticateController extends Controller
         $credentials = ['email' => $userEmail, 'id' => $userfbID ];
 
         $payload = JWTFactory::make($credentials);
-        $tokenString = JWTAuth::encode($payload);
+        $token = JWTAuth::encode($payload);
         
-        $token = compact("tokenString");
         return $token;
     }
 }
