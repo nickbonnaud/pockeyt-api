@@ -63,7 +63,7 @@ class AuthenticateController extends Controller
 
         try {
             $response = $client->request('GET', 'https://graph.facebook.com/me', [
-                'query' => ['fields' => 'email, picture, ', 'access_token' => $token, ]
+                'query' => ['fields' => 'email, picture ', 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
