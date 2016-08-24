@@ -62,7 +62,7 @@ class AuthenticateController extends Controller
         $client = new \GuzzleHttp\Client();
 
         try {
-            $fbResponse = $client->request('GET', 'https://graph.facebook.com/me', [
+            $response = $client->request('GET', 'https://graph.facebook.com/me', [
                 'query' => ['fields' => 'name, email, picture', 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
@@ -70,7 +70,10 @@ class AuthenticateController extends Controller
                 return $e->getResponse();
             }
         }
-        $response = $fbResponse->json();
+
+        $data = $response->getBody();
+
+        return gettype($data);
 
         $newUser = $response->only('name', 'email');
         $newUser['fbID'] = $response->id;
