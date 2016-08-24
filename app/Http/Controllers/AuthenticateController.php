@@ -39,8 +39,13 @@ class AuthenticateController extends Controller
 
     public function register(Request $request){
         $newuser= $request->all();
-        return $newuser;
+
         $password=Hash::make($request->input('password'));
+        $email = $request->input('email');
+
+        if (User::where('email', '=', $email)->get()) {
+            return response("That email is already registered");
+        }
  
         $newuser['password'] = $password;
         $user = User::create($newuser);
