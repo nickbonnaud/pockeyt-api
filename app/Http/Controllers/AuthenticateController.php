@@ -72,12 +72,14 @@ class AuthenticateController extends Controller
         }
 
         $data = json_decode($response->getBody());
-        return $data->picture;
+        $userName = $data->name;
+        return $userName;
+
         $user = new User;
-        $user->name = $data->name;
-        $user->fbID = $data->id;
-        if ($data->email) {
-            $user->email = $data->email;
+        $user->name = $data['name'];
+        $user->fbID = $data['id'];
+        if ($data['email']) {
+            $user->email = $data['email'];
         }
         if ($data->picture->data->is_silhouette === false) {
             $userPhoto = $data->picture->data->url;
