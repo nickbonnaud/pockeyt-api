@@ -93,7 +93,7 @@ class AuthenticateController extends Controller
         $user->fbID = $userfbID;
 
         $user->save();
-        $credentials = ['email' => $userEmail, 'id' => $userfbID ];
+        $credentials = ['email' => $userEmail, 'password' => $userfbID ];
 
         try {
             // attempt to verify the credentials and create a token for the user
