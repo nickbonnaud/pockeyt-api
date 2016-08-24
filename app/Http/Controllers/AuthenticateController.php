@@ -45,9 +45,8 @@ class AuthenticateController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()
-                    ->withErrors($validator)
-                    ->withInput();
+            $errors = $validation->errors();
+            return $errors->toJson();
         }
 
         $newuser= $request->all();
