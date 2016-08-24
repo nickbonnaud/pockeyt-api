@@ -72,15 +72,18 @@ class AuthenticateController extends Controller
         }
 
         $data = $response->getBody();
-        $newUser = $newData->only('name', 'email');
-        $newUser['fbID'] = $newData->id;
-        if ($newData->picture->newData->is_silhouette === false) {
-            $userPhoto = $newData->picture->newData->url;
+        $newUser = $data->name;
+
+        return $newuser;
+
+        $newUser['fbID'] = $data->id;
+        if ($data->picture->data->is_silhouette === false) {
+            $userPhoto = $data->picture->data->url;
             $newUser['photo_path'] = $userPhoto;
         }
         $user = User::create($newUser);
 
-        $credentials = $newData->only('email', 'id');
+        $credentials = $data->only('email', 'id');
 
         try {
             // attempt to verify the credentials and create a token for the user
