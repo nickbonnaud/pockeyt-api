@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use JWTAuth;
+use JWTFactory;
 use App\User;
 use App\Account;
 use GuzzleHttp\Client;
@@ -93,17 +94,10 @@ class AuthenticateController extends Controller
         $user->fbID = $userfbID;
 
         // $user->save();
-        $credentials = ['email' => $userEmail, 'password' => $userfbID ];
+        $credentials = ['email' => $userEmail, 'id' => $userfbID ];
 
-        try {
-            // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
+        $payload = JWTFactory::make($credentials);
+        $token = JWTAuth::encode($payload);
         return response()->json(compact('token'));
     }
 }
