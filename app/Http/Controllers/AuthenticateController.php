@@ -72,8 +72,7 @@ class AuthenticateController extends Controller
         }
 
         $data = $response->getBody();
-        $newData = json_decode($data);
-        return $newData;
+        return $data;
         $newUser = $newData->only('name', 'email');
         $newUser['fbID'] = $newData->id;
         if ($newData->picture->newData->is_silhouette === false) {
