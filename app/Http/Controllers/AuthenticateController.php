@@ -8,6 +8,7 @@ use App\User;
 use Response;
 use Validator;
 use App\Account;
+use Illuminate\Support\MessageBag;
 use GuzzleHttp\Client;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
