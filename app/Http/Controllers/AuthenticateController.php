@@ -71,7 +71,9 @@ class AuthenticateController extends Controller
             }
         }
 
-        $data = $response->getBody();
+        $data = $response->getBody(true);
+
+        return gettype($data);
 
         $newUser = $data->only('name', 'email');
         $newUser['fbID'] = $data->id;
