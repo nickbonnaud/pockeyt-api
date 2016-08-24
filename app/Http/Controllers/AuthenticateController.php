@@ -9,7 +9,6 @@ use GuzzleHttp\Client;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +66,6 @@ class AuthenticateController extends Controller
                 'query' => ['access_token' => $token]
             ]);
         } catch (RequestException $e) {
-            // echo Psr7\str($e->getRequest());
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
