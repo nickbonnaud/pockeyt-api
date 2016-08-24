@@ -18,7 +18,8 @@
         "components/jqueryui": "^1.11",
         "alexpechkarev/google-maps": "1.0.5",
         "tymon/jwt-auth": "0.5.*",
-        "oureastudios/laravel5-braintree": "dev-master"
+        "oureastudios/laravel5-braintree": "dev-master",
+        "symfony/psr-http-message-bridge": "0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
