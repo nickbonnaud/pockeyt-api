@@ -71,7 +71,7 @@ class AuthenticateController extends Controller
             }
         }
 
-        $data = $response->getBody();
+        $data = json_decode($response->getBody());
         return $data;
         $newUser = $newData->only('name', 'email');
         $newUser['fbID'] = $newData->id;
