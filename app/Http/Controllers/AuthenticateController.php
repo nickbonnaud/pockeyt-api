@@ -39,7 +39,7 @@ class AuthenticateController extends Controller
     }
 
     public function register(Request $request){
-         return $request->all();
+         return $request->data->all();
          $validator = Validator::make($request->all(), [
             'email' => 'unique:users'
         ]);
