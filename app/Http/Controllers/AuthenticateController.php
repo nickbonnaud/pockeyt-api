@@ -58,6 +58,11 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->input('token');
-        return $token;
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'https://graph.facebook.com/me', ['query' => 'access_token=' + $token]);
+
+        return $response;
     }
 }
