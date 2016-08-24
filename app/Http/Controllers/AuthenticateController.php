@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use JWTAuth;
 use JWTFactory;
 use App\User;
+use Response;
 use App\Account;
 use GuzzleHttp\Client;
 use Tymon\JWTAuth\Exceptions\JWTException;
