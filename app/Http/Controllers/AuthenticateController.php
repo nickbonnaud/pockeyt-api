@@ -39,9 +39,14 @@ class AuthenticateController extends Controller
 
     public function register(Request $request){
         
-         $this->validate($request, [
-            'email' => 'unique:users',
+         $validator = Validator::make($request->all(), [
+            'email' => 'unique:users'
         ]);
+
+        if ($validator->fails()) {
+            return withErrors($validator)
+                        ->withInput();
+        }
 
         $newuser= $request->all();
         $password=Hash::make($request->input('password'));
