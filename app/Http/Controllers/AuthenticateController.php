@@ -69,7 +69,7 @@ class AuthenticateController extends Controller
         } catch (RequestException $e) {
             // echo Psr7\str($e->getRequest());
             if ($e->hasResponse()) {
-                return Psr7\str($e->getResponse());
+                return $e->getResponse();
             }
         }
         return $response;
