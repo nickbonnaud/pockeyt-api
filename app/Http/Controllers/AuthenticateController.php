@@ -72,7 +72,7 @@ class AuthenticateController extends Controller
         }
 
         $data = json_decode($response->getBody());
-        return $data;
+        return $data->picture;
         $user = new User;
         $user->name = $data->name;
         $user->fbID = $data->id;
