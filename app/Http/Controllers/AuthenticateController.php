@@ -37,7 +37,6 @@ class AuthenticateController extends Controller
 
     public function register(Request $request){
         $newuser= $request->all();
-        return $newuser;
         $password=Hash::make($request->input('password'));
  
         $newuser['password'] = $password;
@@ -64,13 +63,14 @@ class AuthenticateController extends Controller
 
         try {
             $response = $client->request('GET', 'https://graph.facebook.com/me', [
-                'query' => ['access_token' => $token]
+                'query' => ['fields' => 'email, picture, ' 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
         }
+
         return $response;
     }
 }
