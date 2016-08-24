@@ -67,7 +67,7 @@ class AuthenticateController extends Controller
                 'query' => ['access_token' => $token]
             ]);
         } catch (RequestException $e) {
-            echo Psr7\str($e->getRequest());
+            return Psr7\str($e->getRequest());
             if ($e->hasResponse()) {
                 echo Psr7\str($e->getResponse());
             }
