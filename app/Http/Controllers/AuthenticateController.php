@@ -111,6 +111,6 @@ class AuthenticateController extends Controller
         if (!$userToken=JWTAuth::fromUser($dbUser)) {
             return response()->json(['error' => 'invalid_credentials'], 401);
         }
-        return response()->json(compact('userToken'));
+        return response()->json(compact('token'));
     }
 }
