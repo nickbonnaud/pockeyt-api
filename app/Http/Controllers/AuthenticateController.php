@@ -96,7 +96,7 @@ class AuthenticateController extends Controller
             'query' => ['type' => 'large']
         ]);
 
-        $photoData = $response->getBody();
+        $photoData = $res->getBody();
         return $photoData;
         if($photoData->picture->data->is_silhouette === false) {
             $userPhoto = $photoData->picture->data->url;
