@@ -93,13 +93,10 @@ class AuthenticateController extends Controller
         }
         $userfbID = $data->id;
 
-        $client = new \GuzzleHttp\Client([
-            'base_url' => ['http://graph.facebook.com/', []],
-            ]);
-        $client->setDefaultOption('query/type', 'large');
-        $request = $client->get([$userfbID + '/picture']);
-        
-        return $request->getUrl();
+        $client = new \GuzzleHttp\Client(['https://graph.facebook.com/']);
+        $res = $client->request('GET', $userfbID);
+
+        return $res;
 
         if($data->picture->data->is_silhouette === false) {
             $userPhoto = $data->picture->data->url;
