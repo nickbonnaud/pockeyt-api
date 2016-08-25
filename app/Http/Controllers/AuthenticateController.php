@@ -73,10 +73,10 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->input('token');
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com']);
 
         try {
-            $response = $client->request('GET', 'https://graph.facebook.com/me', [
+            $response = $client->request('GET', '/me', [
                 'query' => ['fields' => 'name, email', 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
@@ -92,8 +92,6 @@ class AuthenticateController extends Controller
             $userEmail = $data->email;
         }
         $userfbID = $data->id;
-
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com']);
         $res = $client->request('GET', "/$userfbID/picture", [
             'query' => ['type' => 'large']
         ]);
