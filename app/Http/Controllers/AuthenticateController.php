@@ -93,7 +93,7 @@ class AuthenticateController extends Controller
         }
         $userfbID = $data->id;
 
-        $fbIDCheck = array('fbID' => $userfbID);
+        $fbIDCheck = array('fbId' => $userfbID);
         $validator = Validator::make($fbIDCheck, [
             'fbID' => 'unique:users'
         ]);
