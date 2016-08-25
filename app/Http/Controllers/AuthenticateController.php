@@ -97,7 +97,7 @@ class AuthenticateController extends Controller
         ]);
 
         $photoData = $res;
-        return gettype($photoData);
+        return $photoData;
         if($photoData->picture->data->is_silhouette === false) {
             $userPhoto = $photoData->picture->data->url;
         }
