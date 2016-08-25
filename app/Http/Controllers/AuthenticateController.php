@@ -93,7 +93,7 @@ class AuthenticateController extends Controller
         }
         $userfbID = $data->id;
         $res = $client->request('GET', "/$userfbID/picture", [
-            'query' => ['type' => 'large']
+            'query' => ['type' => 'large', 'redirect' =>'false']
         ]);
 
         $photoData = $res;
