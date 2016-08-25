@@ -102,7 +102,7 @@ class AuthenticateController extends Controller
             $userPhoto = $photoData->data->url;
         }
 
-        $validator = Validator::make($fbID, [
+        $validator = Validator::make($userfbID, [
             'fbID' => 'unique:users'
         ]);
 
