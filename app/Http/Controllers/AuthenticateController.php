@@ -92,14 +92,14 @@ class AuthenticateController extends Controller
             $userEmail = $data->email;
         }
         $userfbID = $data->id;
+
         $res = $client->request('GET', "/$userfbID/picture", [
             'query' => ['type' => 'large', 'redirect' =>'false']
         ]);
 
-        $photoData = $res;
-        return $photoData;
-        if($photoData->picture->data->is_silhouette === false) {
-            $userPhoto = $photoData->picture->data->url;
+        $photoData = json_decode($res->getBody());
+        if($photoData->data->is_silhouette === false) {
+            $userPhoto = $photoData->data->url;
         }
 
         $user = new User;
@@ -107,7 +107,7 @@ class AuthenticateController extends Controller
         if($userEmail) {
             $user->email = $userEmail;
         }
-        if($userEmail) {
+        if($userPhoto) {
             $user->photo_path = $userPhoto;
         }
         $user->fbID = $userfbID;
