@@ -96,10 +96,10 @@ class AuthenticateController extends Controller
             'query' => ['type' => 'large']
         ]);
 
-        return $res;
-
-        if($data->picture->data->is_silhouette === false) {
-            $userPhoto = $data->picture->data->url;
+        $photoData = json_decode($response->getBody());
+        return $photoData
+        if($photoData->picture->data->is_silhouette === false) {
+            $userPhoto = $photoData->picture->data->url;
         }
 
         $user = new User;
