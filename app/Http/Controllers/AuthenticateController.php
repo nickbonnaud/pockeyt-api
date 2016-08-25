@@ -93,30 +93,41 @@ class AuthenticateController extends Controller
         }
         $userfbID = $data->id;
 
-        $res = $client->request('GET', "/$userfbID/picture", [
-            'query' => ['type' => 'large', 'redirect' =>'false']
+        $fbIDCheck = array('fbID' => $userfbID);
+        $validator = Validator::make($fbIDCheck, [
+            'fbID' => 'unique:users'
         ]);
 
-        $photoData = json_decode($res->getBody());
-        if($photoData->data->is_silhouette === false) {
-            $userPhoto = $photoData->data->url;
-        }
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return $errors->toJson();
+        } else {
 
-        $user = new User;
-        $user->name = $userName;
-        if($userEmail) {
-            $user->email = $userEmail;
-        }
-        if($userPhoto) {
-            $user->photo_path = $userPhoto;
-        }
-        $user->fbID = $userfbID;
-        $user->save();
+            $res = $client->request('GET', "/$userfbID/picture", [
+                'query' => ['type' => 'large', 'redirect' =>'false']
+            ]);
 
-        $dbUser = User::where('fbID', '=', $userfbID)->first();
-        if (!$token=JWTAuth::fromUser($dbUser)) {
-            return response()->json(['error' => 'invalid_credentials'], 401);
+            $photoData = json_decode($res->getBody());
+            if($photoData->data->is_silhouette === false) {
+                $userPhoto = $photoData->data->url;
+            }
+
+            $user = new User;
+            $user->name = $userName;
+            if($userEmail) {
+                $user->email = $userEmail;
+            }
+            if($userPhoto) {
+                $user->photo_path = $userPhoto;
+            }
+            $user->fbID = $userfbID;
+            $user->save();
+
+            $dbUser = User::where('fbID', '=', $userfbID)->first();
+            if (!$token=JWTAuth::fromUser($dbUser)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+            return response()->json(compact('token'));
         }
-        return response()->json(compact('token'));
     }
 }
