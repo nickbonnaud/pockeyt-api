@@ -105,13 +105,12 @@ class AuthenticateController extends Controller
             $user->photo_path = $userPhoto;
         }
         $user->fbID = $userfbID;
-
         $user->save();
-        $credentials = ['email' => $userEmail, 'fbID' => $userfbID ];
 
-        $payload = JWTFactory::make($credentials);
-        $token = JWTAuth::encode($payload);
-        
-        return Response::json(['token' => $token->get()]);
+        $dbUser = User::where('fbID', '=', $userfbID)->first();
+        if (!$userToken=JWTAuth::fromUser($dbUser)) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
+        return response()->json(compact('userToken'));
     }
 }
