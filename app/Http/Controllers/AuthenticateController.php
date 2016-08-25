@@ -93,7 +93,7 @@ class AuthenticateController extends Controller
         }
         $userfbID = $data->id;
 
-        $client = new \GuzzleHttp\Client(['https://graph.facebook.com']);
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com']);
         $res = $client->request('GET', "/$userfbID/picture?type=large");
 
         return $url;
