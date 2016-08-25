@@ -39,7 +39,6 @@ class AuthenticateController extends Controller
     }
 
     public function register(Request $request){
-        return $request->all();
         $validator = Validator::make($request->all(), [
             'email' => 'unique:users'
         ]);
@@ -103,32 +102,21 @@ class AuthenticateController extends Controller
             $userPhoto = $photoData->data->url;
         }
 
-        return $data;
-        $validator = Validator::make($data, [
-            'fbID' => 'unique:users'
-        ]);
-
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return $errors->toJson();
-        } else {
-
-            $user = new User;
-            $user->name = $userName;
-            if($userEmail) {
-                $user->email = $userEmail;
-            }
-            if($userPhoto) {
-                $user->photo_path = $userPhoto;
-            }
-            $user->fbID = $userfbID;
-            $user->save();
-
-            $dbUser = User::where('fbID', '=', $userfbID)->first();
-            if (!$token=JWTAuth::fromUser($dbUser)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-            return response()->json(compact('token'));
+        $user = new User;
+        $user->name = $userName;
+        if($userEmail) {
+            $user->email = $userEmail;
         }
+        if($userPhoto) {
+            $user->photo_path = $userPhoto;
+        }
+        $user->fbID = $userfbID;
+        $user->save();
+
+        $dbUser = User::where('fbID', '=', $userfbID)->first();
+        if (!$token=JWTAuth::fromUser($dbUser)) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
+        return response()->json(compact('token'));
     }
 }
