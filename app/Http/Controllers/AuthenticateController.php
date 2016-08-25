@@ -77,7 +77,7 @@ class AuthenticateController extends Controller
 
         try {
             $response = $client->request('GET', 'https://graph.facebook.com/me', [
-                'query' => ['fields' => 'name, email, picture', 'access_token' => $token, ]
+                'query' => ['fields' => 'name, email', 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
@@ -92,6 +92,13 @@ class AuthenticateController extends Controller
             $userEmail = $data->email;
         }
         $userfbID = $data->id;
+
+        $client = new Client('http://graph.facebook.com/');
+        $client->setDefaultOption('query/type', 'large');
+        $request = $client->get($userfbID + '/picture');
+        
+        return $request->getUrl();
+
         if($data->picture->data->is_silhouette === false) {
             $userPhoto = $data->picture->data->url;
         }
