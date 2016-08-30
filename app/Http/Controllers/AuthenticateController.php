@@ -22,7 +22,7 @@ class AuthenticateController extends Controller
     public function authenticate(Request $request)
     {
         if($request->has('fbID')) {
-            return request;
+            return $request;
             $fbID = $request->input('fbID');
             $dbUser = User::where('fbID', '=', $fbID)->first();
             if (!$token=JWTAuth::fromUser($dbUser)) {
