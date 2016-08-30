@@ -22,7 +22,7 @@ class AuthenticateController extends Controller
     public function authenticate(Request $request)
     {
         if($request->has('fbID')) {
-            $data = json_decode($response->getBody());
+            $data = json_decode($request->getBody());
             return $data;
             $RetrievedUser = User::where('fbID', '=', $newfbID)->first();
             return ($RetrievedUser);
