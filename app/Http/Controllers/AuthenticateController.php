@@ -22,10 +22,8 @@ class AuthenticateController extends Controller
     public function authenticate(Request $request)
     {
         if($request->has('fbID')) {
-            $data = json_decode($request->getBody());
-            return $data;
-            $RetrievedUser = User::where('fbID', '=', $newfbID)->first();
-            return ($RetrievedUser);
+            $fbID = (int) $request->input('fbID');
+            $dbUser = User::where('fbID', '=', $fbID)->first();
             if (!$token=JWTAuth::fromUser($dbUser)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
