@@ -22,8 +22,8 @@ class AuthenticateController extends Controller
     public function authenticate(Request $request)
     {
         if($request->has('fbID')) {
-            $newfbID = 10100379110426580;
-            return gettype($newfbID);
+            $data = json_decode($response->getBody());
+            return $data;
             $RetrievedUser = User::where('fbID', '=', $newfbID)->first();
             return ($RetrievedUser);
             if (!$token=JWTAuth::fromUser($dbUser)) {
