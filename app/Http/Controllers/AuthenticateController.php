@@ -21,21 +21,31 @@ class AuthenticateController extends Controller
 
     public function authenticate(Request $request)
     {
-        // grab credentials from the request
-        $credentials = $request->only('email', 'password');
+        if($request->has('fbID')) {
+            $fbID = $request->input('fbID');
 
-        try {
-            // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            $dbUser = User::where('fbID', '=', $fbID)->first();
+            if (!$token=JWTAuth::fromUser($dbUser)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
-        } catch (JWTException $e) {
-            // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
+            return response()->json(compact('token'));
+        } else {
+            // grab credentials from the request
+            $credentials = $request->only('email', 'password');
 
-        // all good so return the token
-        return response()->json(compact('token'));
+            try {
+                // attempt to verify the credentials and create a token for the user
+                if (! $token = JWTAuth::attempt($credentials)) {
+                    return response()->json(['error' => 'invalid_credentials'], 401);
+                }
+            } catch (JWTException $e) {
+                // something went wrong whilst attempting to encode the token
+                return response()->json(['error' => 'could_not_create_token'], 500);
+            }
+
+            // all good so return the token
+            return response()->json(compact('token'));
+        }
     }
 
     public function register(Request $request){
