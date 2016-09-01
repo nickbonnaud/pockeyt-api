@@ -11,13 +11,13 @@ class PaymentController extends Controller
 {
     
     public function clientToken() {
-        $authUser = JWTAuth::parseToken()->authenticate();
+        JWTAuth::parseToken()->authenticate();
         $clientToken = \Braintree_ClientToken::generate();
         return response()->json(compact('clientToken'));
     }
 
     public function createCustomer(Request $request) {
-        $authUser = JWTAuth::parseToken()->authenticate();
+
         return response()->json(compact(authUser));
     }
 
