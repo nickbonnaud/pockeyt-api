@@ -18,7 +18,10 @@ class PaymentController extends Controller
 
     public function createCustomer(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
-        return response()->json(compact('authUser'));
+        
+        $user = $authUser->name;
+
+        return response()->json(compact('user'));
     }
 
 
