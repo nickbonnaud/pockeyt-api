@@ -86,7 +86,7 @@ class AuthenticateController extends Controller
 
         try {
             $response = $client->request('GET', '/me', [
-                'query' => ['fields' => 'name, email', 'access_token' => $token, ]
+                'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
             ]);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
@@ -96,7 +96,8 @@ class AuthenticateController extends Controller
 
         $data = json_decode($response->getBody());
 
-        $userName = $data->name;
+        $userFirstName = $data->first_name;
+        $userLastName = $data->last_name;
         if($data->email) {
             $userEmail = $data->email;
         }
@@ -122,7 +123,8 @@ class AuthenticateController extends Controller
             }
 
             $user = new User;
-            $user->name = $userName;
+            $user->first_name = $userFirstName;
+            $user->last_name = $userLastName;
             if($userEmail) {
                 $user->email = $userEmail;
             }
