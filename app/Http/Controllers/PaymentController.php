@@ -19,7 +19,8 @@ class PaymentController extends Controller
     public function createCustomer(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         $result = \Braintree_Customer::create([
-            'name' => $authUser->name,
+            'firstName' => $authUser->first_name,
+            'lastName' => $authUser->last_name,
             'email' => $authUser->email,
             'paymentMethodNonce' => $request->userNonce
         ]);
