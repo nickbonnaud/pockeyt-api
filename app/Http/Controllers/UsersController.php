@@ -32,13 +32,15 @@ class UsersController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
         }
 
-        if(! $result = \Braintree_Customer::find($user->customer_id)) {
-            return response()->json(compact('user'));
-        } else {
+        $customerId = $user->customer_id;
+        if(isset($customerId)) {
+            $result = \Braintree_Customer::find($customerId);
             $user['cardLast4'] = $result->creditCards[0]->last4;
             $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
             $user['cardToken'] = $result->creditCards[0]->token;
 
+            return response()->json(compact('user'));
+        } else {
             return response()->json(compact('user'));
         }
     }
