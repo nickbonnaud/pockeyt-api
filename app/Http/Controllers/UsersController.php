@@ -33,9 +33,9 @@ class UsersController extends Controller
         }
 
         $customer = \Braintree_Customer::find($user->customer_id);
-        $payDetails = $customer->paymentMethods();
+        $payDetails = $customer->paymentMethods()->_attributes;
 
-        return $payDetails->customerId;
+        return $payDetails;
 
         // the token is valid and we have found the user via the sub claim
         // return response()->json(compact('user'));
