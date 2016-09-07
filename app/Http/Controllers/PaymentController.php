@@ -29,7 +29,7 @@ class PaymentController extends Controller
             $dbUser = User::findOrFail($authUser->id);
             $dbUser['customer_id'] = $result->customer->id;
             $dbUser->save();
-            return $result->customer->paymentMethods;
+            return $result->customer->paymentMethods[0];
         } else {
             foreach($result->errors->deepAll() AS $error) {
                 return($error->code . ": " . $error->message . "\n");
