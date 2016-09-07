@@ -32,13 +32,15 @@ class UsersController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
         }
 
-        $result = \Braintree_Customer::find($user->customer_id);
-        $user['last4'] = $result->creditCards[0]->last4;
+        if(! $result = \Braintree_Customer::find($user->customer_id)) {
+            return response()->json(compact('user'));
+        } else {
+            $user['cardLast4'] = $result->creditCards[0]->last4;
+            $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
+            $user['cardToken'] = $result->creditCards[0]->token;
 
-        return $user;
-
-        // the token is valid and we have found the user via the sub claim
-        // return response()->json(compact('user'));
+            return response()->json(compact('user'));
+        }
     }
 
     /**
