@@ -33,7 +33,7 @@ class UsersController extends Controller
         }
 
         $customer = \Braintree_Customer::find($user->customer_id);
-        $payDetails = $customer->paymentMethods()->_attributes;
+        $payDetails = $customer->paymentMethods();
 
         return $payDetails;
 
