@@ -33,9 +33,9 @@ class UsersController extends Controller
         }
 
         $result = \Braintree_Customer::find($user->customer_id);
-        return $result->creditCards[0]->last4;
+        $user['last4'] = $result->creditCards[0]->last4;
 
-    
+        return $user;
 
         // the token is valid and we have found the user via the sub claim
         // return response()->json(compact('user'));
