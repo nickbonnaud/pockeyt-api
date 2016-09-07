@@ -33,7 +33,7 @@ class UsersController extends Controller
         }
 
         $customer = \Braintree_Customer::find($user->customer_id);
-        return $customer->customer->last4;
+        return $customer;
 
     
 
