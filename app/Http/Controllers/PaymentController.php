@@ -26,13 +26,10 @@ class PaymentController extends Controller
             'paymentMethodNonce' => $request->userNonce
         ]);
         if ($result->success) {
-            return $result;
             $dbUser = User::findOrFail($authUser->id);
             $dbUser['customer_id'] = $result->customer->id;
             $dbUser->save();
-            $payDetails = $result->customer->paymentMethods();
-
-            // return response()->json(compact('payDetails'));
+            return response('Success', 200);
         } else {
             foreach($result->errors->deepAll() AS $error) {
                 return($error->code . ": " . $error->message . "\n");
