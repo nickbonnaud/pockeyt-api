@@ -30,7 +30,7 @@ class PaymentController extends Controller
             $dbUser['customer_id'] = $result->customer->id;
             $dbUser->save();
             $customer = \Braintree_Customer::find($result->customer->id);
-            return $customer->paymentMethods;
+            return $customer->paymentMethods();
         } else {
             foreach($result->errors->deepAll() AS $error) {
                 return($error->code . ": " . $error->message . "\n");
