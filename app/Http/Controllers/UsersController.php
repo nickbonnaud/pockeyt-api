@@ -32,8 +32,8 @@ class UsersController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
         }
 
-        $customer = \Braintree_Customer::find($user->customer_id);
-        return $customer;
+        $result = \Braintree_Customer::find($user->customer_id);
+        return $result->id;
 
     
 
