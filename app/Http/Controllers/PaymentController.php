@@ -37,6 +37,23 @@ class PaymentController extends Controller
         }
     }
 
+    public function editPaymentMethod(Request $request) {
+        $authUser = JWTAuth::parseToken()->authenticate();
+        $result = \Braintree_PaymentMethod::update(
+            $request->payToken,
+            [
+                'paymentMethodNonce' => $request->userNonce
+            ]
+        );
+        if ($result->success) {
+            return response('Success', 200);
+        } else {
+            foreach($result->errors->deepAll() AS $error) {
+                return($error->code . ": " . $error->message . "\n");
+            }
+        }
+    }
+
 
     /**
      * Display a listing of the resource.
