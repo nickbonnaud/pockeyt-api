@@ -76,7 +76,8 @@ class AuthenticateController extends Controller
                 // something went wrong whilst attempting to encode the token
                 return response()->json(['error' => 'could_not_create_token'], 500);
             }
-            return response()->json(compact('token'));
+            $user['token'] = $token;
+            return response()->json(compact('user'));
         }
     }
 
