@@ -23,14 +23,16 @@ class AuthenticateController extends Controller
     {
         if($request->has('fbID')) {
             $fbID = $request->input('fbID');
-            $dbUser = User::where('fbID', '=', $fbID)->first();
-            if (!$token=JWTAuth::fromUser($dbUser)) {
+            $user = User::where('fbID', '=', $fbID)->first();
+            if (!$token=JWTAuth::fromUser($user)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
-            return response()->json(compact('token'));
+            $user['token'] = $token;
+            return response()->json(compact('user'));
         } else {
             // grab credentials from the request
             $credentials = $request->only('email', 'password');
+            return response($credentials);
 
             try {
                 // attempt to verify the credentials and create a token for the user
