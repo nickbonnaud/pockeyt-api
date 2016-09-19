@@ -14,7 +14,7 @@ class GeoController extends Controller
     {
     	
     	$user = User::findOrFail($request->userId);
-    	$user['lat'] = 50;
+    	$user['lat'] = $request->coords;
     	return $user;
     }
 }
