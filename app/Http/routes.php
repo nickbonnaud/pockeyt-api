@@ -58,6 +58,11 @@ Route::group(['prefix' => 'api'], function() {
     Route::put('customer', 'PaymentController@editPaymentMethod');
 });
 
+//geo routes
+Route::group(['prefix' => 'api'], function() {
+    Route::put('geo', 'GeoController@putLocation');
+});
+
 // API Routes
 Route::controller('api', 'APIController', [
     'getPosts' => 'api.posts',
