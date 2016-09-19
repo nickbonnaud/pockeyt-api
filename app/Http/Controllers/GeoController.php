@@ -12,6 +12,6 @@ class GeoController extends Controller
 
     public function putLocation(Request $request)
     {
-    	return response()->json(request);
+    	return response()->json($request);
     }
 }
