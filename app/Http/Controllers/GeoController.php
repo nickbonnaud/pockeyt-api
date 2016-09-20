@@ -19,7 +19,7 @@ class GeoController extends Controller
     	$user['lng'] = $request->long;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
-    	$this->checkDistance($user);
+    	return $this->checkDistance($user);
     }
 
     private function checkDistance($user) {
