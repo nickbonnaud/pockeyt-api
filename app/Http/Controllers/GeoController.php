@@ -51,7 +51,7 @@ class GeoController extends Controller
 	    return $d;
     }
 
-    private function deg2rad($eg) {
+    private function deg2rad($deg) {
     	return $deg * (M_PI/180);
    }
 }
