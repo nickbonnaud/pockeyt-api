@@ -40,7 +40,7 @@ class GeoController extends Controller
     }
 
     private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
-    	$r = 6371; // Radius of the earth in m
+    	$r = 6371000; // Radius of the earth in m
 	    $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below
 	    $dLon = $this->deg2rad($userLng-$businessLng); 
 	    $a = 
