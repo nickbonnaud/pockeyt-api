@@ -29,7 +29,7 @@ class GeoController extends Controller
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
-
+    		return $businessLat;
     		if (($businessLat !== NULL) && ($businessLng !== NULL)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			return $distance;
