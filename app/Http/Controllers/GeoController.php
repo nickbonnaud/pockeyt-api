@@ -16,7 +16,7 @@ class GeoController extends Controller
     {
     	$user = User::findOrFail($request->userId);
     	$user['lat'] = $request->lat;
-    	$user['lng'] = $request->long;
+    	$user['lng'] = $request->lng;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
     	return $this->checkDistance($user);
