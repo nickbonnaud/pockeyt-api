@@ -31,7 +31,7 @@ class GeoController extends Controller
     		$businessLng = $business->lng;
 
     		if (($businessLat !== NULL) && ($businessLng !== NULL)) {
-    			$distance = getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
+    			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			return $distance;
     		}
     	}
@@ -39,8 +39,8 @@ class GeoController extends Controller
 
     private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
     	$r = 6371000; // Radius of the earth in m
-	    $dLat = deg2rad($userLat-$businessLat);  // deg2rad below
-	    $dLon = deg2rad($userLng-$businessLng); 
+	    $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below
+	    $dLon = $this->deg2rad($userLng-$businessLng); 
 	    $a = 
 	      Math.sin($dLat/2) * Math.sin($dLat/2) +
 	      Math.cos(deg2rad($businessLat)) * Math.cos(deg2rad($userLat)) * 
