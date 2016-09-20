@@ -42,16 +42,16 @@ class GeoController extends Controller
 	    $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below
 	    $dLon = $this->deg2rad($userLng-$businessLng); 
 	    $a = 
-	      Math.sin($dLat/2) * Math.sin($dLat/2) +
-	      Math.cos(deg2rad($businessLat)) * Math.cos(deg2rad($userLat)) * 
-	      Math.sin($dLon/2) * Math.sin($dLon/2)
+	      sin($dLat/2) * sin($dLat/2) +
+	      cos(deg2rad($businessLat)) * cos(deg2rad($userLat)) * 
+	      sin($dLon/2) * sin($dLon/2)
 	      ; 
-	    $c = 2 * Math.atan2(Math.sqrt($a), Math.sqrt(1-$a)); 
+	    $c = 2 * atan2(sqrt($a), sqrt(1-$a)); 
 	    $d = R * $c; // Distance in m
 	    return $d;
     }
 
     private function deg2rad($eg) {
-    	return $deg * (Math.PI/180);
+    	return $deg * (M_PI/180);
    }
 }
