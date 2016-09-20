@@ -30,7 +30,7 @@ class GeoController extends Controller
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
     		if (is_null($businessLat) && is_null($businessLng)) {
-    			return "not calculated";
+    			console.log("not calculated");
     		} else {
     			return $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     		}
