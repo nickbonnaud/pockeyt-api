@@ -26,7 +26,6 @@ class GeoController extends Controller
     	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
-    	return $user;
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
