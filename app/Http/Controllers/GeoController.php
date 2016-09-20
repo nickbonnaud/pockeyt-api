@@ -23,7 +23,7 @@ class GeoController extends Controller
     }
 
     private function checkDistance($user) {
-    	$businesses = DB('profiles')->select(array('id', 'lat', 'lng'))->get();
+    	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
     	foreach ($businesses as $business) {
