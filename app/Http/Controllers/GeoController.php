@@ -29,11 +29,10 @@ class GeoController extends Controller
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
-    		if (is_null($businessLat) && is_null($businessLng)) {
-    			console.log("not calculated");
-    		} else {
-    			return $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-    		}
+    		if (($businessLat !== null) && ($businessLng !== null)) {
+    			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
+    			return $distance;
+    		} 
     	}
     }
 
