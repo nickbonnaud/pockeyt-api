@@ -12,7 +12,6 @@ class GeoController extends Controller
 
     public function putLocation(Request $request)
     {
-    	
     	$user = User::findOrFail($request->userId);
     	$user['lat'] = $request->lat;
     	$user['long'] = $request->long;
