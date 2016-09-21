@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Profile;
 use App\Http\Requests;
+use App\Events\CustomerInRadius;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -31,7 +32,9 @@ class GeoController extends Controller
     		$businessLng = $business->lng;
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-    			return $distance;
+    			if ($distance <= 30) {
+    				event(new CustomerInRadius($user));
+    			}
     		} 
     	}
     }
