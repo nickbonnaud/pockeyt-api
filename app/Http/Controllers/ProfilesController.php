@@ -6,6 +6,8 @@ use App\Http\Requests\AddProfilePhotoRequest;
 use App\Http\Requests\DeleteProfilePhotoRequest;
 use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateBusinessLocationRequest;
+use App\Http\Requests\UpdateBusinessTagsRequest;
 use App\Photo;
 use App\Post;
 use App\Profile;
@@ -68,10 +70,7 @@ class ProfilesController extends Controller {
         else
             $this->syncTags($profile, $request->input('tag_list'));
 
-
-        flash()->overlay('Welcome Aboard', 'Thank you for creating a profile!');
-
-        return redirect(profile_path($profile));
+         return redirect()->route('accounts.create');
     }
 
     /**
@@ -109,17 +108,35 @@ class ProfilesController extends Controller {
         /** @var Profile $profile */
         $profile = Profile::findOrFail($id);
         $profile->update($request->all());
+        $tagList = $request->input('tag_list');
 
-        $this->syncTags($profile, $request->input('tag_list'));
+        if (isset($tag_list)) {
+            $this->syncTags($profile, $tag_list);
+        }
 
-        flash()->success('Success!', 'Profile has been updated.');
-
-        return redirect()->route('profiles.show', ['profiles' => $id]);
+        return redirect()->route('profiles.edit', compact('profile', 'tags'));
     }
 
     /**************************
      * Other actions
      */
+
+    public function changeTags(UpdateBusinessTagsRequest $request, $id) {
+        /** @var Profile $profile */
+        $profile = Profile::findOrFail($id);
+        $this->syncTags($profile, $request->input('tag_list'));
+
+        return redirect()->route('profiles.edit', compact('profile', 'tags'));
+    }
+    
+
+    public function changeLocation(UpdateBusinessLocationRequest $request, $id) {
+        /** @var Profile $profile */
+        $profile = Profile::findOrFail($id);
+        $profile->update($request->all());
+
+        return redirect()->route('profiles.edit', compact('profile', 'tags'));
+    }
 
     public function postPhotos(AddProfilePhotoRequest $request, $profile_id) {
         $file = $request->file('photo');

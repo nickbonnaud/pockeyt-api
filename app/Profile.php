@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Profile extends Model {
 
@@ -105,6 +106,14 @@ class Profile extends Model {
     public function tags()
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+
+    public function account() {
+        return $this->hasOne(Account::class);
+    }
+
+    public function publish(Account $account) {
+        return $this->account()->save($account);
     }
 
     

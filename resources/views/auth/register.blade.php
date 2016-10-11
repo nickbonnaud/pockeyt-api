@@ -11,8 +11,13 @@
                 {!! csrf_field() !!}
 
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control" value="{{ old('first_name') }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name') }}" required>
                 </div>
 
                 <div class="form-group">
@@ -33,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Register</button>
+                    <button type="submit" class="btn btn-info pull-right">Next</button>
                 </div>
             </form>
 

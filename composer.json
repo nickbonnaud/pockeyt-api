@@ -19,7 +19,8 @@
         "alexpechkarev/google-maps": "1.0.5",
         "tymon/jwt-auth": "0.5.*",
         "oureastudios/laravel5-braintree": "dev-master",
-        "symfony/psr-http-message-bridge": "0.2"
+        "symfony/psr-http-message-bridge": "0.2",
+        "pusher/pusher-php-server": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

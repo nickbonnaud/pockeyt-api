@@ -1,29 +1,17 @@
 @extends('layoutDashboard')
 
-@if(is_null($profile))
+@section('content')
 
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center">Profile not found.</h2>
-        </div>
-    </div>
-
-@else
-
-    @section('content')
-
-          <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
           <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
               <h1>
-                Blank page
-                <small>it all starts here</small>
+                User Profile
               </h1>
               <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">Blank page</li>
+                <li class="active">User Profile</li>
               </ol>
             </section>
 
@@ -57,40 +45,5 @@
             <!-- /.content -->
           </div>
           <!-- /.content-wrapper -->
-    @stop
-@endif
 
-@section('scripts.footer')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-
-    <script>
-        Dropzone.options.uploadLogo = {
-            paramName: 'photo',
-            maxFilesize: 3,
-            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-            init: function() {
-                this.on('success', function() {
-                    window.location.reload();
-                });
-            }
-        };
-        Dropzone.options.uploadHero = {
-            paramName: 'photo',
-            maxFilesize: 3,
-            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-            init: function() {
-                this.on('success', function() {
-                    window.location.reload();
-                });
-            }
-        };
-
-        $(function() {
-            $( "#event_date_pretty" ).datepicker({
-                dateFormat: "DD, d MM, yy",
-                altField: "#event_date",
-                altFormat: "yy-mm-dd"
-            });
-        });
-    </script>
 @stop

@@ -7,7 +7,7 @@
 <div class="form-group">
     <label for="website">Website URL:</label>
     <input type="text" name="website" id="website" class="form-control"
-           value="{{ old('website') !== null ? old('website') : ((isset($profile) && $profile->website) ? $profile->website : '') }}" required>
+           value="{{ old('website') !== null ? old('website') : ((isset($profile) && $profile->website) ? $profile->website : '') }}" placeholder="www.example.com" required>
 </div>
 
 <div class="form-group">
@@ -24,42 +24,30 @@
 {!! Form::hidden('lat', null, ['id' => 'lat']) !!}
 {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
 
-<div class="form-group">
-    <label for="website">Review URL:</label>
-    <input type="text" name="review_url" id="website" class="form-control"
-           value="{{ old('review_url') !== null ? old('review_url') : ((isset($profile) && $profile->review_url) ? $profile->review_url : '') }}" >
-</div>
-
-<div class="form-group">
-    <label for="review_intro">Review Intro:</label>
-    <input type="text" name="review_intro" id="review_intro" class="form-control"
-           value="{{ old('review_intro') !== null ? old('review_intro') : ((isset($profile) && $profile->review_intro) ? $profile->review_intro : '') }}" >
-</div>
-
 
 @if(isset($profile))
   <div class="form-group">
       {!! Form::label('tag_list', 'Tag:') !!}
-      {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'multiple', 'required']) !!}
+      {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
   </div>
 @else
   <div class="form-group">
       {!! Form::label('tags', 'Tag:') !!}
-      {!! Form::select('tags[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'multiple']) !!}
+      {!! Form::select('tags[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
   </div>
 @endif
 
 <hr>
 
 <div class="form-group">
-    <button type="submit" class="btn btn-primary">{{ !isset($profile) ? 'Create' : 'Update' }} Profile</button>
+    <button type="submit" class="btn btn-info pull-right">{{ !isset($profile) ? 'Next' : 'Update' }}</button>
 </div>
 
 @section('scripts.footer')
   <script>
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -33.8688, lng: 151.2195},
+        center: {lat: 35.7796, lng: -78.6382},
         zoom: 13
       });
 

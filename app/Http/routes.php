@@ -28,10 +28,24 @@ Route::post('profiles/{profiles}/approve', 'ProfilesController@postApprove')->na
 Route::post('profiles/{profiles}/unapprove', 'ProfilesController@postUnapprove')->name('profiles.unapprove');
 Route::post('profiles/{profiles}/feature', 'ProfilesController@postFeature')->name('profiles.feature');
 Route::post('profiles/{profiles}/unfeature', 'ProfilesController@postUnfeature')->name('profiles.unfeature');
+Route::patch('profiles/{profiles}/location', 'ProfilesController@changeLocation')->name('profiles.location');
+Route::patch('profiles/{profiles}/tags', 'ProfilesController@changeTags')->name('profiles.tags');
 Route::resource('profiles', 'ProfilesController');
 
 // Blog routes
 Route::resource('blogs', 'BlogsController');
+
+//Dashboard user Routes
+Route::post('users/{users}/photos', 'BusinessUsersController@postPhotos')->name('users.photos');
+Route::patch('users/{users}/credentials','BusinessUsersController@changePassword')->name('users.credentials');
+Route::resource('users', 'BusinessUsersController');
+
+//Payment Account Routes
+Route::patch('accounts/{accounts}/personal', 'AccountsController@changePersonal')->name('accounts.personal');
+Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness')->name('accounts.business');
+Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
+Route::post('accounts/status', 'AccountsController@postStatus');
+Route::resource('accounts', 'AccountsController');
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
@@ -41,7 +55,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::post('instagram', 'AuthenticateController@instagram');
 });
 
-// User Routes
+// API User Routes
 Route::group(['prefix' => 'api'], function() {
     Route::get('authenticate/user', 'UsersController@getAuthenticatedUser');
     Route::put('authenticate/user', 'UsersController@updateAuthenticatedUser');

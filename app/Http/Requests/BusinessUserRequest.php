@@ -2,22 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use App\Http\Requests\Request;
 
-class AddUserPhotoRequest extends Request {
-
+class BusinessUserRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize() {
-    	$userRoute = $this->route('users');
-        if(!is_null($user = \Auth::user())) {
-            return $user->is_admin || $user->id == $userRoute;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +21,10 @@ class AddUserPhotoRequest extends Request {
      */
     public function rules() {
         return [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6'
         ];
     }
 }

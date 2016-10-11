@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\User;
 use App\Http\Requests\Request;
 
-class AddUserPhotoRequest extends Request {
+class UpdatePasswordRequest extends Request {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class AddUserPhotoRequest extends Request {
      */
     public function rules() {
         return [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            
         ];
     }
 }

@@ -6,7 +6,7 @@
 
         <div class="col-md-12">
 
-            <h1>Create Business Profile</h1>
+            <h1>Add Payment Account Details</h1>
 
             <hr>
 
@@ -17,9 +17,9 @@
                 </div>
             @endif
 
-            {!! Form::open(['route' => 'profiles.store']) !!}
+            {!! Form::open(['route' => 'accounts.store']) !!}
                 @include ('errors.form')
-                @include ('profiles.form_create')
+                @include ('accounts.form_create')
             {!! Form::close() !!}
         </div>
 
