@@ -215,6 +215,7 @@ class AccountsController extends Controller
 
     public function postStatus(Request $request)
     {
+        return response("hooked up");
         if (isset($request->bt_signature) && isset($request->bt_payload)) {
             $notification = \Braintree_WebhookNotification::parse(
                 $request->bt_signature, $request->bt_payload
