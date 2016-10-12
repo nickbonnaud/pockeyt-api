@@ -184,7 +184,7 @@ class AccountsController extends Controller
             return view('accounts.edit', compact('account'));
         } else {
             return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors);
+                ->withErrors($result->errors->deepAll());
         }
     }
 
