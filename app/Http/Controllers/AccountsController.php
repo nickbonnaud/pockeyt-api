@@ -183,6 +183,7 @@ class AccountsController extends Controller
             $account->update($request->all());
             return view('accounts.edit', compact('account'));
         } else {
+            dd($result);
             return view('accounts.edit', compact('account'))
                 ->withErrors($result->errors->deepAll());
         }
