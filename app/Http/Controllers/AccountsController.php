@@ -219,6 +219,9 @@ class AccountsController extends Controller
             $notification = \Braintree_WebhookNotification::parse(
                 $request->bt_signature, $request->bt_payload
             );
+            if ($notification->kind ==  \Braintree_WebhookNotification::CHECK) {
+                return response(200);
+            }
             $id = $notification->merchantAccount->id;
             $account = Profile::findOrFail($id)->account;
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
