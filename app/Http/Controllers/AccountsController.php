@@ -95,7 +95,6 @@ class AccountsController extends Controller
 
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
         } else {
-            dd($result->errors->deepAll());
             return redirect()->route('accounts.create')
                 ->withErrors($result->errors->deepAll());
         }
@@ -163,7 +162,7 @@ class AccountsController extends Controller
             return view('accounts.edit', compact('account'));
         } else {
             return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors);
+                ->withErrors($result->errors->deepAll());
         }
     }
 
@@ -184,7 +183,6 @@ class AccountsController extends Controller
             $account->update($request->all());
             return view('accounts.edit', compact('account'));
         } else {
-            dd($result->errors->deepAll());
             return view('accounts.edit', compact('account'))
                 ->withErrors($result->errors->deepAll());
         }
@@ -211,7 +209,7 @@ class AccountsController extends Controller
             return view('accounts.edit', compact('account'));
         } else {
             return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors);
+                ->withErrors($result->errors->deepAll());
         }
     }
 
