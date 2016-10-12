@@ -215,14 +215,10 @@ class AccountsController extends Controller
 
     public function postStatus(Request $request)
     {
-        return response("hooked up");
         if (isset($request->bt_signature) && isset($request->bt_payload)) {
             $notification = \Braintree_WebhookNotification::parse(
                 $request->bt_signature, $request->bt_payload
             );
-            if ($notification->kind == \Braintree_WebhookNotification::CHECK) {
-                dd($notification);
-            }
             $id = $notification->merchantAccount->id;
             $account = Profile::findOrFail($id)->account;
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
