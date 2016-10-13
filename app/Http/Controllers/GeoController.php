@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 class GeoController extends Controller
 {
 
+    public $business;
+
     public function putLocation(Request $request)
     {
     	$user = User::findOrFail($request->userId);
@@ -20,7 +22,8 @@ class GeoController extends Controller
     	$user['lng'] = $request->lng;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
-    	$business = $this->checkDistance($user);
+    	$this->checkDistance($user);
+
         return response($business);
     }
 
@@ -33,7 +36,7 @@ class GeoController extends Controller
     		$businessLng = $business->lng;
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-    			if ($distance <= 1000) {
+    			if ($distance <= 30) {
                     return $business;
     				// event(new CustomerInRadius($user));
     			}
