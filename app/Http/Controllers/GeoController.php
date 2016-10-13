@@ -22,7 +22,7 @@ class GeoController extends Controller
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
     	$locations = $this->checkDistance($user);
-        return response($locations);
+        return response()->json(compact('locations'));
     }
 
     public function checkDistance($user) {
@@ -36,7 +36,7 @@ class GeoController extends Controller
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
-                    $inLocations[] = $business;
+                    $inLocations[] = $business->id;
     				// event(new CustomerInRadius($user));
     			}
     		} 
