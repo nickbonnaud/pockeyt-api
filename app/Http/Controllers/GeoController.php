@@ -13,23 +13,23 @@ use App\Http\Controllers\Controller;
 class GeoController extends Controller
 {
 
-    public $inLocations = array();
 
-    public function putLocation(Request $request, $inLocations)
+    public function putLocation(Request $request)
     {
     	$user = User::findOrFail($request->userId);
     	$user['lat'] = $request->lat;
     	$user['lng'] = $request->lng;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
-    	$this->checkDistance($user);
-        return response($inLocations);
+    	$locations = $this->checkDistance($user);
+        return response($locations);
     }
 
     public function checkDistance($user) {
     	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
+        $inLocations = array();
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
