@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 class GeoController extends Controller
 {
 
+    public $inLocations = array();
+
     public function putLocation(Request $request)
     {
     	$user = User::findOrFail($request->userId);
@@ -28,7 +30,6 @@ class GeoController extends Controller
     	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
-        $inLocations = array();
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
