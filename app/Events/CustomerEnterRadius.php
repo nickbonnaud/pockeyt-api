@@ -11,15 +11,17 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
     use SerializesModels;
 
     public $user;
+    public $business;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $business)
     {
         $this->user = $user;
+        $this->business = $business;
     }
 
     /**

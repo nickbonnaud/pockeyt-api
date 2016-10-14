@@ -40,7 +40,7 @@ class GeoController extends Controller
                     $inLocations[] = $business->id;
 
                     if (!in_array($business->id, $user->prevLocations)) {
-                        event(new CustomerEnterRadius($user));
+                        event(new CustomerEnterRadius($user, $business));
                     }
     			} elseif ($distance <= 1000 && is_null($user->prevLocations)) {
                     $inLocations[] = $business->id;
