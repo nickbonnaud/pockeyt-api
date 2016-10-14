@@ -66,16 +66,6 @@
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 
     <script>
-      (function () {
-        var pusher = new Pusher('f4976d40a137b96b52ea', {
-          encrypted: true
-        });
-        var channel = pusher.subscribe("{!! 'business' . $profile->id !!}");
-
-        channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
-          console.log(data);
-        });
-      })();
 
       new Vue({
         el: '#users',
