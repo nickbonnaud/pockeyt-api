@@ -75,7 +75,7 @@
           users: []
         },
 
-        ready: function() {
+        mount: function() {
           console.log("inside ready");
           var pusher = new Pusher('f4976d40a137b96b52ea', {
             encrypted: true
