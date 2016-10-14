@@ -68,29 +68,7 @@
 
     <script>
     console.log("inside script");
-      new Vue({
-        el: '#users',
-
-        data: {
-          users: []
-        },
-
-        mount: function() {
-          console.log("inside ready");
-          var pusher = new Pusher('f4976d40a137b96b52ea', {
-            encrypted: true
-          });
-
-          pusher.subscribe("{!! 'business' . $profile->id !!}")
-            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
-        },
-
-        methods: {
-          addUser: function(user) {
-            this.users.push(user);
-          }
-        }
-      })
+      
 
 
     </script>
