@@ -30,7 +30,7 @@
               <!-- Default box -->
               <div id="customer">
                 <template v-for="user in users">
-                  <div class="col-md-6">
+                  <div class="col-md-3">
                     <div class="box box-primary">
                       <div class="box-header with-border text-center">
                         <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>

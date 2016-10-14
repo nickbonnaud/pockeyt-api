@@ -19,7 +19,7 @@
   <section class="content">
 
     <!-- Default box -->
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="box box-primary">
         <div class="box-body box-profile">
           <div class="change-pass">
