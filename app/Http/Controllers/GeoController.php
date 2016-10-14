@@ -36,18 +36,23 @@ class GeoController extends Controller
     		$businessLng = $business->lng;
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-    			if ($distance <= 1000) {
+    			if ($distance <= 1000 && !is_null($user->prevLocations)) {
                     $inLocations[] = $business->id;
 
                     if (!in_array($business->id, $user->prevLocations)) {
                         event(new CustomerEnterRadius($user));
                     }
-    			}
+    			} elseif ($distance <= 1000 && is_null($user->prevLocations)) {
+                    $inLocations[] = $business->id;
+                    event(new CustomerEnterRadius($user));
+                }
     		} 
     	}
-        foreach ($user->prevLocations as $prevLocation) {
-            if (!in_array($prevLocation, $inLocations)) {
-                event(new CustomerExitRadius($user));
+        if (!is_null($user->prevLocations)) {
+            foreach ($user->prevLocations as $prevLocation) {
+                if (!in_array($prevLocation, $inLocations)) {
+                    event(new CustomerExitRadius($user));
+                }
             }
         }
         return $inLocations;
