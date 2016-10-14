@@ -69,7 +69,7 @@
           encrypted: true
         });
         var channel = pusher.subscribe("{!! 'business' . $profile->id !!}");
-
+        console.log("{!! 'business' . $profile->id !!}");
 
         channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
           console.log(data);
