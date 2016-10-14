@@ -64,16 +64,16 @@
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 
     <script>
-
+      (function () {
         var pusher = new Pusher('f4976d40a137b96b52ea', {
           encrypted: true
         });
-        var bizChannel = {!! 'business'.$profile->id !!};
-        var channel = pusher.subscribe(bizChannel);
+        var channel = pusher.subscribe({!! 'business' . $profile->id !!});
 
         channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
           console.log(data);
         });
+      })();
     </script>
 @stop
 
