@@ -86,8 +86,8 @@
 
         methods: {
           addUser: function(user) {
-            console.log(user.user);
-            this.users.push(user);
+            var activeCustomer = user.user;
+            this.users.push(activeCustomer);
           }
         }
       })
