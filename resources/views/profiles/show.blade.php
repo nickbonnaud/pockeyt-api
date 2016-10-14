@@ -67,8 +67,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
-    console.log("inside script");
-      
+      Vue.config.devtools = true
+      new Vue({
+        el: '#users',
+
+        data: {
+          users: []
+        },
+
+        mounted: function() {
+          console.log("inside ready");
+          var pusher = new Pusher('f4976d40a137b96b52ea', {
+            encrypted: true
+          });
+
+          pusher.subscribe("{!! 'business' . $profile->id !!}")
+            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+        },
+
+        methods: {
+          addUser: function(user) {
+            this.users.push(user);
+          }
+        }
+      })
 
 
     </script>
