@@ -64,6 +64,7 @@
 
 @section('scripts.footer')
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
 
