@@ -11,7 +11,7 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
     use SerializesModels;
 
     public $user;
-    public $business;
+    private $business;
 
     /**
      * Create a new event instance.
