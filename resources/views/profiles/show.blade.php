@@ -64,7 +64,7 @@
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 
     <script>
-    console.log({{ 'business'.$profile->id }});
+    console.log({!! 'business'.$profile->id !!});
       (function () {
         var pusher = new Pusher('f4976d40a137b96b52ea', {
           encrypted: true
