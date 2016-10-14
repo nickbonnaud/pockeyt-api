@@ -44,7 +44,7 @@
                 </div>
                 <div class="box-body">
                   <ul id="users">
-                    <li v-repeat="user: users">@{{ user.first_name }}</li>
+                    <li v-for="user in users">@{{ user.first_name }}</li>
                   </ul>
                 </div>
                 <!-- /.box-body -->
@@ -90,7 +90,6 @@
             this.users.push(user);
           }
         }
-
       })
 
 
