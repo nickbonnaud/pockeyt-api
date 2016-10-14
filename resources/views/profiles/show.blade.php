@@ -43,9 +43,7 @@
                   </div>
                 </div>
                 <div class="box-body">
-                  <ul id="users">
-                    <li v-for="user in users">@{{ user.first_name }}</li>
-                  </ul>
+                  Start creating your amazing application!
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -64,35 +62,18 @@
 
 @section('scripts.footer')
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
+      (function () {
+        var pusher = new Pusher('f4976d40a137b96b52ea', {
+          encrypted: true
+        });
+        var channel = pusher.subscribe("{!! 'business' . $profile->id !!}");
 
-      new Vue({
-        el: '#users',
-
-        data: {
-          users: []
-        },
-
-        ready: function() {
-          console.log("inside ready function");
-          var pusher = new Pusher('f4976d40a137b96b52ea', {
-            encrypted: true
-          });
-
-          pusher.subscribe("{!! 'business' . $profile->id !!}")
-            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
-        },
-
-        methods: {
-          addUser: function(user) {
-            this.users.push(user);
-          }
-        }
-      })
-
-
+        channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
+          console.log(data);
+        });
+      })();
     </script>
 @stop
 
