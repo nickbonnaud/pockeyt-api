@@ -86,7 +86,7 @@
 
         methods: {
           addUser: function(user) {
-            console.log(user);
+            console.log(user.user);
             this.users.push(user);
           }
         }
