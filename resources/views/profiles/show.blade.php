@@ -43,7 +43,9 @@
                   </div>
                 </div>
                 <div class="box-body">
-                  <div id="customers">@{{ message }}</div>
+                  <ul id="customer">
+                    <li v-for="user in users">@{{ user.first_name }}</li>
+                  </ul>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -65,28 +67,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
-      var customers = new Vue({
-        el: '#customers',
+      var customer = new Vue({
+        el: '#customer',
 
         data: {
-          message: "Hello World"
+          users: []
+        },
+
+        mounted: function() {
+          console.log("inside ready");
+          var pusher = new Pusher('f4976d40a137b96b52ea', {
+            encrypted: true
+          });
+
+          pusher.subscribe("{!! 'business' . $profile->id !!}")
+            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+        },
+
+        methods: {
+          addUser: function(user) {
+            this.users.push(user);
+          }
         }
-
-        // mounted: function() {
-        //   console.log("inside ready");
-        //   var pusher = new Pusher('f4976d40a137b96b52ea', {
-        //     encrypted: true
-        //   });
-
-        //   pusher.subscribe("{!! 'business' . $profile->id !!}")
-        //     .bind('App\\Events\\CustomerEnterRadius', this.addUser);
-        // },
-
-        // methods: {
-        //   addUser: function(user) {
-        //     this.users.push(user);
-        //   }
-        // }
       })
 
 
