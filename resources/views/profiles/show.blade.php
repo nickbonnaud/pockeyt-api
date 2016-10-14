@@ -64,13 +64,12 @@
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 
     <script>
-    console.log({!! 'business'.$profile->id !!});
       (function () {
         var pusher = new Pusher('f4976d40a137b96b52ea', {
           encrypted: true
         });
-
-        var channel = pusher.subscribe({{ 'business'.$profile->id }});
+        var bizChannel = {!! 'business'.$profile->id !!}
+        var channel = pusher.subscribe(bizChannel);
 
         channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
           console.log(data);
