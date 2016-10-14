@@ -43,7 +43,7 @@
                   </div>
                 </div>
                 <div class="box-body">
-                  <div id="customers">{{ message }}</div>
+                  <div id="customers">@{{ message }}</div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
