@@ -61,36 +61,25 @@
 @endif
 
 @section('scripts.footer')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
+    <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 
     <script>
-        Dropzone.options.uploadLogo = {
-            paramName: 'photo',
-            maxFilesize: 3,
-            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-            init: function() {
-                this.on('success', function() {
-                    window.location.reload();
-                });
-            }
-        };
-        Dropzone.options.uploadHero = {
-            paramName: 'photo',
-            maxFilesize: 3,
-            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-            init: function() {
-                this.on('success', function() {
-                    window.location.reload();
-                });
-            }
-        };
-
-        $(function() {
-            $( "#event_date_pretty" ).datepicker({
-                dateFormat: "DD, d MM, yy",
-                altField: "#event_date",
-                altFormat: "yy-mm-dd"
-            });
+      (function () {
+        var pusher = new Pusher('f4976d40a137b96b52ea', {
+          encrypted: true
         });
+
+        var channel = pusher.subscribe('test');
+
+        channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
+          console.log(data);
+        });
+      })();
     </script>
 @stop
+
+
+
+
+
+

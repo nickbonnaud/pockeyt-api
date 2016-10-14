@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\CustomerInRadius;
+use App\Events\CustomerEnterRadius;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserProximity
+class ShowUser
 {
     /**
      * Create the event listener.
@@ -21,11 +21,11 @@ class UserProximity
     /**
      * Handle the event.
      *
-     * @param  CustomerInRadius  $event
+     * @param  CustomerEnterRadius  $event
      * @return void
      */
-    public function enter(CustomerInRadius $event)
+    public function handle(CustomerEnterRadius $event)
     {
-        console.log($event->user);
+        //
     }
 }

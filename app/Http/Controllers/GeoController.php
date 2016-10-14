@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Profile;
 use App\Http\Requests;
-use App\Events\CustomerInRadius;
+use App\Events\CustomerEnterRadius;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +21,7 @@ class GeoController extends Controller
     	$user['lng'] = $request->lng;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
+        $user['prevLocations'] = $request->lastLocation;
     	$locations = $this->checkDistance($user);
         return response()->json(compact('locations'));
     }
@@ -37,10 +38,18 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
-    				// event(new CustomerInRadius($user));
+
+                    if (!in_array($business->id, $user->prevLocations)) {
+                        event(new CustomerEnterRadius($user));
+                    }
     			}
     		} 
     	}
+        foreach ($user->prevLocations as $prevLocation) {
+            if (!in_array($prevLocation, $inLocations)) {
+                event(new CustomerExitRadius($user));
+            }
+        }
         return $inLocations;
     }
 

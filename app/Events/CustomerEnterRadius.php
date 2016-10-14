@@ -6,7 +6,7 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CustomerInRadius extends Event implements ShouldBroadcast
+class CustomerEnterRadius extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
@@ -29,6 +29,6 @@ class CustomerInRadius extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [];
+        return ['test'];
     }
 }

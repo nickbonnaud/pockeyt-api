@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\CustomerInRadius' => [
-            'App\Listeners\UserProximity@enter',
+        'App\Events\CustomerEnterRadius' => [
+            'App\Listeners\ShowUser',
         ],
     ];
 
