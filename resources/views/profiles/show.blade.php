@@ -35,7 +35,7 @@
                       <div class="box-header with-border text-center">
                         <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
                         <div class="box-body">
-                        <img src="@{{ user.photo_path }}" class="profile-user-img img-responsive img-circle" alt="User Image">
+                        <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
                         </div>
                       </div>
                     </div>
