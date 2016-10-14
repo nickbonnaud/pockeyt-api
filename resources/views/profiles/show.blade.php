@@ -68,8 +68,8 @@
         var pusher = new Pusher('f4976d40a137b96b52ea', {
           encrypted: true
         });
-        
-        var channel = pusher.subscribe(business113);
+        var channel = pusher.subscribe("{!! 'business' . $profile->id !!}");
+
 
         channel.bind('App\\Events\\CustomerEnterRadius', function(data) {
           console.log(data);
