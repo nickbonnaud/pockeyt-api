@@ -30,7 +30,7 @@ class GeoController extends Controller
     	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
-        $inLocations = array();
+        $inLocations = [];
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
     		$businessLng = $business->lng;
@@ -44,7 +44,9 @@ class GeoController extends Controller
     	}
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
-                if (!in_array($prevLocation, $inLocations)) {
+                if ($inLocations == []) {
+                    event(new CustomerExitRadius($user, $prevLocation));
+                } elseif (!in_array($prevLocation, $inLocations)) {
                     event(new CustomerExitRadius($user, $prevLocation));
                 }
             }
