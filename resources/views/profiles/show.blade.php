@@ -60,7 +60,8 @@
         el: '#customer',
 
         data: {
-          users: []
+          users: [],
+          userIds: []
         },
 
         mounted: function() {
@@ -76,12 +77,11 @@
         methods: {
           addUser: function(user) {
             var activeCustomer = user.user;
-            var customers = this.users;
-            console.log(activeCustomer);
-            console.log(customers);
-            console.log(customers.includes(activeCustomer));
-            if (!customers.includes(activeCustomer)) {
-              this.users.push(activeCustomer);
+            var userIds = this.userIds;
+            var users = this.users;
+            if (!userIds.includes(activeCustomer.id)) {
+              userIds.push(activeCustomer.id);
+              users.push(activeCustomer);
             }
           }
         }
