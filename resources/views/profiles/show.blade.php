@@ -76,7 +76,7 @@
         methods: {
           addUser: function(user) {
             var activeCustomer = user.user;
-            var cutomers = this.users;
+            var customers = this.users;
             if (!customers.includes(activeCustomer)) {
               this.users.push(activeCustomer);
             }
