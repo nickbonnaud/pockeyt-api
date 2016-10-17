@@ -17,7 +17,7 @@ class CustomerLeaveRadius extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $prevLocation)
     {
         $this->user = $user;
         $this->prevLocation = $prevLocation;
