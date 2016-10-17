@@ -45,7 +45,7 @@ class GeoController extends Controller
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if (!in_array($prevLocation, $inLocations)) {
-                    event(new CustomerExitRadius($user));
+                    event(new CustomerExitRadius($user, $prevLocation));
                 }
             }
         }

@@ -72,6 +72,9 @@
 
           pusher.subscribe("{!! 'business' . $profile->id !!}")
             .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+
+            pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
+            .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
         },
 
         methods: {
@@ -79,9 +82,21 @@
             var activeCustomer = user.user;
             var userIds = this.userIds;
             var users = this.users;
+
             if (!userIds.includes(activeCustomer.id)) {
               userIds.push(activeCustomer.id);
               users.push(activeCustomer);
+            }
+          },
+          removeUser: function(user) {
+            var leavingCustomer = user.user;
+            var userIds = this.userIds;
+            var users = this.users;
+            var index = userIds.indexOf(leavingCustomer.id);
+
+            if (index > -1) {
+              userIds.splice(index, 1);
+              console.log(users);
             }
           }
         }
