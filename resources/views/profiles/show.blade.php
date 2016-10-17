@@ -76,8 +76,11 @@
         methods: {
           addUser: function(user) {
             var activeCustomer = user.user;
-            this.users.push(activeCustomer);
-          }
+            var cutomers = this.users;
+            if (!customers.includes(activeCustomer)) {
+              this.users.push(activeCustomer);
+            }
+          };
         }
       })
 
