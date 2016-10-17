@@ -7,7 +7,7 @@ use App\User;
 use App\Profile;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
-use App\Events\CustomerExitRadius;
+use App\Events\CustomerLeaveRadius;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -46,9 +46,9 @@ class GeoController extends Controller
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
-                    event(new CustomerExitRadius($user, $prevLocation));
+                    event(new CustomerLeaveRadius($user, $prevLocation));
                 } elseif (!in_array($prevLocation, $inLocations)) {
-                    event(new CustomerExitRadius($user, $prevLocation));
+                    event(new CustomerLeaveRadius($user, $prevLocation));
                 }
             }
         }
