@@ -77,6 +77,9 @@
           addUser: function(user) {
             var activeCustomer = user.user;
             var customers = this.users;
+            console.log(activeCustomer);
+            console.log(customers);
+            console.log(customers.includes(activeCustomer));
             if (!customers.includes(activeCustomer)) {
               this.users.push(activeCustomer);
             }
