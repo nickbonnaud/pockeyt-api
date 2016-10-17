@@ -96,7 +96,10 @@
 
             if (index > -1) {
               userIds.splice(index, 1);
-              console.log(users);
+              for(i=users.length - 1; i >= 0; i --) {
+                console.log(users[i]);
+                if(users[i].id == leavingCustomer.id) users.splice(i, 1);
+              }
             }
           }
         }
