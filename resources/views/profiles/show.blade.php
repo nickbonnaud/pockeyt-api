@@ -80,7 +80,7 @@
             if (!customers.includes(activeCustomer)) {
               this.users.push(activeCustomer);
             }
-          };
+          }
         }
       })
 
