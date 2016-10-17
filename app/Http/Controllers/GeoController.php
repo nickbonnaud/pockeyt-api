@@ -7,6 +7,7 @@ use App\User;
 use App\Profile;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
+use App\Events\CustomerExitRadius;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
