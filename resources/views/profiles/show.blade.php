@@ -96,7 +96,7 @@
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now;
                   console.log(users);
-                  console.log(users[i]);
+                  console.log(users[i].lastActive);
                 }
               }
             }
