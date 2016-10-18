@@ -112,6 +112,7 @@
             }
           },
           removeInactiveUser: function() {
+            var users = this.users;
             if (users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
                 var userLastActive = users[1].lastActive;
