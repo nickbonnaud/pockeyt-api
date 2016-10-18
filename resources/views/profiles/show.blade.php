@@ -2,53 +2,67 @@
 
 @if(is_null($profile))
 
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center">Profile not found.</h2>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Profile not found.</h2>
     </div>
+</div>
 
 @else
 
     @section('content')
 
-          <!-- Content Wrapper. Contains page content -->
-          <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-              <h1>
-                Customer Dashboard
-              </h1>
-              <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-              </ol>
-            </section>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Customer Dashboard
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    </ol>
+  </section>
 
-            <!-- Main content -->
-            <section class="content">
+  <!-- Main content -->
+  <section class="content">
 
-              <!-- Default box -->
-              <div id="customer">
-                <template v-for="user in users">
-                  <div class="col-md-3">
-                    <div class="box box-primary">
-                      <div class="box-header with-border text-center">
-                        <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
-                        <div class="box-body">
-                        <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
-                        <p>@{{user.lastActive}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
+    <!-- Default box -->
+    <div id="customer">
+      <template v-for="user in users">
+        <div class="col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              <div class="box-body">
+              <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+              <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transactionModal">
+                <b>Charge</b>
+              </a>
               </div>
-              <!-- /.box -->
-
-            </section>
-            <!-- /.content -->
+            </div>
           </div>
-          <!-- /.content-wrapper -->
+        </div>
+      </template>
+    </div>
+    <!-- /.box -->
+  </section>
+  <!-- /.content -->
+</div>
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="transactionModal">Create Transaction</h4>
+      </div>
+      <div class="modal-body">
+      <p>@{{user.first_name}} @{{user.last_name}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
     @stop
 @endif
 
@@ -112,7 +126,7 @@
             }
           },
           removeInactiveUser: function() {
-            console.log()
+            console.log("inside check for inactive users");
             var users = this.users;
             if (users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
