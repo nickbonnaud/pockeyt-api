@@ -36,6 +36,7 @@
                         <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
                         <div class="box-body">
                         <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                        <p>@{{user.lastActive}}</p>
                         </div>
                       </div>
                     </div>
@@ -86,8 +87,6 @@
             if(users.length == 0) {
               activeCustomer['lastActive'] = Date.now;
               users.push(activeCustomer);
-              console.log(users);
-              console.log(activeCustomer);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
@@ -95,8 +94,6 @@
                   users.push(activeCustomer);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now;
-                  console.log(users);
-                  console.log(users[i].lastActive);
                 }
               }
             }
