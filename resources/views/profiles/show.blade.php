@@ -81,7 +81,6 @@
           addUser: function(user) {
             console.log("inside add users");
             var activeCustomer = user.user;
-            // var userIds = this.userIds;
             var users = this.users;
 
             if(users.length == 0) {
@@ -97,25 +96,16 @@
                 }
               }
             }
-
-            // if (!userIds.includes(activeCustomer.id)) {
-            //   userIds.push(activeCustomer.id);
-            //   users.push(activeCustomer);
-            //   lastActive[activeCustomer.id] = Date.now;
-            // } else if (userIds.includes(activeCustomer.id)) {
-            //   lastActive[activeCustomer.id] = Date.now;
-            // }
           },
           removeUser: function(user) {
             var leavingCustomer = user.user;
-            var userIds = this.userIds;
             var users = this.users;
-            var index = userIds.indexOf(leavingCustomer.id);
-
-            if (index > -1) {
-              userIds.splice(index, 1);
-              for(i=users.length - 1; i >= 0; i --) {
-                if(users[i].id == leavingCustomer.id) users.splice(i, 1);
+            
+            if(users.length > 0) {
+              for (i=users.length - 1; i >= 0; i --) {
+                if (users[i].id == leavingCustomer.id) {
+                  users.splice(i, 1);
+                }
               }
             }
           }
