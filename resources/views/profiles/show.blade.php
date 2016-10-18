@@ -83,17 +83,21 @@
             // var userIds = this.userIds;
             var users = this.users;
 
-            console.log(users.length);
-            for (i=users.length - 1; i >= 0; i --) {
-              if(!users[i].id == activeCustomer.id) {
-                activeCustomer['lastActive'] = Date.now;
-                users.push(activeCustomer);
-                console.log(users);
-                console.log(activeCustomer);
-              } else if (users[i].id == activeCustomer.id) {
-                users[i].lastActive = Date.now;
-                console.log(users);
-                console.log(users[i]);
+            if(users.length == 0) {
+              activeCustomer['lastActive'] = Date.now;
+              users.push(activeCustomer);
+              console.log(users);
+              console.log(activeCustomer);
+            } else {
+              for (i=users.length - 1; i >= 0; i --) {
+                if(!users[i].id == activeCustomer.id) {
+                  activeCustomer['lastActive'] = Date.now;
+                  users.push(activeCustomer);
+                } else if (users[i].id == activeCustomer.id) {
+                  users[i].lastActive = Date.now;
+                  console.log(users);
+                  console.log(users[i]);
+                }
               }
             }
 
