@@ -114,7 +114,7 @@
           removeInactiveUser: function() {
             if (users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
-                var userLastActive = users.[1].lastActive;
+                var userLastActive = users[1].lastActive;
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
                   users.splice(i, 1);
