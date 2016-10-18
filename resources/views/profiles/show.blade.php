@@ -75,6 +75,8 @@
 
           pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
+
+          window.setInterval(removeInactiveUser(), 120000);
         },
 
         methods: {
@@ -104,6 +106,17 @@
             if(users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
                 if (users[i].id == leavingCustomer.id) {
+                  users.splice(i, 1);
+                }
+              }
+            }
+          },
+          removeInactiveUser: function() {
+            if (users.length > 0) {
+              for (i=users.length - 1; i >= 0; i --) {
+                var userLastActive = users.[1].lastActive;
+                var currentTime = Date.now();
+                if (currentTime - userLastActive >= 120000) {
                   users.splice(i, 1);
                 }
               }
