@@ -78,10 +78,12 @@
 
         methods: {
           addUser: function(user) {
+            console.log("inside add users");
             var activeCustomer = user.user;
             // var userIds = this.userIds;
             var users = this.users;
 
+            console.log(users.length);
             for (i=users.length - 1; i >= 0; i --) {
               if(!users[i].id == activeCustomer.id) {
                 activeCustomer['lastActive'] = Date.now;
