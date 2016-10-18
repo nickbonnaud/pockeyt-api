@@ -76,7 +76,7 @@
           pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
-          window.setInterval(removeInactiveUser(), 120000);
+          window.setInterval(this.removeInactiveUser, 120000);
         },
 
         methods: {
