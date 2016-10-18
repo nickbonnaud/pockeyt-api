@@ -85,15 +85,15 @@
             var users = this.users;
 
             if(users.length == 0) {
-              activeCustomer['lastActive'] = Date.now;
+              activeCustomer['lastActive'] = Date.now();
               users.push(activeCustomer);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
-                  activeCustomer['lastActive'] = Date.now;
+                  activeCustomer['lastActive'] = Date.now();
                   users.push(activeCustomer);
                 } else if (users[i].id == activeCustomer.id) {
-                  users[i].lastActive = Date.now;
+                  users[i].lastActive = Date.now();
                 }
               }
             }
