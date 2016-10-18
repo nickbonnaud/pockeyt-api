@@ -61,7 +61,6 @@
 
         data: {
           users: [],
-          userIds: []
         },
 
         mounted: function() {
@@ -73,20 +72,36 @@
           pusher.subscribe("{!! 'business' . $profile->id !!}")
             .bind('App\\Events\\CustomerEnterRadius', this.addUser);
 
-            pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
+          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
         },
 
         methods: {
           addUser: function(user) {
             var activeCustomer = user.user;
-            var userIds = this.userIds;
+            // var userIds = this.userIds;
             var users = this.users;
 
-            if (!userIds.includes(activeCustomer.id)) {
-              userIds.push(activeCustomer.id);
-              users.push(activeCustomer);
+            for (i=users.length - 1; i >= 0; i --) {
+              if(!users[i].id == activeCustomer.id) {
+                activeCustomer['lastActive'] = Date.now;
+                users.push(activeCustomer);
+                console.log(users);
+                console.log(activeCustomer);
+              } else if (users[i].id == activeCustomer.id) {
+                users[i].lastActive = Date.now;
+                console.log(users);
+                console.log(users[i]);
+              }
             }
+
+            // if (!userIds.includes(activeCustomer.id)) {
+            //   userIds.push(activeCustomer.id);
+            //   users.push(activeCustomer);
+            //   lastActive[activeCustomer.id] = Date.now;
+            // } else if (userIds.includes(activeCustomer.id)) {
+            //   lastActive[activeCustomer.id] = Date.now;
+            // }
           },
           removeUser: function(user) {
             var leavingCustomer = user.user;
@@ -97,10 +112,12 @@
             if (index > -1) {
               userIds.splice(index, 1);
               for(i=users.length - 1; i >= 0; i --) {
-                console.log(users[i]);
                 if(users[i].id == leavingCustomer.id) users.splice(i, 1);
               }
             }
+          }
+          removeInactiveUser: function() {
+
           }
         }
       })
