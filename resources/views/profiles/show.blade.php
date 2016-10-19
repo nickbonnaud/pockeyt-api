@@ -45,21 +45,8 @@
         </div>
       </template>
 
-      <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="transactionModal">Create Transaction</h4>
-            </div>
-            <div class="modal-body">
-              <div ></div>
-            <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
       
+
     </div>
     <!-- /.box -->
   </section>
