@@ -43,10 +43,7 @@
             </div>
           </div>
         </div>
-      </template>
-    </div>
-    <!-- /.box -->
-    <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -60,6 +57,9 @@
           </div>
         </div>
       </div>
+      </template>
+    </div>
+    <!-- /.box -->
   </section>
   <!-- /.content -->
 </div>
