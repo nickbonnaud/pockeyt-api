@@ -25,10 +25,10 @@
   </section>
 
   <!-- Main content -->
-  <section class="content">
+  <section class="content" id="customer">
 
     <!-- Default box -->
-    <div id="customer">
+    <div>
       <template v-for="user in users">
         <div class="col-md-3">
           <div class="box box-primary">
@@ -45,7 +45,7 @@
         </div>
       </template>
 
-      
+
 
     </div>
     <!-- /.box -->
