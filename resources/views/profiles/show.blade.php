@@ -57,7 +57,7 @@
         <h4 class="modal-title" id="transactionModal">Create Transaction</h4>
       </div>
       <div class="modal-body">
-      <p>@{{user.first_name}} @{{user.last_name}}</p>
+      <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
       </div>
     </div>
   </div>
