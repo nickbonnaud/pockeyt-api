@@ -45,7 +45,6 @@ class ConnectController extends Controller
 		if (count($userManagedAccounts === 1)) {
 			$pageID = array_get($userManagedAccounts, '0.id');
 			$access_token = array_get($userManagedAccounts, '0.access_token');
-			dd($pageID);
 			$this->installApp($pageID, $access_token);
 		} 
 	}
@@ -54,7 +53,7 @@ class ConnectController extends Controller
 		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
 		try {
-			$response = $client->request('GET', '$pageID/subscribed_apps', [
+			$response = $client->request('GET', '433612763492786/subscribed_apps', [
         'query' => ['access_token' => $access_token ]
       ]);
 		} catch (RequestException $e) {
