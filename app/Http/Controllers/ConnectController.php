@@ -9,8 +9,9 @@ use Socialite;
 
 class ConnectController extends Controller
 {
-	public function redirectToProviderFb()
+	public function redirectToProviderFb(Request $request)
 	{
+		$this->isLoggedInFB($request->has('code'));
 		return Socialite::driver('facebook')->redirect();
 	}
 
@@ -23,7 +24,21 @@ class ConnectController extends Controller
 			dd($e);
 			return redirect('connect/facebook');
 		}
+	}
 
-		
+	private function isLoggedInFB($hasCode) {
+		if (! $hasCode) return $this->getAuthorization();
+
+		$user = Socialite::driver('facebook')->user();
+		dd($user);
+	}
+
+	private function getAuthorization() {
+		return Socialite::driver('facebook')->redirect();
 	}
 }
+
+
+
+
+
