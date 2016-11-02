@@ -30,7 +30,6 @@ class ConnectController extends Controller
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 
 		$this->getAccountsData($userData);
-		dd(count(array_get($userManagedAccounts->user, 'accounts.data')));
 	}
 
 	private function getAuthorization() {
@@ -43,8 +42,14 @@ class ConnectController extends Controller
 
 		if (count($userManagedAccounts === 1)) {
 			$pageID = array_get($userManagedAccounts, '0.id');
-			dd($pageID);
+			dd($userManagedAccounts);
+			$token = array_get($userManagedAccounts, '0');
+			$this->installApp($pageID);
 		} 
+	}
+
+	private function installApp($pageID) {
+
 	}
 }
 
