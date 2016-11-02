@@ -28,8 +28,7 @@ class ConnectController extends Controller
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userManagedPages = Socialite::driver('facebook')->fields(['accounts'])->user();
-		$newPages = array_dot($userManagedPages->user);
-		dd($newPages);
+		dd(array_get($userManagedPages->user, 'accounts.data'));
 	}
 
 	private function getAuthorization() {
