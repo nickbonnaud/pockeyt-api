@@ -58,6 +58,7 @@ class ConnectController extends Controller
       ]);
 		} catch (RequestException $e) {
 			if ($e->hasResponse()) {
+				dd($e->getResponse())
         return $e->getResponse();
       }
 		}
