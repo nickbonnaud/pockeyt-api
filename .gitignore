@@ -1,3 +1,4 @@
+.env
 .env.*.php
 .env.php
 .env.example
