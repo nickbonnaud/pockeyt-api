@@ -11,7 +11,7 @@ class ConnectController extends Controller
 {
 	public function connectFB(Request $request)
 	{
-		$this->isLoggedInFB($request->has('code'));
+		return $this->isLoggedInFB($request->has('code'));
 	}
 
 	// public function handleProviderCallbackFb()
@@ -27,7 +27,6 @@ class ConnectController extends Controller
 
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
-		dd('passed');
 		$userFB = Socialite::driver('facebook')->user();
 	}
 
