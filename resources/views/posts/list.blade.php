@@ -39,7 +39,7 @@
   			<p>Which website should Pockeyt pull {{$user->profile->business_name}}'s posts and photos from?</p>
       </div>
       <div class="modal-footer">
-	      <a href="{{ action('ConnectController@redirectToProviderFb') }}" class="btn btn-block btn-social btn-facebook">
+	      <a href="{{ action('ConnectController@connectFb') }}" class="btn btn-block btn-social btn-facebook">
 	      	<i class="fa fa-facebook"></i>
 	      	Connect With Facebook
   			</a>

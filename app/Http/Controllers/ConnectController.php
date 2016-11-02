@@ -9,21 +9,21 @@ use Socialite;
 
 class ConnectController extends Controller
 {
-	public function redirectToProviderFb(Request $request)
+	public function connectFB(Request $request)
 	{
 		$this->isLoggedInFB($request->has('code'));
 	}
 
-	public function handleProviderCallbackFb()
-	{
-		try {
-			$userFB = Socialite::driver('facebook')->user();
-			dd($userFB);
-		} catch (Exception $e) {
-			dd($e);
-			return redirect('connect/facebook');
-		}
-	}
+	// public function handleProviderCallbackFb()
+	// {
+	// 	try {
+	// 		$userFB = Socialite::driver('facebook')->user();
+	// 		dd($userFB);
+	// 	} catch (Exception $e) {
+	// 		dd($e);
+	// 		return redirect('connect/facebook');
+	// 	}
+	// }
 
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();

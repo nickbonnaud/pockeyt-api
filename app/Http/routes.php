@@ -50,8 +50,8 @@ Route::post('accounts/status', 'AccountsController@postStatus');
 Route::resource('accounts', 'AccountsController');
 
 // Connect Routes
-Route::get('connect/facebook', 'ConnectController@redirectToProviderFb');
-Route::get('connect/facebook/callback', 'ConnectController@handleProviderCallbackFb');
+Route::get('connect/facebook', 'ConnectController@connectFB');
+// Route::get('connect/facebook/callback', 'ConnectController@handleProviderCallbackFb');
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
