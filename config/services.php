@@ -30,8 +30,8 @@ return [
     ],
 
     'facebook' => [
-        'app_id' => env('FB_APP_ID'),
-        'app_secret' => env('FB_SECRET'),
+        'client_id' => env('FB_APP_ID'),
+        'client_secret' => env('FB_SECRET'),
         'redirect' => env('CALLBACK_URL'),
     ],
 
