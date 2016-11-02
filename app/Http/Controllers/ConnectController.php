@@ -44,7 +44,7 @@ class ConnectController extends Controller
 
 		if (count($userManagedAccounts === 1)) {
 			$pageID = array_get($userManagedAccounts, '0.id');
-			$token = array_get($userManagedAccounts, '0.access_token');
+			$access_token = array_get($userManagedAccounts, '0.access_token');
 			$this->installApp($pageID, $access_token);
 		} 
 	}
