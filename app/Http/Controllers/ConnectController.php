@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Socialite;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class ConnectController extends Controller
 {
@@ -42,14 +44,26 @@ class ConnectController extends Controller
 
 		if (count($userManagedAccounts === 1)) {
 			$pageID = array_get($userManagedAccounts, '0.id');
-			dd($userManagedAccounts);
-			$token = array_get($userManagedAccounts, '0');
-			$this->installApp($pageID);
+			$token = array_get($userManagedAccounts, '0.access_token');
+			$this->installApp($pageID, $access_token);
 		} 
 	}
 
-	private function installApp($pageID) {
+	private function installApp($pageID, $access_token) {
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
+		try {
+			$response = $client->request('GET', '$pageID/subscribed_apps', [
+        'query' => ['access_token' => $token ]
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+		}
+
+		$data = json_decode($response->getBody());
+		dd($data);
 	}
 }
 
