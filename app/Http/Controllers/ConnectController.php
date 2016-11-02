@@ -27,11 +27,10 @@ class ConnectController extends Controller
 	}
 
 	private function isLoggedInFB($hasCode) {
-		dd("hello");
 		if (! $hasCode) return $this->getAuthorization();
 
 		$user = Socialite::driver('facebook')->user();
-		dd($user);
+		dd("after user");
 	}
 
 	private function getAuthorization() {
