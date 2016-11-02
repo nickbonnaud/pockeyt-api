@@ -18,8 +18,8 @@ class ConnectController extends Controller
 	public function handleProviderCallbackFb()
 	{
 		try {
-			$user = Socialite::driver('facebook')->user();
-			dd($user);
+			$userFB = Socialite::driver('facebook')->user();
+			dd($userFB);
 		} catch (Exception $e) {
 			dd($e);
 			return redirect('connect/facebook');
@@ -27,10 +27,10 @@ class ConnectController extends Controller
 	}
 
 	private function isLoggedInFB($hasCode) {
+		dd($hasCode);
 		if (! $hasCode) return $this->getAuthorization();
 
-		$user = Socialite::driver('facebook')->user();
-		dd("after user");
+		$userFB = Socialite::driver('facebook')->user();
 	}
 
 	private function getAuthorization() {
