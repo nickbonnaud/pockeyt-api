@@ -30,6 +30,7 @@ class ConnectController extends Controller
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 
 		$this->getAccountsData($userData);
+		dd(count(array_get($userManagedAccounts->user, 'accounts.data')));
 	}
 
 	private function getAuthorization() {
@@ -40,7 +41,10 @@ class ConnectController extends Controller
 	private function getAccountsData($userData) {
 		$userManagedAccounts = array_get($userData->user, 'accounts.data');
 
-		if (count($userManagedAccounts === 1)) return dd($userManagedAccounts);
+		if (count($userManagedAccounts === 1)) {
+			$pageID = array_get($userManagedAccounts, '0.id');
+			dd($pageID);
+		} 
 	}
 }
 
