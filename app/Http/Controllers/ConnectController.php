@@ -32,7 +32,7 @@ class ConnectController extends Controller
 	}
 
 	private function getAuthorization() {
-		return Socialite::driver('facebook')->redirect();
+		return Socialite::driver('facebook')->scopes(['user_friends'])->redirect();
 	}
 }
 
