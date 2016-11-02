@@ -29,7 +29,7 @@ class ConnectController extends Controller
 		if (! $hasCode) return $this->getAuthorization();
 		$userManagedPages = Socialite::driver('facebook')->fields(['accounts'])->user();
 		$newPages = array_dot($userManagedPages->user);
-		dd($newPages.accounts);
+		dd($newPages);
 	}
 
 	private function getAuthorization() {
