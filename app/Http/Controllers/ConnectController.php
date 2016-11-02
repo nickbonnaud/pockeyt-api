@@ -54,7 +54,7 @@ class ConnectController extends Controller
 
 		try {
 			$response = $client->request('GET', '$pageID/subscribed_apps', [
-        'query' => ['access_token' => $token ]
+        'query' => ['access_token' => $access_token ]
       ]);
 		} catch (RequestException $e) {
 			if ($e->hasResponse()) {
