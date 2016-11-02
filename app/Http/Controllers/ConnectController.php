@@ -29,10 +29,10 @@ class ConnectController extends Controller
 		if (! $hasCode) return $this->getAuthorization();
 
 		$userFB = Socialite::driver('facebook')->user();
-		dd("shit");
 	}
 
 	private function getAuthorization() {
+		dd('inside auth');
 		return Socialite::driver('facebook')->redirect();
 	}
 }
