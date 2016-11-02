@@ -16,17 +16,6 @@ class ConnectController extends Controller
 		return $this->isLoggedInFB($request->has('code'));
 	}
 
-	// public function handleProviderCallbackFb()
-	// {
-	// 	try {
-	// 		$userFB = Socialite::driver('facebook')->user();
-	// 		dd($userFB);
-	// 	} catch (Exception $e) {
-	// 		dd($e);
-	// 		return redirect('connect/facebook');
-	// 	}
-	// }
-
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
@@ -45,6 +34,7 @@ class ConnectController extends Controller
 		if (count($userManagedAccounts === 1)) {
 			$pageID = array_get($userManagedAccounts, '0.id');
 			$access_token = array_get($userManagedAccounts, '0.access_token');
+			
 			$this->installApp($pageID, $access_token);
 		} 
 	}
