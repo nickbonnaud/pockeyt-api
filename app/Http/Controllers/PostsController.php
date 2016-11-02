@@ -72,13 +72,22 @@ class PostsController extends Controller {
         $this->user->profile->posts()->save($post);
 
         flash()->success('Success', 'Your post has been created!');
-        return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
+        return redirect()->back();
     }
 
     public function destroy(DeletePostRequest $request, $id) {
         $post = Post::findOrFail($id);
-        $profile_path = profile_path($post->profile);
         $post->delete();
-        return redirect()->to($profile_path);
+        return redirect()->back();
+    }
+
+    public function listPosts() {
+        $posts = Post::where('profile_id', '=', $this->user->profile->id)->whereNull('event_date')->orderBy('published_at', 'desc')->limit(10)->get();
+        return view('posts.list', compact('posts'));
+    }
+
+    public function eventPosts() {
+        $posts = Post::where('profile_id', '=', $this->user->profile->id)->whereNotNull('event_date')->orderBy('published_at', 'desc')->limit(10)->get();
+        return view('posts.events', compact('posts'));
     }
 }

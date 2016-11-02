@@ -156,6 +156,7 @@ return [
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Oureastudios\Laravel\BraintreeServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -217,6 +218,7 @@ return [
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

@@ -1,7 +1,6 @@
-<div class="row">
-    <div class="col-md-12">
-        {{ csrf_field() }}
 
+    <div class="box-body">
+        {{ csrf_field() }}
         <div class="form-group">
             <label for="title">Post title:</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
@@ -13,19 +12,19 @@
         </div>
 
         <div class="photo-input">
-            <label for="photo">Add Photo (optional)</label>
-            <input type="file" name="photo" id="photo" class="form-control">
+            <label for="photo">Add Photo</label>
+            <input type="file" name="photo" id="photo">
+            <p class="help-block">Optional photo</p>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="event_date_pretty">Event Date (optional)</label>
             <input type="text" id="event_date_pretty">
         </div>
 
-        <input type="hidden" id="event_date" name="event_date">
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Create Your Post!</button>
-        </div>
+        <input type="hidden" id="event_date" name="event_date"> -->
     </div>
-</div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Create Your Post!</button>
+    </div>

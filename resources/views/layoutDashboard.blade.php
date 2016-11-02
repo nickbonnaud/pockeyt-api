@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/skin-yellow.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
@@ -190,17 +191,6 @@
                 @endif
             </div>
           </div>
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                  </span>
-            </div>
-          </form>
-          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
@@ -229,29 +219,8 @@
                 <li><a href="{{ route('accounts.edit', ['account' => $user->profile->account->id]) }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
               </ul>
             </li>
-            <li>
-              <a href="../widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right bg-green">Hot</small>
-                </span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-              </ul>
-            </li>
+            <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span>Posts</span></a></li>
+            <li><a href="{{ route('posts.events') }}"><i class="fa fa-calendar"></i> <span>Events</span></a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>

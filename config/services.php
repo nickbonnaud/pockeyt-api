@@ -29,10 +29,10 @@ return [
         'region' => 'us-east-1',
     ],
 
-    'stripe' => [
-        'model'  => App\User::class,
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+    'facebook' => [
+        'app_id' => env('FB_APP_ID'),
+        'app_secret' => env('FB_SECRET'),
+        'redirect' => env('CALLBACK_URL'),
     ],
 
 ];

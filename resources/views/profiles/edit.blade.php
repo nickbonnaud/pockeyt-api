@@ -27,7 +27,7 @@
               </a>
             @else
               <img src="{{$user->profile->hero->url }}" class="business-hero-img img-responsive" alt="Business Hero Image">
-              <div class="title-space text-center">
+              <div class="title-space text-right">
                 <form action="{{ route('profiles.photos', ['profiles' => $user->profile->id]) }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="type" value="hero">

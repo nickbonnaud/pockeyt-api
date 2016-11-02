@@ -19,6 +19,8 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Posts routes...
 Route::post('posts/{posts}/photos', 'PostsController@postPhotos')->name('posts.photos');
+Route::get('posts/list', 'PostsController@listPosts')->name('posts.list');
+Route::get('posts/events', 'PostsController@eventPosts')->name('posts.events');
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
 // Profile routes...
@@ -46,6 +48,10 @@ Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness'
 Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
 Route::post('accounts/status', 'AccountsController@postStatus');
 Route::resource('accounts', 'AccountsController');
+
+// Connect Routes
+Route::get('connect/facebook', 'ConnectController@redirectToProviderFb');
+Route::get('connect/facebook/callback', 'ConnectController@handleProviderCallbackFb');
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
