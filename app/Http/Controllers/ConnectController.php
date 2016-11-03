@@ -17,15 +17,13 @@ class ConnectController extends Controller
 	}
 
 	public function verifySubscribeFB(Request $request) {
-		dd("ndsjabfj");
 		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env(FB_VERIFY_TOKEN))) {
 			return response(env(FB_VERIFY_TOKEN));
 		}
 	}
 
 	private function isLoggedInFB($hasCode) {
-		if (! $hasCode) return $this->getAuthorization();
-		dd("inside not");
+		if (! $hasCode) dd('no token'); return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 		$this->getAccountsData($userData);
 	}
