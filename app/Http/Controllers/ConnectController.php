@@ -22,12 +22,12 @@ class ConnectController extends Controller
 
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
+		dd("inside not");
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 		$this->getAccountsData($userData);
 	}
 
 	private function getAuthorization() {
-		dd("inside redirect");
 		return Socialite::driver('facebook')
 			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
 	}
