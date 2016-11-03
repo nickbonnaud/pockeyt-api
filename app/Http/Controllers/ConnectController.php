@@ -64,6 +64,9 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-	dd($response);
+		$newResponse = $client->request('Get', $pageID . '/subscribed_apps', [
+        'query' => ['access_token' => $access_token ]
+      ]);
+		dd($newResponse);
 	}
 }
