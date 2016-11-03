@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
+
 use GuzzleHttp\Exception\RequestException;
 
 class ConnectController extends Controller
@@ -24,7 +26,7 @@ class ConnectController extends Controller
 
 	public function receiveFBFeed(Request $request) {
 		$data = $request->all();
-		return view('posts.list', compact('data'));
+		event(new BusinessFeedUpdate($data));
 	}
 
 	private function isLoggedInFB($hasCode) {

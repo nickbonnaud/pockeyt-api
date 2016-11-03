@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CustomerLeaveRadius' => [
             'App\Listeners\RemoveUser',
         ],
+        'App\Events\BusinessFeedUpdate' => [
+            'App\Listeners\UpdateFeed',
+        ],
     ];
 
     /**

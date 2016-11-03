@@ -54,8 +54,28 @@
 @stop
 
 @section('scripts.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+
 <script>
-console.log(data);
+
+var data = new Vue({
+  mounted: function() {
+    console.log("inside ready");
+    var pusher = new Pusher('f4976d40a137b96b52ea', {
+      encrypted: true
+    });
+
+    pusher.subscribe("{!! 'business' . $profile->id !!}")
+      .bind('App\\Events\\CustomerEnterRadius', this.getData);
+  },
+
+  methods: {
+    getData: function(data) {
+      console.log(data);
+    }
+  }
+})
+
 </script>
 
 
