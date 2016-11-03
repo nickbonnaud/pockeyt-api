@@ -64,6 +64,6 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-	return redirect()->back();
+	return view('posts.list');
 	}
 }
