@@ -65,8 +65,8 @@ var data = new Vue({
       encrypted: true
     });
 
-    pusher.subscribe("{!! 'business' . $profile->id !!}")
-      .bind('App\\Events\\CustomerEnterRadius', this.getData);
+    pusher.subscribe(business)
+      .bind('App\\Events\\BusinessFeedUpdate', this.getData);
   },
 
   methods: {
