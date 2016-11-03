@@ -22,6 +22,11 @@ class ConnectController extends Controller
 		}
 	}
 
+	public function receiveFBFeed(Request $request) {
+		$data = $request->all();
+		return view('posts.list', compact('data'));
+	}
+
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();

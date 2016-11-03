@@ -52,7 +52,7 @@ Route::resource('accounts', 'AccountsController');
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
-Route::post('connect/subscribe/facebook', 'ConnectController@newPost');
+Route::post('connect/subscribe/facebook', 'ConnectController@receiveFBFeed');
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {

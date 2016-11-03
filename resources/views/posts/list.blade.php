@@ -51,5 +51,11 @@
     </div>
   </div>
 </div>
-
 @stop
+
+@section('scripts.footer')
+<script>
+console.log(data);
+</script>
+
+
