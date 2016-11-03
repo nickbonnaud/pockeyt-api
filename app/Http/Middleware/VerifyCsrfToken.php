@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier {
      */
     protected $except = [
         'accounts/status',
-        'api/*'
+        'api/*',
+        'connect/subscribe/facebook'
     ];
 }
