@@ -4,7 +4,7 @@
 <div class="content-wrapper">
 	<section class="content-header">
     <h1>
-      Add | Recent Posts
+      Add | Recent Posts Shit
     </h1>
     <a href="#" data-toggle="modal" data-target="#connectSocial">
     	<h4>Enable Auto Posting</h4>

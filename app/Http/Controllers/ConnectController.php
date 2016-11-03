@@ -13,7 +13,6 @@ class ConnectController extends Controller
 {
 	public function connectFB(Request $request)
 	{
-		dd("fuck");
 		return $this->isLoggedInFB($request->has('code'));
 	}
 
