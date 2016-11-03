@@ -67,6 +67,7 @@ class ConnectController extends Controller
 		$newResponse = $client->request('Get', $pageID . '/subscribed_apps', [
         'query' => ['access_token' => $access_token ]
       ]);
-		dd($newResponse);
+		$data = json_decode($response->getBody());
+		dd($data);
 	}
 }
