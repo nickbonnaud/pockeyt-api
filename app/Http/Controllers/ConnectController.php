@@ -62,8 +62,3 @@ class ConnectController extends Controller
 		dd($data);
 	}
 }
-
-
-
-
-
