@@ -80,6 +80,7 @@ var data = new Vue({
 
   methods: {
     getData: function(data) {
+      console.log("inside method");
       console.log(data);
     }
   }
