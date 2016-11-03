@@ -17,8 +17,8 @@ class ConnectController extends Controller
 	}
 
 	public function verifySubscribeFB(Request $request) {
-		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env(FB_VERIFY_TOKEN))) {
-			return response(env(FB_VERIFY_TOKEN));
+		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env('FB_VERIFY_TOKEN'))) {
+			return response($request->hub_challenge);
 		}
 	}
 
