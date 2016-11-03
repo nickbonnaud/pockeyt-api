@@ -26,6 +26,7 @@
 		</div>
 	</div>
 		@include('partials.posts.list', ['posts' => $posts, 'no_icons' => true])
+    <div id="stuff"></div>
 	</section>
 </div>
 <div class="modal fade" id="connectSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -60,13 +61,20 @@
 <script>
 
 var data = new Vue({
+
+  el: '#stuff',
+
+  data: {
+    feed:[],
+  },
+
   mounted: function() {
     console.log("inside ready");
     var pusher = new Pusher('f4976d40a137b96b52ea', {
       encrypted: true
     });
 
-    pusher.subscribe(business)
+    pusher.subscribe('business')
       .bind('App\\Events\\BusinessFeedUpdate', this.getData);
   },
 
