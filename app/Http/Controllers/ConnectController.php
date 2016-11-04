@@ -95,6 +95,8 @@ class ConnectController extends Controller
       }
 		}
 		$data = json_decode($response->getBody());
-		dd($data->success);
+		if ($data->success === 'true') {
+			dd('working');
+		}
 	}
 }
