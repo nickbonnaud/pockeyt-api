@@ -29,14 +29,13 @@ class ConnectController extends Controller
 		$body = $request->getContent();
 		$expected = 'sha1=' . hash_hmac('sha1', $body, env('FB_SECRET'));
 
-		if ($signature == $expected) {
-			$data = true;
-		} else {
-			$data = false;
+		if ($signature != $expected) {
+			exit();
 		}
 
+		$post = $request->all();
 
-		event(new BusinessFeedUpdate($data));
+		event(new BusinessFeedUpdate($post));
 	}
 
 	private function isLoggedInFB($hasCode) {
