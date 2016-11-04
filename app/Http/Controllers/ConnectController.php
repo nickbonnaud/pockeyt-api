@@ -17,9 +17,31 @@ use GuzzleHttp\Exception\RequestException;
 
 class ConnectController extends Controller
 {
-	public function connectFB(Request $request)
-	{
+	public function connectFB(Request $request){
 		return $this->isLoggedInFB($request->has('code'));
+	}
+
+	private function isLoggedInFB($hasCode) {
+		if (! $hasCode) return $this->getAuthorization();
+		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
+		dd($userData);
+		return $this->getAccountsData($userData);
+	}
+
+	private function getAuthorization() {
+		return Socialite::driver('facebook')
+			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
+	}
+
+	private function getAccountsData($userData) {
+		$userManagedAccounts = array_get($userData->user, 'accounts.data');
+
+		if (count($userManagedAccounts === 1)) {
+			$pageID = array_get($userManagedAccounts, '0.id');
+			$access_token = array_get($userManagedAccounts, '0.access_token');
+
+			return $this->installApp($pageID, $access_token);
+		} 
 	}
 
 	public function verifySubscribeFB(Request $request) {
@@ -78,28 +100,6 @@ class ConnectController extends Controller
 				}
 			}
 		}
-	}
-
-	private function isLoggedInFB($hasCode) {
-		if (! $hasCode) return $this->getAuthorization();
-		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
-		return $this->getAccountsData($userData);
-	}
-
-	private function getAuthorization() {
-		return Socialite::driver('facebook')
-			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
-	}
-
-	private function getAccountsData($userData) {
-		$userManagedAccounts = array_get($userData->user, 'accounts.data');
-
-		if (count($userManagedAccounts === 1)) {
-			$pageID = array_get($userManagedAccounts, '0.id');
-			$access_token = array_get($userManagedAccounts, '0.access_token');
-
-			return $this->installApp($pageID, $access_token);
-		} 
 	}
 
 	private function installApp($pageID, $access_token) {
