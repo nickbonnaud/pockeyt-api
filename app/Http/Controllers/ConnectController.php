@@ -139,7 +139,7 @@ class ConnectController extends Controller
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
 				if ($existingPost === null) {
 					$post = new Post;
-					event(new BusinessFeedUpdate($post));
+					event(new BusinessFeedUpdate('shit'));
 					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
 					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
