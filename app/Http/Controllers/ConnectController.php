@@ -142,10 +142,10 @@ class ConnectController extends Controller
 					$postData['message'] = $fbPost['message'];
 					$postData['fb_post_id'] = $fbPost['post_id'];
 					$postData['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
-					event(new BusinessFeedUpdate($profile));
 
 					$post = $profile->publish(
 						new Post($postData));
+					event(new BusinessFeedUpdate($post));
 				}
 				break;
 			
