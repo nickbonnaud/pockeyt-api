@@ -144,7 +144,7 @@ class ConnectController extends Controller
 					$postData['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
 
 					$post = new Post($postData);
-					event(new BusinessFeedUpdate($post));
+					event(new BusinessFeedUpdate("hello"));
 					$profile->posts->save($post);
 				}
 				break;
