@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Socialite;
 use App\Post;
+use Carbon\Carbon;
+use DateTimeZone;
 use App\Profile;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
@@ -55,8 +57,25 @@ class ConnectController extends Controller
 	private function processPost($entry, $profile) {
 		foreach ($entry['changes'] as $item) {
 			if ($item['field'] == 'feed') {
-				$fbUpdate = $item['value'];
-				event(new BusinessFeedUpdate($fbUpdate));
+				$fbPost = $item['value'];
+
+				if ($fbPost['item'] == 'status' || $fbPost['item'] == 'photo' || $fbPost['item'] == 'post') {
+					switch ($fbPost['verb']) {
+						case 'add':
+							$this->addFbPost($fbPost, $profile);
+							break;
+						case 'edited':
+							$this->editFbPost($fbPost, $profile);
+							break;
+						case 'remove':
+						$this->deleteFbPost($fbPost, $profile);
+						break;
+
+						default:
+							exit();
+							break;
+					}
+				}
 			}
 		}
 	}
@@ -109,7 +128,34 @@ class ConnectController extends Controller
 		return redirect()->back();
 	}
 
+	/**************************
+ * Post actions
+ */
+
+	private function addFbPost($fbPost, $profile) {
+
+		switch ($fbPost['item']) {
+			case 'status':
+				$postData = [];
+				$postData['message'] = $fbPost['message'];
+				$postData['fb_post_id'] = $fbPost['post_id'];
+				$postData['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+				$post = $profile->publish(
+					new Post($postData));
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+	}
+
 }
+
+	
+
+
 
 
 
