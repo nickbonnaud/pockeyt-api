@@ -26,7 +26,7 @@ class ConnectController extends Controller
 
 	public function receiveFBFeed(Request $request) {
 		$header = $request->header();
-		$signature = $header->x-hub-signature;
+		$signature = $header->data->x-hub-signature;
 
 
 		event(new BusinessFeedUpdate($signature));
