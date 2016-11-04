@@ -62,7 +62,7 @@ class ConnectController extends Controller
 				if ($fbPost['item'] == 'status' || $fbPost['item'] == 'photo' || $fbPost['item'] == 'post') {
 					switch ($fbPost['verb']) {
 						case 'add':
-							$this->addFbPost($fbPost, $profile);
+							return $this->addFbPost($fbPost, $profile);
 							break;
 						case 'edited':
 							$this->editFbPost($fbPost, $profile);
