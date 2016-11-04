@@ -47,7 +47,6 @@ class ConnectController extends Controller
 				}
 			}
 		}
-		event(new BusinessFeedUpdate($updates));
 	}
 
 	private function newPost($entry) {
