@@ -35,27 +35,28 @@ class ConnectController extends Controller
 			exit();
 		}
 
-		return $this->checkIfPostExists($body);
+		return $this->checkIfProfilePageId($body);
 	}
 
-	private function checkIfPostExists($body) {
+	private function checkIfProfilePageId($body) {
 		$updates = json_decode($body, true);
 		if ($updates['object'] == 'page') {
 			foreach ($updates['entry'] as $entry) {
-				event(new BusinessFeedUpdate($entry));
-				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
-				if ($post === null) {
-					return $this->newPost($entry);
+				$fbPageId = $entry['id'];
+				$profile = Profile::where('fb_page_id', '=', $fbPageId)->first();
+
+				if ($profile !== null) {
+					return $this->processPost($entry, $profile);
 				}
 			}
 		}
 	}
 
-	private function newPost($entry) {
+	private function processPost($entry, $profile) {
 		foreach ($entry['changes'] as $item) {
 			if ($item['field'] == 'feed') {
 				$post = $item['value'];
-
+				event(new BusinessFeedUpdate($post));
 			}
 		}
 	}
