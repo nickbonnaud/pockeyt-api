@@ -174,6 +174,13 @@ class ConnectController extends Controller
 			}
 	}
 
+	public function deleteFbPost($fbPost, $profile) {
+		$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
+			if ($existingPost !== null) {
+				$existingPost->delete();
+			}
+	}
+
 }
 
 	
