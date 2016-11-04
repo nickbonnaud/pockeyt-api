@@ -105,7 +105,9 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->save();
-		return view('profiles.show');
+		$posts = Post::where('profile_id', '=', $profile->id)->whereNull('event_date')->orderBy('published_at', 'desc')->limit(10)->get();
+        return view('posts.list', compact('posts'));
+		return view('profiles.list');
 	}
 
 }
