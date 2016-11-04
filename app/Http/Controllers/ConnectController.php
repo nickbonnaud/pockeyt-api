@@ -43,7 +43,6 @@ class ConnectController extends Controller
 			foreach ($updates['entry'] as $entry) {
 				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
 				if ($post === null) {
-					event(new BusinessFeedUpdate($entry));
 					$this->newPost($entry);
 				}
 			}
@@ -52,6 +51,7 @@ class ConnectController extends Controller
 
 	private function newPost($entry) {
 		foreach ($entry['changes'] as $post) {
+			event(new BusinessFeedUpdate($post));
 			if ($post['field'] == 'feed') {
 			}
 		}
