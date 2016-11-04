@@ -164,6 +164,16 @@ class ConnectController extends Controller
 		}
 	}
 
+	public function editFbPost($fbPost, $profile) {
+		$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
+			if ($existingPost !== null) {
+				$existingPost->message = $fbPost['message'];
+				$existingPost->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+				$profile->posts()->save($existingPost);
+			}
+	}
+
 }
 
 	
