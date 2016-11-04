@@ -50,8 +50,10 @@ class ConnectController extends Controller
 	}
 
 	private function newPost($entry) {
-		foreach ($entry['changes'] as $post) {
-			if ($post['field'] == 'feed') {
+		foreach ($entry['changes'] as $item) {
+			if ($item['field'] == 'feed') {
+				$post = $item['value'];
+
 				event(new BusinessFeedUpdate($post['value']));
 			}
 		}
@@ -92,10 +94,6 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-		$newResponse = $client->request('GET', $pageID . '/subscribed_apps', [
-        'query' => ['access_token' => $access_token ]
-      ]);
-		$data = json_decode($newResponse->getBody());
-		dd($data);
+		dd($response);
 	}
 }
