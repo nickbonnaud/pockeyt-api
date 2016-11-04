@@ -138,14 +138,13 @@ class ConnectController extends Controller
 			case 'status':
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
 				if ($existingPost === null) {
-					$postData = [];
-					$postData['message'] = $fbPost['message'];
-					$postData['fb_post_id'] = $fbPost['post_id'];
-					$postData['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
+					$post = new Post;
+					$post->message = $fbPost['message'];
+					$post->fb_post_id = $fbPost['post_id'];
+					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
 
-					$post = new Post($postData);
-					event(new BusinessFeedUpdate("hello"));
-					$profile->posts->save($post);
+					event(new BusinessFeedUpdate($post));
+					$profile->posts()->save($post);
 				}
 				break;
 			
