@@ -25,9 +25,15 @@ class ConnectController extends Controller
 	}
 
 	public function receiveFBFeed(Request $request) {
-		$header = $request->header();
+		$signature = $request->header('x-hub-signature');
+		$body = $request->getContent();
+		$expected = 'sha1=' . hash_hmac('sha1', $body, env(FB_SECRET));
 
-		event(new BusinessFeedUpdate($header));
+		if ($signature = $expected) {
+			$data = true;
+		}
+
+		event(new BusinessFeedUpdate($data));
 	}
 
 	private function isLoggedInFB($hasCode) {
