@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Socialite;
 use App\Post;
+use App\Profile;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
 
@@ -96,7 +97,7 @@ class ConnectController extends Controller
 		}
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
-			dd('working');
+			dd($user);
 		}
 	}
 }
