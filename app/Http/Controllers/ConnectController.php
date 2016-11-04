@@ -105,7 +105,7 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->save();
-		return view('profiles.list');
+		return redirect()->back();
 	}
 
 }
