@@ -146,9 +146,20 @@ class ConnectController extends Controller
 					$profile->posts()->save($post);
 				}
 				break;
-			
+			case 'photo':
+				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
+				if ($existingPost === null) {
+					$post = new Post;
+					$post->message = $fbPost['message'];
+					$post->fb_post_id = $fbPost['post_id'];
+					$post->photo_path = $fbPost['link'];
+					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+					$profile->posts()->save($post);
+				}
+				break;
 			default:
-				# code...
+				exit();
 				break;
 		}
 	}
