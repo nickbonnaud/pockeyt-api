@@ -46,6 +46,7 @@ class ConnectController extends Controller
 				$profile = Profile::where('fb_page_id', '=', $fbPageId)->first();
 
 				if ($profile !== null) {
+					event(new BusinessFeedUpdate($entry));
 					return $this->processPost($entry, $profile);
 				}
 			}
@@ -56,7 +57,6 @@ class ConnectController extends Controller
 		foreach ($entry['changes'] as $item) {
 			if ($item['field'] == 'feed') {
 				$post = $item['value'];
-				event(new BusinessFeedUpdate($post));
 			}
 		}
 	}
