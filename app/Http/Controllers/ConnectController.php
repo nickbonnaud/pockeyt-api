@@ -132,7 +132,7 @@ class ConnectController extends Controller
  * Post actions
  */
 
-	private function addFbPost($fbPost, $profile) {
+	public function addFbPost($fbPost, $profile) {
 
 		switch ($fbPost['item']) {
 			case 'status':
