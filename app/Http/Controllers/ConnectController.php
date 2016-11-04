@@ -31,6 +31,8 @@ class ConnectController extends Controller
 
 		if ($signature = $expected) {
 			$data = true;
+		} else {
+			$data = false;
 		}
 
 		event(new BusinessFeedUpdate($data));
