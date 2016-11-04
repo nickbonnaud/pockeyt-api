@@ -40,6 +40,7 @@ class ConnectController extends Controller
 	private function checkIfPostExists($body) {
 		$updates = json_decode($body, true);
 		if ($updates['object'] == 'page') {
+			event(new BusinessFeedUpdate($updates['object']));
 			foreach ($updates['entry'] as $entry) {
 				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
 				if ($post === null) {
@@ -52,7 +53,6 @@ class ConnectController extends Controller
 	private function newPost($entry) {
 		foreach ($entry['changes'] as $post) {
 			if ($post['field'] == 'feed') {
-				event(new BusinessFeedUpdate($post->value));
 			}
 		}
 	}
