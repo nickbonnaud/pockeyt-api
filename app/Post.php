@@ -20,7 +20,9 @@ class Post extends Model {
         'photo_name',
         'photo_path',
         'thumb_path',
-        'event_date'
+        'event_date',
+        'message',
+        'fb_post_id'
     ];
 
     /**
