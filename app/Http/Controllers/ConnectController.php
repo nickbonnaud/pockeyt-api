@@ -63,7 +63,7 @@ class ConnectController extends Controller
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
-		$this->getAccountsData($userData);
+		return $this->getAccountsData($userData);
 	}
 
 	private function getAuthorization() {
@@ -78,7 +78,7 @@ class ConnectController extends Controller
 			$pageID = array_get($userManagedAccounts, '0.id');
 			$access_token = array_get($userManagedAccounts, '0.access_token');
 
-			$this->installApp($pageID, $access_token);
+			return $this->installApp($pageID, $access_token);
 		} 
 	}
 
@@ -97,7 +97,7 @@ class ConnectController extends Controller
 		}
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
-			$this->addPageIdToProfile($pageID);
+			return $this->addPageIdToProfile($pageID);
 		}
 	}
 
@@ -105,8 +105,6 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->save();
-		$posts = Post::where('profile_id', '=', $profile->id)->whereNull('event_date')->orderBy('published_at', 'desc')->limit(10)->get();
-        return view('posts.list', compact('posts'));
 		return view('profiles.list');
 	}
 
