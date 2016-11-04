@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\Post;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
 
@@ -33,13 +34,27 @@ class ConnectController extends Controller
 			exit();
 		}
 
-		$this->processFBUpdate($body);
+		$this->checkIfPostExists($body);
 	}
 
-	private function processFBUpdate($body) {
+	private function checkIfPostExists($body) {
 		$updates = json_decode($body, true);
 		if ($updates['object'] == 'page') {
-			event(new BusinessFeedUpdate($updates));
+			foreach ($updates['entry'] as $entry) {
+				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
+				if ($post === null) {
+					$this->newPost($entry);
+				}
+			}
+		}
+		event(new BusinessFeedUpdate($updates));
+	}
+
+	private function newPost($entry) {
+		foreach ($entry['changes'] as $post) {
+			if ($post['field'] == 'feed') {
+				event(new BusinessFeedUpdate($post->value));
+			}
 		}
 	}
 
