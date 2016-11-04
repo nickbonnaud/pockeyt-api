@@ -51,8 +51,8 @@ class ConnectController extends Controller
 
 	private function newPost($entry) {
 		foreach ($entry['changes'] as $post) {
-			event(new BusinessFeedUpdate($post));
 			if ($post['field'] == 'feed') {
+				event(new BusinessFeedUpdate($post['field']));
 			}
 		}
 	}
