@@ -56,7 +56,7 @@ class ConnectController extends Controller
 		foreach ($entry['changes'] as $item) {
 			if ($item['field'] == 'feed') {
 				$fbUpdate = $item['value'];
-				event(new BusinessFeedUpdate($fbUpdate['message']));
+				event(new BusinessFeedUpdate($fbUpdate->message));
 			}
 		}
 	}
