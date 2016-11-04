@@ -35,16 +35,17 @@ class ConnectController extends Controller
 			exit();
 		}
 
-		$this->checkIfPostExists($body);
+		return $this->checkIfPostExists($body);
 	}
 
 	private function checkIfPostExists($body) {
 		$updates = json_decode($body, true);
+		event(new BusinessFeedUpdate($updates));
 		if ($updates['object'] == 'page') {
 			foreach ($updates['entry'] as $entry) {
 				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
 				if ($post === null) {
-					$this->newPost($entry);
+					return $this->newPost($entry);
 				}
 			}
 		}
@@ -55,7 +56,6 @@ class ConnectController extends Controller
 			if ($item['field'] == 'feed') {
 				$post = $item['value'];
 
-				event(new BusinessFeedUpdate($post['value']));
 			}
 		}
 	}
