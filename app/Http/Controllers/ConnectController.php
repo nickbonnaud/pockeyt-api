@@ -41,8 +41,8 @@ class ConnectController extends Controller
 		$updates = json_decode($body, true);
 		if ($updates['object'] == 'page') {
 			foreach ($updates['entry'] as $entry) {
-				event(new BusinessFeedUpdate($entry['id']));
 				$post = Post::where('fb_post_id', '=', $entry['id'])->first();
+				event(new BusinessFeedUpdate($post));
 				if ($post === null) {
 					$this->newPost($entry);
 				}
