@@ -26,10 +26,8 @@ class ConnectController extends Controller
 
 	public function receiveFBFeed(Request $request) {
 		$header = $request->header();
-		$signature = $header->data;
 
-
-		event(new BusinessFeedUpdate($signature));
+		event(new BusinessFeedUpdate($header));
 	}
 
 	private function isLoggedInFB($hasCode) {
