@@ -33,9 +33,14 @@ class ConnectController extends Controller
 			exit();
 		}
 
-		$update = json_decode($body, true);
+		$this->processFBUpdate($body);
+	}
 
-		event(new BusinessFeedUpdate($update));
+	private function processFBUpdate($body) {
+		$updates = json_decode($body, true);
+		if ($updates['object'] == 'page') {
+			event(new BusinessFeedUpdate($updates));
+		}
 	}
 
 	private function isLoggedInFB($hasCode) {
