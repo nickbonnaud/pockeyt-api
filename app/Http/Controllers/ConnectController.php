@@ -55,7 +55,8 @@ class ConnectController extends Controller
 	private function processPost($entry, $profile) {
 		foreach ($entry['changes'] as $item) {
 			if ($item['field'] == 'feed') {
-				event(new BusinessFeedUpdate($item['value']));
+				$fbUpdate = $item['value'];
+				event(new BusinessFeedUpdate($fbUpdate->message));
 			}
 		}
 	}
