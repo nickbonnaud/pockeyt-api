@@ -97,8 +97,17 @@ class ConnectController extends Controller
 		}
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
-			$profile = $this->user->profile;
-			dd($profile);
+			$this->addPageIdToProfile($pageID);
 		}
 	}
+
+	private function addPageIdToProfile($pageID) {
+		$profile = $this->user->profile;
+		$profile->fb_page_id = $pageID;
+		$profile->save();
+	}
+
 }
+
+
+
