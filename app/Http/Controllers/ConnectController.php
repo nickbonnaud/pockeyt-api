@@ -12,7 +12,6 @@ use DateTimeZone;
 use App\Profile;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
-
 use GuzzleHttp\Exception\RequestException;
 
 class ConnectController extends Controller
@@ -24,7 +23,6 @@ class ConnectController extends Controller
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
-		dd($userData);
 		return $this->getAccountsData($userData);
 	}
 
@@ -37,6 +35,7 @@ class ConnectController extends Controller
 		$userManagedAccounts = array_get($userData->user, 'accounts.data');
 
 		if (count($userManagedAccounts === 1)) {
+			dd($userManagedAccounts);
 			$pageID = array_get($userManagedAccounts, '0.id');
 			$access_token = array_get($userManagedAccounts, '0.access_token');
 
