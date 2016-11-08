@@ -57,9 +57,7 @@ class ConnectController extends Controller
       }
 		}
 		$data = json_decode($response->getBody());
-		if ($data->success === true) {
 			dd($data);
-			return $this->addPageIdToProfile($pageID);
 		}
 
 
