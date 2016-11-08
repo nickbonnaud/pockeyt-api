@@ -59,7 +59,7 @@ class ConnectController extends Controller
 		$events = json_decode($response->getBody());
 			$id =[];
 			foreach ($events as $event) {
-				$eventId = $event->id;
+				$eventId = $event['id'];
 				array_push($id, $eventId);
 			}
 			dd($id);
