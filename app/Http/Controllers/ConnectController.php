@@ -62,28 +62,24 @@ class ConnectController extends Controller
 			dd($data);
 			return $this->addPageIdToProfile($pageID);
 		}
-	}
 
 
+		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
-
-
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-
-		try {
-			$response = $client->request('POST', $pageID . '/subscribed_apps', [
-        'query' => ['access_token' => $access_token ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
-				dd($e->getResponse());
-        return $e->getResponse();
-      }
-		}
-		$data = json_decode($response->getBody());
-		if ($data->success === true) {
-			return $this->addPageIdToProfile($pageID);
-		}
+		// try {
+		// 	$response = $client->request('POST', $pageID . '/subscribed_apps', [
+  //       'query' => ['access_token' => $access_token ]
+  //     ]);
+		// } catch (RequestException $e) {
+		// 	if ($e->hasResponse()) {
+		// 		dd($e->getResponse());
+  //       return $e->getResponse();
+  //     }
+		// }
+		// $data = json_decode($response->getBody());
+		// if ($data->success === true) {
+		// 	return $this->addPageIdToProfile($pageID);
+		// }
 	}
 
 	private function addPageIdToProfile($pageID) {
