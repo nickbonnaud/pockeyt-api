@@ -61,7 +61,7 @@ class AddEvents extends Command
                     return $e->getResponse();
                 }
             }
-            $existingEvent = Post
+            
         }
     }
 }
