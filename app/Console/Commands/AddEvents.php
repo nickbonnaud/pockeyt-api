@@ -61,7 +61,12 @@ class AddEvents extends Command
                     return $e->getResponse();
                 }
             }
-            
+            $data = json_decode($response->getBody());
+            $events = $data->data;
+
+            foreach ($events as $event) {
+                $existingPost = Post::where('fb_post_id', '=', $event->id)
+            }
         }
     }
 }

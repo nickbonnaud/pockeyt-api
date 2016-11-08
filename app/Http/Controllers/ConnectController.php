@@ -60,10 +60,8 @@ class ConnectController extends Controller
 		$events = $data->data;
 		$stuff =[];
 		foreach ($events as $event) {
-			$eventId = $event->id;
-			array_push($stuff, $eventId);
+			dd($event);
 		}
-		dd($stuff);
 
 
 
