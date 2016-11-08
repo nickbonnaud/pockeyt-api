@@ -47,7 +47,7 @@ class ConnectController extends Controller
 		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
 		try {
-			$response = $client->request('POST', $pageID . '/events', [
+			$response = $client->request('GET', $pageID . '/events', [
         'query' => ['access_token' => $access_token ]
       ]);
 		} catch (RequestException $e) {
