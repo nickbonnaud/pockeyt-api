@@ -65,7 +65,10 @@ class AddEvents extends Command
             $events = $data->data;
 
             foreach ($events as $event) {
-                $existingPost = Post::where('fb_post_id', '=', $event->id)
+                $existingEvent = Post::where('fb_post_id', '=', $event->id);
+                if ($existingEvent === null) {
+                    $post = new Post;
+                }
             }
         }
     }
