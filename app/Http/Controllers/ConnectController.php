@@ -57,7 +57,8 @@ class ConnectController extends Controller
       }
 		}
 		$events = json_decode($response->getBody());
-		dd($events)
+		dd($events);
+
 
 
 		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
