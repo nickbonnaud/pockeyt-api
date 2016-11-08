@@ -56,8 +56,8 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-
-		dd($response);
+		$events = json_decode($response->getBody());
+		dd($events->data);
 
 
 
