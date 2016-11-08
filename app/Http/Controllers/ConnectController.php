@@ -56,8 +56,13 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-		$data = json_decode($response->getBody());
-			dd($data);
+		$events = json_decode($response->getBody());
+			$id =[];
+			foreach ($events as $event) {
+				$eventId = $event->id;
+				array_push($id, $eventId);
+			}
+			dd($id);
 
 
 

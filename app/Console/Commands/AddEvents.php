@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use App\Profile;
+use App\Post;
 use GuzzleHttp\Exception\RequestException;
 
 class AddEvents extends Command
@@ -50,7 +51,7 @@ class AddEvents extends Command
             $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
             try {
-                $currentTime = new DateTime();
+                $currentTime = time();
                 $response = $client->request('GET', $pageID . '/events?since=' . $currentTime, [
                     'query' => ['access_token' => $access_token ]
                 ]);
@@ -60,7 +61,7 @@ class AddEvents extends Command
                     return $e->getResponse();
                 }
             }
-
+            $existingEvent = Post
         }
     }
 }
