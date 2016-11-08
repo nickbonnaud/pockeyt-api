@@ -43,6 +43,56 @@ class ConnectController extends Controller
 		} 
 	}
 
+	private function installApp($pageID, $access_token) {
+		
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+
+		try {
+			$response = $client->request('POST', $pageID . '/events', [
+        'query' => ['access_token' => $access_token ]
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+				dd($e->getResponse());
+        return $e->getResponse();
+      }
+		}
+		$data = json_decode($response->getBody());
+		if ($data->success === true) {
+			dd($data);
+			return $this->addPageIdToProfile($pageID);
+		}
+	}
+
+
+
+
+
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+
+		try {
+			$response = $client->request('POST', $pageID . '/subscribed_apps', [
+        'query' => ['access_token' => $access_token ]
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+				dd($e->getResponse());
+        return $e->getResponse();
+      }
+		}
+		$data = json_decode($response->getBody());
+		if ($data->success === true) {
+			return $this->addPageIdToProfile($pageID);
+		}
+	}
+
+	private function addPageIdToProfile($pageID) {
+		$profile = $this->user->profile;
+		$profile->fb_page_id = $pageID;
+		$profile->save();
+		return redirect()->back();
+	}
+
 	public function verifySubscribeFB(Request $request) {
 		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env('FB_VERIFY_TOKEN'))) {
 			return response($request->hub_challenge);
@@ -99,32 +149,6 @@ class ConnectController extends Controller
 				}
 			}
 		}
-	}
-
-	private function installApp($pageID, $access_token) {
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-
-		try {
-			$response = $client->request('POST', $pageID . '/subscribed_apps', [
-        'query' => ['access_token' => $access_token ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
-				dd($e->getResponse());
-        return $e->getResponse();
-      }
-		}
-		$data = json_decode($response->getBody());
-		if ($data->success === true) {
-			return $this->addPageIdToProfile($pageID);
-		}
-	}
-
-	private function addPageIdToProfile($pageID) {
-		$profile = $this->user->profile;
-		$profile->fb_page_id = $pageID;
-		$profile->save();
-		return redirect()->back();
 	}
 
 	/**************************
