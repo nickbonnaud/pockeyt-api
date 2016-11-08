@@ -57,8 +57,7 @@ class ConnectController extends Controller
       }
 		}
 		$data = json_decode($response->getBody());
-			$businesses = Profile::whereNotNull('fb_page_id')->whereNotNull('fb_app_id')->get();
-			dd($businesses);
+			dd($data);
 
 
 

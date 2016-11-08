@@ -41,5 +41,26 @@ class AddEvents extends Command
     public function handle()
     {
         $businesses = Profile::whereNotNull('fb_page_id')->whereNotNull('fb_app_id')->get();
+
+        foreach ($businesses as $business) {
+
+            $pageID = $business->fb_page_id;
+            $access_token = $business->fb_app_id;
+
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+
+            try {
+                $currentTime = new DateTime();
+                $response = $client->request('GET', $pageID . '/events?since=' . $currentTime, [
+                    'query' => ['access_token' => $access_token ]
+                ]);
+            } catch (RequestException $e) {
+                if ($e->hasResponse()) {
+                    dd($e->getResponse());
+                    return $e->getResponse();
+                }
+            }
+
+        }
     }
 }
