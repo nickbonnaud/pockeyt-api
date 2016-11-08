@@ -60,9 +60,7 @@ class ConnectController extends Controller
 		$events = $data->data;
 		$stuff =[];
 		foreach ($events as $event) {
-			$time = strtotime($event->start_time);
-			$newDate = date('Y-m-d', $time);
-			dd($newDate);
+			dd($event);
 		}
 
 

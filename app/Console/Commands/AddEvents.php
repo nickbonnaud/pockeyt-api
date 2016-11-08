@@ -72,6 +72,10 @@ class AddEvents extends Command
                     $post->body = $event->description;
                     $post->fb_post_id = $event->id;
                     $post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
+                    
+                    $date = strtotime($event->start_time);
+                    $formattedDate = date('Y-m-d', $time);
+                    $post->event_date = $formattedDate;
                 }
             }
         }
