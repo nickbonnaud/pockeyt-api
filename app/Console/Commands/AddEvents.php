@@ -68,6 +68,10 @@ class AddEvents extends Command
                 $existingEvent = Post::where('fb_post_id', '=', $event->id);
                 if ($existingEvent === null) {
                     $post = new Post;
+                    $post->title = $event->name;
+                    $post->body = $event->description;
+                    $post->fb_post_id = $event->id;
+                    $post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
                 }
             }
         }
