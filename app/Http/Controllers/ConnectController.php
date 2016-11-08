@@ -57,7 +57,8 @@ class ConnectController extends Controller
       }
 		}
 		$data = json_decode($response->getBody());
-			dd($data);
+			$businesses = Profile::whereNotNull('fb_page_id')->whereNotNull('fb_app_id')->get();
+			dd($businesses);
 
 
 
@@ -75,13 +76,14 @@ class ConnectController extends Controller
 		// }
 		// $data = json_decode($response->getBody());
 		// if ($data->success === true) {
-		// 	return $this->addPageIdToProfile($pageID);
+		// 	return $this->addPageIdToProfile($pageID, $access_token);
 		// }
 	}
 
-	private function addPageIdToProfile($pageID) {
+	private function addPageIdToProfile($pageID, $access_token) {
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
+		$profile->fb_app_id = $access_token;
 		$profile->save();
 		return redirect()->back();
 	}
