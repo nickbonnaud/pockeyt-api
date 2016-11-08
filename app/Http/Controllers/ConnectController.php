@@ -35,7 +35,6 @@ class ConnectController extends Controller
 		$userManagedAccounts = array_get($userData->user, 'accounts.data');
 
 		if (count($userManagedAccounts === 1)) {
-			dd($userManagedAccounts);
 			$pageID = array_get($userManagedAccounts, '0.id');
 			$access_token = array_get($userManagedAccounts, '0.access_token');
 
