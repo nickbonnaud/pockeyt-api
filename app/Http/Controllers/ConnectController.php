@@ -78,6 +78,7 @@ class ConnectController extends Controller
                     $date = strtotime($event->start_time);
                     $formattedDate = date('Y-m-d', $time);
                     $post->event_date = $formattedDate;
+                    dd($post);
 
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
                     try {
