@@ -67,6 +67,7 @@ class ConnectController extends Controller
 		$profile->fb_page_id = $pageID;
 		$profile->fb_app_id = $access_token;
 		$profile->save();
+		return redirect()->back();
 	}
 
 	public function verifySubscribeFB(Request $request) {
