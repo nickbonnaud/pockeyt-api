@@ -43,39 +43,23 @@ class ConnectController extends Controller
 	}
 
 	private function installApp($pageID, $access_token) {
-		
-			$something = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-			try {
-				$reSomething = $something->request('GET', '435859843249606/picture', [
-	        'query' => ['redirect' => '0', 'access_token' => $access_token ]
-	      ]);
-			} catch (RequestException $e) {
-				if ($e->hasResponse()) {
-					dd($e->getResponse());
-	        return $e->getResponse();
-	      }
-			}
-			$info = json_decode($reSomething->getBody());
-			dd($info->data->url);
 
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
-
-		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-
-		// try {
-		// 	$response = $client->request('POST', $pageID . '/subscribed_apps', [
-  //       'query' => ['access_token' => $access_token ]
-  //     ]);
-		// } catch (RequestException $e) {
-		// 	if ($e->hasResponse()) {
-		// 		dd($e->getResponse());
-  //       return $e->getResponse();
-  //     }
-		// }
-		// $data = json_decode($response->getBody());
-		// if ($data->success === true) {
-		// 	return $this->addPageIdToProfile($pageID, $access_token);
-		// }
+		try {
+			$response = $client->request('POST', $pageID . '/subscribed_apps', [
+        'query' => ['access_token' => $access_token ]
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+				dd($e->getResponse());
+        return $e->getResponse();
+      }
+		}
+		$data = json_decode($response->getBody());
+		if ($data->success === true) {
+			return $this->addPageIdToProfile($pageID, $access_token);
+		}
 	}
 
 	private function addPageIdToProfile($pageID, $access_token) {

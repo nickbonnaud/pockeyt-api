@@ -76,6 +76,22 @@ class AddEvents extends Command
                     $date = strtotime($event->start_time);
                     $formattedDate = date('Y-m-d', $time);
                     $post->event_date = $formattedDate;
+
+                    $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+                    try {
+                        $responsePhoto = $clientPhoto->request('GET', '435859843249606/picture', [
+                            'query' => ['redirect' => '0', 'access_token' => $access_token ]
+                        ]);
+                    } catch (RequestException $e) {
+                        if ($e->hasResponse()) {
+                            dd($e->getResponse());
+                            return $e->getResponse();
+                        }
+                    }
+                    $dataPhoto = json_decode($responsePhoto->getBody());
+                    $post->photo_path = $dataPhoto->data->url;
+
+                    $business->posts()->save($post);
                 }
             }
         }
