@@ -55,8 +55,8 @@ class ConnectController extends Controller
 
             try {
                 $currentTime = time();
-                $response = $client->request('GET', $pageID . '/events?since=' . $currentTime, [
-                    'query' => ['access_token' => $access_token ]
+                $response = $client->request('GET', $pageID . '/events', [
+                    'query' => ['since' => $currentTime,'access_token' => $access_token ]
                 ]);
             } catch (RequestException $e) {
                 if ($e->hasResponse()) {
@@ -65,9 +65,8 @@ class ConnectController extends Controller
                 }
             }
             $data = json_decode($response->getBody());
-            dd($data);
             $events = $data->data;
-
+            dd($events);
             foreach ($events as $event) {
                 $existingEvent = Post::where('fb_post_id', '=', $event->id);
                 if ($existingEvent === null) {
