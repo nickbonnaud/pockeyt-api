@@ -68,7 +68,6 @@ class ConnectController extends Controller
             $events = $data->data;
             foreach ($events as $event) {
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
-                dd($existingEvent);
                 if ($existingEvent === null) {
                     $post = new Post;
                     $post->title = $event->name;
