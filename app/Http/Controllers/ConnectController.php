@@ -61,11 +61,11 @@ class ConnectController extends Controller
 		foreach ($events as $event) {
 			$something = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 			$eventId = $event->id;
+			dd($eventId);
 			try {
 				$reSomething = $something->request('GET', $eventId . '/picture', [
 	        'query' => ['access_token' => $access_token ]
 	      ]);
-	      dd($reSomething);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
 					dd($e->getResponse());
