@@ -65,6 +65,7 @@ class ConnectController extends Controller
 				$reSomething = $something->request('GET', $eventId . '/picture', [
 	        'query' => ['access_token' => $access_token ]
 	      ]);
+	      dd($reSomething);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
 					dd($e->getResponse());
