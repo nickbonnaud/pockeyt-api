@@ -72,7 +72,7 @@ class ConnectController extends Controller
 	      }
 			}
 			$info = json_decode($reSomething->getBody());
-			dd($reSomething);
+			dd($info);
 		}
 
 
