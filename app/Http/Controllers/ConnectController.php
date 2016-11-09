@@ -67,6 +67,7 @@ class ConnectController extends Controller
             $data = json_decode($response->getBody());
             $events = $data->data;
             foreach ($events as $event) {
+            	dd($event);
                 $existingEvent = Post::where('fb_post_id', '=', $event->id);
                 if ($existingEvent === null) {
                     $post = new Post;
@@ -78,7 +79,6 @@ class ConnectController extends Controller
                     $date = strtotime($event->start_time);
                     $formattedDate = date('Y-m-d', $time);
                     $post->event_date = $formattedDate;
-                    dd($post);
 
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
                     try {
