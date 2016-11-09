@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel {
      * @var array
      */
     protected $commands = [
-        Commands\AddEvents::class
+        \App\Console\Commands\AddEvents::class
     ];
 
     /**
@@ -21,5 +21,7 @@ class Kernel extends ConsoleKernel {
      * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule) {}
+    protected function schedule(Schedule $schedule) {
+        $schedule->command('app:add-events')->everyMinute();
+    }
 }
