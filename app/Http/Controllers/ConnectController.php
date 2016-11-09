@@ -47,7 +47,7 @@ class ConnectController extends Controller
 			$something = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 			try {
 				$reSomething = $something->request('GET', '435859843249606/picture', [
-	        'query' => ['access_token' => $access_token ]
+	        'query' => ['redirect' => '0', 'access_token' => $access_token ]
 	      ]);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
@@ -55,7 +55,7 @@ class ConnectController extends Controller
 	        return $e->getResponse();
 	      }
 			}
-			$info = $reSomething->getBody();
+			$info = json_decode($reSomething->getBody());
 			dd($info);
 
 
