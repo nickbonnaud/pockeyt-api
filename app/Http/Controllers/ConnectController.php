@@ -76,7 +76,7 @@ class ConnectController extends Controller
                     $post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
                     
                     $date = strtotime($event->start_time);
-                    $formattedDate = date('Y-m-d', $time);
+                    $formattedDate = date('Y-m-d', $date);
                     $post->event_date = $formattedDate;
 
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
