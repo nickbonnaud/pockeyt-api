@@ -67,7 +67,7 @@ class ConnectController extends Controller
             $data = json_decode($response->getBody());
             $events = $data->data;
             foreach ($events as $event) {
-                $existingEvent = Post::where('fb_post_id', '=', $event->id);
+                $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 dd($existingEvent);
                 if ($existingEvent === null) {
                     $post = new Post;
