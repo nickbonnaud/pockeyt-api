@@ -63,7 +63,7 @@ class ConnectController extends Controller
 			$newClient = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 			$eventId = $event->id;
 			try {
-				$response = $newClient->request('GET', $eventId . '/picture?type=large', [
+				$newResponse = $newClient->request('GET', $eventId . '/picture?type=large', [
 	        'query' => ['access_token' => $access_token ]
 	      ]);
 			} catch (RequestException $e) {
@@ -72,7 +72,7 @@ class ConnectController extends Controller
 	        return $e->getResponse();
 	      }
 			}
-			$data = json_decode($response->getBody());
+			$data = json_decode($newResponse->getBody());
 			dd($data);
 		}
 
