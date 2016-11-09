@@ -52,8 +52,8 @@ class AddEvents extends Command
 
             try {
                 $currentTime = time();
-                $response = $client->request('GET', $pageID . '/events?since=' . $currentTime, [
-                    'query' => ['access_token' => $access_token ]
+                $response = $client->request('GET', $pageID . '/events', [
+                    'query' => ['since' => $currentTime,'access_token' => $access_token]
                 ]);
             } catch (RequestException $e) {
                 if ($e->hasResponse()) {
