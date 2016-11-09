@@ -44,26 +44,9 @@ class ConnectController extends Controller
 
 	private function installApp($pageID, $access_token) {
 		
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-
-		try {
-			$response = $client->request('GET', $pageID . '/events', [
-        'query' => ['access_token' => $access_token ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
-				dd($e->getResponse());
-        return $e->getResponse();
-      }
-		}
-		$data = json_decode($response->getBody());
-		$events = $data->data;
-		foreach ($events as $event) {
 			$something = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-			$eventId = $event->id;
-			dd($eventId);
 			try {
-				$reSomething = $something->request('GET', $eventId . '/picture', [
+				$reSomething = $something->request('GET', '435859843249606/picture', [
 	        'query' => ['access_token' => $access_token ]
 	      ]);
 			} catch (RequestException $e) {
@@ -74,7 +57,6 @@ class ConnectController extends Controller
 			}
 			$info = json_decode($reSomething->getBody());
 			dd($info);
-		}
 
 
 
