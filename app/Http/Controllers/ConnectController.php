@@ -63,7 +63,7 @@ class ConnectController extends Controller
 			$eventId = $event->id;
 			try {
 				$reSomething = $something->request('GET', $eventId . '/picture', [
-	        'query' => ['type' => 'large','access_token' => $access_token ]
+	        'query' => ['access_token' => $access_token ]
 	      ]);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
