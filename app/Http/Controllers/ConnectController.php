@@ -47,7 +47,7 @@ class ConnectController extends Controller
 		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
 
 		try {
-			$response = $client->request('GET', $pageID . '/events', [
+			$response = $client->request('GET', '433612763492786/picture?type=large', [
         'query' => ['access_token' => $access_token ]
       ]);
 		} catch (RequestException $e) {
@@ -57,6 +57,7 @@ class ConnectController extends Controller
       }
 		}
 		$data = json_decode($response->getBody());
+		dd($data);
 		$events = $data->data;
 		foreach ($events as $event) {
 			$something = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
