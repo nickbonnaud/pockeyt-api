@@ -130,9 +130,12 @@ class ConnectController extends Controller
 	}
 
 	private function getInstaPost($accountId, $mediaId) {
+		event(new BusinessFeedUpdate("inside get insta post"));
 		$existingPost = Post::where('insta_post_id', '=', $mediaId)->first();
+		event(new BusinessFeedUpdate($existingPost));
 		if ($existingPost === null) {
 			$profile = Profile::where('insta_account_id', '=', $accountId);
+			event(new BusinessFeedUpdate($profile));
 			$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
 
 			try {
