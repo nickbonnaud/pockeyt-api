@@ -78,7 +78,7 @@ class AddEvents extends Command
                     $date = strtotime($event->start_time);
                     $formattedDate = date('Y-m-d', $date);
                     $post->event_date = $formattedDate;
-
+                    event(new BusinessFeedUpdate($post));
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
                     try {
                         $responsePhoto = $clientPhoto->request('GET', $event->id . '/picture', [
