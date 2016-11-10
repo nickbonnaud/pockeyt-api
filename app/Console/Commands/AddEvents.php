@@ -45,7 +45,6 @@ class AddEvents extends Command
         $businesses = Profile::whereNotNull('fb_page_id')->whereNotNull('fb_app_id')->get();
 
         foreach ($businesses as $business) {
-            event(new BusinessFeedUpdate($business));
 
             $pageID = $business->fb_page_id;
             $access_token = $business->fb_app_id;
@@ -66,6 +65,7 @@ class AddEvents extends Command
             $data = json_decode($response->getBody());
             $events = $data->data;
             foreach ($events as $event) {
+                event(new BusinessFeedUpdate($event));
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 if ($existingEvent === null) {
                     $post = new Post;
