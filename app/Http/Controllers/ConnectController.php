@@ -144,7 +144,7 @@ class ConnectController extends Controller
 	      }
 			}
 			$data = json_decode($responseInsta->getBody());
-			return $this->addInstaPost($data, $profile);
+			return $this->addInstaPost($data, $profile, $mediaId);
 	}
 
 
@@ -241,9 +241,16 @@ class ConnectController extends Controller
 			}
 	}
 
-	public function addInstaPost($data, $profile) {
-		event(new BusinessFeedUpdate($data->data));
-		event(new BusinessFeedUpdate($data->data->type));
+	public function addInstaPost($data, $profile, $mediaId) {
+		if ($data->data->type === 'image') {
+			$post = new Post;
+			$post->message = $data->data->caption->text;
+			$post->fb_post_id = $mediaId;
+			$post->photo_path = $data->data->images->standard_resolution->url;
+			$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+			$profile->posts()->save($post);
+		}
 	}
 
 }
