@@ -129,6 +129,27 @@ class ConnectController extends Controller
 		}
 	}
 
+	private function getInstaPost($accountId, $mediaId) {
+		$existingPost = Post::where('insta_post_id', '=', $mediaId)->first();
+		if ($existingPost === null) {
+			$profile = Profile::where('insta_account_id', '=', $accountId);
+			$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
+
+			try {
+				$response = $client->request('GET', $mediaId, [
+	        'query' => ['access_token' => $profile->insta_account_token ]
+	      ]);
+			} catch (RequestException $e) {
+				if ($e->hasResponse()) {
+					dd($e->getResponse());
+	        return $e->getResponse();
+	      }
+			}
+			$data = json_decode($response->getBody());
+			return $this->addInstaPost($data, $profile);
+		}
+	}
+
 
 	private function checkIfProfilePageId($body) {
 		$updates = json_decode($body, true);
@@ -221,6 +242,10 @@ class ConnectController extends Controller
 			if ($existingPost !== null) {
 				$existingPost->delete();
 			}
+	}
+
+	public function addInstaPost($data, $profile) {
+		event(new BusinessFeedUpdate($data));
 	}
 
 }
