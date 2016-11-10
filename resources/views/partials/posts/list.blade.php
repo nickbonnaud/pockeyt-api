@@ -3,7 +3,8 @@
         <div class="col-md-6">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><a href="{{ route('posts.show', ['posts' => $post->id]) }}">{{ $post->message }}</a></h3>
+                    <!-- <h3 class="box-title"><a href="{{ route('posts.show', ['posts' => $post->id]) }}">{{ $post->message }}</a></h3> -->
+                    <h3 class="box-title">{{ $post->message }}</h3>
                 </div>
                 <div class="box-body">
                         {{ $post->published_at->diffForHumans() }}
