@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use App\Profile;
 use App\Post;
+use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Exception\RequestException;
 
 class AddEvents extends Command
@@ -44,6 +45,7 @@ class AddEvents extends Command
         $businesses = Profile::whereNotNull('fb_page_id')->whereNotNull('fb_app_id')->get();
 
         foreach ($businesses as $business) {
+            event(new BusinessFeedUpdate($business));
 
             $pageID = $business->fb_page_id;
             $access_token = $business->fb_app_id;
