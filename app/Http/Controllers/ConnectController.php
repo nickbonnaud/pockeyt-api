@@ -71,7 +71,7 @@ class ConnectController extends Controller
                 if ($existingEvent === null) {
                     $post = new Post;
                     event(new BusinessFeedUpdate('should fire'));
-                    event(new BusinessFeedUpdate($post));
+                    
                     $post->title = $event->name;
                     $post->body = $event->description;
                     $post->fb_post_id = $event->id;
