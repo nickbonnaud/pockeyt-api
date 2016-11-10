@@ -122,18 +122,17 @@ class ConnectController extends Controller
 		$body = $request->getContent();
 		$posts = json_decode($body);
 		foreach ($posts as $post) {
-			event(new BusinessFeedUpdate($post));
 			$accountId = $post->object_id;
 			$mediaId = $post->data->media_id;
-			event(new BusinessFeedUpdate($accountId));
-			event(new BusinessFeedUpdate($mediaId));
 
 			return $this->getInstaPost($accountId, $mediaId);
 		}
 	}
 
 	private function getInstaPost($accountId, $mediaId) {
+			event(new BusinessFeedUpdate($accountId));
 			$profile = Profile::where('insta_account_id', '=', $accountId);
+			event(new BusinessFeedUpdate($profile));
 			$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
 
 			try {
@@ -156,7 +155,6 @@ class ConnectController extends Controller
 		if ($updates['object'] == 'page') {
 			foreach ($updates['entry'] as $entry) {
 				$fbPageId = $entry['id'];
-				event(new BusinessFeedUpdate($fbPageId));
 				$profile = Profile::where('fb_page_id', '=', $fbPageId)->first();
 
 				if ($profile !== null) {
