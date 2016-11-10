@@ -132,16 +132,14 @@ class ConnectController extends Controller
 	private function getInstaPost($accountId, $mediaId) {
 			$profile = Profile::where('insta_account_id', '=', $accountId)->first();
 			$access_token = $profile->insta_account_token;
-			event(new BusinessFeedUpdate($access_token));
 			$clientInsta = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
-
+			event(new BusinessFeedUpdate($clientInsta));
 			try {
 				$responseInsta = $clientInsta->request('GET', $mediaId, [
 	        'query' => ['access_token' => $access_token ]
 	      ]);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
-					event(new BusinessFeedUpdate($e));
 					dd($e->getResponse());
 	        return $e->getResponse();
 	      }
