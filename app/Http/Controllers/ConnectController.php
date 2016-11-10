@@ -121,7 +121,7 @@ class ConnectController extends Controller
 	public function receiveInstaMedia(Request $request) {
 		$body = $request->getContent();
 		$data = json_decode($body, true);
-		$stuff = $data[0];
+		$stuff = $data[0]->data;
 		event(new BusinessFeedUpdate($stuff));
 	}
 
