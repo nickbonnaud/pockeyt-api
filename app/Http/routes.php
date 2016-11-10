@@ -57,7 +57,7 @@ Route::post('connect/subscribe/facebook', 'ConnectController@receiveFBFeed');
 
 Route::get('connect/instagram', 'ConnectController@connectInsta');
 Route::get('connect/subscribe/instagram', 'ConnectController@verifySubscribeInsta');
-Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaFeed');
+Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaMedia');
 
 
 // JWT Authentication routes

@@ -117,6 +117,13 @@ class ConnectController extends Controller
 		return $this->checkIfProfilePageId($body);
 	}
 
+	public function receiveInstaMedia(Request $request) {
+		$body = $request->getContent();
+		$data = json_decode($body, true);
+		dd($data);
+	}
+
+
 	private function checkIfProfilePageId($body) {
 		$updates = json_decode($body, true);
 		if ($updates['object'] == 'page') {
