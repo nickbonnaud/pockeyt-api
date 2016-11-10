@@ -68,6 +68,7 @@ class AddEvents extends Command
                 event(new BusinessFeedUpdate($event));
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 if ($existingEvent === null) {
+                    event(new BusinessFeedUpdate("inside if statement"));
                     $post = new Post;
                     $post->title = $event->name;
                     $post->body = $event->description;
@@ -90,6 +91,7 @@ class AddEvents extends Command
                         }
                     }
                     $dataPhoto = json_decode($responsePhoto->getBody());
+                    event(new BusinessFeedUpdate($dataPhoto));
                     $post->photo_path = $dataPhoto->data->url;
 
                     $business->posts()->save($post);
