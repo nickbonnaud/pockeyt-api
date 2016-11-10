@@ -143,7 +143,6 @@ class ConnectController extends Controller
 	        return $e->getResponse();
 	      }
 			}
-			event(new BusinessFeedUpdate($responseInsta));
 			$data = json_decode($responseInsta->getBody());
 			return $this->addInstaPost($data, $profile);
 	}
@@ -243,7 +242,8 @@ class ConnectController extends Controller
 	}
 
 	public function addInstaPost($data, $profile) {
-		event(new BusinessFeedUpdate($data));
+		event(new BusinessFeedUpdate($data->data));
+		event(new BusinessFeedUpdate($data->data->type));
 	}
 
 }
