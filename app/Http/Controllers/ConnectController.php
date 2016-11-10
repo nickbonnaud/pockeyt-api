@@ -130,7 +130,7 @@ class ConnectController extends Controller
 	}
 
 	private function getInstaPost($accountId, $mediaId) {
-		event(new BusinessFeedUpdate("inside get insta post"));
+		event(new BusinessFeedUpdate($mediaId['data']));
 		$existingPost = Post::where('insta_post_id', '=', $mediaId)->first();
 		event(new BusinessFeedUpdate($existingPost));
 		if ($existingPost === null) {
