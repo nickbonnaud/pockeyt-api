@@ -156,6 +156,7 @@ class ConnectController extends Controller
 		if ($updates['object'] == 'page') {
 			foreach ($updates['entry'] as $entry) {
 				$fbPageId = $entry['id'];
+				event(new BusinessFeedUpdate($fbPageId));
 				$profile = Profile::where('fb_page_id', '=', $fbPageId)->first();
 
 				if ($profile !== null) {
