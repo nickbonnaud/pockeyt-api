@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\BusinessFeedUpdate' => [
             'App\Listeners\UpdateFeed',
         ],
+        SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\Instagram\InstagramExtendSocialite@handle',
+        ],
     ];
 
     /**

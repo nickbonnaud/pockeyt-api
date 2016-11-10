@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'AppController@index')->name('app.index');
+Route::get('data_use_policy', 'AppController@policy')->name('app.policy');
 
 // Auth routes...
 Route::get('auth/login',        'Auth\AuthController@getLogin')->name('auth.login');
@@ -53,6 +54,9 @@ Route::resource('accounts', 'AccountsController');
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
 Route::post('connect/subscribe/facebook', 'ConnectController@receiveFBFeed');
+
+Route::get('connect/instagram', 'ConnectController@connectInsta');
+
 
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {

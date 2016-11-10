@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dde1fe630c7e1e73c214b57d631315c",
-    "content-hash": "258f2529f57e85da208ba7e1c7e713a3",
+    "hash": "ef3a29f05856112208ca62472e39a032",
+    "content-hash": "a9d2298d0b231c005fed56040e772c41",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -2754,6 +2754,85 @@
                 "trigger"
             ],
             "time": "2016-08-23 09:07:29"
+        },
+        {
+            "name": "socialiteproviders/instagram",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Instagram.git",
+                "reference": "b18650e5caeaa77279a19e8ba33e066047bab451"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Instagram/zipball/b18650e5caeaa77279a19e8ba33e066047bab451",
+                "reference": "b18650e5caeaa77279a19e8ba33e066047bab451",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Instagram\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Instagram OAuth2 Provider for Laravel Socialite",
+            "time": "2016-04-01 06:59:12"
+        },
+        {
+            "name": "socialiteproviders/manager",
+            "version": "v2.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "904283bdc4fa149f7455cc29f0bbcafa181149f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/904283bdc4fa149f7455cc29f0bbcafa181149f2",
+                "reference": "904283bdc4fa149f7455cc29f0bbcafa181149f2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/socialite": "~2.0",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Manager\\": "src/",
+                    "SocialiteProviders\\Manager\\Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wendt",
+                    "email": "andy@awendt.com"
+                }
+            ],
+            "description": "Easily add new or override built-in providers in Laravel Socialite.",
+            "time": "2016-11-01 08:49:52"
         },
         {
             "name": "spatie/laravel-fractal",

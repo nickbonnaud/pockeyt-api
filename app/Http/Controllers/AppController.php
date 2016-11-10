@@ -15,6 +15,10 @@ class AppController extends Controller {
      * @return View
      */
     public function index() {
-        return view('app.index');
+      return view('app.index');
+    }
+
+    public function policy() {
+    	return view('app.policy');
     }
 }
