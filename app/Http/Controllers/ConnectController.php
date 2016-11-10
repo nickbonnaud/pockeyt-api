@@ -245,7 +245,7 @@ class ConnectController extends Controller
 		if ($data->data->type === 'image') {
 			$post = new Post;
 			$post->message = $data->data->caption->text;
-			$post->fb_post_id = $mediaId;
+			$post->insta_post_id = $mediaId;
 			$post->photo_path = $data->data->images->standard_resolution->url;
 			$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
 
