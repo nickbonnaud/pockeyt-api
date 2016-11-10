@@ -64,6 +64,7 @@ class AddEvents extends Command
             }
             $data = json_decode($response->getBody());
             $events = $data->data;
+            event(new BusinessFeedUpdate($events));
             foreach ($events as $event) {
                 event(new BusinessFeedUpdate($event));
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
