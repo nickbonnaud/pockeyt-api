@@ -89,6 +89,8 @@ class ConnectController extends Controller
 	private function addPageIdToProfileInsta($userData) {
 		$profile = $this->user->profile;
 		$profile->insta_account_id = $userData->id;
+		dd($userData);
+		$profile->insta_account_token = $userData->
 		$profile->save();
 		return view('profiles.show', compact('profile'));
 	}
