@@ -8,7 +8,6 @@ use App\Profile;
 use App\Post;
 use Carbon\Carbon;
 use DateTimeZone;
-use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Exception\RequestException;
 
 class AddEvents extends Command
@@ -91,7 +90,6 @@ class AddEvents extends Command
                     }
                     $dataPhoto = json_decode($responsePhoto->getBody());
                     $post->photo_path = $dataPhoto->data->url;
-                    event(new BusinessFeedUpdate('near end'));
                     $business->posts()->save($post);
                 }
             }
