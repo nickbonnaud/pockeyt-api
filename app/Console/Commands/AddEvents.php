@@ -53,7 +53,7 @@ class AddEvents extends Command
             try {
                 $currentTime = time();
                 $response = $client->request('GET', $pageID . '/events', [
-                    'query' => ['since' => $currentTime,'access_token' => $access_token]
+                    'query' => ['since' => $currentTime,'access_token' => $access_token ]
                 ]);
             } catch (RequestException $e) {
                 if ($e->hasResponse()) {
@@ -63,9 +63,8 @@ class AddEvents extends Command
             }
             $data = json_decode($response->getBody());
             $events = $data->data;
-
             foreach ($events as $event) {
-                $existingEvent = Post::where('fb_post_id', '=', $event->id);
+                $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 if ($existingEvent === null) {
                     $post = new Post;
                     $post->title = $event->name;
@@ -74,7 +73,7 @@ class AddEvents extends Command
                     $post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
                     
                     $date = strtotime($event->start_time);
-                    $formattedDate = date('Y-m-d', $time);
+                    $formattedDate = date('Y-m-d', $date);
                     $post->event_date = $formattedDate;
 
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
