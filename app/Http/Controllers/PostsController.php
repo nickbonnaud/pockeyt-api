@@ -56,7 +56,6 @@ class PostsController extends Controller {
      */
     public function store(PostRequest $request) {
         $post = new Post($request->all());
-        dd($post);
         $file = $request->photo;
         
         if($file != null) {
