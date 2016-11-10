@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use App\Profile;
 use App\Post;
+use Carbon\Carbon;
+use DateTimeZone;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Exception\RequestException;
 
@@ -68,6 +70,7 @@ class AddEvents extends Command
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 if ($existingEvent === null) {
                     $post = new Post;
+                    event(new BusinessFeedUpdate('should fire'));
                     event(new BusinessFeedUpdate($post));
                     $post->title = $event->name;
                     $post->body = $event->description;
