@@ -33,6 +33,7 @@ class ConnectController extends Controller
 	private function isLoggedInInsta($hasCode) {
 		if (! $hasCode) return $this->getAuthorizationInsta();
 		$userData = Socialite::driver('instagram')->user();
+		dd($userData);
 		$accessTokenResponseBody = $userData->accessTokenResponseBody;
 		return $this->getAccountsDataInsta($accessTokenResponseBody);
 	}
