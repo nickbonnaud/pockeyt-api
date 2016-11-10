@@ -121,9 +121,9 @@ class ConnectController extends Controller
 	public function receiveInstaMedia(Request $request) {
 		$body = $request->getContent();
 		$posts = json_decode($body);
-		event(new BusinessFeedUpdate($posts));
 		foreach ($posts as $post) {
 			$accountId = $post['object_id'];
+			event(new BusinessFeedUpdate($accountId));
 			$mediaId = array_get($post, 'data.media_id');
 
 			return $this->getInstaPost($accountId, $mediaId);
