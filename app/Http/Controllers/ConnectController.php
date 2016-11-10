@@ -25,20 +25,26 @@ class ConnectController extends Controller
 	}
 
 	private function isLoggedInFB($hasCode) {
-		if (! $hasCode) return $this->getAuthorization();
+		if (! $hasCode) return $this->getAuthorizationFB();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 		return $this->getAccountsData($userData);
 	}
 
 	private function isLoggedInInsta($hasCode) {
-		if (! $hasCode) return $this->getAuthorization();
-		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
+		if (! $hasCode) return $this->getAuthorizationInsta();
+		$userData = Socialite::driver('instagram')->user();
+		dd($userData);
 		return $this->getAccountsData($userData);
 	}
 
-	private function getAuthorization() {
+	private function getAuthorizationFB() {
 		return Socialite::driver('facebook')
 			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
+	}
+
+	private function getAuthorizationInsta() {
+		return Socialite::driver('instagram')
+			->redirect();
 	}
 
 	private function getAccountsData($userData) {
