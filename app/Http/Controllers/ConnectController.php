@@ -124,6 +124,8 @@ class ConnectController extends Controller
 		foreach ($posts as $post) {
 			event(new BusinessFeedUpdate($post));
 			event(new BusinessFeedUpdate($post['object_id']));
+			$mediaId = array_get($post, 'data.media_id');
+			event(new BusinessFeedUpdate($mediaId));
 		}
 	}
 
