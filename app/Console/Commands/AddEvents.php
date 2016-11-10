@@ -64,13 +64,11 @@ class AddEvents extends Command
             }
             $data = json_decode($response->getBody());
             $events = $data->data;
-            event(new BusinessFeedUpdate($events));
             foreach ($events as $event) {
-                event(new BusinessFeedUpdate($event));
                 $existingEvent = Post::where('fb_post_id', '=', $event->id)->first();
                 if ($existingEvent === null) {
-                    event(new BusinessFeedUpdate("inside if statement"));
                     $post = new Post;
+                    event(new BusinessFeedUpdate($post));
                     $post->title = $event->name;
                     $post->body = $event->description;
                     $post->fb_post_id = $event->id;
@@ -79,7 +77,6 @@ class AddEvents extends Command
                     $date = strtotime($event->start_time);
                     $formattedDate = date('Y-m-d', $date);
                     $post->event_date = $formattedDate;
-                    event(new BusinessFeedUpdate($post));
                     $clientPhoto = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
                     try {
                         $responsePhoto = $clientPhoto->request('GET', $event->id . '/picture', [
@@ -92,7 +89,6 @@ class AddEvents extends Command
                         }
                     }
                     $dataPhoto = json_decode($responsePhoto->getBody());
-                    event(new BusinessFeedUpdate($dataPhoto));
                     $post->photo_path = $dataPhoto->data->url;
 
                     $business->posts()->save($post);
