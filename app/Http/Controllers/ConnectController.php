@@ -33,9 +33,7 @@ class ConnectController extends Controller
 	private function isLoggedInInsta($hasCode) {
 		if (! $hasCode) return $this->getAuthorizationInsta();
 		$userData = Socialite::driver('instagram')->user();
-		dd($userData);
-		$accessTokenResponseBody = $userData->accessTokenResponseBody;
-		return $this->getAccountsDataInsta($accessTokenResponseBody);
+		return $this->addPageIdToProfileInsta($userData);
 	}
 
 	private function getAuthorizationFB() {
@@ -59,11 +57,6 @@ class ConnectController extends Controller
 		} 
 	}
 
-	private function getAccountsDataInsta($accessTokenResponseBody) {
-			$access_token = $accessTokenResponseBody['access_token'];
-			dd($access_token);
-			return $this->installApp($pageID, $access_token);
-	}
 
 	private function installApp($pageID, $access_token) {
 		
@@ -81,14 +74,21 @@ class ConnectController extends Controller
 		}
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
-			return $this->addPageIdToProfile($pageID, $access_token);
+			return $this->addPageIdToProfileFB($pageID, $access_token);
 		}
 	}
 
-	private function addPageIdToProfile($pageID, $access_token) {
+	private function addPageIdToProfileFB($pageID, $access_token) {
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->fb_app_id = $access_token;
+		$profile->save();
+		return view('profiles.show', compact('profile'));
+	}
+
+	private function addPageIdToProfileInsta($userData) {
+		$profile = $this->user->profile;
+		$profile->insta_account_id = $userData->id;
 		$profile->save();
 		return view('profiles.show', compact('profile'));
 	}
