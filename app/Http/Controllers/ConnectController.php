@@ -139,11 +139,11 @@ class ConnectController extends Controller
 	      ]);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
+					event(new BusinessFeedUpdate($e->getResponse()));
 					dd($e->getResponse());
 	        return $e->getResponse();
 	      }
 			}
-			event(new BusinessFeedUpdate($responseInsta));
 			$data = json_decode($responseInsta->getBody());
 			return $this->addInstaPost($data, $profile);
 	}
