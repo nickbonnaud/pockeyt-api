@@ -210,6 +210,7 @@ class ConnectController extends Controller
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
 				if ($existingPost === null) {
 					$post = new Post;
+					event(new BusinessFeedUpdate($fbPost['message']));
 					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
 					$post->photo_path = $fbPost['link'];
