@@ -32,13 +32,13 @@ class ConnectController extends Controller
 
 	private function isLoggedInInsta($hasCode) {
 		if (! $hasCode) return $this->getAuthorizationInsta();
-		$userData = Socialite::driver('instagram')->user();
+		$userData = Socialite::with('instagram')->user();
 		dd($userData);
 		return $this->getAccountsData($userData);
 	}
 
 	private function getAuthorizationFB() {
-		return Socialite::driver('facebook')
+		return Socialite::with('instagram')
 			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
 	}
 
