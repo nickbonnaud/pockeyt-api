@@ -141,6 +141,7 @@ class ConnectController extends Controller
 	      ]);
 			} catch (RequestException $e) {
 				if ($e->hasResponse()) {
+					event(new BusinessFeedUpdate($e));
 					dd($e->getResponse());
 	        return $e->getResponse();
 	      }
