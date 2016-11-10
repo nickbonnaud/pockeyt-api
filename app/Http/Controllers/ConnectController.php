@@ -27,14 +27,14 @@ class ConnectController extends Controller
 	private function isLoggedInFB($hasCode) {
 		if (! $hasCode) return $this->getAuthorizationFB();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
-		return $this->getAccountsData($userData);
+		return $this->getAccountsDataFB($userData);
 	}
 
 	private function isLoggedInInsta($hasCode) {
 		if (! $hasCode) return $this->getAuthorizationInsta();
-		$userData = Socialite::with('instagram')->user();
-		dd($userData);
-		return $this->getAccountsData($userData);
+		$userData = Socialite::driver('instagram')->user();
+		$accessTokenResponseBody = $userData->accessTokenResponseBody;
+		return $this->getAccountsDataInsta($accessTokenResponseBody);
 	}
 
 	private function getAuthorizationFB() {
@@ -47,7 +47,7 @@ class ConnectController extends Controller
 			->redirect();
 	}
 
-	private function getAccountsData($userData) {
+	private function getAccountsDataFB($userData) {
 		$userManagedAccounts = array_get($userData->user, 'accounts.data');
 
 		if (count($userManagedAccounts === 1)) {
@@ -56,6 +56,12 @@ class ConnectController extends Controller
 
 			return $this->installApp($pageID, $access_token);
 		} 
+	}
+
+	private function getAccountsDataInsta($accessTokenResponseBody) {
+			$access_token = $accessTokenResponseBody['access_token'];
+			dd($access_token);
+			return $this->installApp($pageID, $access_token);
 	}
 
 	private function installApp($pageID, $access_token) {
