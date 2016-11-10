@@ -20,7 +20,17 @@ class ConnectController extends Controller
 		return $this->isLoggedInFB($request->has('code'));
 	}
 
+	public function connectInsta(Request $request) {
+		return $this->isLoggedInInsta($request->has('code'));
+	}
+
 	private function isLoggedInFB($hasCode) {
+		if (! $hasCode) return $this->getAuthorization();
+		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
+		return $this->getAccountsData($userData);
+	}
+
+	private function isLoggedInInsta($hasCode) {
 		if (! $hasCode) return $this->getAuthorization();
 		$userData = Socialite::driver('facebook')->fields(['accounts'])->user();
 		return $this->getAccountsData($userData);

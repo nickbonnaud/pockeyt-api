@@ -44,7 +44,7 @@
 	      	<i class="fa fa-facebook"></i>
 	      	Connect With Facebook
   			</a>
-  			<a href="#" class="btn btn-block btn-social btn-instagram">
+  			<a href="{{ action('ConnectController@connectInsta') }}" class="btn btn-block btn-social btn-instagram">
 	      	<i class="fa fa-instagram"></i>
 	      	Connect With Instagram
   			</a>
