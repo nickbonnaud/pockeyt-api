@@ -122,10 +122,10 @@ class ConnectController extends Controller
 		$body = $request->getContent();
 		$posts = json_decode($body, true);
 		foreach ($posts as $post) {
-			event(new BusinessFeedUpdate($post));
-			event(new BusinessFeedUpdate($post['object_id']));
+			$accountId = $post['object_id'];
 			$mediaId = array_get($post, 'data.media_id');
-			event(new BusinessFeedUpdate($mediaId));
+
+			return $this->getInstaPost($accountId, $mediaId);
 		}
 	}
 
