@@ -22,6 +22,6 @@ class Kernel extends ConsoleKernel {
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-        $schedule->command('app:add-events')->everyMinute();
+        $schedule->command('app:add-events')->dailyAt('23:30');
     }
 }
