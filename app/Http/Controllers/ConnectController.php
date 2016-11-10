@@ -130,12 +130,11 @@ class ConnectController extends Controller
 	}
 
 	private function getInstaPost($accountId, $mediaId) {
-			event(new BusinessFeedUpdate($mediaId));
 			$profile = Profile::where('insta_account_id', '=', $accountId)->first();
-			$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
+			$clientInsta = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media']);
 
 			try {
-				$response = $client->request('GET', $mediaId, [
+				$responseInsta = $clientInsta->request('GET', $mediaId, [
 	        'query' => ['access_token' => $profile->insta_account_token ]
 	      ]);
 			} catch (RequestException $e) {
@@ -144,7 +143,8 @@ class ConnectController extends Controller
 	        return $e->getResponse();
 	      }
 			}
-			$data = json_decode($response->getBody());
+			event(new BusinessFeedUpdate($responseInsta));
+			$data = json_decode($responseInsta->getBody());
 			return $this->addInstaPost($data, $profile);
 	}
 
