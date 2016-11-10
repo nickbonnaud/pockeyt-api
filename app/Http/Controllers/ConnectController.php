@@ -123,6 +123,7 @@ class ConnectController extends Controller
 		$posts = json_decode($body, true);
 		foreach ($posts as $post) {
 			event(new BusinessFeedUpdate($post));
+			event(new BusinessFeedUpdate($post->object_id));
 		}
 	}
 
