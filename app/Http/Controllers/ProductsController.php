@@ -38,6 +38,7 @@ class ProductsController extends Controller {
           $photo = Photo::fromForm($file);
           $photo->save();
           $product['product_photo_path'] = url($photo->path);
+          $product['photo_id'] = $photo->id;
       }
 
       $this->user->profile->products()->save($product);
@@ -58,12 +59,13 @@ class ProductsController extends Controller {
 
     if($file != null) {
       if (isset($oldPhoto)) {
-        $photo = Photo::where('path', '=', $oldPhoto);
+        $photo = Photo::where('id', '=', $product->photo_id);
         $photo->delete();
       }
       $photo = Photo::fromForm($file);
       $photo->save();
       $updatedProduct['product_photo_path'] = url($photo->path);
+      $updatedProduct['photo_id'] = $photo->id;
     }
   	$product->update($updatedProduct);
   	return redirect()->route('products.edit', compact('product'));
@@ -71,12 +73,14 @@ class ProductsController extends Controller {
 
   public function destroy(DeleteProductRequest $request, $id) {
       $product = Product::findOrFail($id);
+      $photo = Photo::where('id', '=', $product->photo_id);
+      $photo->delete();
       $product->delete();
       return redirect()->back();
   }
 
   public function listProducts() {
-      $products = Product::where('profile_id', '=', $this->user->profile->id)->orderBy('name', 'desc')->get();
+      $products = Product::where('profile_id', '=', $this->user->profile->id)->orderBy('name', 'asc')->get();
       return view('products.list', compact('products'));
   }
 }

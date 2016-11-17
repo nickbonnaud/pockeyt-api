@@ -3017,7 +3017,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.428571429;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #ddd;
 }
 
@@ -8406,6 +8406,7 @@ img {
 
 .product-image {
   max-width: 50px;
+  max-height: 50px;
 }
 
 .controls {

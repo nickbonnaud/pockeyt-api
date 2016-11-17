@@ -29,6 +29,7 @@
       							<th>Name</th>
       							<th>Price</th>
       							<th>Photo</th>
+      							<th width="70px"></th>
       						</tr>
       						@include('partials.products.list', ['products' => $products])
       					</tbody>

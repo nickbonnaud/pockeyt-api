@@ -85,10 +85,10 @@ class UsersController extends Controller
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
             $dbUser = User::findOrFail($authUser->id);
-            $oldPhoto = $dbUser->photo_path;
+            $oldPhoto = $dbUser->photo_id;
 
             if(isset($oldPhoto)) {
-                $photo = Photo::where('path', '=', $oldPhoto);
+                $photo = Photo::where('id', '=', $oldPhoto);
                 $photo->delete();
             }
 
@@ -97,6 +97,7 @@ class UsersController extends Controller
             $photo->save();
 
             $dbUser['photo_path'] = url($photo->path);
+            $dbUser['photo_id'] = $photo->id;
             $dbUser->save();
 
             return response('Success', 200);
