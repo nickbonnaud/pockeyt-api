@@ -24,6 +24,11 @@ Route::get('posts/list', 'PostsController@listPosts')->name('posts.list');
 Route::get('posts/events', 'PostsController@eventPosts')->name('posts.events');
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
+// Products routes
+Route::get('products/list', 'ProductsController@listProducts')->name('products.list');
+Route::post('products/{products}/photos', 'ProductsController@postPhotos')->name('products.photos');
+Route::resource('products', 'ProductsController', ['only' => ['store', 'destroy', 'edit', 'update']]);
+
 // Profile routes...
 Route::post('profiles/{profiles}/photos', 'ProfilesController@postPhotos')->name('profiles.photos');
 Route::delete('profiles/{profiles}/photos', 'ProfilesController@deletePhotos');

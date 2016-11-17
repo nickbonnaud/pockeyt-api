@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Profile;
+use App\Product;
 use App\Http\Requests\Request;
 
-class PostRequest extends Request {
+class ProductRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -22,9 +22,9 @@ class PostRequest extends Request {
      */
     public function rules() {
         return [
-            'message' => 'required',
+            'name' => 'required',
+            'price' => 'required',
             'photo' => 'mimes:jpg,jpeg,png,bmp',
-            'event_date' => 'date_format: Y-m-d'
         ];
     }
 }

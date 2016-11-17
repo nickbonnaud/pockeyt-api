@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="body">Message:</label>
-            <textarea type="text" name="body" id="body" class="form-control" rows="10" required></textarea>
+            <textarea type="text" name="body" id="body" class="form-control" rows="7" required></textarea>
         </div>
 
         <div class="photo-input">

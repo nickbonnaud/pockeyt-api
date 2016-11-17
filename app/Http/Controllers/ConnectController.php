@@ -82,6 +82,7 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->fb_app_id = $access_token;
+		$profile->connected = true;
 		$profile->save();
 		return view('profiles.show', compact('profile'));
 	}
@@ -90,6 +91,7 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->insta_account_id = $userData->id;
 		$profile->insta_account_token = $userData->token;
+		$profile->connected = true;
 		$profile->save();
 		return view('profiles.show', compact('profile'));
 	}

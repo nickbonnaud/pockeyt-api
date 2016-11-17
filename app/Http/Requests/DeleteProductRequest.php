@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use App\Profile;
-use App\Http\Requests\Request;
 
-class PostRequest extends Request {
+class DeleteProductRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize() {
-        return true;
+        return !is_null($user = \Auth::user()) && ($user->is_admin || $user->profile->products->contains($this->route('products')));
     }
 
     /**
@@ -21,10 +20,6 @@ class PostRequest extends Request {
      * @return array
      */
     public function rules() {
-        return [
-            'message' => 'required',
-            'photo' => 'mimes:jpg,jpeg,png,bmp',
-            'event_date' => 'date_format: Y-m-d'
-        ];
+        return [];
     }
 }

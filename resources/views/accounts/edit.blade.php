@@ -1,139 +1,143 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper">
-	<section class="content-header">
-    <h1>
-      Your Business Account Profile
-    </h1>
-    @if($account->status == 'pending')
-    	<p><i class="fa fa-circle text-warning"></i> Account Pending</p>
-    @elseif($account->status == 'active')
-    	<p><i class="fa fa-circle text-success"></i> Account Active</p>
-    @else
-    	<p><i class="fa fa-circle text-danger"></i> Account Not Approved</p>
-    	<p>{{ $account->status }}</p>
-    @endif
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Payment Account Info</li>
-    </ol>
-  </section>
-  @include ('errors.form')
-	<section class="content">
-		<div class="col-md-6">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Individual Account Holder Info</h3>
+<div class="content-wrapper-scroll">
+	<div class="scroll-main">
+		<div class="scroll-main-contents">
+			<section class="content-header">
+		    <h1>
+		      Your Business Account Profile
+		    </h1>
+		    @if($account->status == 'pending')
+		    	<p><i class="fa fa-circle text-warning"></i> Account Pending</p>
+		    @elseif($account->status == 'active')
+		    	<p><i class="fa fa-circle text-success"></i> Account Active</p>
+		    @else
+		    	<p><i class="fa fa-circle text-danger"></i> Account Not Approved</p>
+		    	<p>{{ $account->status }}</p>
+		    @endif
+		    <ol class="breadcrumb">
+		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+		      <li class="active">Payment Account Info</li>
+		    </ol>
+		  </section>
+		  @include ('errors.form')
+			<section class="content">
+				<div class="col-md-6">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Individual Account Holder Info</h3>
+						</div>
+						<div class="box-body">
+							<ul class="list-group list-group-unbordered">
+								<li class="list-group-item">
+									<b>First Name</b>
+									<p class="pull-right">{{ $account->accountUserFirst }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Last Name</b>
+									<p class="pull-right">{{ $account->accountUserLast }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Email</b>
+									<p class="pull-right">{{ $account->accountEmail }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Date of Birth</b>
+									<p class="pull-right">{{ $account->dateOfBirth }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Last Four SSN</b>
+									<p class="pull-right">{{ $account->last4 }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Street Address</b>
+									<p class="pull-right">{{ $account->indivStreetAdress }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>City</b>
+									<p class="pull-right">{{ $account->indivCity }} </p>
+								</li>
+								<li class="list-group-item">
+									<b>State</b>
+									<p class="pull-right">{{ $account->indivState }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Zip</b>
+									<p class="pull-right">{{ $account->indivZip }}</p>
+								</li>
+							</ul>
+							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#individualAccountInfoModal">
+		          	<b>Change</b>
+		        	</a>
+						</div>
+					</div>
 				</div>
-				<div class="box-body">
-					<ul class="list-group list-group-unbordered">
-						<li class="list-group-item">
-							<b>First Name</b>
-							<p class="pull-right">{{ $account->accountUserFirst }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Last Name</b>
-							<p class="pull-right">{{ $account->accountUserLast }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Email</b>
-							<p class="pull-right">{{ $account->accountEmail }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Date of Birth</b>
-							<p class="pull-right">{{ $account->dateOfBirth }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Last Four SSN</b>
-							<p class="pull-right">{{ $account->last4 }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Street Address</b>
-							<p class="pull-right">{{ $account->indivStreetAdress }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>City</b>
-							<p class="pull-right">{{ $account->indivCity }} </p>
-						</li>
-						<li class="list-group-item">
-							<b>State</b>
-							<p class="pull-right">{{ $account->indivState }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Zip</b>
-							<p class="pull-right">{{ $account->indivZip }}</p>
-						</li>
-					</ul>
-					<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#individualAccountInfoModal">
-          	<b>Change</b>
-        	</a>
-				</div>
-			</div>
-		</div>
 
-		<div class="col-md-6">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Business Info</h3>
+				<div class="col-md-6">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Business Info</h3>
+						</div>
+						<div class="box-body">
+							<ul class="list-group list-group-unbordered">
+								<li class="list-group-item">
+									<b>Legal Business Name</b>
+									<p class="pull-right">{{ $account->legalBizName }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Business Tax ID</b>
+									<p class="pull-right">{{ $account->bizTaxId }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Street Address</b>
+									<p class="pull-right">{{ $account->bizStreetAdress }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>City</b>
+									<p class="pull-right">{{ $account->bizCity }} </p>
+								</li>
+								<li class="list-group-item">
+									<b>State</b>
+									<p class="pull-right">{{ $account->bizState }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Zip</b>
+									<p class="pull-right">{{ $account->bizZip }}</p>
+								</li>
+							</ul>
+							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessAccountInfoModal">
+		          	<b>Change</b>
+		        	</a>
+						</div>
+					</div>
 				</div>
-				<div class="box-body">
-					<ul class="list-group list-group-unbordered">
-						<li class="list-group-item">
-							<b>Legal Business Name</b>
-							<p class="pull-right">{{ $account->legalBizName }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Business Tax ID</b>
-							<p class="pull-right">{{ $account->bizTaxId }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Street Address</b>
-							<p class="pull-right">{{ $account->bizStreetAdress }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>City</b>
-							<p class="pull-right">{{ $account->bizCity }} </p>
-						</li>
-						<li class="list-group-item">
-							<b>State</b>
-							<p class="pull-right">{{ $account->bizState }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Zip</b>
-							<p class="pull-right">{{ $account->bizZip }}</p>
-						</li>
-					</ul>
-					<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessAccountInfoModal">
-          	<b>Change</b>
-        	</a>
-				</div>
-			</div>
-		</div>
 
-		<div class="col-md-6">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Business Info</h3>
+				<div class="col-md-6">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Business Info</h3>
+						</div>
+						<div class="box-body">
+							<ul class="list-group list-group-unbordered">
+								<li class="list-group-item">
+									<b>Account Number</b>
+									<p class="pull-right">{{ $account->accountNumber4 }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Routing Number</b>
+									<p class="pull-right">{{ $account->routingNumber4 }}</p>
+								</li>
+							</ul>
+							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sensitiveAccountInfoModal">
+		          	<b>Change</b>
+		        	</a>
+						</div>
+					</div>
 				</div>
-				<div class="box-body">
-					<ul class="list-group list-group-unbordered">
-						<li class="list-group-item">
-							<b>Account Number</b>
-							<p class="pull-right">{{ $account->accountNumber4 }}</p>
-						</li>
-						<li class="list-group-item">
-							<b>Routing Number</b>
-							<p class="pull-right">{{ $account->routingNumber4 }}</p>
-						</li>
-					</ul>
-					<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sensitiveAccountInfoModal">
-          	<b>Change</b>
-        	</a>
-				</div>
-			</div>
+			</section>
 		</div>
-	</section>
+	</div>
 </div>
 
 <div class="modal fade" id="individualAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

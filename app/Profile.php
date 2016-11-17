@@ -89,6 +89,10 @@ class Profile extends Model {
         return $this->hasMany('App\Post');
     }
 
+    public function products() {
+        return $this->hasMany('App\Product');
+    }
+
     /**
      * method to check if profile owns object
      *

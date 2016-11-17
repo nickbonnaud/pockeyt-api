@@ -8326,6 +8326,16 @@ img {
   width: 100%;
 }
 
+.product-img {
+  max-height: 200px;
+  max-width: 200px;
+  text-align: center;
+}
+
+.something {
+  text-align: center;
+}
+
 .business-logo-img {
   position: relative;
   float: left;
@@ -8354,6 +8364,48 @@ img {
 
 #map {
   height: 300px;
+}
+
+@media (min-width: 991px) {
+  .scroll-container {
+    height: 80vh;
+    overflow: hidden;
+    will-change: overflow;
+    display: flex; 
+  }
+
+  .scroll-contents {
+    overflow: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+  }
+}
+
+@media(max-width: 991px) {
+  .scroll-main {
+    height: 95vh;
+    overflow: hidden;
+    will-change: overflow;
+    display: flex; 
+  }
+  .scroll-main-contents {
+    overflow: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+  }
+}
+
+.box-header .box-title-inventory {
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  line-height: 2;
+}
+
+.product-image {
+  max-width: 50px;
 }
 
 .controls {

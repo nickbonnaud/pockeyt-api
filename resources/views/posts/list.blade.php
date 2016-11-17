@@ -1,33 +1,42 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper">
-	<section class="content-header">
-    <h1>
-      Add | Recent Posts
-    </h1>
-    <a href="#" data-toggle="modal" data-target="#connectSocial">
-    	<h4>Enable Auto Posting</h4>
-    </a>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Posts</li>
-    </ol>
-  </section>
-	<section class="content">
-	<div class="col-md-6">
-		<div class="box box-primary">
-			<div class="box-header with-border">
-				<h3 class="box-title">Create a New Post</h3>
-			</div>
-				{!! Form::open(['method' => 'POST', 'route' => ['posts.store'], 'files' => true]) !!}
-				@include('posts.form')
-				{!! Form::close() !!}
-		</div>
-	</div>
-		@include('partials.posts.list', ['posts' => $posts, 'no_icons' => true])
-    <div id="stuff"></div>
-	</section>
+<div class="content-wrapper-scroll">
+  <div class="scroll-main">
+    <div class="scroll-main-contents">
+    	<section class="content-header">
+        <h1>
+          Add | Recent Posts
+        </h1>
+          @if($user->profile->connected == false)
+          <a href="#" data-toggle="modal" data-target="#connectSocial">
+          	<h4>Enable Auto Posting</h4>
+          </a>
+          @endif
+        <ol class="breadcrumb">
+          <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Posts</li>
+        </ol>
+      </section>
+    	<section class="content">
+      	<div class="col-md-6">
+      		<div class="box box-primary">
+      			<div class="box-header with-border">
+      				<h3 class="box-title">Create a New Post</h3>
+      			</div>
+      				{!! Form::open(['method' => 'POST', 'route' => ['posts.store'], 'files' => true]) !!}
+      				@include('posts.form')
+      				{!! Form::close() !!}
+      		</div>
+      	</div>
+        <div class="scroll-container col-md-6">
+            <div class="scroll-contents">
+              @include('partials.posts.list', ['posts' => $posts, 'no_icons' => true])
+            </div>
+        </div>
+    	</section>
+    </div>
+  </div>
 </div>
 <div class="modal fade" id="connectSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
