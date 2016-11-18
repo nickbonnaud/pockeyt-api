@@ -14,14 +14,16 @@ class TransactionsController extends Controller
     
     public function createTransaction($customerId) {
         $user = User::findOrFail($customerId);
-        $business = 113;
-        $inLocations = $this->checkIfUserInLocation($user, $business);
-        dd(is_null($inLocations));
+        $user['prevLocations'] = [113];
+        foreach ($user->prevLocations as $prevLocation) {
+            $location = $this->checkSavedLocation($user, $prevLocation);
+            return $location->delete();
+        }
     }
-    public function checkIfUserInLocation($user, $business) {
-        $locationCheck = Location::where(function ($query) use ($user, $business) {
+    public function checkSavedLocation($user, $prevLocation) {
+        $locationCheck = Location::where(function ($query) use ($user, $prevLocation) {
             $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business);
+                ->where('location_id', '=', $prevLocation);
         })->first();
         return $locationCheck;
    }
