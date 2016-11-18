@@ -99,8 +99,9 @@
         },
 
         methods: {
-          addUser: function(user) {
+          addUser: function(user, prevLocations) {
             console.log(user);
+            console.log(prevLocations);
             var activeCustomer = user.user;
             var users = this.users;
 
