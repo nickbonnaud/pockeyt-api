@@ -100,8 +100,8 @@
         },
 
         methods: {
-          addUser: function(user) {
-            console.log(user);
+          addUser: function(user, prevlocations) {
+            console.log(prevlocations);
             var activeCustomer = user.user;
             var users = this.users;
 
@@ -132,7 +132,6 @@
             }
           },
           removeInactiveUser: function() {
-            console.log("inside check for inactive users");
             var users = this.users;
             if (users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
