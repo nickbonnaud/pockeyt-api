@@ -41,13 +41,13 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
-                    $prevLocations = $user->prevLocations;
-                    event(new CustomerEnterRadius($user, $business, $prevLocations));
-
-                    if ($business->id !== $user->prevLocations) {
-                        $dbUser->locations()->create([
-                            'location_id' => $business->id
-                        ]);
+                    event(new CustomerEnterRadius($user, $business));
+                    foreach ($user->prevLocations as $prevLocation) {
+                        if ($business->id !== $user->prevLocations) {
+                            $dbUser->locations()->create([
+                                'location_id' => $business->id
+                            ]);
+                        }
                     }
                 }
     		} 
