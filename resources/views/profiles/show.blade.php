@@ -26,6 +26,25 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
+  <div class="col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a class="customer-name-title" href="#" data-toggle="modal" data-target="#transactionModal">
+                <h3 class="box-title">Nick Bonnaud</h3>
+              </a>
+              <div class="box-body">
+                <a href="#" data-toggle="modal" data-target="#transactionModal">
+                  <img src="{{ asset('/images/icon-profile-photo.png') }}" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transactionModal">
+                <b>Create Charge</b>
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
     <!-- Default box -->
     <div>
@@ -33,26 +52,31 @@
         <div class="col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
-              <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
               <div class="box-body">
-              <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
-              <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transactionModal">
-                <b>Charge</b>
+                <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a href="#" class="btn btn-primary btn-block">
+                <b>Create Charge</b>
               </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="transactionModal">Create Transaction for @{{user.first_name}} @{{user.last_name}}</h4>
+              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}}</h4>
             </div>
             <div class="modal-body">
-              <div ></div>
-            <h3 class="box-title"></h3>
+              info
             </div>
           </div>
         </div>
@@ -97,7 +121,7 @@
 
         methods: {
           addUser: function(user) {
-            console.log("inside add users");
+            console.log(user);
             var activeCustomer = user.user;
             var users = this.users;
 

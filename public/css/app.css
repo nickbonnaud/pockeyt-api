@@ -8409,6 +8409,10 @@ img {
   max-height: 50px;
 }
 
+.customer-name-title {
+  color: inherit;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;
