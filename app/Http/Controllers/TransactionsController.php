@@ -18,7 +18,7 @@ class TransactionsController extends Controller
         $locationCheck = Location::where(function ($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $business);
-        })->get();
+        })->first();
         dd($locationCheck);
     }
 
