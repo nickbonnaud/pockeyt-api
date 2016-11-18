@@ -146,8 +146,8 @@
           }
         }
         goToTransaction: function(customerId) {
-          route = "{{ route('transactions.create', ['customerId' => '?id?']) }}"
-          location.href = route.replace('?id?', customerId)
+          route = "{{ route('transactions.create', ['customerId' => '?id?']) }}";
+          location.href = route.replace('?id?', customerId);
         }
       })
     </script>
