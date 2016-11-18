@@ -100,8 +100,8 @@
         },
 
         methods: {
-          addUser: function(user, prevlocations) {
-            console.log(prevlocations);
+          addUser: function(user) {
+            console.log(user);
             var activeCustomer = user.user;
             var users = this.users;
 
