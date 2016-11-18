@@ -26,26 +26,6 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
-  <div class="col-md-3">
-          <div class="box box-primary">
-            <div class="box-header with-border text-center">
-              <a class="customer-name-title" href="#" data-toggle="modal" data-target="#transactionModal">
-                <h3 class="box-title">Nick Bonnaud</h3>
-              </a>
-              <div class="box-body">
-                <a href="#" data-toggle="modal" data-target="#transactionModal">
-                  <img src="{{ asset('/images/icon-profile-photo.png') }}" class="profile-user-img img-responsive img-circle" alt="User Image">
-                </a>
-              </div>
-              <div class="box-footer">
-                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transactionModal">
-                <b>Create Charge</b>
-              </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
     <!-- Default box -->
     <div>
       <template v-for="user in users">
