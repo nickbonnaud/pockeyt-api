@@ -99,9 +99,9 @@
         },
 
         methods: {
-          addUser: function(business, prevLocations) {
+          addUser: function(user, business) {
+            console.log(user);
             console.log(business);
-            console.log(prevLocations);
             var activeCustomer = user.user;
             var users = this.users;
 
