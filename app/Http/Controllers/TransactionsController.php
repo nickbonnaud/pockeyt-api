@@ -16,7 +16,7 @@ class TransactionsController extends Controller
         $user = User::findOrFail($customerId);
         $business = 113;
         $inLocations = $this->checkIfUserInLocation($user, $business);
-        dd($inLocations);
+        dd(is_null($inLocations));
     }
     public function checkIfUserInLocation($user, $business) {
         $locationCheck = Location::where(function ($query) use ($user, $business) {
