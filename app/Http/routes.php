@@ -55,6 +55,9 @@ Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('a
 Route::post('accounts/status', 'AccountsController@postStatus');
 Route::resource('accounts', 'AccountsController');
 
+// Transaction Routes
+Route::get('transactions/create', 'TransactionsController@createTransaction');
+
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
