@@ -44,7 +44,7 @@ class GeoController extends Controller
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $business));
 
-                    $locationCheck = Location::where(function($query) {
+                    $locationCheck = Location::where(function($query, $user, $business) {
                         $query->where('user_id', '=', $user->id)
                             ->where('location_id', '=', $business->id);
                     })->first();
