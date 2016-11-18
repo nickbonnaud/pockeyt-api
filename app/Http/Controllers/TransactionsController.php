@@ -25,6 +25,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $prevLocation);
         })->first();
+        dd($locationCheck);
         return $locationCheck;
    }
 
