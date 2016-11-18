@@ -33,7 +33,7 @@
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}} {{ user.id}}</h3>
               </a>
               <div class="box-body">
                 <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
@@ -41,7 +41,7 @@
                 </a>
               </div>
               <div class="box-footer">
-                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                <a href="#" class="btn btn-primary btn-block">
                 <b>Create Charge</b>
               </a>
               </div>
@@ -144,9 +144,6 @@
               }
             }
           }
-        }
-        goToTransaction: function(customerId) {
-          
         }
       })
     </script>
