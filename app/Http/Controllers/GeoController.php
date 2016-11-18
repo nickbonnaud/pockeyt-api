@@ -49,7 +49,7 @@ class GeoController extends Controller
                             ->where('location_id', '=', $business->id);
                     })->first();
 
-                    if (!isset($prevLocations) && isset(!$locationCheck)) {
+                    if (!isset($prevLocations) && !isset($locationCheck)) {
                         $dbUser->locations()->create([
                             'location_id' => $business->id
                         ]);
