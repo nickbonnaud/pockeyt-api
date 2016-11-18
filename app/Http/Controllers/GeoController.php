@@ -51,8 +51,18 @@ class GeoController extends Controller
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
+                    $location = Location::where([
+                        ['user_id', '=', $dbUser->id],
+                        ['location_id', '=', $prevLocation]
+                    ])->get();
+                    $location->delete();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 } elseif (!in_array($prevLocation, $inLocations)) {
+                    $location = Location::where([
+                        ['user_id', '=', $dbUser->id],
+                        ['location_id', '=', $prevLocation]
+                    ])->get();
+                    $location->delete();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 }
             }
