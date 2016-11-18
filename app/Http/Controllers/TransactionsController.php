@@ -17,7 +17,7 @@ class TransactionsController extends Controller
         $user['prevLocations'] = [113];
         foreach ($user->prevLocations as $prevLocation) {
             $location = $this->checkSavedLocation($user, $prevLocation);
-            return $location->delete();
+            $location->delete();
         }
     }
     public function checkSavedLocation($user, $prevLocation) {
