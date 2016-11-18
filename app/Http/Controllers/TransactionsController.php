@@ -21,7 +21,7 @@ class TransactionsController extends Controller
                 $query->where('user_id', '=', $user->id)
                     ->where('location_id', '=', $business);
             })
-            ->first();
+            ->get();
         dd($locationCheck);
     }
 
