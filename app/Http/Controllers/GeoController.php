@@ -44,10 +44,10 @@ class GeoController extends Controller
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $business));
 
-                    $locationCheck = Location::where([
-                        ['user_id', '=', $user->id],
-                        ['location_id', '=', $business->id]
-                    ])->first();
+                    $locationCheck = Location::where(function($query) {
+                        $query->where('user_id', '=', $user->id)
+                            ->where('location_id', '=', $business->id);
+                    })->first();
 
                     if (!isset($prevLocations) && $locationCheck === null) {
                         $dbUser->locations()->create([
