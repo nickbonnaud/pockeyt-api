@@ -90,4 +90,18 @@ class GeoController extends Controller
     private function deg2rad($deg) {
     	return $deg * (M_PI/180);
    }
+
+   // public function checkIfUserInLocation($user, $business) {
+   //      $locationCheck = Location::where(function ($query) use ($user, $business) {
+   //          $query->where('user_id', '=', $user->id)
+   //              ->where('location_id', '=', $business->id);
+   //      })->first();
+   //      return $locationCheck;
+   // }
 }
+
+
+
+
+
+

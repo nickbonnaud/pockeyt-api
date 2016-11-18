@@ -15,11 +15,15 @@ class TransactionsController extends Controller
     public function createTransaction($customerId) {
         $user = User::findOrFail($customerId);
         $business = 113;
-        $locationCheck = Location::where(function ($query) use ($user, $business) {
-            $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business);
-        })->first();
+        $locationCheck = $this->checkIfUserInLocation($user, $business);
         dd($locationCheck);
     }
+    public function checkIfUserInLocation($user, $business) {
+        $locationCheck = Location::where(function ($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $business->id);
+        })->first();
+        return $locationCheck;
+   }
 
 }
