@@ -41,7 +41,7 @@
                 </a>
               </div>
               <div class="box-footer">
-                <a href="{{ url(transactions/create) }}/@{{user.id}}" class="btn btn-primary btn-block">
+                <a href="#" class="btn btn-primary btn-block">
                 <b>Create Charge</b>
               </a>
               </div>
