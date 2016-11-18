@@ -47,6 +47,10 @@ class GeoController extends Controller
                         $dbUser->locations()->create([
                             'location_id' => $business->id
                         ]);
+                    } elseif (!array_has($prevLocations, $business->id)) {
+                        $dbUser->locations()->create([
+                            'location_id' => $business->id
+                        ]);
                     }
                 }
     		} 
