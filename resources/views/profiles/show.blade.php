@@ -99,8 +99,7 @@
         },
 
         methods: {
-          addUser: function(user, business) {
-            console.log(user);
+          addUser: function(business) {
             console.log(business);
             var activeCustomer = user.user;
             var users = this.users;
