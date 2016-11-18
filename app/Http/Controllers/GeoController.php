@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Location;
 use App\Profile;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
@@ -39,6 +40,10 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
+                    $updateUser = User::findOrFail($request->userId);
+                    $updateUser->locations()->create([
+                        'location_id' => $business->id
+                    ]);
                     event(new CustomerEnterRadius($user, $business));
                 }
     		} 

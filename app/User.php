@@ -60,6 +60,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne(Profile::class);
     }
 
+    public function locations() {
+        return $this->hasMany('App\Location');
+    }
+
     /**
      * current user saves and associates with profile
      *
@@ -69,9 +73,4 @@ class User extends Model implements AuthenticatableContract,
     public function publish(Profile $profile) {
         return $this->profile()->save($profile);
     }
-
-    /**
-     * A user has one account
-     * @return HasOne
-     */
 }
