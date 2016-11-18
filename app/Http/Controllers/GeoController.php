@@ -50,12 +50,12 @@ class GeoController extends Controller
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
                     $removeUser = User::findOrFail($user->id);
-                    $removeUser['location_id'] = null;
+                    $removeUser['location_id'] = 5;
                     $removeUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 } elseif (!in_array($prevLocation, $inLocations)) {
                     $removeUser = User::findOrFail($user->id);
-                    $removeUser['location_id'] = null;
+                    $removeUser['location_id'] = 6;
                     $removeUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 }
