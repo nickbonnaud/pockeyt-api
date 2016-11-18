@@ -45,7 +45,8 @@ class GeoController extends Controller
                     event(new CustomerEnterRadius($user, $business));
                     $inLocation = $this->checkIfUserInLocation($user, $business);
                     if (!isset($prevLocations) && is_null($inLocation)) {
-                        return $this->setLocation($dbUser, $business);
+                        $this->setLocation($dbUser, $business);
+                        return;
                     }
                 }
     		} 
