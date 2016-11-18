@@ -49,8 +49,14 @@ class GeoController extends Controller
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
+                    $updatedUser = User::findOrFail($user->id);
+                    $updatedUser['location_id'] = null;
+                    $updatedUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 } elseif (!in_array($prevLocation, $inLocations)) {
+                    $updatedUser = User::findOrFail($user->id);
+                    $updatedUser['location_id'] = null;
+                    $updatedUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 }
             }
