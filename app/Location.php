@@ -12,7 +12,6 @@ class Location extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'location_id'
     ];
 
