@@ -56,10 +56,12 @@ class GeoController extends Controller
                     event(new CustomerLeaveRadius($user, $prevLocation));
                     $location = $this->checkSavedLocation($user, $prevLocation);
                     $location->delete();
+                    return;
                 } elseif (!in_array($prevLocation, $inLocations)) {
                     event(new CustomerLeaveRadius($user, $prevLocation));
                     $location = $this->checkSavedLocation($user, $prevLocation);
                     $location->delete();
+                    return;
                 }
             }
         }
