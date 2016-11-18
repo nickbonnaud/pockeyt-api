@@ -50,22 +50,16 @@ class GeoController extends Controller
                 }
     		} 
     	}
-        if (!is_null($user->prevLocations)) {
+        if (isset($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
-                    $location = Location::where([
-                        ['user_id', '=', $dbUser->id],
-                        ['location_id', '=', $prevLocation]
-                    ])->get();
-                    $location->delete();
                     event(new CustomerLeaveRadius($user, $prevLocation));
+                    $location = $this->checkSavedLocation($user, $prevLocation);
+                    return $location->delete();
                 } elseif (!in_array($prevLocation, $inLocations)) {
-                    $location = Location::where([
-                        ['user_id', '=', $dbUser->id],
-                        ['location_id', '=', $prevLocation]
-                    ])->get();
-                    $location->delete();
                     event(new CustomerLeaveRadius($user, $prevLocation));
+                    $location = $this->checkSavedLocation($user, $prevLocation);
+                    return $location->delete();
                 }
             }
         }
@@ -90,10 +84,18 @@ class GeoController extends Controller
     	return $deg * (M_PI/180);
    }
 
-   public function checkIfUserInLocation($user, $business) {
+    public function checkIfUserInLocation($user, $business) {
         $locationCheck = Location::where(function ($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $business->id);
+        })->first();
+        return $locationCheck;
+    }
+
+    public function checkSavedLocation($user, $prevLocation) {
+        $locationCheck = Location::where(function ($query) use ($user, $prevLocation) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $prevLocation);
         })->first();
         return $locationCheck;
     }
