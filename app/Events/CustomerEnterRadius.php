@@ -12,16 +12,18 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
 
     public $user;
     private $business;
+    public $userCheck;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $business)
+    public function __construct($user, $business, $userCheck)
     {
         $this->user = $user;
         $this->business = $business;
+        $this->userCheck = $userCheck;
     }
 
     /**
