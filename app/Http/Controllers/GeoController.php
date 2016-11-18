@@ -43,7 +43,8 @@ class GeoController extends Controller
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $business));
-                    if (!isset($prevLocations)) {
+                    $inLocation = $this->checkIfUserInLocation($user, $business);
+                    if (!isset($prevLocations) && is_null($inLocation)) {
                         $dbUser->locations()->create([
                             'location_id' => $business->id
                         ]);
@@ -91,13 +92,13 @@ class GeoController extends Controller
     	return $deg * (M_PI/180);
    }
 
-   // public function checkIfUserInLocation($user, $business) {
-   //      $locationCheck = Location::where(function ($query) use ($user, $business) {
-   //          $query->where('user_id', '=', $user->id)
-   //              ->where('location_id', '=', $business->id);
-   //      })->first();
-   //      return $locationCheck;
-   // }
+   public function checkIfUserInLocation($user, $business) {
+        $locationCheck = Location::where(function ($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $business->id);
+        })->first();
+        return $locationCheck;
+   }
 }
 
 
