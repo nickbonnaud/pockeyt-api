@@ -14,8 +14,8 @@ class TransactionsController extends Controller
     
     public function createTransaction($customerId) {
         $user = User::findOrFail($customerId);
-        // $locationCheck = Location::where('user_id', '=', $user->id)->first();
-        dd($user->id);
+        $locationCheck = Location::where('user_id', '=', $user->id)->first();
+        dd($locationCheck);
     }
 
 }
