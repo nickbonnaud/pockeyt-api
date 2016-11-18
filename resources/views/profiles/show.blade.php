@@ -41,7 +41,7 @@
                 </a>
               </div>
               <div class="box-footer">
-                <a v-on:click="goToTransaction()" class="btn btn-primary btn-block">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
                 <b>Create Charge</b>
               </a>
               </div>
@@ -144,9 +144,10 @@
               }
             }
           }
-        }
-        goToTransaction: function() {
-          console.log("hello");
+        },
+        goToTransaction: function(customerId) {
+          route = "{{ route('transactions.create', ['customerId' => '?id?']) }}";
+          location.href = route.replace('?id?', customerId)
         }
       })
     </script>
