@@ -46,7 +46,7 @@ class GeoController extends Controller
 
                     $locationCheck = Location::where([
                         ['user_id', '=', $user->id],
-                        ['location_id', '=', $prevLocation]
+                        ['location_id', '=', $business->id]
                     ])->first();
 
                     if (!isset($prevLocations) && $locationCheck === null) {
