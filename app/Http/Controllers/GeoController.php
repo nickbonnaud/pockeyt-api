@@ -39,9 +39,6 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
-                    $updatedUser = User::findOrFail($user->id);
-                    $updatedUser['location_id'] = $business->id;
-                    $updatedUser->save();
                     event(new CustomerEnterRadius($user, $business));
                 }
     		} 
@@ -49,14 +46,8 @@ class GeoController extends Controller
         if (!is_null($user->prevLocations)) {
             foreach ($user->prevLocations as $prevLocation) {
                 if ($inLocations == []) {
-                    $removeUser = User::findOrFail($user->id);
-                    $removeUser['location_id'] = 5;
-                    $removeUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 } elseif (!in_array($prevLocation, $inLocations)) {
-                    $removeUser = User::findOrFail($user->id);
-                    $removeUser['location_id'] = 6;
-                    $removeUser->save();
                     event(new CustomerLeaveRadius($user, $prevLocation));
                 }
             }
