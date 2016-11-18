@@ -29,7 +29,8 @@ class GeoController extends Controller
     }
 
     public function checkDistance($user) {
-    	$businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
+    	$dbUser = User::findOrFail($user->id);
+        $businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
     	$userLat = $user->lat;
     	$userLng = $user->lng;
         $inLocations = [];
@@ -40,8 +41,7 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
-                    $updateUser = User::findOrFail($user->id);
-                    $updateUser->locations()->create([
+                    $dbUser->locations()->create([
                         'location_id' => $business->id
                     ]);
                     event(new CustomerEnterRadius($user, $business));
