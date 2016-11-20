@@ -143,7 +143,7 @@
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
                   var businessId = '{{ $profile->id }}'
-                  this.deleteInactiveUser(users[i], businessId);
+                  this.deleteInactiveUser(users[i].id, businessId);
                   users.splice(i, 1);
                 }
               }
@@ -153,13 +153,13 @@
             route = "{{ route('transactions.create', ['customerId' => 'id']) }}"
             location.href = route.replace('id', customerId)
           },
-          deleteInactiveUser: function(customer, businessId) {
-            console.log(customer);
+          deleteInactiveUser: function(customerId, businessId) {
+            console.log(customerId);
             $.ajax({
               method: 'POST',
               url: '/geo/user/destroy',
               data: {
-                'customer' : customer,
+                'customerId' : customerId,
                 'businessId' : businessId
               }
             })
