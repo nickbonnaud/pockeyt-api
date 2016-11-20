@@ -110,7 +110,7 @@ class GeoController extends Controller
     }
 
     public function deleteInactiveUser(Request $request) {
-        $dd($request->all());
+        dd($request->all());
     }
 }
 
