@@ -151,7 +151,6 @@
           deleteInactiveUser: function(customerId) {
             $.post("geo/user/destroy", {
               customerId: customerId,
-              profileId: {{ $profile->id }}
             });
           }
         }
