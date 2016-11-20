@@ -139,12 +139,17 @@
                 if (currentTime - userLastActive >= 120000) {
                   console.log(users[i]);
                   users.splice(i, 1);
+                  this.deleteInactiveUser(users[i].id);
                 }
               }
             }
           },
           goToTransaction: function(customerId) {
             route = "{{ route('transactions.create', ['customerId' => 'id']) }}"
+            location.href = route.replace('id', customerId)
+          },
+          deleteInactiveUser: function(customerId) {
+            route = "{{ route('inactiveUser.delete', ['customerId' => 'id']) }}"
             location.href = route.replace('id', customerId)
           }
         }

@@ -108,6 +108,10 @@ class GeoController extends Controller
             'location_id' => $business->id
         ]);
     }
+
+    public function deleteInactiveUser($customerId) {
+        dd($customerId);
+    }
 }
 
 

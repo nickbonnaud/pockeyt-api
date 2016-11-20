@@ -97,6 +97,8 @@ Route::group(['prefix' => 'api'], function() {
 Route::group(['prefix' => 'api'], function() {
     Route::put('geo', 'GeoController@putLocation');
 });
+Route::get('geo/destroy/{customerId}', 'geoController@deleteInactiveUser')->name('inactiveUser.delete');
+
 
 // API Routes
 Route::controller('api', 'APIController', [
