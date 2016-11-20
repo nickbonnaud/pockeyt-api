@@ -149,8 +149,10 @@
             location.href = route.replace('id', customerId)
           },
           deleteInactiveUser: function(customerId) {
-            route = "{{ route('inactiveUser.delete', ['customerId' => 'id']) }}"
-            location.href = route.replace('id', customerId)
+            $.post("geo/user/destroy", {
+              customerId: customerId,
+              profileId: {{ $profile->id }}
+            });
           }
         }
       })
