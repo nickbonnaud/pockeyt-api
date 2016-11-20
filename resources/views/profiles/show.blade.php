@@ -138,7 +138,7 @@
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
                   console.log(users[i]);
-                  this.deleteInactiveUser(users[i].id);
+                  this.deleteInactiveUser(users[i]);
                   users.splice(i, 1);
                 }
               }
@@ -148,9 +148,9 @@
             route = "{{ route('transactions.create', ['customerId' => 'id']) }}"
             location.href = route.replace('id', customerId)
           },
-          deleteInactiveUser: function(customerId) {
+          deleteInactiveUser: function(customer) {
             $.post("geo/user/destroy", {
-              customerId: customerId,
+              customerId: customer,
             });
           }
         }
