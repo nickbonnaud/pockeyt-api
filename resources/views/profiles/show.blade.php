@@ -155,7 +155,6 @@
           },
           deleteInactiveUser: function(customer) {
             $.post("/geo/user/destroy", {
-              headers: {'csrftoken' : '{{ csrf_token() }}'},
               customerId: customer,
             });
           }
