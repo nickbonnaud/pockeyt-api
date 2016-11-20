@@ -77,6 +77,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
       var customer = new Vue({
         el: '#customer',
 
@@ -150,6 +155,7 @@
           },
           deleteInactiveUser: function(customer) {
             $.post("/geo/user/destroy", {
+              headers: {'csrftoken' : '{{ csrf_token() }}'},
               customerId: customer,
             });
           }
