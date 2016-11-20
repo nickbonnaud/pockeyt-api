@@ -149,7 +149,7 @@
             location.href = route.replace('id', customerId)
           },
           deleteInactiveUser: function(customer) {
-            $.post("geo/user/destroy", {
+            $.post("/geo/user/destroy", {
               customerId: customer,
             });
           }
