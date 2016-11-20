@@ -110,7 +110,8 @@ class GeoController extends Controller
     }
 
     public function deleteInactiveUser($customerId) {
-        dd($customerId);
+        $location = Location::where('user_id', '=', $customerId);
+        $location->delete();
     }
 }
 
