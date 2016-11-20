@@ -142,7 +142,6 @@
                 var userLastActive = users[i].lastActive;
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
-                  console.log(users[i]);
                   this.deleteInactiveUser(users[i]);
                   users.splice(i, 1);
                 }
@@ -154,6 +153,7 @@
             location.href = route.replace('id', customerId)
           },
           deleteInactiveUser: function(customer) {
+            console.log(customer);
             $.post("/geo/user/destroy", {
               customerId: customer,
             });
