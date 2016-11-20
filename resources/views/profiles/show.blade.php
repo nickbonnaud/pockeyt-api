@@ -137,6 +137,7 @@
                 var userLastActive = users[i].lastActive;
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
+                  console.log(users[i]);
                   users.splice(i, 1);
                 }
               }
