@@ -138,8 +138,8 @@
                 var currentTime = Date.now();
                 if (currentTime - userLastActive >= 120000) {
                   console.log(users[i]);
-                  users.splice(i, 1);
                   this.deleteInactiveUser(users[i].id);
+                  users.splice(i, 1);
                 }
               }
             }
