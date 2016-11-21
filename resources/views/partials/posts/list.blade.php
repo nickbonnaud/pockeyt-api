@@ -3,7 +3,9 @@
         <div class="box box-default">
             <div class="box-header with-border">
                 <!-- <h3 class="box-title"><a href="{{ route('posts.show', ['posts' => $post->id]) }}">{{ $post->message }}</a></h3> -->
-                <h3 class="box-title">{{ $post->message }}</h3>
+                <a href="{{ route('posts.show', ['posts' => $post->id]) }}">
+                    <h3 class="box-title">{{ $post->message }}</h3>
+                </a>
             </div>
             <div class="box-body">
                 @if(! is_null($post->photo_path))
