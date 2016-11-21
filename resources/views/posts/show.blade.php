@@ -19,8 +19,8 @@
 
             @else
 
-                <img class="photoLogo" src="{{ $profile->logo->url }}">
-                <p class="partnername">{{ $profile->business_name }}</p>
+               <!--  <img class="photoLogo" src="{{ $profile->logo->url }}">
+                <p class="partnername">{{ $profile->business_name }}</p> -->
                 @if(! is_null($post->title))
                     <p class="postTitle">{{ $post->title }}</p>
                 @endif
