@@ -6,7 +6,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta property="og:site_name" content="Pockeyt" />
-    <meta property="og:type" content="article" />
     <title>Pockeyt Business</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
