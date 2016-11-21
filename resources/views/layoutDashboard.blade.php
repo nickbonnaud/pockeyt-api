@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta property="og:site_name" content="Pockeyt" />
+    <meta property="og:type" content="article" />
     <title>Pockeyt Business</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
@@ -102,7 +104,7 @@
                     <img src="{{ $user->profile->logo->url }}" class="img-circle" alt="Profile Image">
                 @endif
             </div>
-            <div class="pull-left info">
+            <div class="pull-left info profile-status">
                 <p>{{ $user->profile->business_name }}</p>
                 @if($user->profile->approved)
                     <span><i class="fa fa-circle text-success"></i> Profile Approved</span>
