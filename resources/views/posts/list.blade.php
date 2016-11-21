@@ -24,6 +24,7 @@
       			<div class="box-header with-border">
       				<h3 class="box-title">Create a New Post</h3>
       			</div>
+              @include ('errors.form')
       				{!! Form::open(['method' => 'POST', 'route' => ['posts.store'], 'files' => true]) !!}
       				@include('posts.form')
       				{!! Form::close() !!}

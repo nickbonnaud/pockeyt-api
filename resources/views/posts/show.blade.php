@@ -21,7 +21,7 @@
 
                 <img class="photoLogo" src="{{ $profile->logo->url }}">
                 <p class="partnername">{{ $profile->business_name }}</p>
-                if(! is_null($post->title))
+                @if(! is_null($post->title))
                     <p class="postTitle">{{ $post->title }}</p>
                 @endif
 
@@ -32,9 +32,10 @@
                         {!!  $post->formatted_body !!}
                     </article>
                 @else
-                    <article>
-                        {!! $post->message !!}
+                    <article class="postText">
+                        Hello
                     </article>
+                @endif
                 <hr>
                 <div class="footer-date">{{ $post->published_at->diffForHumans() }}</div>
                 <p class="signature">- Brought to you by <a href="http://www.pockeyt.com/">Pockeyt</a>

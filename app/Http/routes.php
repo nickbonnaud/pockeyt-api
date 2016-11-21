@@ -22,6 +22,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::post('posts/{posts}/photos', 'PostsController@postPhotos')->name('posts.photos');
 Route::get('posts/list', 'PostsController@listPosts')->name('posts.list');
 Route::get('posts/events', 'PostsController@eventPosts')->name('posts.events');
+Route::post('events/store', 'PostsController@storeEvent')->name('events.store');
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
 // Products routes

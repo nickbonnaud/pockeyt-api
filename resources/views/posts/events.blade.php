@@ -24,7 +24,8 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">Create a New Event</h3>
 					</div>
-						{!! Form::open(['method' => 'POST', 'route' => ['posts.store'], 'files' => true]) !!}
+						@include ('errors.form')
+						{!! Form::open(['method' => 'POST', 'route' => ['events.store'], 'files' => true]) !!}
 						@include('posts.event_form')
 						{!! Form::close() !!}
 				</div>
