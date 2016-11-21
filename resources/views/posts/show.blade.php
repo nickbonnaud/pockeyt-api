@@ -12,7 +12,6 @@
 
     <div class="row">
         <div class="col-md-12">
-
             <img class="photoLogo" src="{{ $profile->logo->url }}">
             <p class="partnername">{{ $profile->business_name }}</p>
             @if(! is_null($post->title))

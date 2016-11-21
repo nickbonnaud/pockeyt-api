@@ -71,8 +71,8 @@ footer {text-align:center; font-size:12px; padding:15px 0;}
 .navbar-text li {list-style:none;}
 .navbarPost-header {text-align: center;}
 
-.photoLogo { max-width: 65px; display: inline; float: left; margin-right: 10px;}
-.partnername {font-size: 18px; font-weight: 700; margin-bottom: 0px; color: #777;}
+.photoLogo { max-width: 65px; display: inline; float: left; margin-right: 10px; border-radius: 50%;}
+.partnername {font-size: 14px; font-weight: 700; margin-bottom: 0px; color: #777;}
 .postText {font-size: 14px; font-weight: 300; line-height: 22px; padding-right: 5px; color: #777;}
 .postPhoto {padding-top: 10px;}
 .postTitle {font-size: 16px; font-weight: 300; line-height: 22px; padding-right: 5px; color: #777;}
