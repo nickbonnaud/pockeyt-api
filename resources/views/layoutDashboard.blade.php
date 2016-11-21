@@ -107,8 +107,11 @@
                 @if($user->profile->approved)
                   <div class="profile-status">
                     <span><i class="fa fa-circle text-success"></i> Profile Approved</span>
+                  </div>
                 @else
+                  <div class="profile-status">
                       <span href="#"><i class="fa fa-circle text-danger"></i> Profile Waiting Approval</span>
+                  </div>
                   </div>
                 @endif
             </div>
