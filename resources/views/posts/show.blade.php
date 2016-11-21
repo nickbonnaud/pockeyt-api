@@ -2,7 +2,7 @@
 <head>
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https:www.pockeyt-test.com/posts/{{ $post->id }}" /> 
-    <meta property="og:title" content="Pockeyt post by {{ $profile->business_name }}" />
+    <meta property="og:title" content="{{ $post->message }}" />
     @if(! is_null($post->photo_path))
         <meta property="og:image"  content="{{ $post->photo_path }}" />
     @endif
