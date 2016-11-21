@@ -21,13 +21,13 @@
 
             <p><img class="postPhoto" src="{{ $post->photo_path }}"></p>
             <hr>
-            @if(! is_null($post->formatted_body))
+            @if(! is_null($post->body))
                 <article class="postText">
                     {!!  $post->formatted_body !!}
                 </article>
             @else
                 <article class="postText">
-                    Hello
+                    {{ $post->message }}
                 </article>
             @endif
             <hr>
