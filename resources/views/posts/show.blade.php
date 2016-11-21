@@ -21,13 +21,20 @@
 
                 <img class="photoLogo" src="{{ $profile->logo->url }}">
                 <p class="partnername">{{ $profile->business_name }}</p>
-                <p class="postTitle">{{ $post->title }}</p>
+                if(! is_null($post->title))
+                    <p class="postTitle">{{ $post->title }}</p>
+                @endif
 
                 <p><img class="postPhoto" src="{{ $post->photo_path }}"></p>
                 <hr>
-                <article class="postText">
-                    {!!  $post->formatted_body !!}
-                </article>
+                @if(! is_null($post->formatted_body))
+                    <article class="postText">
+                        {!!  $post->formatted_body !!}
+                    </article>
+                @else
+                    <article>
+                        {!! $post->message !!}
+                    </article>
                 <hr>
                 <div class="footer-date">{{ $post->published_at->diffForHumans() }}</div>
                 <p class="signature">- Brought to you by <a href="http://www.pockeyt.com/">Pockeyt</a>
