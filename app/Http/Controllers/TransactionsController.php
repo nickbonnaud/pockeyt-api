@@ -13,12 +13,12 @@ use App\Http\Controllers\Controller;
 class TransactionsController extends Controller
 {
     
-    public function createTransaction($customerId) {
+    public function showTransaction($customerId) {
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
-            return view('transactions.create', compact('customer', 'business'));
+            return view('transactions.show', compact('customer', 'business'));
         }
     }
     public function userInLocationCheck($customer, $business) {
