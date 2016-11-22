@@ -5,6 +5,8 @@
     <meta property="og:title" content="{{ $post->message }}" />
     @if(! is_null($post->photo_path))
         <meta property="og:image"  content="{{ $post->photo_path }}" />
+    @else
+        <meta property="og:image"  content="{{ $profile->logo->url }}" />
     @endif
 </head>
 
