@@ -150,8 +150,8 @@
             }
           },
           goToTransaction: function(customerId) {
-            console.log(customerId);
             $.ajax({
+              method: 'POST',
               url: '/transactions/create',
               data: {
                 'customerId' : customerId
