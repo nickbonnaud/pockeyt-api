@@ -13,12 +13,12 @@
     <div class="row">
         <div class="col-md-12">
             <img class="photoLogo" src="{{ $profile->logo->url }}">
-            <p class="partnername">{{ $profile->business_name }}</p>
+            <span class="partnername">{{ $profile->business_name }}</span>
             @if(! is_null($post->title))
                 <p class="postTitle">{{ $post->title }}</p>
             @endif
 
-            <p><img class="postPhoto" src="{{ $post->photo_path }}"></p>
+            <img class="postPhoto" src="{{ $post->photo_path }}">
             <hr>
             @if(! is_null($post->body))
                 <article class="postText">
