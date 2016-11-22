@@ -2,7 +2,7 @@
     @foreach($posts as $post)
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title"><a href="{{ route('posts.show', ['posts' => $post->id]) }}">{{ $post->title }}</a></h3>
+                <h3 class="box-title"><a href="{{ route('events.show', ['posts' => $post->id]) }}">{{ str_limit($post->title, 85) }}</a></h3>
                 <p class="event-date pull-right">Date of Event: {{ $post->event_date }}</p>
             </div>
             <div class="box-body">

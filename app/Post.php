@@ -30,7 +30,7 @@ class Post extends Model {
      */
     protected $dates = ['published_at'];
 
-    protected $appends = ['formatted_body'];
+    protected $appends = ['formatted_body', 'formatted_message'];
 
     public static function boot() {
         parent::boot();
@@ -53,6 +53,10 @@ class Post extends Model {
         $this->attributes['body'] = clean_newlines($body);
     }
 
+    public function setMessageAttribute($message) {
+        $this->attributes['message'] = clean_newlines($message);
+    }
+
     /**
      * A post belongs to its profile
      *
@@ -64,6 +68,10 @@ class Post extends Model {
 
     public function getFormattedBodyAttribute() {
         return html_newlines_to_p($this->body);
+    }
+
+    public function getFormattedMessageAttribute() {
+        return html_newlines_to_p($this->message);
     }
 
     /**

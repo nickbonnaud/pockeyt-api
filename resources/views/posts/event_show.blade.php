@@ -1,8 +1,8 @@
 @extends('layoutPost')
 <head>
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https:www.pockeyt-test.com/posts/{{ $post->id }}" /> 
-    <meta property="og:title" content="{{ $post->message }}" />
+    <meta property="og:url" content="https:www.pockeyt-test.com/events/{{ $post->id }}" /> 
+    <meta property="og:title" content="{{ $post->title }}" />
     @if(! is_null($post->photo_path))
         <meta property="og:image"  content="{{ $post->photo_path }}" />
     @else
@@ -16,10 +16,12 @@
         <div class="col-md-12">
             <img class="photoLogo" src="{{ $profile->logo->url }}">
             <span class="partnername">{{ $profile->business_name }}</span>
+            <p class="postTitle">{{ $post->title }}</p>
+
             <img class="postPhoto" src="{{ $post->photo_path }}">
             <hr>
             <article class="postText">
-                {!! $post->formatted_message !!}
+                {!!  $post->formatted_body !!}
             </article>
             <hr>
             <div class="footer-date">{{ $post->published_at->diffForHumans() }}</div>

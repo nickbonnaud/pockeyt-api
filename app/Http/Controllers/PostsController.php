@@ -49,6 +49,12 @@ class PostsController extends Controller {
         return view('posts.show', compact('post', 'profile'));
     }
 
+    public function showEvent($id) {
+        $post = Post::visible()->with(['profile'])->find($id);
+        $profile = Profile::approved()->with(['logo'])->find($post->profile_id);
+        return view('posts.event_show', compact('post', 'profile'));
+    }
+
     /**
      * Store new post
      *
