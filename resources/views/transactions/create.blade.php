@@ -1,16 +1,6 @@
 @extends('layoutDashboard')
 
-@if(is_null($profile))
-
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="text-center">Profile not found.</h2>
-    </div>
-</div>
-
-@else
-
-    @section('content')
+@section('content')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -20,48 +10,16 @@
       Customer Dashboard
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Transaction</li>
     </ol>
   </section>
 
   <!-- Main content -->
-  <section class="content" id="customer">
+  <section class="content">
     <!-- Default box -->
     <div>
-      <template v-for="user in users">
-        <div class="col-md-3">
-          <div class="box box-primary">
-            <div class="box-header with-border text-center">
-              <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
-              </a>
-              <div class="box-body">
-                <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
-                </a>
-              </div>
-              <div class="box-footer">
-                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
-                <b>Create Charge</b>
-              </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}}</h4>
-            </div>
-            <div class="modal-body">
-              info
-            </div>
-          </div>
-        </div>
-      </div>
-      </template>
+      Hello World
     </div>
     <!-- /.box -->
   </section>

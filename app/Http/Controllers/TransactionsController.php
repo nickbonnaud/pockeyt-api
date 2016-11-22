@@ -13,9 +13,8 @@ use App\Http\Controllers\Controller;
 class TransactionsController extends Controller
 {
     
-    public function createTransaction(Request $request) {
-        dd($request);
-        $customer = User::findOrFail($request->customerId);
+    public function createTransaction($customerId) {
+        $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
