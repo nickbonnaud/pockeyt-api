@@ -15,7 +15,18 @@ class AppController extends Controller {
      * @return View
      */
     public function index() {
-      return view('app.index');
+        $signedInUser = $this->user;
+        if (isset($signedInUser)) {
+            $profile = $signedInUser->profile;
+            if (isset($profile)) {
+                return view('profiles.show', compact('profile'));
+            } else {
+                $tags = \App\Tag::lists('name', 'id');
+                return view('profiles.create', compact('tags'));
+            }
+        } else {
+            return view('app.index');
+        }
     }
 
     public function policy() {

@@ -23,7 +23,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}" class="logo">
+        <a href="{{ route('profiles.show', ['profiles' => $user->profile->id]) }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">
             <img src="{{ asset('/images/white-logo.png') }}">
@@ -74,7 +74,7 @@
                       <a href="{{ route('users.show', ['users' => $user->id])  }}" class="btn btn-default btn-flat">User Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{ route('auth.logout') }}" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>

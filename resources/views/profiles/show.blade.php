@@ -150,8 +150,13 @@
             }
           },
           goToTransaction: function(customerId) {
-            route = "{{ route('transactions.create', ['customerId' => 'id']) }}"
-            location.href = route.replace('id', customerId)
+            $.ajax({
+              method: 'GET',
+              url: '/transactions/create',
+              data: {
+                'customerId' : customerId
+              }
+            })
           },
           deleteInactiveUser: function(customerId, businessId) {
             console.log(customerId);
