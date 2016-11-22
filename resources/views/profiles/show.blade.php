@@ -152,7 +152,6 @@
           goToTransaction: function(customerId) {
             console.log(customerId);
             $.ajax({
-              method: 'GET',
               url: '/transactions/create',
               data: {
                 'customerId' : customerId
