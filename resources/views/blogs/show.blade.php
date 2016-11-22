@@ -1,4 +1,10 @@
 @extends('layoutPost')
+<head>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https:www.pockeyt-test.com/blogs/{{ $blog->id }}" /> 
+    <meta property="og:title" content="{{ $blog->blog_title }}" />
+    <meta property="og:image"  content="{{ $blog->blog_profile_url }}" />
+</head>
 
 @section('content')
 
