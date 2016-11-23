@@ -18,7 +18,7 @@ class TransactionsController extends Controller
         $business = $this->user->profile;
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
-            return view('bill.show', compact('customer', 'business'));
+            return view('transactions.bill_show', compact('customer', 'business'));
         }
     }
     public function userInLocationCheck($customer, $business) {
