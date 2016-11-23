@@ -13,20 +13,15 @@
     </ol>
   </section>
 
-  <section class="content" id="inventory">
-    <p>{{ $business->id }}</p>
-    <products></products>
-  </section>
-</div>
-
-<section class="content">
-  <div class="scroll-container col-md-9">
-    <div class="scroll-contents">
-      @include('partials.transactions.inventory', ['inventory' => $inventory])  
+  <section class="content">
+    <div class="scroll-container col-md-9">
+      <div class="scroll-contents">
+        @include('partials.transactions.inventory', ['inventory' => $inventory])  
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
+  
+</div>
 @stop
 
 

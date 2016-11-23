@@ -17,7 +17,7 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
-        dd($inventory);
+
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
             return view('transactions.bill_show', compact('customer', 'business', 'inventory'));
