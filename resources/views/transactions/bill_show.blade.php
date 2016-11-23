@@ -14,8 +14,8 @@
   </section>
 
   <section class="content">
-    <div class="scroll-container">
-      <div class="scroll-contents col-md-9">
+    <div class="scroll-container col-md-9">
+      <div class="scroll-contents">
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
       </div>
     </div>
