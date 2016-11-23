@@ -16,7 +16,7 @@ class TransactionsController extends Controller
     public function showBill($customerId) {
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
-        $inventory = Product::where('profile_id', '=', $busines->id);
+        $inventory = Product::where('profile_id', '=', $business->id);
 
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
