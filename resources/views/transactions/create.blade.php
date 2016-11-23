@@ -18,11 +18,13 @@
   <!-- Main content -->
   <section class="content">
     <div class="col-md-3">
-      <div class="box-header with-border">
-        <h3 class="box-title">Pizza</h3>
-      </div>
-      <div class="box-body">
-        Hello
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Pizza</h3>
+        </div>
+        <div class="box-body">
+          Hello
+        </div>
       </div>
     </div>
   
