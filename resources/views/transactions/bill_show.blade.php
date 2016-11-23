@@ -2,9 +2,7 @@
 
 @section('content')
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
       Customer Dashboard
@@ -15,16 +13,17 @@
     </ol>
   </section>
 
-  <!-- Main content -->
   <section class="content">
-    <div class="box-header with-border">
-      <h3 class="box-title">Pizza</h3>
+    <div class="col-md-3">
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Pizza</h3>
+        </div>
+        <div class="box-body">
+          Hello
+        </div>
+      </div>
     </div>
-    <div class="box-body">
-      Hello
-    </div>
-  
-  <!-- <tasks inventory=""></tasks> -->
 
   </section>
 </div>
