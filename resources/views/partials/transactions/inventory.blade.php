@@ -10,7 +10,7 @@
           @endif
         </div>
         <div class="box-footer-inventory">
-          <b>{{ $product->name }}</b>
+          <b>{{ str_limit($product->name, 12) }}</b>
         </div>
       </div>
   </div>
