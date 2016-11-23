@@ -65,6 +65,7 @@ class ProductsController extends Controller {
       $photo = Photo::fromForm($file);
       $photo->save();
       $updatedProduct['product_photo_path'] = url($photo->path);
+      $updatedProduct['product_tn_photo_path'] = url($photo->thumbnail_path);
       $updatedProduct['photo_id'] = $photo->id;
     }
   	$product->update($updatedProduct);

@@ -32,7 +32,7 @@
           <div class="col-md-6">
         		<div class="box box-primary">
         			<div class="box-header with-border">
-        				<h3 class="box-title">{{ $product->name }} picture</h3>
+        				<h3 class="box-title">{{ $product->name }}</h3>
         			</div>
         			<div class="box-body">
       					<img src="{{ $product->product_photo_path }}" class="business-hero-img img-responsive" alt="Product Image">
