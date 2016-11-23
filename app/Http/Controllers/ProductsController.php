@@ -38,6 +38,7 @@ class ProductsController extends Controller {
           $photo = Photo::fromForm($file);
           $photo->save();
           $product['product_photo_path'] = url($photo->path);
+          $product['product_tn_photo_path'] = url($photo->thumbnail_path);
           $product['photo_id'] = $photo->id;
       }
 
