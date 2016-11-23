@@ -13,7 +13,7 @@
     </ol>
   </section>
 
-  <section class="content">
+  <section class="content" id="inventory">
     <div class="scroll-container col-md-9">
       <div class="scroll-contents">
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
@@ -23,6 +23,28 @@
 
 </div>
 @stop
+
+@section('scripts.footer')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+  <script>
+
+    var inventory = new Vue({
+      el: "#inventory",
+
+      data: {
+        bill: []
+      },
+
+      methods: {
+        addProduct: function() {
+          console.log("Connected");
+          
+        }
+      }
+    })
+
+
+  </script>
 
 
 
