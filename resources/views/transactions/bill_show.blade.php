@@ -36,8 +36,8 @@
       },
 
       methods: {
-        addProduct: function() {
-          console.log("Connected");
+        addProduct: function(product) {
+          console.log(product);
           
         }
       }
