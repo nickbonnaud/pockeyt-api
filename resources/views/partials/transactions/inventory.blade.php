@@ -9,8 +9,8 @@
             <img src="{{ asset('/images/noImage.png') }}">
           @endif
         </div>
-        <div class="box-footer">
-          {{ $product->name }}
+        <div class="box-footer-inventory">
+          <b>{{ $product->name }}</b>
         </div>
       </div>
   </div>
