@@ -14,13 +14,13 @@
   </section>
 
   <section class="content">
-    <div class="scroll-container col-md-9">
-      <div class="scroll-contents">
+    <div class="scroll-container">
+      <div class="scroll-contents col-md-9">
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
       </div>
     </div>
   </section>
-  
+
 </div>
 @stop
 
