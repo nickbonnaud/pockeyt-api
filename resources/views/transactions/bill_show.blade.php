@@ -9,7 +9,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Transaction</li>
+      <li class="active">Bill</li>
     </ol>
   </section>
 
