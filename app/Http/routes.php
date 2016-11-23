@@ -58,7 +58,7 @@ Route::post('accounts/status', 'AccountsController@postStatus');
 Route::resource('accounts', 'AccountsController');
 
 // Transaction Routes
-Route::get('transactions/{customerId}', 'TransactionsController@showTransaction')->name('transactions.show');
+Route::get('bill/{customerId}', 'TransactionsController@showBill')->name('bill.show');
 
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');

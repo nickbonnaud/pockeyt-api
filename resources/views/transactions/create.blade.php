@@ -17,14 +17,27 @@
 
   <!-- Main content -->
   <section class="content">
-    <!-- Default box -->
-    <div>
-      Hello World
+    <div class="box-header with-border">
+      <h3 class="box-title">Pizza</h3>
     </div>
+    <div class="box-body">
+      Hello
+    </div>
+  
+  <!-- <tasks inventory=""></tasks> -->
+
   </section>
 </div>
 
+<template id="products-template">
+  
+</template>
+
 @stop
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script src="/js/vuejs.js"></script>
+
+
 
 
 

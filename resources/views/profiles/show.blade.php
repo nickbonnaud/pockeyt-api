@@ -150,7 +150,7 @@
             }
           },
           goToTransaction: function(customerId) {
-            route = "{{ route('transactions.show', ['customerId' => 'id']) }}"
+            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
             location.href = route.replace('id', customerId)
           },
           deleteInactiveUser: function(customerId, businessId) {
