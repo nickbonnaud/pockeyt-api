@@ -8,6 +8,7 @@ Vue.component('products', {
 	},
 
 	created: function() {
+		var id = {{ $business->id }};
 		$.getJSON('products/inventory/{{ $business->id }}', function(data) {
 			console.log(data);
 		})

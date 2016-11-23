@@ -14,6 +14,7 @@
   </section>
 
   <section class="content" id="inventory">
+    <p>{{ $business->id }}</p>
     <products></products>
   </section>
 </div>
