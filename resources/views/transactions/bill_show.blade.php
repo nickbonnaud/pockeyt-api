@@ -19,6 +19,7 @@
 </div>
 
 <template id="products-template">
+  <div>
   <div class="col-md-3" v-for="product in inventory">
     <div class="box">
       <div class="box-header with-border">
@@ -28,6 +29,7 @@
         Hello
       </div>
     </div>
+  </div>
   </div>
 </template>
 
