@@ -16,5 +16,5 @@ Vue.component('products', {
 });
 
 new Vue({
-	el: '#content'
+	el: '#inventory'
 });

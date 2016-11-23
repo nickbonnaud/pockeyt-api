@@ -13,7 +13,7 @@
     </ol>
   </section>
 
-  <section class="content" id="content">
+  <section class="content" id="inventory">
     <products></products>
   </section>
 </div>
