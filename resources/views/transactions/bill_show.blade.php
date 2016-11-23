@@ -19,7 +19,16 @@
   </section>
 </div>
 
-<template id="products-template">
+<section class="content">
+  <div class="scroll-container col-md-9">
+    <div class="scroll-contents">
+      @include('partials.transactions.inventory', ['inventory' => $inventory])  
+    </div>
+    
+  </div>
+</section>
+
+<!-- <template id="products-template">
   <div>
   <div class="col-md-3" v-for="product in inventory">
     <div class="box">
@@ -32,13 +41,13 @@
     </div>
   </div>
   </div>
-</template>
+</template> -->
 
 @stop
-@section('scripts.footer')
+<!-- @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script src="/js/vuejs.js"></script>
-@stop
+@stop -->
 
 
 
