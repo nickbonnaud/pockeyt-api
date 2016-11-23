@@ -4,9 +4,9 @@
       <div class="box">
         <div class="box-body">
           @if(! is_null($product->product_photo_path))
-            <img src="{{ $product->product_tn_photo_path }}" class="product-image">
+            <img src="{{ $product->product_tn_photo_path }}">
           @else
-            <img src="{{ asset('/images/noImage.png') }}" class="product-image">
+            <img src="{{ asset('/images/noImage.png') }}">
           @endif
         </div>
         <div class="box-footer">
