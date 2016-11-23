@@ -13,23 +13,22 @@
     </ol>
   </section>
 
-  <section class="content">
-    <div class="col-md-3">
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Pizza</h3>
-        </div>
-        <div class="box-body">
-          Hello
-        </div>
-      </div>
-    </div>
-
+  <section class="content" id="content">
+    <products></products>
   </section>
 </div>
 
 <template id="products-template">
-  
+  <div class="col-md-3" v-for="product in inventory">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Pizza</h3>
+      </div>
+      <div class="box-body">
+        Hello
+      </div>
+    </div>
+  </div>
 </template>
 
 @stop

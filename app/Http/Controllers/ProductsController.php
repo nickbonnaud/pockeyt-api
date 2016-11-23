@@ -83,4 +83,10 @@ class ProductsController extends Controller {
       $products = Product::where('profile_id', '=', $this->user->profile->id)->orderBy('name', 'asc')->get();
       return view('products.list', compact('products'));
   }
+
+  public function getInventory($id) {
+    return $inventory = Product::where('profile_id', '=', $id)->orderBy('name', 'asc')->get();
+  }
+
+
 }
