@@ -37,11 +37,12 @@
 
       methods: {
         addProduct: function(product) {
+          var this.bill = bill
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
-            this.bill.push(product);
+            bill.push(product);
           }
-          console.log(this.bill);
+          console.log(bill);
         }
       }
     })
