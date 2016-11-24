@@ -38,7 +38,10 @@
       methods: {
         addProduct: function(product) {
           console.log(product);
-          
+          var result = $.grep(bill, function(item) { return item.id === product.id});
+          if (result.length === 0) {
+            this.bill.push(product);
+          }
         }
       }
     })
