@@ -37,7 +37,7 @@
 
       methods: {
         addProduct: function(product) {
-          var this.bill = bill
+          var bill = this.bill
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
             bill.push(product);
