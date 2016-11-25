@@ -44,8 +44,9 @@
             bill.push(product);
           } else {
             product.quantity++
+            bill.push(product);
           }
-          console.log(product.quantity)
+          console.log(bill)
         }
       }
     })
