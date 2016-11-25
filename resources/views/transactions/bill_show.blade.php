@@ -19,6 +19,15 @@
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
       </div>
     </div>
+    <div class="scroll-container col-md-3">
+      <div class="scroll-contents">
+        <template v-for="product in bill">
+          <p>@{{product.name}}</p>
+          <p>@{{product.quantity}}</p>
+        </template>
+
+      </div>
+    </div>
   </section>
 
 </div>
