@@ -44,7 +44,7 @@
             bill.push(product);
           } else {
             var quantity = product.quantity;
-            this.quantity = quantity++;
+            this.quantity = quantity + 1;
           }
           console.log(bill)
         }
