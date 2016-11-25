@@ -1,6 +1,6 @@
 @if(count($inventory) > 0)
   @foreach($inventory as $product)
-  	<div class="col-md-3">
+  	<div class="col-md-4">
       <div class="box-inventory" v-on:click="addProduct({{ $product }})">
         <div class="box-body-inventory">
           @if(! is_null($product->product_photo_path))
