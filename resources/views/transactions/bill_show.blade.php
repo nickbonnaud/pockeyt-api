@@ -43,7 +43,7 @@
             product['quantity'] = 1;
             bill.push(product);
           } else {
-            console.log(product.quantity);
+            console.log(result);
           }
         }
       }
