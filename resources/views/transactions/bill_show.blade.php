@@ -40,9 +40,12 @@
           var bill = this.bill
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
+            product['quantity'] = 1;
             bill.push(product);
+          } else {
+            product.quantity++
           }
-          console.log(bill);
+          console.log(product.quantity)
         }
       }
     })
