@@ -32,6 +32,7 @@
                 <th>Name</th>
                 <th>Price</th>
               </tr>
+              @include('partials.transactions.bill_list')
             </tbody>
           </table>
         </div>
