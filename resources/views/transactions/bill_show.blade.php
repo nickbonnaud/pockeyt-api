@@ -14,12 +14,12 @@
   </section>
 
   <section class="content" id="inventory">
-    <div class="scroll-container col-md-9">
+    <div class="scroll-container col-md-8">
       <div class="scroll-contents">
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="box box-black">
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
