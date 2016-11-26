@@ -61,9 +61,9 @@
         totalBill: function() {
           var bill = this.bill;
           var total = 0;
-          bill.forEach(product) {
+          bill.forEach(function(product) {
             total = total + (product.quantity * product.price)
-          }
+          });
           return total;
         }
       },
