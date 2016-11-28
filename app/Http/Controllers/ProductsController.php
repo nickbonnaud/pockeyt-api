@@ -41,21 +41,24 @@ class ProductsController extends Controller {
           $product['product_tn_photo_path'] = url($photo->thumbnail_path);
           $product['photo_id'] = $photo->id;
       }
-
+      $product->price = $product->price * 100;
       $this->user->profile->products()->save($product);
       return redirect()->back();
   }
 
   public function edit (Request $request, $id) {
   	$product = Product::findOrFail($id);
+    $product->price = $product->price / 100;
   	return view('products.edit', compact('product'));
   }
 
   public function update(UpdateProductRequest $request, $id)
   {
     $product = Product::findOrFail($id);
+
     $oldPhoto = $product->product_photo_path;
     $updatedProduct = $request->except('photo');
+    $updatedProduct['price'] = $updatedProduct['price'] * 100;
     $file = $request->photo;
 
     if($file != null) {
@@ -83,6 +86,9 @@ class ProductsController extends Controller {
 
   public function listProducts() {
       $products = Product::where('profile_id', '=', $this->user->profile->id)->orderBy('name', 'asc')->get();
+      foreach ($products as $product) {
+        $product->price = ($product->price) / 100;
+      }
       return view('products.list', compact('products'));
   }
 
