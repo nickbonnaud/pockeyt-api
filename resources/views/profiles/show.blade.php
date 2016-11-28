@@ -42,7 +42,7 @@
               </div>
               <div class="box-footer">
                 <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
-                <b>Create Charge</b>
+                <b>Bill</b>
               </a>
               </div>
             </div>

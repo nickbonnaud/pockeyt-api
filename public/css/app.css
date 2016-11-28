@@ -8444,6 +8444,16 @@ img {
   color: inherit;
 }
 
+.box-footer-receipt {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top: 4px double #000000;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;

@@ -36,7 +36,8 @@
             </tbody>
           </table>
         </div>
-        <div class="box-footer">
+        <div class="box-footer-receipt">
+          Total
           @{{ totalBill }}
         </div>
       </div>
