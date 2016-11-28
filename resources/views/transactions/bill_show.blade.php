@@ -37,8 +37,10 @@
           </table>
         </div>
         <div class="box-footer-receipt">
-          Total
-          @{{ totalBill }}
+          Total:
+          <div class="receipt-total">
+            @{{ totalBill }}
+          </div>
         </div>
       </div>
     </div>

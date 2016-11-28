@@ -8454,6 +8454,10 @@ img {
   background-color: #ffffff;
 }
 
+.receipt-total {
+  float: right;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;
