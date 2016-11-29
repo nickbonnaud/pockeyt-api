@@ -46,7 +46,7 @@
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
         </div>
-          <button type="button" class="btn btn-block btn-success" v-if="bill.length !== 0" v-on:click="clearBill()">Charge Customer</button>
+          <button type="button" class="btn btn-block btn-success" v-if="bill.length !== 0">Charge Customer</button>
       </div>
     </div>
   </section>
