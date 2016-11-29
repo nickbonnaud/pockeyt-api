@@ -154,7 +154,6 @@
             location.href = route.replace('id', customerId)
           },
           deleteInactiveUser: function(customerId, businessId) {
-            console.log(customerId);
             $.ajax({
               method: 'POST',
               url: '/geo/user/destroy',

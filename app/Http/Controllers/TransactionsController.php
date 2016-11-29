@@ -18,14 +18,15 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
-        $transactions = Transaction::where(function($query) use ($customer, $business) {
+        $transaction = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
-                ->where('profile_id', '=', $business->id);
+                ->where('profile_id', '=', $business->id)
+                ->where('paid', '=', false);
         })->get();
 
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
-            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'transactions'));
+            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'transaction'));
         }
     }
     public function userInLocationCheck($customer, $business) {
