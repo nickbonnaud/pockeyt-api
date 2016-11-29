@@ -71,6 +71,7 @@
 
       mounted: function() {
         var openBill = {!!$transaction!!};
+        console.log(openBill);
         if (typeof openBill !== 'undefined' && openBill !== null) {
           this.billId = openBill.id;
         }
