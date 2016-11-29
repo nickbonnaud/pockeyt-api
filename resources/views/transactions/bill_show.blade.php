@@ -77,6 +77,7 @@
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
             product['quantity'] = 1;
+            product.price = product.price / 100;
             bill.push(product);
           } else {
             console.log(result[0].quantity);
