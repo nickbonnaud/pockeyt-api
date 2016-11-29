@@ -113,7 +113,17 @@
           if (this.billId !== null) {
             console.log(this.billId);
           } else {
-            console.log("no bill");
+            $.ajax({
+              method: 'POST',
+              url: '/bill',
+              data: {
+                'profile_id' : {{ $business->id }},
+                'user_id' : {{ $customer->id }},
+                'paid' : false,
+                'products' : JSON.stringify(this.bill),
+                'total' : totalBill
+              }
+            })
           }
         }
       }

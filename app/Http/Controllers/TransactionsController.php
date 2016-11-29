@@ -37,6 +37,17 @@ class TransactionsController extends Controller
                 ->where('location_id', '=', $business->id);
         })->first();
         return $locationCheck;
-   }
+    }
+
+    public function store(Request $request) {
+        dd($request->all());
+    }
 
 }
+
+
+
+
+
+
+
