@@ -67,9 +67,8 @@
       },
 
       mounted: function() {
-        var openBill = {{$transaction}};
-
-        if (typeof openBill !== 'undefined' && openBill !== null) {
+        var newBill = {{$transaction}};
+        if (newBill !== 'new') {
           this.billId = openBill.id;
         }
       },
