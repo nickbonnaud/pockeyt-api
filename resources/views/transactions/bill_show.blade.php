@@ -45,6 +45,12 @@
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
+          <div class="pull-left">
+            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
+          </div>
+          <div class="pull-right">
+            <button type="button" class="btn btn-block btn-success btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
+          </div>
         </div>
       </div>
     </div>
