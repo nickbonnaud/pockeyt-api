@@ -24,7 +24,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
           <div class="pull-right">
-            <button type="button" class="btn btn-block btn-danger btn-xs" v-if="bill.length !== 0">Clear Bill</button>
+            <button type="button" class="btn btn-block btn-danger btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
           </div>
         </div>
         <div class="box-body no-padding">
@@ -99,6 +99,9 @@
               }
             }
           }
+        },
+        clearBill: function() {
+          this.bill = [];
         }
       }
     })
