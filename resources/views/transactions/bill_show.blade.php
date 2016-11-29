@@ -71,7 +71,7 @@
 
       mounted: function() {
         var openBill = {!!$transaction!!};
-        if (typeof openBill !== 'undefined' || openBill !== null) {
+        if (typeof openBill !== 'undefined' && openBill !== null) {
           this.billId = openBill.id;
         }
       },
