@@ -91,7 +91,7 @@
           } else {
             for(var i = 0; i < bill.length; i++) {
               if(bill[i].id == product.id) {
-                data.splice(i, 1);
+                bill.splice(i, 1);
                 break;
               }
             }
