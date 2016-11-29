@@ -66,6 +66,14 @@
 
       data: {
         bill: [],
+        billId: null
+      },
+
+      mounted: function() {
+        var openBill = {{$transaction}};
+        if (typeof openBill !== 'undefined' || openBill !== null) {
+          this.billId = openBill.id;
+        }
       },
 
       computed: {
@@ -105,7 +113,11 @@
           }
         },
         saveBill: function() {
-
+          if (this.billId !== null) {
+            console.log(this.billId);
+          } else {
+            console.log("no bill");
+          }
         }
       }
     })
