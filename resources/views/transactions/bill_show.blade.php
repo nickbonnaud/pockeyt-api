@@ -121,7 +121,7 @@
                 'user_id' : {{ $customer->id }},
                 'paid' : false,
                 'products' : JSON.stringify(this.bill),
-                'total' : @{{totalBill}}
+                'total' : this.totalBill
               }
             })
           }
