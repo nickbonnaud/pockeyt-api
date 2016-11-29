@@ -39,7 +39,7 @@
         <div class="box-footer-receipt">
           Total:
           <div class="receipt-total">
-            <h4>$@{{ totalBill / 100 }}</h4>
+            $@{{ totalBill / 100 }}
           </div>
         </div>
       </div>
