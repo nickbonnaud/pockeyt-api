@@ -24,7 +24,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
           <div class="pull-right">
-            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Keep Open</button>
+            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="saveBill()">Keep Open</button>
           </div>
         </div>
         <div class="box-body no-padding">
