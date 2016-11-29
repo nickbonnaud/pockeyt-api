@@ -58,6 +58,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
+    var billId = {{$transaction->id}};
+    console.log(billId);
+
     var inventory = new Vue({
       el: "#inventory",
 
