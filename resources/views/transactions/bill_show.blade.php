@@ -42,7 +42,6 @@
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
-          <span class="glyphicon glyphicon-minus-sign"></span>
         </div>
       </div>
     </div>
