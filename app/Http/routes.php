@@ -61,6 +61,7 @@ Route::resource('accounts', 'AccountsController');
 // Transaction Routes
 Route::get('bill/{customerId}', 'TransactionsController@showBill')->name('bill.show');
 Route::post('bill', 'TransactionsController@store')->name('bill.store');
+Route::patch('bill/{transactionId}', 'TransactionsController@update')->name('bill.update');
 
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');

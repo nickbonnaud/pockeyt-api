@@ -24,7 +24,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
           <div class="pull-right">
-            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="saveBill()">Keep Open</button>
+            @include ('partials.transactions.save')
           </div>
         </div>
         <div class="box-body no-padding">
@@ -57,25 +57,12 @@
 @section('scripts.footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
-  $.ajaxSetup({
-      headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-  });
 
     var inventory = new Vue({
       el: "#inventory",
 
       data: {
         bill: [],
-        billId: null
-      },
-
-      mounted: function() {
-        var newBill = '{{ $transaction }}'
-        if (newBill !== 'new') {
-          this.billId = openBill.id;
-        }
       },
 
       computed: {
@@ -114,27 +101,8 @@
             }
           }
         },
-        saveBill: function() {
-          if (this.billId !== null) {
-            console.log(this.billId);
-          } else {
-            $.ajax({
-              method: 'POST',
-              url: '/bill',
-              data: {
-                'profile_id' : {{ $business->id }},
-                'user_id' : {{ $customer->id }},
-                'paid' : false,
-                'products' : JSON.stringify(this.bill),
-                'total' : this.totalBill
-              }
-            })
-          }
-        }
       }
     })
-
-
   </script>
 @stop
 
