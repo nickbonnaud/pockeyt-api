@@ -74,16 +74,23 @@
 
       methods: {
         addProduct: function(product) {
-          var bill = this.bill
+          var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
             product['quantity'] = 1;
             bill.push(product);
           } else {
-            console.log(result[0].quantity);
             result[0].quantity++
           }
-          console.log(bill);
+        },
+        subtractProduct: function(product) {
+          var bill = this.bill;
+          var result = $.grep(bill, function(item) { return item.id === product.id});
+          if (result[0].quantity !== 1) {
+            result[0].quantity--
+          } else {
+            bill = $.grep(bill, function(item) { return item.id !== product.id});
+          }
         }
       }
     })
