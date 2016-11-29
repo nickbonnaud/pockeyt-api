@@ -24,7 +24,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
           <div class="pull-right">
-            <button type="button" class="btn btn-block btn-danger btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
+            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Keep Open</button>
           </div>
         </div>
         <div class="box-body no-padding">
@@ -46,12 +46,7 @@
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
         </div>
-        <div class="pull-left">
-            <button type="button" class="btn btn-block btn-primary btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
-          </div>
-          <div class="pull-right">
-            <button type="button" class="btn btn-block btn-success btn-xs" v-if="bill.length !== 0" v-on:click="clearBill()">Clear Bill</button>
-          </div>
+          <button type="button" class="btn btn-block btn-success" v-if="bill.length !== 0" v-on:click="clearBill()">Charge Customer</button>
       </div>
     </div>
   </section>
