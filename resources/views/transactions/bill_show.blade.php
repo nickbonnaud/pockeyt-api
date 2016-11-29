@@ -31,6 +31,7 @@
                 <th>Quantity</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th width="70px"></th>
               </tr>
               @include('partials.transactions.bill_list')
             </tbody>
