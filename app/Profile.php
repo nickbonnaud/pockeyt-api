@@ -93,6 +93,10 @@ class Profile extends Model {
         return $this->hasMany('App\Product');
     }
 
+    public function transactions() {
+        return $this->hasMany('App\Transaction');
+    }
+
     /**
      * method to check if profile owns object
      *
