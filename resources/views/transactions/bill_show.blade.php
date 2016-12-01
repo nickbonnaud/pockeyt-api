@@ -61,7 +61,7 @@
     var currentBill = {
       fetch: function() {
         if ('{{ isset($transaction) }}') {
-          var currentTransaction = '{!! json_encode($transaction) !!}';
+          var currentTransaction = '{!! $transaction->products !!}';
           var bill = JSON.parse(currentTransaction);
           console.log(bill);
 
