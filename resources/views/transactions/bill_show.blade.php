@@ -119,7 +119,7 @@
         leaving: function() {
           console.log(this.saved);
           if(! this.saved) {
-            return "leaving";
+            return 'Warning: Bill not saved. Hit "Keep Open" button to save!';
           }
         }
       }
