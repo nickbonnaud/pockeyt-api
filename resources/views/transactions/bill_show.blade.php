@@ -46,7 +46,9 @@
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
         </div>
-          <button type="button" class="btn btn-block btn-success" v-if="bill.length !== 0">Charge Customer</button>
+        <div v-if="bill.length !== 0">
+          @include ('partials.transactions.charge')
+        </div>
       </div>
     </div>
   </section>
@@ -117,7 +119,6 @@
           this.saved = true;
         },
         leaving: function() {
-          console.log(this.saved);
           if(! this.saved) {
             return 'Warning: Bill not saved. Hit "Keep Open" button to save!';
           }
