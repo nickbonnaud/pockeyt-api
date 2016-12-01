@@ -75,8 +75,7 @@
 
       mounted: function() {
         window.onbeforeunload = function() {
-          if(!this.saved) {
-            return "This bill not saved";
+          
           }
         }
       },
