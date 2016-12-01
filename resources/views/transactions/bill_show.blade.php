@@ -60,7 +60,7 @@
 
     var currentBill = {
       fetch: function() {
-        if ('{{ isset($transaction) }}') {
+        if ('{{ $transaction !== "newBill" }}') {
           var bill = JSON.parse( '{!! $transaction->products !!}');
           return bill;
         } else {

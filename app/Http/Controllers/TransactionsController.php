@@ -24,7 +24,7 @@ class TransactionsController extends Controller
                 ->where('paid', '=', false);
         })->first();
         if (!isset($transaction)) {
-            $transaction = 'undefined';
+            $transaction = 'newBill';
         }
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {

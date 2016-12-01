@@ -1,4 +1,4 @@
-@if(isset($transaction))
+@if($transaction !== 'newBill')
   <form action="{{ route('bill.update', ['transactionId' => $transaction->id]) }}" method="patch">
    	<input type="hidden" name="user_id" value="{{ $customer->id }}">
     <input type="hidden" name="paid" value="false">
