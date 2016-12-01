@@ -74,7 +74,7 @@
       },
 
       mounted: function() {
-         window.addEventListener('beforeunload', this.leaving);
+         $(window).on('beforeunload', this.leaving);
       },
 
       computed: {
