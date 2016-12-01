@@ -1,4 +1,4 @@
-<form action="{{ route('bill.update', ['id' => $billId]) }}" method="post">
+<form action="{{ route('bill.update', ['id' => $billId]) }}" method="post" v-on:click="save">
 	<input type="hidden" name="_method" value="PATCH">
  	<input type="hidden" name="user_id" value="{{ $customer->id }}">
   <input type="hidden" name="paid" value="false">
