@@ -18,13 +18,14 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
-        $bill = Transaction::where(function($query) use ($customer, $business) {
+        $transaction = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
                 ->where('profile_id', '=', $business->id)
                 ->where('paid', '=', false);
         })->value('products');
-        if(isset($bill)) {
-            $billId = $bill->id;
+        if(isset($transaction)) {
+            $bill = $transaction->products;
+            $billId = $transaction->id;
         }
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if (isset($locationCheck)) {
