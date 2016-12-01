@@ -23,7 +23,7 @@
       <div class="box box-black">
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
-          <div class="pull-right" v-if="bill.length !== 0">
+          <div v-on:click="save" class="pull-right" v-if="bill.length !== 0">
             @include ('partials.transactions.update')
           </div>
         </div>
@@ -108,6 +108,9 @@
             }
           }
         },
+        save: function() {
+          console.log("hooked up");
+        }
       }
     })
   </script>
