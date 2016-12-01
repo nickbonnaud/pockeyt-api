@@ -73,10 +73,8 @@
         saved: false
       },
 
-      mounted: function() {
-        window.onbeforeunload = function() {
-          console.log(this.saved);
-        }
+      ready: function() {
+        window.beforeunload = this.leaving;
       },
 
       computed: {
@@ -118,6 +116,12 @@
         save: function() {
           this.saved = true;
         },
+        leaving: function() {
+          console.log(this.saved);
+          if(! this.saved) {
+            alert("Leaving");
+          }
+        }
       }
     })
   </script>
