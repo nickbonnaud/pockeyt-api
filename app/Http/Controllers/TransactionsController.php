@@ -45,7 +45,7 @@ class TransactionsController extends Controller
     }
 
     public function update(Request $request) {
-        dd($request->all());
+        dd("hello");
     }
 
 }
