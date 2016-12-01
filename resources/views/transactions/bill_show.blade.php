@@ -62,8 +62,8 @@
       fetch: function() {
         var transaction = '{!! $transaction !!}';
         console.log(transaction);
-        var bill = JSON.parse( '{!! $transaction->products !!}');
-        return bill;
+        // var bill = JSON.parse( '{!! $transaction->products !!}');
+        // return bill;
       }
     }
 
