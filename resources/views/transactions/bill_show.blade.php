@@ -75,7 +75,7 @@
 
       mounted: function() {
         window.onbeforeunload = function() {
-          console.log("hello");
+          console.log(this.saved);
         }
       },
 
