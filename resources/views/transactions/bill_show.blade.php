@@ -58,30 +58,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-  // if ('{{isset($transaction)}}') {
-  //   console.log("set");
-  // } else {
-  //   console.log("not set")
-  // }
 
 
-    // var currentBill = {
-    //   fetch: function() {
-    //     if ('{{ isset($transaction) }}') {
-    //       var bill = JSON.parse( '{!! $transaction->products !!}');
-    //       return bill;
-    //     } else {
-    //       var bill = [];
-    //       return bill;
-    //     }
-    //   }
-    // }
 
     var inventory = new Vue({
       el: "#inventory",
 
       data: {
-        bill: currentBill.fetch(),
+        bill: [],
       },
 
       computed: {
