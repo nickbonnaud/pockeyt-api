@@ -59,13 +59,13 @@
   <script>
 
   if ('{{isset($transaction)}}') {
-    console.log("set");
+    var currentTransaction = '{{$transaction}}';
   } else {
     console.log("not set")
   }
 
 
-   
+    
 
     var inventory = new Vue({
       el: "#inventory",
