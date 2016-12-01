@@ -58,7 +58,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-    console.log(this.bill);
+    console.log({{ $transaction->products }});
 
     // var currentBill = {
     //   fetch: function() {
