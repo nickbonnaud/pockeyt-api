@@ -23,13 +23,13 @@ class TransactionsController extends Controller
                 ->where('profile_id', '=', $business->id)
                 ->where('paid', '=', false);
         })->first();
-        if(isset($transaction)) {
+        $locationCheck = $this->userInLocationCheck($customer, $business);
+        if(isset($transaction) && isset($locationCheck)) {
             $bill = $transaction->products;
             $billId = $transaction->id;
-        }
-        $locationCheck = $this->userInLocationCheck($customer, $business);
-        if (isset($locationCheck)) {
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
+        } else {
+            return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
         }
     }
     public function userInLocationCheck($customer, $business) {

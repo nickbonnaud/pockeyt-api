@@ -24,7 +24,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
           <div class="pull-right" v-if="bill.length !== 0">
-            @include ('partials.transactions.update')
+            @include ('partials.transactions.save')
           </div>
         </div>
         <div class="box-body no-padding">
@@ -58,18 +58,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-    var currentBill = {
-      fetch: function() {
-        var bill = JSON.parse('{!! $bill !!}');
-        return bill;
-      }
-    }
-
     var inventory = new Vue({
       el: "#inventory",
 
       data: {
-        bill: currentBill.fetch(),
+        bill: [],
       },
 
       computed: {
