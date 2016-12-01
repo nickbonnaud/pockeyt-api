@@ -28,7 +28,7 @@ class TransactionsController extends Controller
             $bill = $transaction->products;
             $billId = $transaction->id;
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
-        } else {
+        } elseif(isset($locationCheck)) {
             return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
         }
     }
