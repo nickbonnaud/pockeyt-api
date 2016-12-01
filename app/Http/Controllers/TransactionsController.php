@@ -22,7 +22,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customer->id)
                 ->where('profile_id', '=', $business->id)
                 ->where('paid', '=', false);
-        })->value('products');
+        })->first();
         if(isset($transaction)) {
             $bill = $transaction->products;
             $billId = $transaction->id;
