@@ -48,8 +48,12 @@ class TransactionsController extends Controller
         return view('profiles.show', compact('profile'));
     }
 
-    public function update(Request $request) {
-        dd("hello");
+    public function update(Request $request, $id) {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update($request->all());
+        $profile = $this->user->profile;
+
+        return view('profiles.show', compact('profile'));
     }
 
 }

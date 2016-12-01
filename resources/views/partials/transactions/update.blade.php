@@ -1,4 +1,4 @@
-<form action="{{ route('bill.update', ['transactionId' => $billId]) }}" method="patch">
+<form action="{{ route('bill.update', ['id' => $billId]) }}" method="patch">
  	<input type="hidden" name="user_id" value="{{ $customer->id }}">
   <input type="hidden" name="paid" value="false">
   <input type="hidden" name="products" :value="JSON.stringify(bill)">
