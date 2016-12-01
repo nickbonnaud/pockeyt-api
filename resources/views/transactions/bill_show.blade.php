@@ -58,6 +58,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
+    console.log(this.bill);
+
     // var currentBill = {
     //   fetch: function() {
     //     var bill = JSON.parse({{ $transaction }} || '[]');
