@@ -119,7 +119,7 @@
         leaving: function() {
           console.log(this.saved);
           if(! this.saved) {
-            alert("Leaving");
+            return alert("Leaving");
           }
         }
       }
