@@ -58,20 +58,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-    console.log(JSON.parse('{!! $transaction->products !!}'));
-
-    // var currentBill = {
-    //   fetch: function() {
-    //     var bill = JSON.parse({{ $transaction }} || '[]');
-    //     return bill;
-    //   }
-    // }
+    var currentBill = {
+      fetch: function() {
+        var bill = JSON.parse( '{!! $transaction->products !!}' || '[]');
+        return bill;
+      }
+    }
 
     var inventory = new Vue({
       el: "#inventory",
 
       data: {
-        bill: [],
+        bill: currentBill.fetch(),
       },
 
       computed: {
