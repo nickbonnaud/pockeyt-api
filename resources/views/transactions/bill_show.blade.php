@@ -60,13 +60,13 @@
 
     console.log({{ isset($transaction) }});
 
-    
+
 
     var inventory = new Vue({
       el: "#inventory",
 
       data: {
-        bill: currentBill.fetch(),
+        bill: [],
       },
 
       computed: {
