@@ -13,11 +13,6 @@
     </ol>
   </section>
 
-  <div class="alert alert-info fade out" id="bsalert">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Info!</strong> This alert box could indicate a neutral informative or action
-  </div>
-
   <section class="content" id="inventory">
     <div class="scroll-container col-md-8">
       <div class="scroll-contents">
@@ -79,8 +74,12 @@
       },
 
       mounted: function() {
-        window.onbeforeunload = this.leaving;
-      }
+        window.onbeforeunload = function() {
+          if(!this.saved) {
+            return "This bill not saved";
+          }
+        }
+      },
 
       computed: {
         totalBill: function() {
@@ -121,11 +120,6 @@
         save: function() {
           this.saved = true;
         },
-        leaving: function() {
-          if(!this.saved) {
-            $(".alert").toggleClass('in out'); 
-          }
-        }
       }
     })
   </script>
