@@ -63,7 +63,8 @@
         if ('{{ isset($transaction) }}') {
           var currentTransaction = '{!! $transaction !!}';
           console.log(currentTransaction);
-          var bill = JSON.parse(currentTransaction);
+          console.log(currentTransaction.products);
+          var bill = JSON.parse(currentTransaction.products);
           return bill;
         } else {
           var bill = [];
