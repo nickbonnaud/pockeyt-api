@@ -37,7 +37,11 @@ class TransactionsController extends Controller
     }
 
     public function store(Request $request) {
-        dd($request->all());
+        $transaction = new Transaction($request->all());
+        $profile = $this->user->profile;
+        $profile->transactions()->save($transaction);
+
+        return view('profiles.show', compact('profile'));
     }
 
     public function update(Request $request) {
