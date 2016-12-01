@@ -49,6 +49,8 @@ class TransactionsController extends Controller
     }
 
     public function update(Request $request, $id) {
+        dd($request->all());
+
         $transaction = Transaction::findOrFail($id);
         $transaction->update($request->all());
         $profile = $this->user->profile;
