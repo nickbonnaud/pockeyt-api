@@ -73,7 +73,7 @@
         saved: false
       },
 
-      ready: function() {
+      mounted: function() {
         window.beforeunload = this.leaving;
       },
 
