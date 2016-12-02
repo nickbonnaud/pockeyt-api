@@ -129,7 +129,9 @@ class TransactionsController extends Controller
 
     public function find(Request $request) {
         $customers = DB::table('users')
-            ->leftJoin('transactions', 'users.id', '=', 'transactions.user_id')->get();
+            ->join('transactions', function($join) {
+                $join->on('users.id', '=', transactions.user_id);
+            })->get();
 
         dd($customers);
 
