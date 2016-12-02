@@ -67,7 +67,9 @@ class TransactionsController extends Controller
             $transaction->paid = true;
             $profile->transactions()->save($transaction);
             flash()->success('Success', 'Bill paid!');
-            return view('profiles.show', compact('profile'));
+            
+            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            
         } else {
             $transaction->paid = false;
             $profile->transactions()->save($transaction);
