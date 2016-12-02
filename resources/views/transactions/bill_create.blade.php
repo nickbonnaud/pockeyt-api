@@ -98,7 +98,7 @@
 
         addUser: function(data) {
           console.log(data.user);
-          console.log(data.transactions);
+          console.log(data.transactions[0]);
         },
 
         addProduct: function(product) {
