@@ -66,6 +66,7 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $profile->transactions()->save($transaction);
+            flash()->success('Success', 'Bill paid!');
             return view('profiles.show', compact('profile'));
         } else {
             $transaction->paid = false;
@@ -90,6 +91,7 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $transaction->save();
+            flash()->success('Success', 'Bill paid!');
             return view('profiles.show', compact('profile'));
         } else {
             $transaction->paid = false;
