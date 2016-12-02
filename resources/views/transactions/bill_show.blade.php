@@ -14,6 +14,7 @@
   </section>
 
   <section class="content" id="inventory">
+    @include ('errors.form')
     <div class="scroll-container col-md-8">
       <div class="scroll-contents">
         @include('partials.transactions.inventory', ['inventory' => $inventory])  
