@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/skin-yellow.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/sweetalert/dist/sweetalert.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
@@ -343,6 +344,7 @@
 	<script src="{{ asset('/js/app.min.js') }}"></script>
 	<script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
+  <script src="{{ asset('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
