@@ -42,7 +42,7 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $transactions = Transaction::where(function($query) use ($dbUser, $business) {
-                        $query->where('user_id', '=', $customer->id)
+                        $query->where('user_id', '=', $dbUser->id)
                             ->where('profile_id', '=', $business->id)
                             ->latest()->take(5);
                     })->get();
