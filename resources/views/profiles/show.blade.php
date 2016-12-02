@@ -87,6 +87,7 @@
 
         data: {
           users: [],
+          purchases: []
         },
 
         mounted: function() {
@@ -104,17 +105,27 @@
         },
 
         methods: {
-          addUser: function(user) {
-            var activeCustomer = user.user;
+          addUser: function(data) {
+            var activeCustomer = data.user;
+            var transactions = data.transactions;
             var users = this.users;
+            var purchases = this.purchases;
 
             if(users.length == 0) {
               activeCustomer['lastActive'] = Date.now();
+              transactions.forEach(function(transaction) {
+                purchases.push(transaction);
+              });
+              console.log(purchases);
               users.push(activeCustomer);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
                   activeCustomer['lastActive'] = Date.now();
+                  transactions.forEach(function(transaction) {
+                    purchases.push(transaction);
+                  });
+                  console.log(purchases);
                   users.push(activeCustomer);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now();
