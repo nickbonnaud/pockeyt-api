@@ -133,7 +133,7 @@ class TransactionsController extends Controller
         $transactions = Transaction::where(function($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
                 ->where('profile_id', '=', $business->id);
-        })->first();
+        })->orderBy('created_at', 'desc')->take(5);
         event(new CustomerEnterRadius($user, $transactions, $business));
     }
 
