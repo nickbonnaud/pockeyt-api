@@ -30,7 +30,7 @@ class GeoController extends Controller
 
     public function checkDistance($user) {
     	$dbUser = User::findOrFail($user->id);
-        $businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get();
+        $businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get(); 
     	$userLat = $user->lat;
     	$userLng = $user->lng;
         $inLocations = [];
@@ -40,10 +40,15 @@ class GeoController extends Controller
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
+                    $transactions = Transaction::where(function($query) use ($dbUser, $business) {
+                        $query->where('user_id', '=', $customer->id)
+                            ->where('profile_id', '=', $business->id)
+                            ->latest()->take(5);
+                    })->get();
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $business));
-                    $savedLocation = $this->checkIfUserInLocation($user, $business);
+                    $savedLocation = $this->checkIfUserInLocation($user, $transactions, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
                         $this->setLocation($dbUser, $business);
                         return;

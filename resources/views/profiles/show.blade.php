@@ -56,7 +56,9 @@
               <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}}</h4>
             </div>
             <div class="modal-body">
-              info
+              <template v-for="transaction in transactions">
+                <p>@{{transaction.id}}</p>
+              </template>
             </div>
           </div>
         </div>
@@ -87,6 +89,7 @@
 
         data: {
           users: [],
+          purchases: []
         },
 
         mounted: function() {
@@ -104,18 +107,22 @@
         },
 
         methods: {
-          addUser: function(user) {
+          addUser: function(user, transactions) {
             var activeCustomer = user.user;
+            var customerTransactions = transactions.transactions;
             var users = this.users;
+            var purchases = this.purchases;
 
             if(users.length == 0) {
               activeCustomer['lastActive'] = Date.now();
               users.push(activeCustomer);
+              purchases.push(customerTransactions);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
                   activeCustomer['lastActive'] = Date.now();
                   users.push(activeCustomer);
+                  purchases.push(customerTransactions);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now();
                 }
