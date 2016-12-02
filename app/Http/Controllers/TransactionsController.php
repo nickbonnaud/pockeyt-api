@@ -8,6 +8,7 @@ use App\User;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 
