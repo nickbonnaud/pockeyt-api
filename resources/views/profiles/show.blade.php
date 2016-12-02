@@ -56,9 +56,7 @@
               <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}}</h4>
             </div>
             <div class="modal-body">
-              <template v-for="transaction in transactions">
-                <p>@{{transaction.id}}</p>
-              </template>
+              info
             </div>
           </div>
         </div>
@@ -89,7 +87,6 @@
 
         data: {
           users: [],
-          purchases: []
         },
 
         mounted: function() {
@@ -103,29 +100,22 @@
           pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
-          pusher.subscribe("business")
-            .bind('App\\Events\\BusinessFeedUpdate', this.check);
-
           window.setInterval(this.removeInactiveUser, 120000);
         },
 
         methods: {
-          addUser: function(user, transactions) {
+          addUser: function(user) {
             var activeCustomer = user.user;
-            var customerTransactions = transactions.transactions;
             var users = this.users;
-            var purchases = this.purchases;
 
             if(users.length == 0) {
               activeCustomer['lastActive'] = Date.now();
               users.push(activeCustomer);
-              purchases.push(customerTransactions);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
                   activeCustomer['lastActive'] = Date.now();
                   users.push(activeCustomer);
-                  purchases.push(customerTransactions);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now();
                 }
@@ -172,9 +162,6 @@
               }
             })
           }
-        },
-        check: function(transactions) {
-          console.log(transactions);
         }
       })
     </script>

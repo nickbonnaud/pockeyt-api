@@ -126,6 +126,17 @@ class TransactionsController extends Controller
         return $result;
     }
 
+    public function find(Request $request) {
+        $customer = User::find($request->user_id);
+        $business = $this->user-profile;
+        $transaction = Transaction::where(function($query) use ($customer, $business) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('profile_id', '=', $business->id)
+                ->latest()->take(5);
+        })->get();
+        dd($transaction);
+    }
+
 }
 
 
