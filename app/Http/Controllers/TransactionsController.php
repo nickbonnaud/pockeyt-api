@@ -72,7 +72,7 @@ class TransactionsController extends Controller
             $profile->transactions()->save($transaction);
             $bill = $transaction->products;
             $billId = $transaction->id;
-            $inventory = Product::where('profile_id', '=', $business->id)->get();
+            $inventory = Product::where('profile_id', '=', $profile->id)->get();
             
             return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
@@ -96,7 +96,7 @@ class TransactionsController extends Controller
             $transaction->update($transaction);
             $bill = $transaction->products;
             $billId = $transaction->id;
-            $inventory = Product::where('profile_id', '=', $business->id)->get();
+            $inventory = Product::where('profile_id', '=', $profile->id)->get();
             
             return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
