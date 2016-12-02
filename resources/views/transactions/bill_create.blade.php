@@ -78,7 +78,7 @@
           encrypted: true
         });
 
-        pusher.subscribe("{!! 'business' . $profile->id !!}")
+        pusher.subscribe("{!! 'business' . $this->user->profile->id !!}")
           .bind('App\\Events\\CustomerEnterRadius', this.addUser);
 
       computed: {
