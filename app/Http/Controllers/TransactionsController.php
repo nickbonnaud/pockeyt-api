@@ -56,6 +56,51 @@ class TransactionsController extends Controller
         return view('profiles.show', compact('profile'));
     }
 
+    public function charge(Request $request) {
+        $transaction = new Transaction($request->all());
+        $customer = User::findOrFail($transaction->user_id);
+        $profile = $this->user->profile;
+
+        $result = $this->createCharge($transaction, $customer, $profile);
+
+        if ($result->success) {
+            $transaction->paid = true;
+            $profile->transactions()->save($transaction);
+            return view('profiles.show', compact('profile'));
+        } else {
+            $transaction->paid = false;
+            $profile->transactions()->save($transaction);
+            $bill = $transaction->products;
+            $billId = $transaction->id;
+            $inventory = Product::where('profile_id', '=', $business->id)->get();
+            
+            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'))
+                ->withErrors($result->errors->deepAll());
+        }
+    }
+
+    private function createCharge($transaction, $customer, $profile) {
+        $amount = ($transaction->total) / 100;
+        $serviceFee = $amount * 0.02;
+
+        $result = Braintree_Transaction::sale([
+            'merchantAccountId' => $profile->id,
+            'amount' => $amount,
+            'customerId' => $customer->customer_id,
+            'customer' => [
+                'firstName' => $customer->first_name,
+                'lastName' => $customer->last_name,
+                'email' => $customer->email,
+            ],
+            'serviceFeeAmount' => $serviceFee,
+            'options' => [
+                'submitForSettlement' => True
+            ]
+        ]);
+
+        return $result;
+    }
+
 }
 
 
