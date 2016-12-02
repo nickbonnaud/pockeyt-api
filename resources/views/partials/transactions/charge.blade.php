@@ -4,5 +4,5 @@
   <input type="hidden" name="products" :value="JSON.stringify(bill)">
   <input type="hidden" name="total" :value="totalBill">
   {{ csrf_field() }}
-  <input type="submit" value="Charge Customer" class="btn btn-block btn-primary btn-xs">
+  <input type="submit" value="Charge Customer" class="btn btn-block btn-success">
 </form>
