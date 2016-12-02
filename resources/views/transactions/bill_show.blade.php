@@ -48,7 +48,7 @@
           </div>
         </div>
         <div v-if="bill.length !== 0">
-          @include ('partials.transactions.charge')
+          @include ('partials.transactions.charge_existing')
         </div>
       </div>
     </div>

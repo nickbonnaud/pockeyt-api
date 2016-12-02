@@ -46,7 +46,9 @@
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
         </div>
-          <button type="button" class="btn btn-block btn-success" v-if="bill.length !== 0">Charge Customer</button>
+          <div v-if="bill.length !== 0">
+            @include ('partials.transactions.charge')
+          </div>
       </div>
     </div>
   </section>

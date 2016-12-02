@@ -79,6 +79,30 @@ class TransactionsController extends Controller
         }
     }
 
+    public function chargeExisting(Request $request, $id) {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update($request->all());
+        $customer = User::findOrFail($transaction->user_id);
+        $profile = $this->user->profile;
+
+        $result = $this->createCharge($transaction, $customer, $profile);
+
+        if ($result->success) {
+            $transaction->paid = true;
+            $profile->transactions()->save($transaction);
+            return view('profiles.show', compact('profile'));
+        } else {
+            $transaction->paid = false;
+            $profile->transactions()->save($transaction);
+            $bill = $transaction->products;
+            $billId = $transaction->id;
+            $inventory = Product::where('profile_id', '=', $business->id)->get();
+            
+            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'))
+                ->withErrors($result->errors->deepAll());
+        }
+    }
+
     private function createCharge($transaction, $customer, $profile) {
         $amount = ($transaction->total) / 100;
         $serviceFee = $amount * 0.02;
