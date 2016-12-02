@@ -97,7 +97,7 @@
       methods: {
 
         addUser: function(data) {
-          console.log(data);
+          console.log(data.user);
         },
 
         addProduct: function(product) {
