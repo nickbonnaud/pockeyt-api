@@ -10,7 +10,6 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
-    public $user;
     public $transactions;
     private $business;
 
@@ -19,9 +18,8 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user, $transactions, $business)
+    public function __construct($transactions, $business)
     {
-        $this->user = $user;
         $this->transactions = $transactions;
         $this->business = $business;
     }
