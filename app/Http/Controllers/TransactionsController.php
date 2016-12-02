@@ -107,7 +107,7 @@ class TransactionsController extends Controller
         $amount = ($transaction->total) / 100;
         $serviceFee = $amount * 0.02;
 
-        $result = Braintree_Transaction::sale([
+        $result = \Braintree_Transaction::sale([
             'merchantAccountId' => $profile->id,
             'amount' => $amount,
             'customerId' => $customer->customer_id,
