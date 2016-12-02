@@ -74,7 +74,7 @@ class TransactionsController extends Controller
             $billId = $transaction->id;
             $inventory = Product::where('profile_id', '=', $business->id)->get();
             
-            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'))
+            return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
         }
     }
@@ -98,7 +98,7 @@ class TransactionsController extends Controller
             $billId = $transaction->id;
             $inventory = Product::where('profile_id', '=', $business->id)->get();
             
-            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'))
+            return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
         }
     }
