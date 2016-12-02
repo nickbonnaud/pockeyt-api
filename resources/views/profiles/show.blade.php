@@ -109,6 +109,7 @@
         methods: {
           addUser: function(user, transactions) {
             var activeCustomer = user.user;
+            console.log(transactions);
             var customerTransactions = transactions.transactions;
             var users = this.users;
             var purchases = this.purchases;
