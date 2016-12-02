@@ -10,16 +10,16 @@ class BusinessFeedUpdate extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
-    public $data;
+    public $transactions;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($transactions)
     {
-        $this->data = $data;
+        $this->$transactions = $transactions;
     }
 
     /**
