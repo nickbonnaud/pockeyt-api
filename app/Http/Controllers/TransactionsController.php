@@ -134,7 +134,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $user->id)
                 ->where('profile_id', '=', $business->id);
         })->first();
-        event(new CustomerEnterRadius($transactions, $business));
+        event(new CustomerEnterRadius($data));
     }
 
 }

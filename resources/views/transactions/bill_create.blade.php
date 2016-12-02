@@ -96,9 +96,8 @@
 
       methods: {
 
-        addUser: function(user, transactions) {
-          console.log(transactions);
-          console.log(user);
+        addUser: function(data) {
+          console.log(data);
         },
 
         addProduct: function(product) {
