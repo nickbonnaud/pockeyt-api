@@ -128,20 +128,17 @@ class TransactionsController extends Controller
     }
 
     public function find(Request $request) {
-        $customers = DB::table('users')
-            ->join('transactions', function($join) {
-                $join->on('users.id', '=', 'transactions.user_id');
-            })->get();
-
-        dd($customers);
-
         $customer = User::find($request->user_id);
+        $customer['purchases'] = [];
         $business = $this->user->profile;
-        $transaction = Transaction::where(function($query) use ($customer, $business) {
+        $transactions = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
                 ->where('profile_id', '=', $business->id);
         })->orderBy('created_at', 'desc')->take(5)->get();
-        dd($transaction);
+        foreach ($transactions as $transaction) {
+            $customer->purchases = array_add($transaction);
+        }
+        dd($customer);
     }
 
 }
