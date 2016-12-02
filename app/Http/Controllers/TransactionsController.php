@@ -131,9 +131,8 @@ class TransactionsController extends Controller
         $business = $this->user->profile;
         $transaction = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
-                ->where('profile_id', '=', $business->id)
-                ->take(5);
-        })->get();
+                ->where('profile_id', '=', $business->id);
+        })->orderBy('created_at', 'desc')->take(5)->get();
         dd($transaction);
     }
 
