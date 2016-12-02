@@ -12,6 +12,7 @@ use App\Events\CustomerEnterRadius;
 use App\Events\CustomerLeaveRadius;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Events\BusinessFeedUpdate;
 
 class GeoController extends Controller
 {
@@ -46,6 +47,7 @@ class GeoController extends Controller
                             ->where('profile_id', '=', $business->id)
                             ->latest()->take(5);
                     })->get();
+                    event(new BusinessFeedUpdate($transactions));
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $transactions, $business));

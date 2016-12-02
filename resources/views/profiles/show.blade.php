@@ -103,6 +103,9 @@
           pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
+          pusher.subscribe("business")
+            .bind('App\\Events\\BusinessFeedUpdate', this.check);
+
           window.setInterval(this.removeInactiveUser, 120000);
         },
 
@@ -170,6 +173,9 @@
               }
             })
           }
+        },
+        check: function(data) {
+          console.log(data);
         }
       })
     </script>
