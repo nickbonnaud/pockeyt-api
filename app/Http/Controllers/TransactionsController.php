@@ -127,6 +127,11 @@ class TransactionsController extends Controller
     }
 
     public function find(Request $request) {
+        $customers = DB::table('users')
+            ->leftJoin('transactions', 'users.id', '=', 'transactions.user_id')->get();
+
+        dd($customers);
+
         $customer = User::find($request->user_id);
         $business = $this->user->profile;
         $transaction = Transaction::where(function($query) use ($customer, $business) {
