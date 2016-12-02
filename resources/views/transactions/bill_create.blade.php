@@ -98,6 +98,7 @@
 
         addUser: function(user, transactions) {
           console.log(transactions);
+          console.log(user);
         },
 
         addProduct: function(product) {
