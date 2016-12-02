@@ -132,7 +132,7 @@ class TransactionsController extends Controller
         $transaction = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
                 ->where('profile_id', '=', $business->id)
-                ->orderBy('created_at', 'desc')->take(5);
+                ->take(5);
         })->get();
         dd($transaction);
     }
