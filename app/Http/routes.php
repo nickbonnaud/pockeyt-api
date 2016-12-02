@@ -65,6 +65,8 @@ Route::patch('bill/{transactionId}', 'TransactionsController@update')->name('bil
 Route::post('bill/charge', 'TransactionsController@charge')->name('bill.charge');
 Route::patch('bill/charge/{transactionId}', 'TransactionsController@chargeExisting')->name('bill.chargeExisting');
 
+Route::post('transaction/find', 'TransactionsController@find')->name('transaction.find');
+
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
