@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Location;
 use App\Profile;
+use App\Transaction;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
 use App\Events\CustomerLeaveRadius;
