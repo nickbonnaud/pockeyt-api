@@ -89,11 +89,11 @@ class TransactionsController extends Controller
 
         if ($result->success) {
             $transaction->paid = true;
-            $profile->transactions()->save($transaction);
+            $transaction->update($transaction);
             return view('profiles.show', compact('profile'));
         } else {
             $transaction->paid = false;
-            $profile->transactions()->save($transaction);
+            $transaction->update($transaction);
             $bill = $transaction->products;
             $billId = $transaction->id;
             $inventory = Product::where('profile_id', '=', $business->id)->get();
