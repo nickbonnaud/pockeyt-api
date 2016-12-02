@@ -134,7 +134,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $user->id)
                 ->where('profile_id', '=', $business->id);
         })->orderBy('created_at', 'desc')->take(5)->get();
-        
+        dd($transactions);
         event(new CustomerEnterRadius($user, $transactions, $business));
     }
 
