@@ -80,6 +80,7 @@
 
         pusher.subscribe("business113")
           .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+      },
 
       computed: {
         totalBill: function() {
