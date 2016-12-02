@@ -73,6 +73,14 @@
         bill: [],
       },
 
+      mounted: function() {
+        var pusher = new Pusher('f4976d40a137b96b52ea', {
+          encrypted: true
+        });
+
+        pusher.subscribe("{!! 'business' . $profile->id !!}")
+          .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+
       computed: {
         totalBill: function() {
           var bill = this.bill;
@@ -85,6 +93,11 @@
       },
 
       methods: {
+
+        addUser: function(user, transactions) {
+          console.log(transactions);
+        },
+
         addProduct: function(product) {
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
