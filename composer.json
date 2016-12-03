@@ -22,7 +22,8 @@
         "symfony/psr-http-message-bridge": "0.2",
         "pusher/pusher-php-server": "^2.6",
         "laravel/socialite": "^2.0",
-        "socialiteproviders/instagram": "^2.0"
+        "socialiteproviders/instagram": "^2.0",
+        "moment/moment": "^2.17"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

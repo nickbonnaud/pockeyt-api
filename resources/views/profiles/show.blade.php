@@ -167,6 +167,7 @@
               for (i=users.length - 1; i >= 0; i --) {
                 if (users[i].id == leavingCustomer.id) {
                   users.splice(i, 1);
+                  this.removeUserTransactions(users[i].id);
                 }
               }
             }
@@ -181,6 +182,7 @@
                   var businessId = '{{ $profile->id }}'
                   this.deleteInactiveUser(users[i].id, businessId);
                   users.splice(i, 1);
+                  this.removeUserTransactions(users[i].id);
                 }
               }
             }
@@ -198,6 +200,17 @@
                 'businessId' : businessId
               }
             })
+          },
+          removeUserTransactions: function(userId) {
+            var transactions = this.transactions;
+
+            if(transactions.legth > 0) {
+              for (i=transactions.length - 1; i >= 0; i --) {
+                if(transactions[i].user_id == userId) {
+                  transactions.splice(i, 1);
+                }
+              }
+            }
           }
         }
       })
