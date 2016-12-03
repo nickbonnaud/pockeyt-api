@@ -53,7 +53,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}}</h4>
+              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}} | Recent Purchases</h4>
             </div>
             <div class="modal-body">
               <ul class="timeline">
@@ -67,10 +67,9 @@
                 <!-- timeline item -->
                 <li>
                   <!-- timeline icon -->
-                  <i class="fa fa-envelope bg-blue"></i>
+                  <i class="fa fa-money bg-green"></i>
                   <div class="timeline-item">
                     <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-                    <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
                     <div class="timeline-body">
 
                     </div>
