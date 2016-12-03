@@ -104,19 +104,16 @@
         }
     });
 
+      
+
       Vue.component('child', {
         props: ['products'],
         template: '<div v-for="item in items"><p>@{{ item.name }} @{{ item.quantity }}</p></div>',
         data: function() {
           return {
-            items: this.parseProducts(this.products)
+            items: JSON.parse(this.products)
           }
         },
-        methods: {
-          parseProducts: function(data) {
-            return JSON.parse(data);
-          }
-        }
       });
 
       var customer = new Vue({
