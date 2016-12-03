@@ -114,7 +114,6 @@
             items: JSON.parse(this.products)
           }
         },
-        computed
       });
 
       var customer = new Vue({
