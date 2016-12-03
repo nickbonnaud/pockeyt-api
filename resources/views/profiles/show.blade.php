@@ -69,7 +69,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time" v-showDate="purchase.created_at"><i class="fa fa-calendar-o"></i></span>
+                      <span class="time" v-showdate="purchase.created_at"><i class="fa fa-calendar-o"></i></span>
                       <div class="timeline-body">
 
                       </div>
@@ -108,19 +108,18 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+      
+      Vue.directive('showdate', function(value) {
+        var date = moment(value).format("Do MMM YY");
+        this.el.innerText=date;
+      });
+
       var customer = new Vue({
         el: '#customer',
 
         data: {
           users: [],
           purchases: []
-        },
-
-        directives: {
-          showDate: function(value) {
-            var date = moment(value).format("Do MMM YY");
-            this.el.innerText=date;
-          }
         },
 
         mounted: function() {
