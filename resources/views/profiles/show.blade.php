@@ -67,7 +67,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <h3 class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
+                      <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
                       <div class="timeline-body">
 
                       </div>
