@@ -108,12 +108,19 @@
 
       Vue.component('child', {
         props: ['products'],
-        template: '<div><div v-for="item in items"><p>@{{ item.name }} @{{ item.quantity }}</p></div></div>',
+        template: '
+                  <div>
+                    <div v-for="item in items">
+                      <p>@{{ item.quantity }} x @{{ item.name }} at ${{ (item.price / 100) }}</p>
+                    </div>
+                  </div>
+        ',
         data: function() {
           return {
             items: JSON.parse(this.products)
           }
         },
+        computed
       });
 
       var customer = new Vue({
