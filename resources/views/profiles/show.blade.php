@@ -69,7 +69,8 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time" v-showdate="purchase.created_at"><i class="fa fa-calendar-o"></i></span>
+                      <p v-showdate="purchase.created_at"></p>
+                      <!-- <span class="time" v-showdate="purchase.created_at"><i class="fa fa-calendar-o"></i></span> -->
                       <div class="timeline-body">
 
                       </div>
