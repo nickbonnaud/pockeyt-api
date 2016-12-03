@@ -134,7 +134,7 @@
             console.log(date);
             return date;
           }
-        }
+        },
 
         methods: {
           addUser: function(data) {
