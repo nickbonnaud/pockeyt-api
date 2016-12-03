@@ -109,7 +109,7 @@
         template: '<div v-for="item in items"><p>@{{ item.name }} @{{ item.quantity }}</p></div>',
         data: function() {
           return {
-            items: this.parseProducts(this.products);
+            items: this.parseProducts(this.products)
           }
         },
         methods: {
