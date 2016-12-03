@@ -53,7 +53,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}} | Recent Purchases</h4>
+              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}} | Recent purchases</h4>
             </div>
             <div class="modal-body">
               <ul class="timeline">
@@ -69,8 +69,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-calendar-o"></i>@{{ '2016-12-02 12:20:03' | setDate }}</span>
-                      <h3 class="timeline-header">Most recent purchase on @{{ '2016-12-02 12:20:03' | setDate }}</h3>
+                      <h3 class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ '2016-12-02 12:20:03' | setDate }}</h3>
                       <div class="timeline-body">
 
                       </div>
@@ -134,6 +133,13 @@
             date = moment(value).format("Do MMM YY");
             console.log(date);
             return date;
+          },
+          setPossessive: function(value) {
+            if (value.endsWith('s')) {
+              return value.concat("'");
+            } else{
+              return value.concat("'s");
+            }
           }
         },
 
