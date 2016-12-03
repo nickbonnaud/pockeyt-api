@@ -60,7 +60,7 @@
                 <!-- timeline time label -->
                 <li class="time-label">
                   <span class="bg-red">
-                      @{{ moment().format("MMM Do YY") }}
+                      {{ moment().format("MMM Do YY") }}
                   </span>
                 </li>
                 <!-- /.timeline-label -->
@@ -212,9 +212,6 @@
               }
             }
           },
-          moment: function() {
-            return moment();
-          }
         }
       })
     </script>
