@@ -70,7 +70,7 @@
                       <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
                       <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                       <div class="timeline-body">
-                      @{{ purchase.products }}
+                      @{{ parseProducts(purchase.products) }}
                       </div>
                     </div>
                   </li>
@@ -225,6 +225,9 @@
           },
           moment: function() {
             return moment();
+          },
+          parseProducts: function(data) {
+            return JSON.parse(data);
           }
         }
       })
