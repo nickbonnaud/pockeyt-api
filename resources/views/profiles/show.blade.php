@@ -202,12 +202,12 @@
             })
           },
           removeUserTransactions: function(userId) {
-            var transactions = this.transactions;
+            var purchases = this.purchases;
 
-            if(transactions.legth > 0) {
-              for (i=transactions.length - 1; i >= 0; i --) {
-                if(transactions[i].user_id == userId) {
-                  transactions.splice(i, 1);
+            if(purchases.length > 0) {
+              for (i=purchases.length - 1; i >= 0; i --) {
+                if(purchases[i].user_id == userId) {
+                  purchases.splice(i, 1);
                 }
               }
             }
