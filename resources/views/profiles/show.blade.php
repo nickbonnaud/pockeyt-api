@@ -69,7 +69,6 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                    <p v-showdate="'2016-12-02 12:20:03'"></p>
                       <span class="time" v-showdate="'2016-12-02 12:20:03'"><i class="fa fa-calendar-o"></i></span>
                       <div class="timeline-body">
 
@@ -110,7 +109,7 @@
       Vue.directive('showdate', function(value, el) {
         var date = moment(value).format("Do MMM YY");
         console.log(date);
-        el.textContent=date;
+        el.innerHTML=date;
       });
 
       var customer = new Vue({
