@@ -70,6 +70,7 @@
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-calendar-o"></i>@{{ '2016-12-02 12:20:03' | setDate }}</span>
+                      <h3 class="timeline-header">Most recent purchase on @{{ '2016-12-02 12:20:03' | setDate }}</h3>
                       <div class="timeline-body">
 
                       </div>
