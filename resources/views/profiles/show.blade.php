@@ -111,7 +111,7 @@
         template: '
                   <div>
                     <div v-for="item in items">
-                      <p>@{{ item.quantity }} x @{{ item.name }} at ${{ (item.price / 100) }}</p>
+                      <p>@{{ item.quantity }} x @{{ item.name }} at $@{{ (item.price / 100) }}</p>
                     </div>
                   </div>
         ',
