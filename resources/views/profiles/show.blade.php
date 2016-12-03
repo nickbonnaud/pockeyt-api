@@ -69,7 +69,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-calendar-o"></i>@{{ moment().unix(purchase.created_at).format("Do MMM YY") }}</span>
+                      <span class="time" v-showDate="purchase.created_at"><i class="fa fa-calendar-o"></i></span>
                       <div class="timeline-body">
 
                       </div>
@@ -114,6 +114,13 @@
         data: {
           users: [],
           purchases: []
+        },
+
+        directives: {
+          showDate: function(value) {
+            var date = moment(value).format("Do MMM YY");
+            this.el.innerText=date;
+          }
         },
 
         mounted: function() {
