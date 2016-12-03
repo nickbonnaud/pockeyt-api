@@ -69,7 +69,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-calendar-o"><div v-showdate="'2016-12-02 12:20:03'"></div></i></span>
+                      <span class="time" v-showdate="'2016-12-02 12:20:03'"><i class="fa fa-calendar-o"></i></span>
                       <div class="timeline-body">
 
                       </div>
