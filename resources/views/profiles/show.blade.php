@@ -107,10 +107,12 @@
         }
     });
       
-      Vue.directive('showdate', function(value, el) {
-        var date = moment(value).format("Do MMM YY");
-        console.log(date);
-        el.innerHTML=date;
+      Vue.directive('showdate', {
+        bind: function(value, el) {
+          var date = moment(value).format("Do MMM YY");
+          console.log(date);
+          el.innerHTML=date;
+        }
       });
 
       var customer = new Vue({
