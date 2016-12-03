@@ -63,21 +63,22 @@
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                  <!-- timeline icon -->
-                  <i class="fa fa-money bg-green"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-                    <div class="timeline-body">
 
+                <div v-for="purchase in purchases">
+                  <li>
+                    <!-- timeline icon -->
+                    <i class="fa fa-money bg-green"></i>
+                    <div class="timeline-item">
+                      <span class="time"><i class="fa fa-calendar-o"></i>@{{ moment().unix(purchase.created_at).format("Do MMM YY") }}</span>
+                      <div class="timeline-body">
+
+                      </div>
+                      <div class="timeline-footer">
+                        <a class="btn btn-primary btn-xs">...</a>
+                      </div>
                     </div>
-                    <div class="timeline-footer">
-                      <a class="btn btn-primary btn-xs">...</a>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                </div>
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
