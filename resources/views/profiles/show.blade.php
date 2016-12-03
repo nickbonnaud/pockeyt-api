@@ -166,8 +166,8 @@
             if(users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
                 if (users[i].id == leavingCustomer.id) {
-                  users.splice(i, 1);
                   this.removeUserTransactions(users[i].id);
+                  users.splice(i, 1);
                 }
               }
             }
@@ -181,8 +181,8 @@
                 if (currentTime - userLastActive >= 120000) {
                   var businessId = '{{ $profile->id }}'
                   this.deleteInactiveUser(users[i].id, businessId);
-                  users.splice(i, 1);
                   this.removeUserTransactions(users[i].id);
+                  users.splice(i, 1);
                 }
               }
             }
