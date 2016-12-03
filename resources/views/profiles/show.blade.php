@@ -60,7 +60,7 @@
                 <!-- timeline time label -->
                 <li class="time-label">
                   <span class="bg-red">
-                      {{ moment().format("MMM Do YY") }}
+                      @{{ moment().format("MMM Do YY") }}
                   </span>
                 </li>
                 <!-- /.timeline-label -->
@@ -101,6 +101,7 @@
 @section('scripts.footer')
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+    <script src="moment.js"></script>
 
     <script>
     $.ajaxSetup({
@@ -212,6 +213,9 @@
               }
             }
           },
+          moment: function() {
+            return moment();
+          }
         }
       })
     </script>
