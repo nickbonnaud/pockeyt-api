@@ -8,7 +8,6 @@ use App\User;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
-use App\Events\CustomerEnterRadius;
 
 use App\Http\Controllers\Controller;
 
@@ -125,16 +124,6 @@ class TransactionsController extends Controller
         ]);
 
         return $result;
-    }
-
-    public function find(Request $request) {
-        $user = User::find($request->user_id);
-        $business = $this->user->profile;
-        $transactions = Transaction::where(function($query) use ($user, $business) {
-            $query->where('user_id', '=', $user->id)
-                ->where('profile_id', '=', $business->id);
-        })->orderBy('created_at', 'desc')->take(5)->get();
-        event(new CustomerEnterRadius($user, $transactions, $business));
     }
 
 }

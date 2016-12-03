@@ -64,7 +64,6 @@
 
 @section('scripts.footer')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-  <script src="//js.pusher.com/3.2/pusher.min.js"></script>
   <script>
 
     var inventory = new Vue({
@@ -72,15 +71,6 @@
 
       data: {
         bill: [],
-      },
-
-      mounted: function() {
-        var pusher = new Pusher('f4976d40a137b96b52ea', {
-          encrypted: true
-        });
-
-        pusher.subscribe("business113")
-          .bind('App\\Events\\CustomerEnterRadius', this.addUser);
       },
 
       computed: {
@@ -95,12 +85,6 @@
       },
 
       methods: {
-
-        addUser: function(data) {
-          console.log(data.user);
-          console.log(data.transactions[0]);
-        },
-
         addProduct: function(product) {
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
