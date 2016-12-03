@@ -46,15 +46,9 @@
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
           </div>
         </div>
-          <div v-if="bill.length !== 0">
-            @include ('partials.transactions.charge')
-          </div>
-          <form action="{{ route('transaction.find') }}" method="post">
-            <input type="hidden" name="user_id" value="{{ $customer->id }}">
-            {{ csrf_field() }}
-            <input type="submit" value="find" class="btn btn-block btn-success">
-          </form>
-
+        <div v-if="bill.length !== 0">
+          @include ('partials.transactions.charge')
+        </div>
       </div>
     </div>
   </section>

@@ -64,21 +64,18 @@
                   </span>
                 </li>
 
-                <div v-for="purchase in purchases">
+                <!-- <div v-for="purchase in purchases"> -->
                   <li>
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-calendar-o"><div v-showdate="purchase.created_at"></div></i></span>
+                      <span class="time"><i class="fa fa-calendar-o"><div v-showdate="'2016-12-02 12:20:03'"></div></i></span>
                       <div class="timeline-body">
 
                       </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">...</a>
-                      </div>
                     </div>
                   </li>
-                </div>
+                <!-- </div> -->
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
