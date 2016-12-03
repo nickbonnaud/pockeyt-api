@@ -70,7 +70,7 @@
                       <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
                       <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                       <div class="timeline-body">
-                      @{{ parseProducts(purchase.products) }}
+                        <child :products="@{{ parseProducts(purchase.products) }}"></child>
                       </div>
                     </div>
                   </li>
@@ -103,6 +103,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+      Vue.component('child', {
+        props: ['products'],
+        template: '<div v-for="product in products"><p>@{{ product.name }} @{{ product.quantity }}</p></div>'
+      });
 
       var customer = new Vue({
         el: '#customer',
