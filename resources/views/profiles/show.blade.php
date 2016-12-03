@@ -112,7 +112,7 @@
       Vue.directive('showdate', function(value) {
         var date = moment(value).format("Do MMM YY");
         console.log(date);
-        this.el.innerText=date;
+        this.el.textContent=date;
       });
 
       var customer = new Vue({
