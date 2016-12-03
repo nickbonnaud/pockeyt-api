@@ -108,7 +108,7 @@
 
       Vue.component('child', {
         props: ['products'],
-        template: '<div v-for="item in items"><p>@{{ item.name }} @{{ item.quantity }}</p></div>',
+        template: '<div><div v-for="item in items"><p>@{{ item.name }} @{{ item.quantity }}</p></div></div>',
         data: function() {
           return {
             items: JSON.parse(this.products)
