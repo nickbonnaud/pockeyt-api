@@ -111,6 +111,7 @@
       
       Vue.directive('showdate', function(value) {
         var date = moment(value).format("Do MMM YY");
+        console.log(date);
         this.el.innerText=date;
       });
 
