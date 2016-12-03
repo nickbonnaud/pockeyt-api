@@ -69,8 +69,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                    <p v-showdate="'2016-12-02 12:20:03'"></p>
-                      <span class="time" v-showdate="'2016-12-02 12:20:03'"><i class="fa fa-calendar-o"></i></span>
+                      <span class="time"><i class="fa fa-calendar-o"></i>@{{ '2016-12-02 12:20:03' | setDate }}</span>
                       <div class="timeline-body">
 
                       </div>
@@ -106,14 +105,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-      
-      Vue.directive('showdate', {
-        bind: function(value, el) {
-          var date = moment(value).format("Do MMM YY");
-          console.log(date);
-          el.innerHTML=date;
-        }
-      });
 
       var customer = new Vue({
         el: '#customer',
@@ -136,6 +127,14 @@
 
           window.setInterval(this.removeInactiveUser, 120000);
         },
+
+        filters: {
+          setDate: function(value) {
+            date = moment(value).format("Do MMM YY");
+            console.log(date);
+            return date;
+          }
+        }
 
         methods: {
           addUser: function(data) {
