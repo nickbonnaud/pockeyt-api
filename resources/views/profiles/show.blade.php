@@ -74,6 +74,9 @@
                     </div>
                   </div>
                 </li>
+                <li>
+                  <i class="fa fa-clock-o bg-gray"></i>
+                </li>
               </ul>
             </div>
           </div>
