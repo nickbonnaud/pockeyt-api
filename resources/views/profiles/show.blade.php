@@ -159,7 +159,7 @@
             var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
             var totalDistance = mostRecent - last;
             var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
-            
+            console.log(relativeDistance.toString() + '%');
             return {top: relativeDistance.toString() + '%;'}
           },
 
