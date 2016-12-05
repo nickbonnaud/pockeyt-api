@@ -63,7 +63,7 @@
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
-                <li v-for="purchase in purchases" v-bind:class="transactionDistance(purchase)">
+                <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
                   <!-- timeline icon -->
                   <i class="fa fa-money bg-green"></i>
                   <div class="timeline-item">
@@ -74,7 +74,7 @@
                     </div>
                   </div>
                 </li>
-                <li style="top : 100%">
+                <li style="top : 97%">
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
               </ul>
@@ -159,7 +159,7 @@
             var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
             var totalDistance = mostRecent - last;
             var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
-            console.log(relativeDistance);
+            console.log(relativeDistance.toString() + '%');
             return {top: relativeDistance.toString() + '%'}
           },
 
