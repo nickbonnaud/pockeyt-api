@@ -77,8 +77,15 @@
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
               </ul>
-              <div class="col-md-6">
-                Hello
+              <ul class="timeline col-md-6">
+                <li v-for="purchase in purchases">
+                  <div class="timeline-item">
+                    <h3 class="timeline-header">Purchase on the@{{ purchase.updated_at | setDate }}</h3>
+                    <div class="timeline-body">
+                      <purchases :products="purchase.products"></purchases>
+                    </div>
+                  </div>
+                </li>
               </div>
             </div>
           </div>
