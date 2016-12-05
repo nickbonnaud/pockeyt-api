@@ -140,7 +140,7 @@
 
         computed: {
           transactionDistance: function(purchase) {
-            console.log(purchase);
+            console.log(purchase.updated_at);
             var mostRecent = this.purchases[0];
             var last = this.purchases[this.purchases.length - 1];
             var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
@@ -153,7 +153,6 @@
         filters: {
           setDate: function(value) {
             date = moment(value).format("Do MMM YY");
-            console.log(date);
             return date;
           },
           setPossessive: function(value) {
@@ -177,7 +176,6 @@
               transactions.forEach(function(transaction) {
                 purchases.push(transaction);
               });
-              console.log(purchases);
               users.push(activeCustomer);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
@@ -186,7 +184,6 @@
                   transactions.forEach(function(transaction) {
                     purchases.push(transaction);
                   });
-                  console.log(purchases);
                   users.push(activeCustomer);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now();
