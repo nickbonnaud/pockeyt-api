@@ -160,7 +160,7 @@
             var totalDistance = mostRecent - last;
             var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
             console.log(relativeDistance.toString() + '%');
-            return {top: '50%'}
+            return {top: relativeDistance.toString() + '%'}
           },
 
           addUser: function(data) {
