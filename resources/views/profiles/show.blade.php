@@ -138,18 +138,6 @@
           window.setInterval(this.removeInactiveUser, 120000);
         },
 
-        computed: {
-          transactionDistance: function(purchase) {
-            console.log(purchase.updated_at);
-            var mostRecent = this.purchases[0];
-            var last = this.purchases[this.purchases.length - 1];
-            var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
-            var relativeDistance = ((last - Date.parse(purchase.updated_at)) / totalDistance) * 100;
-            console.log(relativeDistance);
-            return {top: relativeDistance.toString() + '%'}
-          }
-        },
-
         filters: {
           setDate: function(value) {
             date = moment(value).format("Do MMM YY");
@@ -165,6 +153,17 @@
         },
 
         methods: {
+
+          transactionDistance: function(purchase) {
+            console.log(purchase.updated_at);
+            var mostRecent = this.purchases[0];
+            var last = this.purchases[this.purchases.length - 1];
+            var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
+            var relativeDistance = ((last - Date.parse(purchase.updated_at)) / totalDistance) * 100;
+            console.log(relativeDistance);
+            return {top: relativeDistance.toString() + '%'}
+          },
+
           addUser: function(data) {
             var activeCustomer = data.user;
             var transactions = data.transactions;
