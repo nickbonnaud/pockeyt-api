@@ -155,9 +155,9 @@
         methods: {
 
           transactionDistance: function(purchase) {
-            console.log(purchase.updated_at);
             var mostRecent = this.purchases[0];
             var last = this.purchases[this.purchases.length - 1];
+            console.log(Date.parse(mostRecent.updated_at));
             var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
             var relativeDistance = ((last - Date.parse(purchase.updated_at)) / totalDistance) * 100;
             console.log(relativeDistance);
