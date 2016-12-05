@@ -158,6 +158,7 @@
             var mostRecent = this.purchases[0];
             var last = this.purchases[this.purchases.length - 1];
             var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
+            console.log(totalDistance);
             var relativeDistance = ((last - Date.parse(purchase.updated_at)) / totalDistance) * 100;
             return {top: relativeDistance.toString() + '%'}
           },
@@ -165,7 +166,6 @@
           addUser: function(data) {
             var activeCustomer = data.user;
             var transactions = data.transactions;
-            console.log(transactions);
             var users = this.users;
             var purchases = this.purchases;
 
