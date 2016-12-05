@@ -63,7 +63,7 @@
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
-                <li v-for="purchase in purchases">
+                <li v-for="purchase in purchases" v-bind:class="transactionDistance">
                   <!-- timeline icon -->
                   <i class="fa fa-money bg-green"></i>
                   <div class="timeline-item">
@@ -136,6 +136,17 @@
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
           window.setInterval(this.removeInactiveUser, 120000);
+        },
+
+        computed: {
+          transactionDistance: function(purchase) {
+            var mostRecent = this.purchases[0];
+            var last = this.purchases[this.purchases.length - 1];
+            var totalDistance = Date.parse(mostRecent.updated_at) - Date.parse(last.updated_at);
+            var relativeDistance = ((last - Date.parse(purchase.updated_at)) / totalDistance) * 100;
+            console.log(relativeDistance);
+            return {top: relativeDistance.toString() += '%'}
+          }
         },
 
         filters: {
