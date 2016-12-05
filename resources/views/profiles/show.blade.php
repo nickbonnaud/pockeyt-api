@@ -56,7 +56,7 @@
               <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
             </div>
             <div class="modal-body-timeline">
-              <ul class="timeline">
+              <ul class="timeline col-md-6">
                 <!-- timeline time label -->
                 <li class="time-label" style="margin-top: -34px">
                   <span class="bg-blue">
@@ -77,6 +77,9 @@
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
               </ul>
+              <div class="col-md-6">
+                Hello
+              </div>
             </div>
           </div>
         </div>
