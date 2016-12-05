@@ -74,7 +74,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li style="top : 100%">
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
               </ul>
