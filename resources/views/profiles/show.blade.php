@@ -63,7 +63,7 @@
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
-                <li v-for="purchase in purchases" v-bind:class="transactionDistance">
+                <li v-for="purchase in purchases" v-bind:class="transactionDistance(purchase)">
                   <!-- timeline icon -->
                   <i class="fa fa-money bg-green"></i>
                   <div class="timeline-item">
