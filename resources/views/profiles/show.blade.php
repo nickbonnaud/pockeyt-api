@@ -63,19 +63,16 @@
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
-                  <li v-for="purchase in purchases">
-                    <!-- timeline icon -->
-                    <i class="fa fa-money bg-green"></i>
-                    <div class="timeline-item">
-                      <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
-                      <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
-                      <div class="timeline-body">
-                        <purchases :products="purchase.products"></purchases>
-                      </div>
+                <li v-for="purchase in purchases">
+                  <!-- timeline icon -->
+                  <i class="fa fa-money bg-green"></i>
+                  <div class="timeline-item">
+                    <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
+                    <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
+                    <div class="timeline-body">
+                      <purchases :products="purchase.products"></purchases>
                     </div>
-                  </li>
-                <li>
-                  <i class="fa fa-clock-o bg-gray"></i>
+                  </div>
                 </li>
               </ul>
             </div>
