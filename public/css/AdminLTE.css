@@ -2117,6 +2117,7 @@ a:focus {
 .modal-body-timeline {
   height: 700px;
   position: relative;
+  padding-top: 35px;
   padding: 15px;
 }
 

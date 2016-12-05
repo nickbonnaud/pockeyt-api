@@ -58,8 +58,8 @@
             <div class="modal-body-timeline">
               <ul class="timeline">
                 <!-- timeline time label -->
-                <li class="time-label">
-                  <span class="bg-red">
+                <li class="time-label" style="margin-top: -34px">
+                  <span class="bg-blue">
                       @{{ moment().format("Do MMM YY") }}
                   </span>
                 </li>
