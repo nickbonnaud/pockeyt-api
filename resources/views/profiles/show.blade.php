@@ -68,7 +68,7 @@
                   <i class="fa fa-money bg-green"></i>
                   <div class="timeline-item">
                     <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
-                    <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
+                    <h3 v-else class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
                     <div class="timeline-body">
                       <purchases :products="purchase.products"></purchases>
                     </div>
@@ -159,8 +159,10 @@
             var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
             var totalDistance = mostRecent - last;
             var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
-            console.log(relativeDistance.toString() + '%');
-            return {top: relativeDistance.toString() + '%'}
+            if (relativeDistance > 94) {
+              relativeDistance = relativeDistance - 6;
+            }
+            return {top: relativeDistance.toString() + '%;'}
           },
 
           addUser: function(data) {
