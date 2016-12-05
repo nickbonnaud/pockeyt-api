@@ -2114,6 +2114,28 @@ a:focus {
  * Component: Timeline
  * -------------------
  */
+
+.modal-content-timeline {
+  height: 750px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 0;
+  border: 0;
+  background-clip: padding-box;
+  outline: 0;
+}
+
+@media (min-width: 768px)
+.modal-content-timeline {
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125);
+}
+
+@media (min-width: 768px)
+.modal-content-timeline {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
 .timeline {
   position: relative;
   margin: 0 0 30px 0;
@@ -2132,9 +2154,10 @@ a:focus {
   border-radius: 2px;
 }
 .timeline > li {
-  position: relative;
+  position: absolute;
   margin-right: 10px;
   margin-bottom: 15px;
+  padding-right: 100%;
 }
 .timeline > li:before,
 .timeline > li:after {

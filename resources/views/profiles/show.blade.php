@@ -70,7 +70,7 @@
                       <h3 v-if="purchases[0].id === purchase.id" class="timeline-header">@{{ user.first_name | setPossessive }} most recent purchase was on @{{ purchase.updated_at | setDate }}</h3>
                       <h3 v-else class="timeline-header">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                       <div class="timeline-body">
-                        <child :products="purchase.products"></child>
+                        <purchases :products="purchase.products"></purchases>
                       </div>
                     </div>
                   </li>
@@ -106,7 +106,7 @@
 
       
 
-      Vue.component('child', {
+      Vue.component('purchases', {
         props: ['products'],
         template: '<div><div v-for="item in items"><p>@{{ item.quantity }} x @{{ item.name }} at $@{{ (item.price / 100) }}</p></div></div>',
         data: function() {
