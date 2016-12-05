@@ -44,7 +44,7 @@ class GeoController extends Controller
                     $transactions = Transaction::where(function($query) use ($dbUser, $business) {
                         $query->where('user_id', '=', $dbUser->id)
                             ->where('profile_id', '=', $business->id);     
-                    })->orderBy('created_at', 'desc')->take(5)->get();
+                    })->orderBy('updated_at', 'desc')->take(5)->get();
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $transactions, $business));
