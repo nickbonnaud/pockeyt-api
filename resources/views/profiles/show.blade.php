@@ -75,7 +75,7 @@
                   </li>
                 </ul>
                 
-                <div class="scroll-container col-md-8">
+                <div class="scroll-container-timeline col-md-8">
                   <div class="scroll-contents">
                     <div v-for="purchase in purchases">
                       <div class="box box-primary">
