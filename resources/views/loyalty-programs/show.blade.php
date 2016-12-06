@@ -57,7 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 	
-	var selection = {
+	var prevSelection = {
 		fetch: function() {
 			if ({{ $loyaltyProgram->is_increment }}) {
 				var selected = "increments";
@@ -73,7 +73,7 @@
 		el: '#content',
 
 		data: {
-			selection: selection.fetch()
+			selection: prevSelection.fetch()
 		}
 	})
 
