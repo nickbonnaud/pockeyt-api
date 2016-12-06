@@ -110,7 +110,10 @@
         }
     });
 
-      
+    var prevDistance = {
+      'lastDist' : 0,
+      'padding' : 0,
+    }
 
       Vue.component('purchases', {
         props: ['products'],
@@ -128,7 +131,6 @@
         data: {
           users: [],
           purchases: [],
-          lastDistance: [{'distance': 0, 'padding': 0}],
         },
 
         mounted: function() {
@@ -169,16 +171,14 @@
             if (relativeDistance > 94) {
               relativeDistance = relativeDistance - 6;
             }
-            if (((relativeDistance - this.lastDistance[0].distance) < 3) && (purchase.id !== this.purchases[0].id)) {
-              console.log(relativeDistance);
-              console.log(this.lastDistance[0].distance);
-              this.lastDistance[0].distance = relativeDistance;
-              console.log(relativeDistance);
-              this.lastDistance[0].padding = this.lastDistance[0].padding + 20;
-              return {top: relativeDistance.toString() + '%;', 'padding-top': this.lastDistance[0].padding.toString() + ';'}
+            if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
+              console.log(prevDistance.lastDist);
+              prevDistance.lastDist = relativeDistance;
+              prevDistance.padding = prevDistance.padding + 20;
+              return {top: relativeDistance.toString() + '%;', 'padding-top': prevDistance.padding.toString() + ';'}
             } else {
-              this.lastDistance[0].distance = relativeDistance;
-              this.lastDistance[0].padding = 0;
+              prevDistance.lastDist = relativeDistance;
+              prevDistance.padding = 0;
               return {top: relativeDistance.toString() + '%'}
             }
           },
