@@ -22,9 +22,9 @@
 						</div>
 						<div class="box-body">
 							@if($loyaltyProgram->is_increment)
-								<h4>Your current Loyalty Program requires {{ $loyaltyProgram->purchases_required }} purchases per reward.</h4>
+								Your current Loyalty Program requires <b>{{ $loyaltyProgram->purchases_required }}</b> purchases per reward.
 							@else
-								<h4>Your current Loyalty Program requires ${{ $loyaltyProgram->amount_required }}'s in total purchases per reward.</h4>
+								Your current Loyalty Program requires <b>${{ $loyaltyProgram->amount_required }}'s</b> in total purchases per reward.
 							@endif
 							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LoyaltyProgramModal">
 		          	<b>Change</b>
