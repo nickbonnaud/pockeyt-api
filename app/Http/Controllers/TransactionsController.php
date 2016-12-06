@@ -155,7 +155,7 @@ class TransactionsController extends Controller
         $loyaltyCard = LoyaltyCard::where(function ($query) use ($customer, $loyaltyProgram) {
             $query->where('user_id', '=', $customer->id)
                 ->where('program_id', '=', $loyaltyProgram->id);
-        })-first();
+        })->first();
 
         if (isset($loyaltyCard)) {
             return $this->addToLoyaltyCard($loyaltyCard, $loyaltyProgram, $transaction);
