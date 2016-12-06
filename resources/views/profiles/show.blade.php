@@ -170,9 +170,9 @@
               relativeDistance = relativeDistance - 6;
             }
             if (((relativeDistance - this.lastDistance[0].distance) < 3) && (purchase.id !== this.purchases[0].id)) {
+              console.log(this.lastDistance[0]);
               this.lastDistance[0].distance = relativeDistance;
               this.lastDistance[0].padding = this.lastDistance[0].padding + 20;
-              console.log(this.lastDistance[0]);
               return {top: relativeDistance.toString() + '%;', 'padding-top': this.lastDistance[0].padding.toString() + ';'}
             } else {
               this.lastDistance[0].distance = relativeDistance;
