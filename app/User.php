@@ -65,7 +65,7 @@ class User extends Model implements AuthenticatableContract,
     }
 
     public function loyaltyCards() {
-        return $this->hasMany('App\LoyaltyCards');
+        return $this->hasMany('App\LoyaltyCard');
     }
 
     /**
