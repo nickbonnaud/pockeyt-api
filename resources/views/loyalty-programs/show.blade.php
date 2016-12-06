@@ -24,7 +24,7 @@
 							@if($loyaltyProgram->is_increment)
 								<h4>Your current Loyalty Program requires {{ $loyaltyProgram->purchases_required }} purchases per reward.</h4>
 							@else
-								<h4>Your current Loyalty Program requires ${{ $loyaltyProgram->amount_required }} in total purchases per reward.</h4>
+								<h4>Your current Loyalty Program requires ${{ $loyaltyProgram->amount_required }}'s in total purchases per reward.</h4>
 							@endif
 						</div>
 					</div>
