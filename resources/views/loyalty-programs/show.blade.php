@@ -26,6 +26,9 @@
 							@else
 								<h4>Your current Loyalty Program requires ${{ $loyaltyProgram->amount_required }}'s in total purchases per reward.</h4>
 							@endif
+							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LoyaltyProgramModal">
+		          	<b>Change</b>
+		        	</a>
 						</div>
 					</div>
 				</div>
@@ -33,16 +36,43 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="LoyaltyProgramModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="LoyaltyProgramModal">Change Loyalty Program</h4>
+      </div>
+      <div class="modal-body">
+        {!! Form::model($loyaltyProgram, ['method' => 'PATCH', 'route' => ['loyaltyProgram.update', $loyaltyProgram->id]]) !!}
+          @include ('partials.loyalty-programs.form_edit')
+        {!! Form::close() !!}
+      </div>
+    </div>
+  </div>
+</div>
 @stop
+
 @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 	
+	var selection = {
+		fetch: function() {
+			if ({{ $loyaltyProgram->is_increment }}) {
+				var selected = "increments";
+			} else {
+				var selected = "amounts";
+			}
+			return selected;
+		}
+	}
+
 	var content = new Vue({
 		el: '#content',
 
 		data: {
-			selection: ""
+			selection: selection.fetch()
 		}
 	})
 
