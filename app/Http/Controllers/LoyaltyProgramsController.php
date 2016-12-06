@@ -58,7 +58,8 @@ class LoyaltyProgramsController extends Controller
      */
     public function show($id)
     {
-        
+        $loyaltyProgram = $this->user->profile->loyaltyProgram;
+        return view('loyalty-programs.show', compact('loyaltyProgram'));
     }
 
     /**
