@@ -36,8 +36,8 @@
 								</div>
 							</div>
 							<h4>Number of Purchases required for reward</h4>
-							<div class="input-group">
-								<div class="col-xs-3">
+							<div class="col-xs-3">
+								<div class="input-group">
 									<span class="input-group-addon">
 										<i class="fa fa-plus-square"></i>
 									</span>
@@ -45,8 +45,8 @@
 								</div>
 							</div>
 							<h4>Total amount customers must spend to receive reward</h4>
-							<div class="input-group">
-								<div class="col-xs-3">
+							<div class="col-xs-3">
+								<div class="input-group">
 									<span class="input-group-addon">
 										<i class="fa fa-dollar"></i>
 									</span>
