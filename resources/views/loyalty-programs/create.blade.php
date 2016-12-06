@@ -37,11 +37,15 @@
 							</div>
 							<div class="form-group">
 								<label for="purchases_required">Number of Purchases required for reward</label>
-								<input class="form-control" type="number" name="purchases_required" id="purchases_required" placeholder="20">
+								<div class="col-xs-3">
+									<input class="form-control" type="number" name="purchases_required" id="purchases_required" placeholder="20">
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="amount_required">Total amount customers must spend to receive reward</label>
-								<input class="form-control" type="number" name="amount_required" id="amount_required" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" placeholder="50.00">
+								<div class="col-xs-3">
+									<input class="form-control" type="number" name="amount_required" id="amount_required" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" placeholder="50.00">
+								</div>
 							</div>
 						</div>
 					</div>
