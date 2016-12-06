@@ -127,7 +127,8 @@
 
         data: {
           users: [],
-          purchases: []
+          purchases: [],
+          lastDistance: [{'distance': 0, 'padding': 0}],
         },
 
         mounted: function() {
@@ -168,7 +169,15 @@
             if (relativeDistance > 94) {
               relativeDistance = relativeDistance - 6;
             }
-            return {top: relativeDistance.toString() + '%'}
+            if ((relativeDistance - this.lastDistance[0].distance < 3) && (purchase.id !== this.purchases[0].id)) {
+              this.lastDistance[0].distance = relativeDistance;
+              this.lastDistance[0].padding = this.lastDistance[0].padding + 20;
+              return {top: relativeDistance.toString() + '%;' padding-top: this.lastDistance[0].padding.toString() + ';'}
+            } else {
+              this.lastDistance[0].distance = relativeDistance;
+              this.lastDistance[0].padding = 0;
+              return {top: relativeDistance.toString() + '%'}
+            }
           },
 
           addUser: function(data) {
