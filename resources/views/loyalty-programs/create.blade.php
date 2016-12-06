@@ -34,21 +34,20 @@
 										Or reward customers after they have spent a certain amount
 									</label>
 								</div>
-								<div class="input-group">
-									<h4>Number of Purchases required for reward</h4>
-									<span class="input-group-addon">
-										<i class="fa plus-square"></i>
-									</span>
-									<input type="number" name="purchases_required" id="purchases_required">
-								</div>
-
-								<div class="input-group">
-									<h4>Total amount customers must spend to receive reward</h4>
-									<span class="input-group-addon">
-										<i class="fa fa-dollar"></i>
-									</span>
-									<input type="number" name="amount_required" id="amount_required" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any">
-								</div>
+							</div>
+							<h4>Number of Purchases required for reward</h4>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="fa plus-square"></i>
+								</span>
+								<input type="number" name="purchases_required" id="purchases_required">
+							</div>
+							<h4>Total amount customers must spend to receive reward</h4>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-dollar"></i>
+								</span>
+								<input type="number" name="amount_required" id="amount_required" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any">
 							</div>
 						</div>
 					</div>
