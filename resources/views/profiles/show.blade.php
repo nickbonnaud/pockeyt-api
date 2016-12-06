@@ -68,9 +68,6 @@
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
                       <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
-                      <div class="timeline-body">
-                        <purchases :products="purchase.products"></purchases>
-                      </div>
                     </div>
                   </li>
                   <li style="top : 97%">
