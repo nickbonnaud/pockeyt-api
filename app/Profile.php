@@ -120,6 +120,10 @@ class Profile extends Model {
         return $this->hasOne(Account::class);
     }
 
+    public function loyaltyProgram() {
+        return $this->hasOne(LoyaltyProgram::class);
+    }
+
     public function publish(Account $account) {
         return $this->account()->save($account);
     }

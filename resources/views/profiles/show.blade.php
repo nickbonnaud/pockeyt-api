@@ -29,7 +29,7 @@
     <!-- Default box -->
     <div>
       <template v-for="user in users">
-        <div class="col-sm-3 col-md-3">
+        <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
