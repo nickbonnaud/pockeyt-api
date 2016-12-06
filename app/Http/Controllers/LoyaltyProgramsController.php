@@ -43,7 +43,7 @@ class LoyaltyProgramsController extends Controller
     public function store(Request $request)
     {
        $loyaltyProgram = new loyaltyProgram($request->except(['optionsRadios']));
-       if ($request->input('optionsRadios') === 'purchases_required') {
+       if ($request->input('optionsRadios') === 'increments') {
             $loyaltyProgram->is_increment = true;
        }
        $this->user->profile->loyaltyProgram()->save($loyaltyProgram);
