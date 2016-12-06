@@ -44,7 +44,7 @@
         <h4 class="modal-title" id="LoyaltyProgramModal">Change Loyalty Program</h4>
       </div>
       <div class="modal-body">
-        {!! Form::model($loyaltyProgram, ['method' => 'PATCH', 'route' => ['loyaltyPrograms.update', $loyaltyProgram->id]]) !!}
+        {!! Form::model($loyaltyProgram, ['method' => 'PATCH', 'route' => ['loyalty-programs.update', $loyaltyProgram->id]]) !!}
           @include ('partials.loyalty-programs.form_edit')
         {!! Form::close() !!}
       </div>
