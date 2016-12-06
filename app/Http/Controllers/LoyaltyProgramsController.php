@@ -96,7 +96,9 @@ class LoyaltyProgramsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loyaltyProgram = LoyaltyProgram::findOrFail($id);
+        $loyaltyProgram->delete();
+        return redirect()->route('loyalty-programs.create');
     }
 
 }
