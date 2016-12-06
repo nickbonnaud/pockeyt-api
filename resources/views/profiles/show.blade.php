@@ -78,10 +78,12 @@
                 </li>
               </ul>
               <ul class="timeline col-md-6">
-                <li v-for="purchase in purchases">
-                  <div class="timeline-item">
-                    <h3 class="timeline-header">Purchase on the@{{ purchase.updated_at | setDate }}</h3>
-                    <div class="timeline-body">
+                <div v-for="purchase in purchases">
+                  <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
+                    </div>
+                    <div class="box-body">
                       <purchases :products="purchase.products"></purchases>
                     </div>
                   </div>
