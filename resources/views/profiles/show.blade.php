@@ -56,7 +56,7 @@
                 <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
-                <ul class="timeline col-md-6">
+                <ul class="timeline col-md-4">
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
@@ -74,9 +74,9 @@
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
-                <div class="col-md-6" v-for="purchase in purchases">
+                <div class="col-md-8" v-for="purchase in purchases">
                   <div class="box box-primary">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border text-center">
                       <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                     </div>
                     <div class="box-body">
