@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LoyaltyProgramsController extends Controller
+class LoyaltyProgramController extends Controller
 {
     
     public function __construct() {
@@ -26,9 +26,9 @@ class LoyaltyProgramsController extends Controller
         $loyaltyProgram = $this->user->profile->loyaltyProgram;
         if (isset($loyaltyProgram)) {
             $loyaltyProgramId = $loyaltyProgram->id;
-            return view('loyalty-programs.show', compact('loyaltyProgramId'));
+            return view('loyalty-program.show', compact('loyaltyProgramId'));
         } else {
-            return view('loyalty-programs.create');
+            return view('loyalty-program.create');
         }
         
     }
