@@ -70,11 +70,11 @@ class TransactionsController extends Controller
             $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
             if (isset($newLoyaltyCard)) {
                 if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
-                    flash()->success('Loyalty reward earned!', $customer->first_name . ' has done ' . $newLoyaltyCard->required . ' transactions!');
+                    flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has done ' . $newLoyaltyCard->required . ' transactions!');
                 } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
-                    flash()->success('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
+                    flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
                 } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-                    flash()->success($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
+                    flash()->overlay($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
                 } else{
                     flash()->success('Paid', 'Transaction Complete');
                 }
