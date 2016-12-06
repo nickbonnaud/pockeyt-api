@@ -25,7 +25,7 @@
 								@if($loyaltyProgram->is_increment)
 									<h4>Your current Loyalty Program requires <b>{{ $loyaltyProgram->purchases_required }}</b> purchases per reward.</h4>
 								@else
-									<h4>Your current Loyalty Program requires <b>${{ $loyaltyProgram->amount_required }}'s</b> in total purchases per reward.</h4>
+									<h4>Your current Loyalty Program requires <b>${{ $loyaltyProgram->amount_required / 100 }}'s</b> in total purchases per reward.</h4>
 								@endif
 								<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LoyaltyProgramModal">
 			          	<b>Change</b>
