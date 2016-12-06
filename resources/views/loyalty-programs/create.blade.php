@@ -38,7 +38,7 @@
 							<h4>Number of Purchases required for reward</h4>
 							<div class="input-group">
 								<span class="input-group-addon">
-									<i class="fa plus-square"></i>
+									<i class="fa fa-plus-square"></i>
 								</span>
 								<input class="form-control" type="number" name="purchases_required" id="purchases_required">
 							</div>
