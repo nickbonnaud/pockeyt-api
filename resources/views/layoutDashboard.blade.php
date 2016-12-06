@@ -133,7 +133,7 @@
             <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span>Posts</span></a></li>
             <li><a href="{{ route('posts.events') }}"><i class="fa fa-calendar"></i> <span>Events</span></a></li>
             <li><a href="{{ route('products.list') }}"><i class="fa fa-shopping-cart"></i> <span>Inventory</span></a></li>
-            <li><a href="{{ route('loyalty-program.create') }}"><i class="fa fa-trophy"></i> <span>Loyalty Program</span></a></li>
+            <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span>Loyalty Program</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
