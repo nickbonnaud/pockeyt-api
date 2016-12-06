@@ -30,7 +30,7 @@
       				{!! Form::close() !!}
       		</div>
       	</div>
-        <div class="scroll-container-timeline col-md-6">
+        <div class="scroll-container col-md-6">
             <div class="scroll-contents">
               @include('partials.posts.list', ['posts' => $posts, 'no_icons' => true])
             </div>
