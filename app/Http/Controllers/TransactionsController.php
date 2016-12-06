@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Location;
+use App\LoyaltyCard;
 use App\User;
 use App\Product;
 use App\Transaction;
@@ -66,8 +67,22 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $profile->transactions()->save($transaction);
-            flash()->success('Paid', 'Transaction Complete');
-            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+            if (isset($newLoyaltyCard)) {
+                if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
+                    flash()->success('Loyalty reward earned!', $customer->first_name . ' has done ' . $loyaltyCard->required . ' transactions!');
+                } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
+                    flash()->success('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($loyaltyCard->required / 100) . ' here!');
+                } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
+                    flash()->success($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($loyaltyCard->required)) / 100) . ' here!');
+                } else{
+                    flash()->success('Paid', 'Transaction Complete');
+                }
+                return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            } else {
+                flash()->success('Paid', 'Transaction Complete');
+                return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            }
         } else {
             $transaction->paid = false;
             $profile->transactions()->save($transaction);
@@ -91,6 +106,7 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $transaction->save();
+            $this->checkLoyaltyProgram($customer, $profile, $transaction);
             flash()->success('Paid', 'Transaction Complete');
             return redirect()->route('profiles.show', ['profiles' => $profile->id]);
         } else {
@@ -124,6 +140,70 @@ class TransactionsController extends Controller
         ]);
 
         return $result;
+    }
+
+    public function checkLoyaltyProgram($customer, $profile, $transaction) {
+        $loyaltyProgram = $profile->loyaltyProgram;
+        if(isset($loyaltyProgram)) {
+            return $this->getCustomerLoyaltyCard($customer, $loyaltyProgram, $transaction);
+        } else {
+            return;
+        }
+    }
+
+    public function getCustomerLoyaltyCard($customer, $loyaltyProgram, $transaction) {
+        $loyaltyCard = LoyaltyCard::where(function ($query) use ($customer, $loyaltyProgram) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('program_id', '=', $loyaltyProgram->id);
+        })-first();
+
+        if (isset($loyaltyCard)) {
+            return $this->addToLoyaltyCard($loyaltyCard, $loyaltyProgram, $transaction);
+        } else {
+            return $this->createLoyaltyCard($customer, $loyaltyProgram, $transaction);
+        }
+    }
+
+    public function addToLoyaltyCard($loyaltyCard, $loyaltyProgram, $transaction) {
+        if($loyaltyProgram->is_increment) {
+            if(($loyaltyCard->current_amount + 1) === $loyaltyProgram->purchases_required) {
+                $loyaltyCard->current_amount = 0;
+                $loyaltyCard->rewards_achieved = $loyaltyCard->rewards_achieved + 1;
+                $loyaltyCard->save();
+                $loyaltyCard['transactionRewards'] = 1;
+                $loyaltyCard['type'] = 'increment';
+                $loyaltyCard['required'] = $loyaltyProgram->purchases_required;
+                return $loyaltyCard;
+            } else {
+                $loyaltyCard->current_amount = $loyaltyCard->current_amount + 1;
+                $loyaltyCard->save();
+                $loyaltyCard['transactionRewards'] = 0;
+                $loyaltyCard['type'] = 'increment';
+                $loyaltyCard['required'] = $loyaltyProgram->purchases_required;
+                return $loyaltyCard;
+            }
+        } else {
+            if(($loyaltyCard->current_amount + $transaction->total) >= $loyaltyProgram->amount_required) {
+                $prevRewardsAchieved = $loyaltyCard->rewards_achieved;
+                $loyaltyCard->current_amount = $loyaltyCard->current_amount + $transaction->total;
+                while($loyaltyCard->current_amount >= $loyaltyProgram->amount_required) {
+                    $loyaltyCard->rewards_achieved = $loyaltyCard->rewards_achieved + 1;
+                    $loyaltyCard->current_amount = $loyaltyCard->current_amount - $loyaltyProgram->amount_required;
+                }
+                $loyaltyCard->save();
+                $loyaltyCard['transactionRewards'] = $loyaltyCard->rewards_achieved - $prevRewardsAchieved;
+                $loyaltyCard['type'] = 'amount';
+                $loyaltyCard['required'] = $loyaltyProgram->amount_required;
+                return $loyaltyCard;
+            } else {
+                $loyaltyCard->current_amount = $loyaltyCard->current_amount + $transaction->total;
+                $loyaltyCard->save();
+                $loyaltyCard['transactionRewards'] = 0;
+                $loyaltyCard['type'] = 'amount';
+                $loyaltyCard['required'] = $loyaltyProgram->amount_required;
+                return $loyaltyCard;
+            }
+        }
     }
 
 }

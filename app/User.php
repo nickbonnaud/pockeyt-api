@@ -64,6 +64,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Location');
     }
 
+    public function loyaltyCards() {
+        return $this->hasMany('App\LoyaltyCards');
+    }
+
     /**
      * current user saves and associates with profile
      *
