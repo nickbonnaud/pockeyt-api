@@ -49,7 +49,7 @@ class LoyaltyProgramsController extends Controller
             $loyaltyProgram->amount_required = ($loyaltyProgram->amount_required) * 100;
        }
        $this->user->profile->loyaltyProgram()->save($loyaltyProgram);
-       return redirect()->route('loyalty-programs.create');
+       return redirect()->route('loyalty-programs.show', compact('loyaltyProgram'));
     }
 
     /**
