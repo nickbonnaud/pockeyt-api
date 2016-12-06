@@ -102,7 +102,7 @@
 </div>
 
 <!-- /.content-wrapper -->
-    @stop
+@stop
 @endif
 
 @section('scripts.footer')

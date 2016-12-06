@@ -14,7 +14,7 @@
 		    </ol>
 		  </section>
 		  @include ('errors.form')
-			<section class="content">
+			<section class="content" id="content">
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
@@ -56,6 +56,17 @@
 		</div>
 	</div>
 </div>
-
-
 @stop
+@section('scripts.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script>
+	
+	var content = new Vue({
+		el: '#content'
+	})
+
+</script>
+
+
+
+
