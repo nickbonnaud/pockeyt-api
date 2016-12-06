@@ -8367,7 +8367,7 @@ img {
   height: 300px;
 }
 
-@media (min-width: 768) {
+@media (min-width: 768px) {
   .scroll-container-timeline {
     height: 100%;
     overflow: hidden;
