@@ -8375,13 +8375,6 @@ img {
     display: flex; 
   }
 
-  .scroll-container-timeline {
-    height: 100%;
-    overflow: hidden;
-    will-change: overflow;
-    display: flex; 
-  }
-
   .scroll-contents {
     overflow: auto;
     width: 100%;
