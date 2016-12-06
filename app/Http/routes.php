@@ -75,7 +75,7 @@ Route::get('connect/subscribe/instagram', 'ConnectController@verifySubscribeInst
 Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaMedia');
 
 // Loyalty Programs
-Route::resource('loyalty-program', 'LoyaltyProgramController');
+Route::resource('loyalty-programs', 'LoyaltyProgramsController');
 
 
 // JWT Authentication routes

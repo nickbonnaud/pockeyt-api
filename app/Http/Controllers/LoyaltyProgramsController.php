@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Profile;
+use App\loyaltyProgram;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LoyaltyProgramController extends Controller
+class LoyaltyProgramsController extends Controller
 {
     
     public function __construct() {
@@ -26,9 +27,9 @@ class LoyaltyProgramController extends Controller
         $loyaltyProgram = $this->user->profile->loyaltyProgram;
         if (isset($loyaltyProgram)) {
             $loyaltyProgramId = $loyaltyProgram->id;
-            return view('loyalty-program.show', compact('loyaltyProgramId'));
+            return view('loyalty-programs.show', compact('loyaltyProgramId'));
         } else {
-            return view('loyalty-program.create');
+            return view('loyalty-programs.create');
         }
         
     }

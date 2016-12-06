@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLoyaltyProgramTable extends Migration
+class CreateLoyaltyProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateLoyaltyProgramTable extends Migration
      */
     public function up()
     {
-        Schema::create('loyalty_program', function (Blueprint $table) {
+        Schema::create('loyalty_programs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
@@ -30,6 +30,6 @@ class CreateLoyaltyProgramTable extends Migration
      */
     public function down()
     {
-        Schema::drop('loyalty_program');
+        Schema::drop('loyalty_programs');
     }
 }
