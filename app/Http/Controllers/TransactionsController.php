@@ -206,6 +206,36 @@ class TransactionsController extends Controller
         }
     }
 
+    public function createLoyaltyCard($customer, $loyaltyProgram, $transaction) {
+        $loyaltyCard = new LoyaltyCard;
+        if($loyaltyProgram->is_increment) {
+            $loyaltyCard->program_id = $loyaltyProgram->id;
+            $loyaltyCard->current_amount = 1;
+            $loyaltyCard->rewards_achieved = 0;
+            $customer->loyaltyCards()->save($loyaltyCard);
+            $loyaltyCard['transactionRewards'] = 0;
+            $loyaltyCard['type'] = 'increment';
+            $loyaltyCard['required'] = $loyaltyProgram->purchases_required;
+            return $loyaltyCard;
+        } else {
+            $loyaltyCard->program_id = $loyaltyProgram->id;
+            $loyaltyCard->current_amount = $transaction->total;
+            $loyaltyCard->rewards_achieved = 0;
+            if($loyaltyCard->current_amount >= $loyaltyProgram->amount_required) {
+                while($loyaltyCard->current_amount >= $loyaltyProgram->amount_required) {
+                    $loyaltyCard->rewards_achieved = $loyaltyCard->rewards_achieved + 1;
+                    $loyaltyCard->current_amount = $loyaltyCard->current_amount - $loyaltyProgram->amount_required;
+                }
+            }
+            $customer->loyaltyCards()->save($loyaltyCard);
+            $loyaltyCard['transactionRewards'] = $loyaltyCard->rewards_achieved;
+            $loyaltyCard['type'] = 'amount';
+            $loyaltyCard['required'] = $loyaltyProgram->amount_required;
+            return $loyaltyCard;
+
+        }
+    }
+
 }
 
 
