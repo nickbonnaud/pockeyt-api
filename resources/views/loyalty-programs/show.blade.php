@@ -15,13 +15,17 @@
 		  </section>
 		  @include ('errors.form')
 			<section class="content" id="content">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Program Details</h3>
 						</div>
 						<div class="box-body">
-						Hello
+							@if($loyaltyProgram->is_increment)
+								<h4>Your current Loyalty Program requires {{ $loyaltyProgram->purchases_required }} purchases per reward.</h4>
+							@else
+								<h4>Your current Loyalty Program requires ${{ $loyaltyProgram->amount_required }} in total purchases per reward.</h4>
+							@endif
 						</div>
 					</div>
 				</div>
