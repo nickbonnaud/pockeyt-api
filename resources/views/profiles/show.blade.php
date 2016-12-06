@@ -74,14 +74,19 @@
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
-                <div class="col-md-8" v-for="purchase in purchases">
-                  <div class="box box-primary">
-                    <div class="box-header with-border text-center">
-                      <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
-                    </div>
-                    <div class="box-body">
-                      <purchases :products="purchase.products"></purchases>
-                      <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}<b></div>
+                
+                <div class="scroll-container col-md-8">
+                  <div class="scroll-contents">
+                    <div v-for="purchase in purchases">
+                      <div class="box box-primary">
+                        <div class="box-header with-border text-center">
+                          <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
+                        </div>
+                        <div class="box-body">
+                          <purchases :products="purchase.products"></purchases>
+                          <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
