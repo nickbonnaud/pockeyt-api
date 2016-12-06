@@ -175,6 +175,7 @@
               console.log(prevDistance.lastDist);
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = prevDistance.padding + 20;
+              console.log(prevDistance.padding);
               return {top: relativeDistance.toString() + '%;', 'padding-top': prevDistance.padding.toString() + ';'}
             } else {
               prevDistance.lastDist = relativeDistance;
