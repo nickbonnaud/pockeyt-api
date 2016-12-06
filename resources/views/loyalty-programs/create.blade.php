@@ -37,7 +37,8 @@
 							</div>
 							<div class="form-group">
 								<label for="purchases_required">Number of Purchases required for reward</label>
-								<div class="col-xs-3">
+								<div class="input-group col-xs-3">
+									<span class="input-group-addon">#</span>
 									<input class="form-control" type="number" name="purchases_required" id="purchases_required" placeholder="20">
 								</div>
 							</div>
