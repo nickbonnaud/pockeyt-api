@@ -62,26 +62,20 @@ class LoyaltyProgramsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $id)
-    {
-        $account = Account::findOrFail($id);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-
+        $loyaltyProgram = LoyaltyProgram::findOrFail($id);
+        if ($request->input('optionsRadios') === 'increments') {
+            $loyaltyProgram->is_increment = true;
+       }
+       $loyaltyProgram->update($request->except(['optionsRadios']));
+       return redirect()->route('loyalty-programs.show', compact('loyaltyProgram'));
     }
 
 
