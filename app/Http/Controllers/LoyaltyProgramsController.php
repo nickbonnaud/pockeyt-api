@@ -26,8 +26,7 @@ class LoyaltyProgramsController extends Controller
     {
         $loyaltyProgram = $this->user->profile->loyaltyProgram;
         if (isset($loyaltyProgram)) {
-            $loyaltyProgramId = $loyaltyProgram->id;
-            return view('loyalty-programs.show', compact('loyaltyProgramId'));
+            return view('loyalty-programs.show', compact('loyaltyProgram'));
         } else {
             return view('loyalty-programs.create');
         }
