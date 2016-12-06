@@ -44,6 +44,9 @@ class LoyaltyProgramsController extends Controller
        $loyaltyProgram = new loyaltyProgram($request->except(['optionsRadios']));
        if ($request->input('optionsRadios') === 'increments') {
             $loyaltyProgram->is_increment = true;
+       } else {
+            $loyaltyProgram->is_increment = false;
+            $loyaltyProgram->amount_required = ($loyaltyProgram->amount_required) * 100;
        }
        $this->user->profile->loyaltyProgram()->save($loyaltyProgram);
        return redirect()->route('loyalty-programs.create');
@@ -73,8 +76,14 @@ class LoyaltyProgramsController extends Controller
         $loyaltyProgram = LoyaltyProgram::findOrFail($id);
         if ($request->input('optionsRadios') === 'increments') {
             $loyaltyProgram->is_increment = true;
+            $loyaltyProgram->amount_required = null;
+            $loyaltyProgram->purchases_required = $request->purchases_required;
+       } else {
+            $loyaltyProgram->is_increment = false;
+            $loyaltyProgram->purchases_required = null;
+            $loyaltyProgram->amount_required = ($request->amount_required) * 100;
        }
-       $loyaltyProgram->update($request->except(['optionsRadios']));
+       $loyaltyProgram->save();
        return redirect()->route('loyalty-programs.show', compact('loyaltyProgram'));
     }
 
