@@ -77,7 +77,7 @@
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
-                <div v-for="purchase in purchases col-md-6">
+                <div class="col-md-6" v-for="purchase in purchases">
                   <div class="box box-primary">
                     <div class="box-header with-border">
                       <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
