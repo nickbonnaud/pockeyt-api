@@ -49,35 +49,31 @@
           </div>
         </div>
         <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
-            </div>
-            <div class="modal-body-timeline">
-              <ul class="timeline col-md-6">
-                <!-- timeline time label -->
-                <li class="time-label" style="margin-top: -34px">
-                  <span class="bg-blue">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
+              </div>
+              <div class="modal-body-timeline">
+                <ul class="timeline col-md-6">
+                  <!-- timeline time label -->
+                  <li class="time-label" style="margin-top: -34px">
+                    <span class="bg-blue">
                       @{{ moment().format("Do MMM YY") }}
-                  </span>
-                </li>
-                <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
-                  <!-- timeline icon -->
-                  <i class="fa fa-money bg-green"></i>
-                  <div class="timeline-item">
-                    <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
-                    <div class="timeline-body">
-                      <purchases :products="purchase.products"></purchases>
+                    </span>
+                  </li>
+                  <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
+                    <!-- timeline icon -->
+                    <i class="fa fa-money bg-green"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
                     </div>
-                  </div>
-                </li>
-                <li style="top : 97%">
-                  <i class="fa fa-clock-o bg-gray"></i>
-                </li>
-              </ul>
-              <ul class="timeline col-md-6">
+                  </li>
+                  <li style="top : 97%">
+                    <i class="fa fa-clock-o bg-gray"></i>
+                  </li>
+                </ul>
                 <div v-for="purchase in purchases">
                   <div class="box box-primary">
                     <div class="box-header with-border">
@@ -87,12 +83,11 @@
                       <purchases :products="purchase.products"></purchases>
                     </div>
                   </div>
-                </li>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </template>
     </div>
     <!-- /.box -->
