@@ -32,6 +32,9 @@ class TransactionsController extends Controller
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
         } elseif(isset($locationCheck)) {
             return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
+        } else {
+            flash()->error('Oops', 'Customer not in business radius!');
+            return redirect()->route('profiles.show', ['profiles' => $business->id]);
         }
     }
     public function userInLocationCheck($customer, $business) {
