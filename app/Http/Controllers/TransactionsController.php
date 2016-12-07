@@ -26,11 +26,11 @@ class TransactionsController extends Controller
         })->first();
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if(isset($transaction) && isset($locationCheck)) {
-            dd("inside transaction set");
             $bill = $transaction->products;
             $billId = $transaction->id;
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
         } elseif(isset($locationCheck)) {
+            dd("inside location set");
             return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
         }
     }
