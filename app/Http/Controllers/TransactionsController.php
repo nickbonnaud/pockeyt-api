@@ -25,7 +25,6 @@ class TransactionsController extends Controller
                 ->where('paid', '=', false);
         })->first();
         $locationCheck = $this->userInLocationCheck($customer, $business);
-        dd($locationCheck);
         if(isset($transaction) && isset($locationCheck)) {
             $bill = $transaction->products;
             $billId = $transaction->id;
