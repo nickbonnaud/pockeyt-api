@@ -68,21 +68,7 @@ class TransactionsController extends Controller
             $transaction->paid = true;
             $profile->transactions()->save($transaction);
             $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-            if (isset($newLoyaltyCard)) {
-                if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
-                    flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has done ' . $newLoyaltyCard->required . ' transactions!');
-                } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
-                    flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
-                } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-                    flash()->overlay($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
-                } else{
-                    flash()->success('Paid', 'Transaction Complete');
-                }
-                return redirect()->route('profiles.show', ['profiles' => $profile->id]);
-            } else {
-                flash()->success('Paid', 'Transaction Complete');
-                return redirect()->route('profiles.show', ['profiles' => $profile->id]);
-            }
+            return $this->flashMessage($newLoyaltyCard, $customer, $profile);
         } else {
             $transaction->paid = false;
             $profile->transactions()->save($transaction);
@@ -106,9 +92,8 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $transaction->save();
-            $this->checkLoyaltyProgram($customer, $profile, $transaction);
-            flash()->success('Paid', 'Transaction Complete');
-            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+            return $this->flashMessage($newLoyaltyCard, $customer, $profile);
         } else {
             $transaction->paid = false;
             $transaction->save();
@@ -233,6 +218,24 @@ class TransactionsController extends Controller
             $loyaltyCard['required'] = $loyaltyProgram->amount_required;
             return $loyaltyCard;
 
+        }
+    }
+
+    public function flashMessage($newLoyaltyCard, $customer, $profile) {
+        if (isset($newLoyaltyCard)) {
+            if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
+                flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
+            } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
+                flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
+            } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
+                flash()->overlay($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
+            } else{
+                flash()->success('Paid', 'Transaction Complete');
+            }
+            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+        } else {
+            flash()->success('Paid', 'Transaction Complete');
+            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
         }
     }
 
