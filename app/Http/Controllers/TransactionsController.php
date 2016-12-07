@@ -17,6 +17,7 @@ class TransactionsController extends Controller
     
     public function showBill($customerId) {
         $customer = User::findOrFail($customerId);
+        dd($customer);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
         $transaction = Transaction::where(function($query) use ($customer, $business) {
@@ -30,7 +31,6 @@ class TransactionsController extends Controller
             $billId = $transaction->id;
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
         } elseif(isset($locationCheck)) {
-            dd("inside location set");
             return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
         }
     }
