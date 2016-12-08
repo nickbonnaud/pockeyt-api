@@ -9,6 +9,7 @@ class UpdateAccountIndividualRequest extends Request {
      * @return bool
      */
     public function authorize() {
+        dd($this->route('accounts'));
         return !is_null($user = \Auth::user()) && ($user->is_admin || $this->route('accounts') == $user->profile->account->id);
     }
 
