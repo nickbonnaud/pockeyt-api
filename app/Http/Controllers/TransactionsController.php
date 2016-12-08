@@ -45,6 +45,7 @@ class TransactionsController extends Controller
     }
 
     public function store(Request $request) {
+        dd("inside store");
         $transaction = new Transaction($request->all());
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
