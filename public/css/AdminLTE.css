@@ -1572,14 +1572,6 @@ a:focus {
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-.box-timeline {
-  width: 135px;
-  border-top-color: #00c0ef;
-}
-.box-timeline .box-header-timeline {
-  padding-bottom: 3px;
-  padding-top: 5px;
-}
 .box.box-primary {
   border-top-color: #3c8dbc;
 }
@@ -1622,7 +1614,6 @@ a:focus {
 .box.box-solid {
   border-top: 0;
 }
-
 .box.box-solid > .box-header .btn.btn-default {
   background: transparent;
 }
@@ -1806,10 +1797,6 @@ a:focus {
   font-size: 12px;
   background: transparent;
   color: #97a0b3;
-}
-.tool-timeline {
-  padding: 0px;
-  padding-bottom: 5px;
 }
 .open .btn-box-tool,
 .btn-box-tool:hover {

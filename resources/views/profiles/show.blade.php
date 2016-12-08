@@ -56,7 +56,7 @@
                 <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
-                <ul class="timeline col-sm-6 col-md-6">
+                <ul class="timeline col-sm-4 col-md-4">
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
@@ -67,29 +67,15 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <div class="box box-timeline collapsed-box">
-                        <div class="box-header-timeline box-header with-border">
-                          <h4 class="box-title">@{{ purchase.updated_at | setDate }}</h4>
-                          <div class="box-tools pull-right">
-                            <button class="tool-timeline btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                          </div>
-                        </div>
-                        <div class="box-body">
-                          <purchases :products="purchase.products"></purchases>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- <div class="timeline-item">
                       <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
-                    </div> -->
+                    </div>
                   </li>
                   <li style="top : 97%">
                     <i class="fa fa-clock-o bg-gray"></i>
                   </li>
                 </ul>
                 
-                <!-- <div class="scroll-container-timeline col-sm-8 col-md-8">
+                <div class="scroll-container-timeline col-sm-8 col-md-8">
                   <div class="scroll-contents">
                     <div v-for="purchase in purchases">
                       <div class="box box-primary">
@@ -103,7 +89,7 @@
                       </div>
                     </div>
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
@@ -133,7 +119,6 @@
     var prevDistance = {
       'lastDist' : 0,
       'padding' : 0,
-      'zIndex' : 100
     }
 
       Vue.component('purchases', {
@@ -195,14 +180,13 @@
             if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
               console.log(prevDistance.lastDist);
               prevDistance.lastDist = relativeDistance;
-              prevDistance.padding = prevDistance.padding + 25;
-              prevDistance.zIndex = prevDistance.zIndex - 1;
-              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px', 'z-index': prevDistance.zIndex.toString()}
+              prevDistance.padding = prevDistance.padding + 20;
+              console.log(prevDistance.padding);
+              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
             } else {
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = 0;
-              prevDistance.zIndex = 100;
-              return {top: relativeDistance.toString() + '%', 'z-index': prevDistance.zIndex.toString()}
+              return {top: relativeDistance.toString() + '%'}
             }
           },
 
