@@ -2152,11 +2152,7 @@ a:focus {
   clear: both;
 }
 .timeline > li > .timeline-item {
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
   margin-top: 0;
-  background: #fff;
   color: #444;
   margin-left: 60px;
   margin-right: 15px;
@@ -2172,7 +2168,6 @@ a:focus {
 .timeline > li > .timeline-item > .timeline-header {
   margin: 0;
   color: #555;
-  border-bottom: 1px solid #f4f4f4;
   font-size: 16px;
   line-height: 1.1;
 }
@@ -3026,6 +3021,9 @@ table.text-center th {
 .modal-primary .modal-header,
 .modal-primary .modal-footer {
   border-color: #307095;
+}
+.modal-primary .modal-header-timeline {
+  border-bottom-color: #d8d8d8;
 }
 .modal-warning .modal-header,
 .modal-warning .modal-footer {
