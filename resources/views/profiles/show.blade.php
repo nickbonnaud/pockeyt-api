@@ -56,7 +56,7 @@
                 <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
-                <ul class="timeline col-sm-4 col-md-4">
+                <ul class="timeline col-sm-6 col-md-6">
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
@@ -87,7 +87,7 @@
                   </li>
                 </ul>
                 
-                <div class="scroll-container-timeline col-sm-8 col-md-8">
+                <!-- <div class="scroll-container-timeline col-sm-8 col-md-8">
                   <div class="scroll-contents">
                     <div v-for="purchase in purchases">
                       <div class="box box-primary">
@@ -101,7 +101,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
