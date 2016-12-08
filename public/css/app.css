@@ -8487,6 +8487,10 @@ img {
   float: right;
 }
 
+.timeline-total {
+  border-top: 1px solid #f4f4f4;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;
