@@ -8487,6 +8487,16 @@ img {
   float: right;
 }
 
+.timeline-purchases-left {
+  float: left;
+  clear: left;
+}
+
+.timeline-purchases-right {
+  float: right;
+  clear: right;
+}
+
 .timeline-total {
   border-top: 1px solid #f4f4f4;
 }
