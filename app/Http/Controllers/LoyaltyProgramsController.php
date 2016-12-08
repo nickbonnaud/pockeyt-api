@@ -7,6 +7,8 @@ use App\Profile;
 use App\LoyaltyProgram;
 use App\LoyaltyCard;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoyaltyProgramRequest;
+use App\Http\Requests\DeleteLoyaltyProgramRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -40,7 +42,7 @@ class LoyaltyProgramsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoyaltyProgramRequest $request)
     {
        $loyaltyProgram = new loyaltyProgram($request->except(['optionsRadios']));
        if ($request->input('optionsRadios') === 'increments') {
@@ -73,7 +75,7 @@ class LoyaltyProgramsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeleteLoyaltyProgramRequest $request, $id)
     {
         $loyaltyProgram = LoyaltyProgram::findOrFail($id);
         $loyaltyCards = LoyaltyCard::where('program_id', '=', $loyaltyProgram->id)->get();
