@@ -1576,6 +1576,11 @@ a:focus {
   width: 135px;
   border-top-color: #00c0ef;
 }
+.box-timeline .box-header-timeline {
+  padding-bottom: 3px;
+  padding-top: 3px;
+  font-size: 14px;
+}
 .box.box-primary {
   border-top-color: #3c8dbc;
 }
@@ -1618,11 +1623,7 @@ a:focus {
 .box.box-solid {
   border-top: 0;
 }
-.box-header-timeline {
-  padding-bottom: 3px;
-  padding-top: 3px;
-  font-size: 14px;
-}
+
 .box.box-solid > .box-header .btn.btn-default {
   background: transparent;
 }
