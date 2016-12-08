@@ -1618,6 +1618,11 @@ a:focus {
 .box.box-solid {
   border-top: 0;
 }
+.box-header-timeline {
+  padding-bottom: 3px;
+  padding-top: 3px;
+  font-size: 14px;
+}
 .box.box-solid > .box-header .btn.btn-default {
   background: transparent;
 }
@@ -1801,6 +1806,9 @@ a:focus {
   font-size: 12px;
   background: transparent;
   color: #97a0b3;
+}
+.tool-timeline {
+  padding: 0px;
 }
 .open .btn-box-tool,
 .btn-box-tool:hover {

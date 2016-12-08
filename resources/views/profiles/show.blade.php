@@ -68,10 +68,10 @@
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
                       <div class="box box-timeline collapsed-box">
-                        <div class="box-header with-border">
+                        <div class="box-header with-border box-header-timeline">
                           <h3 class="box-title">@{{ purchase.updated_at | setDate }}</h3>
                           <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-box-tool tool-timeline" data-widget="collapse"><i class="fa fa-plus"></i></button>
                           </div>
                         </div>
                         <div class="box-body">
@@ -133,6 +133,7 @@
     var prevDistance = {
       'lastDist' : 0,
       'padding' : 0,
+      'zIndex' : 100
     }
 
       Vue.component('purchases', {
@@ -194,9 +195,9 @@
             if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
               console.log(prevDistance.lastDist);
               prevDistance.lastDist = relativeDistance;
-              prevDistance.padding = prevDistance.padding + 20;
-              console.log(prevDistance.padding);
-              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
+              prevDistance.padding = prevDistance.padding + 25;
+              prevDistance.zIndex = prevDistance.zIndex - 1;
+              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px', 'z-index': prevDistance.zIndex.toString()}
             } else {
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = 0;
