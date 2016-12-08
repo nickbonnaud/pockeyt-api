@@ -1849,14 +1849,8 @@ a:focus {
   padding: 10px;
   background-color: #ffffff;
 }
-.box-footer-timeline {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+.timeline-list-footer {
   border-top: 1px dotted #080808;
-  padding: 10px;
-  background-color: #ffffff;
 }
 .chart-legend {
   margin: 10px 0;

@@ -85,7 +85,7 @@
                         <div class="box-body">
                           <purchases :products="purchase.products"></purchases>
                         </div>
-                        <div class="box-footer-timeline">
+                        <div class="box-footer timeline-list-footer">
                           <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
                         </div>
                       </div>
