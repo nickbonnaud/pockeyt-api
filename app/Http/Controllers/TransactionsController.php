@@ -226,12 +226,13 @@ class TransactionsController extends Controller
 
     public function flashMessage($newLoyaltyCard, $customer, $profile) {
         if (isset($newLoyaltyCard)) {
+            $reward = $profile->loyaltyProgram->reward;
             if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
-                flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
+                flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
             } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
-                flash()->overlay('Loyalty reward earned!', $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
+                flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
             } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-                flash()->overlay($newLoyaltyCard->transactionRewards . ' Loyalty rewards earned!', $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
+                flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
             } else{
                 flash()->success('Paid', 'Transaction Complete');
             }
