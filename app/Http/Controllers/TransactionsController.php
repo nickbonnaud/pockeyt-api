@@ -10,6 +10,7 @@ use App\Product;
 use App\Transaction;
 use App\Http\Requests;
 use App\Http\Requests\TransactionRequest;
+use App\Http\Requests\ChargeRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class TransactionsController extends Controller
         return view('profiles.show', compact('profile'));
     }
 
-    public function charge(Request $request) {
+    public function charge(ChargeRequest $request) {
         $transaction = new Transaction($request->all());
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;

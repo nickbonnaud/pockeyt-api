@@ -23,6 +23,7 @@ class TransactionRequest extends Request {
         return [
             'user_id' => 'required',
             'products' => 'required',
+            'paid' => 'required',
             'total' => 'required'
         ];
     }
