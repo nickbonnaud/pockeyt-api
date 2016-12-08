@@ -11,7 +11,7 @@ class DeleteLoyaltyProgramRequest extends Request {
      * @return bool
      */
     public function authorize() {
-        return !is_null($user = \Auth::user()) && ($user->profile->loyaltyProgram->contains($this->route('loyalty_programs')));
+        return !is_null($user = \Auth::user()) && ($user->is_admin || $this->route('loyalty_programs') == $user->profile->loyaltyProgram->id);
     }
 
     /**
