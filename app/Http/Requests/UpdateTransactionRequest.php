@@ -28,7 +28,6 @@ class UpdateTransactionRequest extends Request {
    */
   public function rules() {
     return [
-      'profile_id' => 'required',
       'user_id' => 'required',
       'products' => 'required',
       'total' => 'required'
