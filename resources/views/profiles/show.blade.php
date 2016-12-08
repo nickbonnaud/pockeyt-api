@@ -66,15 +66,17 @@
                   <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
-                    <div class="box box-info collapsed-box">
-                      <div class="box-header with-border">
-                        <h3 class="box-title">@{{ purchase.updated_at | setDate }}</h3>
-                        <div class="box-tools pull-right">
-                          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                    <div class="timeline-item">
+                      <div class="box box-info collapsed-box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">@{{ purchase.updated_at | setDate }}</h3>
+                          <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                          </div>
                         </div>
-                      </div>
-                      <div class="box-body">
-                        <purchases :products="purchase.products"></purchases>
+                        <div class="box-body">
+                          <purchases :products="purchase.products"></purchases>
+                        </div>
                       </div>
                     </div>
 
