@@ -9,6 +9,8 @@ use App\User;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
+use App\Http\Requests\TransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
 
 use App\Http\Controllers\Controller;
 
@@ -44,8 +46,7 @@ class TransactionsController extends Controller
         return $locationCheck;
     }
 
-    public function store(Request $request) {
-        dd("inside store");
+    public function store(TransactionRequest $request) {
         $transaction = new Transaction($request->all());
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
@@ -53,7 +54,7 @@ class TransactionsController extends Controller
         return view('profiles.show', compact('profile'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(UpdateTransactionRequest $request, $id) {
         $transaction = Transaction::findOrFail($id);
         $transaction->update($request->all());
         $profile = $this->user->profile;

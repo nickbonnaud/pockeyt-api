@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class UpdateProductRequest extends Request {
+class UpdateTransactionRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -11,9 +11,9 @@ class UpdateProductRequest extends Request {
     public function authorize() {
         $isAuthorized = false;
         if (!is_null($user = \Auth::user())) {
-            $products = \Auth::user()->profile->products;
-            foreach ($products as $product) {
-                if ($product->id == $this->route('products')) {
+            $transactions = \Auth::user()->profile->transactions->where('paid', '=', 'false');
+            foreach ($transactions as $transaction) {
+                if ($transaction->id == $this->route('transactions')) {
                     $isAuthorized = true;
                 }
             }
@@ -28,9 +28,10 @@ class UpdateProductRequest extends Request {
      */
     public function rules() {
       return [
-        'name' => 'required',
-        'price' => 'required',
-        'photo' => 'mimes:jpg,jpeg,png,bmp',
+        'profile_id' => 'required',
+        'user_id' => 'required',
+        'products' => 'required',
+        'total' => 'required'
       ];
     }
 }
