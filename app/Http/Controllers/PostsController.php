@@ -121,6 +121,7 @@ class PostsController extends Controller {
             $query->where('profile_id', '=', $profile->id)
             ->where('is_redeemable', '=', true);
         })->orderBy('updated_at', 'desc')->take(5)->get();
+        return view('posts.deals', compact('posts'));
     }
 
 
