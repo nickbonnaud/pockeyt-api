@@ -69,7 +69,7 @@
                     <div class="timeline-item">
                       <div class="box box-timeline collapsed-box">
                         <div class="box-header-timeline box-header with-border">
-                          <h3 class="box-title">@{{ purchase.updated_at | setDate }}</h3>
+                          <h4 class="box-title">@{{ purchase.updated_at | setDate }}</h4>
                           <div class="box-tools pull-right">
                             <button class="tool-timeline btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                           </div>

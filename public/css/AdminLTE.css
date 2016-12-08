@@ -1578,8 +1578,7 @@ a:focus {
 }
 .box-timeline .box-header-timeline {
   padding-bottom: 3px;
-  padding-top: 3px;
-  font-size: 14px;
+  padding-top: 5px;
 }
 .box.box-primary {
   border-top-color: #3c8dbc;
@@ -1810,6 +1809,7 @@ a:focus {
 }
 .tool-timeline {
   padding: 0px;
+  padding-bottom: 5px;
 }
 .open .btn-box-tool,
 .btn-box-tool:hover {
