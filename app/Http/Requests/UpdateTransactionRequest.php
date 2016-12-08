@@ -14,7 +14,7 @@ class UpdateTransactionRequest extends Request {
             $transactions = \Auth::user()->profile->transactions->where('paid', '=', false);
             foreach ($transactions as $transaction) {
             	dd($this->route('transactions'));
-                if ($transaction->id == $this->route('transactions')) {
+                if ($transaction->id == $this->route('bill')) {
                     $isAuthorized = true;
                 }
             }
