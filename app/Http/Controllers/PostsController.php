@@ -114,4 +114,15 @@ class PostsController extends Controller {
         $posts = Post::where('profile_id', '=', $this->user->profile->id)->whereNotNull('event_date')->orderBy('published_at', 'desc')->limit(10)->get();
         return view('posts.events', compact('posts'));
     }
+
+    public function dealPosts() {
+        $profile = $this->user->profile;
+        $posts = Post::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+            ->where('is_redeemable', '=', true);
+        })->orderBy('updated_at', 'desc')->take(5)->get();
+    }
+
+
+
 }

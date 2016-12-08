@@ -22,7 +22,10 @@ class Post extends Model {
         'thumb_path',
         'event_date',
         'message',
-        'fb_post_id'
+        'fb_post_id',
+        'is_redeemable',
+        'price',
+        'end_date'
     ];
 
     /**

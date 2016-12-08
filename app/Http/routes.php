@@ -24,6 +24,10 @@ Route::get('posts/list', 'PostsController@listPosts')->name('posts.list');
 Route::get('posts/events', 'PostsController@eventPosts')->name('posts.events');
 Route::post('events/store', 'PostsController@storeEvent')->name('events.store');
 Route::get('events/{posts}', 'PostsController@showEvent')->name('events.show');
+
+Route::get('posts/deals', 'PostsController@dealPosts')->name('posts.deals');
+Route::post('deals/store', 'PostsController@storeDeal')->name('deals.store');
+
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
 // Products routes

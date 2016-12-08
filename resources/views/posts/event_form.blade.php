@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <input type="hidden" id="event_date" name="event_date">
+        <input type="hidden" id="event_date" name="event_date" required>
     </div>
 
     <div class="box-footer">
