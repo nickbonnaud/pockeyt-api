@@ -123,7 +123,7 @@
 
       Vue.component('purchases', {
         props: ['products'],
-        template: '<div><div v-for="item in items"><p class="pull-left clear: left">@{{ item.quantity }} x @{{ item.name }}</p><p class="pull-right clear: right">$@{{ (item.price / 100) }}</p></div></div>',
+        template: '<div><div v-for="item in items"><p class="pull-left">@{{ item.quantity }} x @{{ item.name }}</p><p class="pull-right">$@{{ (item.price / 100) }}</p></div></div>',
         data: function() {
           return {
             items: JSON.parse(this.products)
