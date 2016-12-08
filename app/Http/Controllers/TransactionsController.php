@@ -10,8 +10,9 @@ use App\Product;
 use App\Transaction;
 use App\Http\Requests;
 use App\Http\Requests\TransactionRequest;
-use App\Http\Requests\ChargeRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Http\Requests\ChargeRequest;
+use App\Http\Requests\UpdateChargeRequest;
 
 use App\Http\Controllers\Controller;
 
@@ -64,7 +65,6 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
-        dd("inside charge function");
         $transaction = new Transaction($request->all());
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;
@@ -88,7 +88,7 @@ class TransactionsController extends Controller
         }
     }
 
-    public function chargeExisting(Request $request, $id) {
+    public function chargeExisting(UpdateChargeRequest $request, $id) {
         $transaction = Transaction::findOrFail($id);
         $transaction->update($request->all());
         $customer = User::findOrFail($transaction->user_id);
