@@ -232,7 +232,7 @@ class TransactionsController extends Controller
             } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
                 flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
             } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-                flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
+                flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . ' ' . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
             } else{
                 flash()->success('Paid', 'Transaction Complete');
             }
