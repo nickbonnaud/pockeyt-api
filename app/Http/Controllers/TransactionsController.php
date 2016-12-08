@@ -64,6 +64,7 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
+        dd("inside charge function");
         $transaction = new Transaction($request->all());
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;
