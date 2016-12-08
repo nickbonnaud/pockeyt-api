@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Profile;
 use App\LoyaltyProgram;
+use App\LoyaltyCard;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -48,6 +49,7 @@ class LoyaltyProgramsController extends Controller
             $loyaltyProgram->is_increment = false;
             $loyaltyProgram->amount_required = ($loyaltyProgram->amount_required) * 100;
        }
+       $loyaltyProgram->reward = lcfirst($loyaltyProgram->reward);
        $this->user->profile->loyaltyProgram()->save($loyaltyProgram);
        return redirect()->route('loyalty-programs.show', compact('loyaltyProgram'));
     }
@@ -64,29 +66,6 @@ class LoyaltyProgramsController extends Controller
         return view('loyalty-programs.show', compact('loyaltyProgram'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $loyaltyProgram = LoyaltyProgram::findOrFail($id);
-        if ($request->input('optionsRadios') === 'increments') {
-            $loyaltyProgram->is_increment = true;
-            $loyaltyProgram->amount_required = null;
-            $loyaltyProgram->purchases_required = $request->purchases_required;
-       } else {
-            $loyaltyProgram->is_increment = false;
-            $loyaltyProgram->purchases_required = null;
-            $loyaltyProgram->amount_required = ($request->amount_required) * 100;
-       }
-       $loyaltyProgram->save();
-       return redirect()->route('loyalty-programs.show', compact('loyaltyProgram'));
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -97,6 +76,10 @@ class LoyaltyProgramsController extends Controller
     public function destroy($id)
     {
         $loyaltyProgram = LoyaltyProgram::findOrFail($id);
+        $loyaltyCards = LoyaltyCard::where('program_id', '=', $loyaltyProgram->id)->get();
+        foreach ($loyaltyCards as $loyaltyCard) {
+            $loyaltyCard->delete();
+        }
         $loyaltyProgram->delete();
         return redirect()->route('loyalty-programs.create');
     }

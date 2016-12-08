@@ -15,7 +15,8 @@ class LoyaltyProgram extends Model {
     	'profile_id',
     	'is_increment',
     	'purchases_required',
-    	'amount_required'
+    	'amount_required',
+        'reward'
     ];
 
     public static function boot() {
