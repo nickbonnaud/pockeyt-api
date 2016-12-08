@@ -21,7 +21,7 @@ class LoyaltyProgramRequest extends Request {
    */
   public function rules() {
     return [
-      'is_increment' => 'required',
+      'optionsRadios' => 'required',
       'reward' => 'required'
     ];
   }
