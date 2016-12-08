@@ -1572,14 +1572,9 @@ a:focus {
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-.timeline-box {
-  position: relative;
-  border-radius: 3px;
-  background: #ffffff;
-  border-top: 3px solid #d2d6de;
-  margin-bottom: 20px;
+.box-timeline {
   width: 135px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-top-color: #00c0ef;
 }
 .box.box-primary {
   border-top-color: #3c8dbc;

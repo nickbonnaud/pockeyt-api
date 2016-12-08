@@ -67,7 +67,7 @@
                     <!-- timeline icon -->
                     <i class="fa fa-money bg-green"></i>
                     <div class="timeline-item">
-                      <div class=" box box-timeline box-info collapsed-box">
+                      <div class="box box-timeline collapsed-box">
                         <div class="box-header with-border">
                           <h3 class="box-title">@{{ purchase.updated_at | setDate }}</h3>
                           <div class="box-tools pull-right">
