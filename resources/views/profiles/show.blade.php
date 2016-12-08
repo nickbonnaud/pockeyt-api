@@ -201,7 +201,8 @@
             } else {
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = 0;
-              return {top: relativeDistance.toString() + '%'}
+              prevDistance.zIndex = 100;
+              return {top: relativeDistance.toString() + '%', 'z-index': prevDistance.zIndex.toString()}
             }
           },
 
