@@ -31,7 +31,6 @@
       <user-box v-for="user in users" :user="user"></user-box>
       <template id="user-box">
         <div class="col-sm-4 col-md-3">
-          <div v-bind:style="getRedeemableDeals(user)">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
@@ -48,7 +47,6 @@
               </a>
               </div>
             </div>
-          </div>
           </div>
         </div>
         <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -187,24 +185,9 @@
               }
             }
           },
-          getRedeemableDeals: function(user) {
-            var customerId = user.id;
-            var businessId = '{{ $profile->id }}';
-            this.$http.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId}).then(function(response) {
-              console.log(response.body.length);
-              if(response.body.length > 0) {
-                this.setStyle();
-              } else {
-                return 'none';
-              }
-            })
-          },
           moment: function() {
             return moment();
           },
-          setStyle: function() {
-            console.log("inside set style");
-          }
         }
       });
 
