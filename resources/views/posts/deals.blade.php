@@ -52,7 +52,7 @@
 								</span>
 								<div class="info-box-content">
 									<span class="info-box-text">Redeemed</span>
-									<span class="info-box-number">20</span>
+									<span class="info-box-number">@{{ redeemed }}</span>
 								</div>
 							</div>
 						</div>
@@ -123,6 +123,18 @@
 				purchasedDeals: []
 			},
 
+			computed: {
+				redeemed: function() {
+					var count = 0;
+					this.purchasedDeals.forEach(e) {
+						if (e.redeemed === true) {
+							count++
+						}
+						return count;
+					}
+				}
+			},
+
 			methods: {
 				getPurchasedDeals: function(postId) {
 					$.ajax({
@@ -132,7 +144,7 @@
 							'postId' : postId
 						},
 						success: function(data) {
-							console.log(data);
+							this.purchasedDeals = data;
 						}
 					})
 				}
