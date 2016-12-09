@@ -282,8 +282,11 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data);
-                return 'none';
+                if(data.length > 0) {
+                  return {border: "3px solid red"}
+                } else {
+                  return 'none';
+                }
               }
             })
           },
