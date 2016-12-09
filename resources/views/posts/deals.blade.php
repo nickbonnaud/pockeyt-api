@@ -148,7 +148,7 @@
 						},
 						success: function(data) {
 							console.log(data);
-							this.purchasedDeals = data;
+							return this.purchasedDeals = data;
 						}
 					})
 				}
