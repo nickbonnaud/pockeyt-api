@@ -109,7 +109,7 @@
 
     var currentDeals = {
     	fetch: function() {
-    		var deals = {{ $posts }};
+    		var deals = '{!! $posts !!}';
     		return deals;
     	}
     }
