@@ -9,7 +9,7 @@
       <img :src="@{{ deal->photo_path}}">
       <hr>
       <i>This post is redeemable for $@{{ deal->price }}</i>
-      @if($signedIn && ($isAdmin || $user->profile->owns(@{{ deal }})))
+      @if($signedIn)
         @include('partials.posts.delete')
       @endif
     </div>
