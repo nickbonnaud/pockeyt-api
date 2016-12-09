@@ -276,22 +276,13 @@
           getRedeemableDeals: function(user) {
             var customerId = user.id;
             var businessId = '{{ $profile->id }}';
-            $.ajax({
-              method: 'POST',
-              url: '/user/deals',
-              data: {
-                'customerId' : customerId,
-                'businessId' : businessId
-              },
-              success: function(data) {
-                if(data.length > 0) {
-                  console.log('success');
-                  return {border: "3px solid red"}
-                } else {
-                  return 'none';
-                }
-              }
-            })
+            
+            $.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId})
+              .done(function (data) {
+                console.log(data);
+              });
+
+
           },
           moment: function() {
             return moment();
