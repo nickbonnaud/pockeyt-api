@@ -28,9 +28,10 @@
   <section class="content" id="customer">
     <!-- Default box -->
     <div>
-      <user-box v-for="user in users" :user="user"></user-box>
+      <user-box></user-box>
+
       <template id="user-box">
-        <div class="col-sm-4 col-md-3">
+        <div v-for="user in users" :user="user" class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
