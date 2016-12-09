@@ -117,7 +117,7 @@
 
 
 		var wrapper = new Vue({
-			el: "wrapper",
+			el: "#wrapper",
 
 			data: {
 				purchased: []
