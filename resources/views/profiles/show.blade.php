@@ -285,8 +285,7 @@
                 console.log(data);
               }
             })
-
-          }
+          },
           moment: function() {
             return moment();
           },
