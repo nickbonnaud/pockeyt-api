@@ -28,7 +28,7 @@
 					</div>
 					<div class="scroll-container col-md-6">
 						<div class="scroll-contents">
-							@include('partials.posts.deals', ['posts' => $posts, 'no_icons' => true])
+							@include('partials.posts.deals')
 						</div>
 					</div>
 				</section>
