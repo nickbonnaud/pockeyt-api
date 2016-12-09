@@ -280,7 +280,6 @@
             $.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId})
               .done(function (data) {
                 setBoxBorder(data);
-                }
               });
 
             setBoxBorder: function(data) {
