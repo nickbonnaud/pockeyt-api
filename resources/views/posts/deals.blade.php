@@ -126,7 +126,6 @@
 			computed: {
 				redeemed: function() {
 					var count = 0;
-					console.log(this.purchasedDeals);
 					this.purchasedDeals.forEach(function(e) {
 						if (e.redeemed === true) {
 							count++
@@ -145,8 +144,8 @@
 							'postId' : postId
 						},
 						success: function(data) {
+							console.log(data);
 							this.purchasedDeals = data;
-							console.log(this.purchasedDeals);
 						}
 					})
 				}
