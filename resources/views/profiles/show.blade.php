@@ -139,19 +139,6 @@
             purchases: []
           }
         },
-        mounted: function() {
-          var pusher = new Pusher('f4976d40a137b96b52ea', {
-            encrypted: true
-          });
-
-          pusher.subscribe("{!! 'business' . $profile->id !!}")
-            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
-
-          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
-            .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
-
-          window.setInterval(this.removeInactiveUser, 120000);
-        },
 
         filters: {
           setDate: function(value) {
@@ -185,61 +172,6 @@
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = 0;
               return {top: relativeDistance.toString() + '%'}
-            }
-          },
-
-          addUser: function(data) {
-            var activeCustomer = data.user;
-            var transactions = data.transactions;
-            var users = this.users;
-            var purchases = this.purchases;
-
-            if(users.length == 0) {
-              activeCustomer['lastActive'] = Date.now();
-              transactions.forEach(function(transaction) {
-                purchases.push(transaction);
-              });
-              users.push(activeCustomer);
-            } else {
-              for (i=users.length - 1; i >= 0; i --) {
-                if(!users[i].id == activeCustomer.id) {
-                  activeCustomer['lastActive'] = Date.now();
-                  transactions.forEach(function(transaction) {
-                    purchases.push(transaction);
-                  });
-                  users.push(activeCustomer);
-                } else if (users[i].id == activeCustomer.id) {
-                  users[i].lastActive = Date.now();
-                }
-              }
-            }
-          },
-          removeUser: function(user) {
-            var leavingCustomer = user.user;
-            var users = this.users;
-            
-            if(users.length > 0) {
-              for (i=users.length - 1; i >= 0; i --) {
-                if (users[i].id == leavingCustomer.id) {
-                  this.removeUserTransactions(users[i].id);
-                  users.splice(i, 1);
-                }
-              }
-            }
-          },
-          removeInactiveUser: function() {
-            var users = this.users;
-            if (users.length > 0) {
-              for (i=users.length - 1; i >= 0; i --) {
-                var userLastActive = users[i].lastActive;
-                var currentTime = Date.now();
-                if (currentTime - userLastActive >= 120000) {
-                  var businessId = '{{ $profile->id }}'
-                  this.deleteInactiveUser(users[i].id, businessId);
-                  this.removeUserTransactions(users[i].id);
-                  users.splice(i, 1);
-                }
-              }
             }
           },
           goToTransaction: function(customerId) {
@@ -305,6 +237,75 @@
           users: [],
           purchases: [],
         },
+        mounted: function() {
+          var pusher = new Pusher('f4976d40a137b96b52ea', {
+            encrypted: true
+          });
+
+          pusher.subscribe("{!! 'business' . $profile->id !!}")
+            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+
+          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
+            .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
+
+          window.setInterval(this.removeInactiveUser, 120000);
+        },
+        methods: {
+          addUser: function(data) {
+            var activeCustomer = data.user;
+            var transactions = data.transactions;
+            var users = this.users;
+            var purchases = this.purchases;
+
+            if(users.length == 0) {
+              activeCustomer['lastActive'] = Date.now();
+              transactions.forEach(function(transaction) {
+                purchases.push(transaction);
+              });
+              users.push(activeCustomer);
+            } else {
+              for (i=users.length - 1; i >= 0; i --) {
+                if(!users[i].id == activeCustomer.id) {
+                  activeCustomer['lastActive'] = Date.now();
+                  transactions.forEach(function(transaction) {
+                    purchases.push(transaction);
+                  });
+                  users.push(activeCustomer);
+                } else if (users[i].id == activeCustomer.id) {
+                  users[i].lastActive = Date.now();
+                }
+              }
+            }
+          },
+          removeUser: function(user) {
+            var leavingCustomer = user.user;
+            var users = this.users;
+            
+            if(users.length > 0) {
+              for (i=users.length - 1; i >= 0; i --) {
+                if (users[i].id == leavingCustomer.id) {
+                  this.removeUserTransactions(users[i].id);
+                  users.splice(i, 1);
+                }
+              }
+            }
+          },
+          removeInactiveUser: function() {
+            var users = this.users;
+            if (users.length > 0) {
+              for (i=users.length - 1; i >= 0; i --) {
+                var userLastActive = users[i].lastActive;
+                var currentTime = Date.now();
+                if (currentTime - userLastActive >= 120000) {
+                  var businessId = '{{ $profile->id }}'
+                  this.deleteInactiveUser(users[i].id, businessId);
+                  this.removeUserTransactions(users[i].id);
+                  users.splice(i, 1);
+                }
+              }
+            }
+          }
+        }
       })
     </script>
 @stop
