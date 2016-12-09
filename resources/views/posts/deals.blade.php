@@ -120,7 +120,7 @@
 			el: "#wrapper",
 
 			data: {
-				deals: []
+				purchasedDeals: []
 			},
 
 			methods: {
