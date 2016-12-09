@@ -115,11 +115,13 @@
     <script src="{{ asset('/vendor/vue-resource/vue-resource.min.js') }}"></script>
 
     <script>
+    Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
 
     var prevDistance = {
       'lastDist' : 0,
