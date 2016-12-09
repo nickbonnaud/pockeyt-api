@@ -90,7 +90,7 @@
 							</div>
 						</div>
 						<pre>
-							@{{ data | json }}
+							@{{ purchasedDeals }}
 						</pre>
 	      	</div>
 	    	</div>
