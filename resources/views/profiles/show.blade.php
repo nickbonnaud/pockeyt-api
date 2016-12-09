@@ -185,10 +185,8 @@
               relativeDistance = relativeDistance - 6;
             }
             if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
-              console.log(prevDistance.lastDist);
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = prevDistance.padding + 20;
-              console.log(prevDistance.padding);
               return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
             } else {
               prevDistance.lastDist = relativeDistance;
@@ -281,9 +279,9 @@
             var businessId = '{{ $profile->id }}';
             
             this.$http.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId}).then(function(response) {
-              console.log(response.body);
+              console.log(response.body.length);
               if(response.body.length > 0) {
-                return {border: "3px solid red"}
+                this.setStyle();
               } else {
                 return 'none';
               }
@@ -292,6 +290,10 @@
           moment: function() {
             return moment();
           },
+          setStyle: function() {
+            console.log("inside set style");
+            return {border: "3px solid red"}
+          }
         }
       })
     </script>
