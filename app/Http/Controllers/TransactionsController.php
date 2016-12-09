@@ -249,7 +249,7 @@ class TransactionsController extends Controller
     }
 
     public function getPurchased(Request $request) {
-        $postId = $request->id;
+        $postId = $request->postId;
         // $purchased = Transaction::where('deal_id', '=', $postId)->get();
 
         return response()->json($postId);

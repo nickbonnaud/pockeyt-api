@@ -124,15 +124,15 @@
 			},
 
 			methods: {
-				getPurchasedDeals: function(post) {
+				getPurchasedDeals: function(postId) {
 					$.ajax({
 						method: 'POST',
 						url: '/purchased/deals',
 						data: {
-							'post' : post
+							'postId' : postId
 						},
 						success: function(data) {
-							console.log(data);
+							console.log(JSON.parse(data);
 						}
 					})
 				}
