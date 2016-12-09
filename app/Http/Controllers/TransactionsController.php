@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\LoyaltyCard;
 use App\User;
+use App\Post;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
@@ -245,6 +246,13 @@ class TransactionsController extends Controller
             flash()->success('Paid', 'Transaction Complete');
             return redirect()->route('profiles.show', ['profiles' => $profile->id]);
         }
+    }
+
+    public function getPurchased(Request $request) {
+        $post = $request->input('post');
+        $purchased = Transaction::where('deal_id', '=', $post->id)->get();
+
+        return response()->json($purchased);
     }
 
 }

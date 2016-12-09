@@ -143,6 +143,4 @@ class PostsController extends Controller {
         return view('posts.deals', compact('posts'));
     }
 
-
-
 }
