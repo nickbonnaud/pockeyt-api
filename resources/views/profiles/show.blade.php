@@ -277,19 +277,14 @@
             var customerId = user.id;
             var businessId = '{{ $profile->id }}';
             
-            $.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId})
-              .done(function (data) {
-                setBoxBorder(data);
-              });
-
-            setBoxBorder: function(data) {
-              if(data.length > 0) {
-                  console.log('inside callback');
-                  return {border: "3px solid red"}
-                } else {
-                  return 'none';
-                }
-            }
+            this.$http.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId}).then(function(response) {
+              if(response.length > 0) {
+                console.log('inside callback');
+                return {border: "3px solid red"}
+              } else {
+                return 'none';
+              }
+            })
           },
           moment: function() {
             return moment();
