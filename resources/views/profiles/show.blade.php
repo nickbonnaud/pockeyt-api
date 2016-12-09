@@ -273,7 +273,7 @@
           },
           getRedeemableDeals: function(user) {
             var customerId = user->id;
-           var businessId = '{{ $profile->id }}';
+           var businessId = '{!! $profile->id !!}';
             $.ajax({
               method: 'POST',
               url: '/user/deals',
