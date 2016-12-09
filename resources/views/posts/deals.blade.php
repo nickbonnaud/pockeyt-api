@@ -128,6 +128,7 @@
 					var count = 0;
 					this.purchasedDeals.forEach(function(e) {
 						if (e.redeemed === true) {
+							count++
 						}
 					});
 					console.log(count);
