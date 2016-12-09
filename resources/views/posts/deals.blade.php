@@ -7,7 +7,7 @@
 			<div class="scroll-main-contents">
 				<section class="content-header">
 			    <h1>
-			      Add | Active Events
+			      Add | Active Deals
 			    </h1>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -107,6 +107,13 @@
         }
     });
 
+    var currentDeals = {
+    	fetch: function() {
+    		var deals = {{ $posts }};
+    		return deals;
+    	}
+    }
+
 		$(function() {
       $( "#end_date_pretty" ).datepicker({
           dateFormat: "DD, d MM, yy",
@@ -120,7 +127,7 @@
 			el: "#wrapper",
 
 			data: {
-				purchased: []
+				deals: currentDeals.fetch()
 			},
 
 			methods: {
