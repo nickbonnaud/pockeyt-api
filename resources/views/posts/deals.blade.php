@@ -89,9 +89,6 @@
 								</div>
 							</div>
 						</div>
-						<pre>
-							@{{ purchasedDeals }}
-						</pre>
 	      	</div>
 	    	</div>
 	  	</div>
