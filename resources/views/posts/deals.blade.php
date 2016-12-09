@@ -125,14 +125,13 @@
 
 			computed: {
 				redeemed: function() {
-					console.log("working");
 					var count = 0;
 					this.purchasedDeals.forEach(function(e) {
 						if (e.redeemed === true) {
-							console.log(e);
 						}
-						return count;
 					});
+					console.log(count);
+					return count;
 				}
 			},
 
