@@ -281,8 +281,8 @@
             var businessId = '{{ $profile->id }}';
             
             this.$http.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId}).then(function(response) {
-              console.log(response);
-              if(response.length > 0) {
+              console.log(response.body);
+              if(response.body.length > 0) {
                 return {border: "3px solid red"}
               } else {
                 return 'none';
