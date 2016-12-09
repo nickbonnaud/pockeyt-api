@@ -277,7 +277,7 @@
           getRedeemableDeals: function(user) {
             var customerId = user.id;
             var businessId = '{{ $profile->id }}';
-            
+            return {padding:"50px"}
             this.$http.post('/user/deals', {'customerId' : customerId, 'businessId' : businessId}).then(function(response) {
               console.log(response.body.length);
               if(response.body.length > 0) {
