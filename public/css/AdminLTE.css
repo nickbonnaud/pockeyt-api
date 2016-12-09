@@ -2122,7 +2122,11 @@ a:focus {
   padding-top: 35px;
   background-color: #ecf0f5;
 }
-
+.modal-body-deals {
+  position: relative;
+  padding: 15px;
+  background-color: #ecf0f5;
+}
 
 .timeline {
   position: relative;

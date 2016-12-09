@@ -13,6 +13,7 @@ Use Illuminate\HttpResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\DealRequest;
 use App\Http\Controllers\Controller;
 
 class PostsController extends Controller {
@@ -81,6 +82,24 @@ class PostsController extends Controller {
     }
 
     public function storeEvent(EventRequest $request) {
+        $post = new Post($request->all());
+        $file = $request->photo;
+        
+        if($file != null) {
+            $photo = Photo::fromForm($file);
+            $photo->save();
+
+            $post['photo_name'] = $photo->name;
+            $post['photo_path'] = url($photo->path);
+            $post['thumb_path'] = url($photo->thumbnail_path);
+        }
+
+        $post['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+        $this->user->profile->posts()->save($post);
+        return redirect()->back();
+    }
+    public function storeDeal(DealRequest $request) {
         $post = new Post($request->all());
         $file = $request->photo;
         
