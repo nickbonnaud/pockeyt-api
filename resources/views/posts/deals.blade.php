@@ -126,12 +126,12 @@
 			computed: {
 				redeemed: function() {
 					var count = 0;
-					this.purchasedDeals.forEach(e) {
+					this.purchasedDeals.forEach(function(e) {
 						if (e.redeemed === true) {
 							count++
 						}
 						return count;
-					}
+					});
 				}
 			},
 
