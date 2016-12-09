@@ -285,7 +285,6 @@
           },
           setStyle: function() {
             console.log("inside set style");
-            return {padding:"50px"}
           }
         }
       });
