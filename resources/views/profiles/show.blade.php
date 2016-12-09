@@ -35,7 +35,7 @@
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+                <h3 class="box-title">@{{user.last_name}}</h3>
               </a>
               <div class="box-body">
                 <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
