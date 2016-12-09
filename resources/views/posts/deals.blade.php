@@ -151,6 +151,7 @@
 							earned = earned + e.total;
 					});
 					return (earned / 100);
+				}
 			},
 
 			methods: {
