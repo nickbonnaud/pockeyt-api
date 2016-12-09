@@ -250,9 +250,9 @@ class TransactionsController extends Controller
 
     public function getPurchased(Request $request) {
         $postId = $request->postId;
-        // $purchased = Transaction::where('deal_id', '=', $postId)->get();
+        $purchased = Transaction::where('deal_id', '=', $postId)->get();
 
-        return response()->json($postId);
+        return response()->json($purchased);
     }
 
 }
