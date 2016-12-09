@@ -292,7 +292,7 @@
           },
           setStyle: function() {
             console.log("inside set style");
-            return {border: "3px solid red"}
+            return {padding:"50px"}
           }
         }
       })
