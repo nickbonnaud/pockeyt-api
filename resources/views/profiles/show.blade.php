@@ -30,7 +30,7 @@
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
-          <div class="box box-primary" v-bind:style="getRedeemedDeals(user)">
+          <div class="box box-primary" v-bind:style="getRedeemableDeals(user)">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
@@ -283,6 +283,7 @@
               },
               success: data => {
                 console.log(data);
+                return 'none';
               }
             })
           },
