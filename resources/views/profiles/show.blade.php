@@ -35,7 +35,7 @@
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                <h3 class="box-title">@{{user.last_name}}</h3>
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
               </a>
               <div class="box-body">
                 <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
@@ -128,13 +128,23 @@
       'padding' : 0,
     }
 
+      Vue.component('purchases', {
+        props: ['products'],
+        template: '<div><div v-for="item in items"><p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p><p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div></div>',
+        data: function() {
+          return {
+            items: JSON.parse(this.products)
+          }
+        },
+      });
+
       Vue.component('user-box', {
         template: '#user-box',
         props: ['user', 'purchases'],
         data: function() {
           return {
             something: []
-          }
+          };
         },
 
         filters: {
@@ -190,16 +200,6 @@
             return moment();
           },
         }
-      });
-
-      Vue.component('purchases', {
-        props: ['products'],
-        template: '<div><div v-for="item in items"><p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p><p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div></div>',
-        data: function() {
-          return {
-            items: JSON.parse(this.products)
-          }
-        },
       });
 
       var customer = new Vue({
