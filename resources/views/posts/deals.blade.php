@@ -147,8 +147,8 @@
 							'postId' : postId
 						},
 						success: function(data) {
-							console.log(data);
-							return this.purchasedDeals = data;
+							this.purchasedDeals = data;
+							console.log(this.purchasedDeals);
 						}
 					})
 				}
