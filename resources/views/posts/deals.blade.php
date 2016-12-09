@@ -146,11 +146,10 @@
 						data: {
 							'postId' : postId
 						},
-						success: function(data) {
-							return this.purchasedDeals = data;
+						success: data => {
+							this.purchasedDeals = data
 						}
 					})
-					console.log(this.purchasedDeals);
 				}
 			}
 		})
