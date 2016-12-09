@@ -268,7 +268,7 @@ class TransactionsController extends Controller
         if(isset($redeemableDeal)) {
             return response()->json($redeemableDeal);
         } else {
-            return 'none';
+            return;
         }
     }
 
