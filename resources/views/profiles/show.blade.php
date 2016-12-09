@@ -28,10 +28,10 @@
   <section class="content" id="customer">
     <!-- Default box -->
     <div>
-      <user-box></user-box>
+      <user-box v-for="user in users" :user="user"></user-box>
 
       <template id="user-box">
-        <div v-for="user in users" :user="user" class="col-sm-4 col-md-3">
+        <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
@@ -130,7 +130,7 @@
 
       Vue.component('user-box', {
         template: '#user-box',
-        props: ['users', 'purchases'],
+        props: ['user', 'purchases'],
         data: function() {
           return {
             something: []
