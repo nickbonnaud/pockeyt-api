@@ -85,7 +85,7 @@
 								</span>
 								<div class="info-box-content">
 									<span class="info-box-text">Earned</span>
-									<span class="info-box-number">$100</span>
+									<span class="info-box-number">$@{{ earned }}</span>
 								</div>
 							</div>
 						</div>
