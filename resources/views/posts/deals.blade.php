@@ -126,12 +126,12 @@
 			computed: {
 				redeemed: function() {
 					var count = 0;
+					console.log(this.purchasedDeals);
 					this.purchasedDeals.forEach(function(e) {
 						if (e.redeemed === true) {
 							count++
 						}
 					});
-					console.log(count);
 					return count;
 				}
 			},
