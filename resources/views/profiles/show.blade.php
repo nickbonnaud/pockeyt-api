@@ -281,7 +281,7 @@
                 'customerId' : customerId,
                 'businessId' : businessId
               },
-              success: data => {
+              success: function(data) {
                 if(data.length > 0) {
                   return {border: "3px solid red"}
                 } else {
