@@ -30,8 +30,8 @@
     <div>
       <user-box></user-box>
       <template id="user-box">
-        <div v-for="user in users">
-          <div class="col-sm-4 col-md-3">
+        <div>
+          <div v-for="user in users" class="col-sm-4 col-md-3">
             <div v-bind:style="getRedeemableDeals(user)">
             <div class="box box-primary">
               <div class="box-header with-border text-center">
@@ -132,7 +132,6 @@
     }
 
       Vue.component('user-box', {
-        props: ['users', 'purchases'],
         template: '#user-box',
         data: function() {
           return {
