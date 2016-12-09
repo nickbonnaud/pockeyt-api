@@ -133,7 +133,7 @@
 
       Vue.component('user-box', {
         template: '#user-box',
-        props['users', 'purchases'],
+        props: ['users', 'purchases'],
         data: function() {
           return {
             something: []
