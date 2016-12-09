@@ -148,9 +148,9 @@
 						},
 						success: function(data) {
 							this.purchasedDeals = data;
-							console.log(this.purchasedDeals);
 						}
 					})
+					console.log(this.purchasedDeals);
 				}
 			}
 		})
