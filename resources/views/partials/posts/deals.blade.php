@@ -1,17 +1,21 @@
-<div v-if="deals.length > 0">
-  <div v-for="deal in deals" class="box box-default">
-    <div class="box-header with-border">
-     <p class="pull-right">Expires on: <b>@{{ deal->end_date }}</b></p>
-      <h3 class="box-title" ><a href="#" data-toggle="modal" data-target="#dealModal">@{{ deal->message | truncate '85' }}</a></h3>
-    <i class="fa fa-calendar pull-right"></i>
+@if(count($posts) > 0)
+  @foreach($posts as $post)
+    <div class="box box-default">
+      <div class="box-header with-border">
+       <p class="pull-right">Expires on: <b>{{ $post->end_date }}</b></p>
+        <h3 class="box-title" ><a href="#" data-toggle="modal" data-target="#dealModal">{{ str_limit($post->message, 85) }}</a></h3>
+      <i class="fa fa-calendar pull-right"></i>
+      </div>
+      <div class="box-body">
+        @if(! is_null($post->photo_path))
+            <img src="{{ $post->photo_path}}">
+            <hr>
+        @endif
+        <i>This post is redeemable for ${{ $post->price }}</i>
+        @if($signedIn && ($isAdmin || $user->profile->owns($post)))
+          @include('partials.posts.delete')
+        @endif
+      </div>
     </div>
-    <div class="box-body">
-      <img :src="@{{ deal->photo_path}}">
-      <hr>
-      <i>This post is redeemable for $@{{ deal->price }}</i>
-      @if($signedIn)
-        @include('partials.posts.delete')
-      @endif
-    </div>
-  </div>
-</div>
+  @endforeach
+@endif

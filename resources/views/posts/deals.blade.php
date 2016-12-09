@@ -28,7 +28,7 @@
 					</div>
 					<div class="scroll-container col-md-6">
 						<div class="scroll-contents">
-							@include('partials.posts.deals')
+							@include('partials.posts.deals', ['posts' => $posts, 'no_icons' => true])
 						</div>
 					</div>
 				</section>
@@ -107,13 +107,6 @@
         }
     });
 
-    var currentDeals = {
-    	fetch: function() {
-    		var deals = '{!! $posts !!}';
-    		return deals;
-    	}
-    }
-
 		$(function() {
       $( "#end_date_pretty" ).datepicker({
           dateFormat: "DD, d MM, yy",
@@ -127,18 +120,8 @@
 			el: "#wrapper",
 
 			data: {
-				deals: currentDeals.fetch()
+				deals: []
 			},
-
-			filters: {
-				truncate: function(string, value) {
-					if (string.length > 85) {
-						return string.substring(0, value) + '...';
-					} else {
-						return string;
-					}
-				}
-			}
 
 			methods: {
 				getPurchasedDeals: function(post) {
