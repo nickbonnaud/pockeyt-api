@@ -133,10 +133,10 @@
 
       Vue.component('user-box', {
         template: '#user-box',
+        props['users', 'purchases']
         data: function() {
           return {
-            users: [],
-            purchases: []
+            something: []
           }
         },
 
@@ -177,16 +177,6 @@
           goToTransaction: function(customerId) {
             route = "{{ route('bill.show', ['customerId' => 'id']) }}"
             location.href = route.replace('id', customerId)
-          },
-          deleteInactiveUser: function(customerId, businessId) {
-            $.ajax({
-              method: 'POST',
-              url: '/geo/user/destroy',
-              data: {
-                'customerId' : customerId,
-                'businessId' : businessId
-              }
-            })
           },
           removeUserTransactions: function(userId) {
             var purchases = this.purchases;
@@ -289,6 +279,16 @@
                 }
               }
             }
+          },
+          deleteInactiveUser: function(customerId, businessId) {
+            $.ajax({
+              method: 'POST',
+              url: '/geo/user/destroy',
+              data: {
+                'customerId' : customerId,
+                'businessId' : businessId
+              }
+            })
           },
           removeInactiveUser: function() {
             var users = this.users;
