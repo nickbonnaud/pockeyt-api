@@ -282,8 +282,8 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                console.log(data);
                 if(data.length > 0) {
+                  console.log('success');
                   return {border: "3px solid red"}
                 } else {
                   return 'none';
