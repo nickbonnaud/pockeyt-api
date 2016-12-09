@@ -2,7 +2,7 @@
   <div v-for="deal in deals" class="box box-default">
     <div class="box-header with-border">
      <p class="pull-right">Expires on: <b>@{{ deal->end_date }}</b></p>
-      <h3 class="box-title" ><a href="#" data-toggle="modal" data-target="#dealModal">{{ str_limit(@{{ deal->message }}, 85) }}</a></h3>
+      <h3 class="box-title" ><a href="#" data-toggle="modal" data-target="#dealModal">@{{ deal->message | truncate '85' }}</a></h3>
     <i class="fa fa-calendar pull-right"></i>
     </div>
     <div class="box-body">

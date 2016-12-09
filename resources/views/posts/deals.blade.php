@@ -130,6 +130,16 @@
 				deals: currentDeals.fetch()
 			},
 
+			filters: {
+				truncate: function(string, value) {
+					if (string.length > 85) {
+						return string.substring(0, value) + '...';
+					} else {
+						return string;
+					}
+				}
+			}
+
 			methods: {
 				getPurchasedDeals: function(post) {
 					$.ajax({
