@@ -56,7 +56,7 @@
             <div class="modal-content">
               <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
                 <ul class="timeline col-sm-4 col-md-4">
@@ -213,13 +213,7 @@
             date = moment(value).format("Do MMM YY");
             return date;
           },
-          setPossessive: function(value) {
-            if (value.endsWith('s')) {
-              return value.concat("'");
-            } else{
-              return value.concat("'s");
-            }
-          }
+          
         },
 
         methods: {
