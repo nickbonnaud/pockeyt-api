@@ -24,7 +24,7 @@
     </ol>
   </section>
 
-  <pre>{{data}}</pre>
+  <pre>@{{users}}</pre>
 
   <!-- Main content -->
   <section class="content" id="customer">
