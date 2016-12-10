@@ -36,7 +36,7 @@
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
               </a>
               <div class="box-body">
-                <a  href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                <a v-on:click="getCustomerPurchases(user.id)"  href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                   <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
                 </a>
               </div>
@@ -194,23 +194,16 @@
 
           addUser: function(data) {
             var activeCustomer = data.user;
-            var transactions = data.transactions;
             var users = this.users;
             var purchases = this.purchases;
 
             if(users.length == 0) {
               activeCustomer['lastActive'] = Date.now();
-              transactions.forEach(function(transaction) {
-                purchases.push(transaction);
-              });
               users.push(activeCustomer);
             } else {
               for (i=users.length - 1; i >= 0; i --) {
                 if(!users[i].id == activeCustomer.id) {
                   activeCustomer['lastActive'] = Date.now();
-                  transactions.forEach(function(transaction) {
-                    purchases.push(transaction);
-                  });
                   users.push(activeCustomer);
                 } else if (users[i].id == activeCustomer.id) {
                   users[i].lastActive = Date.now();
@@ -225,7 +218,6 @@
             if(users.length > 0) {
               for (i=users.length - 1; i >= 0; i --) {
                 if (users[i].id == leavingCustomer.id) {
-                  this.removeUserTransactions(users[i].id);
                   users.splice(i, 1);
                 }
               }
@@ -240,7 +232,6 @@
                 if (currentTime - userLastActive >= 120000) {
                   var businessId = '{{ $profile->id }}'
                   this.deleteInactiveUser(users[i].id, businessId);
-                  this.removeUserTransactions(users[i].id);
                   users.splice(i, 1);
                 }
               }
@@ -260,17 +251,6 @@
               }
             })
           },
-          removeUserTransactions: function(userId) {
-            var purchases = this.purchases;
-
-            if(purchases.length > 0) {
-              for (i=purchases.length - 1; i >= 0; i --) {
-                if(purchases[i].user_id == userId) {
-                  purchases.splice(i, 1);
-                }
-              }
-            }
-          },
           moment: function() {
             return moment();
           },
@@ -284,7 +264,7 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data);
+                this.purchases = data
               }
             })
           }
