@@ -30,7 +30,7 @@
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
-          <div :style="border: 1px solid red" class="box box-primary">
+          <div :style="padding: 40%" class="box box-primary">
             <div class="box-header with-border text-center">
               <a v-on:click="getCustomerPurchases(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
