@@ -140,7 +140,6 @@
         template: '#user-template',
         data: function() {
           return {
-            user: customer
           }
         },
 
@@ -191,6 +190,7 @@
 
         data: {
           users: [],
+          user: [],
           purchases: [],
         },
 
