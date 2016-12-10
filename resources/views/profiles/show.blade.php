@@ -136,7 +136,7 @@
       });
 
       Vue.component('user', {
-        props: ['customer'],
+        props: ['customer', 'user'],
         template: '#user-template',
 
         methods: {
