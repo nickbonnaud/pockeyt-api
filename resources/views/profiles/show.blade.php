@@ -142,7 +142,7 @@
           return {
             user: []
           }
-        }
+        },
 
         methods: {
           transactionDistance: function(purchase) {
