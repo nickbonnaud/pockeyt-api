@@ -275,12 +275,13 @@
             return moment();
           },
           getCustomerPurchases: function(customerId) {
+            var businessId = '{{ $profile->id }}'
             $.ajax({
               method: 'POST',
               url: '/user/purchases',
               data: {
                 'customerId' : customerId,
-                'businessId' : '{{profile->id}}'
+                'businessId' : businessId
               },
               success: data => {
                 console.log(data);
