@@ -29,7 +29,7 @@
     <!-- Default box -->
     <pre>@{{users}}</pre>
     <div>
-    <user v-for="user in users" v-bind:customer="user"></user>
+    <user v-for="user in users" v-bind:user="user"></user>
     </div>
       <template id="user-template">
         <div class="col-sm-4 col-md-3">
@@ -136,7 +136,7 @@
       });
 
       Vue.component('user', {
-        props: ['customer'],
+        props: ['user'],
         template: '#user-template',
         data: function() {
           return {
