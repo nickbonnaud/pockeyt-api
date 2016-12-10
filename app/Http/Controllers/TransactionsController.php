@@ -255,18 +255,17 @@ class TransactionsController extends Controller
         return response()->json($purchased);
     }
 
-     public function getUserDeals(Request $request) {
+     public function getUserPurchases(Request $request) {
         $customerId = $request->customerId;
         $businessId = $request->businessId;
 
-        $redeemableDeal = Transaction::where(function($query) use ($customerId, $businessId) {
+        $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
-                ->where('profile_id', '=', $businessId)
-                ->where('redeemed', '=', false);
-        })->get();
+                ->where('profile_id', '=', $businessId);
+        })->orderBy('updated_at', 'desc')->take(5)->get();
 
-        if(isset($redeemableDeal)) {
-            return response()->json($redeemableDeal);
+        if(isset($purchases)) {
+            return response()->json($purchases);
         } else {
             return;
         }
