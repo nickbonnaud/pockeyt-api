@@ -136,8 +136,13 @@
       });
 
       Vue.component('user', {
-        props: ['customer', 'user'],
+        props: ['customer'],
         template: '#user-template',
+        data: function() {
+          return {
+            user: []
+          }
+        }
 
         methods: {
           transactionDistance: function(purchase) {
