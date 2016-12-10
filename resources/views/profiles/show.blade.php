@@ -29,7 +29,9 @@
     <!-- Default box -->
     <pre>@{{users}}</pre>
     <div>
-      <template v-for="user in users">
+    <user v-for="user in users" v-bind:customer="user"></user>
+    </div>
+      <template id="user-template">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
@@ -98,7 +100,6 @@
           </div>
         </div>
       </template>
-    </div>
     <!-- /.box -->
   </section>
   <!-- /.content -->
@@ -133,6 +134,52 @@
           }
         },
       });
+
+      Vue.component('user', {
+        props: ['customer'],
+        template: '#user-template',
+
+        methods: {
+          transactionDistance: function(purchase) {
+            var mostRecent = Date.parse(this.purchases[0].updated_at);
+            var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
+            var totalDistance = mostRecent - last;
+            var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
+            if (relativeDistance > 94) {
+              relativeDistance = relativeDistance - 6;
+            }
+            if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
+              console.log(prevDistance.lastDist);
+              prevDistance.lastDist = relativeDistance;
+              prevDistance.padding = prevDistance.padding + 20;
+              console.log(prevDistance.padding);
+              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
+            } else {
+              prevDistance.lastDist = relativeDistance;
+              prevDistance.padding = 0;
+              return {top: relativeDistance.toString() + '%'}
+            }
+          },
+          goToTransaction: function(customerId) {
+            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
+            location.href = route.replace('id', customerId)
+          },
+          removeUserTransactions: function(userId) {
+            var purchases = this.purchases;
+
+            if(purchases.length > 0) {
+              for (i=purchases.length - 1; i >= 0; i --) {
+                if(purchases[i].user_id == userId) {
+                  purchases.splice(i, 1);
+                }
+              }
+            }
+          },
+          moment: function() {
+            return moment();
+          },
+        }
+      })
 
       var main = new Vue({
         el: '#main',
@@ -171,27 +218,6 @@
         },
 
         methods: {
-
-          transactionDistance: function(purchase) {
-            var mostRecent = Date.parse(this.purchases[0].updated_at);
-            var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
-            var totalDistance = mostRecent - last;
-            var relativeDistance = Math.round(((mostRecent - Date.parse(purchase.updated_at)) / totalDistance) * 100);
-            if (relativeDistance > 94) {
-              relativeDistance = relativeDistance - 6;
-            }
-            if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
-              console.log(prevDistance.lastDist);
-              prevDistance.lastDist = relativeDistance;
-              prevDistance.padding = prevDistance.padding + 20;
-              console.log(prevDistance.padding);
-              return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
-            } else {
-              prevDistance.lastDist = relativeDistance;
-              prevDistance.padding = 0;
-              return {top: relativeDistance.toString() + '%'}
-            }
-          },
 
           addUser: function(data) {
             var activeCustomer = data.user;
@@ -247,10 +273,6 @@
               }
             }
           },
-          goToTransaction: function(customerId) {
-            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
-            location.href = route.replace('id', customerId)
-          },
           deleteInactiveUser: function(customerId, businessId) {
             $.ajax({
               method: 'POST',
@@ -260,20 +282,6 @@
                 'businessId' : businessId
               }
             })
-          },
-          removeUserTransactions: function(userId) {
-            var purchases = this.purchases;
-
-            if(purchases.length > 0) {
-              for (i=purchases.length - 1; i >= 0; i --) {
-                if(purchases[i].user_id == userId) {
-                  purchases.splice(i, 1);
-                }
-              }
-            }
-          },
-          moment: function() {
-            return moment();
           },
         }
       })
