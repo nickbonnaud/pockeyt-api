@@ -284,7 +284,7 @@
                 'businessId' : {{profile->id}}
               },
               success: data => {
-                console.log(success);
+                console.log(data);
               }
             })
           }
