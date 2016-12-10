@@ -25,13 +25,11 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" id="main">
+  <section class="content" id="customer">
     <!-- Default box -->
     <pre>@{{users}}</pre>
     <div>
-    <user v-for="user in users" v-bind:customer="user"></user>
-    </div>
-      <template id="user-template">
+      <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
@@ -56,14 +54,14 @@
             <div class="modal-content">
               <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name}} recent purchases</h4>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
                 <ul class="timeline col-sm-4 col-md-4">
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
-                      Today
+                      @{{ moment().format("Do MMM YY") }}
                     </span>
                   </li>
                   <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
@@ -100,6 +98,7 @@
           </div>
         </div>
       </template>
+    </div>
     <!-- /.box -->
   </section>
   <!-- /.content -->
@@ -135,15 +134,44 @@
         },
       });
 
-      Vue.component('user', {
-        props: ['customer'],
-        template: '#user-template',
-        data: function() {
-          return {
+      var customer = new Vue({
+        el: '#customer',
+
+        data: {
+          users: [],
+          purchases: [],
+        },
+
+        mounted: function() {
+          var pusher = new Pusher('f4976d40a137b96b52ea', {
+            encrypted: true
+          });
+
+          pusher.subscribe("{!! 'business' . $profile->id !!}")
+            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
+
+          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
+            .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
+
+          window.setInterval(this.removeInactiveUser, 120000);
+        },
+
+        filters: {
+          setDate: function(value) {
+            date = moment(value).format("Do MMM YY");
+            return date;
+          },
+          setPossessive: function(value) {
+            if (value.endsWith('s')) {
+              return value.concat("'");
+            } else{
+              return value.concat("'s");
+            }
           }
         },
 
         methods: {
+
           transactionDistance: function(purchase) {
             var mostRecent = Date.parse(this.purchases[0].updated_at);
             var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
@@ -164,64 +192,6 @@
               return {top: relativeDistance.toString() + '%'}
             }
           },
-          goToTransaction: function(customerId) {
-            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
-            location.href = route.replace('id', customerId)
-          },
-          removeUserTransactions: function(userId) {
-            var purchases = this.purchases;
-
-            if(purchases.length > 0) {
-              for (i=purchases.length - 1; i >= 0; i --) {
-                if(purchases[i].user_id == userId) {
-                  purchases.splice(i, 1);
-                }
-              }
-            }
-          },
-          moment: function() {
-            return moment().format("Do MMM YY");
-          },
-          filters: {
-          setDate: function(value) {
-            date = moment(value).format("Do MMM YY");
-            return date;
-          },
-          setPossessive: function(value) {
-            if (value.endsWith('s')) {
-              return value.concat("'");
-            } else{
-              return value.concat("'s");
-            }
-          }
-        },
-        }
-      })
-
-      var main = new Vue({
-        el: '#main',
-
-        data: {
-          users: [],
-          user: [],
-          purchases: [],
-        },
-
-        mounted: function() {
-          var pusher = new Pusher('f4976d40a137b96b52ea', {
-            encrypted: true
-          });
-
-          pusher.subscribe("{!! 'business' . $profile->id !!}")
-            .bind('App\\Events\\CustomerEnterRadius', this.addUser);
-
-          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
-            .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
-
-          window.setInterval(this.removeInactiveUser, 120000);
-        },
-
-        methods: {
 
           addUser: function(data) {
             var activeCustomer = data.user;
@@ -277,6 +247,10 @@
               }
             }
           },
+          goToTransaction: function(customerId) {
+            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
+            location.href = route.replace('id', customerId)
+          },
           deleteInactiveUser: function(customerId, businessId) {
             $.ajax({
               method: 'POST',
@@ -286,6 +260,20 @@
                 'businessId' : businessId
               }
             })
+          },
+          removeUserTransactions: function(userId) {
+            var purchases = this.purchases;
+
+            if(purchases.length > 0) {
+              for (i=purchases.length - 1; i >= 0; i --) {
+                if(purchases[i].user_id == userId) {
+                  purchases.splice(i, 1);
+                }
+              }
+            }
+          },
+          moment: function() {
+            return moment();
           },
         }
       })
