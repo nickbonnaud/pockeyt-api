@@ -29,7 +29,7 @@
     <!-- Default box -->
     <pre>@{{users}}</pre>
     <div>
-    <user v-if="users.length < 0" v-for="user in users" v-bind:customer="user"></user>
+    <user v-if="users.length > 0" v-for="user in users" v-bind:customer="user"></user>
     </div>
       <template id="user-template">
         <div class="col-sm-4 col-md-3">
