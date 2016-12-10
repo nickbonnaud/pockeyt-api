@@ -10,9 +10,11 @@
 
 @else
 
-@section('content')
+    @section('content')
 
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+  <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
       Customer Dashboard
@@ -22,71 +24,72 @@
     </ol>
   </section>
 
+  <pre>@{{data}}</pre>
+
+  <!-- Main content -->
   <section class="content" id="customer">
     <!-- Default box -->
-    <pre>@{{data}}</pre>
     <div>
-    <user v-for="user in users" :user="user"></user>
-    </div>
-    <template id="user-template">
-      <div class="col-sm-4 col-md-3">
-        <div class="box box-primary">
-          <div class="box-header with-border text-center">
-            <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-              <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
-            </a>
-            <div class="box-body">
-              <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
-                <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+      <template v-for="user in users">
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
               </a>
-            </div>
-            <div class="box-footer">
-              <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
-              <b>Bill</b>
-            </a>
+              <div class="box-body">
+                <a href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                <b>Bill</b>
+              </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header-timeline">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
-            </div>
-            <div class="modal-body-timeline">
-              <ul class="timeline col-sm-4 col-md-4">
-                <!-- timeline time label -->
-                <li class="time-label" style="margin-top: -34px">
-                  <span class="bg-blue">
-                    @{{ moment().format("Do MMM YY") }}
-                  </span>
-                </li>
-                <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
-                  <!-- timeline icon -->
-                  <i class="fa fa-money bg-green"></i>
-                  <div class="timeline-item">
-                    <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
-                  </div>
-                </li>
-                <li style="top : 97%">
-                  <i class="fa fa-clock-o bg-gray"></i>
-                </li>
-              </ul>
-              
-              <div class="scroll-container-timeline col-sm-8 col-md-8">
-                <div class="scroll-contents">
-                  <div v-for="purchase in purchases">
-                    <div class="box box-primary">
-                      <div class="box-header with-border text-center">
-                        <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
-                      </div>
-                      <div class="box-body">
-                        <purchases :products="purchase.products"></purchases>
-                      </div>
-                      <div class="box-footer timeline-list-footer">
-                        <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
+        <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header-timeline">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
+              </div>
+              <div class="modal-body-timeline">
+                <ul class="timeline col-sm-4 col-md-4">
+                  <!-- timeline time label -->
+                  <li class="time-label" style="margin-top: -34px">
+                    <span class="bg-blue">
+                      @{{ moment().format("Do MMM YY") }}
+                    </span>
+                  </li>
+                  <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
+                    <!-- timeline icon -->
+                    <i class="fa fa-money bg-green"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
+                    </div>
+                  </li>
+                  <li style="top : 97%">
+                    <i class="fa fa-clock-o bg-gray"></i>
+                  </li>
+                </ul>
+                
+                <div class="scroll-container-timeline col-sm-8 col-md-8">
+                  <div class="scroll-contents">
+                    <div v-for="purchase in purchases">
+                      <div class="box box-primary">
+                        <div class="box-header with-border text-center">
+                          <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
+                        </div>
+                        <div class="box-body">
+                          <purchases :products="purchase.products"></purchases>
+                        </div>
+                        <div class="box-footer timeline-list-footer">
+                          <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -95,9 +98,11 @@
             </div>
           </div>
         </div>
-      </div>
-    </template>
+      </template>
+    </div>
+    <!-- /.box -->
   </section>
+  <!-- /.content -->
 </div>
 
 <!-- /.content-wrapper -->
@@ -129,18 +134,6 @@
           }
         },
       });
-
-      
-      Vue.component('user', {
-        props: ['user', 'purchases'],
-        template: "#user-template",
-        data: function() {
-          return {
-            style: []
-          };
-        }
-      })
-
 
       var customer = new Vue({
         el: '#customer',
