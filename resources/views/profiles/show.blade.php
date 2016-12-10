@@ -63,7 +63,7 @@
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
-                      @{{ moment().format("Do MMM YY") }}
+                      @{{ moment() }}
                     </span>
                   </li>
                   <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
@@ -180,7 +180,7 @@
             }
           },
           moment: function() {
-            return moment();
+            return moment().format("Do MMM YY");
           },
           filters: {
           setDate: function(value) {
