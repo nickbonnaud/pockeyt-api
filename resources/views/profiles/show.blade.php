@@ -24,7 +24,7 @@
 
   <section class="content" id="customer">
     <!-- Default box -->
-    <pre>{{users}}</pre>
+    <pre>@{{data}}</pre>
     <div>
     <user v-for="user in users" :user="user"></user>
     </div>
