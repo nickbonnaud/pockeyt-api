@@ -63,7 +63,7 @@
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
                     <span class="bg-blue">
-                      @{{ moment() }}
+                      Today
                     </span>
                   </li>
                   <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
