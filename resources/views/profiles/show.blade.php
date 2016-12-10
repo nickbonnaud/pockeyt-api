@@ -24,7 +24,7 @@
     </ol>
   </section>
 
-  <pre>@{{this.users}}</pre>
+  <pre>@{{this.data}}</pre>
 
   <!-- Main content -->
   <section class="content" id="customer">
