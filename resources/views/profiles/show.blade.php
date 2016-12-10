@@ -25,7 +25,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" id="customer">
+  <section class="content" id="main">
     <!-- Default box -->
     <pre>@{{users}}</pre>
     <div>
@@ -134,15 +134,15 @@
         },
       });
 
-      var customer = new Vue({
-        el: '#customer',
+      var main = new Vue({
+        el: '#main',
 
         data: {
           users: [],
           purchases: [],
         },
 
-        ready: function() {
+        mounted: function() {
           var pusher = new Pusher('f4976d40a137b96b52ea', {
             encrypted: true
           });
