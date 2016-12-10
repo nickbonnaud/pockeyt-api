@@ -27,7 +27,6 @@
   <!-- Main content -->
   <section class="content" id="customer">
     <!-- Default box -->
-    <pre>@{{users}}</pre>
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
@@ -281,7 +280,7 @@
               url: '/user/purchases',
               data: {
                 'customerId' : customerId,
-                'businessId' : {{profile->id}}
+                'businessId' : '{{profile->id}}'
               },
               success: data => {
                 console.log(data);
