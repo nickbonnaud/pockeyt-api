@@ -182,6 +182,19 @@
           moment: function() {
             return moment();
           },
+          filters: {
+          setDate: function(value) {
+            date = moment(value).format("Do MMM YY");
+            return date;
+          },
+          setPossessive: function(value) {
+            if (value.endsWith('s')) {
+              return value.concat("'");
+            } else{
+              return value.concat("'s");
+            }
+          }
+        },
         }
       })
 
@@ -206,14 +219,6 @@
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
           window.setInterval(this.removeInactiveUser, 120000);
-        },
-
-        filters: {
-          setDate: function(value) {
-            date = moment(value).format("Do MMM YY");
-            return date;
-          },
-          
         },
 
         methods: {
