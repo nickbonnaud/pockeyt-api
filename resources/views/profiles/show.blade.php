@@ -30,7 +30,7 @@
     <div>
       <user-box v-for="user in users" :user="user"></user-box>
 
-      <template id="user-box">
+      <template id="user-template>
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
@@ -138,9 +138,9 @@
         },
       });
 
-      Vue.component('user-box', {
-        template: '#user-box',
-        props: ['user', 'purchases'],
+      Vue.component('user', {
+        template: '#user-template',
+        props: ['purchases'],
         data: function() {
           return {
             something: []
