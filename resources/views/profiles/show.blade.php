@@ -181,10 +181,8 @@
               relativeDistance = relativeDistance - 6;
             }
             if (((relativeDistance - prevDistance.lastDist) < 3) && (purchase.id !== this.purchases[0].id)) {
-              console.log(prevDistance.lastDist);
               prevDistance.lastDist = relativeDistance;
               prevDistance.padding = prevDistance.padding + 20;
-              console.log(prevDistance.padding);
               return {top: relativeDistance.toString() + '%', 'padding-top': prevDistance.padding.toString() + 'px'}
             } else {
               prevDistance.lastDist = relativeDistance;
@@ -194,6 +192,7 @@
           },
 
           addUser: function(data) {
+            console.log(data);
             var activeCustomer = data.user;
             var users = this.users;
             var purchases = this.purchases;
