@@ -44,7 +44,7 @@ class GeoController extends Controller
                     $redeemableDeal = Transaction::where(function($query) use ($dbUser, $business) {
                         $query->where('user_id', '=', $dbUser->id)
                             ->where('profile_id', '=', $business->id)
-                            ->where('paid', '=', 0);     
+                            ->where('redeemed', '=', false);     
                     })->first();
                     if (isset($redeemableDeal)) {
                         $business['redeemableDeal'] = $redeemableDeal->id;
