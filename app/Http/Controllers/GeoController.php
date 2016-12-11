@@ -47,7 +47,7 @@ class GeoController extends Controller
                             ->where('redeemed', '=', 0);     
                     })->first();
                     if (isset($redeemableDeal)) {
-                        $user['redeemableDeal'] = $redeemableDeal->id;
+                        $user['redeemableDeal'] = $dbUser->id;
                     }
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
