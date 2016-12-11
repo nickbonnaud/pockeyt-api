@@ -48,7 +48,7 @@ class GeoController extends Controller
                     })->first();
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
-                    $business['redeemableDeal'] = $redeemableDeal;
+                    $business['redeemableDeal'] = $redeemableDeal->id;
                     event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
