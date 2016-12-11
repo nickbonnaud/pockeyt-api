@@ -28,6 +28,7 @@
   <section class="content" id="customer">
     <!-- Default box -->
     <div>
+    <pre>a{{users}}</pre>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
