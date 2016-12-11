@@ -42,13 +42,14 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $redeemableDeal = Transaction::where(function($query) use ($dbUser, $business) {
-                        $query->where('user_id', '=', $dbUser->id)
+                        $query->where('user_id', '=', $user->id)
                             ->where('profile_id', '=', $business->id)
                             ->where('redeemed', '=', 0);     
                     })->first();
                     if (isset($redeemableDeal)) {
-                        $user['redeemableDeal'] = $dbUser->id;
+                       
                     }
+                    $user['redeemableDeal'] = $user->id;
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
                     event(new CustomerEnterRadius($user, $business));
