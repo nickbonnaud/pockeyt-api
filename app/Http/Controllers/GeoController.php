@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Location;
 use App\Profile;
+use App\Transaction;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
 use App\Events\CustomerLeaveRadius;
@@ -40,8 +41,14 @@ class GeoController extends Controller
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
+                    $redeemableDeal = Transaction::where(function($query) use ($dbUser, $business) {
+                        $query->where('user_id', '=', $dbUser->id)
+                            ->where('profile_id', '=', $business->id)
+                            ->where('paid', '=', false);     
+                    })->first();
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
+                    $business['redeemableDeal'] = $redeemableDeal;
                     event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
