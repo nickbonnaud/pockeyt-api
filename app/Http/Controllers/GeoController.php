@@ -46,10 +46,12 @@ class GeoController extends Controller
                             ->where('profile_id', '=', $business->id)
                             ->where('paid', '=', false);     
                     })->first();
-                    
+                    if (isset($redeemableDeal)) {
+                        $business['redeemableDeal'] = $redeemableDeal->id;
+                    }
+                    return response()->json(compact('redeemableDeal'));
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
-                    $business = $redeemableDeal;
                     event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
