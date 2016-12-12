@@ -31,7 +31,9 @@
     <pre>@{{users}}</pre>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
-          <div class="box box-primary">
+          <div v-if="getRedeemableDeals(user.id)"></div>
+            <div class="box box-primary">
+          </div>
             <div class="box-header with-border text-center">
               <a v-on:click="getCustomerPurchases(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
@@ -140,6 +142,7 @@
         data: {
           users: [],
           purchases: [],
+          deals: []
         },
 
         mounted: function() {
@@ -256,6 +259,7 @@
           },
           getCustomerPurchases: function(customerId) {
             var businessId = '{{ $profile->id }}'
+
             $.ajax({
               method: 'POST',
               url: '/user/purchases',
@@ -265,6 +269,21 @@
               },
               success: data => {
                 this.purchases = data
+              }
+            })
+          }
+          getRedeemableDeals: function(customerId) {
+            var businessId = '{{ $profile->id }}'
+            $.ajax({
+              method: 'POST',
+              url: '/user/deals',
+              data: {
+                'customerId' : customerId,
+                'businessId' : businessId
+              },
+              success: data => {
+                console.log(data);
+                return true;
               }
             })
           }

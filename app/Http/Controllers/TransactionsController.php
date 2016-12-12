@@ -271,6 +271,19 @@ class TransactionsController extends Controller
         }
     }
 
+    public function getUserDeals(Request $request) {
+        $redeemableDeals = Transaction::where(function($query) use ($customerId, $businessId) {
+            $query->where('user_id', '=', $customerId)
+                ->where('profile_id', '=', $businessId)
+                ->where('redeemed', '=', false);     
+        })->get();
+        if (isset($redeemableDeals)) {
+            return response()->json($redeemableDeals);  
+        } else {
+            return;
+        }
+    }
+
 }
 
 
