@@ -272,6 +272,9 @@ class TransactionsController extends Controller
     }
 
     public function getUserDeals(Request $request) {
+        $customerId = $request->customerId;
+        $businessId = $request->businessId;
+        
         $redeemableDeals = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId)
