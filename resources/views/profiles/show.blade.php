@@ -285,20 +285,21 @@
                 'businessId' : businessId
               },
               success: data => {
+                var deals = this.deals;
                 if (data.length > 0 ) {
                   data.forEach(function (userDeal) {
                     var found = false;
-                    if (this.deals.length > 0) {
-                      this.deals.forEach(function(currentUserDeals) {
+                    if (deals.length > 0) {
+                      deals.forEach(function(currentUserDeals) {
                         if (currentUserDeals.id === userDeal.id) {
                           found = true;
                         }
                       }); 
                       if (found === false) {
-                        this.deals.push(userDeal)
+                        deals.push(userDeal)
                       }
                     } else {
-                      this.deals.push(userDeal)
+                      deals.push(userDeal)
                     }
                   });
                 }
