@@ -31,12 +31,7 @@
     <pre>@{{users}}</pre>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
-          <div v-if="checkForDeal(user.id)"></div>
-            <div class="box box-warning">
-          </div>
-          <div v-else>
-            <div class="box box-primary">
-          </div>
+          <div class="box box-primary">
             <div class="box-header with-border text-center">
               <a v-on:click="getCustomerPurchases(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
