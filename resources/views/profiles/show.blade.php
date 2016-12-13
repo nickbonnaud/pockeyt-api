@@ -46,8 +46,8 @@
                   <b>Bill</b>
                 </a>
                 <div v-if="checkForDeal(user.id)">
-                  <a class="btn btn-success btn-block">
-                    <b>Bill</b>
+                  <a class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
                   </a>
                 </div>
               </div>

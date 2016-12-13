@@ -8497,6 +8497,10 @@ img {
   clear: right;
 }
 
+.btn-redeem {
+  margin-top: 5px;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;
