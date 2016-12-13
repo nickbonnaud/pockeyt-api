@@ -31,7 +31,10 @@
     <pre>@{{users}}</pre>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
-          <div v-if="getRedeemableDeals(user.id)"></div>
+          <div v-if="checkForDeal(user.id)"></div>
+            <div class="box box-warning">
+          </div>
+          <div v-else>
             <div class="box box-primary">
           </div>
             <div class="box-header with-border text-center">
@@ -212,6 +215,7 @@
                 }
               }
             }
+            this.getRedeemableDeals(activeCustomer.id);
           },
           removeUser: function(user) {
             var leavingCustomer = user.user;
@@ -281,9 +285,33 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data.length);
+                if (data.length > 0 ) {
+                  data.foreach(userDeal) {
+                    var found = false;
+                    this.deals.foreach(currentUserDeals) {
+                      if (currentUserDeals.id === userDeal.id) {
+                        found = true;
+                        break;
+                      }
+                    } if (found === false) {
+                      this.deals.push(userDeal)
+                    }
+                  }
+                }
               } 
             })
+          },
+          checkForDeal(userId) {
+            if (this.deals.length > 0 ) {
+              var found = false;
+              this.deals.foreach(e) {
+                if (e.user_id === userId) {
+                  found = true;
+                  break;
+                }
+              }
+              return found;
+            }
           }
         }
       })
