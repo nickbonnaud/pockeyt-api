@@ -287,12 +287,16 @@
                 if (data.length > 0 ) {
                   data.forEach(function (userDeal) {
                     var found = false;
-                    this.deals.forEach(function(currentUserDeals) {
-                      if (currentUserDeals.id === userDeal.id) {
-                        found = true;
+                    if (this.deals.length > 0) {
+                      this.deals.forEach(function(currentUserDeals) {
+                        if (currentUserDeals.id === userDeal.id) {
+                          found = true;
+                        }
+                      }); 
+                      if (found === false) {
+                        this.deals.push(userDeal)
                       }
-                    }); 
-                    if (found === false) {
+                    } else {
                       this.deals.push(userDeal)
                     }
                   });
