@@ -305,12 +305,12 @@
           checkForDeal(userId) {
             if (this.deals.length > 0 ) {
               var found = false;
-              this.deals.foreach(e) {
+              this.deals.forEach(function(e) {
                 if (e.user_id === userId) {
                   found = true;
                   break;
                 }
-              }
+              });
               return found;
             }
           }
