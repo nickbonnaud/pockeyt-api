@@ -281,9 +281,8 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data);
-                return true;
-              }
+                console.log(data.length);
+              } 
             })
           }
         }
