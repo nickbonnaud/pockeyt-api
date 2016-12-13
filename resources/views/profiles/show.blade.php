@@ -117,7 +117,7 @@
                         <h3 class="deal-item">@{{ deal.products | getDealItem }}</h3>
                       </span>
                       <span class="pull-right">
-                        <button class="btn btn-block btn-success btn-sm pull-right">Redeem!</button>
+                        <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
                       </span>
                     </div>
                   </div>
@@ -345,6 +345,15 @@
               });
               return found;
             }
+          },
+          RedeemDeal(DealId) {
+            $.ajax({
+              method: 'POST',
+              url: '/user/deal/redeem',
+              data: {
+                'dealId' : dealId,
+              }
+            })
           }
         }
       })
