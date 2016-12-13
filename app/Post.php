@@ -24,6 +24,7 @@ class Post extends Model {
         'message',
         'fb_post_id',
         'is_redeemable',
+        'deal_item',
         'price',
         'end_date'
     ];

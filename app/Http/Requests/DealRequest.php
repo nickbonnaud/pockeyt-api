@@ -24,6 +24,7 @@ class DealRequest extends Request {
         return [
             'message' => 'required',
             'is_redeemable' => 'required',
+            'deal_item' => 'required',
             'photo' => 'mimes:jpg,jpeg,png,bmp',
             'price' => 'required',
             'end_date' => 'date_format: Y-m-d'
