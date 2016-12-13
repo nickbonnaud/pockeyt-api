@@ -27,6 +27,7 @@
   <!-- Main content -->
   <section class="content" id="customer">
     <!-- Default box -->
+    <pre>@{{deals}}</pre>
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
