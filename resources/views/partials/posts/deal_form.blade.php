@@ -5,6 +5,10 @@
     <textarea type="text" name="message" id="message" class="form-control" rows="5" required></textarea>
   </div>
   <div class="form-group">
+    <label for="deal_item">What does your customer receive?</label>
+    <input class="form-control" type="text" name="deal_item" id="deal_item" placeholder="Examples: Cover to show or limited release product" required>
+  </div>
+  <div class="form-group">
   	<label for="price">Price of Deal</label>
   	<div class="input-group">
     	<span class="input-group-addon">$</span>
