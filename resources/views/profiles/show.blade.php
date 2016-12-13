@@ -199,7 +199,8 @@
           },
           parse: function(value) {
             console.log(value);
-            return value;
+            dealItem = JSON.parse(value);
+            return dealItem;
           }
         },
 
