@@ -113,9 +113,11 @@
                 <div class="box-body">
                   <div v-for="deal in deals">
                     <div v-if="deal.user_id === user.id">
-                      <h3 class="pull-left">@{{ deal.products | getDealItem }}</h3>
+                      <span class="pull-left">
+                        <h3>@{{ deal.products | getDealItem }}</h3>
+                      </span>
                       <span class="pull-right">
-                      <button class="btn btn-block btn-success btn-sm pull-right">Redeem!</button>
+                        <button class="btn btn-block btn-success btn-sm pull-right">Redeem!</button>
                       </span>
                     </div>
                   </div>
