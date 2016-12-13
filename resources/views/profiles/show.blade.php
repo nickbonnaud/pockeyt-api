@@ -113,7 +113,7 @@
                 <div class="box-body">
                   <div v-for="deal in deals">
                     <div v-if="deal.user_id === user.id">
-                      <h3 class="pull-left">@{{ deal.id}}</h3>
+                      <h3 class="pull-left">@{{ deal.products | parseJson}}</h3>
                       <span class="pull-right">
                       <button class="btn btn-block btn-success btn-sm pull-right">Redeem!</button>
                       </span>
@@ -196,6 +196,10 @@
             } else{
               return value.concat("'s");
             }
+          },
+          parse: function(value) {
+            console.log(value);
+            return JSON.parse(value);
           }
         },
 
