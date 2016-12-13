@@ -346,7 +346,7 @@
               return found;
             }
           },
-          RedeemDeal(DealId) {
+          RedeemDeal(dealId) {
             $.ajax({
               method: 'POST',
               url: '/user/deal/redeem',
