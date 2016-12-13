@@ -286,17 +286,18 @@
               },
               success: data => {
                 if (data.length > 0 ) {
-                  data.foreach(userDeal) {
+                  data.forEach(function (userDeal) {
                     var found = false;
-                    this.deals.foreach(currentUserDeals) {
+                    this.deals.forEach(function(currentUserDeals) {
                       if (currentUserDeals.id === userDeal.id) {
                         found = true;
                         break;
                       }
-                    } if (found === false) {
+                    }); 
+                    if (found === false) {
                       this.deals.push(userDeal)
                     }
-                  }
+                  });
                 }
               } 
             })
