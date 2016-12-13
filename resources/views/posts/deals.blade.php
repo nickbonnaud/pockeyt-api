@@ -19,6 +19,7 @@
 						<div class="box box-primary">
 							<div class="box-header with-border">
 								<h3 class="box-title">Create a New Deal</h3>
+								<a class="pull-right" href="#" data-toggle="modal" data-target="#dealInfoModal"><p>Info About Deals</p></a>
 							</div>
 								@include ('errors.form')
 								{!! Form::open(['method' => 'POST', 'route' => ['deals.store'], 'files' => true]) !!}
@@ -34,6 +35,30 @@
 				</section>
 			</div>
 		</div>
+	</div>
+
+	<div class="modal fade" id="dealInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="dealInfoModal">Details about using Pockeyt Deals</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="box-body">
+						<h4><strong>Pockeyt does not provide or pay for these Deals</strong></h4>
+						<p>Pockeyt's deal system is meant for tracking purchases that your Customers make in the Pockeyt app.</p>
+						<p>Pockeyt's deal system is meant for you, the Business, to more easily engage your Customers by allowing them to purchase items or services directly in the Pockeyt App and redeem these purchases when they visit your establishment.</p>
+						<p>Pockeyt Deals <strong>do not have to be monetary discounts.</strong> Form example, Pockeyt encourages you, the Business, to use the Deals system to bring attention to new products, pay entrance to an event ahead of time, or allow customers access to an early release product.</p>
+						<p>Pockeyt's Deal system allows customers to redeem purchased Deals when they are physically in your establishment. Customers who have bought a deal will have a Redeem Deal button under their profile when visible on your Customer Dashboard.</p>
+						<p>It is the Businesses' responsibility to provide the customer with Deal specified when the Business created the Deal. Pockeyt <strong>does not provide</strong> Deals to your customers.</p>
+					</div>
+					<div class="box-footer">
+					  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 
 	<div class="modal fade" id="dealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <label for="deal_item">What does your customer receive?</label>
-    <input class="form-control" type="text" name="deal_item" id="deal_item" placeholder="Examples: Cover to show or limited release product" required>
+    <input class="form-control" type="text" name="deal_item" id="deal_item" placeholder="Examples: Entrance to show or limited release product" required>
   </div>
   <div class="form-group">
   	<label for="price">Price of Deal</label>
