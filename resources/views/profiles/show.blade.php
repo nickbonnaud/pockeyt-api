@@ -45,7 +45,7 @@
                   <b>Bill</b>
                 </a>
                 <div v-if="checkForDeal(user.id)">
-                  <a class="btn btn-success btn-block btn-redeem">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
                     <b>Redeem Deal</b>
                   </a>
                 </div>
@@ -101,6 +101,28 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header-timeline">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="redeemDealModal">@{{user.first_name}} @{{user.last_name | setPossessive}} purchased Deal</h4>
+              </div>
+              <div class="modal-body">
+                <div class="box-body">
+                  <div v-for="deal in deals">
+                    <div v-if="deal.user_id === user.id">
+                      <h3 class="pull-left">@{{ deal.deal_item }}</h3>
+                      <button class="btn btn-block btn-success btn-sm pull-right">Redeem!</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </template>
     </div>
     <!-- /.box -->

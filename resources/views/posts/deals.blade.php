@@ -48,6 +48,7 @@
 	      	<div class="box-body">
 						<h4><strong>Pockeyt does not provide or pay for these Deals</strong></h4>
 						<p>Pockeyt's Deal system is meant for tracking purchases that your Customers make in the Pockeyt app.</p>
+						<p>These Deals are visible in the Pockeyt app as a regular post, with the exception of a "Get now!" button.</p>
 						<p>Pockeyt's Deal system is meant for you, the Business, to more easily engage your Customers by allowing them to purchase items or services directly in the Pockeyt App and redeem these purchases when they visit your establishment.</p>
 						<p>Pockeyt Deals <strong>do not have to be monetary discounts.</strong> For example, Pockeyt encourages you, the Business, to use the Deals system to bring attention to new products, pay entrance to an event ahead of time, or allow customers access to an early release product.</p>
 						<p>Pockeyt's Deal system allows customers to redeem purchased Deals when they are physically in your establishment. Customers who have bought a Deal will have a Redeem Deal button under their profile when visible on your Customer Dashboard.</p>
