@@ -198,9 +198,9 @@
             }
           },
           getDealItem: function(value) {
+            console.log(value);
             dealItem = JSON.parse(value);
-            console.log(dealItem.name);
-            return dealItem.name
+            console.log(dealItem);
           }
         },
 
