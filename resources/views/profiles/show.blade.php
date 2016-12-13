@@ -200,7 +200,7 @@
           getDealItem: function(value) {
             console.log(value);
             dealItem = JSON.parse(value);
-            console.log(dealItem);
+            console.log(dealItem[0].name);
           }
         },
 
