@@ -293,6 +293,7 @@ class TransactionsController extends Controller
 
         $transaction->redeemed = true;
         $transaction->save();
+        return response('success');
     }
 
 }
