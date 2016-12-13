@@ -8501,6 +8501,10 @@ img {
   margin-top: 5px;
 }
 
+.deal-item {
+  margin-top: 2px;
+}
+
 .controls {
   background-color: #fff;
   border-radius: 2px;

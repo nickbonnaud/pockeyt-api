@@ -113,7 +113,7 @@
                 <div class="box-body">
                   <div v-for="deal in deals">
                     <div v-if="deal.user_id === user.id">
-                      <span class="pull-left">
+                      <span class="deal-item pull-left">
                         <h3>@{{ deal.products | getDealItem }}</h3>
                       </span>
                       <span class="pull-right">
@@ -200,7 +200,6 @@
             }
           },
           getDealItem: function(value) {
-            console.log(value);
             dealItem = JSON.parse(value);
             return dealItem[0].name;
           }
