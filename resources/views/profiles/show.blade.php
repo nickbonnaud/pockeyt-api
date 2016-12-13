@@ -291,7 +291,6 @@
                     this.deals.forEach(function(currentUserDeals) {
                       if (currentUserDeals.id === userDeal.id) {
                         found = true;
-                        break;
                       }
                     }); 
                     if (found === false) {
@@ -308,7 +307,6 @@
               this.deals.forEach(function(e) {
                 if (e.user_id === userId) {
                   found = true;
-                  break;
                 }
               });
               return found;
