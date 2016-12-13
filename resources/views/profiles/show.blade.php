@@ -356,7 +356,7 @@
               success: data => {
                 var deals = this.deals;
                 for (i=deals.length - 1; i >= 0; i --) {
-                  if (deals[i].id === dealId {
+                  if (deals[i].id === dealId) {
                     deals.splice(i, 1);
                   }
                 }
