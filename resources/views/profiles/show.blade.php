@@ -42,8 +42,13 @@
               </div>
               <div class="box-footer">
                 <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
-                <b>Bill</b>
-              </a>
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a class="btn btn-primary btn-success">
+                    <b>Bill</b>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
