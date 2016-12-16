@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Profile;
 use App\Transaction;
 use DateTimeZone;
+use Carbon\Carbon;
 
 class AddPurchasesQb extends Command
 {
@@ -46,12 +47,13 @@ class AddPurchasesQb extends Command
      */
     public function handle()
     {
-      $businesses = Profile::where('connected_qb', '=', true);
+    	$businesses = Profile::where('connected_qb', '=', true)->get();
 
-      foreach ($businesses as $business) {
-      	$the_tenant = $business->id;
+	    foreach ($businesses as $business) {
 
-      	if ($this->IntuitAnywhere->check(env('QBO_USERNAME'), $the_tenant) && $this->IntuitAnywhere->test(env('QBO_USERNAME'), $the_tenant)) {
+	    	$the_tenant = $business->id;
+
+	    	if ($this->IntuitAnywhere->check(env('QBO_USERNAME'), $the_tenant) && $this->IntuitAnywhere->test(env('QBO_USERNAME'), $the_tenant)) {
 		      // Set up the IPP instance
 		      $IPP = new \QuickBooks_IPP(env('QBO_DSN'));
 		      // Get our OAuth credentials from the database
@@ -71,15 +73,17 @@ class AddPurchasesQb extends Command
 		      // Load the OAuth information from the database
 		      $this->context = $IPP->context();
 		      
-		      $unSynchedTransactions = Transaction::where(function($query) use($the_tenant) {
-		      	$query->where('profile_id', '=', $the_tenant)
-		      		->where('qb_synced', '=', false);
+		      $account = $business->account;
+		      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
+		      	$query->where('qb_synced', '=', false)
+		      		->where('profile_id', '=', $the_tenant)
+		      		->where('created_at', '>', $account->qb_connected_date);
 		      })->get();
-
-		      foreach ($$unSynchedTransactions as $transaction) {
+		      foreach ($unSynchedTransactions as $transaction) {
 		      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 						$invoice = new \QuickBooks_IPP_Object_Invoice();
-		      	$invoice->setDueDate(date('Y-m-d', $transaction->updated_at));
+						$invoice->setTxnDate($transaction->created_at->toDateString());
+		      	$invoice->setDueDate($transaction->created_at->toDateString());
 		      	$invoice->setPrivateNote('Pockeyt Sale Transaction ID # ' . $transaction->id);
 
 		      	$line = new \QuickBooks_IPP_Object_Line();
@@ -88,22 +92,23 @@ class AddPurchasesQb extends Command
 		      	$line->setDescription('Custom Amount');
 
 		      	$salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
- 						$salesItemLineDetail->setUnitPrice(($transaction->total / 100));
- 						$salesItemLineDetail->setQty(1);
- 						$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
+							$salesItemLineDetail->setUnitPrice(($transaction->total / 100));
+							$salesItemLineDetail->setQty(1);
+							$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
- 						$line->addSalesItemLineDetail($salesItemLineDetail);
- 						$invoice->addLine($line);
+							$line->addSalesItemLineDetail($salesItemLineDetail);
+							$invoice->addLine($line);
 
- 						$invoice->setCustomerRef($business->account->pockeyt_qb_id);
- 						if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
+							$invoice->setCustomerRef($business->account->pockeyt_qb_id);
+							if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 				    {
 				      $paymentService = new \QuickBooks_IPP_Service_Payment();
 							$payment = new \QuickBooks_IPP_Object_Payment();
 
 							$payment->setTotalAmt(($transaction->total / 100));
+							$payment->setTxnDate($transaction->created_at->toDateString());
 							$payment->setPrivateNote('Pockeyt Credit Card Payment. Pockeyt Transaction ID # ' . $transaction->id);
-							$payment->setPaymentRefNum('transaction id');
+							$payment->setPaymentRefNum($transaction->id);
 							$payment->setPaymentMethodRef($business->account->pockeyt_payment_method);
 
 							$line = new \QuickBooks_IPP_Object_Line();
@@ -130,6 +135,6 @@ class AddPurchasesQb extends Command
 				    }
 		      }
 		    }
-      }
+	    }
     }
 }
