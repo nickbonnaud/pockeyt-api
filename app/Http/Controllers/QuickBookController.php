@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Profile;
 use App\Transaction;
+use Carbon\Carbon;
+use DateTimeZone;
 
 class QuickBookController extends Controller
 {
@@ -66,13 +68,11 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setPockeytId();
-    $this->createPockeytAccount();
-    $this->createPockeytItem();
-    $this->createPockeytPaymentMethod();
-    $profile = $this->user->profile;
-    $profile->connected_qb = true;
-    $profile->save();
+    // $this->setPockeytId();
+    // $this->createPockeytAccount();
+    // $this->createPockeytItem();
+    // $this->createPockeytPaymentMethod();
+    $this->setQbActive();
    	return view('qbo_success');
   }
 
@@ -162,6 +162,17 @@ class QuickBookController extends Controller
   	}
   }
 
+  public function setQbActive() {
+  	$profile = $this->user->profile;
+    $profile->connected_qb = true;
+
+    $account = $profile->account;
+    $account->qb_connected_date = Carbon::now(new DateTimeZone(config('app.timezone')));
+
+    $profile->save();
+    return $account->save();
+  }
+
   public function setQbId($resp) {
   	$account = $this->user->profile->account;
     $account->pockeyt_qb_id = $resp;
@@ -221,7 +232,8 @@ class QuickBookController extends Controller
 	      foreach ($unSynchedTransactions as $transaction) {
 	      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 					$invoice = new \QuickBooks_IPP_Object_Invoice();
-	      	$invoice->setDueDate($transaction->updated_at->toDateString());
+					$invoice->setTxnDate($transaction->created_at->toDateString());
+	      	$invoice->setDueDate($transaction->created_at->toDateString());
 	      	$invoice->setPrivateNote('Pockeyt Sale Transaction ID # ' . $transaction->id);
 
 	      	$line = new \QuickBooks_IPP_Object_Line();
@@ -244,8 +256,9 @@ class QuickBookController extends Controller
 						$payment = new \QuickBooks_IPP_Object_Payment();
 
 						$payment->setTotalAmt(($transaction->total / 100));
+						$payment->setTxnDate($transaction->created_at->toDateString());
 						$payment->setPrivateNote('Pockeyt Credit Card Payment. Pockeyt Transaction ID # ' . $transaction->id);
-						$payment->setPaymentRefNum('transaction id');
+						$payment->setPaymentRefNum($transaction->id);
 						$payment->setPaymentMethodRef($business->account->pockeyt_payment_method);
 
 						$line = new \QuickBooks_IPP_Object_Line();
