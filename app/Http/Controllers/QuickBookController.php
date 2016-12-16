@@ -218,7 +218,7 @@ class QuickBookController extends Controller
 	      		->where('qb_synced', '=', false);
 	      })->get();
 
-	      foreach ($$unSynchedTransactions as $transaction) {
+	      foreach ($unSynchedTransactions as $transaction) {
 	      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 					$invoice = new \QuickBooks_IPP_Object_Invoice();
 	      	$invoice->setDueDate(date('Y-m-d', $transaction->updated_at));
