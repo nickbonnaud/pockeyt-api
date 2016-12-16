@@ -68,10 +68,10 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    // $this->setPockeytId();
-    // $this->createPockeytAccount();
-    // $this->createPockeytItem();
-    // $this->createPockeytPaymentMethod();
+    $this->setPockeytId();
+    $this->createPockeytAccount();
+    $this->createPockeytItem();
+    $this->createPockeytPaymentMethod();
     $this->setQbActive();
    	return view('qbo_success');
   }
@@ -224,11 +224,13 @@ class QuickBookController extends Controller
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
 	      
-	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant) {
-	      	$query->where('profile_id', '=', $the_tenant)
-	      		->where('qb_synced', '=', false);
+	      $account = $business->account;
+	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
+	      	$query->where('qb_synced', '=', false)
+	      		->where('profile_id', '=', $the_tenant)
+	      		->where('created_at', '>', $account->qb_connected_date);
 	      })->get();
-
+	      dd($unSynchedTransactions);
 	      foreach ($unSynchedTransactions as $transaction) {
 	      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 					$invoice = new \QuickBooks_IPP_Object_Invoice();
