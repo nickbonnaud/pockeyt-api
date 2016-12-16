@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be18d1d71f25dbb746b3cbbd9f497ced",
-    "content-hash": "ca6f9655c982768bf960ae51bd3369d6",
+    "hash": "ab1b9f0e8194ad87e0446e659e3e7faf",
+    "content-hash": "3706c9bd10d933cc214463d8fb7c397b",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -509,16 +509,16 @@
         },
         {
             "name": "consolibyte/quickbooks",
-            "version": "3.1",
+            "version": "v3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolibyte/quickbooks-php.git",
-                "reference": "de4724a92dcd4381507776069839d5e44e286bc1"
+                "reference": "06041bdae92480aa202ea3d4350f12778db19281"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolibyte/quickbooks-php/zipball/de4724a92dcd4381507776069839d5e44e286bc1",
-                "reference": "de4724a92dcd4381507776069839d5e44e286bc1",
+                "url": "https://api.github.com/repos/consolibyte/quickbooks-php/zipball/06041bdae92480aa202ea3d4350f12778db19281",
+                "reference": "06041bdae92480aa202ea3d4350f12778db19281",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +556,7 @@
                 "quickbooks web connector",
                 "web connector"
             ],
-            "time": "2015-11-09 18:54:25"
+            "time": "2016-12-14 18:33:20"
         },
         {
             "name": "danielstjules/stringy",
