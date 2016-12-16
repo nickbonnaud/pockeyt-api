@@ -70,6 +70,9 @@ class QuickBookController extends Controller
     $this->createPockeytAccount();
     $this->createPockeytItem();
     $this->createPockeytPaymentMethod();
+    $profile = $this->user->profile;
+    $profile->connected_qb = true;
+    $profile->save();
    	return view('qbo_success');
   }
 
@@ -185,7 +188,7 @@ class QuickBookController extends Controller
 
   public function syncInvoice() {
   	$businesses = Profile::where('connected_qb', '=', true);
-
+  	dd($businesses);
     foreach ($businesses as $business) {
     	$the_tenant = $business->id;
 
@@ -209,7 +212,7 @@ class QuickBookController extends Controller
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
 	      
-	      $unSynchedTransactions = Transaction::where(function($query) use($the_tenant) {
+	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant) {
 	      	$query->where('profile_id', '=', $the_tenant)
 	      		->where('qb_synced', '=', false);
 	      })->get();
