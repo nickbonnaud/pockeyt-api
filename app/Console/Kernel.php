@@ -24,6 +24,6 @@ class Kernel extends ConsoleKernel {
      */
     protected function schedule(Schedule $schedule) {
         $schedule->command('app:add-events')->dailyAt('23:30');
-        $schedule->command('app:add-purchases-qb')->everyFiveMinutes();
+        $schedule->command('app:add-purchases-qb')->dailyAt('03:00');
     }
 }
