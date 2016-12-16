@@ -221,7 +221,7 @@ class QuickBookController extends Controller
 	      foreach ($unSynchedTransactions as $transaction) {
 	      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 					$invoice = new \QuickBooks_IPP_Object_Invoice();
-					$formattedDate = $transaction->updated_at;
+					$formattedDate = $transaction->updated_at->toDateString();
 					dd($formattedDate);
 	      	$invoice->setDueDate(date('Y-m-d', $transaction->updated_at));
 	      	$invoice->setPrivateNote('Pockeyt Sale Transaction ID # ' . $transaction->id);
