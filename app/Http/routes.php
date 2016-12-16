@@ -117,6 +117,13 @@ Route::group(['prefix' => 'api'], function() {
 });
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
+//Quickbook Routes
+Route::get('qbo/oauth','QuickBookController@qboOauth');
+Route::get('qbo/success','QuickBookController@qboSuccess');
+Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
+
+Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
+
 
 // API Routes
 Route::controller('api', 'APIController', [

@@ -1,6 +1,9 @@
 @extends('layoutDashboard')
-
 @section('content')
+<?php
+$qbo_obj = new \App\Http\Controllers\QuickBookController();
+$qbo_connect = $qbo_obj->qboConnect();
+?>
 <div class="content-wrapper-scroll">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
@@ -8,6 +11,12 @@
 		    <h1>
 		      Your Business Account Profile
 		    </h1>
+		     @if(!$qbo_connect)
+		    	<span class="pull-right">
+						<ipp:connectToIntuit></ipp:connectToIntuit>
+					</span>
+				@endif
+				<a href="{{url('qbo/disconnect')}}" title="">Disconnect</a>
 		    @if($account->status == 'pending')
 		    	<p><i class="fa fa-circle text-warning"></i> Account Pending</p>
 		    @elseif($account->status == 'active')
@@ -20,6 +29,10 @@
 		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Payment Account Info</li>
 		    </ol>
+		    <form action="{{ route('sync.invoice') }}" method="post" class="form-inline" style="display: inline-block;">
+		        {{ csrf_field() }}
+		      <input type="submit" value="Do" class="btn btn-danger btn-flat btn-xs">
+		    </form>
 		  </section>
 		  @include ('errors.form')
 			<section class="content">
@@ -187,5 +200,16 @@
     </div>
   </div>
 </div>
-
 @stop
+@section('scripts.footer')
+<script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
+
+<script>
+	intuit.ipp.anywhere.setup({
+    menuProxy: '{{ env("QBO_MENU_URL") }}',
+    grantUrl: '{{ env("QBO_OAUTH_URL") }}'
+  });
+</script>
+
+
+
