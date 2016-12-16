@@ -187,9 +187,10 @@ class QuickBookController extends Controller
   }
 
   public function syncInvoice() {
-  	$businesses = Profile::where('connected_qb', '=', 1);
-  	dd($businesses);
+  	$businesses = Profile::where('connected_qb', '=', true);
+
     foreach ($businesses as $business) {
+    	dd($business);
     	$the_tenant = $business->id;
 
     	if ($this->IntuitAnywhere->check(env('QBO_USERNAME'), $the_tenant) && $this->IntuitAnywhere->test(env('QBO_USERNAME'), $the_tenant)) {
