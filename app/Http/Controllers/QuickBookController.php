@@ -187,7 +187,7 @@ class QuickBookController extends Controller
   }
 
   public function syncInvoice() {
-  	$businesses = Profile::where('connected_qb', '=', true);
+  	$businesses = Profile::where('connected_qb', '=', 1);
   	dd($businesses);
     foreach ($businesses as $business) {
     	$the_tenant = $business->id;
