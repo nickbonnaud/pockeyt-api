@@ -68,11 +68,11 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setPockeytId();
-    $this->createPockeytAccount();
-    $this->createPockeytItem();
-    $this->createPockeytPaymentMethod();
-    $this->setQbActive();
+    // $this->setPockeytId();
+    // $this->createPockeytAccount();
+    // $this->createPockeytItem();
+    // $this->createPockeytPaymentMethod();
+    // $this->setQbActive();
    	return view('qbo_success');
   }
 
