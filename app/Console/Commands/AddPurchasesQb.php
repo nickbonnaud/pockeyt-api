@@ -37,7 +37,7 @@ class AddPurchasesQb extends Command
 	    }
 	    $this->IntuitAnywhere = new \QuickBooks_IPP_IntuitAnywhere(env('QBO_DSN'), env('QBO_ENCRYPTION_KEY'), env('QBO_OAUTH_CONSUMER_KEY'), env('QBO_CONSUMER_SECRET'), env('QBO_OAUTH_URL'), env('QBO_SUCCESS_URL'));
 
-      parent::__construct();
+    	parent::__construct();
     }
 
     /**
