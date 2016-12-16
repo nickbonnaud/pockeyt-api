@@ -190,7 +190,7 @@ class QuickBookController extends Controller
   	$businesses = Profile::where('connected_qb', '=', true)->get();
 
     foreach ($businesses as $business) {
-    	dd($business);
+
     	$the_tenant = $business->id;
 
     	if ($this->IntuitAnywhere->check(env('QBO_USERNAME'), $the_tenant) && $this->IntuitAnywhere->test(env('QBO_USERNAME'), $the_tenant)) {
