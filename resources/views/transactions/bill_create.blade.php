@@ -46,6 +46,7 @@
             <span>Sales Tax:</span>
             <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
           </div>
+          <hr>
           <b>Total:</b>
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
@@ -73,7 +74,7 @@
       },
 
       computed: {
-        totalBill: function() {
+        subTotal: function() {
           var bill = this.bill;
           var total = 0;
           bill.forEach(function(product) {
@@ -83,8 +84,13 @@
         },
 
         totalTax: function() {
-          var tax = this.totalBill * .07;
+          var tax = this.subTotal * {{ ($user->profile->tax_rate) / 10000 }};
           return tax;
+        },
+
+        totalBill: function() {
+          var total = this.subTotal + this.totalTax;
+          return total;
         }
       },
 
