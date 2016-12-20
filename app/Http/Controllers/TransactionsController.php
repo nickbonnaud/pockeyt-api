@@ -92,7 +92,6 @@ class TransactionsController extends Controller
     public function chargeExisting(UpdateChargeRequest $request, $id) {
         $transaction = Transaction::findOrFail($id);
         $transaction->update($request->all());
-        dd($transaction);
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;
 
@@ -116,6 +115,7 @@ class TransactionsController extends Controller
     }
 
     private function createCharge($transaction, $customer, $profile) {
+        dd($transaction->total);
         $amount = ($transaction->total) / 100;
         $serviceFee = round($amount * 0.02, 2);
         $result = \Braintree_Transaction::sale([
