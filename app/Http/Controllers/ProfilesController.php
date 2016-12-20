@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateBusinessTagsRequest;
 use App\Photo;
 use App\Post;
 use App\Profile;
+use App\Tax;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
@@ -62,15 +63,23 @@ class ProfilesController extends Controller {
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
         $profile = $this->user->publish(
-            new Profile($request->all())
+            new Profile($request->except(['county', 'state']))
         );
+
+        $county = $request->county;
+        $state = $request->state;
+
+        $taxLocation = Tax::where(function($query) use ($county, $state) {
+            $query->where('county', '=', $county)
+                ->where('state', '=', $state);
+        })->first();
 
         if(is_null($this->user->profile))
             $this->syncTags($profile, $request->input('tags'));
         else
             $this->syncTags($profile, $request->input('tag_list'));
 
-         return redirect()->route('accounts.create');
+        return redirect()->route('accounts.create');
     }
 
     /**
@@ -133,8 +142,17 @@ class ProfilesController extends Controller {
     public function changeLocation(UpdateBusinessLocationRequest $request, $id) {
         /** @var Profile $profile */
         $profile = Profile::findOrFail($id);
-        $profile->update($request->all());
+        
+        $county = $request->county;
+        $state = $request->state;
 
+        $taxLocation = Tax::where(function($query) use ($county, $state) {
+            $query->where('county', '=', $county)
+                ->where('state', '=', $state);
+        })->first();
+
+        $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        $profile->update($request->except(['county', 'state']));
         return redirect()->route('profiles.edit', compact('profile', 'tags'));
     }
 

@@ -207,6 +207,8 @@
                     {!! Form::model($profile, ['method' => 'PATCH', 'route' => ['profiles.location', $user->profile->id], 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('lat', null, ['id' => 'lat']) !!}
                         {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
+                        {!! Form::hidden('state', null, ['id' => 'state']) !!}
+                        {!! Form::hidden('county', null, ['id' => 'county']) !!}
                         <div class="modal-footer">
                             <div class="form-group">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -280,6 +282,14 @@
 
             var latitude = place.geometry.location.lat();
             var longitude = place.geometry.location.lng();
+
+            place.address_components.forEach(function(e) {
+                if (e.types.includes("administrative_area_level_1")) {
+                    $('#state').val(e.short_name);
+                } else if (e.types.includes("administrative_area_level_2")) {
+                    $('#county').val(e.short_name);
+                }
+            });
 
             $('#lat').val(latitude);
             $('#lng').val(longitude);

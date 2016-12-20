@@ -23,7 +23,8 @@
 
 {!! Form::hidden('lat', null, ['id' => 'lat']) !!}
 {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
-
+{!! Form::hidden('state', null, ['id' => 'state']) !!}
+{!! Form::hidden('county', null, ['id' => 'county']) !!}
 
 @if(isset($profile))
   <div class="form-group">
@@ -89,6 +90,14 @@
 
         var latitude = place.geometry.location.lat();
         var longitude = place.geometry.location.lng();
+
+        place.address_components.forEach(function(e) {
+          if (e.types.includes("administrative_area_level_1")) {
+            $('#state').val(e.short_name);
+          } else if (e.types.includes("administrative_area_level_2")) {
+            $('#county').val(e.short_name);
+          }
+        });
 
         $('#lat').val(latitude);
         $('#lng').val(longitude);

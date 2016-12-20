@@ -68,11 +68,13 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    // $this->setPockeytId();
-    // $this->createPockeytAccount();
-    // $this->createPockeytItem();
-    // $this->createPockeytPaymentMethod();
-    // $this->setQbActive();
+    $this->setPockeytId();
+    $this->createPockeytAccount();
+    $this->createPockeytTipsAccount();
+    $this->createPockeytItem();
+    $this->createPockeytTipsItem();
+    $this->createPockeytPaymentMethod();
+    $this->setQbActive();
    	return view('qbo_success');
   }
 
@@ -123,10 +125,34 @@ class QuickBookController extends Controller
 		}
   }
 
+  public function createPockeytTipsAccount() {
+    $this->qboConnect();
+    $accountService = new \QuickBooks_IPP_Service_Account();
+    $account = new \QuickBooks_IPP_Object_Account();
+
+    $account->setName('Pockeyt Tips');
+    $account->setCashFlowClassification('Liability');
+    $account->setAccountType('OtherCurrentLiabilities');
+    $account->setAccountSubType('OtherCurrentLiabilities');
+    
+    if ($resp = $accountService->add($this->context, $this->realm, $account))
+    {
+      $resp = str_replace('{','',$resp);
+      $resp = str_replace('}','',$resp);
+      $resp = abs($resp);
+      return $this->setQbTipsAccount($resp);
+    }
+    else
+    {
+      print($accountService->lastError($this->context));
+    }
+  }
+
   public function createPockeytItem() {
   	$this->qboConnect();
   	$itemService = new \QuickBooks_IPP_Service_Item();
   	$item = new \QuickBooks_IPP_Object_Item();
+
   	$item->setName('Pockeyt Item');
 		$item->setType('Service');
 		$item->setIncomeAccountRef($this->user->profile->account->pockeyt_qb_account);
@@ -141,6 +167,27 @@ class QuickBookController extends Controller
 		{
 			print($itemService->lastError($this->context));
 		}
+  }
+
+  public function createPockeytTipsItem() {
+    $this->qboConnect();
+    $itemService = new \QuickBooks_IPP_Service_Item();
+    $item = new \QuickBooks_IPP_Object_Item();
+
+    $item->setName('Pockeyt Tips');
+    $item->setType('Service');
+    $item->setIncomeAccountRef($this->user->profile->account->pockeyt_qb_tips_account);
+    if ($resp = $itemService->add($this->context, $this->realm, $item))
+    {
+      $resp = str_replace('{','',$resp);
+      $resp = str_replace('}','',$resp);
+      $resp = abs($resp);
+      return $this->setPockeytTipsItem($resp);
+    }
+    else
+    {
+      print($itemService->lastError($this->context));
+    }
   }
 
   public function createPockeytPaymentMethod() {
@@ -185,9 +232,21 @@ class QuickBookController extends Controller
     return $account->save();
   }
 
+  public function setQbTipsAccount($resp) {
+    $account = $this->user->profile->account;
+    $account->pockeyt_qb_tips_account = $resp;
+    return $account->save();
+  }
+
   public function setPockeytItem($resp) {
   	$account = $this->user->profile->account;
     $account->pockeyt_item = $resp;
+    return $account->save();
+  }
+
+  public function setPockeytTipsItem($resp) {
+    $account = $this->user->profile->account;
+    $account->pockeyt_tips_item = $resp;
     return $account->save();
   }
 
@@ -243,15 +302,30 @@ class QuickBookController extends Controller
 	      	$line->setDescription('Custom Amount');
 
 	      	$salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
-						$salesItemLineDetail->setUnitPrice(($transaction->total / 100));
-						$salesItemLineDetail->setQty(1);
-						$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
+					$salesItemLineDetail->setUnitPrice(($transaction->total / 100));
+					$salesItemLineDetail->setQty(1);
+					$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
-						$line->addSalesItemLineDetail($salesItemLineDetail);
-						$invoice->addLine($line);
+					$line->addSalesItemLineDetail($salesItemLineDetail);
+					$invoice->addLine($line);
 
-						$invoice->setCustomerRef($business->account->pockeyt_qb_id);
-						if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
+          if (isset($transaction->tip_amount)) {
+            $line = new \QuickBooks_IPP_Object_Line();
+            $line->setDetailType('SalesItemLineDetail');
+            $line->setAmount(($transaction->tip_amount / 100));
+            $line->setDescription('Pockeyt Tips Money');
+
+            $salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
+            $salesItemLineDetail->setUnitPrice(($transaction->tip_amount / 100));
+            $salesItemLineDetail->setQty(1);
+            $salesItemLineDetail->setItemRef($business->account->pockeyt_tips_item);
+
+            $line->addSalesItemLineDetail($salesItemLineDetail);
+            $invoice->addLine($line);
+          }
+
+					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
+					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 			    {
 			      $paymentService = new \QuickBooks_IPP_Service_Payment();
 						$payment = new \QuickBooks_IPP_Object_Payment();
