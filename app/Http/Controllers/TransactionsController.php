@@ -116,7 +116,6 @@ class TransactionsController extends Controller
 
     private function createCharge($transaction, $customer, $profile) {
         $amount = (round($transaction->total)) / 100;
-        dd($amount);
         $serviceFee = round($amount * 0.02, 2);
         $result = \Braintree_Transaction::sale([
             'merchantAccountId' => $profile->id,
