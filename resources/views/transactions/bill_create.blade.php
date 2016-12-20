@@ -42,6 +42,10 @@
           </table>
         </div>
         <div class="box-footer-receipt">
+          <p>Sales Tax:</p>
+          <div class="receipt-total">
+            <p>$@{{ totalTax / 100 }}</p>
+          </div>
           <b>Total:</b>
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
@@ -76,6 +80,11 @@
             total = total + (product.quantity * product.price)
           });
           return total;
+        },
+
+        totalTax: function() {
+          var tax = this.totalBill * .07;
+          return tax;
         }
       },
 
