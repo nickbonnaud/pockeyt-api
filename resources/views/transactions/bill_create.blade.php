@@ -43,7 +43,7 @@
         </div>
         <div class="box-footer-receipt">
           <div class="tax-section">
-            <span>Sales Tax:</span>
+            <span>Tax:</span>
             <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
           </div>
           <b>Total:</b>

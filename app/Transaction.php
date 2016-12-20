@@ -16,6 +16,9 @@ class Transaction extends Model {
     	'user_id',
     	'paid',
     	'products',
+        'tax',
+        'tips',
+        'net_sales',
     	'total'
     ];
 
