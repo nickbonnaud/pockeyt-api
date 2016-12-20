@@ -68,6 +68,13 @@ class TransactionsController extends Controller
     public function charge(ChargeRequest $request) {
         $transaction = new Transaction($request->all());
         $customer = User::findOrFail($transaction->user_id);
+        if (isset($customer->default_tip_rate)) {
+            $tip = $transaction->total * ($customer->default_tip_rate / 10000);
+            $transaction->total = $transaction->total + $tip;
+            $transaction->tips = $tip;
+
+            $transaction->save();
+        }
         $profile = $this->user->profile;
 
         $result = $this->createCharge($transaction, $customer, $profile);
@@ -93,6 +100,13 @@ class TransactionsController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction->update($request->all());
         $customer = User::findOrFail($transaction->user_id);
+        if (isset($customer->default_tip_rate)) {
+            $tip = $transaction->total * ($customer->default_tip_rate / 10000);
+            $transaction->total = $transaction->total + $tip;
+            $transaction->tips = $tip;
+
+            $transaction->save();
+        }
         $profile = $this->user->profile;
 
         $result = $this->createCharge($transaction, $customer, $profile);
