@@ -42,9 +42,9 @@
           </table>
         </div>
         <div class="box-footer-receipt">
-          <b>Sales Tax:</b>
+          <p>Sales Tax:</p>
           <div class="something">
-            <b>$@{{ (totalTax / 100).toFixed(2) }}</b>
+            <p>$@{{ (totalTax / 100).toFixed(2) }}</p>
           </div>
           <b>Total:</b>
           <div class="receipt-total">
