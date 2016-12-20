@@ -42,15 +42,10 @@
           </table>
         </div>
         <div class="box-footer-receipt">
-          <div class="tax-section">
-            <div class="tax-title">
-              <p>Sales Tax:</p>
-            </div>
-            <div class="something">
-              <p>$@{{ (totalTax / 100).toFixed(2) }}</p>
-            </div>
+          <span>Sales Tax:</span>
+          <div class="something">
+            <span>$@{{ (totalTax / 100).toFixed(2) }}</span>
           </div>
-
           <b>Total:</b>
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
