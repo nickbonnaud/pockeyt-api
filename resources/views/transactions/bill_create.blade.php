@@ -46,7 +46,6 @@
             <span>Sales Tax:</span>
             <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
           </div>
-          <hr>
           <b>Total:</b>
           <div class="receipt-total">
             <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
