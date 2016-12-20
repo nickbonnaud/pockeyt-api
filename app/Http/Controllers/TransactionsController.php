@@ -79,7 +79,6 @@ class TransactionsController extends Controller
 
         if ($result->success) {
             $transaction->paid = true;
-            dd($transaction);
             $profile->transactions()->save($transaction);
             $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
             return $this->flashMessage($newLoyaltyCard, $customer, $profile);
@@ -103,8 +102,6 @@ class TransactionsController extends Controller
             $tip = $transaction->total * ($customer->default_tip_rate / 10000);
             $transaction->total = $transaction->total + $tip;
             $transaction->tips = $tip;
-
-            $transaction->save();
         }
         $profile = $this->user->profile;
 
