@@ -74,7 +74,7 @@ class QuickBookController extends Controller
     $this->createPockeytItem();
     $this->createPockeytTipsItem();
     $this->createPockeytPaymentMethod();
-    $this->createPockeytTaxAccounting();
+    // $this->createPockeytTaxAccounting();
     $this->setQbActive();
    	return view('qbo_success');
   }
@@ -210,18 +210,18 @@ class QuickBookController extends Controller
   	}
   }
 
-  public function createPockeytTaxAccounting() {
-    $this->qboConnect();
-    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+  // public function createPockeytTaxAccounting() {
+  //   $this->qboConnect();
+  //   $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
 
-    $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-    $code = [];
-    foreach ($taxcodes as $TaxCode)
-    {
-      array_push($code, $TaxCode);
-    }
-    dd($code);
-  }
+  //   $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+  //   $code = [];
+  //   foreach ($taxcodes as $TaxCode)
+  //   {
+  //     array_push($code, $TaxCode);
+  //   }
+  //   dd($code);
+  // }
 
   public function setQbActive() {
   	$profile = $this->user->profile;
