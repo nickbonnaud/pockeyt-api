@@ -68,13 +68,14 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setPockeytId();
-    $this->createPockeytAccount();
-    $this->createPockeytTipsAccount();
-    $this->createPockeytItem();
-    $this->createPockeytTipsItem();
-    $this->createPockeytPaymentMethod();
-    $this->setQbActive();
+    // $this->setPockeytId();
+    // $this->createPockeytAccount();
+    // $this->createPockeytTipsAccount();
+    // $this->createPockeytItem();
+    // $this->createPockeytTipsItem();
+    // $this->createPockeytPaymentMethod();
+    $this->createPockeytTaxAccounting();
+    // $this->setQbActive();
    	return view('qbo_success');
   }
 
@@ -209,6 +210,19 @@ class QuickBookController extends Controller
   	}
   }
 
+  public function createPockeytTaxAccounting() {
+    $this->qboConnect();
+    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+
+    $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    $code = [];
+    foreach ($taxcodes as $TaxCode)
+    {
+      array_push($code, $TaxCode);
+    }
+    dd($code);
+  }
+
   public function setQbActive() {
   	$profile = $this->user->profile;
     $profile->connected_qb = true;
@@ -309,6 +323,10 @@ class QuickBookController extends Controller
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
 
+          $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
+          $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
+          $taxDetail->setTotalTax($transaction->tax / 100);
+
           if (isset($transaction->tip_amount)) {
             $line = new \QuickBooks_IPP_Object_Line();
             $line->setDetailType('SalesItemLineDetail');
@@ -325,6 +343,7 @@ class QuickBookController extends Controller
           }
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
+          dd($invoice);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 			    {
 			      $paymentService = new \QuickBooks_IPP_Service_Payment();
