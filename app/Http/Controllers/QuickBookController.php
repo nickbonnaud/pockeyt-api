@@ -313,7 +313,7 @@ class QuickBookController extends Controller
 
 	      	$line = new \QuickBooks_IPP_Object_Line();
 	      	$line->setDetailType('SalesItemLineDetail');
-	      	$line->setAmount(($transaction->total / 100));
+	      	$line->setAmount(($transaction->net_sales / 100));
 	      	$line->setDescription('Custom Amount');
 
 	      	$salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
@@ -323,11 +323,6 @@ class QuickBookController extends Controller
 
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
-
-          $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
-          $taxDetail->setTxnTaxCodeRef('SalesTax');
-          $taxDetail->setTotalTax($transaction->tax / 100);
-          $invoice->addTxnTaxDetail($taxDetail);
 
           if (isset($transaction->tips)) {
             $line = new \QuickBooks_IPP_Object_Line();
@@ -343,6 +338,11 @@ class QuickBookController extends Controller
             $line->addSalesItemLineDetail($salesItemLineDetail);
             $invoice->addLine($line);
           }
+
+          $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
+          $taxDetail->setTxnTaxCodeRef('SalesTax');
+          $taxDetail->setTotalTax($transaction->tax / 100);
+          $invoice->addTxnTaxDetail($taxDetail);
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
