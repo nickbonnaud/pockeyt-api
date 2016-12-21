@@ -328,7 +328,7 @@ class QuickBookController extends Controller
           $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
           $taxDetail->setTotalTax($transaction->tax / 100);
           $invoice->addTxnTaxDetail($taxDetail);
-          dd($invoice);
+
           if (isset($transaction->tips)) {
             $line = new \QuickBooks_IPP_Object_Line();
             $line->setDetailType('SalesItemLineDetail');
@@ -345,6 +345,7 @@ class QuickBookController extends Controller
           }
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
+          dd($invoice);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 			    {
 			      $paymentService = new \QuickBooks_IPP_Service_Payment();
