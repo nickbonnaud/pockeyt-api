@@ -326,15 +326,15 @@ class QuickBookController extends Controller
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
           $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
           $taxDetail->setTotalTax($transaction->tax / 100);
-
-          if (isset($transaction->tip_amount)) {
+          $invoice->addTxnTaxDetail($taxDetail);
+          if (isset($transaction->tips)) {
             $line = new \QuickBooks_IPP_Object_Line();
             $line->setDetailType('SalesItemLineDetail');
-            $line->setAmount(($transaction->tip_amount / 100));
+            $line->setAmount(($transaction->tips / 100));
             $line->setDescription('Pockeyt Tips Money');
 
             $salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
-            $salesItemLineDetail->setUnitPrice(($transaction->tip_amount / 100));
+            $salesItemLineDetail->setUnitPrice(($transaction->tips / 100));
             $salesItemLineDetail->setQty(1);
             $salesItemLineDetail->setItemRef($business->account->pockeyt_tips_item);
 
