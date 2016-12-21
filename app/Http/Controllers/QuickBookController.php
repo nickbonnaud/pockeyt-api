@@ -68,14 +68,14 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    // $this->setPockeytId();
-    // $this->createPockeytAccount();
-    // $this->createPockeytTipsAccount();
-    // $this->createPockeytItem();
-    // $this->createPockeytTipsItem();
-    // $this->createPockeytPaymentMethod();
+    $this->setPockeytId();
+    $this->createPockeytAccount();
+    $this->createPockeytTipsAccount();
+    $this->createPockeytItem();
+    $this->createPockeytTipsItem();
+    $this->createPockeytPaymentMethod();
     $this->createPockeytTaxAccounting();
-    // $this->setQbActive();
+    $this->setQbActive();
    	return view('qbo_success');
   }
 
