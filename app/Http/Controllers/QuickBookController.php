@@ -273,17 +273,17 @@ class QuickBookController extends Controller
   public function syncInvoice() {
 
     $this->qboConnect();
-    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+    $TaxRateService = new \QuickBooks_IPP_Service_TaxRate();
 
-    $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    $TaxRates= $TaxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate);
     $code = [];
-    foreach ($taxcodes as $TaxCode)
+    foreach ($TaxRates as $TaxRate)
     {
-      array_push($code, $TaxCode);
+      array_push($code, $TaxRate);
     }
     dd($code);
 
-    
+
 
   	$businesses = Profile::where('connected_qb', '=', true)->get();
 
