@@ -369,11 +369,13 @@ class QuickBookController extends Controller
 						{
 							$transaction->qb_synced = true;
 							$transaction->save();
+              dd($transaction);
 						}
 						else
 						{
 							$transaction->qb_synced = false;
 							$transaction->save();
+              dd('failed');
 						}
 			    }
 	      }
