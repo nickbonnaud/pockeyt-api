@@ -343,7 +343,6 @@ class QuickBookController extends Controller
           }
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
-          dd($invoice);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 			    {
 			      $paymentService = new \QuickBooks_IPP_Service_Payment();
