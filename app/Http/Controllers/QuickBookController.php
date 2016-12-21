@@ -303,7 +303,7 @@ class QuickBookController extends Controller
 	      		->where('profile_id', '=', $the_tenant)
 	      		->where('created_at', '>', $account->qb_connected_date);
 	      })->get();
-        dd($unSynchedTransactions);
+
 	      foreach ($unSynchedTransactions as $transaction) {
 	      	$invoiceService = new \QuickBooks_IPP_Service_Invoice();
 					$invoice = new \QuickBooks_IPP_Object_Invoice();
@@ -323,7 +323,7 @@ class QuickBookController extends Controller
 
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
-
+          dd($invoice);
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
           $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
           $taxDetail->setTotalTax($transaction->tax / 100);
