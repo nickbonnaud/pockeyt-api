@@ -323,11 +323,12 @@ class QuickBookController extends Controller
 
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
-          dd($invoice);
+
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
           $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
           $taxDetail->setTotalTax($transaction->tax / 100);
           $invoice->addTxnTaxDetail($taxDetail);
+          dd($invoice);
           if (isset($transaction->tips)) {
             $line = new \QuickBooks_IPP_Object_Line();
             $line->setDetailType('SalesItemLineDetail');
