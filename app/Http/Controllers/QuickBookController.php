@@ -275,7 +275,7 @@ class QuickBookController extends Controller
     $this->qboConnect();
     $TaxRateService = new \QuickBooks_IPP_Service_TaxRate();
 
-    $TaxRates= $TaxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate);
+    $TaxRates= $TaxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
     $code = [];
     foreach ($TaxRates as $TaxRate)
     {
