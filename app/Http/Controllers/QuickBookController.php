@@ -317,7 +317,7 @@ class QuickBookController extends Controller
 	      	$line->setDescription('Custom Amount');
 
 	      	$salesItemLineDetail = new \QuickBooks_IPP_Object_SalesItemLineDetail();
-					$salesItemLineDetail->setUnitPrice(($transaction->total / 100));
+					$salesItemLineDetail->setUnitPrice(($transaction->net_sales / 100));
 					$salesItemLineDetail->setQty(1);
 					$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
