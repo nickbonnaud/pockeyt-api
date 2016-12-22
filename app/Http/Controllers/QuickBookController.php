@@ -385,7 +385,7 @@ class QuickBookController extends Controller
 							$transaction->qb_synced = true;
 							$transaction->save();
               $InvoiceService = new \QuickBooks_IPP_Service_Invoice();
-              $invoices = $InvoiceService->query($Context, $realm, "SELECT * FROM Invoice STARTPOSITION 1 MAXRESULTS 10");
+              $invoices = $InvoiceService->query($this->context, $this->realm, "SELECT * FROM Invoice STARTPOSITION 1 MAXRESULTS 10");
               dd($invoices);
 						}
 						else
