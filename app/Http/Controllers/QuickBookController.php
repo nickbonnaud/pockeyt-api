@@ -333,7 +333,7 @@ class QuickBookController extends Controller
 
           if (isset($transaction->tips)) {
             $line = new \QuickBooks_IPP_Object_Line();
-            $line->setDetailType('TaxLineDetail');
+            $line->setDetailType('SalesItemLineDetail');
             $line->setAmount(($transaction->tips / 100));
             $line->setDescription('Pockeyt Tips Money');
 
@@ -352,12 +352,10 @@ class QuickBookController extends Controller
 
           $taxLine = new \QuickBooks_IPP_Object_TaxLine();
           $taxLine->setAmount($transaction->tax / 100);
+          $taxLine->setDetailType('TaxLineDetail');
 
           $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
-          $taxLineDetail->setDetailType('SalesItemLineDetail');
-          $taxLineDetail->setAmount($transaction->tax / 100);
           $taxLineDetail->setTaxRateRef('SalesTax');
-
           $taxLineDetail->setPercentBased(true);
           $taxLineDetail->setTaxPercent(0);
           $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
