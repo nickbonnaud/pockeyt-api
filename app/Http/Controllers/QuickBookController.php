@@ -342,6 +342,21 @@ class QuickBookController extends Controller
             $invoice->addLine($line);
           }
 
+          $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
+          $taxDetail->setTxnTaxCodeRef('SalesTax');
+          $taxDetail->setTotalTax($transaction->tax / 100);
+
+          $taxLine = new \QuickBooks_IPP_Object_TaxLine();
+          $taxLine->setAmount($transaction->tax / 100);
+
+          $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
+          $taxLineDetail->setTaxRateRef('SalesTax');
+          $taxLineDetail->setPercentBased(true);
+          $taxLineDetail->setTaxPercent(0);
+          $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
+
+          $invoice->addTxnTaxDetail($taxDetail);
+
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
 			    {
