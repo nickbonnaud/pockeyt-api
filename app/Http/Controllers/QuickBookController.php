@@ -352,7 +352,7 @@ class QuickBookController extends Controller
           $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
           $taxLineDetail->setTaxRateRef('SalesTax');
           $taxLineDetail->setPercentBased(true);
-          $taxLineDetail->setTaxPercent(7.5);
+          $taxLineDetail->setTaxPercent(0);
           $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
 
           $invoice->addTxnTaxDetail($taxDetail);
@@ -384,7 +384,9 @@ class QuickBookController extends Controller
 						{
 							$transaction->qb_synced = true;
 							$transaction->save();
-              dd($transaction);
+              $InvoiceService = new QuickBooks_IPP_Service_Invoice();
+              $invoices = $InvoiceService->query($Context, $realm, "SELECT * FROM Invoice STARTPOSITION 1 MAXRESULTS 10");
+              dd($invoices);
 						}
 						else
 						{
