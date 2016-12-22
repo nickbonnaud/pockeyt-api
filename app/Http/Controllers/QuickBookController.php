@@ -272,19 +272,6 @@ class QuickBookController extends Controller
 
   public function syncInvoice() {
 
-    $this->qboConnect();
-    $TaxRateService = new \QuickBooks_IPP_Service_TaxRate();
-
-    $TaxRates= $TaxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
-    $code = [];
-    foreach ($TaxRates as $TaxRate)
-    {
-      array_push($code, $TaxRate);
-    }
-    dd($code);
-
-
-
   	$businesses = Profile::where('connected_qb', '=', true)->get();
 
     foreach ($businesses as $business) {
@@ -335,6 +322,8 @@ class QuickBookController extends Controller
 					$salesItemLineDetail->setQty(1);
 					$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
+          $salesItemLineDetail->setTaxCodeRef('TAX');
+
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
 
@@ -352,21 +341,6 @@ class QuickBookController extends Controller
             $line->addSalesItemLineDetail($salesItemLineDetail);
             $invoice->addLine($line);
           }
-
-          $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
-          $taxDetail->setTxnTaxCodeRef('SalesTax');
-          $taxDetail->setTotalTax($transaction->tax / 100);
-
-          $taxLine = new \QuickBooks_IPP_Object_TaxLine();
-          $taxLine->setAmount($transaction->tax / 100);
-
-          $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
-          $taxLineDetail->setTaxRateRef('SalesTax');
-          $taxLineDetail->setPercentBased(true);
-          $taxLineDetail->setTaxPercent(0);
-          $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
-
-          $invoice->addTxnTaxDetail($taxDetail);
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
 					if ($resp = $invoiceService->add($this->context, $this->realm, $invoice))
