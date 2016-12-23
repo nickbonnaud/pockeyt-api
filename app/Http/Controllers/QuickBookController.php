@@ -298,15 +298,15 @@ class QuickBookController extends Controller
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
 
-        $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+        $TaxRateService = new \QuickBooks_IPP_Service_TaxRate();
 
-        $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-        $code = [];
-        foreach ($taxcodes as $TaxCode)
+        $taxrates = $TaxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
+        $rate = [];
+        foreach ($taxrates as $TaxRate)
         {
-          array_push($code, $TaxCode);
+          array_push($rate, $TaxRate);
         }
-        dd($code);
+        dd($rate);
 	      
 	      $account = $business->account;
 	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
@@ -353,7 +353,7 @@ class QuickBookController extends Controller
           }
 
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
-          $taxDetail->setTxnTaxCodeRef('2');
+          $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
           $taxDetail->setTotalTax($transaction->tax / 100);
 
           $taxLine = new \QuickBooks_IPP_Object_TaxLine();
