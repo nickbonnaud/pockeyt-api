@@ -297,6 +297,16 @@ class QuickBookController extends Controller
 	      $this->realm = $creds['qb_realm'];
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
+
+        $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+
+        $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+        $code = [];
+        foreach ($taxcodes as $TaxCode)
+        {
+          array_push($code, $TaxCode);
+        }
+        dd($code);
 	      
 	      $account = $business->account;
 	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
