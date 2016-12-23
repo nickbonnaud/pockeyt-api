@@ -343,7 +343,7 @@ class QuickBookController extends Controller
           }
 
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
-          $taxDetail->setTxnTaxCodeRef('CustomSalesTax');
+          $taxDetail->setTxnTaxCodeRef('TAX');
           $taxDetail->setTotalTax($transaction->tax / 100);
 
           $taxLine = new \QuickBooks_IPP_Object_TaxLine();
