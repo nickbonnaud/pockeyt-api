@@ -348,7 +348,15 @@ class QuickBookController extends Controller
 
           $taxLine = new \QuickBooks_IPP_Object_TaxLine();
           $taxLine->setAmount($transaction->tax / 100);
-          
+          $taxLine->setDetailType('TaxLineDetail');
+
+          $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
+          $taxLineDetail->setTaxRateRef('TAX');
+          $taxLineDetail->setPercentBased(true);
+          $taxLineDetail->setTaxPercent(0);
+          $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
+
+          $taxLine->addTaxLineDetail($taxLineDetail);
           $taxDetail->addTaxLine($taxLine);
 
           $invoice->addTxnTaxDetail($taxDetail);
