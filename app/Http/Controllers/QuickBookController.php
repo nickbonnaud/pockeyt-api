@@ -272,7 +272,10 @@ class QuickBookController extends Controller
 
   public function syncInvoice() {
 
-  	$businesses = Profile::where('connected_qb', '=', true)->get();
+  	
+
+
+    $businesses = Profile::where('connected_qb', '=', true)->get();
 
     foreach ($businesses as $business) {
 
@@ -297,6 +300,9 @@ class QuickBookController extends Controller
 	      $this->realm = $creds['qb_realm'];
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
+
+        $taxService = new \QuickBooks_IPP_Service_TaxService();
+        dd("exists");
 
 	      $account = $business->account;
 	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
