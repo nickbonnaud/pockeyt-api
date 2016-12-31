@@ -8,6 +8,8 @@ use App\Profile;
 use App\Transaction;
 use Carbon\Carbon;
 use DateTimeZone;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class QuickBookController extends Controller
 {
@@ -68,13 +70,13 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setPockeytId();
-    $this->createPockeytAccount();
-    $this->createPockeytTipsAccount();
-    $this->createPockeytItem();
-    $this->createPockeytTipsItem();
-    $this->createPockeytPaymentMethod();
-    // $this->createPockeytTaxAccounting();
+    // $this->setPockeytId();
+    // $this->createPockeytAccount();
+    // $this->createPockeytTipsAccount();
+    // $this->createPockeytItem();
+    // $this->createPockeytTipsItem();
+    // $this->createPockeytPaymentMethod();
+    $this->createTaxAccount();
     $this->setQbActive();
    	return view('qbo_success');
   }
@@ -210,18 +212,28 @@ class QuickBookController extends Controller
   	}
   }
 
-  // public function createPockeytTaxAccounting() {
-  //   $this->qboConnect();
-  //   $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+  public function createTaxAccount() {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://sandbox-quickbooks.api.intuit.com']);
 
-  //   $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-  //   $code = [];
-  //   foreach ($taxcodes as $TaxCode)
-  //   {
-  //     array_push($code, $TaxCode);
-  //   }
-  //   dd($code);
-  // }
+    try {
+      $response = $client->request('POST', '/v3/company/' . $this->realm . '/taxservice/taxcode', ['json' => [
+          'TaxCode' => 'PockeytTaxCode',
+          'TaxRateDetails' => [
+            'TaxRateName' => 'PockeytTaxRate',
+            'RateValue' => '0',
+            'TaxAgencyId' => 'PockeytTaxAgency',
+            'TaxApplicableOn' => 'Sales'
+          ]
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $data = json_decode($response->getBody());
+    dd($data);
+  }
 
   public function setQbActive() {
   	$profile = $this->user->profile;
