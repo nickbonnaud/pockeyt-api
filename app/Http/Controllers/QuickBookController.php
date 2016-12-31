@@ -50,6 +50,7 @@ class QuickBookController extends Controller
       $this->realm = $creds['qb_realm'];
       // Load the OAuth information from the database
       $this->context = $IPP->context();
+      dd($this->context);
       return true;
     } else {
       return false;
@@ -224,7 +225,8 @@ class QuickBookController extends Controller
             'TaxAgencyId' => 'PockeytTaxAgency',
             'TaxApplicableOn' => 'Sales'
           ]
-        ]
+        ],
+        'header'
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
