@@ -37,7 +37,6 @@ class QuickBookController extends Controller
       // Get our OAuth credentials from the database
       $creds = $this->IntuitAnywhere->load(env('QBO_USERNAME'), $the_tenant);
       // Tell the framework to load some data from the OAuth store
-      dd($creds);
       $IPP->authMode(
         \QuickBooks_IPP::AUTHMODE_OAUTH,
         env('QBO_USERNAME'),
@@ -71,7 +70,7 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    // $this->setPockeytId();
+    $this->setPockeytId();
     // $this->createPockeytAccount();
     // $this->createPockeytTipsAccount();
     // $this->createPockeytItem();
@@ -96,11 +95,13 @@ class QuickBookController extends Controller
   	$customer->setDisplayName('Pockeyt Customer');
   	$customer->setNotes('Created to track Pockeyt sales');
   	if ($resp = $customerService->add($this->context, $this->realm, $customer)) {
-  		$resp = str_replace('{','',$resp);
+  		dd("done");
+      $resp = str_replace('{','',$resp);
       $resp = str_replace('}','',$resp);
       $resp = abs($resp);
       return $this->setQbId($resp);
   	} else {
+      dd("done");
   		print($customerService->lastError($this->context));
   	}
   }
