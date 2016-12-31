@@ -313,9 +313,6 @@ class QuickBookController extends Controller
 	      // Load the OAuth information from the database
 	      $this->context = $IPP->context();
 
-        $taxService = new \QuickBooks_IPP_Service_TaxService();
-        dd("exists");
-
 	      $account = $business->account;
 	      $unSynchedTransactions = Transaction::where(function($query) use ($the_tenant, $account) {
 	      	$query->where('qb_synced', '=', false)
