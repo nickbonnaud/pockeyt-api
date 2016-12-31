@@ -228,7 +228,7 @@ class QuickBookController extends Controller
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
-        return $e->getResponse();
+        dd($e->getResponse());
       }
     }
     $data = json_decode($response->getBody());
