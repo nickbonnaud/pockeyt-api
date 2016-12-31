@@ -37,6 +37,7 @@ class QuickBookController extends Controller
       // Get our OAuth credentials from the database
       $creds = $this->IntuitAnywhere->load(env('QBO_USERNAME'), $the_tenant);
       // Tell the framework to load some data from the OAuth store
+      dd($creds);
       $IPP->authMode(
         \QuickBooks_IPP::AUTHMODE_OAUTH,
         env('QBO_USERNAME'),
@@ -50,7 +51,6 @@ class QuickBookController extends Controller
       $this->realm = $creds['qb_realm'];
       // Load the OAuth information from the database
       $this->context = $IPP->context();
-      dd($this->context);
       return true;
     } else {
       return false;
