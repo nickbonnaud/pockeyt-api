@@ -219,7 +219,7 @@ class QuickBookController extends Controller
     
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
 
-    $taxcodes = $TaxCodeService->query($Context, $realm, "SELECT * FROM TaxCode");
+    $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
 
     dd($taxcodes);
   }
