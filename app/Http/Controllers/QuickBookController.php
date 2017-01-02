@@ -70,7 +70,7 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setPockeytId();
+    // $this->setPockeytId();
     // $this->createPockeytAccount();
     // $this->createPockeytTipsAccount();
     // $this->createPockeytItem();
@@ -215,27 +215,24 @@ class QuickBookController extends Controller
   }
 
   public function createTaxAccount() {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://sandbox-quickbooks.api.intuit.com']);
+    $this->qboConnect();
+    $taxAccountService = new \QuickBooks_IPP_Service_TaxAccount();
+    $taxAccount = new \QuickBooks_IPP_Object_TaxAccount();
 
-    try {
-      $response = $client->request('POST', '/v3/company/' . $this->realm . '/taxservice/taxcode', ['json' => [
-          'TaxCode' => 'PockeytTaxCode',
-          'TaxRateDetails' => [
-            'TaxRateName' => 'PockeytTaxRate',
-            'RateValue' => '0',
-            'TaxAgencyId' => 'PockeytTaxAgency',
-            'TaxApplicableOn' => 'Sales'
-          ]
-        ],
-        'header'
-      ]);
-    } catch (RequestException $e) {
-      if ($e->hasResponse()) {
-        dd($e->getResponse());
-      }
+    $taxAccount->setTaxCode('Pockeyt Sales Tax Code');
+
+    $taxRateDetail = new \QuickBooks_IPP_Object_TaxRateDetails();
+    $taxRateDetail->setTaxRateName('Pockeyt Sales Tax');
+    $taxRateDetail->setRateValue(0);
+    $taxRateDetail->setAgencyId('Pockeyt');
+
+    $taxAccount->addTaxRateDetail($taxRateDetail);
+
+    if ($resp = $taxAccountService->add($this->context, $this->realm, $taxAccount)) {
+      dd($resp);
+    } else {
+      dd($taxAccountService->lastError($this->context));
     }
-    $data = json_decode($response->getBody());
-    dd($data);
   }
 
   public function setQbActive() {
