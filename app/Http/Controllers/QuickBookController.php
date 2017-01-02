@@ -216,23 +216,12 @@ class QuickBookController extends Controller
 
   public function createTaxAccount() {
     $this->qboConnect();
-    $taxAccountService = new \QuickBooks_IPP_Service_TaxAccount();
-    $taxAccount = new \QuickBooks_IPP_Object_TaxAccount();
+    
+    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
 
-    $taxAccount->setTaxCode('Pockeyt Sales Tax Code');
+    $taxcodes = $TaxCodeService->query($Context, $realm, "SELECT * FROM TaxCode");
 
-    $taxRateDetail = new \QuickBooks_IPP_Object_TaxRateDetails();
-    $taxRateDetail->setTaxRateName('Pockeyt Sales Tax');
-    $taxRateDetail->setRateValue(0);
-    $taxRateDetail->setAgencyId('Pockeyt');
-
-    $taxAccount->addTaxRateDetail($taxRateDetail);
-
-    if ($resp = $taxAccountService->add($this->context, $this->realm, $taxAccount)) {
-      dd($resp);
-    } else {
-      dd($taxAccountService->lastError($this->context));
-    }
+    dd($taxcodes);
   }
 
   public function setQbActive() {
