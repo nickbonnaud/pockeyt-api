@@ -76,9 +76,9 @@ class QuickBookController extends Controller
     // $this->createPockeytItem();
     // $this->createPockeytTipsItem();
     // $this->createPockeytPaymentMethod();
-    $this->createTaxAccount();
+    $this->setTaxAccount();
     $this->setQbActive();
-   	return view('qbo_success');
+   	return view('qbo.success');
   }
 
   public function qboDisconnect(){
@@ -214,14 +214,17 @@ class QuickBookController extends Controller
   	}
   }
 
-  public function createTaxAccount() {
+  public function setTaxAccount() {
     $this->qboConnect();
     
-    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+    $taxRateService = new \QuickBooks_IPP_Service_TaxRate();
+    $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
+    dd($taxRates);
 
+    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
 
-    dd($taxcodes);
+    return view('qbo.tax', compact('taxcodes'));
   }
 
   public function setQbActive() {
