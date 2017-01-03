@@ -222,32 +222,33 @@ class QuickBookController extends Controller
 
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-
+    $data = [];
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
-        $taxRateDetails = $taxRateList->getTaxRateDetail();
+        array_push($data, $taxRateList);
+        // $taxRateDetails = $taxRateList->getTaxRateDetail();
 
-        $qbTaxRate = 0;
-        $taxRateRefs = [];
-        foreach ($taxRateDetails as $taxRateDetail) {
-          $taxRateRef = $taxRateDetail->TaxRateRef;
-          array_push($taxRateRefs, $taxRateRef);
-          // foreach ($taxRates as $taxRate) {
-          //   $taxId = $taxRate->getId();
-          //   if ($taxId == $taxRateRef) {
-          //     $componentRate = floatval($taxRate->getRateValue());
-          //     $qbTaxRate = $qbTaxRate + $componentRate;
-          //   }
-          // }
-        }
-        dd($taxRateRefs);
-        $businessTaxRate = $this->user->profile->tax_rate / 100;
-        if ($qbTaxRate == round($businessTaxRate, 2)) {
-          dd($TaxCode);
-        }
+        // $qbTaxRate = 0;
+
+        // foreach ($taxRateDetails as $taxRateDetail) {
+        //   $taxRateRef = $taxRateDetail->TaxRateRef;
+
+        //   foreach ($taxRates as $taxRate) {
+        //     $taxId = $taxRate->getId();
+        //     if ($taxId == $taxRateRef) {
+        //       $componentRate = floatval($taxRate->getRateValue());
+        //       $qbTaxRate = $qbTaxRate + $componentRate;
+        //     }
+        //   }
+        // }
+        // $businessTaxRate = $this->user->profile->tax_rate / 100;
+        // if ($qbTaxRate == round($businessTaxRate, 2)) {
+        //   dd($TaxCode);
+        // }
       }
     }
+    dd($data);
 
     return view('qbo.tax', compact('taxCodes'));
   }
