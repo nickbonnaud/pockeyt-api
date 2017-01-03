@@ -229,18 +229,19 @@ class QuickBookController extends Controller
         $taxRateDetails = $taxRateList->getTaxRateDetail();
 
         $qbTaxRate = 0;
-
+        $taxRateRefs = [];
         foreach ($taxRateDetails as $taxRateDetail) {
           $taxRateRef = $taxRateDetail->TaxRateRef;
-
-          foreach ($taxRates as $taxRate) {
-            $taxId = $taxRate->getId();
-            if ($taxId == $taxRateRef) {
-              $componentRate = floatval($taxRate->getRateValue());
-              $qbTaxRate = $qbTaxRate + $componentRate;
-            }
-          }
+          array_push($taxRateRefs, $taxRateRef);
+          // foreach ($taxRates as $taxRate) {
+          //   $taxId = $taxRate->getId();
+          //   if ($taxId == $taxRateRef) {
+          //     $componentRate = floatval($taxRate->getRateValue());
+          //     $qbTaxRate = $qbTaxRate + $componentRate;
+          //   }
+          // }
         }
+        dd($taxRateRefs);
         $businessTaxRate = $this->user->profile->tax_rate / 100;
         if ($qbTaxRate == round($businessTaxRate, 2)) {
           dd($TaxCode);
