@@ -241,7 +241,7 @@ class QuickBookController extends Controller
             }
           }
         }
-        if ($qbTaxRate == round($user->profile->tax_rate / 100, 2)) {
+        if ($qbTaxRate == round($this->user->profile->tax_rate / 100, 2)) {
           dd($TaxCode);
         }
       }
