@@ -225,24 +225,25 @@ class QuickBookController extends Controller
 
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
-      dd($taxRateList);
-      $taxRateDetails = $taxRateList->getTaxRateDetail();
+      if ($taxRateList !== null) {
+        $taxRateDetails = $taxRateList->getTaxRateDetail();
 
-      $qbTaxRate = 0;
+        $qbTaxRate = 0;
 
-      foreach ($taxRateDetails as $taxRateDetail) {
-        $taxRateRef = $taxRateDetail->TaxRateRef;
+        foreach ($taxRateDetails as $taxRateDetail) {
+          $taxRateRef = $taxRateDetail->TaxRateRef;
 
-        foreach ($taxRates as $taxRate) {
-          $taxId = $taxRate->getId();
-          if ($taxId == $taxRateRef) {
-            $componentRate = floatval($taxRate->getRateValue());
-            $qbTaxRate = $qbTaxRate + $componentRate;
+          foreach ($taxRates as $taxRate) {
+            $taxId = $taxRate->getId();
+            if ($taxId == $taxRateRef) {
+              $componentRate = floatval($taxRate->getRateValue());
+              $qbTaxRate = $qbTaxRate + $componentRate;
+            }
           }
         }
-      }
-      if ($qbTaxRate == round($user->profile->tax_rate / 100, 2)) {
-        dd($TaxCode);
+        if ($qbTaxRate == round($user->profile->tax_rate / 100, 2)) {
+          dd($TaxCode);
+        }
       }
     }
 
