@@ -225,7 +225,7 @@ class QuickBookController extends Controller
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
-        if (count($taxRateList['TaxRateDetail']) > 1) {
+        if (count($taxRateList->TaxRateDetail) > 1) {
           dd("two");
         }
         $taxRateDetails = $taxRateList->getTaxRateDetail();
