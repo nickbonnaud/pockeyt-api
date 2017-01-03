@@ -222,12 +222,13 @@ class QuickBookController extends Controller
 
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-    $data = [];
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
         $taxRateDetails = $taxRateList->getTaxRateDetail();
-        array_push($data, $taxRateList);
+        if (count($taxRateDetails) > 1) {
+          dd("two");
+        }
 
         // $qbTaxRate = 0;
 
@@ -248,7 +249,7 @@ class QuickBookController extends Controller
         // }
       }
     }
-    dd($data);
+    dd("something");
 
     return view('qbo.tax', compact('taxCodes'));
   }
