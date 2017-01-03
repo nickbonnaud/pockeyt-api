@@ -219,10 +219,13 @@ class QuickBookController extends Controller
     
     $taxRateService = new \QuickBooks_IPP_Service_TaxRate();
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
-    dd($taxRates);
 
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    dd($taxcodes);
+    foreach ($taxcodes as $taxcode) {
+      
+    }
 
     return view('qbo.tax', compact('taxcodes'));
   }
