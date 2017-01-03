@@ -219,21 +219,33 @@ class QuickBookController extends Controller
     
     $taxRateService = new \QuickBooks_IPP_Service_TaxRate();
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
-    dd($taxRates);
-    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
-    $taxcodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
 
-    foreach ($taxcodes as $taxcode) {
+    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+    $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+
+    foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       $taxRateDetails = $taxRateList->getTaxRateDetail();
+
+      $qbTaxRate = 0;
 
       foreach ($taxRateDetails as $taxRateDetail) {
         $taxRateRef = $taxRateDetail->TaxRateRef;
 
+        foreach ($taxRates as $taxRate) {
+          $taxId = $taxRate->getId();
+          if ($taxId == $taxRateRef) {
+            $componentRate = floatval($taxRate->getRateValue());
+            $qbTaxRate = $qbTaxRate + $componentRate;
+          }
+        }
+      }
+      if ($qbTaxRate == round($user->profile->tax_rate / 100, 2)) {
+        dd($TaxCode);
       }
     }
 
-    return view('qbo.tax', compact('taxcodes'));
+    return view('qbo.tax', compact('taxCodes'));
   }
 
   public function setQbActive() {
