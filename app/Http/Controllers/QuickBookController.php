@@ -227,7 +227,7 @@ class QuickBookController extends Controller
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
         $taxRateDetails = $taxRateList->getTaxRateDetail();
-        array_push($data, $taxRateDetails);
+        array_push($data, $taxRateList);
 
         // $qbTaxRate = 0;
 
