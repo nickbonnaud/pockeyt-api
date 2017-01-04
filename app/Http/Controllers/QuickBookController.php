@@ -226,32 +226,28 @@ class QuickBookController extends Controller
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
-        if ($taxRateList->countTaxRateDetail() > 1) {
-          dd('two');
+        $qbTaxRate = 0;
+
+        $taxRateDetailLine = $taxRateList->countTaxRateDetail();
+        for ($i = 0; $i < $taxRateDetailLine; $i++) {
+          $taxRateDetail = $taxRateList->getTaxRateDetail(i);
+          $taxRateRef = $taxRateDetail->TaxRateRef;
+
+          foreach ($taxRates as $taxRate) {
+            $taxId = $taxRate->getId();
+            if ($taxId == $taxRateRef) {
+              $componentRate = floatval($taxRate->getRateValue());
+              $qbTaxRate = $qbTaxRate + $componentRate;
+            }
+          }
         }
-        
-        // $taxRateDetails = $taxRateList->getTaxRateDetail();
-
-        // $qbTaxRate = 0;
-
-        // foreach ($taxRateDetails as $taxRateDetail) {
-        //   $taxRateRef = $taxRateDetail->TaxRateRef;
-
-        //   foreach ($taxRates as $taxRate) {
-        //     $taxId = $taxRate->getId();
-        //     if ($taxId == $taxRateRef) {
-        //       $componentRate = floatval($taxRate->getRateValue());
-        //       $qbTaxRate = $qbTaxRate + $componentRate;
-        //     }
-        //   }
-        // }
-        // $businessTaxRate = $this->user->profile->tax_rate / 100;
-        // if ($qbTaxRate == round($businessTaxRate, 2)) {
-        //   dd($TaxCode);
-        // }
+        $businessTaxRate = $this->user->profile->tax_rate / 100;
+        if ($qbTaxRate == round($businessTaxRate, 2)) {
+          dd($TaxCode);
+        }
       }
     }
-    dd('something');
+    dd('nothing');
     return view('qbo.tax', compact('taxCodes'));
   }
 
