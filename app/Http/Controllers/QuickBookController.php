@@ -298,6 +298,11 @@ class QuickBookController extends Controller
   	return $account->save();
   }
 
+  public function setPockeytTaxCode($taxCode) {
+    $account = $this->user->profile->account;
+    dd($taxCode->getId());
+  }
+
   public function syncInvoice() {
 
     $businesses = Profile::where('connected_qb', '=', true)->get();
