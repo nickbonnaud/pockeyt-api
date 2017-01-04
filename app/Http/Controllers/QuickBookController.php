@@ -243,7 +243,11 @@ class QuickBookController extends Controller
         }
         $businessTaxRate = $this->user->profile->tax_rate / 100;
         if ($qbTaxRate == round($businessTaxRate, 2)) {
-          return $this->setPockeytTaxCode($taxCode);
+          $taxCodeId = $taxCode->getId();
+          $taxCodeId = str_replace('{','',$resp);
+          $taxCodeId = str_replace('}','',$resp);
+          $taxCodeId = abs($resp);
+          return $this->setPockeytTaxCode($taxCodeId);
         }
       }
     }
@@ -298,9 +302,10 @@ class QuickBookController extends Controller
   	return $account->save();
   }
 
-  public function setPockeytTaxCode($taxCode) {
+  public function setPockeytTaxCode($taxCodeId) {
     $account = $this->user->profile->account;
-    dd($taxCode->getId());
+    $account->pockeyt_qb_taxcode = $taxCodeId;
+    return $account->save();
   }
 
   public function syncInvoice() {
