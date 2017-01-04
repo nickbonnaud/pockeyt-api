@@ -300,9 +300,6 @@ class QuickBookController extends Controller
 
   public function syncInvoice() {
 
-  	
-
-
     $businesses = Profile::where('connected_qb', '=', true)->get();
 
     foreach ($businesses as $business) {
