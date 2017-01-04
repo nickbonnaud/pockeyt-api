@@ -230,7 +230,7 @@ class QuickBookController extends Controller
 
         $taxRateDetailLine = $taxRateList->countTaxRateDetail();
         for ($i = 0; $i < $taxRateDetailLine; $i++) {
-          $taxRateDetail = $taxRateList->getTaxRateDetail(i);
+          $taxRateDetail = $taxRateList->getTaxRateDetail($i);
           $taxRateRef = $taxRateDetail->TaxRateRef;
 
           foreach ($taxRates as $taxRate) {
