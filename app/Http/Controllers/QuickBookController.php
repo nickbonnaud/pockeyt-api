@@ -77,6 +77,7 @@ class QuickBookController extends Controller
     // $this->createPockeytTipsItem();
     // $this->createPockeytPaymentMethod();
     $this->setTaxAccount();
+    return view('qbo.tax');
     $this->setQbActive();
    	return view('qbo.success');
   }
@@ -251,8 +252,7 @@ class QuickBookController extends Controller
         }
       }
     }
-    dd("not found");
-    return view('qbo.tax', compact('taxCodes'));
+    return;
   }
 
   public function setQbActive() {
