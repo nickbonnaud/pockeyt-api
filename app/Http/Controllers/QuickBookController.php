@@ -243,11 +243,11 @@ class QuickBookController extends Controller
         }
         $businessTaxRate = $this->user->profile->tax_rate / 100;
         if ($qbTaxRate == round($businessTaxRate, 2)) {
-          dd($taxCode);
+          return $this->setPockeytTaxCode($taxCode);
         }
       }
     }
-    dd('nothing');
+    //change to taxcode not found
     return view('qbo.tax', compact('taxCodes'));
   }
 
