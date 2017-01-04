@@ -244,9 +244,9 @@ class QuickBookController extends Controller
         $businessTaxRate = $this->user->profile->tax_rate / 100;
         if ($qbTaxRate == round($businessTaxRate, 2)) {
           $taxCodeId = $taxCode->getId();
-          $taxCodeId = str_replace('{','',$resp);
-          $taxCodeId = str_replace('}','',$resp);
-          $taxCodeId = abs($resp);
+          $taxCodeId = str_replace('{','',$taxCodeId);
+          $taxCodeId = str_replace('}','',$taxCodeId);
+          $taxCodeId = abs($taxCodeId);
           return $this->setPockeytTaxCode($taxCodeId);
         }
       }
