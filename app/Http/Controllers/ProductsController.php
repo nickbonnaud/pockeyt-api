@@ -19,9 +19,8 @@ class ProductsController extends Controller {
    * Create a new PostsController instance
    */
   public function __construct() {
-      parent::__construct();
-      $this->middleware('auth', ['only' => 'store']);
-      $this->middleware('auth:admin', ['only' => ['index']]);
+    parent::__construct();
+    $this->middleware('auth');
   }
 
   /**
