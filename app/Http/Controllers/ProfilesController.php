@@ -23,7 +23,7 @@ class ProfilesController extends Controller {
      * Create a new ProfilesController instance
      */
     public function __construct() {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth');
         $this->middleware('auth:admin', ['only' => ['index', 'postApprove', 'postUnapprove', 'postFeature', 'postUnfeature']]);
 
         parent::__construct();
