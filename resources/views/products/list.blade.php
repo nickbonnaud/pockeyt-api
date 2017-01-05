@@ -8,6 +8,12 @@
         <h1>
           Current Inventory
         </h1>
+        <span class="pull-right">
+          <button type="button" class="btn btn-block btn-social btn-github">
+            <i class="fa fa-credit-card"></i>
+            Connect
+          </button>
+        </span>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Inventory</li>
