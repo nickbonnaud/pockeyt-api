@@ -370,7 +370,7 @@ class QuickBookController extends Controller
 					$salesItemLineDetail->setQty(1);
 					$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
-          // $salesItemLineDetail->setTaxCodeRef('TAX');
+          $salesItemLineDetail->setTaxCodeRef($business->account->pockeyt_qb_taxcode);
 
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
