@@ -108,13 +108,11 @@ class QuickBookController extends Controller
   	$customer->setDisplayName('Pockeyt Customer');
   	$customer->setNotes('Created to track Pockeyt sales');
   	if ($resp = $customerService->add($this->context, $this->realm, $customer)) {
-  		dd("done");
       $resp = str_replace('{','',$resp);
       $resp = str_replace('}','',$resp);
       $resp = abs($resp);
       return $this->setQbId($resp);
   	} else {
-      dd("done");
   		print($customerService->lastError($this->context));
   	}
   }
