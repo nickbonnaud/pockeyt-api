@@ -120,7 +120,7 @@ Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inact
 //Quickbook Routes
 Route::get('qbo/oauth','QuickBookController@qboOauth');
 Route::get('qbo/success','QuickBookController@qboSuccess');
-Route::get('qbo/tax', 'QuickBookController@qboTax');
+Route::get('qbo/tax', 'QuickBookController@qboTax')->name('qbo.tax');
 Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
 
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
