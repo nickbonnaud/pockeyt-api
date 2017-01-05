@@ -31,12 +31,6 @@ class AddPurchasesQb extends Command
    */
   public function __construct()
   {
-    if (!\QuickBooks_Utilities::initialized(env('QBO_DSN'))) {
-    	// Initialize creates the neccessary database schema for queueing up requests and logging
-    	\QuickBooks_Utilities::initialize(env('QBO_DSN'));
-    }
-    $this->IntuitAnywhere = new \QuickBooks_IPP_IntuitAnywhere(env('QBO_DSN'), env('QBO_ENCRYPTION_KEY'), env('QBO_OAUTH_CONSUMER_KEY'), env('QBO_CONSUMER_SECRET'), env('QBO_OAUTH_URL'), env('QBO_SUCCESS_URL'));
-
   	parent::__construct();
   }
 
@@ -47,6 +41,12 @@ class AddPurchasesQb extends Command
    */
   public function handle()
   {
+  	if (!\QuickBooks_Utilities::initialized(env('QBO_DSN'))) {
+    	// Initialize creates the neccessary database schema for queueing up requests and logging
+    	\QuickBooks_Utilities::initialize(env('QBO_DSN'));
+    }
+    $this->IntuitAnywhere = new \QuickBooks_IPP_IntuitAnywhere(env('QBO_DSN'), env('QBO_ENCRYPTION_KEY'), env('QBO_OAUTH_CONSUMER_KEY'), env('QBO_CONSUMER_SECRET'), env('QBO_OAUTH_URL'), env('QBO_SUCCESS_URL'));
+    
   	$businesses = Profile::where('connected_qb', '=', true)->get();
     foreach ($businesses as $business) {
     	$the_tenant = $business->id;
