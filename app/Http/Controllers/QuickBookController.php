@@ -394,17 +394,17 @@ class QuickBookController extends Controller
           $taxDetail->setTxnTaxCodeRef($business->account->pockeyt_qb_taxcode);
           $taxDetail->setTotalTax($transaction->tax / 100);
 
-          $taxLine = new \QuickBooks_IPP_Object_TaxLine();
-          $taxLine->setAmount($transaction->tax / 100);
-          $taxLine->setDetailType('TaxLineDetail');
+          // $taxLine = new \QuickBooks_IPP_Object_TaxLine();
+          // $taxLine->setAmount($transaction->tax / 100);
+          // $taxLine->setDetailType('TaxLineDetail');
 
-          $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
-          $taxLineDetail->setPercentBased(true);
-          $taxLineDetail->setTaxPercent(0);
-          $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
+          // $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
+          // $taxLineDetail->setPercentBased(true);
+          // $taxLineDetail->setTaxPercent(0);
+          // $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
 
-          $taxLine->addTaxLineDetail($taxLineDetail);
-          $taxDetail->addTaxLine($taxLine);
+          // $taxLine->addTaxLineDetail($taxLineDetail);
+          // $taxDetail->addTaxLine($taxLine);
 
           $invoice->addTxnTaxDetail($taxDetail);
 
