@@ -95,5 +95,9 @@ class ProductsController extends Controller {
     return $inventory = Product::where('profile_id', '=', $id)->orderBy('name', 'asc')->get();
   }
 
+  public function  connectSquare() {
+    dd('connected');
+  }
+
 
 }

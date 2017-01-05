@@ -9,10 +9,12 @@
           Current Inventory
         </h1>
         <span class="pull-right">
-          <button type="button" class="btn btn-block btn-social btn-github">
-            <i class="fa fa-sign-in"></i>
-            Sync Square Inventory
-          </button>
+          <a href="{{ route('square.connect') }}">
+            <button type="button" class="btn btn-block btn-social btn-github">
+              <i class="fa fa-sign-in"></i>
+              Sync Square Inventory
+            </button>
+          </a>
         </span>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
