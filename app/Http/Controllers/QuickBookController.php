@@ -76,7 +76,7 @@ class QuickBookController extends Controller
   public function qboSuccess(){
     $this->setTaxAccount();
      $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
-    if (isset($taxCode)) {
+    if (isset($taxCodeId)) {
       $this->setPockeytId();
       $this->createPockeytAccount();
       $this->createPockeytTipsAccount();
