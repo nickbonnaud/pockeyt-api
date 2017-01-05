@@ -10,8 +10,8 @@
         </h1>
         <span class="pull-right">
           <button type="button" class="btn btn-block btn-social btn-github">
-            <i class="fa fa-credit-card"></i>
-            Connect
+            <i class="fa fa-sign-in"></i>
+            Sync Square Inventory
           </button>
         </span>
         <ol class="breadcrumb">
