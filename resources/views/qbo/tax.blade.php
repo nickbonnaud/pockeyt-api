@@ -3,7 +3,7 @@
 <div class="content-wrapper">
 	<section class="content">
 		<div>
-			Please Adjust your Sales Tax Rate in QuickBoooks or Pockeyt.
+			<b>Please Adjust your Sales Tax Rate in QuickBoooks or Pockeyt.</b>
 			<button type="button" class="btn btn-block btn-primary btn-lg">Close Window</button>
 		</div>
 	</section>
