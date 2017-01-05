@@ -1,6 +1,6 @@
 @extends('layoutDashboard')
 @section('content')
-<div class="content-wrapper">
+<div>
 	<section>
 		<div style="text-align: center">
 			<h4>Please Adjust your Sales Tax Rate in QuickBoooks or Pockeyt.</h4>
