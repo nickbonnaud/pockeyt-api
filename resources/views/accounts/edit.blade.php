@@ -16,7 +16,6 @@ $qbo_connect = $qbo_obj->qboConnect();
 						<ipp:connectToIntuit></ipp:connectToIntuit>
 					</span>
 				@endif
-				<a href="{{url('qbo/disconnect')}}" title="">Disconnect</a>
 		    @if($account->status == 'pending')
 		    	<p><i class="fa fa-circle text-warning"></i> Account Pending</p>
 		    @elseif($account->status == 'active')
@@ -29,10 +28,6 @@ $qbo_connect = $qbo_obj->qboConnect();
 		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Payment Account Info</li>
 		    </ol>
-		    <form action="{{ route('sync.invoice') }}" method="post" class="form-inline" style="display: inline-block;">
-		        {{ csrf_field() }}
-		      <input type="submit" value="Do" class="btn btn-danger btn-flat btn-xs">
-		    </form>
 		  </section>
 		  @include ('errors.form')
 			<section class="content">
