@@ -3696,6 +3696,8 @@ table.text-center th {
   color: #ffffff;
   background-color: #444444;
   border-color: rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .btn-github:focus,
 .btn-github.focus {
