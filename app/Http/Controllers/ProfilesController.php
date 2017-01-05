@@ -23,7 +23,7 @@ class ProfilesController extends Controller {
      * Create a new ProfilesController instance
      */
     public function __construct() {
-        $this->middleware('auth', ['except' => ['show', 'index', 'getPosts', 'edit']]);
+        $this->middleware('auth', ['except' => ['index']]);
         $this->middleware('auth:admin', ['only' => ['index', 'postApprove', 'postUnapprove', 'postFeature', 'postUnfeature']]);
 
         parent::__construct();
@@ -100,7 +100,7 @@ class ProfilesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit(EditProfileRequest $request, $id) {
         $profile = Profile::findOrFail($id);
         $tags = \App\Tag::lists('name', 'id');
         return view('profiles.edit', compact('profile', 'tags'));
