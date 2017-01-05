@@ -84,7 +84,8 @@ class QuickBookController extends Controller
     } else {
       $the_tenant = $this->user->profile->id;
       $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
-      return view('qbo.tax');
+      flash()->error('Oops', 'Your Current Sales Tax for Pockeyt Pay based on your business location is {{ ($user->profile->tax_rate) / 100  }}%. This Does Not match your Quickbooks Sales Tax. Please make sure your location is correct on Pockeyt or your Sales Tax on QuickBooks is correct');
+      return redirect()->back();
     }
   }
 
