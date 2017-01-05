@@ -13,6 +13,7 @@
 <script type="text/javascript">
   window.opener.location.reload(false);
 </script>
- @include('flash')
+ @yield('scripts.footer')
+  @include('flash')
 </body>
 </html>
