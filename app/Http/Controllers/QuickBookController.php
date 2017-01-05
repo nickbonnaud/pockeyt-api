@@ -70,15 +70,22 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    // $this->setPockeytId();
-    // $this->createPockeytAccount();
-    // $this->createPockeytTipsAccount();
-    // $this->createPockeytItem();
-    // $this->createPockeytTipsItem();
-    // $this->createPockeytPaymentMethod();
     $this->setTaxAccount();
-    $this->setQbActive();
-   	return view('qbo.success');
+     $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
+    if (isset($taxCode)) {
+      // $this->setPockeytId();
+      // $this->createPockeytAccount();
+      // $this->createPockeytTipsAccount();
+      // $this->createPockeytItem();
+      // $this->createPockeytTipsItem();
+      // $this->createPockeytPaymentMethod();
+      // $this->setQbActive();
+      return view('qbo.success');
+    } else {
+      $the_tenant = $this->user->profile->id;
+      $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
+      view('qbo.tax');
+    }
   }
 
   public function qboDisconnect(){
@@ -251,7 +258,7 @@ class QuickBookController extends Controller
         }
       }
     }
-    return view('qbo.tax');
+    return;
   }
 
   public function setQbActive() {
