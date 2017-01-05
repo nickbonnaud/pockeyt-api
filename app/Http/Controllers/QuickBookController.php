@@ -84,7 +84,7 @@ class QuickBookController extends Controller
     } else {
       $the_tenant = $this->user->profile->id;
       $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
-      view('qbo.tax');
+      return view('qbo.tax');
     }
   }
 
