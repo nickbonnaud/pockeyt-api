@@ -394,18 +394,6 @@ class QuickBookController extends Controller
           $taxDetail->setTxnTaxCodeRef($business->account->pockeyt_qb_taxcode);
           $taxDetail->setTotalTax($transaction->tax / 100);
 
-          // $taxLine = new \QuickBooks_IPP_Object_TaxLine();
-          // $taxLine->setAmount($transaction->tax / 100);
-          // $taxLine->setDetailType('TaxLineDetail');
-
-          // $taxLineDetail = new \QuickBooks_IPP_Object_TaxLineDetail();
-          // $taxLineDetail->setPercentBased(true);
-          // $taxLineDetail->setTaxPercent(0);
-          // $taxLineDetail->setNetAmountTaxable($transaction->net_sales);
-
-          // $taxLine->addTaxLineDetail($taxLineDetail);
-          // $taxDetail->addTaxLine($taxLine);
-
           $invoice->addTxnTaxDetail($taxDetail);
 
 					$invoice->setCustomerRef($business->account->pockeyt_qb_id);
@@ -435,9 +423,6 @@ class QuickBookController extends Controller
 						{
 							$transaction->qb_synced = true;
 							$transaction->save();
-              $InvoiceService = new \QuickBooks_IPP_Service_Invoice();
-              $invoices = $InvoiceService->query($this->context, $this->realm, "SELECT * FROM Invoice STARTPOSITION 1 MAXRESULTS 10");
-              dd($invoices);
 						}
 						else
 						{
