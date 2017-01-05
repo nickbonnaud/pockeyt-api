@@ -77,13 +77,13 @@ class QuickBookController extends Controller
     $this->setTaxAccount();
      $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
     if (isset($taxCode)) {
-      // $this->setPockeytId();
-      // $this->createPockeytAccount();
-      // $this->createPockeytTipsAccount();
-      // $this->createPockeytItem();
-      // $this->createPockeytTipsItem();
-      // $this->createPockeytPaymentMethod();
-      // $this->setQbActive();
+      $this->setPockeytId();
+      $this->createPockeytAccount();
+      $this->createPockeytTipsAccount();
+      $this->createPockeytItem();
+      $this->createPockeytTipsItem();
+      $this->createPockeytPaymentMethod();
+      $this->setQbActive();
       return view('qbo.success');
     } else {
       $the_tenant = $this->user->profile->id;
