@@ -370,7 +370,7 @@ class QuickBookController extends Controller
 					$salesItemLineDetail->setQty(1);
 					$salesItemLineDetail->setItemRef($business->account->pockeyt_item);
 
-          $salesItemLineDetail->setTaxCodeRef($business->account->pockeyt_qb_taxcode);
+          $salesItemLineDetail->setTaxCodeRef('TAX');
 
 					$line->addSalesItemLineDetail($salesItemLineDetail);
 					$invoice->addLine($line);
@@ -391,7 +391,7 @@ class QuickBookController extends Controller
           }
 
           $taxDetail = new \QuickBooks_IPP_Object_TxnTaxDetail();
-          $taxDetail->setTxnTaxCodeRef(4);
+          $taxDetail->setTxnTaxCodeRef($business->account->pockeyt_qb_taxcode);
           $taxDetail->setTotalTax($transaction->tax / 100);
 
           // $taxLine = new \QuickBooks_IPP_Object_TaxLine();
