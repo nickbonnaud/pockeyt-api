@@ -27,6 +27,10 @@ class QuickBookController extends Controller
 
     parent::__construct();
   }
+
+  public function qboTax() {
+    return view('qbo.tax');
+  }
     
   public function  qboConnect(){
   	$the_tenant = $this->user->profile->id;
