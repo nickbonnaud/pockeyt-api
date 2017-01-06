@@ -99,6 +99,7 @@ class ProductsController extends Controller {
   }
 
   public function connectSquare(Request $request) {
+    dd("connect");
     return $this->isLoggedInSquare($request->all());
   }
 
