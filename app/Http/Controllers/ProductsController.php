@@ -108,7 +108,6 @@ class ProductsController extends Controller {
   }
 
   public function getAuthorization() {
-    dd("inside get auth");
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
       $client->request('GET', '/authorize', [
@@ -122,6 +121,7 @@ class ProductsController extends Controller {
   }
 
   public function getAccessToken($code) {
+    dd($code);
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
       $response = $client->request('POST', '/token', [
