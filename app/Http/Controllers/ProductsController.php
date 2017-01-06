@@ -110,7 +110,7 @@ class ProductsController extends Controller {
   public function getAuthorization() {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
-      $client->request('GET', '/authorize', [
+      $response = $client->request('GET', '/authorize', [
         'query' => ['client_id' => env('SQUARE_ID'), 'scope' => 'ITEMS_READ', 'state' => env('SQUARE_STATE')]
       ]);
     } catch (RequestException $e) {
@@ -118,10 +118,10 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
+    dd($response);
   }
 
   public function getAccessToken($code) {
-    dd($code);
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
       $response = $client->request('POST', '/token', [
