@@ -99,7 +99,6 @@ class ProductsController extends Controller {
   }
 
   public function connectSquare(Request $request) {
-    dd("connect");
     return $this->isLoggedInSquare($request->all());
   }
 
@@ -109,6 +108,7 @@ class ProductsController extends Controller {
   }
 
   public function getAuthorization() {
+    dd('getAuth');
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
       $response = $client->request('GET', '/authorize', [
