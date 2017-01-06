@@ -9,7 +9,7 @@
           Current Inventory
         </h1>
         <span class="pull-right">
-          <a href="{{ action('ProductsController@connect') }}">
+          <a href="{{ action('ProductsController@connectSquare') }}">
             <button type="button" class="btn btn-block btn-social btn-github">
               <i class="fa fa-sign-in"></i>
               Sync Square Inventory
