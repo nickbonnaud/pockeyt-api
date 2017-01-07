@@ -108,16 +108,20 @@ class ProductsController extends Controller {
   }
 
   public function getAuthorization() {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/'], ['headers' => [
-        'Access-Control-Allow-Origin' => '*',
-        'Authorization'  => 'Client ' . env('SQUARE_SECRET'),
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-      ]]);
-    dd($client);
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
     try {
       $response = $client->request('GET', 'authorize', [
-        'query' => ['client_id' => env('SQUARE_ID'), 'scope' => 'ITEMS_READ', 'state' => env('SQUARE_STATE')]
+        'query' => [
+          'client_id' => env('SQUARE_ID'),
+          'scope' => 'ITEMS_READ',
+          'state' => env('SQUARE_STATE')
+        ],
+        'headers' => [
+          'Access-Control-Allow-Origin' => '*',
+          'Authorization'  => 'Client ' . env('SQUARE_SECRET'),
+          'Accept' => 'application/json',
+          'Content-Type' => 'application/json'
+      ]
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
