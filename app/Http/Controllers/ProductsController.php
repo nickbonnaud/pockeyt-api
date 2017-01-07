@@ -114,6 +114,7 @@ class ProductsController extends Controller {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
       ]]);
+    dd($client);
     try {
       $response = $client->request('GET', 'authorize', [
         'query' => ['client_id' => env('SQUARE_ID'), 'scope' => 'ITEMS_READ', 'state' => env('SQUARE_STATE')]
