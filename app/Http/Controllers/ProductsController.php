@@ -118,6 +118,7 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
+    dd($response);
   }
 
   public function getAccessToken($code) {
