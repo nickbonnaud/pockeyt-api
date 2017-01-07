@@ -129,6 +129,7 @@ class ProductsController extends Controller {
         'Accept' => 'application/json',
         'Content-Type' => 'application/json'
       ]]);
+    dd($client);
     try {
       $response = $client->request('POST', '/token', [
         'json' => ['client_id' => env('SQUARE_ID'), 'client_secret' => env('SQUARE_SECRET'), 'code'=> $code]
