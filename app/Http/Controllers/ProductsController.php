@@ -123,6 +123,7 @@ class ProductsController extends Controller {
   public function getAccessToken($code) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2']);
     try {
+      dd(env('SQUARE_ID'));
       $response = $client->request('POST', '/token', [
         'json' => ['client_id' => env('SQUARE_ID'), 'client_secret' => env('SQUARE_SECRET'), 'code'=> $code]
       ]);
