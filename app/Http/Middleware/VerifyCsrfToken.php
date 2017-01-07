@@ -14,7 +14,6 @@ class VerifyCsrfToken extends BaseVerifier {
         'accounts/status',
         'api/*',
         'connect/subscribe/facebook',
-        'connect/subscribe/instagram',
-        'products/square/connect'
+        'connect/subscribe/instagram'
     ];
 }
