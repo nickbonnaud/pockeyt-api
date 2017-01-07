@@ -108,6 +108,7 @@ class ProductsController extends Controller {
   }
 
   public function getAuthorization() {
+    dd(env('Client ' . env('SQUARE_SECRET')));
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/'], ['Authorization' => 'Client ' . env('SQUARE_SECRET'),
               'Accept' => 'application/json',
         'Content-Type' => 'application/json']);
