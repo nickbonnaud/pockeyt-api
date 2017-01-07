@@ -35,7 +35,7 @@ Route::get('products/list', 'ProductsController@listProducts')->name('products.l
 Route::post('products/{products}/photos', 'ProductsController@postPhotos')->name('products.photos');
 Route::get('products/inventory/{profiles}', 'ProductsController@getInventory');
 Route::post('products/square/connect', 'ProductsController@connectSquare');
-Route::get('products/square/connect', 'ProductsController@connectSquare');
+Route::get('products/square/connect', 'ProductsController@connectSquare', ['middleware' =>'cors']);
 Route::resource('products', 'ProductsController', ['only' => ['store', 'destroy', 'edit', 'update']]);
 
 // Profile routes...
