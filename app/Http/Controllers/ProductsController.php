@@ -109,9 +109,10 @@ class ProductsController extends Controller {
 
   public function getAuthorization() {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/'], ['headers' => [
+        'Access-Control-Allow-Origin' => '*',
         'Authorization'  => 'Client ' . env('SQUARE_SECRET'),
         'Accept' => 'application/json',
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       ]]);
     try {
       $response = $client->request('GET', 'authorize', [
