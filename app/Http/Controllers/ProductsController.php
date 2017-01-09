@@ -131,7 +131,12 @@ class ProductsController extends Controller {
   public function getSquareLocationId($token) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
-      $response = $client->request('GET', 'me/locations');
+      $response = $client->request('GET', 'me/locations', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
