@@ -188,7 +188,7 @@ class ProductsController extends Controller {
       }
     }
     $body = json_decode($response->getBody());
-    dd($body);
+    return $this->syncPockeytInventory($body);
   }
 
   public function matchLocation($locations) {
@@ -208,6 +208,11 @@ class ProductsController extends Controller {
       flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section', 'error');
       return redirect()->route('products.list');
     }
+  }
+
+  public function syncPockeytInventory($items){
+    $profile = $this->user->profile;
+    dd($profile->products);
   }
 
 }
