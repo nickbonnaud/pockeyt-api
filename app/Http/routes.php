@@ -36,6 +36,7 @@ Route::post('products/{products}/photos', 'ProductsController@postPhotos')->name
 Route::get('products/inventory/{profiles}', 'ProductsController@getInventory');
 Route::post('products/square/connect', 'ProductsController@connectSquare');
 Route::get('products/square/connect', 'ProductsController@connectSquare');
+Route::get('products/square/sync', 'ProductsController@syncSquareItems');
 Route::resource('products', 'ProductsController', ['only' => ['store', 'destroy', 'edit', 'update']]);
 
 // Profile routes...
