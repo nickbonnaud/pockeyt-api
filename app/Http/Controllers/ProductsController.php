@@ -138,8 +138,12 @@ class ProductsController extends Controller {
   }
 
   public function getSquareLocationId() {
-    dd('Inside get Location');
-    $token = $this->user->profile->square_token;
+    try {
+      $token = Crypt::decrypt($this->user->profile->square_token);
+    } catch (DecryptException $e) {
+      dd($e);
+    }
+
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
       $response = $client->request('GET', 'me/locations', [
