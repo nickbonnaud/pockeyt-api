@@ -157,7 +157,7 @@ class ProductsController extends Controller {
   }
 
   public function syncItems($squareLocationId) {
-    dd("inside get items")
+    dd("inside get items");
     $token = $this->user->profile->square_token;
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
