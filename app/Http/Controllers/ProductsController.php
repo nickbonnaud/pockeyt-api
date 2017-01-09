@@ -158,7 +158,10 @@ class ProductsController extends Controller {
       }
     }
     $body = json_decode($response->getBody());
-    dd(count($body));
+    dd($body);
+    if (count($body) > 1) {
+      # code...
+    }
   }
 
   public function syncItems($squareLocationId) {
