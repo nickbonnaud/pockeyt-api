@@ -133,7 +133,8 @@ class ProductsController extends Controller {
     if (isset($squareLocationId)) {
       return $this->syncItems($squareLocationId);
     } else {
-      return $this->getSquareLocationId();
+      $this->getSquareLocationId();
+      return $this->syncItems($squareLocationId);
     }
   }
 
@@ -158,9 +159,12 @@ class ProductsController extends Controller {
       }
     }
     $body = json_decode($response->getBody());
-    dd($body);
     if (count($body) > 1) {
-      # code...
+      //
+    } elseif(count($body) == 1) {
+      $account = $this->user->profile->account;
+      $account->square_location_id = $body[0]->id;
+      return $account->save();
     }
   }
 
