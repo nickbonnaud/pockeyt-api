@@ -187,7 +187,8 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    return dd($response);
+    $body = json_decode($response->getBody());
+    dd($body);
   }
 
   public function matchLocation($locations) {
