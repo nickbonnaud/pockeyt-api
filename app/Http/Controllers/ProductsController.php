@@ -124,8 +124,6 @@ class ProductsController extends Controller {
     $profile->square_token = Crypt::encrypt($body->access_token);
     $profile->save();
     $this->getSquareLocationId($profile->square_token);
-    flash()->success('Connected!', 'You can now import inventory from Square');
-    return redirect()->route('products.list');
   }
 
   public function getSquareLocationId($token) {
