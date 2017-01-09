@@ -9,7 +9,15 @@
           Current Inventory
         </h1>
         <span class="pull-right">
-          <a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ&state=' . env('SQUARE_STATE') }}">
+          <!-- @if(isset($this->user->profile->square_token))
+            <a href="{{ action('ProductsController@syncSquareItems') }}">
+              <button type="button" class="btn btn-block btn-social btn-github">
+                <i class="fa fa-sign-in"></i>
+                Sync Square Inventory
+              </button>
+            </a>
+          @endif -->
+          <a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20MERCHANT_PROFILE_READ&state=' . env('SQUARE_STATE') }}">
             <button type="button" class="btn btn-block btn-social btn-github">
               <i class="fa fa-sign-in"></i>
               Sync Square Inventory

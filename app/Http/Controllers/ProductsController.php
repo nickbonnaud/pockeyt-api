@@ -123,8 +123,25 @@ class ProductsController extends Controller {
     $profile = $this->user->profile;
     $profile->square_token = Crypt::encrypt($body->access_token);
     $profile->save();
+    $this->getSquareLocationId($profile->square_token);
     flash()->success('Connected!', 'You can now import inventory from Square');
     return redirect()->route('products.list');
+  }
+
+  public function getSquareLocationId($token) {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', 'me/locations');
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    dd($response);
+  }
+
+  public function syncSquareItems() {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
   }
 
 }
