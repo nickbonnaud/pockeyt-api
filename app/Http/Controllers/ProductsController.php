@@ -123,10 +123,21 @@ class ProductsController extends Controller {
     $profile = $this->user->profile;
     $profile->square_token = Crypt::encrypt($body->access_token);
     $profile->save();
-    $this->getSquareLocationId($profile->square_token);
+    flash()->success('Connected!', 'You can now import inventory from Square');
+    return redirect()->route('products.list');
   }
 
-  public function getSquareLocationId($token) {
+  public function syncSquareItems() {
+    $squareLocationId = $this->user->profile->account->square_location_id;
+    if (isset($squareLocationId)) {
+      $this->syncItems($squareLocationId);
+    } else {
+      $this->getSquareLocationId();
+    }
+  }
+
+  public function getSquareLocationId() {
+    $token = $this->user->profile->square_token;
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
       $response = $client->request('GET', 'me/locations', [
@@ -140,11 +151,25 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    return dd($response);
+    dd($response);
   }
 
-  public function syncSquareItems() {
+  public function syncItems($squareLocationId) {
+    $token = $this->user->profile->square_token;
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', $squareLocationId . '/items', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    dd($response);
   }
 
 }
