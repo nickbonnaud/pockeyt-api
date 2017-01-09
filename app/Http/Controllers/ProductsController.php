@@ -103,6 +103,7 @@ class ProductsController extends Controller {
   }
 
   public function isLoggedInSquare($data) {
+    dd($data);
     if ($data->state = env('SQUARE_STATE')) return $this->getAccessToken($data->code);
   }
 
