@@ -9,7 +9,7 @@
           Current Inventory
         </h1>
         <span class="pull-right">
-          @if(isset($this->user->profile->square_token))
+          @if(isset($this->user))
             <a href="{{ action('ProductsController@syncSquareItems') }}">
               <button type="button" class="btn btn-block btn-social btn-github">
                 <i class="fa fa-sign-in"></i>
