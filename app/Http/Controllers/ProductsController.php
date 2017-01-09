@@ -131,9 +131,9 @@ class ProductsController extends Controller {
   public function syncSquareItems() {
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (isset($squareLocationId)) {
-      $this->syncItems($squareLocationId);
+      return $this->syncItems($squareLocationId);
     } else {
-      $this->getSquareLocationId();
+      return $this->getSquareLocationId();
     }
   }
 
@@ -152,7 +152,7 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    dd($response);
+    return dd($response);
   }
 
   public function syncItems($squareLocationId) {
@@ -170,7 +170,7 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    dd($response);
+    return dd($response);
   }
 
 }
