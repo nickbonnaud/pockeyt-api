@@ -87,11 +87,12 @@ class ProductsController extends Controller {
   }
 
   public function listProducts() {
-      $products = Product::where('profile_id', '=', $this->user->profile->id)->orderBy('name', 'asc')->get();
+      $profile = $this->user->profile;
+      $products = Product::where('profile_id', '=', $profile->id)->orderBy('name', 'asc')->get();
       foreach ($products as $product) {
         $product->price = ($product->price) / 100;
       }
-      return view('products.list', compact('products'));
+      return view('products.list', compact('products', 'profile'));
   }
 
   public function getInventory($id) {

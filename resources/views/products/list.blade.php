@@ -6,10 +6,10 @@
     <div class="scroll-main-contents">
     	<section class="content-header">
         <h1>
-          Current Inventory {{$this->user}}
+          Current Inventory
         </h1>
         <span class="pull-right">
-          @if(isset($this->user))
+          @if(isset($profile->square_token))
             <a href="{{ action('ProductsController@syncSquareItems') }}">
               <button type="button" class="btn btn-block btn-social btn-github">
                 <i class="fa fa-sign-in"></i>
