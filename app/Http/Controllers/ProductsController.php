@@ -160,7 +160,7 @@ class ProductsController extends Controller {
     }
     $body = json_decode($response->getBody());
     if (count($body) > 1) {
-      //
+      return $this->matchLocation($body);
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
       $account->square_location_id = $body[0]->id;
@@ -188,6 +188,25 @@ class ProductsController extends Controller {
       }
     }
     return dd($response);
+  }
+
+  public function matchLocation($locations) {
+    $businessLocation = $this->user->account->bizStreetAdress;
+    if(isset($businessLocation)) {
+      foreach ($locations as $location) {
+        if ($location->business_address->address_line_1 == $businessLocation) {
+          $account = $this->user->profile->account;
+          $account->square_location_id = $location->id;
+          return $account->save();
+        } else {
+          flash()->overlay('Oops', "Your business's street address in Pockeyt: " . $businessLocation . " does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
+          return redirect()->route('products.list');
+        }
+      }
+    } else {
+      flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section', 'error');
+      return redirect()->route('products.list');
+    }
   }
 
 }
