@@ -6,7 +6,7 @@
     <div class="scroll-main-contents">
     	<section class="content-header">
         <h1>
-          Current Inventory
+          Current Inventory {{$this->user}}
         </h1>
         <span class="pull-right">
           @if(isset($this->user))
