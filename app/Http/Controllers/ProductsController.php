@@ -157,12 +157,16 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    return dd($response);
+    $body = json_decode($response->getBody());
+    return dd($body);
   }
 
   public function syncItems($squareLocationId) {
-    dd("inside get items");
-    $token = $this->user->profile->square_token;
+     try {
+      $token = Crypt::decrypt($this->user->profile->square_token);
+    } catch (DecryptException $e) {
+      dd($e);
+    }
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
       $response = $client->request('GET', $squareLocationId . '/items', [
