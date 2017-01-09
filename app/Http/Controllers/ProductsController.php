@@ -140,7 +140,7 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    dd($response);
+    return dd($response);
   }
 
   public function syncSquareItems() {
