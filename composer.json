@@ -23,8 +23,7 @@
         "pusher/pusher-php-server": "^2.6",
         "laravel/socialite": "^2.0",
         "socialiteproviders/instagram": "^2.0",
-        "consolibyte/quickbooks": "^3.2",
-        "wheniwork/oauth2-square": "^1.3"
+        "consolibyte/quickbooks": "^3.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

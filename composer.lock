@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ecab03fc143f41950111b091a3c80c5",
+    "content-hash": "3706c9bd10d933cc214463d8fb7c397b",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -2032,62 +2032,6 @@
             "time": "2016-08-17T00:36:58+00:00"
         },
         {
-            "name": "league/oauth2-client",
-            "version": "0.12.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "670ec6e743f5c95441263440afcdabc3fc720547"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/670ec6e743f5c95441263440afcdabc3fc720547",
-                "reference": "670ec6e743f5c95441263440afcdabc3fc720547",
-                "shasum": ""
-            },
-            "require": {
-                "guzzle/guzzle": "~3.7",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "jakub-onderka/php-parallel-lint": "0.8.*",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "0.6.*",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "League\\OAuth2\\Client\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alex Bilbie",
-                    "email": "hello@alexbilbie.com",
-                    "homepage": "http://www.alexbilbie.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "OAuth 2.0 Client Library",
-            "keywords": [
-                "Authentication",
-                "SSO",
-                "authorization",
-                "identity",
-                "idp",
-                "oauth",
-                "oauth2",
-                "single sign on"
-            ],
-            "time": "2015-06-20T16:06:31+00:00"
-        },
-        {
             "name": "mailgun/mailgun-php",
             "version": "v1.7.2",
             "source": {
@@ -3331,16 +3275,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.9",
+            "version": "v2.8.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "889983a79a043dfda68f38c38b6dba092dd49cd8"
+                "reference": "25c576abd4e0f212e678fe8b2bd9a9a98c7ea934"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/889983a79a043dfda68f38c38b6dba092dd49cd8",
-                "reference": "889983a79a043dfda68f38c38b6dba092dd49cd8",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/25c576abd4e0f212e678fe8b2bd9a9a98c7ea934",
+                "reference": "25c576abd4e0f212e678fe8b2bd9a9a98c7ea934",
                 "shasum": ""
             },
             "require": {
@@ -3387,7 +3331,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-28T16:56:28+00:00"
+            "time": "2016-10-13T01:43:15+00:00"
         },
         {
             "name": "symfony/finder",
@@ -4150,61 +4094,6 @@
                 "environment"
             ],
             "time": "2015-05-30T15:59:26+00:00"
-        },
-        {
-            "name": "wheniwork/oauth2-square",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wheniwork/oauth2-square.git",
-                "reference": "9e9ec4ef4871b7f782896534dca61c4d6d6ba7be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wheniwork/oauth2-square/zipball/9e9ec4ef4871b7f782896534dca61c4d6d6ba7be",
-                "reference": "9e9ec4ef4871b7f782896534dca61c4d6d6ba7be",
-                "shasum": ""
-            },
-            "require": {
-                "league/oauth2-client": "~0.9",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Wheniwork\\OAuth2\\Client\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Woody Gilk",
-                    "email": "woody.gilk@gmail.com",
-                    "homepage": "https://github.com/shadowhand"
-                },
-                {
-                    "name": "Daniel Olfelt",
-                    "email": "dolfelt@gmail.com",
-                    "homepage": "https://github.com/dolfelt"
-                }
-            ],
-            "description": "Square OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
-            "keywords": [
-                "authorisation",
-                "authorization",
-                "client",
-                "oauth",
-                "oauth2",
-                "square"
-            ],
-            "time": "2016-04-13T15:48:41+00:00"
         }
     ],
     "packages-dev": [
