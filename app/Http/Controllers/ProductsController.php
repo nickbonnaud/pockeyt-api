@@ -212,7 +212,7 @@ class ProductsController extends Controller {
 
   public function syncPockeytInventory($items){
     $profile = $this->user->profile;
-    dd($profile->products);
+    return dd($profile->products);
   }
 
 }
