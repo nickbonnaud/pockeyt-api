@@ -187,7 +187,6 @@ class ProductsController extends Controller {
         return $e->getResponse();
       }
     }
-    dd("here");
     $body = json_decode($response->getBody());
     return $this->syncPockeytInventory($body);
   }
@@ -213,6 +212,7 @@ class ProductsController extends Controller {
   }
 
   public function syncPockeytInventory($items){
+    dd($item);
     foreach ($items as $item) {
       $name = $item->name;
       foreach ($item->variations as $variation) {
