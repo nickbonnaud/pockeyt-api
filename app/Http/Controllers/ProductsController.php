@@ -194,8 +194,7 @@ class ProductsController extends Controller {
   }
 
   public function matchLocation($locations) {
-    dd($this->user->account);
-    $businessLocation = $this->user->account->bizStreetAdress;
+    $businessLocation = $this->user->profile->account->bizStreetAdress;
     if(isset($businessLocation)) {
       foreach ($locations as $location) {
         if ($location->business_address->address_line_1 == $businessLocation) {
