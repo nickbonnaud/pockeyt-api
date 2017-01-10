@@ -207,7 +207,7 @@ class ProductsController extends Controller {
         }
       }
     } else {
-      flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section', 'error');
+      flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section');
       return redirect()->back();
     }
   }
