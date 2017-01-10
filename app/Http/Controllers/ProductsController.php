@@ -233,7 +233,7 @@ class ProductsController extends Controller {
     $product->price = $variation->price_money->amount;
     $product->sku = $variation->sku;
     $product->square_id = $variation->id;
-
+    dd("here");
     return $product->save();
   }
 
