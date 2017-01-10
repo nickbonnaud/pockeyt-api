@@ -217,7 +217,6 @@ class ProductsController extends Controller {
       $name = $item->name;
       foreach ($item->variations as $variation) {
         $product = Product::where('square_id', '=', $variation->id)->first();
-        dd(isset($product));
         if (! isset($product)) {
           return $this->createNewProduct($variation, $name);
         } else {
