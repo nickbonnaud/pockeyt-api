@@ -131,10 +131,12 @@ class ProductsController extends Controller {
   public function syncSquareItems() {
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (isset($squareLocationId)) {
-      return $this->syncItems($squareLocationId);
+      $this->syncItems($squareLocationId);
+      return $this->syncSuccess();
     } else {
       $this->getSquareLocationId();
-      return $this->syncItems($squareLocationId);
+      $this->syncItems($squareLocationId);
+      return $this->syncSuccess();
     }
   }
 
@@ -211,11 +213,42 @@ class ProductsController extends Controller {
   }
 
   public function syncPockeytInventory($items){
-    dd($items);
-    $products = $this->user->profile->products;
     foreach ($items as $item) {
-      # code...
+      $name = $item->name;
+      foreach ($item->variations as $variation) {
+        $product = Product::where('square_id', '=', $variation->id);
+        if (! isset($product)) {
+          return $this->createNewProduct($variation, $name);
+        } else {
+          return $this->updateProduct($variation, $name, $product);
+        }
+      }
     }
+  }
+
+  public function createNewProduct($variation, $name) {
+    $product = new Product;
+
+    $product->name = $name . ' ' . $variation->name;
+    $product->price = $variation->price_money->amount;
+    $product->sku = $variation->sku;
+    $product->square_id = $variation->id;
+
+    return $product->save();
+  }
+
+  public function updateProduct($variation, $name, $product) {
+    $product->name = $name . ' ' . $variation->name;
+    $product->price = $variation->price_money->amount;
+    $product->sku = $variation->sku;
+    $product->square_id = $variation->id;
+
+    return $product->save();
+  }
+
+  public function syncSuccess() {
+    flash()->success('Synced!', 'Pockeyt Inventory updated.');
+    return redirect()->route('products.list');
   }
 
 }
