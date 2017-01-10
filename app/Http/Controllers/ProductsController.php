@@ -131,12 +131,9 @@ class ProductsController extends Controller {
   public function syncSquareItems() {
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (isset($squareLocationId)) {
-      $this->syncItems($squareLocationId);
-      return $this->syncSuccess();
+      return $this->syncItems($squareLocationId);
     } else {
-      $this->getSquareLocationId();
-      $this->syncItems($squareLocationId);
-      return $this->syncSuccess();
+      return $this->getSquareLocationId();
     }
   }
 
@@ -166,7 +163,8 @@ class ProductsController extends Controller {
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
       $account->square_location_id = $body[0]->id;
-      return $account->save();
+      $account->save();
+      return $this->syncItems($squareLocationId);
     }
   }
 
@@ -200,15 +198,16 @@ class ProductsController extends Controller {
         if ($location->business_address->address_line_1 == $businessLocation) {
           $account = $this->user->profile->account;
           $account->square_location_id = $location->id;
-          return $account->save();
+          $account->save();
+          return $this->syncItems($account->square_location_id);
         } else {
           flash()->overlay('Oops', "Your business's street address in Pockeyt: " . $businessLocation . " does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
           return redirect()->route('products.list');
         }
       }
     } else {
-      flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section');
-      return redirect()->back();
+      flash()->overlay('Oops', 'Please set your business address in your "Payment Account Info" tab in the "Your Business Info" section', 'error');
+      return redirect()->route('products.list');
     }
   }
 
@@ -233,7 +232,8 @@ class ProductsController extends Controller {
     $product->price = $variation->price_money->amount;
     $product->sku = $variation->sku;
     $product->square_id = $variation->id;
-    return $this->user->profile->products()->save($product);
+    $this->user->profile->products()->save($product);
+    return $this->syncSuccess();
   }
 
   public function updateProduct($variation, $name, $product) {
@@ -241,7 +241,8 @@ class ProductsController extends Controller {
     $product->price = $variation->price_money->amount;
     $product->sku = $variation->sku;
     $product->square_id = $variation->id;
-    return $this->user->profile->products()->save($product);
+    $this->user->profile->products()->save($product);
+    return $this->syncSuccess();
   }
 
   public function syncSuccess() {
