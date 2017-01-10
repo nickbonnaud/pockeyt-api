@@ -199,7 +199,7 @@ class ProductsController extends Controller {
           $account = $this->user->profile->account;
           $account->square_location_id = $location->id;
           $account->save();
-          dd("here");
+          dd($account->square_location_id);
           return $this->syncItems($account->square_location_id);
         } else {
           flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
