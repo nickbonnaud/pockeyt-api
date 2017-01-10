@@ -212,7 +212,7 @@ class ProductsController extends Controller {
   }
 
   public function syncPockeytInventory($items){
-    dd($item);
+    dd($items);
     foreach ($items as $item) {
       $name = $item->name;
       foreach ($item->variations as $variation) {
