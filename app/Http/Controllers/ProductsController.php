@@ -233,8 +233,7 @@ class ProductsController extends Controller {
     $product->price = $variation->price_money->amount;
     $product->sku = $variation->sku;
     $product->square_id = $variation->id;
-    dd($product);
-    return $product->save();
+    return $this->user->profile->products()->save($product);
   }
 
   public function updateProduct($variation, $name, $product) {
@@ -242,8 +241,7 @@ class ProductsController extends Controller {
     $product->price = $variation->price_money->amount;
     $product->sku = $variation->sku;
     $product->square_id = $variation->id;
-
-    return $product->save();
+    return $this->user->profile->products()->save($product);
   }
 
   public function syncSuccess() {
