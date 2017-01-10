@@ -212,15 +212,19 @@ class ProductsController extends Controller {
   }
 
   public function syncPockeytInventory($items){
-    dd($items);
-    foreach ($items as $item) {
-      $name = $item->name;
-      foreach ($item->variations as $variation) {
-        $product = Product::where('square_id', '=', $variation->id)->first();
-        if (! isset($product)) {
-          return $this->createNewProduct($variation, $name);
-        } else {
-          return $this->updateProduct($variation, $name, $product);
+    if ($items === []) {
+      flash()->overlay('Oops', "This location has no inventory on Square.", 'error');
+      return redirect()->route('products.list');
+    } else {
+      foreach ($items as $item) {
+        $name = $item->name;
+        foreach ($item->variations as $variation) {
+          $product = Product::where('square_id', '=', $variation->id)->first();
+          if (! isset($product)) {
+            return $this->createNewProduct($variation, $name);
+          } else {
+            return $this->updateProduct($variation, $name, $product);
+          }
         }
       }
     }
