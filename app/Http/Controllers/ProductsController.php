@@ -136,7 +136,7 @@ class ProductsController extends Controller {
           'custom' => array('transactionId' => '5')
         ));
         $push = \PushNotification::app('PockeytIOS')
-          ->to('5e9f4bf2030ab5b0c4793779e21802404a28c64207040319f6b4a770a24ef2ed')
+          ->to('51d919e27b5e4031f3f61ac2b094d4c888b5390cf9b95bf162f0ed34bd09bd4e')
           ->send($message);
 
         dd($push->pushManager);
