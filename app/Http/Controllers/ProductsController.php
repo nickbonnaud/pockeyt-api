@@ -140,7 +140,7 @@ class ProductsController extends Controller {
           ->send($message);
 
         foreach ($collection->pushManager as $push) {
-          $response = $push->getAdapter();
+          $response = $push->getAdapter()->getResponse();
           dd($response);
         }
 
