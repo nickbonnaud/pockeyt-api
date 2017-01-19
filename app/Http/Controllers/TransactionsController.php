@@ -332,7 +332,7 @@ class TransactionsController extends Controller
 
     public function UserConfirmBill(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
-        dd($authUser);
+        return response()->json(compact('authUser'));
     }
 
 }
