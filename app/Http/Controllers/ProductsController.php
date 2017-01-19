@@ -135,11 +135,14 @@ class ProductsController extends Controller {
           'locKey' => '1',
           'custom' => array('transactionId' => '5')
         ));
-        $push = \PushNotification::app('PockeytIOS')
+        $collection = \PushNotification::app('PockeytIOS')
           ->to('51d919e27b5e4031f3f61ac2b094d4c888b5390cf9b95bf162f0ed34bd09bd4e')
           ->send($message);
 
-        dd($push->pushManager);
+        foreach ($collection->pushManager as $push) {
+          $response = $push->getAdapter()->getResponse();
+          dd($response);
+        }
 
 
     $squareLocationId = $this->user->profile->account->square_location_id;
