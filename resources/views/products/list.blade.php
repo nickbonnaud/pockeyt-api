@@ -17,7 +17,7 @@
               </button>
             </a>
           @else
-            <a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20MERCHANT_PROFILE_READ&state=' . env('SQUARE_STATE') }}">
+            <a href="{{ action('ProductsController@syncSquareItems') }}">
               <button type="button" class="btn btn-block btn-social btn-github">
                 <i class="fa fa-sign-in"></i>
                 Sync Square Inventory

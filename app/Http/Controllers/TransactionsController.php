@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\LoyaltyCard;
 use App\User;
+use JWTAuth;
 use App\Post;
 use App\Product;
 use App\Transaction;
@@ -20,6 +21,11 @@ use App\Http\Controllers\Controller;
 class TransactionsController extends Controller
 {
     
+     public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => ['UserConfirmBill']]);
+    }
+
     public function showBill($customerId) {
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
@@ -74,6 +80,10 @@ class TransactionsController extends Controller
             $transaction->tips = $tip;
         }
         $profile = $this->user->profile;
+        $transaction->paid = false;
+        $profile->transactions()->save($transaction);
+
+        return $this->confirmTransaction($transaction);
 
         $result = $this->createCharge($transaction, $customer, $profile);
 
@@ -92,6 +102,20 @@ class TransactionsController extends Controller
             return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
         }
+    }
+
+    public function confirmTransaction($transaction) {
+        $message = \PushNotification::Message('You have been charged ...', array(
+          'category' => 'payment',
+          'locKey' => '1',
+          'custom' => array('transactionId' => $transaction->id)
+        ));
+        $push = \PushNotification::app('PockeytIOS')
+          ->to('5e9f4bf2030ab5b0c4793779e21802404a28c64207040319f6b4a770a24ef2ed')
+          ->send($message);
+
+        $response = $push->getAdapter()->getResponse();
+        dd($response);
     }
 
     public function chargeExisting(UpdateChargeRequest $request, $id) {
@@ -304,6 +328,11 @@ class TransactionsController extends Controller
         $transaction->redeemed = true;
         $transaction->save();
         return response('success');
+    }
+
+    public function UserConfirmBill(Request $request) {
+        $authUser = JWTAuth::parseToken()->authenticate();
+        dd($authUser);
     }
 
 }

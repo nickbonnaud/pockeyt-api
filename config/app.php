@@ -157,6 +157,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Oureastudios\Laravel\BraintreeServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
+        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
 
     ],
 
@@ -219,6 +220,7 @@ return [
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'PushNotification' => Davibennun\LaravelPushNotification\Facades\PushNotification::class,
     ],
 
 ];

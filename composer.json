@@ -23,7 +23,8 @@
         "pusher/pusher-php-server": "^2.6",
         "laravel/socialite": "^2.0",
         "socialiteproviders/instagram": "^2.0",
-        "consolibyte/quickbooks": "^3.2"
+        "consolibyte/quickbooks": "^3.2",
+        "davibennun/laravel-push-notification": "dev-laravel5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

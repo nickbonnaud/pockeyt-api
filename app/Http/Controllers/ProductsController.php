@@ -129,6 +129,19 @@ class ProductsController extends Controller {
   }
 
   public function syncSquareItems() {
+
+    $message = \PushNotification::Message('You have been charged ...', array(
+          'category' => 'payment',
+          'locKey' => '1',
+          'custom' => array('transactionId' => '5')
+        ));
+        $push = \PushNotification::app('PockeytIOS')
+          ->to('5e9f4bf2030ab5b0c4793779e21802404a28c64207040319f6b4a770a24ef2ed')
+          ->send($message);
+
+        dd($push->pushManager);
+
+
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (isset($squareLocationId)) {
       return $this->syncItems($squareLocationId);
