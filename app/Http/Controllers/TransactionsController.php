@@ -111,7 +111,7 @@ class TransactionsController extends Controller
           'custom' => array('transactionId' => $transaction->id)
         ));
         $push = \PushNotification::app('PockeytIOS')
-          ->to('5e9f4bf2030ab5b0c4793779e21802404a28c64207040319f6b4a770a24ef2ed')
+          ->to('51d919e27b5e4031f3f61ac2b094d4c888b5390cf9b95bf162f0ed34bd09bd4e')
           ->send($message);
 
         $response = $push->getAdapter()->getResponse();
@@ -332,7 +332,11 @@ class TransactionsController extends Controller
 
     public function UserConfirmBill(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
-        return response()->json(compact('authUser'));
+        $transaction = Transaction::findOrFail($request->transactionId);
+
+        if ($authUser->id === $transaction->user_id && !$transaction->paid) {
+            
+        }
     }
 
 }
