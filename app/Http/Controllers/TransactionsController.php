@@ -27,8 +27,8 @@ class TransactionsController extends Controller
     }
 
     public function showBill($customerId) {
-        dd($customerId);
         $customer = User::findOrFail($customerId);
+        dd($customer);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
         $transaction = Transaction::where(function($query) use ($customer, $business) {
