@@ -142,7 +142,7 @@ class ProductsController extends Controller {
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($response);
+        dd($response->code);
 
 
     $squareLocationId = $this->user->profile->account->square_location_id;
