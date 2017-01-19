@@ -83,7 +83,7 @@ class TransactionsController extends Controller
         $transaction->paid = false;
         $profile->transactions()->save($transaction);
 
-        return $this->confirmTransaction($transaction);
+        return $this->confirmTransaction($transaction, $customer, $profile);
 
         $result = $this->createCharge($transaction, $customer, $profile);
 
@@ -101,25 +101,6 @@ class TransactionsController extends Controller
             
             return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
-        }
-    }
-
-    public function confirmTransaction($transaction) {
-        $message = \PushNotification::Message('You have been charged ...', array(
-          'category' => 'payment',
-          'locKey' => '1',
-          'custom' => array('transactionId' => $transaction->id)
-        ));
-        $collection = \PushNotification::app('PockeytIOS')
-          ->to('51d919e27b5e4031f3f61ac2b094d4c888b5390cf9b95bf162f0ed34bd09bd4e')
-          ->send($message);
-
-        foreach ($collection->pushManager as $push) {
-          $response = $push->getAdapter()->getResponse()->getCode();
-        }
-
-        if ($response->) {
-            # code...
         }
     }
 
@@ -133,6 +114,10 @@ class TransactionsController extends Controller
             $transaction->tips = $tip;
         }
         $profile = $this->user->profile;
+        $transaction->paid = false;
+        $profile->transactions()->save($transaction);
+
+        return $this->confirmTransaction($transaction, $customer, $profile);
 
         $result = $this->createCharge($transaction, $customer, $profile);
 
@@ -150,6 +135,47 @@ class TransactionsController extends Controller
             
             return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
                 ->withErrors($result->errors->deepAll());
+        }
+    }
+
+    public function confirmTransaction($transaction, $customer, $profile) {
+        $subTotal = ($transaction->tax + $transaction->net_sales) / 100;
+        $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name, array(
+          'category' => 'payment',
+          'locKey' => '1',
+          'custom' => array('transactionId' => $transaction->id)
+        ));
+        $collection = \PushNotification::app('PockeytIOS')
+          ->to('51d919e27b5e4031f3f61ac2b094d4c888b5390cf9b95bf162f0ed34bd09bd4e')
+          ->send($message);
+
+        foreach ($collection->pushManager as $push) {
+          $response = $push->getAdapter()->getResponse()->getCode();
+        }
+
+        if ($response === 0) {
+            return $this->flashSuccessPush($customer, $profile);
+        } else {
+            return $this->flashErrorPush($profile);
+        }
+    }
+
+    public function flashSuccessPush($customer, $profile) {
+        flash()->success('Bill created!', 'Waiting for ' . $customer->first_name . ' to approve bill');
+        return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+    }
+
+    public function flashErrorPush($profile) {
+        flash()->overlay('Oops!', 'An error occurred while sending Bill to the customer. Please contact customer support.', 'error');
+        return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+    }
+
+     public function UserConfirmBill(Request $request) {
+        $authUser = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::findOrFail($request->transactionId);
+
+        if ($authUser->id === $transaction->user_id && !$transaction->paid) {
+            return response()->json(compact('authUser'));
         }
     }
 
@@ -333,15 +359,6 @@ class TransactionsController extends Controller
         $transaction->redeemed = true;
         $transaction->save();
         return response('success');
-    }
-
-    public function UserConfirmBill(Request $request) {
-        $authUser = JWTAuth::parseToken()->authenticate();
-        $transaction = Transaction::findOrFail($request->transactionId);
-
-        if ($authUser->id === $transaction->user_id && !$transaction->paid) {
-            
-        }
     }
 
 }
