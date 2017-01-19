@@ -140,7 +140,7 @@ class TransactionsController extends Controller
     }
 
     public function confirmTransaction($transaction, $customer, $profile) {
-        $subTotal = ($transaction->tax + $transaction->net_sales) / 100;
+        $subTotal = round(($transaction->tax + $transaction->net_sales) / 100, 2);
         $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name, array(
           'category' => 'payment',
           'locKey' => '1',
@@ -171,7 +171,7 @@ class TransactionsController extends Controller
         return redirect()->route('profiles.show', ['profiles' => $profile->id]);
     }
 
-     public function UserConfirmBill(Request $request) {
+     public function userConfirmBill(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
 
