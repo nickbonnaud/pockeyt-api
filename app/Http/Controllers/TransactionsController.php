@@ -172,20 +172,36 @@ class TransactionsController extends Controller
     }
 
     public function userConfirmBill(Request $request) {
-        $authUser = JWTAuth::parseToken()->authenticate();
-        $something = $request->all();
+        $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
+        $profileId = $transaction->profile_id;
 
-        if ($authUser->id === $transaction->user_id && !$transaction->paid) {
-            return response()->json(compact('authUser'));
+        if ($customer->id === $transaction->user_id && !$transaction->paid) {
+            $result = $this->createCharge($transaction, $customer, $profileId);
+
+            if ($result->success) {
+                $transaction->paid = true;
+                $transaction->save();
+                $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+                return $this->flashMessage($newLoyaltyCard, $customer, $profile);
+            } else {
+                $transaction->paid = false;
+                $transaction->save();
+                $bill = $transaction->products;
+                $billId = $transaction->id;
+                $inventory = Product::where('profile_id', '=', $profile->id)->get();
+                
+                return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
+                    ->withErrors($result->errors->deepAll());
+            }
         }
     }
 
-    private function createCharge($transaction, $customer, $profile) {
+    private function createCharge($transaction, $customer, $profileId) {
         $amount = (round($transaction->total)) / 100;
         $serviceFee = round($amount * 0.02, 2);
         $result = \Braintree_Transaction::sale([
-            'merchantAccountId' => $profile->id,
+            'merchantAccountId' => $profileId,
             'amount' => $amount,
             'customerId' => $customer->customer_id,
             'customer' => [

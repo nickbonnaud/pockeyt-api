@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel {
      */
     protected $commands = [
         \App\Console\Commands\AddEvents::class,
-        \App\Console\Commands\AddPurchasesQb::class
+        // \App\Console\Commands\AddPurchasesQb::class
     ];
 
     /**
