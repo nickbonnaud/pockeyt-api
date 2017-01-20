@@ -77,7 +77,7 @@ Route::post('user/deals', 'TransactionsController@getUserDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
 
 Route::group(['prefix' => 'api'], function() {
-    Route::post('user/bill/accept', 'TransactionsController@userConfirmBill');
+    Route::post('bill/accept', 'TransactionsController@userConfirmBill');
 });
 
 
