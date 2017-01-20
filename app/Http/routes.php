@@ -122,7 +122,7 @@ Route::group(['prefix' => 'api'], function() {
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
 
-Route::post('transaction/accept', 'TransactionsController@userConfirmBill');
+Route::put('transaction/accept', 'TransactionsController@userConfirmBill');
 
 
 //Quickbook Routes
