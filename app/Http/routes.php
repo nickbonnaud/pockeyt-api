@@ -76,10 +76,6 @@ Route::post('user/purchases', 'TransactionsController@getUserPurchases');
 Route::post('user/deals', 'TransactionsController@getUserDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
 
-Route::group(['prefix' => 'api'], function() {
-    Route::post('bill/accept', 'TransactionsController@userConfirmBill');
-});
-
 
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');
@@ -124,6 +120,10 @@ Route::group(['prefix' => 'api'], function() {
     Route::put('geo', 'GeoController@putLocation');
 });
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
+
+Route::group(['prefix' => 'api'], function() {
+    Route::post('bill/accept', 'TransactionsController@userConfirmBill');
+});
 
 //Quickbook Routes
 Route::get('qbo/oauth','QuickBookController@qboOauth');
