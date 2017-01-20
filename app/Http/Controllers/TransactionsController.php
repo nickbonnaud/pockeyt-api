@@ -82,6 +82,7 @@ class TransactionsController extends Controller
         }
         $profile = $this->user->profile;
         $transaction->paid = false;
+        $transaction->status = "sent";
         $profile->transactions()->save($transaction);
 
         return $this->confirmTransaction($transaction, $customer, $profile);
@@ -116,6 +117,7 @@ class TransactionsController extends Controller
         }
         $profile = $this->user->profile;
         $transaction->paid = false;
+        $transaction->status = "sent";
         $profile->transactions()->save($transaction);
 
         return $this->confirmTransaction($transaction, $customer, $profile);
@@ -155,8 +157,12 @@ class TransactionsController extends Controller
         }
 
         if ($response === 0) {
+            $transaction->status = "received";
+            $profile->transactions()->save($transaction);
             return $this->flashSuccessPush($customer, $profile);
         } else {
+            $transaction->status = "Push failed";
+            $profile->transactions()->save($transaction);
             return $this->flashErrorPush($profile);
         }
     }
@@ -181,11 +187,13 @@ class TransactionsController extends Controller
 
             if ($result->success) {
                 $transaction->paid = true;
+                $transaction->status = "paid";
                 $transaction->save();
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 return $this->flashMessage($newLoyaltyCard, $customer, $profile);
             } else {
                 $transaction->paid = false;
+                $transaction->status = "Charge failed";
                 $transaction->save();
                 $bill = $transaction->products;
                 $billId = $transaction->id;
@@ -377,6 +385,10 @@ class TransactionsController extends Controller
         $transaction->redeemed = true;
         $transaction->save();
         return response('success');
+    }
+
+    public function getRecentTransactions(Request $request) {
+        $businessId = $request->businessId;
     }
 
 }
