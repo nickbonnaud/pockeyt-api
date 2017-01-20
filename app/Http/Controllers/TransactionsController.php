@@ -171,7 +171,7 @@ class TransactionsController extends Controller
         return redirect()->route('profiles.show', ['profiles' => $profile->id]);
     }
 
-     public function userConfirmBill(Request $request) {
+    public function userConfirmBill(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
 

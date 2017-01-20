@@ -75,9 +75,12 @@ Route::post('purchased/deals', 'TransactionsController@getPurchased');
 Route::post('user/purchases', 'TransactionsController@getUserPurchases');
 Route::post('user/deals', 'TransactionsController@getUserDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
+
 Route::group(['prefix' => 'api'], function() {
     Route::post('user/bill/accept', 'TransactionsController@userConfirmBill');
 });
+
+
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
