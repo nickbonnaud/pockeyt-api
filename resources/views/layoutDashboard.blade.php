@@ -317,7 +317,7 @@
       methods: {
 
         loadTransactions: function() {
-          var businessId = $user->profile->id;
+          var businessId = $user.profile.id;
           $.ajax({
             method: 'POST',
             url: '/business/transactions',
