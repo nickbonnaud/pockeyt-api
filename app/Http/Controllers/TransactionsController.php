@@ -173,6 +173,8 @@ class TransactionsController extends Controller
 
     public function userConfirmBill(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
+        return response()->json(compact('authUser'));
+        dd('something');
         $transaction = Transaction::findOrFail($request->transactionId);
 
         if ($authUser->id === $transaction->user_id && !$transaction->paid) {
