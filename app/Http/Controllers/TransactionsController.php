@@ -23,7 +23,6 @@ class TransactionsController extends Controller
     
      public function __construct()
     {
-        parent::__construct();
         $this->middleware('jwt.auth', ['only' => ['UserConfirmBill']]);
     }
 
