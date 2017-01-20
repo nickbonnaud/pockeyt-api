@@ -82,7 +82,7 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar" v-on:click="loadRecentTransactions()"><i class="fa fa-gears"></i></a>
+                <a href="#" data-toggle="control-sidebar" v-on:click="loadTransactions()"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -157,25 +157,25 @@
             <h3 class="control-sidebar-heading">Recent Transactions</h3>
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactions">
-                <a v-if="transaction.status === 'paid'" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-smile-o bg-green"></i>
+                <a v-if="transaction.status === 0" href="javascript:void(0)">
+                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Paid!</p>
+                    <p>Failed to send Bill to Customer</p>
                   </div>
                 </a>
-                <a v-else-if="transaction.status === 'received'" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
+                <a v-else-if="transaction.status === 1" href="javascript:void(0)">
+                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Waiting for Customer to approve bill.</p>
+                    <p>Unable to charge Card</p>
                   </div>
                 </a>
-                <a v-else-if="transaction.status === 'sent'" href="javascript:void(0)">
+                 <a v-else-if="transaction.status === 10" href="javascript:void(0)">
                   <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
                   <div class="menu-info">
@@ -184,13 +184,22 @@
                     <p>Bill Sent to Customer</p>
                   </div>
                 </a>
-                <a v-else-if="transaction.status === 'Push failed' || transaction.status === 'Charge failed'" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
+                <a v-else-if="transaction.status === 11" href="javascript:void(0)">
+                  <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
 
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>@{{ transaction.status }}</p>
+                    <p>Waiting for Customer to approve bill.</p>
+                  </div>
+                </a>
+                <a v-else-if="transaction.status === 20" href="javascript:void(0)">
+                  <i class="menu-icon fa fa-smile-o bg-green"></i>
+
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+
+                    <p>Paid!</p>
                   </div>
                 </a>
               </li>
@@ -307,9 +316,8 @@
 
       methods: {
 
-        loadRecentTransactions: function() {
+        loadTransactions: function() {
           var businessId = $user->profile->id;
-
           $.ajax({
             method: 'POST',
             url: '/business/transactions',
@@ -317,7 +325,7 @@
               'businessId' : businessId
             },
             success: data => {
-              this.transactions = data
+              console.log(data);
             }
           })
         }

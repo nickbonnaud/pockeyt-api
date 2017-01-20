@@ -75,7 +75,8 @@ Route::post('purchased/deals', 'TransactionsController@getPurchased');
 Route::post('user/purchases', 'TransactionsController@getUserPurchases');
 Route::post('user/deals', 'TransactionsController@getUserDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
-Route::post('business/transactions', 'TransactionsController@getRecentTransactions');
+Route::post('business/transactions', 'TransactionsController@getTransactions');
+Route::post('business/transactions/finalized', 'TransactionsController@getFinalizedTransactions');
 
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');

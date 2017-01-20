@@ -82,7 +82,7 @@ class TransactionsController extends Controller
         }
         $profile = $this->user->profile;
         $transaction->paid = false;
-        $transaction->status = "sent";
+        $transaction->status = 10;
         $profile->transactions()->save($transaction);
 
         return $this->confirmTransaction($transaction, $customer, $profile);
@@ -117,7 +117,7 @@ class TransactionsController extends Controller
         }
         $profile = $this->user->profile;
         $transaction->paid = false;
-        $transaction->status = "sent";
+        $transaction->status = 10;
         $profile->transactions()->save($transaction);
 
         return $this->confirmTransaction($transaction, $customer, $profile);
@@ -157,11 +157,11 @@ class TransactionsController extends Controller
         }
 
         if ($response === 0) {
-            $transaction->status = "received";
+            $transaction->status = 11;
             $profile->transactions()->save($transaction);
             return $this->flashSuccessPush($customer, $profile);
         } else {
-            $transaction->status = "Push failed";
+            $transaction->status = 0;
             $profile->transactions()->save($transaction);
             return $this->flashErrorPush($profile);
         }
@@ -187,13 +187,13 @@ class TransactionsController extends Controller
 
             if ($result->success) {
                 $transaction->paid = true;
-                $transaction->status = "paid";
+                $transaction->status = 20;
                 $transaction->save();
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 return $this->flashMessage($newLoyaltyCard, $customer, $profile);
             } else {
                 $transaction->paid = false;
-                $transaction->status = "Charge failed";
+                $transaction->status = 1;
                 $transaction->save();
                 $bill = $transaction->products;
                 $billId = $transaction->id;
@@ -387,8 +387,32 @@ class TransactionsController extends Controller
         return response('success');
     }
 
-    public function getRecentTransactions(Request $request) {
+    public function getTransactions(Request $request) {
         $businessId = $request->businessId;
+        $transactionsPending = Transaction::where(function($query) use ($businessId) {
+            $query->where('profile_id', '=', $businessId)
+                ->where('status', '<', '20');
+        })->orderBy('status', 'asc')->get();
+
+        $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
+            $query->where('profile_id', '=', $businessId)
+                ->where('status', '>=', '20');
+        })->orderBy('updated_at', 'desc')->take(10)->get();
+
+        return response()->json($transactionsPending, $transactionsFinalized);
+    }
+
+    public function getFinalizedTransactions(Request $request) {
+        $businessId = $request->businessId;
+        $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
+            $query->where('profile_id', '=', $businessId)
+                ->where('status', '>=', '20');
+        })->take(10)->get();
+        if (isset($transactions)) {
+            return response()->json($transactionsFinalized);
+        } else {
+            return;
+        }
     }
 
 }
