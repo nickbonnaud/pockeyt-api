@@ -121,9 +121,9 @@ Route::group(['prefix' => 'api'], function() {
 });
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
-Route::group(['prefix' => 'api'], function() {
-    Route::post('bill/accept', 'TransactionsController@userConfirmBill');
-});
+
+Route::post('bill/accept', 'TransactionsController@userConfirmBill');
+
 
 //Quickbook Routes
 Route::get('qbo/oauth','QuickBookController@qboOauth');
