@@ -326,6 +326,9 @@
             },
             success: data => {
               console.log(data);
+            },
+            error: err => {
+              console.log(err);
             }
           })
         }
