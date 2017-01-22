@@ -394,12 +394,14 @@ class TransactionsController extends Controller
                 ->where('status', '<', '20');
         })->orderBy('status', 'asc')->get();
 
-        $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
-            $query->where('profile_id', '=', $businessId)
-                ->where('status', '>=', '20');
-        })->orderBy('updated_at', 'desc')->take(10)->get();
+         return response()->json($transactionsPending);
 
-        return response()->json($transactionsPending, $transactionsFinalized);
+        // $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
+        //     $query->where('profile_id', '=', $businessId)
+        //         ->where('status', '>=', '20');
+        // })->orderBy('updated_at', 'desc')->take(10)->get();
+
+        // return response()->json($transactionsPending, $transactionsFinalized);
     }
 
     public function getFinalizedTransactions(Request $request) {
