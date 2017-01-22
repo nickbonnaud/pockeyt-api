@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -143,7 +143,7 @@
   @yield('content')
   
       <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark" id="sidebar">
+      <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
           <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -307,8 +307,8 @@
         }
     });
 
-    var sidebar = new Vue({
-      el: '#sidebar',
+    var wrapper = new Vue({
+      el: '#wrapper',
 
       data: {
         transactions: []
