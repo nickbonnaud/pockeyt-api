@@ -326,7 +326,7 @@
               'businessId' : businessId
             },
             success: data => {
-              console.log(data);
+              console.log(data.transactionsPending);
             },
             error: err => {
               console.log(err);
