@@ -168,7 +168,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-else-if="transaction.status === 1">
+                <div v-if="transaction.status === 1">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -179,7 +179,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-else-if="transaction.status === 10">
+                <div v-if="transaction.status === 10">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -190,7 +190,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-else-if="transaction.status === 11">
+                <div v-if="transaction.status === 11">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
 
@@ -201,7 +201,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-else-if="transaction.status === 20">
+                <div v-if="transaction.status === 20">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-smile-o bg-green"></i>
 
