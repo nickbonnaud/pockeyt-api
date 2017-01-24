@@ -213,8 +213,8 @@
           <!-- Settings tab content -->
           <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
-              <h3 class="control-sidebar-heading">General Settings</h3>
-
+              <h3 class="control-sidebar-heading" v-if="transactionsFinalized.length != 0">Recent transactions</h3>
+               <h3 class="control-sidebar-heading" v-else>No recent transactions</h3>
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Report panel usage
