@@ -295,10 +295,10 @@
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
-    </div>
-    <pre>
+       <pre>
       @{{this.transactionsPending}}
     </pre>
+    </div>
     <!-- ./wrapper -->
 
 	<script src="{{ asset('/vendor/jquery/jquery-2.2.3.min.js') }}"></script>
