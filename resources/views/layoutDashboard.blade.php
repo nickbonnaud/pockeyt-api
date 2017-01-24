@@ -327,7 +327,6 @@
       methods: {
 
         loadTransactions: function() {
-          console.log("init");
           var businessId = '{{ $user->profile->id }}';
           $.ajax({
             method: 'POST',

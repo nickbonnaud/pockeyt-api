@@ -399,6 +399,16 @@ class TransactionsController extends Controller
                 ->where('status', '>=', '20');
         })->orderBy('updated_at', 'desc')->take(10)->get();
 
+        foreach ($transactionsPending as $transaction) {
+            $customer = User::findOrFail($transaction->user_id);
+            $transaction['customerName'] = $customer->first_name . ' ' . $customer->last_name;
+        }
+
+        foreach ($transactionsFinalized as $transaction) {
+            $customer = User::findOrFail($transaction->user_id);
+            $transaction['customerName'] = $customer->first_name . ' ' . $customer->last_name;
+        }
+
         return response()->json(array('transactionsPending' => $transactionsPending, 'transactionsFinalized' => $transactionsFinalized));
     }
 
