@@ -157,60 +157,61 @@
             <h3 class="control-sidebar-heading">Pending Transactions</h3>
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactionsPending">
-                <a v-if="transaction.status === 0" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-warning bg-red"></i>
+                <div v-if="transaction.status === 0" >
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-warning bg-red"></i>
 
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Failed to send Bill to Customer</p>
-                  </div>
-                </a>
-                <a v-else-if="transaction.status === 1" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
+                      <p>Failed to send Bill to Customer</p>
+                    </div>
+                  </a>
+                </div>
+                <div v-else-if="transaction.status === 1">
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Unable to charge Card</p>
-                  </div>
-                </a>
-                 <a v-else-if="transaction.status === 10" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
+                      <p>Unable to charge Card</p>
+                    </div>
+                  </a>
+                </div>
+                <div v-else-if="transaction.status === 10">
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Bill Sent to Customer</p>
-                  </div>
-                </a>
-                <a v-else-if="transaction.status === 11" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
+                      <p>Bill Sent to Customer</p>
+                    </div>
+                  </a>
+                </div>
+                <div v-else-if="transaction.status === 11">
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
 
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Waiting for Customer to approve bill.</p>
-                  </div>
-                </a>
-                <a v-else-if="transaction.status === 20" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-smile-o bg-green"></i>
+                      <p>Waiting for Customer to approve bill.</p>
+                    </div>
+                  </a>
+                </div>
+                <div v-else-if="transaction.status === 20">
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-smile-o bg-green"></i>
 
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Paid!</p>
-                  </div>
-                </a>
-                <a v-else href="javascript:void(0)">
-                  <i class="menu-icon fa fa-warning bg-red"></i>
-
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
-
-                    <p>Oops something went wrong. Please contact customer support</p>
-                  </div>
-                </a>
+                      <p>Paid!</p>
+                    </div>
+                  </a>
+                </div>
               </li>
             </ul>
             <!-- /.control-sidebar-menu -->
