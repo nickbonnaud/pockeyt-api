@@ -82,7 +82,7 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar" v-on:click="loadTransactions()"><i class="fa fa-eye"></i></a>
+                <a href="#" data-toggle="control-sidebar" v-on:click="loadTransactions()"><i class="fa-check-square-o"></i></a>
               </li>
             </ul>
           </div>
