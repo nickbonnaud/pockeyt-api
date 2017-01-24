@@ -153,7 +153,8 @@
         <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Pending Transactions</h3>
+            <h3 class="control-sidebar-heading" v-if="transactionsPending.length != 0">Pending Transactions</h3>
+            <h3 class="control-sidebar-heading" v-else>No Pending Transactions</h3>
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactionsPending">
                 <a href="javascript:void(0)" v-if="transaction.status === 0">
