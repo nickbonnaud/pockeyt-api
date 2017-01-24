@@ -214,6 +214,9 @@
           <div class="tab-pane" id="control-sidebar-settings-tab">
               <h3 class="control-sidebar-heading" v-if="transactionsFinalized.length != 0">Recent transactions</h3>
               <h3 class="control-sidebar-heading" v-else>No recent transactions</h3>
+              <ul>
+                <li>Nick</li>
+              </ul>
           </div>
           <!-- /.tab-pane -->
         </div>
