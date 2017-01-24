@@ -189,8 +189,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-if="transaction.status === 11">
-                  <a href="javascript:void(0)">
+                  <a href="javascript:void(0)" v-if="transaction.status === 11">
                     <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
 
                     <div class="menu-info">
@@ -199,7 +198,6 @@
                       <p>Waiting for Customer to approve bill.</p>
                     </div>
                   </a>
-                </div>
                 <div v-if="transaction.status === 20">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-smile-o bg-green"></i>
