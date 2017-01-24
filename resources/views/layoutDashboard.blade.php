@@ -296,6 +296,9 @@
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div>
+    <pre>
+      @{{this.transactionsPending}}
+    </pre>
     <!-- ./wrapper -->
 
 	<script src="{{ asset('/vendor/jquery/jquery-2.2.3.min.js') }}"></script>
@@ -337,7 +340,7 @@
             },
             success: data => {
               this.transactionsPending = data.transactionsPending;
-              console.log(data.transactionsPending);
+              console.log(this.transactionsPending);
             },
             error: err => {
               console.log(err);
