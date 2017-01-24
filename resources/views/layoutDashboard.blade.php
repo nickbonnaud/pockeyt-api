@@ -154,9 +154,9 @@
         <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Recent Transactions</h3>
+            <h3 class="control-sidebar-heading">Pending Transactions</h3>
             <ul class="control-sidebar-menu">
-              <li v-for="transaction in transactions">
+              <li v-for="transaction in transactionsPending">
                 <a v-if="transaction.status === 0" href="javascript:void(0)">
                   <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -311,7 +311,7 @@
       el: '#wrapper',
 
       data: {
-        transactions: []
+        transactionsPending: []
       },
 
       methods: {
@@ -326,6 +326,7 @@
               'businessId' : businessId
             },
             success: data => {
+              this.transactionsPending = data.transactionsPending;
               console.log(data.transactionsPending);
             },
             error: err => {
