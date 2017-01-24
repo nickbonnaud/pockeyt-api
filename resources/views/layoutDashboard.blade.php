@@ -158,7 +158,7 @@
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactionsPending">
                 <a v-if="transaction.status === 0" href="javascript:void(0)">
-                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
+                  <i class="menu-icon fa fa-warning bg-red"></i>
 
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
@@ -200,6 +200,15 @@
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
                     <p>Paid!</p>
+                  </div>
+                </a>
+                <a v-else href="javascript:void(0)">
+                  <i class="menu-icon fa fa-warning bg-red"></i>
+
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+
+                    <p>Oops something went wrong. Please contact customer support</p>
                   </div>
                 </a>
               </li>
