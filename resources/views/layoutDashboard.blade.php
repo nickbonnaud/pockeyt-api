@@ -167,7 +167,7 @@
                   </div>
                 </a>
                 <a href="javascript:void(0)" v-if="transaction.status === 1">
-                  <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
+                  <i class="menu-icon fa fa-warning bg-red"></i>
 
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
