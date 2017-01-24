@@ -168,7 +168,7 @@
                     </div>
                   </a>
                 </div>
-                <div v-else-if="transaction.status === 11">
+                <div v-else-if="transaction.status === 1">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -179,7 +179,7 @@
                     </div>
                   </a>
                 </div>
-                <!-- <div v-else-if="transaction.status === 10">
+                <div v-else-if="transaction.status === 10">
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -211,7 +211,7 @@
                       <p>Paid!</p>
                     </div>
                   </a>
-                </div> -->
+                </div>
               </li>
             </ul>
             <!-- /.control-sidebar-menu -->
