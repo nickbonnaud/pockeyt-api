@@ -214,8 +214,16 @@
           <div class="tab-pane" id="control-sidebar-settings-tab">
               <h3 class="control-sidebar-heading" v-if="transactionsFinalized.length != 0">Recent transactions</h3>
               <h3 class="control-sidebar-heading" v-else>No recent transactions</h3>
-              <ul>
-                <li>Nick</li>
+              <ul class="control-sidebar-menu">
+                <a href="javascript:void(0)" v-if="transaction.status === 20">
+                  <i class="menu-icon fa fa-smile-o bg-green"></i>
+
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+
+                    <p>Paid!</p>
+                  </div>
+                </a>
               </ul>
           </div>
           <!-- /.tab-pane -->
