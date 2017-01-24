@@ -157,7 +157,17 @@
             <h3 class="control-sidebar-heading">Pending Transactions</h3>
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactionsPending">
-                <p>@{{transaction.id}}</p>
+                <div v-if="transaction.status === 11">
+                  <a href="javascript:void(0)">
+                    <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
+
+                    <div class="menu-info">
+                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+
+                      <p>Waiting for Customer to approve bill.</p>
+                    </div>
+                  </a>
+                </div>
                 <!-- <div v-if="transaction.status === 0" >
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-warning bg-red"></i>
@@ -188,17 +198,6 @@
                       <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
                       <p>Bill Sent to Customer</p>
-                    </div>
-                  </a>
-                </div>
-                <div v-else-if="transaction.status === 11">
-                  <a href="javascript:void(0)">
-                    <i class="menu-icon fa fa-thumbs-o-up bg-light-blue"></i>
-
-                    <div class="menu-info">
-                      <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
-
-                      <p>Waiting for Customer to approve bill.</p>
                     </div>
                   </a>
                 </div>
