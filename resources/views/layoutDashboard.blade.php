@@ -157,7 +157,7 @@
             <h3 class="control-sidebar-heading">Pending Transactions</h3>
             <ul class="control-sidebar-menu">
               <li v-for="transaction in transactionsPending">
-                <p>@{{transaction.customerName</p>
+                <p>@{{transaction.customerName}}</p>
                 <!-- <div v-if="transaction.status === 0" >
                   <a href="javascript:void(0)">
                     <i class="menu-icon fa fa-warning bg-red"></i>
