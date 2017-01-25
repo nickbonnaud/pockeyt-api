@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -253,8 +253,8 @@
         }
     });
 
-    var tab = new Vue({
-      el: '#tab',
+    var wrapper = new Vue({
+      el: '#wrapper',
 
       data: {
         transactionsPending: [],
