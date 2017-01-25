@@ -150,8 +150,8 @@
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-check"></i></a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content">
         <div id="something">
+        <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading" v-if="transactionsPending.length != 0">Pending Transactions</h3>
