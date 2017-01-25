@@ -17,7 +17,7 @@ class TransactionsChange extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($transaction, $business)
+    public function __construct($business)
     {
         $this->business = $business;
     }
