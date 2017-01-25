@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
-    <div class="wrapper" id="wrapper">
+    <div class="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -143,6 +143,7 @@
   @yield('content')
   
       <!-- Control Sidebar -->
+      <div id="wrapper">
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -226,6 +227,7 @@
           <!-- /.tab-pane -->
         </div>
       </aside>
+      </div>
       <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
