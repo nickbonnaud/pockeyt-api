@@ -82,7 +82,7 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar" v-on:click="loadTransactions()"><i class="fa fa-check-square-o"></i></a>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-check-square-o"></i></a>
               </li>
             </ul>
           </div>
@@ -143,7 +143,6 @@
   @yield('content')
   
       <!-- Control Sidebar -->
-      <div id="wrapper">
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -227,7 +226,6 @@
           <!-- /.tab-pane -->
         </div>
       </aside>
-      </div>
       <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
@@ -255,8 +253,8 @@
         }
     });
 
-    var wrapper = new Vue({
-      el: '#wrapper',
+    var tab = new Vue({
+      el: '#tab',
 
       data: {
         transactionsPending: [],
@@ -296,9 +294,9 @@
           })
         }
       }
-    })
+    });
 
-
+    tab.loadTransactions();
 
   </script>
 </body>
