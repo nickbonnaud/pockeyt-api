@@ -243,6 +243,7 @@
   <script src="{{ asset('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+  <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
   <script>
@@ -260,7 +261,20 @@
         transactionsFinalized: []
       },
 
+      mounted: function() {
+        var pusher = new Pusher('f4976d40a137b96b52ea', {
+          encrypted: true
+        });
+        pusher.subscribe("{!! 'reward' . $user->profile->id !!}")
+          .bind('App\\Events\\RewardNotification', this.notifyReward);
+      },
+
       methods: {
+
+        notifyReward: function(data) {
+          console.log(data);
+        },
+
         loadTransactions: function() {
           var businessId = '{{ $user->profile->id }}';
           $.ajax({
