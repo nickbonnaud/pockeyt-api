@@ -17,8 +17,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddPhotoRequest;
 
-use App\Events\CustomerEnterRadius;
-
 class ProfilesController extends Controller {
 
     /**
@@ -91,12 +89,7 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-
         $profile = (!is_null($this->user) && $this->user->is_admin) ? Profile::find($id) : Profile::visible()->find($id);
-
-        $business = $profile;
-        $user = "Nick";
-        event(new CustomerEnterRadius($user, $business));
 
         return view('profiles.show', compact('profile'));
     }
