@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -150,7 +150,7 @@
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-check"></i></a></li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content" id="tab">
+        <div class="tab-content">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading" v-if="transactionsPending.length != 0">Pending Transactions</h3>
@@ -254,7 +254,7 @@
     });
 
     var wrapper = new Vue({
-      el: '#tab',
+      el: '#wrapper',
 
       data: {
         transactionsPending: [],
