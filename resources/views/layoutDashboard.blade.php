@@ -20,7 +20,7 @@
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
-    <div class="wrapper" id="wrapper">
+    <div class="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -151,6 +151,7 @@
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
+        <div id="something">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading" v-if="transactionsPending.length != 0">Pending Transactions</h3>
@@ -225,6 +226,7 @@
           </div>
           <!-- /.tab-pane -->
         </div>
+        </div>
       </aside>
       <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
@@ -254,7 +256,7 @@
     });
 
     var wrapper = new Vue({
-      el: '#wrapper',
+      el: '#something',
 
       data: {
         transactionsPending: [],
