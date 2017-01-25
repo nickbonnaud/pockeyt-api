@@ -12,6 +12,7 @@ use App\Product;
 use App\Transaction;
 use App\Http\Requests;
 use App\Events\RewardNotification;
+use App\Events\TransactionsChange;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Requests\ChargeRequest;
@@ -85,26 +86,26 @@ class TransactionsController extends Controller
         $transaction->paid = false;
         $transaction->status = 10;
         $profile->transactions()->save($transaction);
-
+        event(new TransactionsChange($profile));
         return $this->confirmTransaction($transaction, $customer, $profile);
 
-        $result = $this->createCharge($transaction, $customer, $profile);
+        // $result = $this->createCharge($transaction, $customer, $profile);
 
-        if ($result->success) {
-            $transaction->paid = true;
-            $profile->transactions()->save($transaction);
-            $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-            return $this->flashMessage($newLoyaltyCard, $customer, $profile);
-        } else {
-            $transaction->paid = false;
-            $profile->transactions()->save($transaction);
-            $bill = $transaction->products;
-            $billId = $transaction->id;
-            $inventory = Product::where('profile_id', '=', $profile->id)->get();
+        // if ($result->success) {
+        //     $transaction->paid = true;
+        //     $profile->transactions()->save($transaction);
+        //     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+        //     return $this->flashMessage($newLoyaltyCard, $customer, $profile);
+        // } else {
+        //     $transaction->paid = false;
+        //     $profile->transactions()->save($transaction);
+        //     $bill = $transaction->products;
+        //     $billId = $transaction->id;
+        //     $inventory = Product::where('profile_id', '=', $profile->id)->get();
             
-            return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
-                ->withErrors($result->errors->deepAll());
-        }
+        //     return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
+        //         ->withErrors($result->errors->deepAll());
+        // }
     }
 
     public function chargeExisting(UpdateChargeRequest $request, $id) {
@@ -120,26 +121,26 @@ class TransactionsController extends Controller
         $transaction->paid = false;
         $transaction->status = 10;
         $profile->transactions()->save($transaction);
-
+        event(new TransactionsChange($profile));
         return $this->confirmTransaction($transaction, $customer, $profile);
 
-        $result = $this->createCharge($transaction, $customer, $profile);
+        // $result = $this->createCharge($transaction, $customer, $profile);
 
-        if ($result->success) {
-            $transaction->paid = true;
-            $transaction->save();
-            $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-            return $this->flashMessage($newLoyaltyCard, $customer, $profile);
-        } else {
-            $transaction->paid = false;
-            $transaction->save();
-            $bill = $transaction->products;
-            $billId = $transaction->id;
-            $inventory = Product::where('profile_id', '=', $profile->id)->get();
+        // if ($result->success) {
+        //     $transaction->paid = true;
+        //     $transaction->save();
+        //     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+        //     return $this->flashMessage($newLoyaltyCard, $customer, $profile);
+        // } else {
+        //     $transaction->paid = false;
+        //     $transaction->save();
+        //     $bill = $transaction->products;
+        //     $billId = $transaction->id;
+        //     $inventory = Product::where('profile_id', '=', $profile->id)->get();
             
-            return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
-                ->withErrors($result->errors->deepAll());
-        }
+        //     return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
+        //         ->withErrors($result->errors->deepAll());
+        // }
     }
 
     public function confirmTransaction($transaction, $customer, $profile) {
@@ -160,10 +161,12 @@ class TransactionsController extends Controller
         if ($response === 0) {
             $transaction->status = 11;
             $profile->transactions()->save($transaction);
+            event(new TransactionsChange($profile));
             return $this->flashSuccessPush($customer, $profile);
         } else {
             $transaction->status = 0;
             $profile->transactions()->save($transaction);
+            event(new TransactionsChange($profile));
             return $this->flashErrorPush($profile);
         }
     }
@@ -190,6 +193,7 @@ class TransactionsController extends Controller
                 $transaction->paid = true;
                 $transaction->status = 20;
                 $transaction->save();
+                event(new TransactionsChange($profile));
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
 
@@ -198,6 +202,7 @@ class TransactionsController extends Controller
                 $transaction->paid = false;
                 $transaction->status = 1;
                 $transaction->save();
+                event(new TransactionsChange($profile));
                 $bill = $transaction->products;
                 $billId = $transaction->id;
                 $inventory = Product::where('profile_id', '=', $profile->id)->get();

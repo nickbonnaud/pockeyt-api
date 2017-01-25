@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\RewardNotification' => [
             'App\Listeners\NotifyReward',
         ],
+        'App\Events\TransactionsChange' => [
+            'App\Listeners\UpdateTransactions',
+        ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\Instagram\InstagramExtendSocialite@handle',
         ],

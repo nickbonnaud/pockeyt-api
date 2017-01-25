@@ -267,6 +267,9 @@
         });
         pusher.subscribe("{!! 'reward' . $user->profile->id !!}")
           .bind('App\\Events\\RewardNotification', this.notifyReward);
+
+        pusher.subscribe("{!! 'transaction' . $user->profile->id !!}")
+          .bind('App\\Events\\RewardNotification', this.loadTransactions);
       },
 
       methods: {
@@ -295,7 +298,6 @@
         }
       }
     });
-
     tab.loadTransactions();
 
   </script>
