@@ -269,7 +269,7 @@
           .bind('App\\Events\\RewardNotification', this.notifyReward);
 
         pusher.subscribe("{!! 'transaction' . $user->profile->id !!}")
-          .bind('App\\Events\\RewardNotification', this.loadTransactions);
+          .bind('App\\Events\\TransactionsChange', this.loadTransactions);
       },
 
       methods: {
