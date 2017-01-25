@@ -261,19 +261,19 @@
         transactionsFinalized: []
       },
 
-      mounted: function() {
-        var pusher = new Pusher('f4976d40a137b96b52ea', {
-          encrypted: true
-        });
-        pusher.subscribe("{!! 'reward' . $user->profile->id !!}")
-          .bind('App\\Events\\RewardNotification', this.notifyReward);
-      },
+      // mounted: function() {
+      //   var pusher = new Pusher('f4976d40a137b96b52ea', {
+      //     encrypted: true
+      //   });
+      //   pusher.subscribe("{!! 'reward' . $user->profile->id !!}")
+      //     .bind('App\\Events\\RewardNotification', this.notifyReward);
+      // },
 
       methods: {
 
-        notifyReward: function(data) {
-          console.log(data);
-        },
+        // notifyReward: function(data) {
+        //   console.log(data);
+        // },
 
         loadTransactions: function() {
           var businessId = '{{ $user->profile->id }}';
