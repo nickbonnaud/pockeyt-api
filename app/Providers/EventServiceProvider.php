@@ -19,8 +19,8 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CustomerLeaveRadius' => [
             'App\Listeners\RemoveUser',
         ],
-        'App\Events\BusinessFeedUpdate' => [
-            'App\Listeners\UpdateFeed',
+        'App\Events\RewardNotification' => [
+            'App\Listeners\NotifyReward',
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\Instagram\InstagramExtendSocialite@handle',
