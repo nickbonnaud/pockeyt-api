@@ -150,8 +150,7 @@
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-check"></i></a></li>
         </ul>
         <!-- Tab panes -->
-        <div id="something">
-        <div class="tab-content">
+        <div class="tab-content" id="tab">
           <!-- Home tab content -->
           <div class="tab-pane active" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading" v-if="transactionsPending.length != 0">Pending Transactions</h3>
@@ -226,7 +225,6 @@
           </div>
           <!-- /.tab-pane -->
         </div>
-        </div>
       </aside>
       <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
@@ -255,8 +253,8 @@
         }
     });
 
-    var wrapper = new Vue({
-      el: '#something',
+    var tab = new Vue({
+      el: '#tab',
 
       data: {
         transactionsPending: [],
