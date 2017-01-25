@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\BusinessFeedUpdate;
+use App\Events\RewardNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UpdateFeed
+class NotifyReward
 {
     /**
      * Create the event listener.
@@ -24,7 +24,7 @@ class UpdateFeed
      * @param  BusinessFeedUpdate  $event
      * @return void
      */
-    public function handle(BusinessFeedUpdate $event)
+    public function handle(NotifyReward $event)
     {
         //
     }

@@ -11,6 +11,7 @@ use App\Post;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
+use App\Events\RewardNotification;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Requests\ChargeRequest;
@@ -180,17 +181,19 @@ class TransactionsController extends Controller
     public function userConfirmBill(Request $request) {
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
-        $profileId = $transaction->profile_id;
+        $profile = Profile::findOrFail($transaction->profile_id);
 
         if ($customer->id === $transaction->user_id && !$transaction->paid) {
-            $result = $this->createCharge($transaction, $customer, $profileId);
+            $result = $this->createCharge($transaction, $customer, $profile->id);
 
             if ($result->success) {
                 $transaction->paid = true;
                 $transaction->status = 20;
                 $transaction->save();
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-                return $this->flashMessage($newLoyaltyCard, $customer, $profile);
+                return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
+
+                //Fix this!!!
             } else {
                 $transaction->paid = false;
                 $transaction->status = 1;
@@ -320,22 +323,21 @@ class TransactionsController extends Controller
         }
     }
 
-    public function flashMessage($newLoyaltyCard, $customer, $profile) {
+    public function updateLoyaltyCard($newLoyaltyCard, $customer, $profile) {
         if (isset($newLoyaltyCard)) {
-            $reward = $profile->loyaltyProgram->reward;
-            if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
-                flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
-            } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
-                flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
-            } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-                flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . ' ' . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
-            } else{
-                flash()->success('Paid', 'Transaction Complete');
-            }
-            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            $loyaltyProgram = $profile->loyaltyProgram;
+            return event(new RewardNotification($user, $profile, $loyaltyProgram));
+            // if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
+            //     flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
+            // } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
+            //     flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
+            // } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
+            //     flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . ' ' . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
+            // } else{
+            //     flash()->success('Paid', 'Transaction Complete');
+            // }
         } else {
-            flash()->success('Paid', 'Transaction Complete');
-            return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+            return;
         }
     }
 
@@ -411,20 +413,6 @@ class TransactionsController extends Controller
 
         return response()->json(array('transactionsPending' => $transactionsPending, 'transactionsFinalized' => $transactionsFinalized));
     }
-
-    public function getFinalizedTransactions(Request $request) {
-        $businessId = $request->businessId;
-        $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
-            $query->where('profile_id', '=', $businessId)
-                ->where('status', '>=', '20');
-        })->take(10)->get();
-        if (isset($transactions)) {
-            return response()->json($transactionsFinalized);
-        } else {
-            return;
-        }
-    }
-
 }
 
 
