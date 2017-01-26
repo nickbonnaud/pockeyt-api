@@ -182,7 +182,7 @@ class TransactionsController extends Controller
             event(new TransactionsChange($profile));
             return event(new ErrorNotification($customer, $profile, $transaction));
         } else {
-            return
+            return;
         }
     }
 
