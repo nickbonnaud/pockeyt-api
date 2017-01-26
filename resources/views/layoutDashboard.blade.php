@@ -277,14 +277,15 @@
       methods: {
 
         notifyReward: function(data) {
-          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward)
+          console.log(data);
+          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward);
 
           toastr.options = {
-            "closeButton": true,
+            "closeButton": false,
             "debug": false,
             "newestOnTop": true,
             "progressBar": false,
-            "positionClass": "toast-top-left",
+            "positionClass": "toast-top-right",
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": "300",
@@ -295,7 +296,7 @@
             "hideEasing": "linear",
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut",
-            "tapToDismiss": true
+            "tapToDismiss": false
           }
         },
 
