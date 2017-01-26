@@ -192,7 +192,7 @@ class TransactionsController extends Controller
         $profile = Profile::findOrFail($transaction->profile_id);
 
         if ($customer->id === $transaction->user_id && !$transaction->paid) {
-            return response()->json('customer', 'transaction', 'profile');
+            return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
         } else { 
             return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
         }
