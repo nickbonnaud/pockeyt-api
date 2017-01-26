@@ -114,8 +114,7 @@ class TransactionsController extends Controller
         $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name, array(
           'category' => 'payment',
           'locKey' => '1',
-          'custom' => array('transactionId' => $transaction->id
-                            'tipRate' => $customer->default_tip_rate)
+          'custom' => array('transactionId' => $transaction->id)
         ));
         $collection = \PushNotification::app('PockeytIOS')
           ->to('ac201490161a80f0bea413f55911473108cf6b57cab5489b3fda6c169cd731ae')
