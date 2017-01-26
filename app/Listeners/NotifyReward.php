@@ -24,7 +24,7 @@ class NotifyReward
      * @param  BusinessFeedUpdate  $event
      * @return void
      */
-    public function handle(NotifyReward $event)
+    public function handle(RewardNotification $event)
     {
         //
     }
