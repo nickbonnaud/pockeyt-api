@@ -11,8 +11,8 @@ class RewardNotification extends Event implements ShouldBroadcast
     use SerializesModels;
 
     public $user;
-    public $business
-    public $loyaltyProgram
+    public $business;
+    public $loyaltyProgram;
 
     /**
      * Create a new event instance.
