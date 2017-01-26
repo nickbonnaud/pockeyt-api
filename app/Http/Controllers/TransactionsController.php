@@ -333,7 +333,7 @@ class TransactionsController extends Controller
     public function updateLoyaltyCard($newLoyaltyCard, $customer, $profile) {
         if (isset($newLoyaltyCard)) {
             $loyaltyProgram = $profile->loyaltyProgram;
-            return event(new RewardNotification($user, $profile, $loyaltyProgram));
+            return event(new RewardNotification($customer, $profile, $loyaltyProgram));
             // if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
             //     flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
             // } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
