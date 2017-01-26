@@ -19,11 +19,11 @@ class RewardNotification extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user, $business)
+    public function __construct($user, $business, $loyaltyProgram)
     {
         $this->user = $user;
-        $this->loyaltyProgram = $loyaltyProgram;
         $this->business = $business;
+        $this->loyaltyProgram = $loyaltyProgram;
     }
 
     /**
