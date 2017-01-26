@@ -127,12 +127,10 @@ class TransactionsController extends Controller
         if ($response === 0) {
             $transaction->status = 11;
             $profile->transactions()->save($transaction);
-            event(new TransactionsChange($profile));
             return $this->flashSuccessPush($customer, $profile);
         } else {
             $transaction->status = 0;
             $profile->transactions()->save($transaction);
-            event(new TransactionsChange($profile));
             return $this->flashErrorPush($profile);
         }
     }
