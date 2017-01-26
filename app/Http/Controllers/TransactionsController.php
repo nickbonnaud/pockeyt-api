@@ -8,6 +8,7 @@ use App\LoyaltyCard;
 use App\User;
 use JWTAuth;
 use App\Post;
+use App\Profile;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
@@ -184,6 +185,7 @@ class TransactionsController extends Controller
     public function userConfirmBill(Request $request) {
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
+
         $profile = Profile::findOrFail($transaction->profile_id);
 
         if ($customer->id === $transaction->user_id && !$transaction->paid) {
