@@ -190,6 +190,7 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
         $profile = Profile::findOrFail($transaction->profile_id);
+        $profile['logo_photo'] = $profile->logo->thumbnail_url;
 
         if ($customer->id === $transaction->user_id && !$transaction->paid) {
             return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
