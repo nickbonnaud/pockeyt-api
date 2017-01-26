@@ -296,7 +296,7 @@
             "hideEasing": "linear",
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut",
-            "tapToDismiss": false
+            "tapToDismiss": true
           }
         },
 
