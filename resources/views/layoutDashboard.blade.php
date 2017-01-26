@@ -277,7 +277,6 @@
       methods: {
 
         notifyReward: function(data) {
-          console.log(data);
           toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward)
 
           toastr.options = {
@@ -285,7 +284,7 @@
             "debug": false,
             "newestOnTop": true,
             "progressBar": false,
-            "positionClass": "toast-top-right",
+            "positionClass": "toast-top-left",
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": "300",
