@@ -272,36 +272,27 @@
 
         pusher.subscribe("{!! 'transaction' . $user->profile->id !!}")
           .bind('App\\Events\\TransactionsChange', this.loadTransactions);
+
+        pusher.subscribe("{!! 'error' . $user->profile->id !!}")
+          .bind('App\\Events\\ErrorNotification', this.notifyError);
       },
 
       methods: {
 
         notifyReward: function(data) {
-          console.log(data);
           toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
           })
+        },
 
-          // toastr.options = {
-          //   "closeButton": false,
-          //   "debug": false,
-          //   "newestOnTop": true,
-          //   "progressBar": false,
-          //   "positionClass": "toast-top-right",
-          //   "preventDuplicates": false,
-          //   "onclick": null,
-          //   "showDuration": "300",
-          //   "hideDuration": "1000",
-          //   "timeOut": 0,
-          //   "extendedTimeOut": 0,
-          //   "showEasing": "swing",
-          //   "hideEasing": "linear",
-          //   "showMethod": "fadeIn",
-          //   "hideMethod": "fadeOut",
-          //   "tapToDismiss": false
-          // }
+        notifyError: function(data) {
+          toastr["error"]("Charge Failed<br /><br /><button type='button' class='btn clear'>Ok</button>", "Unable to charge " + data.user.first_name + " " + data.user.last_name + ". Unable to process payment for transaction id: " + data.transaction.id + ". Please contact Customer Support.", {
+            "newestOnTop": true,
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+          })
         },
 
         loadTransactions: function() {

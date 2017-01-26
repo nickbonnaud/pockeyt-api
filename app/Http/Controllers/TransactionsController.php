@@ -14,6 +14,7 @@ use App\Transaction;
 use App\Http\Requests;
 use App\Events\RewardNotification;
 use App\Events\TransactionsChange;
+use App\Events\ErrorNotification;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Requests\ChargeRequest;
@@ -89,24 +90,6 @@ class TransactionsController extends Controller
         $profile->transactions()->save($transaction);
         event(new TransactionsChange($profile));
         return $this->confirmTransaction($transaction, $customer, $profile);
-
-        // $result = $this->createCharge($transaction, $customer, $profile);
-
-        // if ($result->success) {
-        //     $transaction->paid = true;
-        //     $profile->transactions()->save($transaction);
-        //     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-        //     return $this->flashMessage($newLoyaltyCard, $customer, $profile);
-        // } else {
-        //     $transaction->paid = false;
-        //     $profile->transactions()->save($transaction);
-        //     $bill = $transaction->products;
-        //     $billId = $transaction->id;
-        //     $inventory = Product::where('profile_id', '=', $profile->id)->get();
-            
-        //     return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
-        //         ->withErrors($result->errors->deepAll());
-        // }
     }
 
     public function chargeExisting(UpdateChargeRequest $request, $id) {
@@ -124,24 +107,6 @@ class TransactionsController extends Controller
         $profile->transactions()->save($transaction);
         event(new TransactionsChange($profile));
         return $this->confirmTransaction($transaction, $customer, $profile);
-
-        // $result = $this->createCharge($transaction, $customer, $profile);
-
-        // if ($result->success) {
-        //     $transaction->paid = true;
-        //     $transaction->save();
-        //     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
-        //     return $this->flashMessage($newLoyaltyCard, $customer, $profile);
-        // } else {
-        //     $transaction->paid = false;
-        //     $transaction->save();
-        //     $bill = $transaction->products;
-        //     $billId = $transaction->id;
-        //     $inventory = Product::where('profile_id', '=', $profile->id)->get();
-            
-        //     return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
-        //         ->withErrors($result->errors->deepAll());
-        // }
     }
 
     public function confirmTransaction($transaction, $customer, $profile) {
@@ -198,19 +163,12 @@ class TransactionsController extends Controller
                 event(new TransactionsChange($profile));
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
-
-                //Fix this!!!
             } else {
                 $transaction->paid = false;
                 $transaction->status = 1;
                 $transaction->save();
                 event(new TransactionsChange($profile));
-                $bill = $transaction->products;
-                $billId = $transaction->id;
-                $inventory = Product::where('profile_id', '=', $profile->id)->get();
-                
-                return view('transactions.bill_show', compact('customer', 'inventory', 'bill', 'billId'))
-                    ->withErrors($result->errors->deepAll());
+                return event(new ErrorNotification($customer, $profile, $transaction));
             }
         }
     }
@@ -333,7 +291,6 @@ class TransactionsController extends Controller
     public function updateLoyaltyCard($newLoyaltyCard, $customer, $profile) {
         if (isset($newLoyaltyCard)) {
             $loyaltyProgram = $profile->loyaltyProgram;
-            return event(new RewardNotification($customer, $profile, $loyaltyProgram));
             if ($newLoyaltyCard->transactionRewards > 0) {
                 return event(new RewardNotification($customer, $profile, $loyaltyProgram));
             } else {
