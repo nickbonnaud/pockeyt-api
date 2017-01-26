@@ -148,7 +148,6 @@ class TransactionsController extends Controller
     public function userConfirmBill(Request $request) {
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
-
         $profile = Profile::findOrFail($transaction->profile_id);
 
         if ($customer->id === $transaction->user_id && !$transaction->paid) {
@@ -168,6 +167,22 @@ class TransactionsController extends Controller
                 event(new TransactionsChange($profile));
                 return event(new ErrorNotification($customer, $profile, $transaction));
             }
+        }
+    }
+
+    public function userDeclineBill(Request $request) {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::findOrFail($request->transactionId);
+        $profile = Profile::findOrFail($transaction->profile_id);
+
+        if ($customer->id === $transaction->user_id && !$transaction->paid) {
+            $transaction->paid = false;
+            $transaction->status = 2;
+            $transaction->save();
+            event(new TransactionsChange($profile));
+            return event(new ErrorNotification($customer, $profile, $transaction));
+        } else {
+            return
         }
     }
 

@@ -176,6 +176,15 @@
                     <p>Unable to charge Card</p>
                   </div>
                 </a>
+                <a href="javascript:void(0)" v-if="transaction.status === 2">
+                  <i class="menu-icon fa fa-warning bg-red"></i>
+
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
+
+                    <p>Bill decline by customer</p>
+                  </div>
+                </a>
                 <a href="javascript:void(0)" v-if="transaction.status === 10">
                   <i class="menu-icon fa fa-paper-plane-o bg-yellow"></i>
 
@@ -288,11 +297,19 @@
         },
 
         notifyError: function(data) {
-          toastr["error"]("Charge Failed<br /><br /><button type='button' class='btn clear'>Ok</button>", "Unable to charge " + data.user.first_name + " " + data.user.last_name + ". Unable to process payment for transaction id: " + data.transaction.id + ". Please contact Customer Support.", {
-            "newestOnTop": true,
-            "timeOut": 0,
-            "extendedTimeOut": 0,
-          })
+          if (data.transaction.status === 1) {
+            toastr["error"]("Charge Failed<br /><br /><button type='button' class='btn clear'>Ok</button>", "Unable to charge " + data.user.first_name + " " + data.user.last_name + ". Unable to process payment for transaction id: " + data.transaction.id + ". Please contact Customer Support.", {
+              "newestOnTop": true,
+              "timeOut": 0,
+              "extendedTimeOut": 0,
+            })
+          } else if (data.transaction.status === 2) {
+            toastr["error"]("Bill Declined<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " declined the bill. Please check with " + data.user.first_name + " to settle dispute and re-submit bill.", {
+              "newestOnTop": true,
+              "timeOut": 0,
+              "extendedTimeOut": 0,
+            })
+          }
         },
 
         loadTransactions: function() {
