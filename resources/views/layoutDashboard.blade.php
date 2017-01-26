@@ -278,7 +278,8 @@
 
         notifyReward: function(data) {
           console.log(data);
-          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>" + data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward)
+          toastr["info"]("Some text<br /><br /><button type="button" class="btn clear">Yes</button>", "Test")
+          // toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>" + data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward)
 
           toastr.options = {
             "closeButton": false,
@@ -288,6 +289,7 @@
             "positionClass": "toast-top-right",
             "preventDuplicates": false,
             "onclick": null,
+            "showDuration": "300",
             "hideDuration": "1000",
             "timeOut": 0,
             "extendedTimeOut": 0,
