@@ -278,26 +278,30 @@
 
         notifyReward: function(data) {
           console.log(data);
-          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward);
-
-          toastr.options = {
-            "closeButton": false,
-            "debug": false,
+          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
             "newestOnTop": true,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
             "timeOut": 0,
             "extendedTimeOut": 0,
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
-            "tapToDismiss": false
-          }
+          })
+
+          // toastr.options = {
+          //   "closeButton": false,
+          //   "debug": false,
+          //   "newestOnTop": true,
+          //   "progressBar": false,
+          //   "positionClass": "toast-top-right",
+          //   "preventDuplicates": false,
+          //   "onclick": null,
+          //   "showDuration": "300",
+          //   "hideDuration": "1000",
+          //   "timeOut": 0,
+          //   "extendedTimeOut": 0,
+          //   "showEasing": "swing",
+          //   "hideEasing": "linear",
+          //   "showMethod": "fadeIn",
+          //   "hideMethod": "fadeOut",
+          //   "tapToDismiss": false
+          // }
         },
 
         loadTransactions: function() {
