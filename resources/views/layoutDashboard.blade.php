@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/skin-yellow.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/sweetalert/dist/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
@@ -242,6 +243,7 @@
   <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
   <script src="{{ asset('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
+  <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
@@ -275,7 +277,26 @@
       methods: {
 
         notifyReward: function(data) {
-          console.log(data);
+          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>" . {{ data.user.first_name }} . " " . {{data.user.last_name}} . " has earned: " . {{ data.loyaltyProgram.reward }})
+
+          toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "tapToDismiss": false
+          }
         },
 
         loadTransactions: function() {

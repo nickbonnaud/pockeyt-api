@@ -334,15 +334,11 @@ class TransactionsController extends Controller
         if (isset($newLoyaltyCard)) {
             $loyaltyProgram = $profile->loyaltyProgram;
             return event(new RewardNotification($customer, $profile, $loyaltyProgram));
-            // if (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "increment")) {
-            //     flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has completed ' . $newLoyaltyCard->required . ' transactions!');
-            // } elseif (($newLoyaltyCard->transactionRewards === 1) && ($newLoyaltyCard->type === "amount")) {
-            //     flash()->overlay($customer->first_name . ' gets a ' . $reward, $customer->first_name . ' has purchased $' . ($newLoyaltyCard->required / 100) . ' here!');
-            // } elseif (($newLoyaltyCard->transactionRewards > 1) && ($newLoyaltyCard->type === "amount")) {
-            //     flash()->overlay($customer->first_name . ' gets ' . $newLoyaltyCard->transactionRewards . ' ' . str_plural($reward), $customer->first_name . ' has purchased $' . ((($newLoyaltyCard->transactionRewards) * ($newLoyaltyCard->required)) / 100) . ' here!');
-            // } else{
-            //     flash()->success('Paid', 'Transaction Complete');
-            // }
+            if ($newLoyaltyCard->transactionRewards > 0) {
+                return event(new RewardNotification($customer, $profile, $loyaltyProgram));
+            } else {
+                return;
+            }
         } else {
             return;
         }
