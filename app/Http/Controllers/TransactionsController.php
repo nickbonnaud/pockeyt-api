@@ -114,7 +114,8 @@ class TransactionsController extends Controller
         $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name, array(
           'category' => 'payment',
           'locKey' => '1',
-          'custom' => array('transactionId' => $transaction->id)
+          'custom' => array('transactionId' => $transaction->id
+                            'tipRate' => $customer->default_tip_rate)
         ));
         $collection = \PushNotification::app('PockeytIOS')
           ->to('ac201490161a80f0bea413f55911473108cf6b57cab5489b3fda6c169cd731ae')
@@ -183,6 +184,18 @@ class TransactionsController extends Controller
             return event(new ErrorNotification($customer, $profile, $transaction));
         } else {
             return;
+        }
+    }
+
+    public function customTip(Request $request) {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::findOrFail($request->transactionId);
+        $profile = Profile::findOrFail($transaction->profile_id);
+
+        if ($customer->id === $transaction->user_id && !$transaction->paid) {
+            return response()->json($customer, $transaction, $profile);
+        } else { 
+            return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
         }
     }
 

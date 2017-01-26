@@ -182,7 +182,7 @@
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">@{{ transaction.customerName }}</h4>
 
-                    <p>Bill decline by customer</p>
+                    <p>Bill declined by customer</p>
                   </div>
                 </a>
                 <a href="javascript:void(0)" v-if="transaction.status === 10">
