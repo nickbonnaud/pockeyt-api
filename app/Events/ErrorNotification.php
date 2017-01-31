@@ -12,18 +12,18 @@ class ErrorNotification extends Event implements ShouldBroadcast
 
     public $user;
     public $business;
-    public $transaction;
+    public $data;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $business, $transaction)
+    public function __construct($user, $business, $data)
     {
         $this->user = $user;
         $this->business = $business;
-        $this->transaction = $transaction;
+        $this->data = $data;
     }
 
     /**

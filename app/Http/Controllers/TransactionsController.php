@@ -190,10 +190,10 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
         $profile = Profile::findOrFail($transaction->profile_id);
-        return response()->json(['hello' => 'working'], 200);
+        $data = $request->all();
+        event(new ErrorNotification($customer, $profile, $data));
         if ($request->tipSet === true) {
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
-                return
                 $transaction->tips = round(($request->tips * 100));
                 $transaction->total = round(($request->total * 100));
                 $transaction->save();
