@@ -111,7 +111,7 @@ class TransactionsController extends Controller
 
     public function confirmTransaction($transaction, $customer, $profile) {
         $subTotal = round(($transaction->tax + $transaction->net_sales) / 100, 2);
-        $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name . '. Please swipe U+1F447 or U+1F448 to view Bill.', array(
+        $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name . '. Please swipe ' . U+1F447 . ' or ' . U+1F448 . ' to view Bill.', array(
           'category' => 'payment',
           'locKey' => '1',
           'custom' => array('transactionId' => $transaction->id)
