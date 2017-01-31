@@ -333,7 +333,6 @@
       }
     });
     tab.loadTransactions();
-
   </script>
 </body>
 </html>
