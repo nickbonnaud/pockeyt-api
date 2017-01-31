@@ -196,7 +196,7 @@ class TransactionsController extends Controller
                 $transaction->tips = floatval($request->tips) * 100;
                 $transaction->total = floatval($request->total) * 100;
                 $transaction->save();
-                event(new ErrorNotification($customer, $profile, $transaction));
+                return event(new ErrorNotification($customer, $profile, $transaction));
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
                 if ($result->success) {
