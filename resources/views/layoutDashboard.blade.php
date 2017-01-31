@@ -297,7 +297,8 @@
         },
 
         notifyError: function(data) {
-          console.log(data.data);
+          console.log("something")
+          console.log(data);
         },
 
         loadTransactions: function() {
