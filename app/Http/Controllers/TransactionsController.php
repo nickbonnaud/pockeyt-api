@@ -193,10 +193,10 @@ class TransactionsController extends Controller
 
         if ($request->tipSet === true) {
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
-                $transaction = $request->tips;
-                // $transaction->total = floatval($request->total) * 100;
-                // $transaction->save();
-                return event(new ErrorNotification($customer, $profile, $transaction));
+                $transaction->tips = floatval($request->tips) * 100;
+                $transaction->total = floatval($request->total) * 100;
+                return response()->json($transaction);
+                $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
                 if ($result->success) {
