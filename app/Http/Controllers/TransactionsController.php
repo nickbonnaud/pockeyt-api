@@ -196,7 +196,7 @@ class TransactionsController extends Controller
                 $transaction->tips = 1000;
                 $transaction->total = 2000;
                 $data = $request->all();
-                return response()->json($transaction);
+                return response()->json($data);
                 $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
