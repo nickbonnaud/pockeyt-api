@@ -312,7 +312,8 @@
           }
         },
 
-        loadTransactions: function() {
+        loadTransactions: function(data) {
+          console.log(data.data);
           console.log("init");
           var businessId = '{{ $user->profile->id }}';
           $.ajax({
@@ -333,7 +334,6 @@
       }
     });
     tab.loadTransactions();
-
   </script>
 </body>
 </html>

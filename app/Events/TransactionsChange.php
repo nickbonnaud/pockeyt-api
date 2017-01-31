@@ -11,6 +11,7 @@ class TransactionsChange extends Event implements ShouldBroadcast
     use SerializesModels;
 
     private $business;
+    public $data;
 
     /**
      * Create a new event instance.
@@ -20,6 +21,7 @@ class TransactionsChange extends Event implements ShouldBroadcast
     public function __construct($business)
     {
         $this->business = $business;
+        $this->data = $data;
     }
 
     /**
