@@ -190,12 +190,11 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
         $profile = Profile::findOrFail($transaction->profile_id);
-        $data = $request->all();
-        event(new ErrorNotification($customer, $profile, $data));
+
         if ($request->tipSet === true) {
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
-                $transaction->tips = round(($request->tips * 100));
-                $transaction->total = round(($request->total * 100));
+                $transaction->tips = round($response->tips * 100);
+                $transaction->total = round($response->total * 100);
                 $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
@@ -216,10 +215,11 @@ class TransactionsController extends Controller
             }
         } else {
             $profile['logo_photo'] = $profile->logo->thumbnail_url;
+
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
                 return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
             } else { 
-                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);
+                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
             }
         }
     }
