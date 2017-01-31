@@ -195,13 +195,14 @@ class TransactionsController extends Controller
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
                 $transaction->tips = floatval($request->tips) * 100;
                 $transaction->total = floatval($request->total) * 100;
-                $transaction0->save();
+                $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
                 if ($result->success) {
                     $transaction->paid = true;
                     $transaction->status = 20;
                     $transaction->save();
+                    event(new ErrorNotification($customer, $profile, $transaction));
                     event(new TransactionsChange($profile));
                     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                     return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
