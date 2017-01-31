@@ -190,12 +190,35 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
         $profile = Profile::findOrFail($transaction->profile_id);
-        $profile['logo_photo'] = $profile->logo->thumbnail_url;
 
-        if ($customer->id === $transaction->user_id && !$transaction->paid) {
-            return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
-        } else { 
-            return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
+        if ($request->tipSet === true) {
+            if ($customer->id === $transaction->user_id && !$transaction->paid) {
+                $transaction->tips = $request->tips * 100;
+                $transaction->total = $request->total * 100;
+                $result = $this->createCharge($transaction, $customer, $profile->id);
+
+                if ($result->success) {
+                    $transaction->paid = true;
+                    $transaction->status = 20;
+                    $transaction->save();
+                    event(new TransactionsChange($profile));
+                    $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+                    return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
+                } else {
+                    $transaction->paid = false;
+                    $transaction->status = 1;
+                    $transaction->save();
+                    event(new TransactionsChange($profile));
+                    return event(new ErrorNotification($customer, $profile, $transaction));
+                }
+            }
+        } else {
+            $profile['logo_photo'] = $profile->logo->thumbnail_url;
+            if ($customer->id === $transaction->user_id && !$transaction->paid) {
+                return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
+            } else { 
+                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
+            }
         }
     }
 
