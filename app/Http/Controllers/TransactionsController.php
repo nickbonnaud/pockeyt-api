@@ -192,11 +192,12 @@ class TransactionsController extends Controller
         $profile = Profile::findOrFail($transaction->profile_id);
 
         if ($request->tipSet === true) {
+            return response()->json(['hello' => 'working'], 200);
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
-                // $transaction->tips = round(($request->tips * 100));
-                // $transaction->total = round(($request->total * 100));
-                $data = $request->tips;
-                return event(new ErrorNotification($customer, $profile, $data));
+                return
+                $transaction->tips = round(($request->tips * 100));
+                $transaction->total = round(($request->total * 100));
+                $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile->id);
 
                 if ($result->success) {
@@ -219,7 +220,7 @@ class TransactionsController extends Controller
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
                 return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
             } else { 
-                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
+                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);
             }
         }
     }
