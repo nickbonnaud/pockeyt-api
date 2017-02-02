@@ -29,11 +29,11 @@ class GeoController extends Controller
         foreach ($geoData as $data) {
             $geoLocation = (object) $data;
         }
-    	$user['lat'] = $geoLocation->latitide;
-    	$user['lng'] = $geoLocation->longitude;
-    	$user['accuracy'] = $geoLocation->accuracy;
-    	$user['timestamp'] = $geoLocation->timestamp;
-        $user['prevLocations'] = $geoLocation->lastLocation;
+    	// $user['lat'] = $geoLocation->latitide;
+    	// $user['lng'] = $geoLocation->longitude;
+    	// $user['accuracy'] = $geoLocation->accuracy;
+    	// $user['timestamp'] = $geoLocation->timestamp;
+     //    $user['prevLocations'] = $geoLocation->lastLocation;
         $business = 113;
         event(new CustomerEnterRadius($user, $business));
         return;
