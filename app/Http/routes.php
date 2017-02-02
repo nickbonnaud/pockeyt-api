@@ -1,5 +1,10 @@
 <?php
 
+//geo routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('geo', 'GeoController@postLocation');
+});
+
 Route::get('/', 'AppController@index')->name('app.index');
 Route::get('data_use_policy', 'AppController@policy')->name('app.policy');
 
@@ -116,10 +121,6 @@ Route::group(['prefix' => 'api'], function() {
     Route::put('customer', 'PaymentController@editPaymentMethod');
 });
 
-//geo routes
-Route::group(['prefix' => 'api'], function() {
-    Route::post('geo/user', 'GeoController@postLocation');
-});
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
 Route::group(['prefix' => 'api'], function() {
