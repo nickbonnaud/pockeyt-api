@@ -29,23 +29,18 @@ class GeoController extends Controller
         foreach ($geoData as $data) {
             $geoLocation = (object) $data;
         }
-    	$user['speed'] = $geoLocation->speed;
     	// $user['lng'] = $geoLocation->longitude;
     	// $user['accuracy'] = $geoLocation->accuracy;
     	// $user['timestamp'] = $geoLocation->timestamp;
-     //    $user['prevLocations'] = $geoLocation->lastLocation;
-        $business = 113;
-        event(new CustomerEnterRadius($user, $business));
-        return;
-    	$locations = $this->checkDistance($user);
+        //$user['prevLocations'] = $geoLocation->lastLocation;
+    	$locations = $this->checkDistance($user, $geoLocation);
         return response()->json(compact('locations'));
     }
 
-    public function checkDistance($user) {
-    	$dbUser = User::findOrFail($user->id);
+    public function checkDistance($user, $geoLocation) {
         $businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get(); 
-    	$userLat = $user->lat;
-    	$userLng = $user->lng;
+    	$userLat = $geoLocation->latitude;
+    	$userLng = $geoLocation->longitude;
         $inLocations = [];
     	foreach ($businesses as $business) {
     		$businessLat = $business->lat;
@@ -54,8 +49,8 @@ class GeoController extends Controller
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
-                    $prevLocations = $user->prevLocations;
-                    // event(new CustomerEnterRadius($user, $business));
+                    // $prevLocations = $user->prevLocations;
+                    return event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
                         $this->setLocation($dbUser, $business);

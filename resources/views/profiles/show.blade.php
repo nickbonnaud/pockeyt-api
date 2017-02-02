@@ -227,9 +227,7 @@
           },
 
           addUser: function(data) {
-            console.log("inside geo function");
-            console.log(data.user);
-            return;
+            console.log("in addUser");
             var activeCustomer = data.user;
             var users = this.users;
             var purchases = this.purchases;
