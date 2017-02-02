@@ -25,7 +25,7 @@ class GeoController extends Controller
     public function postLocation(Request $request)
     {
         JWTAuth::parseToken()->authenticate();
-        $user = $request->all();
+        $user = $request->getContent();
     	// $user['lat'] = $request->latitide;
     	// $user['lng'] = $request->longitude;
     	// $user['accuracy'] = $request->accuracy;
