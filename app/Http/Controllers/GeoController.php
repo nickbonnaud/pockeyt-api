@@ -30,7 +30,7 @@ class GeoController extends Controller
             $newData = $data;
         }
         $newData['id'] = 5;
-        $user = $newData->id;
+        $user = $newData;
 
     	// $user['lat'] = $request->latitide;
     	// $user['lng'] = $request->longitude;
