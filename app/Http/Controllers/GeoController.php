@@ -29,7 +29,7 @@ class GeoController extends Controller
         foreach ($geoData as $data) {
             $newData = $data;
         }
-        $user = 115;
+        $user = $request->all();
     	// $user['lat'] = $request->latitide;
     	// $user['lng'] = $request->longitude;
     	// $user['accuracy'] = $request->accuracy;
