@@ -26,15 +26,12 @@ class GeoController extends Controller
     {
         JWTAuth::parseToken()->authenticate();
         $data = $request->all();
-        $user = $data[0];
-    	// $user['lat'] = $request->latitide;
-    	// $user['lng'] = $request->longitude;
-    	// $user['accuracy'] = $request->accuracy;
-    	// $user['timestamp'] = $request->timestamp;
-        // $user['prevLocations'] = $request->lastLocation;
-        $business = 113;
-        event(new CustomerEnterRadius($user, $business));
-        return;
+        $data[0];
+    	$user['lat'] = $data[0]->latitide;
+    	$user['lng'] = $data[0]->longitude;
+    	$user['accuracy'] = $data[0]->accuracy;
+    	$user['timestamp'] = $data[0]->timestamp;
+        $user['prevLocations'] = $data[0]->lastLocation;
     	$locations = $this->checkDistance($user);
         return response()->json(compact('locations'));
     }
@@ -53,7 +50,7 @@ class GeoController extends Controller
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
-                    // event(new CustomerEnterRadius($user, $business));
+                    event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
                         $this->setLocation($dbUser, $business);
