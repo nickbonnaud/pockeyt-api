@@ -20,7 +20,8 @@ class GeoController extends Controller
     public function postLocation(Request $request)
     {
         $business = Profile::findOrFail(113);
-        return;
+        $user = $request->all();
+        return event(new CustomerEnterRadius($user, $business));
 
         $user = User::findOrFail($request->userId);
     	$user['lat'] = $request->lat;
