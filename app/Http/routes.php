@@ -1,5 +1,10 @@
 <?php
 
+//geo routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('geo', 'GeoController@postLocation');
+});
+
 Route::get('/', 'AppController@index')->name('app.index');
 Route::get('data_use_policy', 'AppController@policy')->name('app.policy');
 
@@ -148,8 +153,3 @@ Route::controller('api', 'APIController', [
     'getBlogs' => 'api.blogs',
     'getBookmarks' => 'api.bookmarks'
 ]);
-
-//geo routes
-Route::group(['prefix' => 'api'], function() {
-    Route::post('geo', 'GeoController@postLocation');
-});
