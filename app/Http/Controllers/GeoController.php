@@ -17,8 +17,11 @@ class GeoController extends Controller
 {
 
 
-    public function putLocation(Request $request)
+    public function postLocation(Request $request)
     {
+        $business = Profile::findOrFail(113);
+        return;
+
         $user = User::findOrFail($request->userId);
     	$user['lat'] = $request->lat;
     	$user['lng'] = $request->lng;
