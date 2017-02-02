@@ -26,8 +26,7 @@ class GeoController extends Controller
     {
         JWTAuth::parseToken()->authenticate();
         $data = $request->all();
-        $newData= $data[0];
-        $user = $newData->latitude;
+        $user = $data[0];
     	// $user['lat'] = $request->latitide;
     	// $user['lng'] = $request->longitude;
     	// $user['accuracy'] = $request->accuracy;
