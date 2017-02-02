@@ -26,9 +26,9 @@ class GeoController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
     	$user['lat'] = "hello";
-    	$user['lng'] = $request->longitude;
-    	$user['accuracy'] = $request->accuracy;
-    	$user['timestamp'] = $request->timestamp;
+    	// $user['lng'] = $request->longitude;
+    	// $user['accuracy'] = $request->accuracy;
+    	// $user['timestamp'] = $request->timestamp;
         // $user['prevLocations'] = $request->lastLocation;
         $business = 113;
         event(new CustomerEnterRadius($user, $business));
