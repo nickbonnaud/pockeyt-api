@@ -30,6 +30,9 @@ class GeoController extends Controller
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
         // $user['prevLocations'] = $request->lastLocation;
+        $business = 113;
+        event(new CustomerEnterRadius($user, $business));
+        return;
     	$locations = $this->checkDistance($user);
         return response()->json(compact('locations'));
     }
@@ -48,7 +51,7 @@ class GeoController extends Controller
     			if ($distance <= 1000) {
                     $inLocations[] = $business->id;
                     $prevLocations = $user->prevLocations;
-                    event(new CustomerEnterRadius($user, $business));
+                    // event(new CustomerEnterRadius($user, $business));
                     $savedLocation = $this->checkIfUserInLocation($user, $business);
                     if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
                         $this->setLocation($dbUser, $business);
