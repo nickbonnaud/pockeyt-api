@@ -24,17 +24,16 @@ class GeoController extends Controller
 
     public function postLocation(Request $request)
     {
-        JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
         foreach ($geoData as $data) {
-            $newUser = (object) $data;
+            $geoLocation = (object) $data;
         }
-        $user = $newUser->speed;
-    	// $user['lat'] = $request->latitide;
-    	// $user['lng'] = $request->longitude;
-    	// $user['accuracy'] = $request->accuracy;
-    	// $user['timestamp'] = $request->timestamp;
-        // $user['prevLocations'] = $request->lastLocation;
+    	$user['lat'] = $geoLocation->latitide;
+    	$user['lng'] = $geoLocation->longitude;
+    	$user['accuracy'] = $geoLocation->accuracy;
+    	$user['timestamp'] = $geoLocation->timestamp;
+        $user['prevLocations'] = $geoLocation->lastLocation;
         $business = 113;
         event(new CustomerEnterRadius($user, $business));
         return;
