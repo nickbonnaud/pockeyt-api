@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use JWTAuth;
 use App\Location;
 use App\Profile;
 use App\Transaction;
@@ -15,20 +16,20 @@ use App\Http\Controllers\Controller;
 
 class GeoController extends Controller
 {
-
+     public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('jwt.auth', ['only' => ['postLocation']]);
+    }
 
     public function postLocation(Request $request)
     {
-        $business = Profile::findOrFail(113);
-        $user = $request->all();
-        return event(new CustomerEnterRadius($user, $business));
-
-        $user = User::findOrFail($request->userId);
-    	$user['lat'] = $request->lat;
-    	$user['lng'] = $request->lng;
+        $user = JWTAuth::parseToken()->authenticate();
+    	$user['lat'] = $request->latitide;
+    	$user['lng'] = $request->longitude;
     	$user['accuracy'] = $request->accuracy;
     	$user['timestamp'] = $request->timestamp;
-        $user['prevLocations'] = $request->lastLocation;
+        // $user['prevLocations'] = $request->lastLocation;
     	$locations = $this->checkDistance($user);
         return response()->json(compact('locations'));
     }

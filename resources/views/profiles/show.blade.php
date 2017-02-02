@@ -227,8 +227,6 @@
           },
 
           addUser: function(data) {
-            console.log(data.user);
-            return;
             var activeCustomer = data.user;
             var users = this.users;
             var purchases = this.purchases;
