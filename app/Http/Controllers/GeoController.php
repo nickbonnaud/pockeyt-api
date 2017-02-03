@@ -29,12 +29,7 @@ class GeoController extends Controller
         foreach ($geoData as $data) {
             $geoLocation = (object) $data;
         }
-    	// $user['lng'] = $geoLocation->longitude;
-    	// $user['accuracy'] = $geoLocation->accuracy;
-    	// $user['timestamp'] = $geoLocation->timestamp;
-        //$user['prevLocations'] = $geoLocation->lastLocation;
-    	$locations = $this->checkDistance($user, $geoLocation);
-        return response()->json(compact('locations'));
+    	return $this->checkDistance($user, $geoLocation);
     }
 
     public function checkDistance($user, $geoLocation) {
@@ -48,72 +43,47 @@ class GeoController extends Controller
     		if (($businessLat !== null) && ($businessLng !== null)) {
     			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
     			if ($distance <= 1000) {
-                    $inLocations[] = $business->id;
-                    // $prevLocations = $user->prevLocations;
-                    return event(new CustomerEnterRadius($user, $business));
-                    $savedLocation = $this->checkIfUserInLocation($user, $business);
-                    if ((!isset($prevLocations) || empty($prevLocations)) && is_null($savedLocation)) {
-                        $this->setLocation($dbUser, $business);
-                        return;
-                    }
+                    array_push($inLocations, $business->id);
+                    event(new CustomerEnterRadius($user, $business));
                 }
-    		} 
+    		}
     	}
-        if (isset($user->prevLocations)) {
-            foreach ($user->prevLocations as $prevLocation) {
-                if ($inLocations == []) {
-                    event(new CustomerLeaveRadius($user, $prevLocation));
-                    $location = $this->checkSavedLocation($user, $prevLocation);
-                    $location->delete();
-                    return;
-                } elseif (!in_array($prevLocation, $inLocations)) {
-                    event(new CustomerLeaveRadius($user, $prevLocation));
-                    $location = $this->checkSavedLocation($user, $prevLocation);
-                    $location->delete();
-                    return;
-                }
+        if (count($inLocations) > 0) {
+            return $this->checkIfUserInLocation($user, $inLocations);
+        } else {
+            $storedLocations = Location::where('user_id', '=', $user->id)->get();
+            if (!isset($storedLocations)) { return; }
+            foreach ($storedLocations as $storedLocation) {
+                event(new CustomerLeaveRadius($user, $storedLocation));
+                $storedLocation->delete();
             }
         }
-        return $inLocations;
+        return;
     }
 
-    private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
-    	$r = 6371000; // Radius of the earth in m
-	    $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below
-	    $dLon = $this->deg2rad($userLng-$businessLng); 
-	    $a = 
-	      sin($dLat/2) * sin($dLat/2) +
-	      cos(deg2rad($businessLat)) * cos(deg2rad($userLat)) * 
-	      sin($dLon/2) * sin($dLon/2)
-	      ; 
-	    $c = 2 * atan2(sqrt($a), sqrt(1-$a)); 
-	    $d = $r * $c; // Distance in m
-	    return $d;
+    public function checkIfUserInLocation($user, $inLocations) {
+        $storedLocations = Location::where('user_id', '=', $user->id)->get();
+        if (!isset($storedLocations)) { return; }
+        foreach ($storedLocations as $storedLocation) {
+            if (!in_array($storedLocation->location_id, $inLocations)) {
+                event(new CustomerLeaveRadius($user, $storedLocation));
+                $storedLocation->delete();
+            } else {
+                $key = array_search($storedLocation->location_id, $inLocations);
+                unset($inLocations[$key]);
+            }
+        }
+        if (count($inLocations) > 0) {
+            foreach ($inLocations as $inLocation) {
+                $this->setLocation($user, $inLocation);
+            }
+        }
+        return;
     }
 
-    private function deg2rad($deg) {
-    	return $deg * (M_PI/180);
-   }
-
-    public function checkIfUserInLocation($user, $business) {
-        $locationCheck = Location::where(function ($query) use ($user, $business) {
-            $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business->id);
-        })->first();
-        return $locationCheck;
-    }
-
-    public function checkSavedLocation($user, $prevLocation) {
-        $locationCheck = Location::where(function ($query) use ($user, $prevLocation) {
-            $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $prevLocation);
-        })->first();
-        return $locationCheck;
-    }
-
-    public function setLocation($dbUser, $business) {
-         return $setLocation = $dbUser->locations()->create([
-            'location_id' => $business->id
+    public function setLocation($user, $inLocation) {
+         return $setLocation = $user->locations()->create([
+            'location_id' => $inLocation
         ]);
     }
 
@@ -126,6 +96,24 @@ class GeoController extends Controller
         })->first();
         $locationCheck->delete();
     }
+
+    private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
+        $r = 6371000; // Radius of the earth in m
+        $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below
+        $dLon = $this->deg2rad($userLng-$businessLng); 
+        $a = 
+          sin($dLat/2) * sin($dLat/2) +
+          cos(deg2rad($businessLat)) * cos(deg2rad($userLat)) * 
+          sin($dLon/2) * sin($dLon/2)
+          ; 
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a)); 
+        $d = $r * $c; // Distance in m
+        return $d;
+    }
+
+    private function deg2rad($deg) {
+        return $deg * (M_PI/180);
+   }
 }
 
 
