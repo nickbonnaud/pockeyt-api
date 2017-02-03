@@ -181,7 +181,7 @@
           pusher.subscribe("{!! 'business' . $profile->id !!}")
             .bind('App\\Events\\CustomerEnterRadius', this.addUser);
 
-          pusher.subscribe("{!! 'customerAdd' . $profile->id !!}")
+          pusher.subscribe("{!! 'remove' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
           window.setInterval(this.removeInactiveUser, 120000);

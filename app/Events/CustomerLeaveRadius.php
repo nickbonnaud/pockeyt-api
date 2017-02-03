@@ -11,16 +11,16 @@ class CustomerLeaveRadius extends Event implements ShouldBroadcast
     use SerializesModels;
 
     public $user;
-    private $prevLocation;
+    private $storedLocation;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $prevLocation)
+    public function __construct($user, $storedLocation)
     {
         $this->user = $user;
-        $this->prevLocation = $prevLocation;
+        $this->storedLocation = $storedLocation;
     }
 
     /**
@@ -30,7 +30,7 @@ class CustomerLeaveRadius extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $channel = 'customerAdd' . $this->prevLocation;
+        $channel = 'remove' . $this->storedLocation;
         return [$channel];
     }
 }
