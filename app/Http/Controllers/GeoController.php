@@ -22,6 +22,10 @@ class GeoController extends Controller
         $this->middleware('jwt.auth', ['only' => ['postLocation']]);
     }
 
+    public function getGeoFences() {
+        
+    }
+
     public function postLocation(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
