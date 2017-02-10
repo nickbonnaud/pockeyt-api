@@ -50,10 +50,12 @@ class GeoController extends Controller
             $business = Profile::findOrFail($geoData['extras']['profile']);
             if ($geoFenceEvent === 'ENTER') {
                 event(new CustomerEnterRadius($user, $business));
-                return $this->setLocation($user, $business);
+                $this->setLocation($user, $business);
+                return response('ok');
             } elseif ($geoFenceEvent === 'EXIT') {
                 event(new CustomerLeaveRadius($user, $business));
-                return $this->removeSetLocation($user, $business);
+                $this->removeSetLocation($user, $business);
+                return response('ok');
             }
         } else {
             foreach ($geoData as $data) {
