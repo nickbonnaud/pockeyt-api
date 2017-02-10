@@ -44,10 +44,23 @@ class GeoController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
-        foreach ($geoData as $data) {
-            $geoLocation = (object) $data;
+        $geoFenceEvent = $geoData->action;
+
+        if (isset($geoFenceEvent)) {
+            $business = Profile::findOrFail($geoData->extras->profile);
+            if ($geoFenceEvent === 'ENTER') {
+                event(new CustomerEnterRadius($user, $business));
+                return $this->setLocation($user, $business);
+            } elseif ($geoFenceEvent === 'EXIT') {
+                event(new CustomerLeaveRadius($user, $business));
+                return $this->removeSetLocation($user, $business);
+            }
+        } else {
+            foreach ($geoData as $data) {
+                $geoLocation = (object) $data;
+            }
+            return $this->checkDistance($user, $geoLocation);
         }
-    	return $this->checkDistance($user, $geoLocation);
     }
 
     public function checkDistance($user, $geoLocation) {
@@ -99,10 +112,28 @@ class GeoController extends Controller
         return;
     }
 
-    public function setLocation($user, $inLocation) {
-         return $setLocation = $user->locations()->create([
-            'location_id' => $inLocation
-        ]);
+    public function setLocation($user, $business) {
+        $location = Location::where(function($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $business->id);
+        })->first();
+        if (!isset($location)) { 
+            return $setLocation = $user->locations()->create([
+                'location_id' => $business->id
+            ]);
+        }
+        return;
+    }
+
+    public function removeSetLocation($user, $business) {
+        $location = Location::where(function($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $business->id);
+        })->first();
+        if (isset($location)) {
+           return $location->delete();
+        }
+        return;
     }
 
     public function deleteInactiveUser(Request $request) {
