@@ -27,10 +27,12 @@ class GeoController extends Controller
         $geoCoords = DB::table('geo_locations')->select('profile_id', 'identifier', 'latitude', 'longitude')->get();
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
+            $data['latitude'] = $geoCoord->latitude;
+            $data['longitude'] = $geoCoord->longitude;
+            $data['identifier'] = $geoCoord->identifier;
             $data['radius'] = 100;
             $data['notifyOnEntry'] = true;
             $data['notifyOnExit'] = true;
-            $data['notifyOnDwell'] = 30000;
             $data['extras'] = (object) ['profile' => $geoCoord->profile_id];
 
             array_push($geoFences, (object) $data);
