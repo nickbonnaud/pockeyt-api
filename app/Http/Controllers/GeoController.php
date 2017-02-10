@@ -49,28 +49,22 @@ class GeoController extends Controller
         if (isset($geoFenceEvent)) {
             $business = Profile::findOrFail($geoData['extras']['profile']);
             if ($geoFenceEvent === 'ENTER') {
-                event(new CustomerEnterRadius($user, $business));
-                $this->setLocation($user, $business);
-                return response('ok');
+               return customerEnter($user, $business);
             } elseif ($geoFenceEvent === 'EXIT') {
-                event(new CustomerLeaveRadius($user, $business));
-                $this->removeSetLocation($user, $business);
-                return response('ok');
+                return  customerExit($user, $business);
             }
-        } else {
-            foreach ($geoData as $data) {
-                $geoLocation = (object) $data;
-            }
-            return $this->checkDistance($user, $geoLocation);
         }
     }
 
     public function postLocationMonitor(Request $request) {
-        $userT = JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
+        $geoData = (object) $geoData;
 
-        $user = (object) $geoData;
+        $geoFence = $geoData->location->geofence;
         $business = 113;
+        $user = $geoFence;
+
         event(new CustomerEnterRadius($user, $business));
     }
 
@@ -145,6 +139,18 @@ class GeoController extends Controller
            return $location->delete();
         }
         return;
+    }
+
+    public function customerEnter($user, $business) {
+        event(new CustomerEnterRadius($user, $business));
+        $this->setLocation($user, $business);
+        return response('ok');
+    }
+
+    public function customerExit($user, $business) {
+        event(new CustomerLeaveRadius($user, $business));
+        $this->removeSetLocation($user, $business);
+        return response('ok');
     }
 
     public function deleteInactiveUser(Request $request) {
