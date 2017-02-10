@@ -12,6 +12,7 @@ use App\Photo;
 use App\Post;
 use App\Profile;
 use App\Tax;
+use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
@@ -63,7 +64,7 @@ class ProfilesController extends Controller {
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
         $profile = $this->user->publish(
-            new Profile($request->except(['county', 'state']))
+            new Profile($request->except(['lat', 'lng', 'county', 'state']))
         );
 
         $county = $request->county;
@@ -73,6 +74,16 @@ class ProfilesController extends Controller {
             $query->where('county', '=', $county)
                 ->where('state', '=', $state);
         })->first();
+
+        $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        $profile->save();
+
+        $geoLocation = new GeoLocation;
+        $geoLocation->identifier = $request->business_name;
+        $geoLocation->latitude = $request->lat;
+        $geoLocation->longitude = $request->lng;
+
+        $profile->geoLocation()->save($geoLocation);
 
         if(is_null($this->user->profile))
             $this->syncTags($profile, $request->input('tags'));
@@ -152,7 +163,14 @@ class ProfilesController extends Controller {
         })->first();
 
         $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
-        $profile->update($request->except(['county', 'state']));
+        $profile->save();
+
+        $geoLocation = $this->user->profile->geoLocation;
+        $geoLocation->latitude = $request->lat;
+        $geoLocation->longitude = $request->lng;
+        $geoLocation->identifier = $profile->business_name;
+        $geoLocation->save();
+
         return redirect()->route('profiles.edit', compact('profile', 'tags'));
     }
 

@@ -8,6 +8,7 @@ use JWTAuth;
 use App\Location;
 use App\Profile;
 use App\Transaction;
+use App\GeoLocation;
 use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
 use App\Events\CustomerLeaveRadius;
@@ -23,7 +24,18 @@ class GeoController extends Controller
     }
 
     public function getGeoFences() {
-        
+        $geoCoords = DB::table('geo_locations')->select('profile_id', 'identifier', 'latitude', 'longitude')->get();
+        $geoFences = [];
+        foreach ($geoCoords as $geoCoord) {
+            $data['radius'] = 100;
+            $data['notifyOnEntry'] = true;
+            $data['notifyOnExit'] = true;
+            $data['notifyOnDwell'] = 30000;
+            $data['extras'] = (object) ['profile' => $geoCoord->profile_id];
+
+            array_push($geoFences, (object) $data);
+        }
+        return response()->json($geoFences);
     }
 
     public function postLocation(Request $request)

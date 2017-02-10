@@ -120,6 +120,10 @@ class Profile extends Model {
         return $this->hasOne(Account::class);
     }
 
+    public function geoLocation() {
+        return $this->hasOne(GeoLocation::class);
+    }
+
     public function loyaltyProgram() {
         return $this->hasOne(LoyaltyProgram::class);
     }

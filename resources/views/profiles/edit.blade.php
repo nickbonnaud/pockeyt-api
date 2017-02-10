@@ -78,6 +78,11 @@
                             <div class="box-body">
                                 <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                                 <div id="map"></div>
+                                <div id="infowindow-content">
+                                  <span id="place-name"  class="title"></span>
+                                </div>
+                            </div>
+                            <div class="box-footer">
                                 <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#businessLocationModal">
                                 <b>Set Business to THIS Location</b>
                                 </a>
@@ -224,18 +229,18 @@
 
 @section('scripts.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5bWVb25GSXY-fhI5EFNJ8JualZcSluXE&libraries=places&callback=initMap"
-        async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5bWVb25GSXY-fhI5EFNJ8JualZcSluXE&libraries=places&callback=initMap"></script>
 
     <script>
         function initMap() {
-            var lat = {!! $profile->lat !!};
-            var lng = {!! $profile->lng !!}
+            var lat = {!! $profile->geoLocation->latitude !!};
+            var lng = {!! $profile->geoLocation->longitude !!}
             var bizLatlng = new google.maps.LatLng(lat,lng);
 
             var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
-            zoom: 17
+            zoom: 17,
+            gestureHandling: 'cooperative'
             });
 
             var defaultMarker = new google.maps.Marker({
@@ -252,7 +257,10 @@
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
             var infowindow = new google.maps.InfoWindow();
-            marker = new google.maps.Marker({
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var geocoder = new google.maps.Geocoder;
+            var marker = new google.maps.Marker({
             map: map
             });
             marker.addListener('click', function() {
@@ -260,45 +268,42 @@
             });
 
             autocomplete.addListener('place_changed', function() {
-            infowindow.close();
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-              return;
-            }
+                infowindow.close();
+                var place = autocomplete.getPlace();
 
-            if (place.geometry.viewport) {
-              map.fitBounds(place.geometry.viewport);
-            } else {
-              map.setCenter(place.geometry.location);
-              map.setZoom(17);
-            }
-
-            // Set the position of the marker using the place ID and location.
-            marker.setPlace({
-              placeId: place.place_id,
-              location: place.geometry.location
-            });
-            marker.setVisible(true);
-
-            var latitude = place.geometry.location.lat();
-            var longitude = place.geometry.location.lng();
-
-            place.address_components.forEach(function(e) {
-                if (e.types.includes("administrative_area_level_1")) {
-                    $('#state').val(e.short_name);
-                } else if (e.types.includes("administrative_area_level_2")) {
-                    $('#county').val(e.short_name);
+                if (!place.geometry) {
+                  return;
                 }
+                geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+                    if (status !== 'OK') {
+                      window.alert('Geocoder failed due to: ' + status);
+                      return;
+                    }
+                    map.setZoom(17);
+                    map.setCenter(place.geometry.location);
+
+                    marker.setPlace({
+                        placeId: place.place_id,
+                        location: place.geometry.location
+                    });
+                    marker.setVisible(true);
+                    infowindowContent.children['place-name'].textContent = place.name;
+                    infowindow.open(map, marker);
+                });
+
+                var latitude = place.geometry.location.lat();
+                var longitude = place.geometry.location.lng();
+
+                place.address_components.forEach(function(e) {
+                    if (e.types.includes("administrative_area_level_1")) {
+                        $('#state').val(e.short_name);
+                    } else if (e.types.includes("administrative_area_level_2")) {
+                        $('#county').val(e.short_name);
+                    }
+                });
+                $('#lat').val(latitude);
+                $('#lng').val(longitude);
             });
-
-            $('#lat').val(latitude);
-            $('#lng').val(longitude);
-
-            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                place.formatted_address);
-            infowindow.open(map, marker);
-            });
-
         };
 
         Dropzone.options.uploadHero = {
