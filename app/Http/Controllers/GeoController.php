@@ -69,9 +69,8 @@ class GeoController extends Controller
         $userT = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
 
-        $data = (object) $geoData;
+        $user = (object) $geoData;
         $business = 113;
-        $user = gettype($data);
         event(new CustomerEnterRadius($user, $business));
     }
 
