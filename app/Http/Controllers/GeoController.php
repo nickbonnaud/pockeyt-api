@@ -40,31 +40,25 @@ class GeoController extends Controller
         return response()->json($geoFences);
     }
 
-    public function postLocationEvent(Request $request)
+    public function postLocationMonitor(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $geoData = $request->all();
-        $geoFenceEvent = $geoData['action'];
-
-        if (isset($geoFenceEvent)) {
-            $business = Profile::findOrFail($geoData['extras']['profile']);
-            if ($geoFenceEvent === 'ENTER') {
-               return $this->customerEnter($user, $business);
-            } elseif ($geoFenceEvent === 'EXIT') {
-                return  $this->customerExit($user, $business);
-            }
-        }
-    }
-
-    public function postLocationMonitor(Request $request) {
-        $user = JWTAuth::parseToken()->authenticate();
-        $geoData = $request->all();
-        $geoData = (object) $geoData;
+        $data = $request->all();
+        $geoData = (object) $data;
 
         $business = 113;
         $user = $geoData;
 
         event(new CustomerEnterRadius($user, $business));
+
+        // if (isset($geoFenceEvent)) {
+        //     $business = Profile::findOrFail($geoData['extras']['profile']);
+        //     if ($geoFenceEvent === 'ENTER') {
+        //        return $this->customerEnter($user, $business);
+        //     } elseif ($geoFenceEvent === 'EXIT') {
+        //         return  $this->customerExit($user, $business);
+        //     }
+        // }
     }
 
     public function checkDistance($user, $geoLocation) {
