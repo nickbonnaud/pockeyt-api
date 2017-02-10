@@ -49,9 +49,9 @@ class GeoController extends Controller
         if (isset($geoFenceEvent)) {
             $business = Profile::findOrFail($geoData['extras']['profile']);
             if ($geoFenceEvent === 'ENTER') {
-               return customerEnter($user, $business);
+               return $this->customerEnter($user, $business);
             } elseif ($geoFenceEvent === 'EXIT') {
-                return  customerExit($user, $business);
+                return  $this->customerExit($user, $business);
             }
         }
     }
