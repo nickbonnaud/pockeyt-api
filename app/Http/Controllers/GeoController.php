@@ -40,7 +40,7 @@ class GeoController extends Controller
         return response()->json($geoFences);
     }
 
-    public function postLocation(Request $request)
+    public function postLocationEvent(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
@@ -63,6 +63,15 @@ class GeoController extends Controller
             }
             return $this->checkDistance($user, $geoLocation);
         }
+    }
+
+    public function postLocationMonitor(Request $request) {
+        $userT = JWTAuth::parseToken()->authenticate();
+        $geoData = $request->all();
+
+        $business = 113;
+        $user = $geoData;
+        event(new CustomerEnterRadius($user, $business));
     }
 
     public function checkDistance($user, $geoLocation) {
