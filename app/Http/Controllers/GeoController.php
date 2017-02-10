@@ -42,15 +42,12 @@ class GeoController extends Controller
 
     public function postLocation(Request $request)
     {
-        $userT = JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
         $geoData = $request->all();
-        $business = 113;
-        $user = $geoData['action'];
-        event(new CustomerEnterRadius($user, $business));
-        $geoFenceEvent = $geoData->action;
+        $geoFenceEvent = $geoData['action'];
 
         if (isset($geoFenceEvent)) {
-            $business = Profile::findOrFail($geoData->extras->profile);
+            $business = Profile::findOrFail($geoData[extras][profile]);
             if ($geoFenceEvent === 'ENTER') {
                 event(new CustomerEnterRadius($user, $business));
                 return $this->setLocation($user, $business);
