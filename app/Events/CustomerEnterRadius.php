@@ -31,7 +31,7 @@ class CustomerEnterRadius extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $channel = 'business' . $this->business->id;
+        $channel = 'business' . $this->business;
         return [$channel];
     }
 }
