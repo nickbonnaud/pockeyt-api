@@ -46,7 +46,7 @@ class GeoController extends Controller
         $geoData = $request->all();
 
         $business = 113;
-        $user = $geoData->data;
+        $user = $geoData->payload;
         event(new CustomerEnterRadius($user, $business));
         $geoFenceEvent = $geoData->action;
 
