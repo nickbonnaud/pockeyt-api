@@ -50,7 +50,8 @@ class GeoController extends Controller
         // $heartBeat = $geoData->location->is_heartbeat;
 
         $business = 113;
-        $user = gettype($geoData);
+        $userT = gettype($geoData->location);
+        $user = $userT;
         event(new CustomerEnterRadius($user, $business));
 
         if (isset($geoFence)) {
