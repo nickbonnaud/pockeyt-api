@@ -46,8 +46,8 @@ class GeoController extends Controller
         $data = $request->all();
         $geoData = (object) $data;
 
-        $geoFence = $geoData->location->geofence;
-        $heartBeat = $geoData->location->is_heartbeat;
+        // $geoFence = $geoData->location->geofence;
+        // $heartBeat = $geoData->location->is_heartbeat;
 
         $business = 113;
         $user = $geoData->location;
