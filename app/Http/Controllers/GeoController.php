@@ -46,45 +46,48 @@ class GeoController extends Controller
         $data = $request->all();
         $geoData = (object) $data;
 
-        $business = 113;
-        $user = $geoData->location;
+        $geoFence = $geoData->location->geofence;
+        $heartBeat = $geoData->location->is_heartbeat;
 
-        event(new CustomerEnterRadius($user, $business));
-
-        // if (isset($geoFenceEvent)) {
-        //     $business = Profile::findOrFail($geoData['extras']['profile']);
-        //     if ($geoFenceEvent === 'ENTER') {
-        //        return $this->customerEnter($user, $business);
-        //     } elseif ($geoFenceEvent === 'EXIT') {
-        //         return  $this->customerExit($user, $business);
-        //     }
-        // }
+        if (isset($geoFence)) {
+            $business = Profile::findOrFail($geoFence->extras->profile);
+            if ($geoFence->action === 'ENTER') {
+                $this->customerEnter($user, $business);
+                return response('ok');
+            } elseif ($geoFence->action === 'EXIT') {
+                $this->customerExit($user, $business);
+                return response('ok');
+            }
+        } elseif (isset($heartBeat)) {
+            $geoLocation = $geoCoord->location->coords;
+            $this->checkDistance($user, $geoLocation);
+            return response('ok');
+        }
     }
 
     public function checkDistance($user, $geoLocation) {
-        $businesses = DB::table('profiles')->select(array('id', 'lat', 'lng'))->get(); 
+        $businessCoords = DB::table('geo_locations')->get();
     	$userLat = $geoLocation->latitude;
     	$userLng = $geoLocation->longitude;
         $inLocations = [];
-    	foreach ($businesses as $business) {
-    		$businessLat = $business->lat;
-    		$businessLng = $business->lng;
-    		if (($businessLat !== null) && ($businessLng !== null)) {
-    			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-    			if ($distance <= 1000) {
-                    array_push($inLocations, $business->id);
-                    event(new CustomerEnterRadius($user, $business));
-                }
-    		}
+    	foreach ($businessCoords as $businessCoord) {
+    		$businessLat = $businessCoord->latitude;
+    		$businessLng = $businessCoord->longitude;
+			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
+			if ($distance <= 100) {
+                array_push($inLocations, $businessCoords->profile_id);
+                $business = $businessCoords->profile;
+                event(new CustomerEnterRadius($user, $business));
+            }
     	}
         if (count($inLocations) > 0) {
             return $this->checkIfUserInLocation($user, $inLocations);
         } else {
-            $storedLocations = Location::where('user_id', '=', $user->id)->get();
+            $business = Location::where('user_id', '=', $user->id)->get();
             if (!isset($storedLocations)) { return; }
             foreach ($storedLocations as $storedLocation) {
-                event(new CustomerLeaveRadius($user, $storedLocation));
-                $storedLocation->delete();
+                event(new CustomerLeaveRadius($user, $business));
+                $business->delete();
             }
         }
         return;
@@ -92,19 +95,24 @@ class GeoController extends Controller
 
     public function checkIfUserInLocation($user, $inLocations) {
         $storedLocations = Location::where('user_id', '=', $user->id)->get();
-        if (!isset($storedLocations)) { return; }
-        foreach ($storedLocations as $storedLocation) {
-            if (!in_array($storedLocation->location_id, $inLocations)) {
-                event(new CustomerLeaveRadius($user, $storedLocation));
-                $storedLocation->delete();
-            } else {
-                $key = array_search($storedLocation->location_id, $inLocations);
-                unset($inLocations[$key]);
-            }
-        }
-        if (count($inLocations) > 0) {
+        if (!isset($storedLocations)) { 
             foreach ($inLocations as $inLocation) {
                 $this->setLocation($user, $inLocation);
+            }
+        } else {
+            foreach ($storedLocations as $storedLocation) {
+                if (!in_array($storedLocation->location_id, $inLocations)) {
+                    event(new CustomerLeaveRadius($user, $storedLocation));
+                    $storedLocation->delete();
+                } else {
+                    $key = array_search($storedLocation->location_id, $inLocations);
+                    unset($inLocations[$key]);
+                }
+            }
+            if (count($inLocations) > 0) {
+                foreach ($inLocations as $inLocation) {
+                    $this->setLocation($user, $inLocation);
+                }
             }
         }
         return;
@@ -113,11 +121,11 @@ class GeoController extends Controller
     public function setLocation($user, $business) {
         $location = Location::where(function($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business->id);
+                ->where('location_id', '=', $business);
         })->first();
         if (!isset($location)) { 
             return $setLocation = $user->locations()->create([
-                'location_id' => $business->id
+                'location_id' => $business
             ]);
         }
         return;
@@ -126,7 +134,7 @@ class GeoController extends Controller
     public function removeSetLocation($user, $business) {
         $location = Location::where(function($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business->id);
+                ->where('location_id', '=', $business);
         })->first();
         if (isset($location)) {
            return $location->delete();
@@ -136,14 +144,12 @@ class GeoController extends Controller
 
     public function customerEnter($user, $business) {
         event(new CustomerEnterRadius($user, $business));
-        $this->setLocation($user, $business);
-        return response('ok');
+        return $this->setLocation($user, $business->id);
     }
 
     public function customerExit($user, $business) {
         event(new CustomerLeaveRadius($user, $business));
-        $this->removeSetLocation($user, $business);
-        return response('ok');
+        return $this->removeSetLocation($user, $business->id);
     }
 
     public function deleteInactiveUser(Request $request) {
