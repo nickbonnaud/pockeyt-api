@@ -49,10 +49,12 @@ class GeoController extends Controller
         // $heartBeat = $geoData->location->is_heartbeat;
         $business = 113;
         $data = json_decode(json_encode($data));
-        $user = $data->location->geofence;
-        event(new CustomerEnterRadius($user, $business));
+        $isHeartBeat = $data->location->is_heartbeat;
+        $user = $data;
+        return event(new CustomerEnterRadius($user, $business));
 
-        if (isset($geoFence)) {
+        if (!$isHeartBeat) {
+            $geoFence = $data->location->geofence;
             $business = Profile::findOrFail($geoFence->extras->profile);
             if ($geoFence->action === 'ENTER') {
                 $this->customerEnter($user, $business);
@@ -61,7 +63,7 @@ class GeoController extends Controller
                 $this->customerExit($user, $business);
                 return response('ok');
             }
-        } elseif (isset($heartBeat)) {
+        } elseif ($isHeartBeat) {
             $geoLocation = $geoCoord->location->coords;
             $this->checkDistance($user, $geoLocation);
             return response('ok');
