@@ -47,10 +47,6 @@ class GeoController extends Controller
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->location->is_heartbeat;
 
-        $business = 113;
-        $user = $data;
-        event(new CustomerLeaveRadius($user, $business));
-
         if (!$isHeartBeat) {
             $geoFence = $data->location->geofence;
             $profile = Profile::findOrFail($geoFence->extras->profile);
@@ -59,7 +55,7 @@ class GeoController extends Controller
                 $this->customerEnter($user, $business);
                 return response('ok');
             } elseif ($geoFence->action === 'EXIT') {
-                // $business = $profile->id;
+                $business = $profile->id;
                 $this->customerExit($user, $business);
                 return response('ok');
             }
