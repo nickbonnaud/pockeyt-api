@@ -77,7 +77,7 @@ class GeoController extends Controller
             $user = $distance;
             event(new CustomerEnterRadius($user, $business));
 			if ($distance <= 100) {
-                $user = "inside less than";
+                $user = $businessCoords->profile_id;
                 return event(new CustomerEnterRadius($user, $business));
                 array_push($inLocations, $businessCoords->profile_id);
                 $business = $businessCoords->profile;
