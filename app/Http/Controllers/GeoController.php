@@ -148,12 +148,12 @@ class GeoController extends Controller
 
     public function customerEnter($user, $business) {
         event(new CustomerEnterRadius($user, $business));
-        return $this->setLocation($user, $business->id);
+        return $this->setLocation($user, $business);
     }
 
     public function customerExit($user, $business) {
         event(new CustomerLeaveRadius($user, $business));
-        return $this->removeSetLocation($user, $business->id);
+        return $this->removeSetLocation($user, $business);
     }
 
     public function deleteInactiveUser(Request $request) {
