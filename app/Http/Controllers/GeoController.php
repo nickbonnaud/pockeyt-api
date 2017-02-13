@@ -91,7 +91,7 @@ class GeoController extends Controller
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
                 event(new CustomerLeaveRadius($user, $business));
-                $business->delete();
+                $storedLocation->delete();
             }
         }
         return;
