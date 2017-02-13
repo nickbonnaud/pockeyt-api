@@ -57,7 +57,7 @@ class GeoController extends Controller
             } elseif ($geoFence->action === 'EXIT') {
                 // $business = $profile->id;
                 $business = 113;
-                $user = $profile->id;
+                $user = "something";
                 event(new CustomerEnterRadius($user, $business));
                 $this->customerExit($user, $business);
                 return response('ok');
