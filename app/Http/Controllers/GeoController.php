@@ -49,7 +49,7 @@ class GeoController extends Controller
 
         $business = 113;
         $user = $data;
-        event(new CustomerLeaveRadius($user, $business));
+        $this->customerExit($user, $business);
         $user = $userT;
 
         if (!$isHeartBeat) {
