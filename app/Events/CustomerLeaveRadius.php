@@ -30,7 +30,7 @@ class CustomerLeaveRadius extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        $channel = 'remove' . $this->business->location_id;
+        $channel = 'remove' . $this->business;
         return [$channel];
     }
 }

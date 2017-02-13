@@ -73,23 +73,21 @@ class GeoController extends Controller
     		$businessLat = $businessCoord->latitude;
     		$businessLng = $businessCoord->longitude;
 			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-            $business = 113;
-            $user = $distance;
-            event(new CustomerEnterRadius($user, $business));
 			if ($distance <= 100) {
-                $user = $businessCoord->profile_id;
-                return event(new CustomerEnterRadius($user, $business));
-                array_push($inLocations, $businessCoords->profile_id);
-                $business = $businessCoords->profile;
-                event(new CustomerEnterRadius($user, $business));
+                if (!in_array($businessCoord->profile_id, $inLocations)) {
+                    array_push($inLocations, $businessCoord->profile_id);
+                    $business = $businessCoord->profile_id;
+                    event(new CustomerEnterRadius($user, $business));
+                }
             }
     	}
         if (count($inLocations) > 0) {
             return $this->checkIfUserInLocation($user, $inLocations);
         } else {
-            $business = Location::where('user_id', '=', $user->id)->get();
+            $storedLocations = Location::where('user_id', '=', $user->id)->get();
             if (!isset($storedLocations)) { return; }
             foreach ($storedLocations as $storedLocation) {
+                $business = $storedLocation->profile_id;
                 event(new CustomerLeaveRadius($user, $business));
                 $business->delete();
             }
