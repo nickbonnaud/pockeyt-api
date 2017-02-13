@@ -42,7 +42,7 @@ class GeoController extends Controller
 
     public function postLocationMonitor(Request $request)
     {
-        $userT = JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
         $data = $request->all();
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->location->is_heartbeat;
