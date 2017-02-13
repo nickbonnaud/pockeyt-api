@@ -248,6 +248,7 @@
             this.getRedeemableDeals(activeCustomer.id);
           },
           removeUser: function(user) {
+            console.log("remove user by distance");
             var leavingCustomer = user.user;
             var users = this.users;
             
