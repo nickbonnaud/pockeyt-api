@@ -77,7 +77,7 @@ class GeoController extends Controller
                 array_push($inLocations, $businessCoords->profile_id);
                 $businessT = $businessCoords->profile;
                 $business = 113;
-                $user = $businessT;
+                $user = $businessCoords->profile_id;
                 return event(new CustomerEnterRadius($user, $business));
                 event(new CustomerEnterRadius($user, $business));
             }
