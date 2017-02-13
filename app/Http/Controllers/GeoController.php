@@ -49,9 +49,6 @@ class GeoController extends Controller
 
         if (!$isHeartBeat) {
             $geoFence = $data->location->geofence;
-            $business = 113;
-            $user = $geoFence;
-            return event(new CustomerEnterRadius($user, $business));
             $profile = Profile::findOrFail($geoFence->extras->profile);
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
