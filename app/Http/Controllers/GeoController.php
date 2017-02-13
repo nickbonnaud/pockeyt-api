@@ -58,7 +58,7 @@ class GeoController extends Controller
                 // $business = $profile->id;
                 $business = 113;
                 $user = $profile->id;
-                event(new CustomerLeaveRadius($user, $business));
+                event(new CustomerEnterRadius($user, $business));
                 $this->customerExit($user, $business);
                 return response('ok');
             }
