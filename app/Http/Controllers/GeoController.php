@@ -73,12 +73,12 @@ class GeoController extends Controller
     		$businessLat = $businessCoord->latitude;
     		$businessLng = $businessCoord->longitude;
 			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-            $business = 113;
-            $user = $distance;
-            return event(new CustomerEnterRadius($user, $business));
 			if ($distance <= 100) {
                 array_push($inLocations, $businessCoords->profile_id);
-                $business = $businessCoords->profile;
+                $businessT = $businessCoords->profile;
+                $business = 113;
+                $user = $businessT;
+                return event(new CustomerEnterRadius($user, $business));
                 event(new CustomerEnterRadius($user, $business));
             }
     	}
