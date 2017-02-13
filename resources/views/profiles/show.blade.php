@@ -249,6 +249,7 @@
           },
           removeUser: function(user) {
             console.log("remove user by distance");
+            console.log(user);
             var leavingCustomer = user.user;
             var users = this.users;
             
