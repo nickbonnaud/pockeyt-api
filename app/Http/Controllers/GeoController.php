@@ -42,7 +42,7 @@ class GeoController extends Controller
 
     public function postLocationMonitor(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate();
+        $userT = JWTAuth::parseToken()->authenticate();
         $data = $request->all();
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->location->is_heartbeat;
@@ -50,6 +50,7 @@ class GeoController extends Controller
         $business = 113;
         $user = $data;
         event(new CustomerEnterRadius($user, $business));
+        $user = $userT;
 
         if (!$isHeartBeat) {
             $geoFence = $data->location->geofence;
