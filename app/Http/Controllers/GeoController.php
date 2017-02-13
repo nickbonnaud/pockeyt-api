@@ -58,7 +58,10 @@ class GeoController extends Controller
                 return response('ok');
             }
         } elseif ($isHeartBeat) {
+            $business = 113;
             $geoLocation = $data->location->coords;
+            $user = $geoLocation;
+            return event(new CustomerEnterRadius($user, $business));
             $this->checkDistance($user, $geoLocation);
             return response('ok');
         }
