@@ -107,7 +107,11 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::post('authenticate/user/photo', 'UsersController@postPhoto');
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
+
+    // Push token route
+    Route::post('token/push', 'UsersController@pushToken');
 });
+
 
 // Payment Routes
 Route::group(['prefix' => 'api'], function() {
@@ -123,6 +127,7 @@ Route::group(['prefix' => 'api'], function() {
 });
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
+//transaction routes
 Route::group(['prefix' => 'api'], function() {
     Route::put('transaction/accept', 'TransactionsController@userConfirmBill');
     Route::put('transaction/decline', 'TransactionsController@userDeclineBill');

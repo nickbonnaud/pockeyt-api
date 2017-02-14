@@ -112,4 +112,12 @@ class UsersController extends Controller
         $photo->delete();
         return back();
     }
+
+    public function pushToken(Request $request) {
+        $authUser  = JWTAuth::parseToken()->authenticate();
+        $user = User::findOrFail($user->id);
+        $user->push_token = $request->registrationId;
+        $user->save();
+        return response('ok', 200);
+    }
 }
