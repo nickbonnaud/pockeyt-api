@@ -23,7 +23,7 @@ class PushIdsController extends Controller
 			$token->save();
 			return response('ok', 200);
 		} else {
-			return response('ok', 200);
+			return response('found', 200);
 		}
 	}
 }
