@@ -107,9 +107,10 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::post('authenticate/user/photo', 'UsersController@postPhoto');
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
+});
 
-    // Push token route
-    Route::post('token/push', 'UsersController@pushToken');
+Route::group(['prefix' => 'api'], function() {
+    Route::post('token/push', 'PushIdsController@store');
 });
 
 
