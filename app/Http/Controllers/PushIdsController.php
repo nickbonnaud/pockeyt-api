@@ -17,8 +17,13 @@ class PushIdsController extends Controller
  	}
 
 	public function store(PushIdRequest $request) {
-		$token = new PushId($request->all());
-		$token->save();
-		return response('ok', 200);
+		$dbToken = PushId::where('push_token', '=', $request->push_token);
+		if (!isset($dbToken)) {
+			$token = new PushId($request->all());
+			$token->save();
+			return response('ok', 200);
+		} else {
+			return response('ok', 200);
+		}
 	}
 }
