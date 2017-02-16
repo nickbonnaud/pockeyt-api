@@ -111,6 +111,7 @@ Route::group(['prefix' => 'api'], function() {
 
 Route::group(['prefix' => 'api'], function() {
     Route::post('token/push', 'PushIdsController@store');
+    Route::post('token/sync', 'PushIdsController@sync');
 });
 
 

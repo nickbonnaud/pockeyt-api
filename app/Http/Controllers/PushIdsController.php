@@ -14,6 +14,7 @@ class PushIdsController extends Controller
 	
 	public function __construct() {
     parent::__construct();
+    $this->middleware('jwt.auth', ['only' => ['sync']]);
  	}
 
 	public function store(PushIdRequest $request) {
@@ -24,6 +25,17 @@ class PushIdsController extends Controller
 			return response('ok', 200);
 		} else {
 			return response('found', 200);
+		}
+	}
+
+	public function sync(Request $request) {
+		$user = JWTAuth::parseToken()->authenticate();
+		$token = PushId::where('push_token', '=', $request->push_token)->first();
+		if (isset($token)) {
+			$token->user_id = $user->id;
+			return response('set', 200);
+		} else {
+			return response('token not found', 200);
 		}
 	}
 }
