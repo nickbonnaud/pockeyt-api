@@ -8,6 +8,7 @@ use App\LoyaltyCard;
 use App\User;
 use JWTAuth;
 use App\Post;
+use App\PushId;
 use App\Profile;
 use App\Product;
 use App\Transaction;
@@ -118,8 +119,14 @@ class TransactionsController extends Controller
                             'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
                         )
         ));
-        $collection = \PushNotification::app('PockeytIOS')
-          ->to('ac201490161a80f0bea413f55911473108cf6b57cab5489b3fda6c169cd731ae')
+        $token = PushId::where('user_id', '=', $customer->id);
+        if ($token->device_type === 'iOS') {
+            $pushService = 'PockeytIOS';
+        } else {
+            $pushService = 'PockeytAndroid';
+        }
+        $collection = \PushNotification::app($pushService)
+          ->to($token->push_token)
           ->send($message);
 
         foreach ($collection->pushManager as $push) {
