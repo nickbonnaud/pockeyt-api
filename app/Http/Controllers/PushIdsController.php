@@ -34,6 +34,7 @@ class PushIdsController extends Controller
 		$token = PushId::where('push_token', '=', $request->push_token)->first();
 		if (isset($token)) {
 			$token->user_id = $user->id;
+			$token->save();
 			return response('set', 200);
 		} else {
 			return response('token not found', 200);
