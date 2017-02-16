@@ -120,7 +120,6 @@ class TransactionsController extends Controller
                         )
         ));
         $token = PushId::where('user_id', '=', $customer->id)->first();
-        dd($token);
         if ($token->device_type === 'iOS') {
             $pushService = 'PockeytIOS';
         } else {
