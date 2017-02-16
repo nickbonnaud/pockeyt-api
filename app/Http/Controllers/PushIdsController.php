@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 Use Illuminate\HttpResponse;
 use App\Http\Requests;
 use App\PushId;
+use JWTAuth;
 use App\Http\Requests\PushIdRequest;
 use App\Http\Controllers\Controller;
 
