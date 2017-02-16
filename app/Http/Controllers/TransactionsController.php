@@ -119,7 +119,7 @@ class TransactionsController extends Controller
                             'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
                         )
         ));
-        $token = PushId::where('user_id', '=', $customer->id);
+        $token = PushId::where('user_id', '=', $customer->id)->get();
         if ($token->device_type === 'iOS') {
             $pushService = 'PockeytIOS';
         } else {
