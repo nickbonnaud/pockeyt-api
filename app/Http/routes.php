@@ -106,7 +106,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::put('authenticate/user', 'UsersController@updateAuthenticatedUser');
     Route::delete('authenticate/user', 'UsersController@destroyAuthenticatedUser');
 
-    Route::post('user/photo', 'UsersController@postPhoto');
+    Route::post('photo', 'UsersController@postPhoto');
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
 });
 
