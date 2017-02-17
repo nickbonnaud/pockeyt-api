@@ -83,6 +83,7 @@ class UsersController extends Controller
     }
 
     public function postPhoto(AddUserPhotoRequest $request) {
+        return response('fuck you', 200);
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
             $dbUser = User::findOrFail($authUser->id);
