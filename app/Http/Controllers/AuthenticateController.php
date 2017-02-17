@@ -58,13 +58,10 @@ class AuthenticateController extends Controller
             $errors = $validator->errors();
             return $errors->toJson();
         } else {
-
             $newuser= $request->all();
             $password = Hash::make($request->input('password'));
-     
             $newuser['password'] = $password;
             $user = User::create($newuser);
-
             $credentials = $request->only('email', 'password');
 
             try {
@@ -84,35 +81,26 @@ class AuthenticateController extends Controller
     public function update(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'unique:users'
-        ]);
+        $dbUser = User::findOrFail($user->id);
+        $dbUser->update($request->except('password'));
+        $password = $request->input('password');
 
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return $errors->toJson();
-        } else {
-            $dbUser = User::findOrFail($user->id);
-            $dbUser->update($request->except('password'));
-            $password = $request->input('password');
+        $password = Hash::make($password);
+        $dbUser->password = $password;
+        $dbUser->save();
+        $credentials = $request->only('email', 'password');
 
-            $password = Hash::make($password);
-            $dbUser->password = $password;
-            $dbUser->save();
-            $credentials = $request->only('email', 'password');
-
-            try {
-                // attempt to verify the credentials and create a token for the user
-                if (! $token = JWTAuth::attempt($credentials)) {
-                    return response()->json(['error' => 'invalid_credentials'], 401);
-                }
-            } catch (JWTException $e) {
-                // something went wrong whilst attempting to encode the token
-                return response()->json(['error' => 'could_not_create_token'], 500);
+        try {
+            // attempt to verify the credentials and create a token for the user
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
             }
-            $dbUser['token'] = $token;
-            return response()->json(compact('dbUser'));            
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json(['error' => 'could_not_create_token'], 500);
         }
+        $dbUser['token'] = $token;
+        return response()->json(compact('dbUser'));
     }
 
     public function facebook(Request $request) {
