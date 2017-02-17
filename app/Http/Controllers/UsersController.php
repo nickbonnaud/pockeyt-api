@@ -85,8 +85,8 @@ class UsersController extends Controller
     public function postPhoto(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
-            $dbUser = User::findOrFail($authUser->id);
-            $oldPhoto = $dbUser->photo_id;
+            $user = User::findOrFail($authUser->id);
+            $oldPhoto = $user->photo_id;
 
             if(isset($oldPhoto)) {
                 $photo = Photo::where('id', '=', $oldPhoto);
@@ -97,11 +97,11 @@ class UsersController extends Controller
             $photo = Photo::fromForm($file);
             $photo->save();
 
-            $dbUser['photo_path'] = url($photo->path);
-            $dbUser['photo_id'] = $photo->id;
-            $dbUser->save();
+            $user['photo_path'] = url($photo->path);
+            $user['photo_id'] = $photo->id;
+            $user->save();
 
-            return response('Success', 200);
+            return response()->json(compact('user'));
         }
     }
 
