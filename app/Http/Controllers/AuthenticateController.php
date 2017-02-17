@@ -84,7 +84,7 @@ class AuthenticateController extends Controller
         $dbUser = User::findOrFail($user->id);
         $user = $request->all();
         $password = Hash::make($request->input('password'));
-        $user->password = $password;
+        $user['password'] = $password;
         $dbUser->update($user);
         $credentials = $request->only('email', 'password');
 
