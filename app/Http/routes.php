@@ -108,8 +108,12 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::post('authenticate/user/photo', 'UsersController@postPhoto');
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
+
+    Route::post('set/tip', 'UsersController@setDefaultTipRate');
 });
 
+
+// Push Ids Routes
 Route::group(['prefix' => 'api'], function() {
     Route::post('token/push', 'PushIdsController@store');
     Route::post('token/sync', 'PushIdsController@sync');

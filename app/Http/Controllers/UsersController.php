@@ -113,4 +113,16 @@ class UsersController extends Controller
         $photo->delete();
         return back();
     }
+
+    public function setDefaultTipRate(Request $request) {
+        $authUser = JWTAuth::parseToken()->authenticate();
+        $user = User::findOrFail($authUser->id);
+        $user->default_tip_rate = $request->default_tip_rate;
+        $user->save();
+
+        return response()->json(compact('user'));
+    }
+
+
+
 }
