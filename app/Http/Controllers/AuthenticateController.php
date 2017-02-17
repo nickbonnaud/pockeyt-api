@@ -65,8 +65,8 @@ class AuthenticateController extends Controller
             $newuser['password'] = $password;
             $user = User::create($newuser);
 
-            $credentials = $request->only('email', 'password');
-            $credentials->password = $password;
+            $credentials = $request->input('email');
+            $credentials['password'] = $password;
 
             try {
                 // attempt to verify the credentials and create a token for the user
