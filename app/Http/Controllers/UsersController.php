@@ -16,6 +16,7 @@ class UsersController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->middleware('jwt.auth', []);
     }
 
     public function getAuthenticatedUser()
@@ -81,7 +82,7 @@ class UsersController extends Controller
         }
     }
 
-    public function postPhoto(AddUserPhotoRequest $request) {
+    public function postPhoto(Request $request) {
         return response('fuck you', 200);
         $authUser = JWTAuth::parseToken()->authenticate();
         if($authUser) {
