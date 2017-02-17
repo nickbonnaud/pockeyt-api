@@ -102,9 +102,8 @@ class AuthenticateController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        $user = User::findOrFail($dbUser->id);
-        $user['token'] = $token;
-        return response()->json(compact('user'));
+        $dbUser['token'] = $token;
+        return response()->json(compact('dbUser'));
     }
 
     public function facebook(Request $request) {
