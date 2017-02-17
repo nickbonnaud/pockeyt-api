@@ -102,6 +102,7 @@ class AuthenticateController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+        $dbUser = User::findOrFail($user->id);
         $dbUser['token'] = $token;
         return response()->json(compact('dbUser'));
     }
