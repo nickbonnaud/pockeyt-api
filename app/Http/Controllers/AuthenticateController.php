@@ -60,14 +60,13 @@ class AuthenticateController extends Controller
         } else {
 
             $newuser= $request->all();
-            $password=Hash::make($request->input('password'));
-            $email = $request->input('email');
+            $password = Hash::make($request->input('password'));
      
             $newuser['password'] = $password;
             $user = User::create($newuser);
 
-
             $credentials = $request->only('email', 'password');
+            $credentials->password = $password;
 
             try {
                 // attempt to verify the credentials and create a token for the user
@@ -80,6 +79,46 @@ class AuthenticateController extends Controller
             }
             $user['token'] = $token;
             return response()->json(compact('user'));
+        }
+    }
+
+    public function update(Request $request) {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'unique:users'
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return $errors->toJson();
+        } else {
+            $dbUser = User::findOrFail($user->id);
+            $dbUser->update($request->except('password'));
+            $password = $request->input('password');
+
+            if (isset($password)) {
+                $password = Hash::make($password);
+                $dbUser->password = $password;
+                $dbUser->save();
+                $credentials = $request->only('email', 'password');
+                $credentials->password = $password;
+            } else {
+                $credentials = $request->input('email');
+                $credentials['password'] = $dbUser->password;
+            }
+
+            try {
+                // attempt to verify the credentials and create a token for the user
+                if (! $token = JWTAuth::attempt($credentials)) {
+                    return response()->json(['error' => 'invalid_credentials'], 401);
+                }
+            } catch (JWTException $e) {
+                // something went wrong whilst attempting to encode the token
+                return response()->json(['error' => 'could_not_create_token'], 500);
+            }
+            $dbUser['token'] = $token;
+            return response()->json(compact('dbUser'));            
         }
     }
 

@@ -95,8 +95,9 @@ Route::resource('loyalty-programs', 'LoyaltyProgramsController');
 Route::group(['prefix' => 'api'], function() {
     Route::post('register', 'AuthenticateController@register');
     Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::put('update', 'AuthenticateController@update');
     Route::post('facebook', 'AuthenticateController@facebook');
-    Route::post('instagram', 'AuthenticateController@instagram');
+    
 });
 
 // API User Routes
