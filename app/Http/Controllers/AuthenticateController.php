@@ -67,8 +67,8 @@ class AuthenticateController extends Controller
 
             $email = $request->input('email');
             $credentials = [
-                'email' => $email,
-                'password' => $password
+                $email,
+                $password
             ];
 
             try {
