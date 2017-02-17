@@ -1,5 +1,7 @@
 <?php
 
+Route::post('api/upload/photo', 'UsersController@postPhoto');
+
 Route::get('/', 'AppController@index')->name('app.index');
 Route::get('data_use_policy', 'AppController@policy')->name('app.policy');
 
@@ -108,8 +110,6 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
 });
-
-Route::post('upload/photo', 'UsersController@postPhoto');
 
 Route::group(['prefix' => 'api'], function() {
     Route::post('token/push', 'PushIdsController@store');
