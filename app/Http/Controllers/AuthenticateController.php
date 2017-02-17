@@ -82,11 +82,9 @@ class AuthenticateController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
 
         $dbUser = User::findOrFail($user->id);
-        $dbUser->update($request->except('password'));
-        $password = $request->input('password');
-
-        $password = Hash::make($password);
-        $dbUser->password = $password;
+        $dbUser->update($request->all());
+        $password = Hash::make($request->input('password'));
+        $dbUser['password'] = $password;
         $dbUser->save();
         $credentials = $request->only('email', 'password');
 
