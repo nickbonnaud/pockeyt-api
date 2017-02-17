@@ -65,11 +65,8 @@ class AuthenticateController extends Controller
             $newuser['password'] = $password;
             $user = User::create($newuser);
 
-            $email = $request->input('email');
-            $credentials = [
-                $email,
-                $password
-            ];
+            $credentials = $request->only('email', 'password');
+            $credentials->password = $password;
 
             try {
                 // attempt to verify the credentials and create a token for the user
@@ -100,16 +97,11 @@ class AuthenticateController extends Controller
             $dbUser->update($request->except('password'));
             $password = $request->input('password');
 
-            if (isset($password)) {
-                $password = Hash::make($password);
-                $dbUser->password = $password;
-                $dbUser->save();
-                $credentials = $request->only('email', 'password');
-                $credentials->password = $password;
-            } else {
-                $credentials = $request->input('email');
-                $credentials['password'] = $dbUser->password;
-            }
+            $password = Hash::make($password);
+            $dbUser->password = $password;
+            $dbUser->save();
+            $credentials = $request->only('email', 'password');
+            $credentials->password = $password;
 
             try {
                 // attempt to verify the credentials and create a token for the user
