@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Hash;
 class AuthenticateController extends Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function authenticate(Request $request)
     {
         if($request->has('fbID')) {
