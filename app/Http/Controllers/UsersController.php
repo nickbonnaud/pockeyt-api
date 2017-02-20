@@ -117,7 +117,7 @@ class UsersController extends Controller
     public function setDefaultTipRate(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         $user = User::findOrFail($authUser->id);
-        $user->default_tip_rate = $request->default_tip_rate;
+        $user->default_tip_rate = $request->default_tip_rate * 100;
         $user->save();
 
         return response()->json(compact('user'));
