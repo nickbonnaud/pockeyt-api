@@ -117,8 +117,18 @@ class UsersController extends Controller
     public function setDefaultTipRate(Request $request) {
         $authUser = JWTAuth::parseToken()->authenticate();
         $user = User::findOrFail($authUser->id);
+        $prevDefaultTip = $user->default_tip_rate;
         $user->default_tip_rate = $request->default_tip_rate * 100;
         $user->save();
+
+        $customerId = $user->customer_id;
+        if (isset($customerId)) {
+            $result = \Braintree_Customer::find($customerId);
+            $user['cardLast4'] = $result->creditCards[0]->last4;
+            $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
+        }
+
+        if ($prevDefaultTip === null) { $user['edit'] = true; } else { $user['edit'] = false; }
 
         return response()->json(compact('user'));
     }
