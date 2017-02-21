@@ -128,7 +128,7 @@ class UsersController extends Controller
             $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
         }
 
-        if ($prevDefaultTip === null) { $user['edit'] = true; } else { $user['edit'] = false; }
+        if ($prevDefaultTip !== null) { $user['edit'] = true; } else { $user['edit'] = false; }
 
         return response()->json(compact('user'));
     }
