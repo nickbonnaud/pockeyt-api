@@ -110,6 +110,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::delete('authenticate/user/photo', 'UsersController@deletePhoto');
 
     Route::post('set/tip', 'UsersController@setDefaultTipRate');
+    Route::post('token/refresh', 'UsersController@refreshToken');
 });
 
 

@@ -133,6 +133,9 @@ class UsersController extends Controller
         return response()->json(compact('user'));
     }
 
-
+    public function refreshToken(Request $request) {
+        $token = JWTAuth::parseToken()->refresh();
+        return response()->json($token);
+    }
 
 }
