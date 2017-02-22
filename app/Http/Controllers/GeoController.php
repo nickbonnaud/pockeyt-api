@@ -53,19 +53,16 @@ class GeoController extends Controller
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
-                $token = JWTAuth::parseToken()->refresh();
-                return response()->json($token);
+                return response('ok');
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                $token = JWTAuth::parseToken()->refresh();
-                return response()->json($token);
+                return response('ok');
             }
         } elseif ($isHeartBeat) {
             $geoLocation = $data->location->coords;
             $this->checkDistance($user, $geoLocation);
-            $token = JWTAuth::parseToken()->refresh();
-            return response()->json($token);
+            return response('ok');
         }
     }
 
