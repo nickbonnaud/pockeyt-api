@@ -21,6 +21,7 @@ class GeoController extends Controller
     {
         parent::__construct();
         $this->middleware('jwt.auth', ['only' => ['postLocationMonitor']]);
+        $this->middleware('jwt.refresh', ['only' => ['postLocationMonitor']]);
     }
 
     public function getGeoFences() {
@@ -53,16 +54,16 @@ class GeoController extends Controller
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
-                return response('ok');
+                return response()->json('ok');
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                return response('ok');
+                 return response()->json('ok');
             }
         } elseif ($isHeartBeat) {
             $geoLocation = $data->location->coords;
             $this->checkDistance($user, $geoLocation);
-            return response('ok');
+             return response()->json('ok');
         }
     }
 
