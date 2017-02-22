@@ -25,15 +25,14 @@ class UsersController extends Controller
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
-            } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-                return response()->json(['token_expired'], $e->getStatusCode());
-            } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-                return response()->json(['token_invalid'], $e->getStatusCode());
-            } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-                return response()->json(['token_absent'], $e->getStatusCode());
-            }
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
 
-        $token = JWTAuth::parseToken()->refresh();
         $customerId = $user->customer_id;
         if(isset($customerId)) {
             $result = \Braintree_Customer::find($customerId);
@@ -41,9 +40,9 @@ class UsersController extends Controller
             $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
             $user['cardToken'] = $result->creditCards[0]->token;
 
-            return response()->json(compact('user', 'token'));
+            return response()->json(compact('user'));
         } else {
-            return response()->json(compact('user', 'token'));
+            return response()->json(compact('user'));
         }
     }
 
