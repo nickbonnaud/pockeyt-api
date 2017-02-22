@@ -44,7 +44,6 @@ class GeoController extends Controller
     public function postLocationMonitor(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $token = JWTAuth::parseToken()->refresh();
         $data = $request->all();
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->location->is_heartbeat;
@@ -55,16 +54,16 @@ class GeoController extends Controller
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
-                return response()->json($token);
+                return response()->json('ok');
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                return response()->json($token);
+                return response()->json('ok');
             }
         } elseif ($isHeartBeat) {
             $geoLocation = $data->location->coords;
             $this->checkDistance($user, $geoLocation);
-            return response()->json($token);
+            return response()->json('ok');
         }
     }
 
