@@ -101,7 +101,17 @@ class UsersController extends Controller
             $user['photo_id'] = $photo->id;
             $user->save();
 
-            return response()->json(compact('user'));
+            $customerId = $user->customer_id;
+            if(isset($customerId)) {
+                $result = \Braintree_Customer::find($customerId);
+                $user['cardLast4'] = $result->creditCards[0]->last4;
+                $user['cardImageUrl'] = $result->creditCards[0]->imageUrl;
+                $user['cardToken'] = $result->creditCards[0]->token;
+
+                return response()->json(compact('user'));
+            } else {
+                return response()->json(compact('user'));
+            }
         }
     }
 
