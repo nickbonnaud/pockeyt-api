@@ -244,6 +244,19 @@ class TransactionsController extends Controller
         }
     }
 
+    public function hasBill() {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::where(function ($query) use ($customer) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('paid', '=', false);
+        })->first();
+        if (isset($transaction)) {
+            return response()->json(true, 200);
+        } else {
+            return response()->json(false, 404);
+        }
+    }
+
     private function createCharge($transaction, $customer, $profileId) {
         $amount = (round($transaction->total)) / 100;
         $serviceFee = round($amount * 0.02, 2);
