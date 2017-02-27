@@ -140,6 +140,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::put('transaction/accept', 'TransactionsController@userConfirmBill');
     Route::put('transaction/decline', 'TransactionsController@userDeclineBill');
     Route::put('transaction/custom', 'TransactionsController@customTip');
+    Route::get('transaction/show', 'TransactionsController@getCurrentBill');
 });
 
 //Quickbook Routes

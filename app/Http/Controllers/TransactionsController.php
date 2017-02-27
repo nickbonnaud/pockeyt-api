@@ -224,8 +224,23 @@ class TransactionsController extends Controller
             if ($customer->id === $transaction->user_id && !$transaction->paid) {
                 return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
             } else { 
-                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);;
+                return response()->json(['error' => 'Unable to retrieve transaction.'], 404);
             }
+        }
+    }
+
+    public function getCurrentBill() {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::where(function ($query) use ($customer) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('paid', '=', false);
+        })->first();
+        if (isset($transaction)) {
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $profile['logo_photo'] = $profile->logo->thumbnail_url;
+            return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
+        } else {
+            return response()->json(['error' => 'Unable to retrieve transaction.'], 404);
         }
     }
 
