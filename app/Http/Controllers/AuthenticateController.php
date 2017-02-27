@@ -88,10 +88,23 @@ class AuthenticateController extends Controller
 
         $dbUser = User::findOrFail($user->id);
         $user = $request->all();
-        $password = Hash::make($request->input('password'));
-        $user['password'] = $password;
-        $dbUser->update($user);
-        $credentials = $request->only('email', 'password');
+        if (Hash::check($request->input('password'), $dbUser->password)) {
+            $newPassword = $request->input('passwordNew');
+            if(isset($newPassword)) {
+                $password = Hash::make($newPassword);
+                $user['password'] = $password;
+                $dbUser->update($user);
+                $credentials = $request->only('email', 'passwordNew');
+            } else {
+                $password =  Hash::make($request->input('password'));
+                $user['password'] = $password;
+                $dbUser->update($user);
+                $credentials = $request->only('email', 'password');
+            }
+        } else {
+            return response()->json('wrong password', 401);
+        }
+       
 
         try {
             // attempt to verify the credentials and create a token for the user
