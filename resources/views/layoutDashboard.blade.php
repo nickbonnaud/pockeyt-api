@@ -300,7 +300,7 @@
         },
 
         notifyBill: function(data) {
-          toastr["warning"]("Bill Requested!<br /><br /><button type='button' class='btn clear'>Send Bill</button>", data.user.first_name + " " + data.user.last_name + " has requested their bill.", {
+          toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn clear'>Send Bill</button>", "Bill Requested!", {
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
