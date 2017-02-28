@@ -292,7 +292,7 @@
       methods: {
 
         notifyReward: function(data) {
-          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
+          toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn btn-default'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
@@ -300,7 +300,7 @@
         },
 
         notifyBill: function(data) {
-          toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn clear'>Send Bill</button>", "Bill Requested!", {
+          toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn btn-default'>Send Bill</button>", "Bill Requested!", {
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
@@ -313,13 +313,13 @@
 
         notifyError: function(data) {
           if (data.transaction.status === 1) {
-            toastr["error"]("Charge Failed<br /><br /><button type='button' class='btn clear'>Ok</button>", "Unable to charge " + data.user.first_name + " " + data.user.last_name + ". Unable to process payment for transaction id: " + data.transaction.id + ". Please contact Customer Support.", {
+            toastr["error"]("Charge Failed<br /><br /><button type='button' class='btn btn-default'>Ok</button>", "Unable to charge " + data.user.first_name + " " + data.user.last_name + ". Unable to process payment for transaction id: " + data.transaction.id + ". Please contact Customer Support.", {
               "newestOnTop": true,
               "timeOut": 0,
               "extendedTimeOut": 0,
             })
           } else if (data.transaction.status === 2) {
-            toastr["error"]("Bill Declined<br /><br /><button type='button' class='btn clear'>Ok</button>", data.user.first_name + " " + data.user.last_name + " declined the bill. Please check with " + data.user.first_name + " to settle dispute and re-submit the bill.", {
+            toastr["error"]("Bill Declined<br /><br /><button type='button' class='btn btn-default'>Ok</button>", data.user.first_name + " " + data.user.last_name + " declined the bill. Please check with " + data.user.first_name + " to settle dispute and re-submit the bill.", {
               "newestOnTop": true,
               "timeOut": 0,
               "extendedTimeOut": 0,
