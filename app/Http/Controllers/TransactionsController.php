@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Events\RewardNotification;
 use App\Events\TransactionsChange;
 use App\Events\ErrorNotification;
+use App\Events\CustomerRequestBill;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Requests\ChargeRequest;
@@ -462,6 +463,7 @@ class TransactionsController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::findOrFail($request->transactionId);
         $business = Profile::findOrFail($transaction->profile_id);
+        return event(new CustomerRequestBill($user, $business));
     }
 }
 

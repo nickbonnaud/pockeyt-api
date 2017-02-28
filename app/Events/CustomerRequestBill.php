@@ -12,18 +12,16 @@ class CustomerRequestBill extends Event implements ShouldBroadcast
 
     public $user;
     public $business;
-    public $transaction;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $business, $transaction)
+    public function __construct($user, $business)
     {
         $this->user = $user;
         $this->business = $business;
-        $this->transaction = $transaction;
     }
 
     /**
