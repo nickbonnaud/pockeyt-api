@@ -21,7 +21,8 @@ use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Requests\ChargeRequest;
 use App\Http\Requests\UpdateChargeRequest;
-
+use League\Fractal\Resource\Collection;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Http\Controllers\Controller;
 
 class TransactionsController extends Controller
@@ -30,7 +31,7 @@ class TransactionsController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('jwt.auth', ['only' => ['UserConfirmBill', 'requestBill', 'userDeclineBill', 'customTip', 'getCurrentBill', 'hasBill']]);
+        $this->middleware('jwt.auth', ['only' => ['UserConfirmBill', 'requestBill', 'userDeclineBill', 'customTip', 'getCurrentBill', 'hasBill', 'getRecentTransactions']]);
     }
 
     public function showBill($customerId) {
@@ -419,7 +420,7 @@ class TransactionsController extends Controller
                 ->where('redeemed', '=', false);     
         })->get();
         if (isset($redeemableDeals)) {
-            return response()->json($redeemableDeals);  
+            return response()->json($redeemableDeals);
         } else {
             return;
         }
@@ -464,6 +465,34 @@ class TransactionsController extends Controller
         $transaction = Transaction::findOrFail($request->transactionId);
         $business = Profile::findOrFail($transaction->profile_id);
         return event(new CustomerRequestBill($user, $business));
+    }
+
+    public function getRecentTransactions() {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $paginator = Transaction::where(function($query) use ($customer) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('paid', '=', true);
+        })->orderBy('updated_at', 'desc')->paginate(20);
+
+        $transactions = $paginator->getCollection();
+        return fractal()
+            ->collection($transactions, function(Transaction $transaction) {
+                    return [
+                        'id' => $transaction->id,
+                        'business_logo' => $transaction->profile->logo->thumbnail_url,
+                        'business_name' => $transaction->profile->business_name,
+                        'deal_id' => $transaction->deal_id,
+                        'redeemed' => $transaction->redeemed,
+                        'products' => $transaction->products,
+                        'tax' => $transaction->tax,
+                        'tips' => $transaction->tips,
+                        'net_sales' => $transaction->net_sales,
+                        'total' => $transaction->total,
+                        'updated_at' => $transaction->updated_at,
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
     }
 }
 

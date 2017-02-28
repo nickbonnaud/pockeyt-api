@@ -143,6 +143,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transaction/show', 'TransactionsController@getCurrentBill');
     Route::get('transaction/open', 'TransactionsController@hasBill');
     Route::post('transaction/bill', 'TransactionsController@requestBill');
+    Route::get('transactions/recent', 'TransactionsController@getRecentTransactions');
 });
 
 //Quickbook Routes
