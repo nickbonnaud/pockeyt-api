@@ -284,6 +284,9 @@
 
         pusher.subscribe("{!! 'error' . $user->profile->id !!}")
           .bind('App\\Events\\ErrorNotification', this.notifyError);
+
+        pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
+          .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
       },
 
       methods: {
@@ -293,6 +296,18 @@
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
+          })
+        },
+
+        notifyBill: function(data) {
+          toastr["warning"]("Bill Requested!<br /><br /><button type='button' class='btn clear'>Send Bill</button>", data.user.first_name + " " + data.user.last_name + " has requested their bill.", {
+            "newestOnTop": true,
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+            "onclick": function() {
+              route = "{{ route('bill.show', ['customerId' => 'id']) }}"
+              location.href = route.replace('id', data.user.id)
+            }
           })
         },
 

@@ -28,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ErrorNotification' => [
             'App\Listeners\NotifyError',
         ],
+        'App\Events\CustomerRequestBill' => [
+            'App\Listeners\ShowBillRequest',
+        ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\Instagram\InstagramExtendSocialite@handle',
         ],

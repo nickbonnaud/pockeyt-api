@@ -29,7 +29,7 @@ class TransactionsController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('jwt.auth', ['only' => ['UserConfirmBill']]);
+        $this->middleware('jwt.auth', ['only' => ['UserConfirmBill', 'requestBill', 'userDeclineBill', 'customTip', 'getCurrentBill', 'hasBill']]);
     }
 
     public function showBill($customerId) {
@@ -240,7 +240,7 @@ class TransactionsController extends Controller
             $profile['logo_photo'] = $profile->logo->thumbnail_url;
             return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
         } else {
-            return response()->json(['error' => 'Unable to retrieve transaction.'], 404);
+            return response()->json('noBill', 404);
         }
     }
 
@@ -456,6 +456,12 @@ class TransactionsController extends Controller
         }
 
         return response()->json(array('transactionsPending' => $transactionsPending, 'transactionsFinalized' => $transactionsFinalized));
+    }
+
+    public function requestBill(Request $request) {
+        $user = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::findOrFail($request->transactionId);
+        $business = Profile::findOrFail($transaction->profile_id);
     }
 }
 
