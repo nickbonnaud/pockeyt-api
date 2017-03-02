@@ -44,14 +44,11 @@ class GeoController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
         $data = $request->all();
-        $user = $data;
-        $business = 113;
-        return $this->customerEnter($user, $business);
         $data = json_decode(json_encode($data));
-        $isHeartBeat = $data->location->is_heartbeat;
+        $isHeartBeat = $data->is_heartbeat;
 
         if (!$isHeartBeat) {
-            $geoFence = $data->location->geofence;
+            $geoFence = $data->geofence;
             $profile = Profile::findOrFail($geoFence->extras->profile);
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
@@ -63,7 +60,7 @@ class GeoController extends Controller
                 return response('ok');
             }
         } elseif ($isHeartBeat) {
-            $geoLocation = $data->location->coords;
+            $geoLocation = $data->coords;
             $this->checkDistance($user, $geoLocation);
             return response('ok');
         }
