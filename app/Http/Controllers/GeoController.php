@@ -44,6 +44,9 @@ class GeoController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
         $data = $request->all();
+        $user = $data;
+        $business = 113;
+        return $this->customerEnter($user, $business);
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->location->is_heartbeat;
 
