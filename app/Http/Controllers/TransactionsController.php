@@ -501,7 +501,7 @@ class TransactionsController extends Controller
         $deals = DB::table('transactions')
             ->join('posts', function($join) use ($user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
-                    ->where('transactions.user_id', '=', $user);
+                    ->where('transactions.user_id', '=', $user->id);
             })
             ->get();
 
