@@ -503,7 +503,7 @@ class TransactionsController extends Controller
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user->id);
             })
-            ->paginate(20);
+            ->orderBy('updated_at', 'desc')->paginate(20);
 
             $transactions = $paginator->getCollection();
             return fractal()
