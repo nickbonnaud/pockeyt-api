@@ -517,7 +517,7 @@ class TransactionsController extends Controller
                             'price' => $transaction->price,
                             'business_id' => $transaction->profile_id,
                             'redeemed' => $transaction->redeemed,
-                            'business_thumb_path' => $transaction->thumb_path,
+                            'business_thumb_path' => $transaction->post->profile->logo->thumbnail_url,
                             'tax' => $transaction->tax,
                             'total' => $transaction->total,
                             'customer_id' => $transaction->user_id,
