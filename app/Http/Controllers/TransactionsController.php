@@ -518,6 +518,7 @@ class TransactionsController extends Controller
                             'business_id' => $transaction->profile_id,
                             'redeemed' => $transaction->redeemed,
                             'business_thumb_path' => $transaction->profile->logo->thumbnail_url,
+                            'business_name' => $transaction->profile->business_name,
                             'tax' => $transaction->tax,
                             'total' => $transaction->total,
                             'customer_id' => $transaction->user_id,
