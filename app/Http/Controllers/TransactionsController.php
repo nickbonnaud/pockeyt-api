@@ -507,7 +507,7 @@ class TransactionsController extends Controller
 
             $deals = $paginator->getCollection();
             return fractal()
-                ->collection($deals, function(Transaction $transaction) {
+                ->collection($deals, function(Deal $deal) {
                         return [
                             'deal_id' => $transaction->deal_id,
                             'deal_item' => $transaction->deal_item,
