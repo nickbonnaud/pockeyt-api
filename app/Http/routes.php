@@ -74,7 +74,6 @@ Route::patch('bill/charge/{transactionId}', 'TransactionsController@chargeExisti
 Route::post('purchased/deals', 'TransactionsController@getPurchased');
 Route::post('user/purchases', 'TransactionsController@getUserPurchases');
 Route::post('user/deals', 'TransactionsController@getUserDeals');
-Route::post('user/deals/all', 'TransactionsController@getDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
 Route::post('business/transactions', 'TransactionsController@getTransactions');
 Route::post('business/transactions/finalized', 'TransactionsController@getFinalizedTransactions');
@@ -146,6 +145,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transaction/open', 'TransactionsController@hasBill');
     Route::post('transaction/bill', 'TransactionsController@requestBill');
     Route::get('transactions/recent', 'TransactionsController@getRecentTransactions');
+    Route::post('transactions/deals', 'TransactionsController@getDeals');
 });
 
 //Quickbook Routes
