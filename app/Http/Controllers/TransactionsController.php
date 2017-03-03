@@ -512,7 +512,6 @@ class TransactionsController extends Controller
                             'deal_id' => $transaction->deal_id,
                             'deal_item' => $transaction->deal_item,
                             'end_date' => $transaction->end_date,
-                            'deal_id' => $transaction->deal_id,
                             'message' => $transaction->message,
                             'post_photo_path' => $transaction->photo_path,
                             'price' => $transaction->price,
