@@ -499,7 +499,7 @@ class TransactionsController extends Controller
     public function getDeals(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
         $deals = DB::table('transactions')
-            ->join('posts', function($join) {
+            ->join('posts', function($join, $user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user->id);
             })
