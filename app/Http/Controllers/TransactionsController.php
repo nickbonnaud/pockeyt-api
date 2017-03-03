@@ -498,13 +498,12 @@ class TransactionsController extends Controller
 
     public function getDeals(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
-        $user = 406;
         $deals = DB::table('transactions')
             ->join('posts', function($join) use ($user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user);
             })
-            ->orderBy('updated_at', 'desc')->get();
+            ->get();
 
         return response()->json($deals);
     }
