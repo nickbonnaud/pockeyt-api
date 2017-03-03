@@ -113,6 +113,7 @@ class PostsController extends Controller {
         }
 
         $post['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
+        $post['price'] = $request->price * 100;
 
         $this->user->profile->posts()->save($post);
         return redirect()->back();

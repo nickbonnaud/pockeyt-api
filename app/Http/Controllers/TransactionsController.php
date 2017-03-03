@@ -498,14 +498,35 @@ class TransactionsController extends Controller
 
     public function getDeals(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
-        $deals = DB::table('transactions')
+        $paginator = DB::table('transactions')
             ->join('posts', function($join) use ($user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user->id);
             })
-            ->get();
+            ->paginate(20);
 
-        return response()->json($deals);
+            $deals = $paginator->getCollection();
+            return fractal()
+                ->collection($deals, function(Transaction $transaction) {
+                        return [
+                            'deal_id' => $transaction->deal_id,
+                            'deal_item' => $transaction->deal_item,
+                            'end_date' => $transaction->end_date,
+                            'deal_id' => $transaction->deal_id,
+                            'message' => $transaction->message,
+                            'post_photo_path' => $transaction->photo_path,
+                            'price' => $transaction->price,
+                            'business_id' => $transaction->profile_id,
+                            'redeemed' => $transaction->redeemed,
+                            'business_thumb_path' => $transaction->thumb_path,
+                            'tax' => $transaction->tax,
+                            'total' => $transaction->total,
+                            'customer_id' => $transaction->user_id,
+                            'purchased_on' => $transaction->updated_at
+                        ];
+                })
+            ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+            ->toArray();
     }
 }
 
