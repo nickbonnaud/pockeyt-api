@@ -74,9 +74,11 @@ Route::patch('bill/charge/{transactionId}', 'TransactionsController@chargeExisti
 Route::post('purchased/deals', 'TransactionsController@getPurchased');
 Route::post('user/purchases', 'TransactionsController@getUserPurchases');
 Route::post('user/deals', 'TransactionsController@getUserDeals');
+Route::post('user/deals/all', 'TransactionsController@getDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
 Route::post('business/transactions', 'TransactionsController@getTransactions');
 Route::post('business/transactions/finalized', 'TransactionsController@getFinalizedTransactions');
+
 
 // Connect Routes
 Route::get('connect/facebook', 'ConnectController@connectFB');

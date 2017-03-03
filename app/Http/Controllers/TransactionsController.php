@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Events\RewardNotification;
 use App\Events\TransactionsChange;
 use App\Events\ErrorNotification;
+use Illuminate\Support\Facades\DB;
 use App\Events\CustomerRequestBill;
 use App\Http\Requests\TransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
@@ -493,6 +494,18 @@ class TransactionsController extends Controller
             })
         ->paginateWith(new IlluminatePaginatorAdapter($paginator))
         ->toArray();
+    }
+
+    public function getDeals(Request $request) {
+        $user = JWTAuth::parseToken()->authenticate();
+        $deals = DB::table('transactions')
+            ->join('posts', function($join) {
+                $join->on('transactions.deal_id', '=', 'posts.id')
+                    ->where('transactions.user_id', '=', $user->id);
+            })
+            ->orderBy('updated_at', 'desc')->get();
+
+        return response()->json($deals);
     }
 }
 
