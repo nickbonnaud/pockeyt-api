@@ -500,7 +500,7 @@ class TransactionsController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
         $user = 406;
         $deals = DB::table('transactions')
-            ->join('posts', function($join, $user) {
+            ->join('posts', function($join) use ($user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user);
             })
