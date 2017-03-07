@@ -14,7 +14,6 @@ use App\Http\Requests;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Http\Controllers\Controller;
-use App\Events\CustomerEnterRadius;
 
 class LoyaltyProgramsController extends Controller
 {
@@ -99,10 +98,6 @@ class LoyaltyProgramsController extends Controller
                     ->where('loyalty_cards.user_id', '=', $user->id);
             })
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
-
-            $user = $paginator;
-            $business = 113;
-            return event(new CustomerEnterRadius($user, $business));
 
             $loyaltyCards = $paginator->getCollection();
             return fractal()
