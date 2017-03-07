@@ -4,7 +4,7 @@ return array(
 
     'PockeytIOS'     => array(
         'environment' =>'development',
-        'certificate' =>'DevAPNSCert.pem',
+        'certificate' =>'../pushcert.pem',
         'passPhrase'  =>env('APN_PASSWORD'),
         'service'     =>'apns'
     ),
