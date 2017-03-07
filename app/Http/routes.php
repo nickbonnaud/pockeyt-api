@@ -90,6 +90,9 @@ Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaMedia'
 
 // Loyalty Programs
 Route::resource('loyalty-programs', 'LoyaltyProgramsController');
+Route::group(['prefix' => 'api'], function() {
+    Route::get('loyalty/cards', 'LoyaltyProgramsController@getLoyaltyCards');
+});
 
 
 // JWT Authentication routes

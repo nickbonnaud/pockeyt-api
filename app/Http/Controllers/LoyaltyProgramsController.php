@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use App\User;
 use App\Profile;
 use App\LoyaltyProgram;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoyaltyProgramRequest;
 use App\Http\Requests\DeleteLoyaltyProgramRequest;
 use App\Http\Requests;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Http\Controllers\Controller;
 
 class LoyaltyProgramsController extends Controller
@@ -84,6 +87,37 @@ class LoyaltyProgramsController extends Controller
         }
         $loyaltyProgram->delete();
         return redirect()->route('loyalty-programs.create');
+    }
+
+    public function getLoyaltyCards(Request $request) {
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $paginator = LoyaltyCard::with([])
+            ->join('loyalty-programs', function($join) use ($user) {
+                $join->on('loyalty_cards.program_id', '=', 'loyalty_programs.profile_id')
+                    ->where('loyalty_cards.user_id', '=', $user->id);
+            })
+            ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
+
+            $loyaltyCards = $paginator->getCollection();
+            return response()->json($loyaltyCards);
+            return fractal()
+                ->collection($loyaltyCards, function(LoyaltyCard $loyaltyCard) {
+                        return [
+                            'program_id' => $loyaltyCard->program_id,
+                            'deal_item' => $loyaltyCard->deal_item,
+                            'current_amount' => $loyaltyCard->current_amount,
+                            'rewards_achieved' => $loyaltyCard->rewards_achieved,
+                            'last_purchase' => $loyaltyCard->updated_at,
+                            'is_increment' => $loyaltyCard->is_increment,
+                            'purchases_required' => $loyaltyCard->purchases_required,
+                            'amount_required' => $loyaltyCard->amount_required,
+                            'reward' => $loyaltyCard->reward,
+                        ];
+                })
+            ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+            ->toArray();
+
     }
 
 }
