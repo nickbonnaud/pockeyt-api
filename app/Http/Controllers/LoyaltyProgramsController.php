@@ -94,7 +94,7 @@ class LoyaltyProgramsController extends Controller
 
         $paginator = LoyaltyCard::with([])
             ->join('loyalty-programs', function($join) use ($user) {
-                $join->on('loyalty_cards.program_id', '=', 'loyalty_programs.profile_id')
+                $join->on('loyalty_cards.program_id', '=', 'loyalty_programs.id')
                     ->where('loyalty_cards.user_id', '=', $user->id);
             })
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
