@@ -19,7 +19,8 @@ class LoyaltyProgramsController extends Controller
 {
     
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['getLoyaltyCards']]);
+        $this->middleware('jwt.auth', ['only' => ['getLoyaltyCards']]);
         parent::__construct();
     }
 
