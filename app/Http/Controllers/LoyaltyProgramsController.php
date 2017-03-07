@@ -111,7 +111,8 @@ class LoyaltyProgramsController extends Controller
                             'amount_required' => $loyaltyCard->amount_required,
                             'reward' => $loyaltyCard->reward,
                             'business_thumb_path' => $loyaltyCard->profile->logo->thumbnail_url,
-                            'business_name' => $loyaltyCard->profile->business_name
+                            'business_name' => $loyaltyCard->profile->business_name,
+                            'last_purchase' => $loyaltyCard->updated_at
                         ];
                 })
             ->paginateWith(new IlluminatePaginatorAdapter($paginator))
