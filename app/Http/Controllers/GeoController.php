@@ -59,7 +59,7 @@ class GeoController extends Controller
                 $this->customerExit($user, $business);
                 return response('ok');
             }
-        } elseif ($isHeartBeat || (!$is_heartbeat && !isset($data->geofence))) {
+        } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
             $this->checkDistance($user, $geoLocation);
             return response('ok');
