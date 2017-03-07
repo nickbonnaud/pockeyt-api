@@ -101,7 +101,7 @@ class LoyaltyProgramsController extends Controller
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
             $loyaltyCards = $paginator->getCollection();
             return fractal()
-                ->collection($loyaltyCards, function(LoyaltyCard $loyaltyCard) {
+                ->collection($loyaltyCards, function(LoyaltyProgram $loyaltyCard) {
                         return [
                             'program_id' => $loyaltyCard->program_id,
                             'current_amount' => $loyaltyCard->current_amount,
