@@ -93,9 +93,9 @@ class LoyaltyProgramsController extends Controller
     public function getLoyaltyCards(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
 
-        $paginator = LoyaltyCard::with([])
-            ->join('loyalty_programs', function($join) use ($user) {
-                $join->on('loyalty_cards.program_id', '=', 'loyalty_programs.id')
+        $paginator = LoyaltyProgram::with([])
+            ->join('loyalty_cards', function($join) use ($user) {
+                $join->on('loyalty_programs.id', '=', 'loyalty_cards.program_id')
                     ->where('loyalty_cards.user_id', '=', $user->id);
             })
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
