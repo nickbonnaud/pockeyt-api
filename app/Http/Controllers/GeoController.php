@@ -47,6 +47,11 @@ class GeoController extends Controller
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->is_heartbeat;
 
+        $business = 113;
+        $user = $data;
+        return $this->customerEnter($user, $business);
+
+
         if (!$isHeartBeat) {
             $geoFence = $data->geofence;
             $profile = Profile::findOrFail($geoFence->extras->profile);
