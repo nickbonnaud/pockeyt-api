@@ -99,20 +99,19 @@ class LoyaltyProgramsController extends Controller
                     ->where('loyalty_cards.user_id', '=', $user->id);
             })
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
-            return response()->json($paginator);
             $loyaltyCards = $paginator->getCollection();
             return fractal()
                 ->collection($loyaltyCards, function(LoyaltyCard $loyaltyCard) {
                         return [
                             'program_id' => $loyaltyCard->program_id,
-                            'deal_item' => $loyaltyCard->deal_item,
                             'current_amount' => $loyaltyCard->current_amount,
                             'rewards_achieved' => $loyaltyCard->rewards_achieved,
-                            'last_purchase' => $loyaltyCard->updated_at,
                             'is_increment' => $loyaltyCard->is_increment,
                             'purchases_required' => $loyaltyCard->purchases_required,
                             'amount_required' => $loyaltyCard->amount_required,
                             'reward' => $loyaltyCard->reward,
+                            'business_thumb_path' => $loyaltyCard->profile->logo->thumbnail_url,
+                            'business_name' => $loyaltyCard->profile->business_name
                         ];
                 })
             ->paginateWith(new IlluminatePaginatorAdapter($paginator))
