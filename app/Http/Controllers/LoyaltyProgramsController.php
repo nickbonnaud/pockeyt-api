@@ -98,7 +98,7 @@ class LoyaltyProgramsController extends Controller
                     ->where('loyalty_cards.user_id', '=', $user->id);
             })
             ->orderBy('loyalty_cards.updated_at', 'desc')->paginate(10);
-
+            return response()->json($paginator);
             $loyaltyCards = $paginator->getCollection();
             return fractal()
                 ->collection($loyaltyCards, function(LoyaltyCard $loyaltyCard) {
