@@ -93,10 +93,11 @@ class GeoController extends Controller
                 $storedLocation->delete();
             }
         }
-        return response()->json($user);
+        return;
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
+        return response()->json("shit");
         $storedLocations = Location::where('user_id', '=', $user->id)->get();
         if (!isset($storedLocations)) { 
             foreach ($inLocations as $inLocation) {
