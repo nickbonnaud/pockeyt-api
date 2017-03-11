@@ -97,11 +97,10 @@ class GeoController extends Controller
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
-        return response()->json("dam");
         $storedLocations = Location::where('user_id', '=', $user->id)->get();
         if (!isset($storedLocations)) { 
             foreach ($inLocations as $inLocation) {
-                $this->setLocation($user, $inLocation);
+                return $this->setLocation($user, $inLocation);
             }
         } else {
             foreach ($storedLocations as $storedLocation) {
@@ -115,7 +114,7 @@ class GeoController extends Controller
             }
             if (count($inLocations) > 0) {
                 foreach ($inLocations as $inLocation) {
-                    $this->setLocation($user, $inLocation);
+                    return $this->setLocation($user, $inLocation);
                 }
             }
         }
@@ -132,7 +131,7 @@ class GeoController extends Controller
                 'location_id' => $business
             ]);
         }
-        return;
+        return response()->json("hell");;
     }
 
     public function removeSetLocation($user, $business) {
