@@ -61,7 +61,7 @@ class GeoController extends Controller
             }
         } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
-            return $this->checkDistance($user, $geoLocation);
+            $this->checkDistance($user, $geoLocation);
         }
     }
 
@@ -97,6 +97,7 @@ class GeoController extends Controller
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
+        return response()->json("dam");
         $storedLocations = Location::where('user_id', '=', $user->id)->get();
         if (!isset($storedLocations)) { 
             foreach ($inLocations as $inLocation) {
@@ -122,7 +123,6 @@ class GeoController extends Controller
     }
 
     public function setLocation($user, $business) {
-        return response()->json("shit");
         $location = Location::where(function($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $business);
