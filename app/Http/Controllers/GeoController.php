@@ -83,8 +83,8 @@ class GeoController extends Controller
                 if (!in_array($businessCoord->profile_id, $inLocations)) {
                     array_push($inLocations, $businessCoord->profile_id);
                     $business = $businessCoord->profile_id;
-                    event(new CustomerEnterRadius($user, $business));
                     $businessEnter = $business;
+                    event(new CustomerEnterRadius($user, $business));
                 }
             }
     	}
@@ -95,9 +95,9 @@ class GeoController extends Controller
             if (!isset($storedLocations)) { return; }
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
+                $businessEnter = null;
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
-                $businessEnter = null;
             }
         }
         return $businessEnter;
