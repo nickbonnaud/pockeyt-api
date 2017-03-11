@@ -95,7 +95,7 @@ class GeoController extends Controller
             }
         }
         if (isset($businessEnter)) {
-            return response()->json($businessEnter);
+            return response()->json("anything");
         } else {
             return response("nothing");
         }
