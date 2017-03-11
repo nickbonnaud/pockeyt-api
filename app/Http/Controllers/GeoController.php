@@ -118,7 +118,7 @@ class GeoController extends Controller
                 }
             }
         }
-        return response()->json("dnjak");;
+        return response()->json(['inLocation' => true], 200);
     }
 
     public function setLocation($user, $business) {
@@ -127,11 +127,11 @@ class GeoController extends Controller
                 ->where('location_id', '=', $business);
         })->first();
         if (!isset($location)) { 
-            return $setLocation = $user->locations()->create([
+            $user->locations()->create([
                 'location_id' => $business
             ]);
+            return response()->json(['inLocation' => true], 200);
         }
-        return response()->json("hell");
     }
 
     public function removeSetLocation($user, $business) {
