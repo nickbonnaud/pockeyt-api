@@ -61,7 +61,7 @@ class GeoController extends Controller
             }
         } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
-            $this->checkDistance($user, $geoLocation);
+            return $this->checkDistance($user, $geoLocation);
         }
     }
 
