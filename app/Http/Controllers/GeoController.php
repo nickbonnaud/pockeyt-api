@@ -66,7 +66,6 @@ class GeoController extends Controller
     }
 
     public function checkDistance($user, $geoLocation) {
-        return response()->json($user);
         $businessCoords = DB::table('geo_locations')->get();
     	$userLat = $geoLocation->latitude;
     	$userLng = $geoLocation->longitude;
@@ -94,7 +93,7 @@ class GeoController extends Controller
                 $storedLocation->delete();
             }
         }
-        return;
+        return response()->json($user);
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
