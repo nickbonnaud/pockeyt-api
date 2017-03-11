@@ -118,7 +118,7 @@ class GeoController extends Controller
                 }
             }
         }
-        return;
+        return response()->json("dnjak");;
     }
 
     public function setLocation($user, $business) {
