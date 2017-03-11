@@ -131,7 +131,7 @@ class GeoController extends Controller
                 'location_id' => $business
             ]);
         }
-        return response()->json("hell");;
+        return response()->json("hell");
     }
 
     public function removeSetLocation($user, $business) {
