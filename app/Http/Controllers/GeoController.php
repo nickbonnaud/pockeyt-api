@@ -53,20 +53,15 @@ class GeoController extends Controller
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
-                return response()->json($business);
+                return response('ok');
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                return response()->json($business);
+                return response('ok');
             }
         } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
-            $businessEnter = $this->checkDistance($user, $geoLocation);
-            if (isset($businessEnter)) {
-                return response()->json($businessEnter);
-            } else {
-                return response('ok!!!!');
-            }
+            return $this->checkDistance($user, $geoLocation);
         }
     }
 
@@ -95,12 +90,16 @@ class GeoController extends Controller
             if (!isset($storedLocations)) { return; }
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
-                $businessEnter = null;
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
             }
         }
-        return $businessEnter;
+        if (isset($businessEnter)) {
+            return response()->json($businessEnter);
+        } else {
+            return response("nothing");
+        }
+        
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
