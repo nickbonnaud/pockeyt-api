@@ -66,6 +66,7 @@ class GeoController extends Controller
     }
 
     public function checkDistance($user, $geoLocation) {
+        return response()->json($user);
         $businessCoords = DB::table('geo_locations')->get();
     	$userLat = $geoLocation->latitude;
     	$userLng = $geoLocation->longitude;
@@ -78,7 +79,6 @@ class GeoController extends Controller
                 if (!in_array($businessCoord->profile_id, $inLocations)) {
                     array_push($inLocations, $businessCoord->profile_id);
                     $business = $businessCoord->profile_id;
-                    $businessEnter = $business;
                     event(new CustomerEnterRadius($user, $business));
                 }
             }
@@ -94,12 +94,7 @@ class GeoController extends Controller
                 $storedLocation->delete();
             }
         }
-        if (isset($businessEnter)) {
-            return response()->json($businessEnter);
-        } else {
-            return response("nothing");
-        }
-        
+        return;
     }
 
     public function checkIfUserInLocation($user, $inLocations) {
