@@ -160,14 +160,26 @@ Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
 
 
-// API Routes
+
+//API routes V2
+Route::group(['prefix' => 'api/v2'], function() {
+    Route::get('profiles', 'APIController@getProfilesV2');
+    Route::get('posts', 'APIController@getPostsV2');
+    Route::get('favs', 'APIController@getFavsV2');
+    Route::get('search', 'APIController@getSearchV2');
+    Route::get('events', 'APIController@getEventsV2');
+    Route::get('bookmarks', 'APIController@getBookmarksV2');
+});
+
+
+
+// API Routes V1
 Route::controller('api', 'APIController', [
     'getPosts' => 'api.posts',
     'getPost' => 'api.post',
     'getProfiles' => 'api.profiles',
     'getProfile' => 'api.profile',
 
-    //v1
     'getProfilesv1' => 'api.profilesv1',
     'getpostsv1' => 'api.postsv1',
     'getfavs' => 'api.favs',
@@ -175,13 +187,4 @@ Route::controller('api', 'APIController', [
     'getEvents' => 'api.events',
     'getBlogs' => 'api.blogs',
     'getBookmarks' => 'api.bookmarks',
-
-    //v2
-    'getProfilesV2' => 'api.v2.profiles',
-    'getPostsV2' => 'api.v2.posts',
-    'getFavsV2' => 'api.v2.favs',
-    'getSearchV2' => 'api.v2.search',
-    'getEventsV2' => 'api.v2.events',
-    'getBookmarksV2' => 'api.v2.bookmarks'
-
 ]);
