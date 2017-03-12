@@ -162,8 +162,8 @@ Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoi
 
 
 //API routes V2
-Route::group(['prefix' => 'api/v2'], function() {
-    Route::get('profiles', 'APIController@getProfilesV2');
+Route::group(['prefix' => 'api'], function() {
+    Route::get('v2/profiles', 'APIController@getProfilesV2');
     Route::get('posts', 'APIController@getPostsV2');
     Route::get('favs', 'APIController@getFavsV2');
     Route::get('search', 'APIController@getSearchV2');
