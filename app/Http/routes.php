@@ -167,11 +167,21 @@ Route::controller('api', 'APIController', [
     'getProfiles' => 'api.profiles',
     'getProfile' => 'api.profile',
 
+    //v1
     'getProfilesv1' => 'api.profilesv1',
     'getpostsv1' => 'api.postsv1',
     'getfavs' => 'api.favs',
     'getsearch' => 'api.search',
     'getEvents' => 'api.events',
     'getBlogs' => 'api.blogs',
-    'getBookmarks' => 'api.bookmarks'
+    'getBookmarks' => 'api.bookmarks',
+
+    //v2
+    'getProfilesV2' => 'api.v2.profiles',
+    'getPostsV2' => 'api.v2.posts',
+    'getFavsV2' => 'api.v2.favs',
+    'getSearchV2' => 'api.v2.search',
+    'getEventsV2' => 'api.v2.events',
+    'getBookmarksV2' => 'api.v2.bookmarks'
+
 ]);
