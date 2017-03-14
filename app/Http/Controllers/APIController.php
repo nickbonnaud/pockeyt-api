@@ -538,4 +538,35 @@ class APIController extends Controller {
         }
     }
 
+    public function getBusinessPostsV2(Request $request) {
+        if ($request->has('profile')) {
+            $input = $request->all();
+            $profile = $input['profile'];
+            $profile = explode(',', $profile);
+
+            $paginator = Post::where('profile_id', '=', $profile)->visible()->with([])->latest()->paginate(10);
+            $paginator->appends($input)->render();
+            $posts = $paginator->getCollection();
+            return fractal()
+            ->collection($posts, function(Post $post) {
+                    return [
+                        'id' => (int) $post->id,
+                        'profile_id' => $post->profile_id,
+                        'business_name' => $post->profile->business_name,
+                        'message' => $post->message,
+                        'photo_url' => $post->photo_path,
+                        'published_at' => $post->published_at,
+                        'event_date' => $post->event_date,
+                        'is_redeemable' => $post->is_redeemable,
+                        'deal_item' => $post->deal_item,
+                        'price' => $post->price,
+                        'end_date' => $post->end_date,
+                        'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
+                    ];
+            })
+        ->paginateWith(new IlluminatePaginatorAdapter($paginator))
+        ->toArray();
+        }
+    }
+
 }

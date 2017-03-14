@@ -169,6 +169,7 @@ Route::group(['prefix' => 'api/v2'], function() {
     Route::get('search', 'APIController@getSearchV2');
     Route::get('events', 'APIController@getEventsV2');
     Route::get('bookmarks', 'APIController@getBookmarksV2');
+    Route::get('business/posts', 'APIController@getBusinessPostsV2');
 });
 
 
