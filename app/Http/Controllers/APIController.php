@@ -400,6 +400,10 @@ class APIController extends Controller {
                         'end_date' => $post->end_date,
                         'tags' => $post->profile->tags,
                         'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
+                        'website' => $post->profile->website,
+                        'description' => $post->profile->description,
+                        'formatted_description' => $post->profile->formatted_description,
+                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
                     ];
             })
         ->paginateWith(new IlluminatePaginatorAdapter($paginator))
