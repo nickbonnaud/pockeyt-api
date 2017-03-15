@@ -421,8 +421,9 @@ class APIController extends Controller {
             $search = $request->all();
             $input = $search['input'];
 
-            $paginator = Profile::approved()->where('business_name','LIKE', "%$input%")
-            ->orWhereHas('tags', function ($q) use ($input) {
+            $paginator = Profile::approved()
+                ->where('business_name','LIKE', "%$input%")
+                ->orWhereHas('tags', function ($q) use ($input) {
                 $q->where('name', 'LIKE', "%$input%");
             })
             ->orderBy('business_name', 'ASC')->paginate(10);
@@ -433,10 +434,13 @@ class APIController extends Controller {
             return fractal()
                 ->collection($profiles, function(Profile $profile) {
                         return [
-                        'id' => (int) $profile->id,
+                        'profile_id' => (int) $profile->id,
                         'business_name' => $profile->business_name,
                         'tags' => $profile->tags,
                         'logo' =>  is_null($profile->logo) ? '' : $profile->logo->url,
+                        'website' => $profile->website,
+                        'formatted_description' => $profile->formatted_description,
+                        'hero' => is_null($profile->hero) ? '' : $profile->hero->url,
                         ];
                     })
                 ->paginateWith(new IlluminatePaginatorAdapter($paginator))
