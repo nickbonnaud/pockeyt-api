@@ -499,15 +499,12 @@ class APIController extends Controller {
                         'id' => (int) $post->id,
                         'profile_id' => $post->profile_id,
                         'business_name' => $post->profile->business_name,
-                        'message' => $post->message,
+                        'title' => $post->title,
+                        'body' => $post->body,
                         'photo_url' => $post->photo_path,
                         'published_at' => $post->published_at,
                         'event_date' => $post->event_date,
                         'is_redeemable' => $post->is_redeemable,
-                        'deal_item' => $post->deal_item,
-                        'price' => $post->price,
-                        'end_date' => $post->end_date,
-                        'tags' => $post->profile->tags,
                         'logo' =>  is_null($post->profile->logo) ? '' : $post->profile->logo->url,
                     ];
             })
