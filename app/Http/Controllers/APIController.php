@@ -339,10 +339,13 @@ class APIController extends Controller {
         return fractal()
             ->collection($profiles, function(Profile $profile) {
                     return [
-                        'id' => (int) $profile->id,
+                        'profile_id' => (int) $profile->id,
                         'business_name' => $profile->business_name,
                         'tags' => $profile->tags,
                         'logo' =>  is_null($profile->logo) ? '' : $profile->logo->url,
+                        'website' => $post->profile->website,
+                        'formatted_description' => $post->profile->formatted_description,
+                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
                     ];
                 })
             ->paginateWith(new IlluminatePaginatorAdapter($paginator))
