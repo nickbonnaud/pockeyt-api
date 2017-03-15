@@ -343,9 +343,9 @@ class APIController extends Controller {
                         'business_name' => $profile->business_name,
                         'tags' => $profile->tags,
                         'logo' =>  is_null($profile->logo) ? '' : $profile->logo->url,
-                        'website' => $post->profile->website,
-                        'formatted_description' => $post->profile->formatted_description,
-                        'hero' => is_null($post->profile->hero) ? '' : $post->profile->hero->url,
+                        'website' => $profile->website,
+                        'formatted_description' => $profile->formatted_description,
+                        'hero' => is_null($profile->hero) ? '' : $profile->hero->url,
                     ];
                 })
             ->paginateWith(new IlluminatePaginatorAdapter($paginator))
