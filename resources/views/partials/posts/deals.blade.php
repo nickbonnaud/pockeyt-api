@@ -11,7 +11,7 @@
             <img src="{{ $post->photo_path}}">
             <hr>
         @endif
-        <i>This post is redeemable for ${{ $post->price }}</i>
+        <i>This post is redeemable for ${{ $post->price / 100 }}</i>
         @if($signedIn && ($isAdmin || $user->profile->owns($post)))
           @include('partials.posts.delete')
         @endif
