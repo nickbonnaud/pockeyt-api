@@ -529,6 +529,8 @@ class APIController extends Controller {
                         'profile_id' => $post->profile_id,
                         'business_name' => $post->profile->business_name,
                         'message' => $post->message,
+                        'title' => $post->title,
+                        'body' => $post->body,
                         'photo_url' => $post->photo_path,
                         'published_at' => $post->published_at,
                         'event_date' => $post->event_date,
