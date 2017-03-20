@@ -95,6 +95,7 @@ class PostsController extends Controller {
         }
 
         $post['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
+        $post['message'] = $request->title . "\n" . $request->body;
 
         $this->user->profile->posts()->save($post);
         return redirect()->back();
