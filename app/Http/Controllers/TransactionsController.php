@@ -260,6 +260,41 @@ class TransactionsController extends Controller
         }
     }
 
+    public function purchaseDeal(Request $request) {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $profile = Profile::findOrFail($request->profile_id);
+        $transaction = new Transaction;
+
+        $transaction->profile_id = $request->business_id;
+        $transaction->user_id = $customer->id;
+        $transaction->paid = false;
+        $transaction->deal_id = $request->id;
+        $transaction->net_sales = $request->price;
+
+        $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales + $transaction->net_sales);
+        $total = $transaction->net_sales + $tax;
+        $transaction->tax = $tax;
+        $transaction->total = $total;
+
+        $products = ['name' => $request->deal_item, 'price' => $request->price, 'quantity' => 1];
+        $transaction->products = json_encode($products);
+
+        $profile->transactions()->save($transaction);
+        $result = $this->createCharge($transaction, $customer, $profile->id);
+
+        if ($result->success) {
+            $transaction->paid = true;
+            $transaction->status = 20;
+            $transaction->save();
+            return response()->json(['success' => 'Post Purchased'], 200);
+        } else {
+            $transaction->paid = false;
+            $transaction->status = 1;
+            $transaction->save();
+            return response()->json(['error' => 'Unable to charge card.'], 400);
+        }
+    }
+
     private function createCharge($transaction, $customer, $profileId) {
         $amount = (round($transaction->total)) / 100;
         $serviceFee = round($amount * 0.02, 2);
