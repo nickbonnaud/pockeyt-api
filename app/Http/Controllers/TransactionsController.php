@@ -473,7 +473,7 @@ class TransactionsController extends Controller
         $paginator = Transaction::where(function($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', true);
-        })->orderBy('updated_at', 'desc')->paginate(20);
+        })->orderBy('updated_at', 'desc')->paginate(10);
 
         $transactions = $paginator->getCollection();
         return fractal()
