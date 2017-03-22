@@ -277,9 +277,10 @@ class TransactionsController extends Controller
         $transaction->tax = $tax;
         $transaction->total = $total;
 
-        $transaction->products = [];
         $products = json_encode(['name' => $request->deal_item, 'price' => $request->price, 'quantity' => 1]);
-        array_push($transaction->products, $products);
+        $productsItem = [];
+        array_push($productsItem, $products);
+        $transaction->products = $productsItem;
 
         $profile->transactions()->save($transaction);
         $result = $this->createCharge($transaction, $customer, $profile->id);
