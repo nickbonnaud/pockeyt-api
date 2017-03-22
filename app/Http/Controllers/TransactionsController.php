@@ -272,7 +272,7 @@ class TransactionsController extends Controller
         $transaction->deal_id = $request->id;
         $transaction->net_sales = $request->price;
 
-        $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales + $transaction->net_sales);
+        $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales);
         $total = $transaction->net_sales + $tax;
         $transaction->tax = $tax;
         $transaction->total = $total;
