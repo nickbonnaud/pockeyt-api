@@ -5,8 +5,8 @@
     <textarea type="text" name="message" id="message" class="form-control" rows="5" required></textarea>
   </div>
   <div class="form-group">
-    <label for="deal_item">What does your customer receive?</label>
-    <input class="form-control" type="text" name="deal_item" id="deal_item" placeholder="Examples: Entrance to show or limited release product" required>
+    <label for="deal_item">Purchase this post to receive:</label>
+    <input class="form-control" type="text" name="deal_item" id="deal_item" placeholder="Examples: Entrance to show or a limited time offer" required>
   </div>
   <div class="form-group">
   	<label for="price">Price of Deal</label>
@@ -27,7 +27,7 @@
     	<div class="input-group-addon">
     		<i class="fa fa-calendar"></i>
     	</div>
-    	<input type="text" class="form-control pull-right" id="end_date_pretty">
+    	<input type="text" class="form-control pull-right" id="end_date_pretty" required>
     </div>
   </div>
 
