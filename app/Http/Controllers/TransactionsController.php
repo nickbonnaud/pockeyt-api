@@ -536,7 +536,7 @@ class TransactionsController extends Controller
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user->id);
             })
-            ->orderBy('redeemed', 'desc')->paginate(10);
+            ->orderBy('redeemed', 'asc')->paginate(10);
 
             $transactions = $paginator->getCollection();
             return fractal()
