@@ -29,7 +29,7 @@ class AnalyticsController extends Controller
 			$post->save();
 
 			if (isset($user)) {
-				$postAnalytics = PostAnalytics::where(function($query) use ($user, $post) {
+				$postAnalytics = PostsAnalytics::where(function($query) use ($user, $post) {
           $query->where('user_id', '=', $user->id)
               ->where('post_id', '=', $post->id);
         })->first();
