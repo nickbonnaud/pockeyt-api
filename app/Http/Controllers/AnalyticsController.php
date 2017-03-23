@@ -18,8 +18,14 @@ class AnalyticsController extends Controller
 
 	public function viewedPosts(Request $request) {
 		$user = JWTAuth::parseToken()->authenticate();
+		$viewedPosts = $request->all();
 		if (isset($user)) {
-		 	$viewedPosts = $request->all();
+			foreach ($viewedPosts as $viewedPost) {
+				$post = Post::findOrFail($viewedPost);
+				$views = $post->views;
+				$post->views = $views + 1;
+				$post->save();
+			}
 		 	return response($viewedPosts);
 		} 
 	}	
