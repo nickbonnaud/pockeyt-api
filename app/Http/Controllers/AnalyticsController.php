@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 Use Illuminate\HttpResponse;
 use App\Http\Requests;
 use JWTAuth;
+use App\Post;
 use App\Http\Controllers\Controller;
 
 class AnalyticsController extends Controller
