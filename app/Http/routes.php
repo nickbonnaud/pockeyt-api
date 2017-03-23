@@ -152,12 +152,16 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transactions/deals', 'TransactionsController@getDeals');
 });
 
+//Analytics routes
+Route::group(['prefix' => 'api'], function() {
+    Route::post('analytics/posts/viewed', 'AnalyticsController@viewedPosts');
+});
+
 //Quickbook Routes
 Route::get('qbo/oauth','QuickBookController@qboOauth');
 Route::get('qbo/success','QuickBookController@qboSuccess');
 Route::get('qbo/tax', 'QuickBookController@qboTax')->name('qbo.tax');
 Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
-
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
 
 
