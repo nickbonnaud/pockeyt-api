@@ -48,5 +48,65 @@ class AnalyticsController extends Controller
 			}
 		}
 		return response()->json($viewedPosts);
-	}	
+	}
+
+	public function interactionPosts(Request $request) {
+		$user = JWTAuth::parseToken()->authenticate();
+		$interaction = $request->all();
+		$post = Post::findOrFail($interaction->postId);
+
+		if ($interaction->type === 'share') {
+			$shares = $post->shares;
+			$post->shares = $shares + 1;
+		} elseif ($interaction->type === 'bookmark') {
+			if ($interaction->action === 'add') {
+				$bookmarks = $post->bookmarks;
+				$post->bookmarks = $bookmarks + 1;
+			} elseif ($interaction->action === 'remove') {
+				$bookmarks = $post->bookmarks;
+				$post->bookmarks = $bookmarks - 1;
+			}
+		}
+		$post->save();
+
+		if (isset($user)) {
+			$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
+        $query->where('user_id', '=', $user->id)
+            ->where('post_id', '=', $post->id);
+      })->first();
+
+      if (isset($postAnalytic)) {
+      	if ($interaction->type === 'share') {
+      		$postAnalytic->shared = true;
+      		$postAnalytic->shared_on = Carbon::now(new DateTimeZone(config('app.timezone')));
+      	} elseif ($interaction->type === 'bookmark') {
+      		if ($interaction->action === 'add') {
+      			$postAnalytic->bookmarked = true;
+      			$postAnalytic->bookmarked_on = Carbon::now(new DateTimeZone(config('app.timezone')));
+      		} elseif ($interaction->action === 'remove') {
+      			$postAnalytic->bookmarked = false;
+      			$postAnalytic->bookmarked_on = null;
+      		}
+      	}
+      } else {
+      	$postAnalytic = new PostAnalytic;
+      	$postAnalytic->business_id = $post->profile_id;
+      	$postAnalytic->post_id = $post->id;
+      	if ($interaction->type === 'share') {
+      		$postAnalytic->shared = true;
+      		$postAnalytic->shared_on = Carbon::now(new DateTimeZone(config('app.timezone')));
+      	} elseif ($interaction->type === 'bookmark') {
+      		if ($interaction->action === 'add') {
+      			$postAnalytic->bookmarked = true;
+      			$postAnalytic->bookmarked_on = Carbon::now(new DateTimeZone(config('app.timezone')));
+      		} elseif ($interaction->action === 'remove') {
+      			$postAnalytic->bookmarked = false;
+      			$postAnalytic->bookmarked_on = null;
+      		}
+      	}
+      }
+      $user->postAnalytics()->save($postAnalytic);
+		}
+		return response()->json($interaction);
+	}
 }

@@ -155,6 +155,7 @@ Route::group(['prefix' => 'api'], function() {
 //Analytics routes
 Route::group(['prefix' => 'api'], function() {
     Route::post('analytics/posts/viewed', 'AnalyticsController@viewedPosts');
+    Route::post('analytics/posts/interaction', 'AnalyticsController@interactionPosts');
 });
 
 //Quickbook Routes
