@@ -47,6 +47,6 @@ class AnalyticsController extends Controller
         $user->postAnalytics()->save($postAnalytic);
 			}
 		}
-		return response()->json(['success' => 'viewed posts analytics updated'], 200);
+		return response()->json($viewedPosts);
 	}	
 }
