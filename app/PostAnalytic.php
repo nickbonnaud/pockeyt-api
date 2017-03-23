@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Builder;
 
-class PostAnalytics extends Model {
+class PostAnalytic extends Model {
    
     protected $fillable = [
     	'user_id',
@@ -22,8 +22,8 @@ class PostAnalytics extends Model {
     public static function boot() {
         parent::boot();
 
-        static::created(function(PostAnalytics $postAnalytics) {
-            $postAnalytics->user->touch();
+        static::created(function(PostAnalytic $postAnalytic) {
+            $postAnalytic->user->touch();
         });
     }
 
