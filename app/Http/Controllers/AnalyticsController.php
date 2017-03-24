@@ -108,6 +108,6 @@ class AnalyticsController extends Controller
       }
       $user->postAnalytics()->save($postAnalytic);
 		}
-		return response()->json($interaction);
+		return response()->json(['success' => 'Updated post analytics'], 200);
 	}
 }
