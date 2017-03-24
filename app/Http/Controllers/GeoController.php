@@ -131,7 +131,7 @@ class GeoController extends Controller
             $profile = Profile::findOrFail($business);
             $location = $user->locations()->create([
                 'location_id' => $business,
-                'business_logo' => $profile->logo->thumbnail_url
+                'business_logo' => $profile->logo
             ]);
             return $location;
         }
