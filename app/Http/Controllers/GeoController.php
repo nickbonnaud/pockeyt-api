@@ -86,13 +86,13 @@ class GeoController extends Controller
             return $this->checkIfUserInLocation($user, $inLocations);
         } else {
             $storedLocations = Location::where('user_id', '=', $user->id)->get();
-            if (!isset($storedLocations)) { return response()->json(['inLocation' => false], 200);}
+            if (!isset($storedLocations)) { return response()->json(['currentLocations' => false], 200);}
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
             }
-            return response()->json(['inLocation' => false], 200);
+            return response()->json(['currentLocations' => false], 200);
         }
     }
 
@@ -117,8 +117,8 @@ class GeoController extends Controller
                     return $this->setLocation($user, $inLocation);
                 }
             }
-        }
-        return response()->json(['inLocation' => true], 200);
+        $currentLocations = Location::where('user_id', '=', $user->id)->get();
+        return response()->json($currentLocations);
     }
 
     public function setLocation($user, $business) {
@@ -126,11 +126,13 @@ class GeoController extends Controller
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $business);
         })->first();
-        if (!isset($location)) { 
-            $user->locations()->create([
-                'location_id' => $business
+        if (!isset($location)) {
+            $profile = Profile::findOrFail($business);
+            $location = $user->locations()->create([
+                'location_id' => $business,
+                'business_logo' => $profile->logo->thumbnail_url
             ]);
-            return response()->json(['inLocation' => true], 200);
+            return $location;
         }
     }
 
