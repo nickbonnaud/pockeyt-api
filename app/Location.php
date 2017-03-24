@@ -11,7 +11,7 @@ class Location extends Model {
      *
      * @var array
      */
-    protected $fillable = [ 'location_id' ];
+    protected $fillable = [ 'location_id', 'business_logo' ];
 
     public static function boot() {
         parent::boot();
