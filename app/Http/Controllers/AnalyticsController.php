@@ -55,14 +55,15 @@ class AnalyticsController extends Controller
 		$type = $request->type;
 		$post = Post::findOrFail($request->postId);
 
-		if ($interaction->type === 'share') {
+		if ($type === 'share') {
 			$shares = $post->shares;
 			$post->shares = $shares + 1;
-		} elseif ($interaction->type === 'bookmark') {
-			if ($interaction->action === 'add') {
+		} elseif ($type === 'bookmark') {
+			$action = $request->action;
+			if ($action === 'add') {
 				$bookmarks = $post->bookmarks;
 				$post->bookmarks = $bookmarks + 1;
-			} elseif ($interaction->action === 'remove') {
+			} elseif ($action === 'remove') {
 				$bookmarks = $post->bookmarks;
 				$post->bookmarks = $bookmarks - 1;
 			}
@@ -76,14 +77,14 @@ class AnalyticsController extends Controller
       })->first();
 
       if (isset($postAnalytic)) {
-      	if ($interaction->type === 'share') {
+      	if ($type === 'share') {
       		$postAnalytic->shared = true;
       		$postAnalytic->shared_on = Carbon::now(new DateTimeZone(config('app.timezone')));
-      	} elseif ($interaction->type === 'bookmark') {
-      		if ($interaction->action === 'add') {
+      	} elseif ($type === 'bookmark') {
+      		if ($action === 'add') {
       			$postAnalytic->bookmarked = true;
       			$postAnalytic->bookmarked_on = Carbon::now(new DateTimeZone(config('app.timezone')));
-      		} elseif ($interaction->action === 'remove') {
+      		} elseif ($action === 'remove') {
       			$postAnalytic->bookmarked = false;
       			$postAnalytic->bookmarked_on = null;
       		}
@@ -92,14 +93,14 @@ class AnalyticsController extends Controller
       	$postAnalytic = new PostAnalytic;
       	$postAnalytic->business_id = $post->profile_id;
       	$postAnalytic->post_id = $post->id;
-      	if ($interaction->type === 'share') {
+      	if ($type === 'share') {
       		$postAnalytic->shared = true;
       		$postAnalytic->shared_on = Carbon::now(new DateTimeZone(config('app.timezone')));
-      	} elseif ($interaction->type === 'bookmark') {
-      		if ($interaction->action === 'add') {
+      	} elseif ($type === 'bookmark') {
+      		if ($action === 'add') {
       			$postAnalytic->bookmarked = true;
       			$postAnalytic->bookmarked_on = Carbon::now(new DateTimeZone(config('app.timezone')));
-      		} elseif ($interaction->action === 'remove') {
+      		} elseif ($action === 'remove') {
       			$postAnalytic->bookmarked = false;
       			$postAnalytic->bookmarked_on = null;
       		}
