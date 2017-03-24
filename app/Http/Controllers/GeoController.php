@@ -117,6 +117,7 @@ class GeoController extends Controller
                     return $this->setLocation($user, $inLocation);
                 }
             }
+        }
         $currentLocations = Location::where('user_id', '=', $user->id)->get();
         return response()->json($currentLocations);
     }
