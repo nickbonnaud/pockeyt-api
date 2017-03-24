@@ -52,8 +52,8 @@ class AnalyticsController extends Controller
 
 	public function interactionPosts(Request $request) {
 		$user = JWTAuth::parseToken()->authenticate();
-		$interaction = $request->all();
-		$post = Post::findOrFail($interaction->postId);
+		$type = $request->type;
+		$post = Post::findOrFail($request->postId);
 
 		if ($interaction->type === 'share') {
 			$shares = $post->shares;
