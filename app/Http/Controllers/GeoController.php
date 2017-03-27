@@ -106,8 +106,9 @@ class GeoController extends Controller
             }
         } else {
             foreach ($storedLocations as $storedLocation) {
-                if (!in_array($storedLocation->location_id, $inLocations)) {
-                    event(new CustomerLeaveRadius($user, $storedLocation));
+                $business = $storedLocation->location_id
+                if (!in_array($business, $inLocations)) {
+                    event(new CustomerLeaveRadius($user, $business));
                     $storedLocation->delete();
                 } else {
                     $key = array_search($storedLocation->location_id, $inLocations);
