@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\PushId;
 use JWTAuth;
 use App\Location;
 use App\Profile;
@@ -133,6 +134,14 @@ class GeoController extends Controller
                 'location_id' => $business,
                 'business_logo' => $profile->logo->thumbnail_url
             ]);
+            $bill = Transaction::where(function($query) use ($user,$business) {
+                $query->where('user_id', '=', $user->id)
+                    ->where('profile_id', '=', $business)
+                    ->where('paid', '=', false);
+            })->first();
+            if (!isset($bill)) {
+                $this->sendEnterNotif($user, $business);
+            }
             return $location;
         }
     }
@@ -146,6 +155,26 @@ class GeoController extends Controller
            return $location->delete();
         }
         return;
+    }
+
+    public function sendEnterNotif($user, $business) {
+        $business = Profile::findOrFail($business);
+        $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
+            array(  'category' => 'default',
+                    'locKey' => '1',
+                    'custom' => array(
+                        'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
+                    )
+        ));
+        $token =  PushId::where('user_id', '=', $user->id)->first();
+        if ($token->device_type === 'iOS') {
+            $pushService = 'PockeytIOS';
+        } else {
+            $pushService = 'PockeytAndroid';
+        }
+        return $collection = \PushNotification::app($pushService)
+          ->to($token->push_token)
+          ->send($message);
     }
 
     public function customerEnter($user, $business) {
