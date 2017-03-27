@@ -53,7 +53,8 @@ class GeoController extends Controller
             $profile = Profile::findOrFail($geoFence->extras->profile);
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
-                $currentLocations = $this->customerEnter($user, $business);
+                $this->customerEnter($user, $business);
+                $currentLocations = Location::where('user_id', '=', $user->id)->get();
                 return response()->json($currentLocations);
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
@@ -179,7 +180,7 @@ class GeoController extends Controller
 
     public function customerEnter($user, $business) {
         event(new CustomerEnterRadius($user, $business));
-        return $location = $this->setLocation($user, $business);
+        return $this->setLocation($user, $business);
     }
 
     public function customerExit($user, $business) {
