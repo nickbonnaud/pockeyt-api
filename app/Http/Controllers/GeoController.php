@@ -53,12 +53,12 @@ class GeoController extends Controller
             $profile = Profile::findOrFail($geoFence->extras->profile);
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
-                $this->customerEnter($user, $business);
-                return response('ok');
+                $location = $this->customerEnter($user, $business);
+                return response($location);
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                return response('ok');
+                return response('exit');
             }
         } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
