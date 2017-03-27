@@ -55,7 +55,7 @@ class GeoController extends Controller
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
                 $currentLocations = Location::where('user_id', '=', $user->id)->get();
-                return response()->json($currentLocations);
+                
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
