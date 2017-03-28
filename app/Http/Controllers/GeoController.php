@@ -43,7 +43,9 @@ class GeoController extends Controller
 
     public function postLocationMonitor(Request $request)
     {
+        
         $user = JWTAuth::parseToken()->authenticate();
+        return $this->sendEnterNotif($user);
         $data = $request->all();
         $data = json_decode(json_encode($data));
         $isHeartBeat = $data->is_heartbeat;
@@ -139,7 +141,10 @@ class GeoController extends Controller
                     ->where('profile_id', '=', $business)
                     ->where('paid', '=', false);
             })->first();
-            return $this->sendEnterNotif($user, $profile);
+            if (!isset($bill)) {
+                $this->sendEnterNotif($user, $profile);
+            }
+            return $location;
         }
     }
 
@@ -154,7 +159,8 @@ class GeoController extends Controller
         return;
     }
 
-    public function sendEnterNotif($user, $business) {
+    public function sendEnterNotif($user) {
+        $business = Profile::findOrFail(113);
         $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
             array(  'category' => 'default',
                     'locKey' => '1',
@@ -171,7 +177,6 @@ class GeoController extends Controller
         $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
-        return;
     }
 
     public function customerEnter($user, $business) {
