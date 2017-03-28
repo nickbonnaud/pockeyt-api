@@ -174,6 +174,7 @@ class GeoController extends Controller
         $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
+        return;
     }
 
     public function customerEnter($user, $business) {
