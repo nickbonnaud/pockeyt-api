@@ -172,7 +172,7 @@ class GeoController extends Controller
         } else {
             $pushService = 'PockeytAndroid';
         }
-        $collection = \PushNotification::app($pushService)
+        return $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
     }
