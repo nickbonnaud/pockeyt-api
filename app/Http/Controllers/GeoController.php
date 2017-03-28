@@ -140,7 +140,7 @@ class GeoController extends Controller
                     ->where('paid', '=', false);
             })->first();
             if (!isset($bill)) {
-                return $this->sendEnterNotif($user, $business);
+                $this->sendEnterNotif($user, $business);
             }
             return $location;
         }
@@ -172,7 +172,7 @@ class GeoController extends Controller
         } else {
             $pushService = 'PockeytAndroid';
         }
-        return $collection = \PushNotification::app($pushService)
+        $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
     }
