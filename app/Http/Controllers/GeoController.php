@@ -54,8 +54,7 @@ class GeoController extends Controller
             if ($geoFence->action === 'ENTER') {
                 $business = $profile->id;
                 $this->customerEnter($user, $business);
-                $currentLocations = Location::where('user_id', '=', $user->id)->get();
-                return response()->json($currentLocations);
+                return $this->sendResponse($user);
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
@@ -121,8 +120,7 @@ class GeoController extends Controller
                 }
             }
         }
-        $currentLocations = Location::where('user_id', '=', $user->id)->get();
-        return response()->json($currentLocations);
+        return $this->sendResponse($user);
     }
 
     public function setLocation($user, $business) {
@@ -197,6 +195,11 @@ class GeoController extends Controller
                 ->where('location_id', '=', $businessId);
         })->first();
         $locationCheck->delete();
+    }
+
+    public function sendResponse($user) {
+        $currentLocations = Location::where('user_id', '=', $user->id)->get();
+        return response()->json($currentLocations);
     }
 
     private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
