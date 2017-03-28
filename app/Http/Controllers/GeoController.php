@@ -140,7 +140,7 @@ class GeoController extends Controller
                     ->where('paid', '=', false);
             })->first();
             if (!isset($bill)) {
-                $this->sendEnterNotif($user, $business);
+                return $this->sendEnterNotif($user, $business);
             }
             return $location;
         }
