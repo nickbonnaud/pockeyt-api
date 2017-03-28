@@ -139,10 +139,7 @@ class GeoController extends Controller
                     ->where('profile_id', '=', $business)
                     ->where('paid', '=', false);
             })->first();
-            if (!isset($bill)) {
-                $this->sendEnterNotif($user, $business);
-            }
-            return $location;
+            return $this->sendEnterNotif($user, $profile);
         }
     }
 
@@ -158,7 +155,6 @@ class GeoController extends Controller
     }
 
     public function sendEnterNotif($user, $business) {
-        $business = Profile::findOrFail($business);
         $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
             array(  'category' => 'default',
                     'locKey' => '1',
@@ -172,9 +168,10 @@ class GeoController extends Controller
         } else {
             $pushService = 'PockeytAndroid';
         }
-        return $collection = \PushNotification::app($pushService)
+        $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
+        return
     }
 
     public function customerEnter($user, $business) {
