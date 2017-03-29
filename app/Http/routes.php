@@ -140,7 +140,7 @@ Route::group(['prefix' => 'api'], function() {
 });
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 
-//transaction routes
+//` routes
 Route::group(['prefix' => 'api'], function() {
     Route::put('transaction/accept', 'TransactionsController@userConfirmBill');
     Route::put('transaction/decline', 'TransactionsController@userDeclineBill');
@@ -149,6 +149,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transaction/open', 'TransactionsController@hasBill');
     Route::post('transaction/bill', 'TransactionsController@requestBill');
     Route::post('transaction/deal', 'TransactionsController@purchaseDeal');
+    Route::get('transaction/sent', 'TransactionsController@getSentTransaction');
     Route::get('transactions/recent', 'TransactionsController@getRecentTransactions');
     Route::get('transactions/deals', 'TransactionsController@getDeals');
 });

@@ -248,6 +248,22 @@ class TransactionsController extends Controller
         }
     }
 
+    public function getSentTransaction() {
+        $customer = JWTAuth::parseToken()->authenticate();
+        $transaction = Transaction::where(function ($query) use ($customer) {
+            $query->where('user_id', '=', $customer->id)
+                ->where('paid', '=', false)
+                ->where('status', '=', 11);
+        })->first();
+        if (!$transaction) {
+            return response()->json(['noBill' => 'No Open Bills'], 200);
+        } else {
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $profile['logo_photo'] = $profile->logo->thumbnail_url;
+            return response()->json(array('customer' => $customer, 'transaction' => $transaction, 'profile' => $profile));
+        }
+    }
+
     public function hasBill() {
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::where(function ($query) use ($customer) {
