@@ -270,10 +270,14 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', false);
         })->first();
-        if (isset($transaction)) {
-            return response()->json(true, 200);
+        if (!$transaction) {
+            return response()->json(false, 200);
         } else {
-            return response()->json(false, 404);
+            if ($transaction->status == 11) {
+                return response()->json(['billSent' => true], 200);
+            } else {
+                return response()->json(['billSent' => false], 200);
+            }
         }
     }
 
