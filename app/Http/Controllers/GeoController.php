@@ -124,12 +124,12 @@ class GeoController extends Controller
     }
 
     public function setLocation($user, $business) {
-        $location = Location::where(function($query) use ($user, $business) {
+        $profile = Profile::findOrFail($business);
+        $location = Location::where(function($query) use ($user, $profile) {
             $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business);
+                ->where('location_id', '=', $profile->id);
         })->first();
         if (!isset($location)) {
-            $profile = Profile::findOrFail($business);
             $location = $user->locations()->create([
                 'location_id' => $business,
                 'business_logo' => $profile->logo->thumbnail_url
@@ -199,6 +199,16 @@ class GeoController extends Controller
 
     public function sendResponse($user) {
         $currentLocations = Location::where('user_id', '=', $user->id)->get();
+        if (count($currentLocations) > 1) {
+            $locationIds = [];
+            foreach ($currentLocations as $currentLocation) {
+                if (in_array($currentLocation->location_id, $locationIds)) {
+                    $currentLocations->forget($currentLocation->id);
+                } else {
+                    array_push($locationIds, $currentLocation->location_id);
+                }
+            }
+        }
         return response()->json($currentLocations);
     }
 

@@ -109,6 +109,7 @@ class TransactionsController extends Controller
           'category' => 'payment',
           'locKey' => '1',
           'custom' => array('transactionId' => $transaction->id,
+                            'businessId' => $profile->id,
                             'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
                         )
         ));
