@@ -85,8 +85,8 @@
 		methods: {
 			formatBarData: function(dataSet) {
 				var dataSetTrimmed = dataSet.slice(0,9);
-				var labels: [];
-				var data: [];
+				var labels = [];
+				var data = [];
 				
 				dataSetTrimmed.foreach(function(post) {
 
