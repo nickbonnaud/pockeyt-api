@@ -47,15 +47,22 @@
 @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
-var tab = new Vue({
-	el: '#dashboard',
 
-	data: {
-		postsInteractedWeek: {!! $mostInteracted !!},
-		postsRevenueWeek: {!! $mostRevenueGenerated !!}
-	},
+	console.log(@{{ postsInteractedWeek }});
 
-})
+	var barChartCanvas = $("#barchart").get(0).getContext("2d");
+	var barChart = new Chart(barChartCanvas);
+	var barChartData = areaCharData;
+
+	var tab = new Vue({
+		el: '#dashboard',
+
+		data: {
+			postsInteractedWeek: {!! $mostInteracted !!},
+			postsRevenueWeek: {!! $mostRevenueGenerated !!}
+		},
+
+	})
 	
 
 </script>
