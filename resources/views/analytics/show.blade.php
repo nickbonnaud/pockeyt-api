@@ -31,7 +31,7 @@
 								</div>
 								<div class="box-body">
 									<div class="chart">
-										<canvas id="barChartInter" style="height:230px"></canvas>
+										<canvas id="barChartInter" width="400" height="400"></canvas>
 									</div>
 								</div>
 							</div>
