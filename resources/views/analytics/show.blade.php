@@ -31,8 +31,8 @@ var tab = new Vue({
 	el: '#dashboard',
 
 	data: {
-		postsInteractedWeek: {{ $mostInteracted }},
-		postsRevenueWeek: {{ $mostRevenueGenerated }}
+		postsInteractedWeek: {!! $mostInteracted !!},
+		postsRevenueWeek: {!! $mostRevenueGenerated !!}
 	},
 
 })
