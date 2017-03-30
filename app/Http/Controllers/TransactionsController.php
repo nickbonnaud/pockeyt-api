@@ -538,7 +538,7 @@ class TransactionsController extends Controller
             ->where('business_id', '=', $profile->id);
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
-        if ($postViewed) {
+        if (isset($postViewed)) {
             $post = Post::findOrFail($postViewed->post_id);
             $postRevenue = $post->total_revenue;
             $post->total_revenue = $postRevenue + $transaction->tips + $transaction->net_sales;
