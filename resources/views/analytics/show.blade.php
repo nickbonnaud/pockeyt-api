@@ -62,7 +62,6 @@
 
 		mounted: function() {
 			var barChartCanvas = $("#barChartInter").get(0).getContext("2d");
-			var barChart = new Chart(barChartCanvas);
 			var barChartData = this.formatBarData(this.postsInteractedWeek);
 			var barChartOptions = {
 				scaleBeginAtZero: true,
@@ -78,8 +77,11 @@
 	      responsive: true,
 	      maintainAspectRatio: true
 			};
-			barChartOptions.datasetFill = false;
-    	barChart.Bar(barChartData, barChartOptions);
+    	var barChart = new Chart(barChartCanvas, {
+    		type: 'bar',
+    		data: barChartData,
+    		options: barChartOptions
+    	});
 		},
 
 		methods: {
