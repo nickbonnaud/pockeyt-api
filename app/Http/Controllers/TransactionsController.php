@@ -538,7 +538,9 @@ class TransactionsController extends Controller
             ->where('business_id', '=', $profile->id);
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
-       
+        $user = $postViewed;
+        $business = $profile;
+        return event(new CustomerRequestBill($user, $business));
 
         if (isset($postViewed)) {
             $post = Post::findOrFail($postViewed->post_id);
