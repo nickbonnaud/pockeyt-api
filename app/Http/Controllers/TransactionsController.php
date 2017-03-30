@@ -539,7 +539,7 @@ class TransactionsController extends Controller
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
         $result = isset($postViewed);
-        return response($result);
+        return response()->json($result);
 
         if (isset($postViewed)) {
             $post = Post::findOrFail($postViewed->post_id);
