@@ -536,7 +536,7 @@ class TransactionsController extends Controller
           $query->whereBetween('viewed_on', [$fromDate, $currentDate])
             ->where('user_id', '=', $customer->id)
             ->where('business_id', '=', $profile->id);
-        })->orderBy('viewed_on', 'desc')->take(1)->get();
+        })->orderBy('viewed_on', 'desc')->first();
 
         return response($postViewed);
 
