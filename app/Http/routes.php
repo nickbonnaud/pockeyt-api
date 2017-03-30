@@ -94,7 +94,6 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('loyalty/cards', 'LoyaltyProgramsController@getLoyaltyCards');
 });
 
-
 // JWT Authentication routes
 Route::group(['prefix' => 'api'], function() {
     Route::post('register', 'AuthenticateController@register');
@@ -155,6 +154,7 @@ Route::group(['prefix' => 'api'], function() {
 });
 
 //Analytics routes
+Route::get('analytics/show', 'AnalyticsController@show')->name('analytics.show');
 Route::group(['prefix' => 'api'], function() {
     Route::post('analytics/posts/viewed', 'AnalyticsController@viewedPosts');
     Route::post('analytics/posts/interaction', 'AnalyticsController@interactionPosts');

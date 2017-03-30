@@ -9,6 +9,7 @@ use JWTAuth;
 use Carbon\Carbon;
 use DateTimeZone;
 use App\Post;
+use App\Transaction;
 use App\PostAnalytic;
 use App\Http\Controllers\Controller;
 
@@ -19,13 +20,38 @@ class AnalyticsController extends Controller
     parent::__construct();
  	}
 
-	public function viewedPosts(Request $request) {
+	
+  public function show() {
+    $currentDate = Carbon::now();
+    $fromDate = $currentDate->subWeek();
+    $profile = $this->user->profile;
+
+    $mostInteracted = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
+      $query->whereBetween('published_at', [$fromDate, $currentDate])
+        ->where('profile_id', '=', $profile->id);
+    })->orderBy('total_interactions', 'desc')->get();
+
+    $mostRevenueGenerated = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
+      $query->whereBetween('published_at', [$fromDate, $currentDate])
+        ->where('profile_id', '=', $profile->id);
+    })->orderBy('total_revenue', 'desc')->get();
+
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
+  }
+
+
+  public function viewedPosts(Request $request) {
 		$user = JWTAuth::parseToken()->authenticate();
 		$viewedPosts = $request->all();
 		foreach ($viewedPosts as $viewedPost) {
 			$post = Post::findOrFail($viewedPost);
+
 			$views = $post->views;
+      $total_interactions = $post->total_interactions;
+
 			$post->views = $views + 1;
+      $post->total_interactions = $total_interactions + 1;
+
 			$post->save();
 
 			if (isset($user)) {
@@ -57,14 +83,23 @@ class AnalyticsController extends Controller
 
 		if ($type === 'share') {
 			$shares = $post->shares;
+      $total_interactions = $post->total_interactions;
+
+      $post->total_interactions = $total_interactions + 1;
 			$post->shares = $shares + 1;
 		} elseif ($type === 'bookmark') {
 			$action = $request->action;
 			if ($action === 'add') {
 				$bookmarks = $post->bookmarks;
+        $total_interactions = $post->total_interactions;
+
+        $post->total_interactions = $total_interactions + 1;
 				$post->bookmarks = $bookmarks + 1;
 			} elseif ($action === 'remove') {
 				$bookmarks = $post->bookmarks;
+        $total_interactions = $post->total_interactions;
+
+        $post->total_interactions = $total_interactions - 1;
 				$post->bookmarks = $bookmarks - 1;
 			}
 		}

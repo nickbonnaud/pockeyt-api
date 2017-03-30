@@ -8,6 +8,9 @@ use App\LoyaltyCard;
 use App\User;
 use JWTAuth;
 use App\Post;
+use App\PostAnalytic;
+use Carbon\Carbon;
+use DateTimeZone;
 use App\PushId;
 use App\Profile;
 use App\Product;
@@ -167,6 +170,7 @@ class TransactionsController extends Controller
                 $transaction->status = 20;
                 $transaction->save();
                 event(new TransactionsChange($profile));
+                $this->checkRecentViewedPosts($customer, $profile, $transaction);
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
             } else {
@@ -212,6 +216,7 @@ class TransactionsController extends Controller
                     $transaction->status = 20;
                     $transaction->save();
                     event(new TransactionsChange($profile));
+                    $this->checkRecentViewedPosts($customer, $profile, $transaction);
                     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                     return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
                 } else {
@@ -305,6 +310,7 @@ class TransactionsController extends Controller
             $transaction->paid = true;
             $transaction->status = 20;
             $transaction->save();
+            
             return response()->json(['success' => 'Post Purchased'], 200);
         } else {
             $transaction->paid = false;
@@ -520,6 +526,25 @@ class TransactionsController extends Controller
         $transaction = Transaction::findOrFail($request->transactionId);
         $business = Profile::findOrFail($transaction->profile_id);
         return event(new CustomerRequestBill($user, $business));
+    }
+
+    public function checkRecentViewedPosts($customer, $profile, $transaction) {
+        $currentDate = Carbon::now();
+        $fromDate = $currentDate->subDays(2);
+
+        $postViewed = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $profile, $customer) {
+          $query->whereBetween('viewed_on', [$fromDate, $currentDate])
+            ->where('user_id', '=', $customer->id;)
+            ->where('business_id', '=', $profile->id);
+        })->orderBy('viewed_on', 'desc')->take(1)->get();
+
+        if ($postViewed) {
+            $post = Post::findOrFail($postViewed->post_id);
+            $postRevenue = $post->total_revenue;
+            $post->total_revenue = $postRevenue + $transaction->tips + $transaction->net_sales;
+            $post->save();
+        }
+        return;
     }
 
     public function getRecentTransactions() {
