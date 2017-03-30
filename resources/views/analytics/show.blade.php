@@ -64,7 +64,6 @@
 			var barChartCanvas = $("#barChartInter").get(0).getContext("2d");
 			var barChartData = this.formatBarData(this.postsInteractedWeek);
 			var barChartOptions = {
-				beginAtZero: true,
 	      scaleShowGridLines: true,
 	      scaleGridLineColor: "rgba(0,0,0,.05)",
 	      scaleGridLineWidth: 1,
@@ -75,7 +74,14 @@
 	      barValueSpacing: 5,
 	      barDatasetSpacing: 1,
 	      responsive: true,
-	      maintainAspectRatio: true
+	      maintainAspectRatio: true,
+	      scales: {
+	      	yAxes: [{
+	      		ticks: {
+	      			beginAtZero: true
+	      		}
+	      	}]
+	      }
 			};
     	var barChart = new Chart(barChartCanvas, {
     		type: 'bar',
