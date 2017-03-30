@@ -532,7 +532,7 @@ class TransactionsController extends Controller
         $business = $profile;
 
         $currentDate = Carbon::now();
-        $fromDate = $currentDate->subDays(2);
+        $fromDate = Carbon::now()->subDays(2);
 
         $user =  $currentDate;
         event(new CustomerRequestBill($user, $business));
