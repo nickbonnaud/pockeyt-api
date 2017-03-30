@@ -14,7 +14,8 @@
 			      <li class="active">Analytics Dashboard</li>
 			    </ol>
 			  </section>
-				<section class="content">
+				<section class="content" id="dashboard">
+				
 					
 				</section>
 			</div>
@@ -26,7 +27,15 @@
 @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
-	
+var tab = new Vue({
+	el: '#dashboard',
+
+	data: {
+		postsInteractedWeek: {{ mostInteracted }},
+		postsRevenueWeek: {{ mostRevenueGenerated }}
+	},
+
+})
 	
 
 </script>

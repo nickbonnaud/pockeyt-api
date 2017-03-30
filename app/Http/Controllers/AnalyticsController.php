@@ -36,8 +36,6 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-    dd($mostRevenueGenerated);
-
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
   }
 
