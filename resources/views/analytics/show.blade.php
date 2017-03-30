@@ -48,7 +48,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-	console.log(@{{ postsInteractedWeek }});
+	var thing = @{{ postsInteractedWeek }};
+	console.log(thing);
 
 	var barChartCanvas = $("#barchart").get(0).getContext("2d");
 	var barChart = new Chart(barChartCanvas);
