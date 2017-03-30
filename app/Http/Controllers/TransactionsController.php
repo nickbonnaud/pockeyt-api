@@ -310,7 +310,7 @@ class TransactionsController extends Controller
             $transaction->paid = true;
             $transaction->status = 20;
             $transaction->save();
-            
+
             return response()->json(['success' => 'Post Purchased'], 200);
         } else {
             $transaction->paid = false;
@@ -534,7 +534,7 @@ class TransactionsController extends Controller
 
         $postViewed = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $profile, $customer) {
           $query->whereBetween('viewed_on', [$fromDate, $currentDate])
-            ->where('user_id', '=', $customer->id;)
+            ->where('user_id', '=', $customer->id)
             ->where('business_id', '=', $profile->id);
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
