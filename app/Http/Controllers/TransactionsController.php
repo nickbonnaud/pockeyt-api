@@ -529,17 +529,23 @@ class TransactionsController extends Controller
     }
 
     public function checkRecentViewedPosts($customer, $profile, $transaction) {
+        $business = $profile;
+
         $currentDate = Carbon::now();
         $fromDate = $currentDate->subDays(2);
 
+        $user =  $currentDate;
+        event(new CustomerRequestBill($user, $business));
+        $user =  $fromDate;
+        event(new CustomerRequestBill($user, $business));
+        
         $postViewed = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $profile, $customer) {
-          $query->whereBetween('viewed_on', [$fromDate, $currentDate])
+          $query->whereBetween('updated_at', [$fromDate, $currentDate])
             ->where('user_id', '=', $customer->id)
             ->where('business_id', '=', $profile->id);
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
         $user = $postViewed;
-        $business = $profile;
         event(new CustomerRequestBill($user, $business));
         if (count($postViewed) !== 0) {
             $post = Post::findOrFail($postViewed->post_id);
