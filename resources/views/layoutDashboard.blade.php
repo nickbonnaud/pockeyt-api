@@ -136,6 +136,7 @@
             <li><a href="{{ route('products.list') }}"><i class="fa fa-shopping-cart"></i> <span>Inventory</span></a></li>
             <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span>Loyalty Program</span></a></li>
             <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span>Deals</span></a></li>
+            <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span>Analytics Dashboard</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -302,15 +303,15 @@
 
         notifyBill: function(data) {
           console.log(data);
-          // toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn btn-default'>Send Bill</button>", "Bill Requested!", {
-          //   "newestOnTop": true,
-          //   "timeOut": 0,
-          //   "extendedTimeOut": 0,
-          //   "onclick": function() {
-          //     route = "{{ route('bill.show', ['customerId' => 'id']) }}"
-          //     location.href = route.replace('id', data.user.id)
-          //   }
-          // })
+          toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn btn-default'>Send Bill</button>", "Bill Requested!", {
+            "newestOnTop": true,
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+            "onclick": function() {
+              route = "{{ route('bill.show', ['customerId' => 'id']) }}"
+              location.href = route.replace('id', data.user.id)
+            }
+          })
         },
 
         notifyError: function(data) {

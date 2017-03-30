@@ -23,7 +23,7 @@ class AnalyticsController extends Controller
 	
   public function show() {
     $currentDate = Carbon::now();
-    $fromDate = $currentDate->subWeek();
+    $fromDate = Carbon::now()->subWeek();
     $profile = $this->user->profile;
 
     $mostInteracted = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
@@ -35,6 +35,8 @@ class AnalyticsController extends Controller
       $query->whereBetween('published_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
+
+    dd($mostInteracted);
 
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
   }
