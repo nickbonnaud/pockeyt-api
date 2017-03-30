@@ -88,7 +88,7 @@
 				var labels = [];
 				var data = [];
 				
-				dataSetTrimmed.foreach(function(post) {
+				dataSetTrimmed.forEach(function(post) {
 
 					var postLabel = post.message;
 					if (postLabel.length > 10) postLabel = postLabel.substring(0, 10) + "...";
