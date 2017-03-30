@@ -27,12 +27,12 @@ class AnalyticsController extends Controller
     $profile = $this->user->profile;
 
     $mostInteracted = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
-      $query->whereBetween('published_at', [$fromDate, $currentDate])
+      $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_interactions', 'desc')->get();
 
     $mostRevenueGenerated = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
-      $query->whereBetween('published_at', [$fromDate, $currentDate])
+      $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
