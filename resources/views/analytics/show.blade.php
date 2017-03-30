@@ -31,7 +31,7 @@
 								</div>
 								<div class="box-body">
 									<div class="chart">
-										
+										<canvas id="barChartInter" style="height:230px"></canvas>
 									</div>
 								</div>
 							</div>
@@ -48,12 +48,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-	var thing = postsInteractedWeek;
-	console.log(thing);
-
-	var barChartCanvas = $("#barchart").get(0).getContext("2d");
-	var barChart = new Chart(barChartCanvas);
-	var barChartData = areaCharData;
+	// var barChartCanvas = $("#barchart").get(0).getContext("2d");
+	// var barChart = new Chart(barChartCanvas);
+	// var barChartData = areaCharData;
 
 	var tab = new Vue({
 		el: '#dashboard',
@@ -62,6 +59,62 @@
 			postsInteractedWeek: {!! $mostInteracted !!},
 			postsRevenueWeek: {!! $mostRevenueGenerated !!}
 		},
+
+		mounted: function() {
+			var barChartCanvas = $("#barChartInter").get(0).getContext("2d");
+			var barChart = new Chart(barChartCanvas);
+			var barChartData = this.formatBarData(this.postsInteractedWeek);
+			var barChartOptions = {
+				scaleBeginAtZero: true,
+	      scaleShowGridLines: true,
+	      scaleGridLineColor: "rgba(0,0,0,.05)",
+	      scaleGridLineWidth: 1,
+	      scaleShowHorizontalLines: true,
+	      scaleShowVerticalLines: false,
+	      barShowStroke: true,
+	      barStrokeWidth: 2,
+	      barValueSpacing: 5,
+	      barDatasetSpacing: 1,
+	      responsive: true,
+	      maintainAspectRatio: true
+			};
+			barChartOptions.datasetFill = false;
+    	barChart.Bar(barChartData, barChartOptions);
+		},
+
+		methods: {
+			formatBarData: function(dataSet) {
+				var dataSetTrimmed = dataSet.slice(0,9);
+				var labels: [];
+				var data: [];
+				
+				dataSetTrimmed.foreach(function(post) {
+
+					var postLabel = post.message;
+					if (postLabel.length > 10) postLabel = postLabel.substring(0, 10) + "...";
+					labels.push(postLabel);
+
+					var interactions = post.total_interactions;
+					data.push(interactions);
+				});
+				var barChartData = {
+					labels: labels,
+					datasets: [
+						{
+							label: "Interactions",
+							fillColor: "rgba(210, 214, 222, 1)",
+							strokeColor: "rgba(210, 214, 222, 1)",
+          		pointColor: "rgba(210, 214, 222, 1)",
+          		pointStrokeColor: "#c1c7d1",
+          		pointHighlightFill: "#fff",
+          		pointHighlightStroke: "rgba(220,220,220,1)",
+          		data: data
+						}
+					]
+				}
+				return barChartData;
+			}
+		}
 
 	})
 	
