@@ -64,7 +64,7 @@
 			var barChartCanvas = $("#barChartInter").get(0).getContext("2d");
 			var barChartData = this.formatBarData(this.postsInteractedWeek);
 			var barChartOptions = {
-				scaleBeginAtZero: true,
+				beginAtZero: true,
 	      scaleShowGridLines: true,
 	      scaleGridLineColor: "rgba(0,0,0,.05)",
 	      scaleGridLineWidth: 1,
