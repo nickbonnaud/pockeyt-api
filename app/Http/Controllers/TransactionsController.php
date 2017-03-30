@@ -538,8 +538,7 @@ class TransactionsController extends Controller
             ->where('business_id', '=', $profile->id);
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
-        $result = isset($postViewed);
-        return response()->json($result);
+       
 
         if (isset($postViewed)) {
             $post = Post::findOrFail($postViewed->post_id);
