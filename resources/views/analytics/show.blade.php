@@ -89,7 +89,6 @@
 				var data = [];
 				
 				dataSetTrimmed.forEach(function(post) {
-					console.log(post);
 					var postLabel = post.message;
 					if (!postLabel) {
 						postLabel = post.title;
