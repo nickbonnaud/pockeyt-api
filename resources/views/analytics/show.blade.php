@@ -91,6 +91,9 @@
 				dataSetTrimmed.forEach(function(post) {
 					console.log(post);
 					var postLabel = post.message;
+					if (!postLabel) {
+						postLabel = post.title;
+					}
 					if (postLabel.length > 10) postLabel = postLabel.substring(0, 10) + "...";
 					labels.push(postLabel);
 
