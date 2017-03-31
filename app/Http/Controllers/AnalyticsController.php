@@ -132,7 +132,7 @@ class AnalyticsController extends Controller
 
      
 			if (JWTAuth::getToken() && JWTAuth::parseToken()->authenticate()) {
-        $user = JWTAuth::parseToken()->authenticate()
+        $user = JWTAuth::parseToken()->authenticate();
 				$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
           $query->where('user_id', '=', $user->id)
               ->where('post_id', '=', $post->id);
@@ -183,7 +183,7 @@ class AnalyticsController extends Controller
 		$post->save();
 
 		if (JWTAuth::getToken() && JWTAuth::parseToken()->authenticate()) {
-      $user = JWTAuth::parseToken()->authenticate()
+      $user = JWTAuth::parseToken()->authenticate();
 			$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
         $query->where('user_id', '=', $user->id)
             ->where('post_id', '=', $post->id);
