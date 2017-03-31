@@ -44,7 +44,7 @@ class AnalyticsController extends Controller
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [3]);
       })->groupBy(DB::raw('Date(updated_at)'))
-        ->orderBy('updated_at', 'DESC')->get();
+        ->count();
       dd($activityPerDay);
       array_push($activityByDay, $activityPerDay);
     }
