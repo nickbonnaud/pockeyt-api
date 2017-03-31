@@ -97,7 +97,7 @@
 
 		methods: {
 			formatBarData: function(dataSet) {
-				var dataSetTrimmed = dataSet.slice(0,9);
+				var dataSetTrimmed = dataSet.slice(0,10);
 				var labels = [];
 				var data = [];
 				
