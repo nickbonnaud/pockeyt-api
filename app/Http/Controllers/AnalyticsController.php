@@ -37,12 +37,16 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-    $historicalTimingInteractions = PostAnalytic::where(function($query) use ($profile) {
-      $query->where('business_id', '=', $profile->id)
-        ->whereRaw('WEEKDAY(updated_at) = 3');
-    })->count();
+    $interactionsByDay = [];
+    for ($i = 0; $i <= 6 $i++) {
+      $InteractionsPerDay = PostAnalytic::where(function($query) use ($profile) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(updated_at) = ?');
+      })->setBindings([$i])->count();
+      array_push($interactionsByDay, $InteractionsPerDay);
+    }
 
-    dd($historicalTimingInteractions);
+    dd($interactionsByDay);
 
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'historicalTimingInteractions'));
   }
