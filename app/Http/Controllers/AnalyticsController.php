@@ -130,7 +130,8 @@ class AnalyticsController extends Controller
 
 			$post->save();
 
-			if ($user = JWTAuth::parseToken()->authenticate()) {
+     
+			if (JWTAuth::getToken() && JWTAuth::parseToken()->authenticate()) {
 				$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
           $query->where('user_id', '=', $user->id)
               ->where('post_id', '=', $post->id);
