@@ -543,7 +543,8 @@ class TransactionsController extends Controller
             foreach ($postViewed as $viewed) {
                 $viewed->transaction_resulted = true;
                 $viewed->transaction_on = Carbon::now(new DateTimeZone(config('app.timezone')));
-                $viewed->total_revenue = $transactionRevenue;
+                $prevPurchases = $viewed->total_revenue;
+                $viewed->total_revenue = $prevPurchases + $transactionRevenue;
                 $viewed->save();
 
                 $post = Post::findOrFail($viewed->post_id);
