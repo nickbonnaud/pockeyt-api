@@ -37,7 +37,8 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-    $historicalTiming = PostAnalytic::where('business_id', '=', $profile->id)->get();
+    $historicalTiming = PostAnalytic::where('business_id', '=', $profile->id)
+      orderBy('updated_at', 'desc')->get();
     dd($historicalTiming);
 
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
