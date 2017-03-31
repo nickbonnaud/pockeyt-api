@@ -17,20 +17,15 @@
 				<section class="content" id="dashboard">
 					<div class="row">
 						<div class="col-md-6">
-							<div class="box box-primary">
-								<div class="box-header with-border">
-									<h3 class="box-title">Top 10 Most Interacted with Posts</h3>
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool" data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool" data-widget="remove">
-											<i class="fa fa-times"></i>
-										</button>
-									</div>
-								</div>
-								<div class="box-body">
-									<div class="chart">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs pull-right">
+									<li class="active"><a href="#week-chart" data-toggle="tab">Last 7 Days</a></li>
+									<li><a href="#month-chart" data-toggle="tab">Last 30 Days</a></li>
+									<li><a href="#2month-chart" data-toggle="tab">Last 60 Days</a></li>
+									<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Interactions</li>
+								</ul>
+								<div class="tab-content no-padding">
+									<div class="chart tab-pane active" id="week-chart">
 										<canvas id="barChartInter" width="400" height="400"></canvas>
 									</div>
 								</div>
