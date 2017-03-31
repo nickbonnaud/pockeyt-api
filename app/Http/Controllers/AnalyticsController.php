@@ -108,7 +108,7 @@ class AnalyticsController extends Controller
 
       $days = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [i]);
+          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->groupBy(DB::raw('Date(updated_at)'))->count();
 
       $averageActivityPerDay = $activityPerDayTotal / $days;
