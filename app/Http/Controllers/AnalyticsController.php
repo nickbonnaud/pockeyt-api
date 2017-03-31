@@ -37,21 +37,19 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-    $interactionsByDay = [];
+    $activityByDay = [];
     for ($i = 0; $i <= 6; $i++) {
-      $InteractionsPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
+      $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->count();
-      array_push($interactionsByDay, $InteractionsPerDay);
+      array_push($activityByDay, $activityPerDay);
     }
 
-    dd($interactionsByDay);
-
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'historicalTimingInteractions'));
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
   }
 
-  public function getDashboardData(Request $request) {
+  public function getDashboardDataBar(Request $request) {
     $profile = Profile::findOrFail($request->businessId);
     $timeSpan = $request->timeSpan;
     $type = $request->type;
@@ -79,6 +77,28 @@ class AnalyticsController extends Controller
     } else {
       return $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
     }
+  }
+
+  public function getDashboardDataLine(Request $request) {
+    $profile = Profile::findOrFail($request->businessId);
+    $type = $request->type;
+    if ($type === 'interaction') {
+      return $this->getInteractionsByDay($profile, $type);
+    } else {
+      return $this->getRevenueByDay($profile, $type);
+    }
+  }
+
+  public function getInteractionsByDay($profile, $type) {
+    $activityByDay = [];
+    for ($i = 0; $i <= 6; $i++) {
+      $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
+      })->count();
+      array_push($activityByDay, $activityPerDay);
+    }
+    return response()->json(array('data' => $activityByDay, 'type' => $type));
   }
 
   public function getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan) {

@@ -155,7 +155,8 @@ Route::group(['prefix' => 'api'], function() {
 
 //Analytics routes
 Route::get('analytics/show', 'AnalyticsController@show')->name('analytics.show');
-Route::post('analytics/dashboard/data', 'AnalyticsController@getDashboardData');
+Route::post('analytics/dashboard/data/bar', 'AnalyticsController@getDashboardDataBar');
+Route::post('analytics/dashboard/data/line', 'AnalyticsController@getDashboardDataLine');
 
 Route::group(['prefix' => 'api'], function() {
     Route::post('analytics/posts/viewed', 'AnalyticsController@viewedPosts');

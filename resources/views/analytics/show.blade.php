@@ -38,19 +38,16 @@
 							</div>
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#historical-inter" data-toggle="tab" v-on:click="historicalInterData()">Interactions</a></li>
-									<li><a href="#historical-revenue" data-toggle="tab" v-on:click="historicalRevenueData()">Revenue</a></li>
-									<li class="pull-left header"><i class="fa fa-calendar-o"></i> Post Interactions by Day</li>
+									<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="dayInterData()">Interactions</a></li>
+									<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
+									<li class="pull-left header"><i class="fa fa-calendar-o"></i> Activity by Day</li>
 								</ul>
 								<div class="tab-content no-padding">
-									<div class="chart tab-pane active" id="week-inter-chart">
-										<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
+									<div class="chart tab-pane active" id="day-inter-chart">
+										<canvas id="lineInterDay" width="400" height="400"></canvas>
 									</div>
-									<div class="chart tab-pane" id="month-inter-chart">
-										<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
-									</div>
-									<div class="chart tab-pane" id="2month-inter-chart">
-										<canvas id="barInteractions2Month" width="400" height="400"></canvas>
+									<div class="chart tab-pane" id="day-revenue-chart">
+										<canvas id="lineRevenueDay" width="400" height="400"></canvas>
 									</div>
 								</div>
 							</div>
@@ -109,7 +106,6 @@
     }
 	};
 
-
 	var tab = new Vue({
 		el: '#dashboard',
 
@@ -122,14 +118,14 @@
 			postsRevenueMonth: [],
 			postsRevenue2Month: [],
 
-			postsHistoricalInter: {!! $historicalTimingInteractions !!}
+			postsActivityByDay: {!! $activityByDay !!},
+			postsRevenueByDay: []
 		},
 
 		mounted: function() {
 			var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
 			var type = "interaction";
 			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
-			
     	var barChartInter7 = new Chart(barInteractionsWeek, {
     		type: 'bar',
     		data: barInteractionsWeekData,
@@ -139,17 +135,82 @@
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
 			var barRevenueWeekData = this.formatBarData(this.postsRevenueWeek, type);
-			
     	var barChartRevenue7 = new Chart(barRevenueWeek, {
     		type: 'bar',
     		data: barRevenueWeekData,
     		options: barChartOptions
     	});
 
-
+    	var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
+    	var type = "interaction";
+    	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
+    	var lineChartInter = new Chart(lineInteractionsDay, {
+    		type: 'line',
+    		data: lineInteractionsDayData
+    	});
 		},
 
 		methods: {
+			formatLineData: function(dataSet, type) {
+				var data = dataSet;
+				var labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+				if (type === 'interaction') {
+					var lineChartData = {
+						labels: labels,
+						datasets: [
+							{
+								label: "Views, Shares, Bookmarks",
+								fill: false,
+								lineTension: 0.1,
+								backgroundColor: "rgba(52, 152, 219,0.4)",
+								borderColor: "rgba(52, 152, 219,1.0)",
+								borderCapStyle: "round",
+								borderDash: [],
+								borderDashOffset: 0.0,
+								borderJoinStyle: 'bevel',
+								pointBorderColor: "rgba(52, 152, 219,1.0)",
+								pointBackgroundColor: "#fff",
+								pointBorderWidth: 1,
+            		pointHoverRadius: 5,
+            		pointHoverBackgroundColor: "rgba(41, 128, 185,1.0)",
+            		pointHoverBorderColor: "rgba(41, 128, 185,1.0)",
+            		pointHoverBorderWidth: 2,
+            		pointRadius: 1,
+	          		data: data,
+	          		spanGaps: false,
+							}
+						]
+					}
+				} else {
+					var lineChartData = {
+						labels: labels,
+						datasets: [
+							{
+								fill: false,
+								lineTension: 0.1,
+								backgroundColor: "rgba(46, 204, 113,.4)",
+								borderColor: "rgba(46, 204, 113,1.0)",
+								borderCapStyle: "round",
+								borderDash: [],
+								borderDashOffset: 0.0,
+								borderJoinStyle: 'bevel',
+								pointBorderColor: "rgba(46, 204, 113,1.0)",
+								pointBackgroundColor: "#fff",
+								pointBorderWidth: 1,
+            		pointHoverRadius: 5,
+            		pointHoverBackgroundColor: "rgba(39, 174, 96,1.0)",
+            		pointHoverBorderColor: "rgba(39, 174, 96,1.0)",
+            		pointHoverBorderWidth: 2,
+            		pointRadius: 1,
+	          		data: data,
+	          		spanGaps: false,
+							}
+						]
+					}
+				}
+				return lineChartData;
+			},
 			formatBarData: function(dataSet, type) {
 				var dataSetTrimmed = dataSet.slice(0,10);
 				var labels = [];
@@ -198,46 +259,87 @@
 				}
 				return barChartData;
 			},
+			dayInterData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var type = "interaction";
+				this.getDataLine(businessId, type);
+			},
+			dayRevenueData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var type = "revenue";
+				this.getDataLine(businessId, type);
+			},
 			weekInteractionData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "week";
 				var type = "interaction";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
 			monthInteractionData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "month";
 				var type = "interaction";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
 			twoMonthInteractionData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "2month";
 				var type = "interaction";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
 			weekRevenueData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "week";
 				var type = "revenue";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
 			monthRevenueData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "month";
 				var type = "revenue";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
 			twoMonthRevenueData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "2month";
 				var type = "revenue";
-				this.getData(businessId, timeSpan, type);
+				this.getDataBar(businessId, timeSpan, type);
 			},
-			getData: function(businessId, timeSpan, type) {
+			getDataLine: function(businessId, type) {
 				$.ajax({
 					method: 'POST',
-					url: '/analytics/dashboard/data',
+					url: '/analytics/dashboard/data/line',
+					data: {
+						'businessId': businessId,
+						'type': type
+					},
+					success: data => {
+						var type = data.type;
+						var dataSet = data.data;
+
+						if (type === 'interaction') {
+							this.postsActivityByDay = dataSet;
+							var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
+				    	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
+				    	var lineChartInter = new Chart(lineInteractionsDay, {
+				    		type: 'line',
+				    		data: lineInteractionsDayData
+				    	});
+						} else {
+							this.postsRevenueByDay = dataSet;
+							var lineRevenueDay = $("#lineRevenueDay").get(0).getContext("2d");
+				    	var lineRevenueDayData = this.formatLineData(this.postsRevenueByDay, type);
+				    	var lineChartRevenue= new Chart(lineRevenueDay, {
+				    		type: 'line',
+				    		data: lineRevenueDayData
+				    	});
+						}
+					}
+			},
+			getDataBar: function(businessId, timeSpan, type) {
+				$.ajax({
+					method: 'POST',
+					url: '/analytics/dashboard/data/bar',
 					data: {
 						'businessId': businessId,
 						'timeSpan': timeSpan,
@@ -323,7 +425,6 @@
 				})
 			}
 		}
-
 	})
 	
 
