@@ -36,6 +36,24 @@
 									</div>
 								</div>
 							</div>
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs pull-right">
+									<li class="active"><a href="#historical-inter" data-toggle="tab" v-on:click="historicalInterData()">Interactions</a></li>
+									<li><a href="#historical-revenue" data-toggle="tab" v-on:click="historicalRevenueData()">Revenue</a></li>
+									<li class="pull-left header"><i class="fa fa-calendar-o"></i> Post Interactions by Day</li>
+								</ul>
+								<div class="tab-content no-padding">
+									<div class="chart tab-pane active" id="week-inter-chart">
+										<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
+									</div>
+									<div class="chart tab-pane" id="month-inter-chart">
+										<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
+									</div>
+									<div class="chart tab-pane" id="2month-inter-chart">
+										<canvas id="barInteractions2Month" width="400" height="400"></canvas>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="nav-tabs-custom">
@@ -102,7 +120,9 @@
 
 			postsRevenueWeek: {!! $mostRevenueGenerated !!},
 			postsRevenueMonth: [],
-			postsRevenue2Month: []
+			postsRevenue2Month: [],
+
+			postsHistoricalInter: {!! $historicalTimingInteractions !!}
 		},
 
 		mounted: function() {
@@ -125,6 +145,8 @@
     		data: barRevenueWeekData,
     		options: barChartOptions
     	});
+
+
 		},
 
 		methods: {

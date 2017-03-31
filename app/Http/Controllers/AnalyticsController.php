@@ -37,11 +37,14 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-    $historicalTiming = PostAnalytic::where('business_id', '=', $profile->id)
-      ->orderBy('updated_at', 'desc')->take(1000)->get();
-    dd($historicalTiming);
+    $historicalTimingInteractions = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->whereRaw('WEEKDAY(updated_at) = 0')
+    })->orderBy('updated_at', 'desc')->get();
 
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
+    dd($historicalTimingInteractions);
+
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'historicalTimingInteractions'));
   }
 
   public function getDashboardData(Request $request) {
