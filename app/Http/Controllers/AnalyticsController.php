@@ -38,6 +38,41 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
+
+
+
+    $revenueByDay = [];
+    for ($i = 0; $i <= 6; $i++) {
+      $purchases = PostAnalytic::where(function($query) use ($profile, $i) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
+      })->select('total_revenue')->get();
+
+      $totalRevenuePerDay = 0;
+      foreach ($purchases as $purchase) {
+        $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
+      }
+
+      $days = PostAnalytic::where(function($query) use ($profile, $i) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
+      })->groupBy(DB::raw('Date(transaction_on)'))->count();
+
+      if ($days !== 0) {
+        $averageRevenuePerDay = $totalRevenuePerDay / $days;
+        array_push($revenueByDay, $averageRevenuePerDay);
+      } else {
+        array_push($revenueByDay, $totalRevenuePerDay);
+      }
+    }
+    dd($revenueByDay);
+
+
+
+
+
+
+
     $activityByDay = [];
     for ($i = 0; $i <= 6; $i++) {
       $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
