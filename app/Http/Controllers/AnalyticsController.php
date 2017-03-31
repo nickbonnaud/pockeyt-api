@@ -12,6 +12,7 @@ use App\Post;
 use App\Profile;
 use App\Transaction;
 use App\PostAnalytic;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AnalyticsController extends Controller
