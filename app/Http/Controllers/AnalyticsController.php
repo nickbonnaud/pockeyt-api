@@ -39,7 +39,7 @@ class AnalyticsController extends Controller
 
     $historicalTimingInteractions = PostAnalytic::where(function($query) use ($profile) {
       $query->where('business_id', '=', $profile->id)
-        ->whereRaw('WEEKDAY(updated_at) = 1');
+        ->whereRaw('WEEKDAY(updated_at) = 3');
     })->orderBy('updated_at', 'desc')->get();
 
     dd($historicalTimingInteractions);
