@@ -83,7 +83,7 @@ class AnalyticsController extends Controller
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
-    return response()->json($mostRevenueGenerated, $type, $timeSpan);
+    return response()->json($mostRevenueGenerated, ['type' => $type], ['timeSpan' => $timeSpan]);
   }
 
   public function viewedPosts(Request $request) {
