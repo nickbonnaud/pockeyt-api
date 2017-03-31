@@ -143,7 +143,6 @@
 
     	var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
     	var type = "interaction";
-    	console.log(this.postsActivityByDay);
     	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
     	var lineChartInter = new Chart(lineInteractionsDay, {
     		type: 'line',
