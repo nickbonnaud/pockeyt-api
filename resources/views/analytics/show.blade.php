@@ -116,9 +116,9 @@
     		options: barChartOptions
     	});
 
-    	var barRevenueWeek = $("#barInteractionsWeek").get(0).getContext("2d");
+    	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
-			var barRevenueWeekData = this.formatBarData(this.postsInteractedWeek, type);
+			var barRevenueWeekData = this.formatBarData(this.postsRevenueWeek, type);
 			
     	var barChartRevenue7 = new Chart(barRevenueWeek, {
     		type: 'bar',
