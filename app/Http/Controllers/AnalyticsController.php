@@ -64,9 +64,9 @@ class AnalyticsController extends Controller
         break;
     }
     if ($type === 'interaction') {
-      return $this->getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan);
+      $this->getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan);
     } else {
-      return $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
+      $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
     }
   }
 
