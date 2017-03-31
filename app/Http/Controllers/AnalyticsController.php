@@ -47,12 +47,12 @@ class AnalyticsController extends Controller
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(transaction_on) = ?', [4]);
       })->select('total_revenue')->get();
-      dd($purchases);
 
       $totalRevenuePerDay = 0;
       foreach ($purchases as $purchase) {
         $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
       }
+      dd($purchases);
 
       $days = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
