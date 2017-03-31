@@ -38,41 +38,6 @@ class AnalyticsController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
 
-
-
-
-    $revenueByDay = [];
-    for ($i = 0; $i <= 6; $i++) {
-      $purchases = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
-      })->select('total_revenue')->get();
-
-      $totalRevenuePerDay = 0;
-      foreach ($purchases as $purchase) {
-        $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
-      }
-
-      $days = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
-      })->groupBy(DB::raw('Date(transaction_on)'))->get();
-      $days = count($days);
-      if ($days !== 0) {
-        $averageRevenuePerDay = ($totalRevenuePerDay / 100) / $days;
-        array_push($revenueByDay, $averageRevenuePerDay);
-      } else {
-        array_push($revenueByDay, $totalRevenuePerDay / 100);
-      }
-    }
-    dd($revenueByDay);
-
-
-
-
-
-
-
     $activityByDay = [];
     for ($i = 0; $i <= 6; $i++) {
       $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
@@ -162,25 +127,29 @@ class AnalyticsController extends Controller
   public function getRevenueByDay($profile, $type) {
     $revenueByDay = [];
     for ($i = 0; $i <= 6; $i++) {
-      $revenuePerDay = PostAnalytic::where(function($query) use ($profile, $i) {
+      $purchases = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
       })->select('total_revenue')->get();
-      dd($revenuePerDay);
+
+      $totalRevenuePerDay = 0;
+      foreach ($purchases as $purchase) {
+        $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
+      }
 
       $days = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->groupBy(DB::raw('Date(updated_at)'))->count();
-
+          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
+      })->groupBy(DB::raw('Date(transaction_on)'))->get();
+      $days = count($days);
       if ($days !== 0) {
-        $averageActivityPerDay = $activityPerDayTotal / $days;
-        array_push($activityByDay, $averageActivityPerDay);
+        $averageRevenuePerDay = ($totalRevenuePerDay / 100) / $days;
+        array_push($revenueByDay, $averageRevenuePerDay);
       } else {
-        array_push($activityByDay, $activityPerDayTotal);
+        array_push($revenueByDay, $totalRevenuePerDay / 100);
       }
     }
-    return response()->json(array('data' => $activityByDay, 'type' => $type));
+    return response()->json(array('data' => $revenueByDay, 'type' => $type));
   }
 
   public function getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan) {
