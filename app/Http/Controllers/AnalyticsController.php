@@ -38,7 +38,7 @@ class AnalyticsController extends Controller
     })->orderBy('total_revenue', 'desc')->get();
 
     $interactionsByDay = [];
-    for ($i = 0; $i <= 6 $i++) {
+    for ($i = 0; $i <= 6; $i++) {
       $InteractionsPerDay = PostAnalytic::where(function($query) use ($profile) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?');
