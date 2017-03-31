@@ -161,6 +161,33 @@
 								if (type === 'interaction') {
 									console.log("bingo");
 									this.postsInteractedMonth = dataSet;
+									var barInteractionsMonth = $("#barInteractionsMonth").get(0).getContext("2d");
+									var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth);
+									var barChartOptions = {
+							      scaleShowGridLines: true,
+							      scaleGridLineColor: "rgba(0,0,0,.05)",
+							      scaleGridLineWidth: 1,
+							      scaleShowHorizontalLines: true,
+							      scaleShowVerticalLines: false,
+							      barShowStroke: true,
+							      barStrokeWidth: 2,
+							      barValueSpacing: 5,
+							      barDatasetSpacing: 1,
+							      responsive: true,
+							      maintainAspectRatio: true,
+							      scales: {
+							      	yAxes: [{
+							      		ticks: {
+							      			beginAtZero: true
+							      		}
+							      	}]
+							      }
+									};
+									var barChartInter30 = new Chart(barInteractionsMonth, {
+						    		type: 'bar',
+						    		data: barInteractionsMonthData,
+						    		options: barChartOptions
+						    	});
 								} else {
 									this.postsRevenueMonth = dataSet;
 								}
