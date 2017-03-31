@@ -42,7 +42,7 @@ class AnalyticsController extends Controller
     for ($i = 0; $i <= 6; $i++) {
       $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
+          ->whereRaw('WEEKDAY(updated_at) = ?', [3]);
       })->groupBy(DB::raw('Date(updated_at)'))
         ->orderBy('updated_at', 'DESC')->get();
       dd($activityPerDay);
