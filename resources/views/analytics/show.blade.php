@@ -121,6 +121,7 @@
 			},
 			MonthInteractionData: function() {
 				var businessId = '{{ $profile->id }}';
+				console.log(businessId);
 				var timeSpan = "month";
 				var type = "interaction";
 				this.getData(businessId, timeSpan, type);
