@@ -38,12 +38,11 @@ class AnalyticsController extends Controller
     })->orderBy('total_revenue', 'desc')->get();
 
     $interactionsByDay = [];
-    $profileId = $profile->id;
     for ($i = 0; $i <= 6; $i++) {
       $InteractionsPerDay = PostAnalytic::where(function($query) use ($profile) {
-        $query->where('business_id', '=', 'profileId')
-          ->whereRaw('WEEKDAY(updated_at) = i');
-      })->setBindings([$profileId, $i])->count();
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(updated_at) =' $i);
+      })->count();
       array_push($interactionsByDay, $InteractionsPerDay);
     }
 
