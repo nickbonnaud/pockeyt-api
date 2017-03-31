@@ -16,7 +16,7 @@
 			  </section>
 				<section class="content" id="dashboard">
 					<div class="row">
-						<div class="scroll-container">
+						<div class="scroll-container-analytics">
 							<div class="scroll-contents">
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
