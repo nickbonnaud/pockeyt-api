@@ -112,7 +112,7 @@
 					datasets: [
 						{
 							label: "Views, Shares, Bookmarks",
-							backgroundColor: "rgba(52, 152, 219,1.0)",
+							backgroundColor: "rgba(52, 152, 219,.5)",
 							hoverBorderColor: "rgba(41, 128, 185,1.0)",
           		data: data
 						}
