@@ -62,7 +62,7 @@ class AnalyticsController extends Controller
         $averageRevenuePerDay = ($totalRevenuePerDay / 100) / $days;
         array_push($revenueByDay, $averageRevenuePerDay);
       } else {
-        array_push($revenueByDay, $$totalRevenuePerDay / 100);
+        array_push($revenueByDay, $totalRevenuePerDay / 100);
       }
     }
     dd($revenueByDay);
