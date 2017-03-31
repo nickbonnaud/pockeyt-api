@@ -19,9 +19,9 @@
 						<div class="col-md-6">
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#week-chart" data-toggle="tab">7 Days</a></li>
-									<li><a href="#month-chart" data-toggle="tab" v-on:click="MonthInteractionData()">30 Days</a></li>
-									<li><a href="#2month-chart" data-toggle="tab">60 Days</a></li>
+									<li class="active"><a href="#week-chart" data-toggle="tab" v-on:click="weekInteractionData()">7 Days</a></li>
+									<li><a href="#month-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
+									<li><a href="#2month-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
 									<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Interactions</li>
 								</ul>
 								<div class="tab-content no-padding">
@@ -30,6 +30,9 @@
 									</div>
 									<div class="chart tab-pane" id="month-chart">
 										<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
+									</div>
+									<div class="chart tab-pane" id="2month-chart">
+										<canvas id="barInteractions2Month" width="400" height="400"></canvas>
 									</div>
 								</div>
 							</div>
@@ -45,6 +48,28 @@
 @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
+
+	var barChartOptions = {
+    scaleShowGridLines: true,
+    scaleGridLineColor: "rgba(0,0,0,.05)",
+    scaleGridLineWidth: 1,
+    scaleShowHorizontalLines: true,
+    scaleShowVerticalLines: false,
+    barShowStroke: true,
+    barStrokeWidth: 2,
+    barValueSpacing: 5,
+    barDatasetSpacing: 1,
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+    	yAxes: [{
+    		ticks: {
+    			beginAtZero: true
+    		}
+    	}]
+    }
+	};
+
 
 	var tab = new Vue({
 		el: '#dashboard',
@@ -62,39 +87,10 @@
 		mounted: function() {
 			var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
 			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek);
-
-			var barInteractionsMonth = $("#barInteractionsMonth").get(0).getContext("2d");
-			var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth);
-
-			var barChartOptions = {
-	      scaleShowGridLines: true,
-	      scaleGridLineColor: "rgba(0,0,0,.05)",
-	      scaleGridLineWidth: 1,
-	      scaleShowHorizontalLines: true,
-	      scaleShowVerticalLines: false,
-	      barShowStroke: true,
-	      barStrokeWidth: 2,
-	      barValueSpacing: 5,
-	      barDatasetSpacing: 1,
-	      responsive: true,
-	      maintainAspectRatio: true,
-	      scales: {
-	      	yAxes: [{
-	      		ticks: {
-	      			beginAtZero: true
-	      		}
-	      	}]
-	      }
-			};
+			
     	var barChartInter7 = new Chart(barInteractionsWeek, {
     		type: 'bar',
     		data: barInteractionsWeekData,
-    		options: barChartOptions
-    	});
-
-    	var barChartInter30 = new Chart(barInteractionsMonth, {
-    		type: 'bar',
-    		data: barInteractionsMonthData,
     		options: barChartOptions
     	});
 		},
@@ -129,9 +125,21 @@
 				}
 				return barChartData;
 			},
-			MonthInteractionData: function() {
+			weekInteractionData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var timeSpan = "week";
+				var type = "interaction";
+				this.getData(businessId, timeSpan, type);
+			},
+			monthInteractionData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var timeSpan = "month";
+				var type = "interaction";
+				this.getData(businessId, timeSpan, type);
+			},
+			twoMonthInteractionData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var timeSpan = "2month";
 				var type = "interaction";
 				this.getData(businessId, timeSpan, type);
 			},
@@ -153,36 +161,23 @@
 							case "week":
 								if (type === 'interaction') {
 									this.postsInteractedWeek = dataSet;
+									var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
+									var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek);
+									
+						    	var barChartInter7 = new Chart(barInteractionsWeek, {
+						    		type: 'bar',
+						    		data: barInteractionsWeekData,
+						    		options: barChartOptions
+						    	});
 								} else {
 									this.postsRevenueWeek = dataSet;
 								}
 								break;
 							case "month":
 								if (type === 'interaction') {
-									console.log("bingo");
 									this.postsInteractedMonth = dataSet;
 									var barInteractionsMonth = $("#barInteractionsMonth").get(0).getContext("2d");
 									var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth);
-									var barChartOptions = {
-							      scaleShowGridLines: true,
-							      scaleGridLineColor: "rgba(0,0,0,.05)",
-							      scaleGridLineWidth: 1,
-							      scaleShowHorizontalLines: true,
-							      scaleShowVerticalLines: false,
-							      barShowStroke: true,
-							      barStrokeWidth: 2,
-							      barValueSpacing: 5,
-							      barDatasetSpacing: 1,
-							      responsive: true,
-							      maintainAspectRatio: true,
-							      scales: {
-							      	yAxes: [{
-							      		ticks: {
-							      			beginAtZero: true
-							      		}
-							      	}]
-							      }
-									};
 									var barChartInter30 = new Chart(barInteractionsMonth, {
 						    		type: 'bar',
 						    		data: barInteractionsMonthData,
@@ -195,6 +190,13 @@
 							case "2month":
 								if (type === 'interaction') {
 									this.postsInteracted2Month = dataSet;
+									var barInteractions2Month = $("#barInteractions2Month").get(0).getContext("2d");
+									var barInteractions2MonthData = this.formatBarData(this.postsInteracted2Month);
+									var barChartInter60 = new Chart(barInteractions2Month, {
+						    		type: 'bar',
+						    		data: barInteractions2MonthData,
+						    		options: barChartOptions
+						    	});
 								} else {
 									this.postsRevenue2Month = dataSet;
 								}
