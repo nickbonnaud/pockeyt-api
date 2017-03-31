@@ -159,6 +159,7 @@
 								break;
 							case "month":
 								if (type === 'interaction') {
+									console.log("bingo");
 									this.postsInteractedMonth = dataSet;
 								} else {
 									this.postsRevenueMonth = dataSet;
