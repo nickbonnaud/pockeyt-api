@@ -40,12 +40,20 @@ class AnalyticsController extends Controller
 
     $activityByDay = [];
     for ($i = 0; $i <= 6; $i++) {
-      $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
+      $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->count();
-      array_push($activityByDay, $activityPerDay);
+
+      $days = PostAnalytic::where(function($query) use ($profile, $i) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(updated_at) = ?', [i]);
+      })->groupBy(DB::raw('Date(updated_at)'))->count();
+
+      $averageActivityPerDay = $activityPerDayTotal / $days;
+      array_push($activityByDay, $averageActivityPerDay);
     }
+    dd($activityByDay);
     $activityByDay = collect($activityByDay);
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
   }
@@ -106,7 +114,6 @@ class AnalyticsController extends Controller
       $averageActivityPerDay = $activityPerDayTotal / $days;
       array_push($activityByDay, $averageActivityPerDay);
     }
-    dd($activityByDay);
     return response()->json(array('data' => $activityByDay, 'type' => $type));
   }
 
