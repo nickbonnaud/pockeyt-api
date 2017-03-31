@@ -539,10 +539,16 @@ class TransactionsController extends Controller
         })->orderBy('viewed_on', 'desc')->take(1)->get();
 
         if (count($postViewed) !== 0) {
+            $transactionRevenue = $transaction->tips + $transaction->net_sales;
             foreach ($postViewed as $viewed) {
+                $viewed->transaction_resulted = true;
+                $viewed->transaction_on = Carbon::now();
+                $view->total_revenue = $transactionRevenue;
+                $viewed->save();
+
                 $post = Post::findOrFail($viewed->post_id);
                 $postRevenue = $post->total_revenue;
-                $post->total_revenue = $postRevenue + $transaction->tips + $transaction->net_sales;
+                $post->total_revenue = $postRevenue + $transactionRevenue;
                 $post->save();
             }
         }
