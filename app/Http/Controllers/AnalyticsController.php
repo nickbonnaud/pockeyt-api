@@ -56,7 +56,7 @@ class AnalyticsController extends Controller
       $days = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(transaction_on) = ?', [4]);
-      })->groupBy(DB::raw('Date(transaction_on)'))->get();
+      })->groupBy(DB::raw('Date(transaction_on)'))->count();
       dd($days);
       if ($days !== 0) {
         $averageRevenuePerDay = $totalRevenuePerDay / $days;
