@@ -112,8 +112,6 @@
 					datasets: [
 						{
 							label: "Views, Shares, Bookmarks",
-							xAxisID: "Posts",
-							YAxisID: "Interactions",
 							backgroundColor: "rgba(52, 152, 219,.8)",
 							hoverBorderColor: "rgba(41, 128, 185,1.0)",
           		data: data
