@@ -26,10 +26,10 @@
 								</ul>
 								<div class="tab-content no-padding">
 									<div class="chart tab-pane active" id="week-chart">
-										<canvas id="barChartInter" width="400" height="400"></canvas>
+										<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
 									</div>
-									<div class="chart tab-pane active" id="month-chart">
-										<canvas id="barChartInter" width="400" height="400"></canvas>
+									<div class="chart tab-pane" id="month-chart">
+										<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
 									</div>
 								</div>
 							</div>
@@ -46,22 +46,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-	// var barChartCanvas = $("#barchart").get(0).getContext("2d");
-	// var barChart = new Chart(barChartCanvas);
-	// var barChartData = areaCharData;
-
 	var tab = new Vue({
 		el: '#dashboard',
 
 		data: {
 			postsInteractedWeek: {!! $mostInteracted !!},
 			postsInteractedMonth: [],
+			postsInteracted2Month: [],
+
 			postsRevenueWeek: {!! $mostRevenueGenerated !!},
+			postsRevenueMonth: [],
+			postsRevenue2Month: []
 		},
 
 		mounted: function() {
-			var barChartCanvas = $("#barChartInter").get(0).getContext("2d");
-			var barChartData = this.formatBarData(this.postsInteractedWeek);
+			var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
+			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek);
+
+			var barInteractionsMonth = $("#barInteractionsMonth").get(0).getContext("2d");
+			var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth);
+
 			var barChartOptions = {
 	      scaleShowGridLines: true,
 	      scaleGridLineColor: "rgba(0,0,0,.05)",
@@ -82,9 +86,15 @@
 	      	}]
 	      }
 			};
-    	var barChart = new Chart(barChartCanvas, {
+    	var barChartInter7 = new Chart(barInteractionsWeek, {
     		type: 'bar',
-    		data: barChartData,
+    		data: barInteractionsWeekData,
+    		options: barChartOptions
+    	});
+
+    	var barChartInter30 = new Chart(barInteractionsMonth, {
+    		type: 'bar',
+    		data: barInteractionsMonthData,
     		options: barChartOptions
     	});
 		},
@@ -121,7 +131,6 @@
 			},
 			MonthInteractionData: function() {
 				var businessId = '{{ $user->profile->id }}';
-				console.log(businessId);
 				var timeSpan = "month";
 				var type = "interaction";
 				this.getData(businessId, timeSpan, type);
@@ -136,7 +145,32 @@
 						'type': type
 					},
 					success: data => {
-						console.log(data);
+						var timeSpan = data.timeSpan;
+						var type = data.type;
+						var dataSet = data.data;
+
+						switch(timeSpan) {
+							case "week":
+								if (type === 'interaction') {
+									this.postsInteractedWeek = dataSet;
+								} else {
+									this.postsRevenueWeek = dataSet;
+								}
+								break;
+							case "month":
+								if (type === 'interaction') {
+									this.postsInteractedMonth = dataSet;
+								} else {
+									this.postsRevenueMonth = dataSet;
+								}
+								break;
+							case "2month":
+								if (type === 'interaction') {
+									this.postsInteracted2Month = dataSet;
+								} else {
+									this.postsRevenue2Month = dataSet;
+								}
+						}
 					},
 					error: data => {
 						console.log(data);
