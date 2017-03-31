@@ -41,7 +41,7 @@ class AnalyticsController extends Controller
     for ($i = 0; $i <= 6; $i++) {
       $InteractionsPerDay = PostAnalytic::where(function($query) use ($profile) {
         $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) =' $i);
+          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->count();
       array_push($interactionsByDay, $InteractionsPerDay);
     }
