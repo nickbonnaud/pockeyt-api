@@ -43,7 +43,7 @@ class AnalyticsController extends Controller
       $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [3]);
-      })->count();
+      })->get();
 
       dd($activityPerDayTotal);
 
