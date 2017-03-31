@@ -59,10 +59,10 @@ class AnalyticsController extends Controller
       })->groupBy(DB::raw('Date(transaction_on)'))->get();
       $days = count($days);
       if ($days !== 0) {
-        $averageRevenuePerDay = $totalRevenuePerDay / $days;
+        $averageRevenuePerDay = ($totalRevenuePerDay / 100) / $days;
         array_push($revenueByDay, $averageRevenuePerDay);
       } else {
-        array_push($revenueByDay, $totalRevenuePerDay);
+        array_push($revenueByDay, $$totalRevenuePerDay / 100);
       }
     }
     dd($revenueByDay);
