@@ -52,7 +52,6 @@ class AnalyticsController extends Controller
       foreach ($purchases as $purchase) {
         $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
       }
-      dd($totalRevenuePerDay);
 
       $days = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
