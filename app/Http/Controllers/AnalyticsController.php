@@ -9,6 +9,7 @@ use JWTAuth;
 use Carbon\Carbon;
 use DateTimeZone;
 use App\Post;
+use App\Profile;
 use App\Transaction;
 use App\PostAnalytic;
 use App\Http\Controllers\Controller;
@@ -39,6 +40,51 @@ class AnalyticsController extends Controller
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
   }
 
+  public function getDashboardData(Request $request) {
+    $profile = Profile::findOrFail($request->businessId);
+    $timeSpan = $request->timeSpan;
+    $type = $request->type;
+
+    switch ($timeSpan) {
+      case 'week':
+        $currentDate = Carbon::now();
+        $fromDate = Carbon::now()->subWeek();
+        break;
+      case 'month':
+        $currentDate = Carbon::now();
+        $fromDate = Carbon::now()->subMonth();
+        break;
+      case '2month':
+        $currentDate = Carbon::now();
+        $fromDate = Carbon::now()->subMonths(2);
+        break;
+      default:
+        $currentDate = Carbon::now();
+        $fromDate = Carbon::now()->subWeek();
+        break;
+    }
+    if ($type === 'interaction') {
+      return $this->getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan);
+    } else {
+      return $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
+    }
+  }
+
+  public function getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan) {
+    $mostInteracted = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
+      $query->whereBetween('updated_at', [$fromDate, $currentDate])
+        ->where('profile_id', '=', $profile->id);
+    })->orderBy('total_interactions', 'desc')->get();
+    return response()->json($mostInteracted, $type, $timeSpan);
+  }
+
+  public function getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan) {
+    $mostRevenueGenerated = Post::where(function($query) use ($fromDate, $currentDate, $profile) {
+      $query->whereBetween('updated_at', [$fromDate, $currentDate])
+        ->where('profile_id', '=', $profile->id);
+    })->orderBy('total_revenue', 'desc')->get();
+    return response()->json($mostRevenueGenerated, $type, $timeSpan);
+  }
 
   public function viewedPosts(Request $request) {
 		$user = JWTAuth::parseToken()->authenticate();

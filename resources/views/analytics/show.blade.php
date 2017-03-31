@@ -19,13 +19,16 @@
 						<div class="col-md-6">
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#week-chart" data-toggle="tab">Last 7 Days</a></li>
-									<li><a href="#month-chart" data-toggle="tab">Last 30 Days</a></li>
-									<li><a href="#2month-chart" data-toggle="tab">Last 60 Days</a></li>
+									<li class="active"><a href="#week-chart" data-toggle="tab">7 Days</a></li>
+									<li><a href="#month-chart" data-toggle="tab" v-on:click="MonthInteractionData()">30 Days</a></li>
+									<li><a href="#2month-chart" data-toggle="tab">60 Days</a></li>
 									<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Interactions</li>
 								</ul>
 								<div class="tab-content no-padding">
 									<div class="chart tab-pane active" id="week-chart">
+										<canvas id="barChartInter" width="400" height="400"></canvas>
+									</div>
+									<div class="chart tab-pane active" id="month-chart">
 										<canvas id="barChartInter" width="400" height="400"></canvas>
 									</div>
 								</div>
@@ -52,7 +55,8 @@
 
 		data: {
 			postsInteractedWeek: {!! $mostInteracted !!},
-			postsRevenueWeek: {!! $mostRevenueGenerated !!}
+			postsInteractedMonth: [],
+			postsRevenueWeek: {!! $mostRevenueGenerated !!},
 		},
 
 		mounted: function() {
@@ -114,6 +118,29 @@
 					]
 				}
 				return barChartData;
+			},
+			MonthInteractionData: function() {
+				var businessId = '{{ $profile->id }}';
+				var timeSpan = "month";
+				var type = "interaction";
+				this.getData(businessId, timeSpan, type);
+			},
+			getData: function(businessId, timeSpan, type) {
+				$.ajax({
+					method: 'POST',
+					url: '/analytics/dashboard/data',
+					data: {
+						'businessId': businessId,
+						'timeSpan': timeSpan,
+						'type': type
+					},
+					success: data => {
+						console.log(data);
+					},
+					error: data => {
+						console.log(data);
+					}
+				})
 			}
 		}
 
