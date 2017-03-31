@@ -542,7 +542,7 @@ class TransactionsController extends Controller
             $transactionRevenue = $transaction->tips + $transaction->net_sales;
             foreach ($postViewed as $viewed) {
                 $viewed->transaction_resulted = true;
-                $viewed->transaction_on = Carbon::now();
+                $viewed->transaction_on = Carbon::now(new DateTimeZone(config('app.timezone')));
                 $view->total_revenue = $transactionRevenue;
                 $viewed->save();
 
