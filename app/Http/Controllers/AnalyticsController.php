@@ -46,7 +46,7 @@ class AnalyticsController extends Controller
       array_push($activityByDay, $activityPerDay);
     }
 
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated'));
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
   }
 
   public function getDashboardDataBar(Request $request) {
