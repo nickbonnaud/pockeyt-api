@@ -75,7 +75,7 @@ class AnalyticsController extends Controller
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_interactions', 'desc')->get();
-    return response()->json($mostInteracted);
+    return response()->json(array('data' => $mostInteracted, 'type' => $type, 'timeSpan' => $timeSpan));
   }
 
   public function getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan) {
@@ -83,7 +83,7 @@ class AnalyticsController extends Controller
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_revenue', 'desc')->get();
-    return response()->json($mostRevenueGenerated, ['type' => $type], ['timeSpan' => $timeSpan]);
+    return response()->json(array('data' => $mostRevenueGenerated, 'type' => $type, 'timeSpan' => $timeSpan));
   }
 
   public function viewedPosts(Request $request) {
