@@ -16,59 +16,63 @@
 			  </section>
 				<section class="content" id="dashboard">
 					<div class="row">
-						<div class="col-md-6">
-							<div class="nav-tabs-custom">
-								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#week-inter-chart" data-toggle="tab" v-on:click="weekInteractionData()">7 Days</a></li>
-									<li><a href="#month-inter-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
-									<li><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
-									<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Top 10 Posts by Interactions</li>
-								</ul>
-								<div class="tab-content no-padding">
-									<div class="chart tab-pane active" id="week-inter-chart">
-										<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
+						<div class="scroll-container">
+							<div class="scroll-contents">
+								<div class="col-md-6">
+									<div class="nav-tabs-custom">
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#week-inter-chart" data-toggle="tab" v-on:click="weekInteractionData()">7 Days</a></li>
+											<li><a href="#month-inter-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
+											<li><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
+											<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Top 10 Posts by Interactions</li>
+										</ul>
+										<div class="tab-content no-padding">
+											<div class="chart tab-pane active" id="week-inter-chart">
+												<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="month-inter-chart">
+												<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="2month-inter-chart">
+												<canvas id="barInteractions2Month" width="400" height="400"></canvas>
+											</div>
+										</div>
 									</div>
-									<div class="chart tab-pane" id="month-inter-chart">
-										<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
-									</div>
-									<div class="chart tab-pane" id="2month-inter-chart">
-										<canvas id="barInteractions2Month" width="400" height="400"></canvas>
+									<div class="nav-tabs-custom">
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="dayInterData()">Interactions</a></li>
+											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
+											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Activity by Day</li>
+										</ul>
+										<div class="tab-content no-padding">
+											<div class="chart tab-pane active" id="day-inter-chart">
+												<canvas id="lineInterDay" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="day-revenue-chart">
+												<canvas id="lineRevenueDay" width="400" height="400"></canvas>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="nav-tabs-custom">
-								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="dayInterData()">Interactions</a></li>
-									<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
-									<li class="pull-left header"><i class="fa fa-calendar-o"></i> Activity by Day</li>
-								</ul>
-								<div class="tab-content no-padding">
-									<div class="chart tab-pane active" id="day-inter-chart">
-										<canvas id="lineInterDay" width="400" height="400"></canvas>
-									</div>
-									<div class="chart tab-pane" id="day-revenue-chart">
-										<canvas id="lineRevenueDay" width="400" height="400"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="nav-tabs-custom">
-								<ul class="nav nav-tabs pull-right">
-									<li class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
-									<li><a href="#month-revenue-chart" data-toggle="tab" v-on:click="monthRevenueData()">30 Days</a></li>
-									<li><a href="#2month-revenue-chart" data-toggle="tab" v-on:click="twoMonthRevenueData()">60 Days</a></li>
-									<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
-								</ul>
-								<div class="tab-content no-padding">
-									<div class="chart tab-pane active" id="week-revenue-chart">
-										<canvas id="barRevenueWeek" width="400" height="400"></canvas>
-									</div>
-									<div class="chart tab-pane" id="month-revenue-chart">
-										<canvas id="barRevenueMonth" width="400" height="400"></canvas>
-									</div>
-									<div class="chart tab-pane" id="2month-revenue-chart">
-										<canvas id="barRevenue2Month" width="400" height="400"></canvas>
+								<div class="col-md-6">
+									<div class="nav-tabs-custom">
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
+											<li><a href="#month-revenue-chart" data-toggle="tab" v-on:click="monthRevenueData()">30 Days</a></li>
+											<li><a href="#2month-revenue-chart" data-toggle="tab" v-on:click="twoMonthRevenueData()">60 Days</a></li>
+											<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
+										</ul>
+										<div class="tab-content no-padding">
+											<div class="chart tab-pane active" id="week-revenue-chart">
+												<canvas id="barRevenueWeek" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="month-revenue-chart">
+												<canvas id="barRevenueMonth" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="2month-revenue-chart">
+												<canvas id="barRevenue2Month" width="400" height="400"></canvas>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
