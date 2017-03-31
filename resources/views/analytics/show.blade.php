@@ -120,7 +120,7 @@
 				return barChartData;
 			},
 			MonthInteractionData: function() {
-				var businessId = '{{ $profile->id }}';
+				var businessId = '{{ $this->user->profile->id }}';
 				console.log(businessId);
 				var timeSpan = "month";
 				var type = "interaction";
