@@ -12,7 +12,6 @@ use App\Post;
 use App\Profile;
 use App\Transaction;
 use App\PostAnalytic;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AnalyticsController extends Controller
@@ -42,10 +41,8 @@ class AnalyticsController extends Controller
     for ($i = 0; $i <= 6; $i++) {
       $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [3]);
-      })->groupBy(DB::raw('Date(updated_at)'))
-        ->count();
-      dd($activityPerDay);
+          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
+      })->count();
       array_push($activityByDay, $activityPerDay);
     }
     $activityByDay = collect($activityByDay);
@@ -95,12 +92,20 @@ class AnalyticsController extends Controller
   public function getInteractionsByDay($profile, $type) {
     $activityByDay = [];
     for ($i = 0; $i <= 6; $i++) {
-      $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
+      $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->groupBy();
-      array_push($activityByDay, $activityPerDay);
+      })->count();
+
+      $days = PostAnalytic::where(function($query) use ($profile, $i) {
+        $query->where('business_id', '=', $profile->id)
+          ->whereRaw('WEEKDAY(updated_at) = ?', [i]);
+      })->groupBy(DB::raw('Date(updated_at)'))->count();
+
+      $averageActivityPerDay = $activityPerDayTotal / $days;
+      array_push($activityByDay, $averageActivityPerDay);
     }
+    dd($activityByDay);
     return response()->json(array('data' => $activityByDay, 'type' => $type));
   }
 
