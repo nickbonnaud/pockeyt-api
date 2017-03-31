@@ -50,8 +50,12 @@ class AnalyticsController extends Controller
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->groupBy(DB::raw('Date(updated_at)'))->count();
 
-      $averageActivityPerDay = $activityPerDayTotal / $days;
-      array_push($activityByDay, $averageActivityPerDay);
+      if ($days !== 0) {
+        $averageActivityPerDay = $activityPerDayTotal / $days;
+        array_push($activityByDay, $averageActivityPerDay);
+      } else {
+        array_push($activityByDay, $activityPerDayTotal);
+      }
     }
     dd($activityByDay);
     $activityByDay = collect($activityByDay);
@@ -111,8 +115,12 @@ class AnalyticsController extends Controller
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
       })->groupBy(DB::raw('Date(updated_at)'))->count();
 
-      $averageActivityPerDay = $activityPerDayTotal / $days;
-      array_push($activityByDay, $averageActivityPerDay);
+      if ($days !== 0) {
+        $averageActivityPerDay = $activityPerDayTotal / $days;
+        array_push($activityByDay, $averageActivityPerDay);
+      } else {
+        array_push($activityByDay, $activityPerDayTotal);
+      }
     }
     return response()->json(array('data' => $activityByDay, 'type' => $type));
   }
