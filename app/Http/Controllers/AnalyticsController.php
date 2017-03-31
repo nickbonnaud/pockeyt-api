@@ -57,7 +57,6 @@ class AnalyticsController extends Controller
         array_push($activityByDay, $activityPerDayTotal);
       }
     }
-    dd($activityByDay);
     $activityByDay = collect($activityByDay);
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
   }
