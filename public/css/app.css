@@ -8403,6 +8403,13 @@ img {
     display: flex; 
   }
 
+  .scroll-container-analytics {
+    height: 88vh;
+    overflow: hidden;
+    will-change: overflow;
+    display: flex; 
+  }
+
   .scroll-contents {
     overflow: auto;
     width: 100%;
