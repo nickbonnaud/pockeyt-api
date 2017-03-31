@@ -118,7 +118,6 @@ class AnalyticsController extends Controller
   }
 
   public function viewedPosts(Request $request) {
-		$user = JWTAuth::parseToken()->authenticate();
 		$viewedPosts = $request->all();
 		foreach ($viewedPosts as $viewedPost) {
 			$post = Post::findOrFail($viewedPost);
@@ -131,7 +130,7 @@ class AnalyticsController extends Controller
 
 			$post->save();
 
-			if (isset($user)) {
+			if ($user = JWTAuth::parseToken()->authenticate()) {
 				$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
           $query->where('user_id', '=', $user->id)
               ->where('post_id', '=', $post->id);
@@ -154,7 +153,6 @@ class AnalyticsController extends Controller
 	}
 
 	public function interactionPosts(Request $request) {
-		$user = JWTAuth::parseToken()->authenticate();
 		$type = $request->type;
 		$post = Post::findOrFail($request->postId);
 
@@ -182,7 +180,7 @@ class AnalyticsController extends Controller
 		}
 		$post->save();
 
-		if (isset($user)) {
+		if ($user = JWTAuth::parseToken()->authenticate()) {
 			$postAnalytic = PostAnalytic::where(function($query) use ($user, $post) {
         $query->where('user_id', '=', $user->id)
             ->where('post_id', '=', $post->id);
