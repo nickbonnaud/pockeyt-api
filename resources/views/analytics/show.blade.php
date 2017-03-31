@@ -336,6 +336,7 @@
 				    	});
 						}
 					}
+				})
 			},
 			getDataBar: function(businessId, timeSpan, type) {
 				$.ajax({
