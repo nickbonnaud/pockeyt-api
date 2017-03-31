@@ -12,6 +12,7 @@ use App\Post;
 use App\Profile;
 use App\Transaction;
 use App\PostAnalytic;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AnalyticsController extends Controller
@@ -42,7 +43,9 @@ class AnalyticsController extends Controller
       $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->count();
+      })->groupBy(DB::raw('Date(updated_at)'))
+        ->orderBy('updated_at', 'DESC')->get();
+      dd($activityPerDay);
       array_push($activityByDay, $activityPerDay);
     }
     $activityByDay = collect($activityByDay);
@@ -95,10 +98,14 @@ class AnalyticsController extends Controller
       $activityPerDay = PostAnalytic::where(function($query) use ($profile, $i) {
         $query->where('business_id', '=', $profile->id)
           ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->count();
+      })->groupBy();
       array_push($activityByDay, $activityPerDay);
     }
     return response()->json(array('data' => $activityByDay, 'type' => $type));
+  }
+
+  public function getRevenueByDay($profile, $type) {
+
   }
 
   public function getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan) {
