@@ -64,9 +64,9 @@ class AnalyticsController extends Controller
         break;
     }
     if ($type === 'interaction') {
-      $this->getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan);
+      return $this->getMostInteracted($currentDate, $fromDate, $profile, $type, $timeSpan);
     } else {
-      $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
+      return $this->getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan);
     }
   }
 
@@ -75,7 +75,7 @@ class AnalyticsController extends Controller
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->orderBy('total_interactions', 'desc')->get();
-    return response()->json($mostInteracted, ['type' => $type], ['timeSpan' => $timeSpan]);
+    return response()->json($mostInteracted);
   }
 
   public function getMostRevenueGenerated($currentDate, $fromDate, $profile, $type, $timeSpan) {
