@@ -152,6 +152,7 @@
 
 		methods: {
 			formatLineData: function(dataSet, type) {
+				console.log(dataSet);
 				var data = dataSet;
 				var labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
