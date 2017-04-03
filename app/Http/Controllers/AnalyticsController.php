@@ -60,7 +60,7 @@ class AnalyticsController extends Controller
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
-    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id))->count();
+    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id)->count();
     if ($totalHoursData !== 0) {
       for ($i = 0; $i <= 23; $i++) {
         $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
