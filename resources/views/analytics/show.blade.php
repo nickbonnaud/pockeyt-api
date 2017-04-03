@@ -42,7 +42,7 @@
 										<ul class="nav nav-tabs pull-right">
 											<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="dayInterData()">Interactions</a></li>
 											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
-											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Activity by Day</li>
+											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Average Activity by Day</li>
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="day-inter-chart">
@@ -71,6 +71,21 @@
 											</div>
 											<div class="chart tab-pane" id="2month-revenue-chart">
 												<canvas id="barRevenue2Month" width="400" height="400"></canvas>
+											</div>
+										</div>
+									</div>
+									<div class="nav-tabs-custom">
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="timeInterData()">Interactions</a></li>
+											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="timeRevenueData()">Revenue</a></li>
+											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Average Activity by Time of Day</li>
+										</ul>
+										<div class="tab-content no-padding">
+											<div class="chart tab-pane active" id="day-inter-chart">
+												<canvas id="lineInterTime" width="400" height="400"></canvas>
+											</div>
+											<div class="chart tab-pane" id="day-revenue-chart">
+												<canvas id="lineRevenueTime" width="400" height="400"></canvas>
 											</div>
 										</div>
 									</div>
@@ -165,7 +180,7 @@
 						labels: labels,
 						datasets: [
 							{
-								label: "Views, Shares, Bookmarks",
+								label: "AVG Views, Shares, Bookmarks",
 								fill: false,
 								lineTension: 0.1,
 								backgroundColor: "rgba(52, 152, 219,0.4)",
@@ -192,6 +207,7 @@
 						labels: labels,
 						datasets: [
 							{
+								label: "AVG Revenue"
 								fill: false,
 								lineTension: 0.1,
 								backgroundColor: "rgba(46, 204, 113,.4)",

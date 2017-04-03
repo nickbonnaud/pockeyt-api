@@ -58,6 +58,15 @@ class AnalyticsController extends Controller
       }
     }
     $activityByDay = collect($activityByDay);
+
+    $activityByTime = PostAnalytic::where('business_id', '=', $profile->id)->select('updated_at')->get();
+    $activityByTimeData = [];
+
+    foreach ($activityByTime as $activity) {
+      $time = $activity->updated_at->toTimeString();
+      dd($time);
+    }
+
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
   }
 
