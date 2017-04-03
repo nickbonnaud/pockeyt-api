@@ -59,15 +59,24 @@ class AnalyticsController extends Controller
     }
     $activityByDay = collect($activityByDay);
 
-    $activityByTime = PostAnalytic::where('business_id', '=', $profile->id)->select('updated_at')->get();
-    $activityByTimeData = [];
+    $activityByHour = [];
+    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id))->count();
+    if ($totalHoursData !== 0) {
+      for ($i = 0; $i <= 23; $i++) {
+        $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('HOUR(updated_at) = ?', [$i]);
+        })->count();
 
-    foreach ($activityByTime as $activity) {
-      $time = $activity->updated_at->toTimeString();
-      dd($time);
+        $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
+        array_push($activityByHour, $percentagePerHour);
+      }
+    } else {
+      $activityByHour = [0];
     }
-
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay'));
+    $activityByHour = collect($activityByHour);
+    dd($activityByHour);
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour'));
   }
 
   public function getDashboardDataBar(Request $request) {
