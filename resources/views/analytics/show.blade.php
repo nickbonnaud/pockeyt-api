@@ -159,7 +159,7 @@
 		scales: {
 			yAxes: [{
     		ticks: {
-    			padding: 100,
+    			padding: -100,
     			beginAtZero: true,
     			callback: function(value, index, values) {
             return value + '%';
