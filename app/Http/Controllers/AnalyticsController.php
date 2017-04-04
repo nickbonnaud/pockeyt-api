@@ -75,7 +75,6 @@ class AnalyticsController extends Controller
       $activityByHour = [0];
     }
     $activityByHour = collect($activityByHour);
-    dd($activityByHour);
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour'));
   }
 
@@ -117,6 +116,54 @@ class AnalyticsController extends Controller
     } else {
       return $this->getRevenueByDay($profile, $type);
     }
+  }
+
+  public function getDashboardDataLineHour(Request $request) {
+    $profile = Profile::findOrFail($request->businessId);
+    $type = $request->type;
+    if ($type === 'interaction') {
+      return $this->getInteractionsByHour($profile, $type);
+    } else {
+      return $this->getRevenueByHour($profile, $type);
+    }
+  }
+
+  public function getInteractionsByHour($profile, $type) {
+    $activityByHour = [];
+    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    if ($totalHoursData !== 0) {
+      for ($i = 0; $i <= 23; $i++) {
+        $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('HOUR(updated_at) = ?', [$i]);
+        })->count();
+
+        $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
+        array_push($activityByHour, $percentagePerHour);
+      }
+    } else {
+      $activityByHour = [0];
+    }
+    $activityByHour = collect($activityByHour);
+  }
+
+  public function getRevenueByHour($profile, $type) {
+    $activityByHour = [];
+    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    if ($totalHoursData !== 0) {
+      for ($i = 0; $i <= 23; $i++) {
+        $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('HOUR(updated_at) = ?', [$i]);
+        })->count();
+
+        $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
+        array_push($activityByHour, $percentagePerHour);
+      }
+    } else {
+      $activityByHour = [0];
+    }
+    $activityByHour = collect($activityByHour);
   }
 
   public function getInteractionsByDay($profile, $type) {

@@ -76,16 +76,16 @@
 									</div>
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
-											<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="timeInterData()">Interactions</a></li>
-											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="timeRevenueData()">Revenue</a></li>
-											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Average Activity by Time of Day</li>
+											<li class="active"><a href="#hour-inter-chart" data-toggle="tab" v-on:click="hourInterData()">Interactions</a></li>
+											<li><a href="#hour-revenue-chart" data-toggle="tab" v-on:click="hourRevenueData()">Revenue</a></li>
+											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time of Day</li>
 										</ul>
 										<div class="tab-content no-padding">
-											<div class="chart tab-pane active" id="day-inter-chart">
-												<canvas id="lineInterTime" width="400" height="400"></canvas>
+											<div class="chart tab-pane active" id="hour-inter-chart">
+												<canvas id="lineInterHour" width="400" height="400"></canvas>
 											</div>
-											<div class="chart tab-pane" id="day-revenue-chart">
-												<canvas id="lineRevenueTime" width="400" height="400"></canvas>
+											<div class="chart tab-pane" id="hour-revenue-chart">
+												<canvas id="lineRevenueHour" width="400" height="400"></canvas>
 											</div>
 										</div>
 									</div>
@@ -138,7 +138,10 @@
 			postsRevenue2Month: [],
 
 			postsActivityByDay: {!! $activityByDay !!},
-			postsRevenueByDay: []
+			postsRevenueByDay: [],
+
+			postsActivityByHour: {!! $postsActivityByHour !!},
+			postsRevenueByHour: []
 		},
 
 		mounted: function() {
@@ -166,6 +169,14 @@
     	var lineChartInter = new Chart(lineInteractionsDay, {
     		type: 'line',
     		data: lineInteractionsDayData
+    	});
+
+    	var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
+    	var type = "interaction";
+    	var lineInteractionsHourData = this.formatLineData(this.postsActivityByHour, type);
+    	var lineChartInterHour = new Chart(lineInteractionsHour, {
+    		type: 'line',
+    		data: lineInteractionsHourData
     	});
 		},
 
@@ -280,6 +291,11 @@
 				}
 				return barChartData;
 			},
+			hourInterData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var type = "interaction";
+				this.getDataLineHour(businessId, type);
+			},
 			dayInterData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var type = "interaction";
@@ -325,6 +341,39 @@
 				var timeSpan = "2month";
 				var type = "revenue";
 				this.getDataBar(businessId, timeSpan, type);
+			},
+			getDataLineHour: function(businessId, type) {
+				$.ajax({
+					method: 'POST',
+					url: '/analytics/dashboard/data/line/hour',
+					data: {
+						'businessId': businessId,
+						'type': type
+					},
+					success: data => {
+						var type = data.type;
+						var dataSet = data.data;
+
+						if (type === 'interaction') {
+							this.postsActivityByHour = dataSet;
+							var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
+				    	var type = "interaction";
+				    	var lineInteractionsHourData = this.formatLineData(this.postsActivityByHour, type);
+				    	var lineChartInterHour = new Chart(lineInteractionsHour, {
+				    		type: 'line',
+				    		data: lineInteractionsHourData
+				    	});
+						} else {
+							this.postsRevenueByHour = dataSet;
+							var lineRevenueHour = $("#lineRevenueHour").get(0).getContext("2d");
+				    	var lineRevenueHourData = this.formatLineData(this.postsRevenueByHour, type);
+				    	var lineChartRevenueHour= new Chart(lineRevenueHour, {
+				    		type: 'line',
+				    		data: lineRevenueHourData
+				    	});
+						}
+					}
+				})
 			},
 			getDataLine: function(businessId, type) {
 				$.ajax({
