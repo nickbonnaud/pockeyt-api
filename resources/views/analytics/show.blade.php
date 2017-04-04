@@ -125,6 +125,36 @@
     }
 	};
 
+	var barChartOptionsRevenue = {
+    scaleShowGridLines: true,
+    scaleGridLineColor: "rgba(0,0,0,.05)",
+    scaleGridLineWidth: 1,
+    scaleShowHorizontalLines: true,
+    scaleShowVerticalLines: false,
+    barShowStroke: true,
+    barStrokeWidth: 2,
+    barValueSpacing: 5,
+    barDatasetSpacing: 1,
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+    	yAxes: [{
+    		ticks: {
+    			beginAtZero: true,
+    			callback: function(value, index, values) {
+            if(parseInt(value) >= 1000){
+              return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            } else {
+              return '$' + value;
+            }
+          } 
+    		}
+    	}]
+    }
+	};
+
+
+
 	var lineChartHoursOptions = {
 		scales: {
       xAxes: [{
@@ -171,7 +201,7 @@
     	var barChartRevenue7 = new Chart(barRevenueWeek, {
     		type: 'bar',
     		data: barRevenueWeekData,
-    		options: barChartOptions
+    		options: barChartOptionsRevenue
     	});
 
     	var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
@@ -516,7 +546,7 @@
 						    	var barChartRevenue7 = new Chart(barRevenueWeek, {
 						    		type: 'bar',
 						    		data: barRevenueWeekData,
-						    		options: barChartOptions
+						    		options: barChartOptionsRevenue
 						    	});
 								}
 								break;
@@ -538,7 +568,7 @@
 						    	var barChartRevenue30 = new Chart(barRevenueMonth, {
 						    		type: 'bar',
 						    		data: barRevenueMonthData,
-						    		options: barChartOptions
+						    		options: barChartOptionsRevenue
 						    	});
 								}
 								break;
@@ -560,7 +590,7 @@
 						    	var barChartRevenue60 = new Chart(barRevenue2Month, {
 						    		type: 'bar',
 						    		data: barRevenue2MonthData,
-						    		options: barChartOptions
+						    		options: barChartOptionsRevenue
 						    	});
 								}
 						}
