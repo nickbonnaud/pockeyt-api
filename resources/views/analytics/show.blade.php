@@ -193,7 +193,7 @@
 	var selectedPost;
 
 	var test = function(data) {
-		Vue.set(vm.postsInteractedWeek, data)
+		Vue.set(tab.postsInteractedWeek, data)
 	};
 
 	var tab = new Vue({
