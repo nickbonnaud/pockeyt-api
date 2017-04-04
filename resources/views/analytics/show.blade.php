@@ -193,11 +193,12 @@
 		methods: {
 			formatLineDataHour: function(dataSet, type) {
 				var data = dataSet;
+				var labels = ['12am', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12pm', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 				if (type === 'interaction') {
 					var lineChartData = {
+						labels: labels,
 						datasets: [
 							{
-								labels: ['12am', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12pm', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
 								label: "% Views, Shares, Bookmarks",
 								fill: false,
 								lineTension: 0.1,
