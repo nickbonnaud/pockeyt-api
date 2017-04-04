@@ -190,7 +190,7 @@
 	};
 
 	var test = function() {
-		console.log(tab);
+		console.log(this);
 	}
 
 	var tab = new Vue({
