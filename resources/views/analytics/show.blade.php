@@ -194,7 +194,8 @@
 		},
 
 		mounted: function() {
-			var barInteractionsWeek = $("#barInteractionsWeek").get(0);
+			var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
+			var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
 			var type = "interaction";
 			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
     	var barChartInter7 = new Chart(barInteractionsWeek, {
@@ -203,7 +204,7 @@
     		options: barChartOptions
     	});
 
-    	barInteractionsWeek.onclick = function(evt) {
+    	barInteractionsWeekRaw.onclick = function(evt) {
     		console.log(evt);
     	};
 
