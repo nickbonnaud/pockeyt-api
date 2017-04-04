@@ -44,7 +44,7 @@
 											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
 											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Percentage Activity by Day</li>
 										</ul>
-										<div class="tab-content no-padding">
+										<div class="tab-content">
 											<div class="chart tab-pane active" id="day-inter-chart">
 												<canvas id="lineInterDay" width="400" height="300"></canvas>
 											</div>
@@ -156,7 +156,6 @@
 	var lineChartOptions = {
 		responsive: true,
     maintainAspectRatio: true,
-    padding: 50,
 		scales: {
 			yAxes: [{
     		ticks: {
