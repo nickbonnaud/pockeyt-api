@@ -203,7 +203,6 @@
 							{
 								label: "% Views, Shares, Bookmarks",
 								fill: false,
-								lineTension: 0.1,
 								backgroundColor: "rgba(52, 152, 219,0.4)",
 								borderColor: "rgba(52, 152, 219,1.0)",
 								borderCapStyle: "round",
@@ -230,7 +229,6 @@
 							{
 								label: "% Revenue",
 								fill: false,
-								lineTension: 0.1,
 								backgroundColor: "rgba(46, 204, 113,.4)",
 								borderColor: "rgba(46, 204, 113,1.0)",
 								borderCapStyle: "round",
@@ -265,7 +263,6 @@
 							{
 								label: "AVG Views, Shares, Bookmarks",
 								fill: false,
-								lineTension: 0.1,
 								backgroundColor: "rgba(52, 152, 219,0.4)",
 								borderColor: "rgba(52, 152, 219,1.0)",
 								borderCapStyle: "round",
@@ -292,7 +289,6 @@
 							{
 								label: "AVG Revenue",
 								fill: false,
-								lineTension: 0.1,
 								backgroundColor: "rgba(46, 204, 113,.4)",
 								borderColor: "rgba(46, 204, 113,1.0)",
 								borderCapStyle: "round",
