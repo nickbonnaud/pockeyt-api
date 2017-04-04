@@ -104,10 +104,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-	barInteractionsWeek.onclick = function(event) {
-    		console.log(barChartInter7.getElementsAtEvent(evt));
-    	};
-
 	var barChartOptions = {
     scaleShowGridLines: true,
     scaleGridLineColor: "rgba(0,0,0,.05)",
@@ -206,6 +202,10 @@
     		data: barInteractionsWeekData,
     		options: barChartOptions
     	});
+
+    	$("#barInteractionsWeek").get(0).onclick = function(evt) {
+    		console.log(evt);
+    	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
