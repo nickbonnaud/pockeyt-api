@@ -104,12 +104,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-barInteractionsWeekRaw.onclick = function(evt) {
-    		var activePoints = barChartInter7.getElementsAtEvent(evt);
-    		var idx = activePoints[0]['_index'];
-    		console.log(idx);
-    	};
-
 	var barChartOptions = {
     scaleShowGridLines: true,
     scaleGridLineColor: "rgba(0,0,0,.05)",
@@ -209,6 +203,12 @@ barInteractionsWeekRaw.onclick = function(evt) {
     		data: barInteractionsWeekData,
     		options: barChartOptions
     	});
+
+    	barInteractionsWeekRaw.onclick = function(evt) {
+    		var activePoints = barChartInter7.getElementsAtEvent(evt);
+    		var idx = activePoints[0]['_index'];
+    		console.log(idx);
+    	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
@@ -548,7 +548,8 @@ barInteractionsWeekRaw.onclick = function(evt) {
 							case "week":
 								if (type === 'interaction') {
 									this.postsInteractedWeek = dataSet;
-									var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
+									var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
+									var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
 									var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
 									
 						    	var barChartInter7 = new Chart(barInteractionsWeek, {
@@ -571,13 +572,20 @@ barInteractionsWeekRaw.onclick = function(evt) {
 							case "month":
 								if (type === 'interaction') {
 									this.postsInteractedMonth = dataSet;
-									var barInteractionsMonth = $("#barInteractionsMonth").get(0).getContext("2d");
+									var barInteractionsMonthRaw = $("#barInteractionsMonth").get(0);
+									var barInteractionsMonth = barInteractionsMonthRaw.getContext("2d");
 									var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth, type);
 									var barChartInter30 = new Chart(barInteractionsMonth, {
 						    		type: 'bar',
 						    		data: barInteractionsMonthData,
 						    		options: barChartOptions
 						    	});
+
+						    	barInteractionsMonthRaw.onclick = function(evt) {
+						    		var activePoints = barChartInter30.getElementsAtEvent(evt);
+						    		var idx = activePoints[0]['_index'];
+						    		console.log(idx);
+						    	};
 								} else {
 									this.postsRevenueMonth = dataSet;
 									var barRevenueMonth = $("#barRevenueMonth").get(0).getContext("2d");
