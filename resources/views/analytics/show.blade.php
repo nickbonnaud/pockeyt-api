@@ -208,6 +208,8 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var chartData = activePoints[0]['_chart'].config.data;
     		console.log(chartData);
+    		var idx = activePoints[0]['_index'];
+    		console.log(idx);
     	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
