@@ -193,7 +193,7 @@
 
 	var test = function(selectedPost) {
 		console.log(selectedPost);
-		Vue.set(selectedChartPost, 0, selectedPost);
+		Vue.set(tab.selectedChartPost, 0, selectedPost);
 	};
 
 	var tab = new Vue({
