@@ -367,6 +367,11 @@
 				var type = "interaction";
 				this.getDataLineHour(businessId, type);
 			},
+			hourRevenueData: function() {
+				var businessId = '{{ $user->profile->id }}';
+				var type = "revenue";
+				this.getDataLineHour(businessId, type);
+			},
 			dayInterData: function() {
 				var businessId = '{{ $user->profile->id }}';
 				var type = "interaction";

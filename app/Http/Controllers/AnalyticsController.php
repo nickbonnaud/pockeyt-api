@@ -148,13 +148,16 @@ class AnalyticsController extends Controller
   }
 
   public function getRevenueByHour($profile, $type) {
-    $activityByHour = [];
-    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    $revenueByHour = [];
+    $totalHoursRevenue = PostAnalytic::where(function($query) use ($profile) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('HOUR(transaction_on) = ?', [$i]);
+        })->count();
     if ($totalHoursData !== 0) {
       for ($i = 0; $i <= 23; $i++) {
         $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
           $query->where('business_id', '=', $profile->id)
-            ->whereRaw('HOUR(updated_at) = ?', [$i]);
+            ->whereRaw('HOUR(transaction_on) = ?', [$i]);
         })->count();
 
         $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
@@ -168,22 +171,20 @@ class AnalyticsController extends Controller
 
   public function getInteractionsByDay($profile, $type) {
     $activityByDay = [];
-    for ($i = 0; $i <= 6; $i++) {
-      $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->count();
+    $totalDaysData = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    if ($totalDaysData !== 0) {
+      for ($i = 0; $i <= 6; $i++) {
+        $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
+        })->count();
 
-      $days = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->groupBy(DB::raw('Date(updated_at)'))->count();
-
-      if ($days !== 0) {
-        $averageActivityPerDay = $activityPerDayTotal / $days;
-        array_push($activityByDay, $averageActivityPerDay);
-      } else {
-        array_push($activityByDay, $activityPerDayTotal);
+        $percentagePerDay = ($activityPerDayTotal / $totalDaysData) * 100;
+        array_push($activityByDay, $percentagePerDay);
+      }
+    } else {
+      for ($i = 0; $i <= 6; $i++) {
+        array_push($activityByDay, 0);
       }
     }
     return response()->json(array('data' => $activityByDay, 'type' => $type));
