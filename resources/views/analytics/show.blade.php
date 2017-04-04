@@ -206,7 +206,8 @@
 
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
-    		console.log(activePoints);
+    		var chartData = activePoints[0]['_chart'].config.data;
+    		console.log(chartData);
     	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
