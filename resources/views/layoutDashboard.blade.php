@@ -269,10 +269,7 @@
     var tab = new Vue({
       el: '#tab',
 
-      data: {
-        transactionsPending: [],
-        transactionsFinalized: []
-      },
+      
 
       mounted: function() {
         var pusher = new Pusher('f4976d40a137b96b52ea', {
