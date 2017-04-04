@@ -100,7 +100,7 @@
 </div>
 <div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" v-for="post in selectedpost">
+    <div class="modal-content" v-for="post in selectedPost">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="showPostModal">@{{post.message}}</h4>
@@ -190,10 +190,10 @@
 	};
 
 	var postsInteractedWeek = {!! $mostInteracted !!};
-	var selectedPost;
 
-	var test = function(data) {
-		Vue.set(tab.postsInteractedWeek, data)
+	var test = function(selectedPost) {
+		console.log(selectedPost);
+		Vue.set(data.postsInteractedWeek, 0, selectedPost);
 	};
 
 	var tab = new Vue({
@@ -230,7 +230,7 @@
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
-    		selectedPost = postsInteractedWeek[idx];
+    		var selectedPost = postsInteractedWeek[idx];
     		test(selectedPost);
     		console.log(selectedPost);
     		
