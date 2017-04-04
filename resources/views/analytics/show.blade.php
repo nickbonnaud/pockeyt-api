@@ -221,10 +221,11 @@
     		options: barChartOptions
     	});
 
-    	barInteractionsWeekRaw.onclick = function(evt) {
+    	var data = this.postsInteractedWeek;
+    	barInteractionsWeekRaw.onclick = function(evt, data) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
-    		var post = this.postsInteractedWeek[idx];
+    		var post = data[idx];
     		this.selectedpost = [];
     		this.selectedpost.push(post);
     		$('#showPost').modal('show');
