@@ -190,7 +190,7 @@
 	};
 
 	var test = function() {
-		console.log(tab._data);
+		console.log(postsInteractedWeek);
 	}
 
 	var tab = new Vue({
