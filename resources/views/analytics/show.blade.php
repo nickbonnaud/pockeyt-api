@@ -226,6 +226,7 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek;
+    		console.log(post);
     		dashboard.$data.selectedPost = [];
     		dashboard.$data.selectedPost.push(post);
     		console.log(dashboard.$data.selectedPost);
