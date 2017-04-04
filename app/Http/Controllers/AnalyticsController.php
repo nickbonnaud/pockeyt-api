@@ -144,7 +144,7 @@ class AnalyticsController extends Controller
     } else {
       $activityByHour = [0];
     }
-    $activityByHour = collect($activityByHour);
+    return response()->json(array('data' => $activityByHour, 'type' => $type));
   }
 
   public function getRevenueByHour($profile, $type) {
