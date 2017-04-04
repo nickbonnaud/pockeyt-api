@@ -189,21 +189,21 @@
     }
 	};
 
-	var postsInteractedWeek: {!! $mostInteracted !!};
-	var postsInteractedMonth: [];
-	var postsInteracted2Month: [];
+	var postsInteractedWeek = {!! $mostInteracted !!};
+	var postsInteractedMonth = [];
+	var postsInteracted2Month = [];
 
-	var postsRevenueWeek: {!! $mostRevenueGenerated !!};
-	var postsRevenueMonth: [];
-	var postsRevenue2Month: [];
+	var postsRevenueWeek = {!! $mostRevenueGenerated !!};
+	var postsRevenueMonth = [];
+	var postsRevenue2Month = [];
 
-	var postsActivityByDay: {!! $activityByDay !!};
-	var postsRevenueByDay: [];
+	var postsActivityByDay = {!! $activityByDay !!};
+	var postsRevenueByDay = [];
 
-	var postsActivityByHour: {!! $activityByHour !!};
-	var postsRevenueByHour: [];
+	var postsActivityByHour = {!! $activityByHour !!};
+	var postsRevenueByHour = [];
 
-	var selectedpost:[];
+	var selectedpost =[];
 
 	var tab = new Vue({
 		el: '#dashboard',
