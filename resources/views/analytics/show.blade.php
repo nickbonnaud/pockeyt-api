@@ -207,7 +207,7 @@
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
 
-			selectedChartPost: []
+			selectedPost: []
 		},
 
 		mounted: function() {
@@ -225,7 +225,10 @@
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
-    		console.log(dashboard.$data.postsInteractedWeek);
+    		var post = dashboard.$data.postsInteractedWeek;
+    		dashboard.$data.selectedPost = [];
+    		dashboard.$data.selectedPost.push(post);
+    		console.log(dashboard.$data.selectedPost);
     		$('#showPost').modal('show');
     	};
 
