@@ -189,6 +189,8 @@
     }
 	};
 
+	var newData = {!! $mostInteracted !!};
+
 	var tab = new Vue({
 		el: '#dashboard',
 
@@ -223,7 +225,7 @@
 
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
-    		console.log(this.postsInteractedWeek);
+    		console.log(newData);
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = data[idx];
