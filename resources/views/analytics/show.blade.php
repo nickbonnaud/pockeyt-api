@@ -194,7 +194,7 @@
 		},
 
 		mounted: function() {
-			var barInteractionsWeek = $("#barInteractionsWeek").get(0).getContext("2d");
+			var barInteractionsWeek = $("#barInteractionsWeek").get(0);
 			var type = "interaction";
 			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
     	var barChartInter7 = new Chart(barInteractionsWeek, {
