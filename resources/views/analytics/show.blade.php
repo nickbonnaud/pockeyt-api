@@ -153,9 +153,7 @@
     }
 	};
 
-
-
-	var lineChartHoursOptions = {
+	var lineChartOptions = {
 		scales: {
 			yAxes: [{
     		ticks: {
@@ -172,7 +170,7 @@
         }
       }]
     }
-	}
+	};
 
 	var tab = new Vue({
 		el: '#dashboard',
@@ -217,7 +215,8 @@
     	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
     	var lineChartInter = new Chart(lineInteractionsDay, {
     		type: 'line',
-    		data: lineInteractionsDayData
+    		data: lineInteractionsDayData,
+    		options: lineChartOptions
     	});
 
     	var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
@@ -226,7 +225,7 @@
     	var lineChartInterHour = new Chart(lineInteractionsHour, {
     		type: 'line',
     		data: lineInteractionsHourData,
-    		options: lineChartHoursOptions
+    		options: lineChartOptions
     	});
 		},
 
@@ -473,7 +472,7 @@
 				    	var lineChartInterHour = new Chart(lineInteractionsHour, {
 				    		type: 'line',
 				    		data: lineInteractionsHourData,
-				    		options: lineChartHoursOptions
+				    		options: lineChartOptions
 				    	});
 						} else {
 							this.postsRevenueByHour = dataSet;
@@ -482,7 +481,7 @@
 				    	var lineChartRevenueHour= new Chart(lineRevenueHour, {
 				    		type: 'line',
 				    		data: lineRevenueHourData,
-				    		options: lineChartHoursOptions
+				    		options: lineChartOptions
 				    	});
 						}
 					}
@@ -506,7 +505,8 @@
 				    	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
 				    	var lineChartInter = new Chart(lineInteractionsDay, {
 				    		type: 'line',
-				    		data: lineInteractionsDayData
+				    		data: lineInteractionsDayData,
+				    		options: lineChartOptions
 				    	});
 						} else {
 							this.postsRevenueByDay = dataSet;
@@ -514,7 +514,8 @@
 				    	var lineRevenueDayData = this.formatLineData(this.postsRevenueByDay, type);
 				    	var lineChartRevenue= new Chart(lineRevenueDay, {
 				    		type: 'line',
-				    		data: lineRevenueDayData
+				    		data: lineRevenueDayData,
+				    		options: lineChartOptions
 				    	});
 						}
 					}
