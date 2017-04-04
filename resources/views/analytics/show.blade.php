@@ -80,7 +80,7 @@
 											<li><a href="#hour-revenue-chart" data-toggle="tab" v-on:click="hourRevenueData()">Revenue</a></li>
 											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time</li>
 										</ul>
-										<div class="tab-content no-padding">
+										<div class="tab-content">
 											<div class="chart tab-pane active" id="hour-inter-chart">
 												<canvas id="lineInterHour" width="400" height="300"></canvas>
 											</div>
