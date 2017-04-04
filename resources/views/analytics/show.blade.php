@@ -218,7 +218,7 @@
 						labels: labels,
 						datasets: [
 							{
-								label: "AVG Revenue"
+								label: "AVG Revenue",
 								fill: false,
 								lineTension: 0.1,
 								backgroundColor: "rgba(46, 204, 113,.4)",
