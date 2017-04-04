@@ -157,6 +157,14 @@
 
 	var lineChartHoursOptions = {
 		scales: {
+			yAxes: [{
+    		ticks: {
+    			beginAtZero: true,
+    			callback: function(value, index, values) {
+            return value + '%';
+          } 
+    		}
+    	}],
       xAxes: [{
         ticks: {
           autoSkip: true,
