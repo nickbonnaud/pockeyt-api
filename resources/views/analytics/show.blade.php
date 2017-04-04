@@ -140,7 +140,7 @@
 			postsActivityByDay: {!! $activityByDay !!},
 			postsRevenueByDay: [],
 
-			postsActivityByHour: {!! $postsActivityByHour !!},
+			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: []
 		},
 
