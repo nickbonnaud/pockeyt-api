@@ -328,7 +328,7 @@
 						var interactions = post.total_interactions;
 						data.push(interactions);
 					} else {
-						var revenue = post.total_revenue;
+						var revenue = post.total_revenue / 100;
 						data.push(revenue);
 					}
 				});
