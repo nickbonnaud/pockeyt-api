@@ -42,7 +42,7 @@
 										<ul class="nav nav-tabs pull-right">
 											<li class="active"><a href="#day-inter-chart" data-toggle="tab" v-on:click="dayInterData()">Interactions</a></li>
 											<li><a href="#day-revenue-chart" data-toggle="tab" v-on:click="dayRevenueData()">Revenue</a></li>
-											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Average Activity by Day</li>
+											<li class="pull-left header"><i class="fa fa-calendar-o"></i> Percentage Activity by Day</li>
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="day-inter-chart">
@@ -78,7 +78,7 @@
 										<ul class="nav nav-tabs pull-right">
 											<li class="active"><a href="#hour-inter-chart" data-toggle="tab" v-on:click="hourInterData()">Interactions</a></li>
 											<li><a href="#hour-revenue-chart" data-toggle="tab" v-on:click="hourRevenueData()">Revenue</a></li>
-											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time of Day</li>
+											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time</li>
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="hour-inter-chart">
