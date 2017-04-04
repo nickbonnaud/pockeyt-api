@@ -222,7 +222,7 @@ class AnalyticsController extends Controller
         foreach ($revenueDayAll as $revenueDay) {
           $revenuePerDayTotal = $revenuePerDayTotal + $revenueDay->total_revenue;
         }
-        $percentagePerDay = ($revenuePerHourTotal / $totalRevenueHours) * 100;
+        $percentagePerDay = ($revenuePerDayTotal / $totalRevenueDays) * 100;
         array_push($revenueByDay, $percentagePerDay);
       }
     } else {
