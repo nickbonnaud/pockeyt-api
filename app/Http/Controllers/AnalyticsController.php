@@ -39,22 +39,20 @@ class AnalyticsController extends Controller
     })->orderBy('total_revenue', 'desc')->get();
 
     $activityByDay = [];
-    for ($i = 0; $i <= 6; $i++) {
-      $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->count();
+    $totalDaysData = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    if ($totalDaysData !== 0) {
+      for ($i = 0; $i <= 6; $i++) {
+        $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
+        })->count();
 
-      $days = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
-      })->groupBy(DB::raw('Date(updated_at)'))->count();
-
-      if ($days !== 0) {
-        $averageActivityPerDay = $activityPerDayTotal / $days;
-        array_push($activityByDay, $averageActivityPerDay);
-      } else {
-        array_push($activityByDay, $activityPerDayTotal);
+        $percentagePerDay = ($activityPerDayTotal / $totalDaysData) * 100;
+        array_push($activityByDay, $percentagePerDay);
+      }
+    } else {
+      for ($i = 0; $i <= 6; $i++) {
+        array_push($activityByDay, 0);
       }
     }
     $activityByDay = collect($activityByDay);
