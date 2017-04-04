@@ -103,7 +103,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="showPostModal">@{{post.message}}</h4>
+        <h4 class="modal-title" id="showPostModal">@{{selectedPost.message}}</h4>
       </div>
       <div class="modal-body">
         <div class="box-body">
@@ -207,7 +207,7 @@
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
 
-			selectedPost: []
+			selectedPost: {}
 		},
 
 		mounted: function() {
@@ -226,9 +226,7 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
-    		console.log(post);
-    		dashboard.$data.selectedPost = [];
-    		dashboard.$data.selectedPost.push(post);
+    		dashboard.$data.selectedPost = post;
     		console.log(dashboard.$data.selectedPost);
     		$('#showPost').modal('show');
     	};
