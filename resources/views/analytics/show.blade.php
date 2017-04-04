@@ -154,7 +154,16 @@
 	};
 
 	var lineChartOptions = {
-		responsive: true,
+		scaleShowGridLines: true,
+    scaleGridLineColor: "rgba(0,0,0,.05)",
+    scaleGridLineWidth: 1,
+    scaleShowHorizontalLines: true,
+    scaleShowVerticalLines: false,
+    barShowStroke: true,
+    barStrokeWidth: 2,
+    barValueSpacing: 5,
+    barDatasetSpacing: 1,
+    responsive: true,
     maintainAspectRatio: true,
 		scales: {
 			yAxes: [{
