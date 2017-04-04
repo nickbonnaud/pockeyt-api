@@ -125,6 +125,16 @@
     }
 	};
 
+	var lineChartHoursOptions = {
+		scales: {
+      xAxes: [{
+        time: {
+          unit: 'hour'
+        }
+      }]
+    }
+	}
+
 	var tab = new Vue({
 		el: '#dashboard',
 
@@ -173,14 +183,72 @@
 
     	var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
     	var type = "interaction";
-    	var lineInteractionsHourData = this.formatLineData(this.postsActivityByHour, type);
+    	var lineInteractionsHourData = this.formatLineDataHour(this.postsActivityByHour, type);
     	var lineChartInterHour = new Chart(lineInteractionsHour, {
     		type: 'line',
-    		data: lineInteractionsHourData
+    		data: lineInteractionsHourData,
+    		options: lineChartHoursOptions
     	});
 		},
 
 		methods: {
+			formatLineDataHour: function(dataSet, type) {
+				var data = dataSet;
+				if (type === 'interaction') {
+					var lineChartData = {
+						datasets: [
+							{
+								label: "% Views, Shares, Bookmarks",
+								fill: false,
+								lineTension: 0.1,
+								backgroundColor: "rgba(52, 152, 219,0.4)",
+								borderColor: "rgba(52, 152, 219,1.0)",
+								borderCapStyle: "round",
+								borderDash: [],
+								borderDashOffset: 0.0,
+								borderJoinStyle: 'bevel',
+								pointBorderColor: "rgba(52, 152, 219,1.0)",
+								pointBackgroundColor: "#fff",
+								pointBorderWidth: 1,
+            		pointHoverRadius: 5,
+            		pointHoverBackgroundColor: "rgba(41, 128, 185,1.0)",
+            		pointHoverBorderColor: "rgba(41, 128, 185,1.0)",
+            		pointHoverBorderWidth: 2,
+            		pointRadius: 1,
+	          		data: data,
+	          		spanGaps: false,
+							}
+						]
+					}
+				} else {
+					var lineChartData = {
+						datasets: [
+							{
+								label: "% Revenue",
+								fill: false,
+								lineTension: 0.1,
+								backgroundColor: "rgba(46, 204, 113,.4)",
+								borderColor: "rgba(46, 204, 113,1.0)",
+								borderCapStyle: "round",
+								borderDash: [],
+								borderDashOffset: 0.0,
+								borderJoinStyle: 'bevel',
+								pointBorderColor: "rgba(46, 204, 113,1.0)",
+								pointBackgroundColor: "#fff",
+								pointBorderWidth: 1,
+            		pointHoverRadius: 5,
+            		pointHoverBackgroundColor: "rgba(39, 174, 96,1.0)",
+            		pointHoverBorderColor: "rgba(39, 174, 96,1.0)",
+            		pointHoverBorderWidth: 2,
+            		pointRadius: 1,
+	          		data: data,
+	          		spanGaps: false,
+							}
+						]
+					}
+				}
+				return lineChartData;
+			},
 			formatLineData: function(dataSet, type) {
 				console.log(dataSet);
 				var data = dataSet;
