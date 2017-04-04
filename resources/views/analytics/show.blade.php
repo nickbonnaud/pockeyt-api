@@ -128,8 +128,9 @@
 	var lineChartHoursOptions = {
 		scales: {
       xAxes: [{
-        time: {
-          unit: 'hour'
+        ticks: {
+          autoSkip: true,
+          autoSkipPadding: 5
         }
       }]
     }
@@ -186,14 +187,15 @@
     	var lineInteractionsHourData = this.formatLineDataHour(this.postsActivityByHour, type);
     	var lineChartInterHour = new Chart(lineInteractionsHour, {
     		type: 'line',
-    		data: lineInteractionsHourData
+    		data: lineInteractionsHourData,
+    		options: lineChartHoursOptions
     	});
 		},
 
 		methods: {
 			formatLineDataHour: function(dataSet, type) {
 				var data = dataSet;
-				var labels = ['12am', '3', '6', '9', '12pm', '3', '6', '9', '12'];
+				var labels = ['12am', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12pm', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 				if (type === 'interaction') {
 					var lineChartData = {
 						labels: labels,
