@@ -98,6 +98,21 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header-timeline">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="showPostModal">Hello</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+         <p>Hello World</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('scripts.footer')
@@ -207,7 +222,7 @@
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
-    		console.log(idx);
+    		$('#showPost').modal('show');
     	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
