@@ -202,27 +202,32 @@ class AnalyticsController extends Controller
 
   public function getRevenueByDay($profile, $type) {
     $revenueByDay = [];
-    for ($i = 0; $i <= 6; $i++) {
-      $purchases = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
-      })->select('total_revenue')->get();
+    $daysRevenue = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('transaction_resulted', '=', true);
+    })->select('total_revenue')->get();
+    $totalRevenueDays = 0;
+    foreach ($daysRevenue as $dayRevenue) {
+      $totalRevenueDays = $totalRevenueDays + $dayRevenue->total_revenue;
+    }
 
-      $totalRevenuePerDay = 0;
-      foreach ($purchases as $purchase) {
-        $totalRevenuePerDay = $totalRevenuePerDay + $purchase->total_revenue;
+    if ($totalRevenueDays !== 0) {
+      for ($i = 0; $i <= 6; $i++) {
+        $revenueDayAll = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
+        })->select('total_revenue')->get();
+
+        $revenuePerDayTotal = 0;
+        foreach ($revenueDayAll as $revenueDay) {
+          $revenuePerDayTotal = $revenuePerDayTotal + $revenueDay->total_revenue;
+        }
+        $percentagePerDay = ($revenuePerHourTotal / $totalRevenueHours) * 100;
+        array_push($revenueByDay, $percentagePerDay);
       }
-
-      $days = PostAnalytic::where(function($query) use ($profile, $i) {
-        $query->where('business_id', '=', $profile->id)
-          ->whereRaw('WEEKDAY(transaction_on) = ?', [$i]);
-      })->groupBy(DB::raw('Date(transaction_on)'))->get();
-      $days = count($days);
-      if ($days !== 0) {
-        $averageRevenuePerDay = ($totalRevenuePerDay / 100) / $days;
-        array_push($revenueByDay, $averageRevenuePerDay);
-      } else {
-        array_push($revenueByDay, $totalRevenuePerDay / 100);
+    } else {
+      for ($i = 0; $i <= 6; $i++) {
+        array_push($revenueByDay, 0);
       }
     }
     return response()->json(array('data' => $revenueByDay, 'type' => $type));
