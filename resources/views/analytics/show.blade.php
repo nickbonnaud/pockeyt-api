@@ -203,7 +203,7 @@
 	var postsActivityByHour = {!! $activityByHour !!};
 	var postsRevenueByHour = [];
 
-	var selectedpost =[];
+	var selectedpost = [];
 
 	var tab = new Vue({
 		el: '#dashboard',
@@ -226,8 +226,8 @@
     		var idx = activePoints[0]['_index'];
     		var post = postsInteractedWeek[idx];
     		console.log(post)
-    		this.selectedpost = [];
-    		this.selectedpost.push(post);
+    		selectedpost = [];
+    		selectedpost.push(post);
     		$('#showPost').modal('show');
     	};
 
