@@ -225,6 +225,7 @@
 					}
 				} else {
 					var lineChartData = {
+						labels: labels,
 						datasets: [
 							{
 								label: "% Revenue",
