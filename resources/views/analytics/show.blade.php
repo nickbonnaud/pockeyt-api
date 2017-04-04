@@ -225,7 +225,7 @@
 
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
-    		console.log(newData);
+    		console.log(this);
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = data[idx];
