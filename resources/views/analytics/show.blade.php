@@ -203,6 +203,10 @@
     		options: barChartOptions
     	});
 
+    	barInteractionsWeek.onclick = function(event) {
+    		console.log(barChartInter7.getElementsAtEvent(evt));
+    	};
+
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
 			var barRevenueWeekData = this.formatBarData(this.postsRevenueWeek, type);
