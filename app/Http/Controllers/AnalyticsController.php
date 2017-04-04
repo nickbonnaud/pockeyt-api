@@ -147,24 +147,36 @@ class AnalyticsController extends Controller
 
   public function getRevenueByHour($profile, $type) {
     $revenueByHour = [];
-    $totalHoursRevenue = PostAnalytic::where(function($query) use ($profile) {
-          $query->where('business_id', '=', $profile->id)
-            ->whereRaw('HOUR(transaction_on) = ?', [$i]);
-        })->count();
-    if ($totalHoursData !== 0) {
-      for ($i = 0; $i <= 23; $i++) {
-        $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
-          $query->where('business_id', '=', $profile->id)
-            ->whereRaw('HOUR(transaction_on) = ?', [$i]);
-        })->count();
+    $hoursRevenue = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('transaction_resulted', '=', true);
+    })->select('total_revenue')->get();
+    $totalRevenueHours = 0;
+    foreach ($hoursRevenue as $hourRevenue) {
+      $totalRevenueHours = $totalRevenueHours + $hourRevenue->total_revenue;
+    }
 
-        $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
-        array_push($activityByHour, $percentagePerHour);
+    if ($totalRevenueHours !== 0) {
+      for ($i = 0; $i <= 23; $i++) {
+        $revenueHourAll = PostAnalytic::where(function($query) use ($profile, $i) {
+          $query->where('business_id', '=', $profile->id)
+            ->whereRaw('HOUR(transaction_on) = ?', [$i]);
+        })->select('total_revenue')->get();
+
+        $revenuePerHourTotal = 0;
+        foreach ($revenueHourAll as $revenueHour) {
+          $revenuePerHourTotal = $revenuePerHourTotal + $revenueHour->total_revenue;
+        }
+
+        $percentagePerHour = ($revenuePerHourTotal / $totalRevenueHours) * 100;
+        array_push($revenueByHour, $percentagePerHour);
       }
     } else {
-      $activityByHour = [0];
+      for ($i = 0; $i <= 23; $i++) {
+        array_push($revenueByHour, 0);
+      }
     }
-    $activityByHour = collect($activityByHour);
+    return response()->json(array('data' => $revenueByHour, 'type' => $type));
   }
 
   public function getInteractionsByDay($profile, $type) {
