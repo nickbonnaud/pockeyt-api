@@ -192,11 +192,15 @@
 	var postsInteractedWeek = {!! $mostInteracted !!};
 	var selectedPost;
 
+	var test = function(data) {
+		Vue.set(vm.postsInteractedWeek, data)
+	};
+
 	var tab = new Vue({
 		el: '#dashboard',
 
 		data: {
-			
+			postsInteractedWeek: [],
 			postsInteractedMonth: [],
 			postsInteracted2Month: [],
 
@@ -227,6 +231,7 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		selectedPost = postsInteractedWeek[idx];
+    		test(selectedpost);
     		console.log(selectedPost);
     		
     		$('#showPost').modal('show');
