@@ -433,7 +433,6 @@
 						if (type === 'interaction') {
 							this.postsActivityByHour = dataSet;
 							var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
-				    	var type = "interaction";
 				    	var lineInteractionsHourData = this.formatLineDataHour(this.postsActivityByHour, type);
 				    	var lineChartInterHour = new Chart(lineInteractionsHour, {
 				    		type: 'line',
@@ -443,10 +442,11 @@
 						} else {
 							this.postsRevenueByHour = dataSet;
 							var lineRevenueHour = $("#lineRevenueHour").get(0).getContext("2d");
-				    	var lineRevenueHourData = this.formatLineData(this.postsRevenueByHour, type);
+				    	var lineRevenueHourData = this.formatLineDataHour(this.postsRevenueByHour, type);
 				    	var lineChartRevenueHour= new Chart(lineRevenueHour, {
 				    		type: 'line',
-				    		data: lineRevenueHourData
+				    		data: lineRevenueHourData,
+				    		options: lineChartHoursOptions
 				    	});
 						}
 					}
