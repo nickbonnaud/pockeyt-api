@@ -156,10 +156,10 @@
 	var lineChartOptions = {
 		responsive: true,
     maintainAspectRatio: true,
+    padding: 50,
 		scales: {
 			yAxes: [{
     		ticks: {
-    			padding: -100,
     			beginAtZero: true,
     			callback: function(value, index, values) {
             return value + '%';
