@@ -233,7 +233,7 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var selectedPost = postsInteractedWeek[idx];
-    		console.log(tab.$data.postsInteractedWeek);
+    		console.log(tab.$data);
     		console.log(selectedPost);
     		
     		$('#showPost').modal('show');
