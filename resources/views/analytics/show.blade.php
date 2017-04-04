@@ -104,6 +104,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
+barInteractionsWeekRaw.onclick = function(evt) {
+    		var activePoints = barChartInter7.getElementsAtEvent(evt);
+    		var idx = activePoints[0]['_index'];
+    		console.log(idx);
+    	};
+
 	var barChartOptions = {
     scaleShowGridLines: true,
     scaleGridLineColor: "rgba(0,0,0,.05)",
@@ -203,12 +209,6 @@
     		data: barInteractionsWeekData,
     		options: barChartOptions
     	});
-
-    	barInteractionsWeekRaw.onclick = function(evt) {
-    		var activePoints = barChartInter7.getElementsAtEvent(evt);
-    		var idx = activePoints[0]['_index'];
-    		console.log(idx);
-    	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
     	var type = "revenue";
