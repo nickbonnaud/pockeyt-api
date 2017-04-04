@@ -156,9 +156,6 @@
 	var lineChartOptions = {
 		responsive: true,
     maintainAspectRatio: true,
-    layout: {
-    	padding: 10
-    }
 		scales: {
 			yAxes: [{
     		ticks: {
