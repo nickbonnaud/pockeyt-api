@@ -205,7 +205,8 @@
     	});
 
     	barInteractionsWeekRaw.onclick = function(evt) {
-    		console.log(evt);
+    		var activePoints = barChartInter7.getElementsAtEvent(evt);
+    		console.log(activePoints);
     	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
