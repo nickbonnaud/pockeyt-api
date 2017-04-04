@@ -203,7 +203,7 @@
     		options: barChartOptions
     	});
 
-    	$("#barInteractionsWeek").get(0).onclick = function(evt) {
+    	barInteractionsWeek.onclick = function(evt) {
     		console.log(evt);
     	};
 
