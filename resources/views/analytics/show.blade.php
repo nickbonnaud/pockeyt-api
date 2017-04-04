@@ -100,10 +100,10 @@
 </div>
 <div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header-timeline">
+    <div class="modal-content" v-for="post in selectedpost">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="showPostModal">Hello</h4>
+        <h4 class="modal-title" id="showPostModal">@{{post.message}}</h4>
       </div>
       <div class="modal-body">
         <div class="box-body">
@@ -205,7 +205,9 @@
 			postsRevenueByDay: [],
 
 			postsActivityByHour: {!! $activityByHour !!},
-			postsRevenueByHour: []
+			postsRevenueByHour: [],
+
+			selectedpost:[]
 		},
 
 		mounted: function() {
@@ -222,6 +224,9 @@
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
+    		var post = this.postsInteractedWeek[idx];
+    		this.selectedpost = [];
+    		this.selectedpost.push(post);
     		$('#showPost').modal('show');
     	};
 
