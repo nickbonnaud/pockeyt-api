@@ -100,14 +100,14 @@
 </div>
 <div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" v-for="post in selectedPost">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="showPostModal">@{{selectedPost.message}}</h4>
+        <h4 class="modal-title" id="showPostModal">@{{post.message}}</h4>
       </div>
       <div class="modal-body">
         <div class="box-body">
-         <p>@{{selectedChartPost}}</p>
+         <p>@{{post}}</p>
         </div>
       </div>
     </div>
@@ -207,7 +207,7 @@
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
 
-			selectedPost: {}
+			selectedPost: []
 		},
 
 		mounted: function() {
@@ -226,7 +226,8 @@
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
-    		dashboard.$data.selectedPost = post;
+    		dashboard.$data.selectedPost = [];
+    		dashboard.$data.selectedPost.push(post);
     		console.log(dashboard.$data.selectedPost);
     		$('#showPost').modal('show');
     	};
