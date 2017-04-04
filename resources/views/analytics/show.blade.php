@@ -189,15 +189,14 @@
     }
 	};
 
-	var test = function() {
-		console.log(postsInteractedWeek);
-	}
+	var postsInteractedWeek = {!! $mostInteracted !!};
+	var selectedPost;
 
 	var tab = new Vue({
 		el: '#dashboard',
 
 		data: {
-			postsInteractedWeek: {!! $mostInteracted !!},
+			
 			postsInteractedMonth: [],
 			postsInteracted2Month: [],
 
@@ -210,15 +209,13 @@
 
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
-
-			selectedpost:[]
 		},
 
 		mounted: function() {
 			var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
 			var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
 			var type = "interaction";
-			var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
+			var barInteractionsWeekData = this.formatBarData(postsInteractedWeek, type);
     	var barChartInter7 = new Chart(barInteractionsWeek, {
     		type: 'bar',
     		data: barInteractionsWeekData,
@@ -227,9 +224,10 @@
 
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
-    		test();
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
+    		selectedPost = postsInteractedWeek[idx];
+    		console.log(selectedPost);
     		
     		$('#showPost').modal('show');
     	};
@@ -571,10 +569,10 @@
 						switch(timeSpan) {
 							case "week":
 								if (type === 'interaction') {
-									this.postsInteractedWeek = dataSet;
+									postsInteractedWeek = dataSet;
 									var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
 									var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
-									var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
+									var barInteractionsWeekData = this.formatBarData(postsInteractedWeek, type);
 									
 						    	var barChartInter7 = new Chart(barInteractionsWeek, {
 						    		type: 'bar',
