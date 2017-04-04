@@ -28,13 +28,13 @@
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="week-inter-chart">
-												<canvas id="barInteractionsWeek" width="400" height="400"></canvas>
+												<canvas id="barInteractionsWeek" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="month-inter-chart">
-												<canvas id="barInteractionsMonth" width="400" height="400"></canvas>
+												<canvas id="barInteractionsMonth" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="2month-inter-chart">
-												<canvas id="barInteractions2Month" width="400" height="400"></canvas>
+												<canvas id="barInteractions2Month" width="400" height="300"></canvas>
 											</div>
 										</div>
 									</div>
@@ -46,10 +46,10 @@
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="day-inter-chart">
-												<canvas id="lineInterDay" width="400" height="400"></canvas>
+												<canvas id="lineInterDay" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="day-revenue-chart">
-												<canvas id="lineRevenueDay" width="400" height="400"></canvas>
+												<canvas id="lineRevenueDay" width="400" height="300"></canvas>
 											</div>
 										</div>
 									</div>
@@ -64,13 +64,13 @@
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="week-revenue-chart">
-												<canvas id="barRevenueWeek" width="400" height="400"></canvas>
+												<canvas id="barRevenueWeek" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="month-revenue-chart">
-												<canvas id="barRevenueMonth" width="400" height="400"></canvas>
+												<canvas id="barRevenueMonth" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="2month-revenue-chart">
-												<canvas id="barRevenue2Month" width="400" height="400"></canvas>
+												<canvas id="barRevenue2Month" width="400" height="300"></canvas>
 											</div>
 										</div>
 									</div>
@@ -82,10 +82,10 @@
 										</ul>
 										<div class="tab-content no-padding">
 											<div class="chart tab-pane active" id="hour-inter-chart">
-												<canvas id="lineInterHour" width="400" height="400"></canvas>
+												<canvas id="lineInterHour" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="hour-revenue-chart">
-												<canvas id="lineRevenueHour" width="400" height="400"></canvas>
+												<canvas id="lineRevenueHour" width="400" height="300"></canvas>
 											</div>
 										</div>
 									</div>
@@ -154,6 +154,8 @@
 	};
 
 	var lineChartOptions = {
+		responsive: true,
+    maintainAspectRatio: true,
 		scales: {
 			yAxes: [{
     		ticks: {
