@@ -427,6 +427,7 @@
 						'type': type
 					},
 					success: data => {
+						console.log(data);
 						var type = data.type;
 						var dataSet = data.data;
 
