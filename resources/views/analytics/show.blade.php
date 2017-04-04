@@ -429,10 +429,11 @@
 							this.postsActivityByHour = dataSet;
 							var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
 				    	var type = "interaction";
-				    	var lineInteractionsHourData = this.formatLineData(this.postsActivityByHour, type);
+				    	var lineInteractionsHourData = this.formatLineDataHour(this.postsActivityByHour, type);
 				    	var lineChartInterHour = new Chart(lineInteractionsHour, {
 				    		type: 'line',
-				    		data: lineInteractionsHourData
+				    		data: lineInteractionsHourData,
+				    		options: lineChartHoursOptions
 				    	});
 						} else {
 							this.postsRevenueByHour = dataSet;
