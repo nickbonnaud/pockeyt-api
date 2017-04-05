@@ -252,21 +252,19 @@
   				dataSets: [{
   						data:[10, 15, 4],
   						backgroundColor: [
-  							'rgba(52, 152, 219,.8)',
-  							'rgba(155, 89, 182,.8)',
-  							'rgba(46, 204, 113,.8)'
+  							'rgba(52, 152, 219, .8)',
+  							'rgba(155, 89, 182, .8)',
+  							'rgba(46, 204, 113, .8)'
   						],
   						hoverBackgroundColor: [
-  							'rgba(41, 128, 185,1.0)',
-  							'rgba(142, 68, 173,1.0)',
-  							'rgba(39, 174, 96,1.0)'
+  							'rgba(41, 128, 185, 1.0)',
+  							'rgba(142, 68, 173, 1.0)',
+  							'rgba(39, 174, 96, 1.0)'
   						]
   				}]
     		};
     		var options = {
-    			animation: {
-    				animateScale: true
-    			}
+    			cutoutPercentage: 0
     		};
     		var donutChartInter = new Chart(donutInteractions, {
     			type: 'pie',
