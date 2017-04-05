@@ -103,15 +103,28 @@
 					      <div class="modal-body">
 					        <div class="box-body">
 					        	<div class="col-md-6">
-					         		<img class="photoLogo" src="{{ $user->profile->logo->url }}">
-					         		<span class="partnername">{{ $user->profile->business_name }}</span>
-					         		<img class="postPhoto" :src="selectedPost.thumb_path">
-					         		<hr>
-					         		<article class="postText">
-					         			@{{ selectedPost.message }}
-					         		</article>
-					         		<hr>
-					         		<div class="footer-date">@{{ selectedPost.published_at }}</div>
+						        	<nav class="navbar-post navbar-fixed-top">
+										    <div class="container-fluid">
+									        <div class="navbarPost-header">
+								            <a class="navbarPost-brand" href="http://www.pockeyt.com/" target="_blank">
+								              <img src="{{ asset('/images/logo-horizontal-white.png') }}" class="logoPost">
+								            </a>
+									        </div>
+										    </div>
+											</nav>
+											<div class="wrapper">
+    										<div class="container">
+    											<img class="photoLogo" src="{{ $user->profile->logo->url }}">
+							         		<span class="partnername">{{ $user->profile->business_name }}</span>
+							         		<img class="postPhoto" :src="selectedPost.thumb_path">
+							         		<hr>
+							         		<article class="postText">
+							         			@{{ selectedPost.message }}
+							         		</article>
+							         		<hr>
+							         		<div class="footer-date">@{{ selectedPost.published_at }}</div>
+    										</div>
+    									</div>
 					         	</div>
 					        </div>
 					      </div>
