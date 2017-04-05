@@ -89,14 +89,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="box box-primary">
-										<div class="box-header with-border">
-											<h3 class="box-title">Interaction Breakdown</h3>
-										</div>
-										<div class="box-body">
-											<canvas id="donutInteractions" width="200" height="200"></canvas>
-										</div>
-				         	</div>
 								</div>
 							</div>
 						</div>
@@ -124,11 +116,16 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<!-- <div class="col-md-6">
+				         	<div class="col-md-6">
 				         		<div class="box box-primary">
-				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
-				         		</div>
-				         	</div> -->
+											<div class="box-header with-border">
+												<h3 class="box-title">Interaction Breakdown</h3>
+											</div>
+											<div class="box-body">
+												<canvas id="donutInteractions" width="200" height="200"></canvas>
+											</div>
+					         	</div>
+				         	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -246,33 +243,33 @@
     		options: barChartOptions
     	});
 
-    	var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
-    	var donutChartInter = new Chart(donutInteractionsCanvas, {
-    			type: 'pie',
-    			data: {
-    				labels: ['Views', 'Shares', 'Bookmarks'],
-    				datasets: [{
-    					backgroundColor: [
-  							'rgba(52, 152, 219, .8)',
-  							'rgba(155, 89, 182, .8)',
-  							'rgba(46, 204, 113, .8)'
-  						],
-  						hoverBackgroundColor: [
-  							'rgba(41, 128, 185, 1.0)',
-  							'rgba(142, 68, 173, 1.0)',
-  							'rgba(39, 174, 96, 1.0)'
-  						],
-  						data: [10, 15, 4]
-  					}]
-    			}
-    		});
-
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
     		dashboard.$data.selectedPost = post;
+
+    		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+	    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+	    			type: 'pie',
+	    			data: {
+	    				labels: ['Views', 'Shares', 'Bookmarks'],
+	    				datasets: [{
+	    					backgroundColor: [
+	  							'rgba(52, 152, 219, .8)',
+	  							'rgba(155, 89, 182, .8)',
+	  							'rgba(46, 204, 113, .8)'
+	  						],
+	  						hoverBackgroundColor: [
+	  							'rgba(41, 128, 185, 1.0)',
+	  							'rgba(142, 68, 173, 1.0)',
+	  							'rgba(39, 174, 96, 1.0)'
+	  						],
+	  						data: [post.views, post.shares, post.bookmarks]
+	  					}]
+	    			}
+	    		});
 
     		$('#showPost').modal('show');
 
