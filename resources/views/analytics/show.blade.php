@@ -101,7 +101,7 @@
 					        <h4 class="modal-title" id="showPostModal">Post Details</h4>
 					      </div>
 					      <div class="modal-body-timeline">
-				        	<!-- <div class="col-md-6">
+				        	<div class="col-md-6">
 				        		<div class="box box-primary">
 				        			<div class="box-header with-border">
 				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
@@ -115,8 +115,8 @@
                     		<p class="analytics-date">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
 				        			</div>
 				        		</div>
-				         	</div> -->
-				         	<div class="col-md-12">
+				         	</div>
+				         	<div class="col-md-6">
 				         		<div class="box box-primary">
 				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
 				         		</div>
@@ -246,6 +246,10 @@
     		dashboard.$data.selectedPost = post;
     		
     		var donutInteractions = $("#donutInteractions").get(0).getContext("2d");
+    		console.log(donutInteractions);
+    		console.log(post.views);
+    		console.log(post.shares);
+    		console.log(post.bookmarks)
     		var data = {
     			labels: ['Views', 'Shares', 'Bookmarks'],
   				dataSets: [{
