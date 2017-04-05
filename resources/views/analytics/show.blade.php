@@ -124,11 +124,11 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<div class="col-md-6">
+				         	<!-- <div class="col-md-6">
 				         		<div class="box box-primary">
 				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
 				         		</div>
-				         	</div>
+				         	</div> -->
 					      </div>
 					    </div>
 					  </div>
@@ -246,40 +246,21 @@
     		options: barChartOptions
     	});
 
-  		var data = [
-    		{
-    			value: 10,
-    			color: 'rgba(52, 152, 219, .8)',
-    			highlight: 'rgba(41, 128, 185, 1.0)',
-    			label: "Views"
-    		},
-    		{
-    			value: 15,
-    			color: 'rgba(155, 89, 182, .8)',
-    			highlight: 'rgba(142, 68, 173, 1.0)',
-    			label: "Shares"
-    		},
-    		{
-    			value: 4,
-    			color: 'rgba(46, 204, 113, .8)',
-    			highlight: 'rgba(39, 174, 96, 1.0)',
-    			label: "Bookmarks"
-    		}
-  		];
-
-  		var options = {
-  			segmentShowStroke : true,
-  			segmentStrokeColor : "#fff",
-  			segmentStrokeWidth : 2,
-  			animation : true,
-  			animationSteps : 100,
-  			animationEasing : "easeOutBounce",
-  			animateRotate : true,
-  			animateScale : true,
-  			onAnimationComplete : null
-  		};
-  		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
-  		new Chart(donutInteractionsCanvas).Pie(data, options);
+    	var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+    			type: 'pie',
+    			data: {
+    				labels: ['Views', 'Shares', 'Bookmarks'],
+    				dataSets: [{
+    					backgroundColor: [
+  							'rgba(52, 152, 219, .8)',
+  							'rgba(155, 89, 182, .8)',
+  							'rgba(46, 204, 113, .8)'
+  						],
+  						data: [10, 15, 4]
+  					}]
+    			}
+    		});
 
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
