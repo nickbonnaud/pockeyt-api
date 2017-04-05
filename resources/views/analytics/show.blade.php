@@ -686,11 +686,35 @@
 						    	barInteractionsMonthRaw.onclick = function(evt) {
 						    		var activePoints = barChartInter30.getElementsAtEvent(evt);
 						    		var idx = activePoints[0]['_index'];
-						    		console.log(idx);
+						    		var post = dashboard.$data.postsInteractedMonth[idx];
+						    		dashboard.$data.selectedPost = post;
+
+						    		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+							    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+							    			type: 'pie',
+							    			data: {
+							    				labels: ['Views', 'Shares', 'Bookmarks'],
+							    				datasets: [{
+							    					backgroundColor: [
+							  							'rgba(52, 152, 219, .8)',
+							  							'rgba(155, 89, 182, .8)',
+							  							'rgba(46, 204, 113, .8)'
+							  						],
+							  						hoverBackgroundColor: [
+							  							'rgba(41, 128, 185, 1.0)',
+							  							'rgba(142, 68, 173, 1.0)',
+							  							'rgba(39, 174, 96, 1.0)'
+							  						],
+							  						data: [post.views, post.shares, post.bookmarks]
+							  					}]
+							    			}
+							    		});
+						    		$('#showPost').modal('show');
 						    	};
 								} else {
 									this.postsRevenueMonth = dataSet;
-									var barRevenueMonth = $("#barRevenueMonth").get(0).getContext("2d");
+									var barRevenueMonthRaw = $("#barRevenueMonth").get(0);
+									var barRevenueMonth = barRevenueMonthRaw.getContext("2d");
 									var barRevenueMonthData = this.formatBarData(this.postsRevenueMonth, type);
 									
 						    	var barChartRevenue30 = new Chart(barRevenueMonth, {
@@ -698,21 +722,79 @@
 						    		data: barRevenueMonthData,
 						    		options: barChartOptionsRevenue
 						    	});
+						    	barRevenueMonthRaw.onclick = function(evt) {
+						    		var activePoints = barChartRevenue30.getElementsAtEvent(evt);
+						    		var idx = activePoints[0]['_index'];
+						    		var post = dashboard.$data.postsRevenueMonth[idx];
+						    		dashboard.$data.selectedPost = post;
+
+						    		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+							    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+							    			type: 'pie',
+							    			data: {
+							    				labels: ['Views', 'Shares', 'Bookmarks'],
+							    				datasets: [{
+							    					backgroundColor: [
+							  							'rgba(52, 152, 219, .8)',
+							  							'rgba(155, 89, 182, .8)',
+							  							'rgba(46, 204, 113, .8)'
+							  						],
+							  						hoverBackgroundColor: [
+							  							'rgba(41, 128, 185, 1.0)',
+							  							'rgba(142, 68, 173, 1.0)',
+							  							'rgba(39, 174, 96, 1.0)'
+							  						],
+							  						data: [post.views, post.shares, post.bookmarks]
+							  					}]
+							    			}
+							    		});
+						    		$('#showPost').modal('show');
+						    	};
 								}
 								break;
 							case "2month":
 								if (type === 'interaction') {
 									this.postsInteracted2Month = dataSet;
-									var barInteractions2Month = $("#barInteractions2Month").get(0).getContext("2d");
+									var barInteractions2MonthRaw = $("#barInteractions2Month").get(0);
+									var barInteractions2Month = barInteractions2MonthRaw.getContext("2d");
 									var barInteractions2MonthData = this.formatBarData(this.postsInteracted2Month, type);
 									var barChartInter60 = new Chart(barInteractions2Month, {
 						    		type: 'bar',
 						    		data: barInteractions2MonthData,
 						    		options: barChartOptions
 						    	});
+						    	barInteractions2MonthRaw.onclick = function(evt) {
+						    		var activePoints = barChartInter60.getElementsAtEvent(evt);
+						    		var idx = activePoints[0]['_index'];
+						    		var post = dashboard.$data.postsInteracted2Month[idx];
+						    		dashboard.$data.selectedPost = post;
+
+						    		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+							    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+							    			type: 'pie',
+							    			data: {
+							    				labels: ['Views', 'Shares', 'Bookmarks'],
+							    				datasets: [{
+							    					backgroundColor: [
+							  							'rgba(52, 152, 219, .8)',
+							  							'rgba(155, 89, 182, .8)',
+							  							'rgba(46, 204, 113, .8)'
+							  						],
+							  						hoverBackgroundColor: [
+							  							'rgba(41, 128, 185, 1.0)',
+							  							'rgba(142, 68, 173, 1.0)',
+							  							'rgba(39, 174, 96, 1.0)'
+							  						],
+							  						data: [post.views, post.shares, post.bookmarks]
+							  					}]
+							    			}
+							    		});
+						    		$('#showPost').modal('show');
+						    	};
 								} else {
 									this.postsRevenue2Month = dataSet;
-									var barRevenue2Month = $("#barRevenue2Month").get(0).getContext("2d");
+									var barRevenue2MonthRaw = $("#barRevenue2Month").get(0);
+									var barRevenue2Month = barRevenue2MonthRaw.getContext("2d");
 									var barRevenue2MonthData = this.formatBarData(this.postsRevenue2Month, type);
 									
 						    	var barChartRevenue60 = new Chart(barRevenue2Month, {
@@ -720,6 +802,35 @@
 						    		data: barRevenue2MonthData,
 						    		options: barChartOptionsRevenue
 						    	});
+
+						    	barRevenue2MonthRaw.onclick = function(evt) {
+						    		var activePoints = barChartRevenue60.getElementsAtEvent(evt);
+						    		var idx = activePoints[0]['_index'];
+						    		var post = dashboard.$data.postsRevenue2Month[idx];
+						    		dashboard.$data.selectedPost = post;
+
+						    		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+							    	var donutChartInter = new Chart(donutInteractionsCanvas, {
+							    			type: 'pie',
+							    			data: {
+							    				labels: ['Views', 'Shares', 'Bookmarks'],
+							    				datasets: [{
+							    					backgroundColor: [
+							  							'rgba(52, 152, 219, .8)',
+							  							'rgba(155, 89, 182, .8)',
+							  							'rgba(46, 204, 113, .8)'
+							  						],
+							  						hoverBackgroundColor: [
+							  							'rgba(41, 128, 185, 1.0)',
+							  							'rgba(142, 68, 173, 1.0)',
+							  							'rgba(39, 174, 96, 1.0)'
+							  						],
+							  						data: [post.views, post.shares, post.bookmarks]
+							  					}]
+							    			}
+							    		});
+						    		$('#showPost').modal('show');
+						    	};
 								}
 						}
 					},
