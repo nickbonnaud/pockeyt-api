@@ -102,9 +102,9 @@
 					      </div>
 					      <div class="modal-body-timeline">
 				        	<div class="col-md-6">
-				        		<div class="box box-default">
+				        		<div class="box box-primary">
 				        			<div class="box-header with-border">
-				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message }}</h4>
+				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate '30' }}</h4>
 				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
 				        			</div>
 				        			<div class="box-body">
@@ -112,7 +112,7 @@
 				        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
 				        				</div>
                     		<hr>
-                    		<p>@{{ selectedPost.published_at | setDate }}</p>
+                    		<p>Post on @{{ selectedPost.published_at | setDate }}</p>
 				        			</div>
 				        		</div>
 				         	</div>
@@ -275,7 +275,10 @@
 			setDate: function(value) {
 	      date = moment(value).format("Do MMM YY");
 	      return date;
-	    }
+	    },
+	    truncate: function(string, value) {
+    		return string.substring(0, value) + '...';
+    	}
 		},
 
 		methods: {
