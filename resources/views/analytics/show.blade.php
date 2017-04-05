@@ -265,11 +265,6 @@
     		var donutChartInter = new Chart(donutInteractions, {
     			type: 'pie',
     			data: data
-    			options: {
-		        animation:{
-		          animateScale:true
-		        }
-			    }
     		});
 
     		$('#showPost').modal('show');
