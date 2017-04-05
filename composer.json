@@ -24,7 +24,8 @@
         "laravel/socialite": "^2.0",
         "socialiteproviders/instagram": "^2.0",
         "consolibyte/quickbooks": "^3.2",
-        "davibennun/laravel-push-notification": "dev-laravel5"
+        "davibennun/laravel-push-notification": "dev-laravel5",
+        "genealabs/laravel-caffeine": "^0.3.12"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
