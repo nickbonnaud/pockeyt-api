@@ -89,9 +89,14 @@
 											</div>
 										</div>
 									</div>
-									<div class="chart">
-				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
-				         		</div>
+									<div class="box box-primary">
+										<div class="box-header with-border">
+											<h3 class="box-title">Interaction Breakdown</h3>
+										</div>
+										<div class="box-body">
+											<canvas id="donutInteractions" width="200" height="200"></canvas>
+										</div>
+				         	</div>
 								</div>
 							</div>
 						</div>
@@ -119,11 +124,11 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<div class="col-md-6">
+				         	<!-- <div class="col-md-6">
 				         		<div class="box box-primary">
 				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
 				         		</div>
-				         	</div>
+				         	</div> -->
 					      </div>
 					    </div>
 					  </div>
