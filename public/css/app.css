@@ -8523,4 +8523,6 @@ img {
   padding-right: 15px;
 }
 
-
+.modal-analytics {
+  height: 320px;
+}

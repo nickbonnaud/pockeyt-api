@@ -102,7 +102,7 @@
 					      </div>
 					      <div class="modal-body-timeline">
 				        	<div class="col-md-6">
-				        		<div class="box box-primary">
+				        		<div class="box box-primary modal-analytics">
 				        			<div class="box-header with-border">
 				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
 				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
@@ -117,7 +117,7 @@
 				        		</div>
 				         	</div>
 				         	<div class="col-md-6">
-				         		<div class="box box-primary">
+				         		<div class="box box-primary modal-analytics">
 											<div class="box-header with-border">
 												<h3 class="box-title">Interaction Breakdown</h3>
 											</div>
