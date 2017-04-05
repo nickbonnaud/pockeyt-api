@@ -98,11 +98,21 @@
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="showPostModal">@{{selectedPost.message}}</h4>
+					        <h4 class="modal-title" id="showPostModal">Post Details</h4>
 					      </div>
 					      <div class="modal-body">
 					        <div class="box-body">
-					         <p>@{{selectedPost}}</p>
+					        	<div class="col-md-6">
+					         		<img class="photoLogo" src="{{ $user->profile->logo->url }}">
+					         		<span class="partnername">{{ $user->profile->business_name }}</span>
+					         		<img class="postPhoto" :src="selectedPost.thumb_path">
+					         		<hr>
+					         		<article class="postText">
+					         			@{{ selectedPost.message }}
+					         		</article>
+					         		<hr>
+					         		<div class="footer-date">@{{ selectedPost.published_at }}</div>
+					         	</div>
 					        </div>
 					      </div>
 					    </div>
