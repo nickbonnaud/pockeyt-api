@@ -124,7 +124,11 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	
+				         	<!-- <div class="col-md-6">
+				         		<div class="box box-primary">
+				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
+				         		</div>
+				         	</div> -->
 					      </div>
 					    </div>
 					  </div>
@@ -247,7 +251,7 @@
     			type: 'pie',
     			data: {
     				labels: ['Views', 'Shares', 'Bookmarks'],
-    				dataSets: [{
+    				datasets: [{
     					backgroundColor: [
   							'rgba(52, 152, 219, .8)',
   							'rgba(155, 89, 182, .8)',
