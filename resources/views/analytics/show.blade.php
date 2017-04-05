@@ -246,31 +246,40 @@
     		options: barChartOptions
     	});
 
-    	var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
-    		var data = {
-    			labels: ['Views', 'Shares', 'Bookmarks'],
-  				dataSets: [{
-  						data:[10, 15, 4],
-  						backgroundColor: [
-  							'rgba(52, 152, 219, .8)',
-  							'rgba(155, 89, 182, .8)',
-  							'rgba(46, 204, 113, .8)'
-  						],
-  						hoverBackgroundColor: [
-  							'rgba(41, 128, 185, 1.0)',
-  							'rgba(142, 68, 173, 1.0)',
-  							'rgba(39, 174, 96, 1.0)'
-  						]
-  				}]
-    		};
-    		var options = {
-    			cutoutPercentage: 0
-    		};
-    		var donutChartInter = new Chart(donutInteractionsCanvas, {
-    			type: 'doughnut',
-    			data: data,
-    			options: options
-    		});
+  		var data = [
+    		{
+    			value: 10,
+    			color: 'rgba(52, 152, 219, .8)',
+    			highlight: 'rgba(41, 128, 185, 1.0)',
+    			label: "Views"
+    		},
+    		{
+    			value: 15,
+    			color: 'rgba(155, 89, 182, .8)',
+    			highlight: 'rgba(142, 68, 173, 1.0)',
+    			label: "Shares"
+    		},
+    		{
+    			value: 4,
+    			color: 'rgba(46, 204, 113, .8)',
+    			highlight: 'rgba(39, 174, 96, 1.0)',
+    			label: "Bookmarks"
+    		}
+  		];
+
+  		var options = {
+  			segmentShowStroke : true,
+  			segmentStrokeColor : "#fff",
+  			segmentStrokeWidth : 2,
+  			animation : true,
+  			animationSteps : 100,
+  			animationEasing : "easeOutBounce",
+  			animateRotate : true,
+  			animateScale : true,
+  			onAnimationComplete : null
+  		};
+  		var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
+  		new Chart(donutInteractionsCanvas).Pie(data, options);
 
     	
     	barInteractionsWeekRaw.onclick = function(evt) {
