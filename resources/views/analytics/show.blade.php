@@ -108,7 +108,7 @@
 				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
 				        			</div>
 				        			<div class="box-body">
-				        				<img v-if="selectedPost.thumb_pat" :src="selectedPost.thumb_path">
+				        				<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
                     		<hr>
                     		<p>@{{ selectedPost.published_at }}</p>
 				        			</div>
