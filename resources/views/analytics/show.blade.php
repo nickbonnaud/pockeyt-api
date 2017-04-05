@@ -124,11 +124,7 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<!-- <div class="col-md-6">
-				         		<div class="box box-primary">
-				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
-				         		</div>
-				         	</div> -->
+				         	
 					      </div>
 					    </div>
 					  </div>
