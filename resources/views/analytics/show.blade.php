@@ -82,7 +82,7 @@
 										</ul>
 										<div class="tab-content">
 											<div class="chart tab-pane active" id="hour-inter-chart">
-												<canvas id="lineInterHour" width="400" height="300"></canvas>
+												<canvas id="donutInteractions" width="200" height="200"></canvas>
 											</div>
 											<div class="chart tab-pane" id="hour-revenue-chart">
 												<canvas id="lineRevenueHour" width="400" height="300"></canvas>
@@ -93,9 +93,7 @@
 										<div class="box-header with-border">
 											<h3 class="box-title">Interaction Breakdown</h3>
 										</div>
-										<div class="box-body">
-											<canvas id="donutInteractions" width="200" height="200"></canvas>
-										</div>
+										
 				         	</div>
 								</div>
 							</div>
