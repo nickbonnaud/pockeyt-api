@@ -249,11 +249,11 @@
     		console.log(donutInteractions);
     		console.log(post.views);
     		console.log(post.shares);
-    		console.log(post.bookmarks)
+    		console.log(post.bookmarks);
     		var data = {
     			labels: ['Views', 'Shares', 'Bookmarks'],
   				dataSets: [{
-  						data:[post.views, post.shares, post.bookmarks],
+  						data:[11, 12, 13],
   						backgroundColor: [
   							'rgba(52, 152, 219,.8)',
   							'rgba(155, 89, 182,.8)',
