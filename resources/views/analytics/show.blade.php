@@ -104,7 +104,7 @@
 				        	<div class="col-md-6">
 				        		<div class="box box-primary">
 				        			<div class="box-header with-border">
-				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate '30' }}</h4>
+				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
 				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
 				        			</div>
 				        			<div class="box-body">
@@ -277,7 +277,7 @@
 	      return date;
 	    },
 	    truncate: function(string, value) {
-    		return string.substring(0, value) + '...';
+    		return string.substring(0, 30) + '...';
     	}
 		},
 
