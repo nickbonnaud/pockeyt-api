@@ -100,7 +100,7 @@
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					        <h4 class="modal-title" id="showPostModal">Post Details</h4>
 					      </div>
-					      <div class="modal-body-timeline">
+					      <div class="modal-body-analytics">
 				        	<div class="col-md-6">
 				        		<div class="box box-primary modal-analytics">
 				        			<div class="box-header with-border">

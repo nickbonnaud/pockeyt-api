@@ -8527,7 +8527,8 @@ img {
   height: 320px;
 }
 
-.analytics-body-modal {
+.modal-body-analytics {
+  height: 500px;
   position: relative;
   padding: 15px;
   padding-top: 35px;
