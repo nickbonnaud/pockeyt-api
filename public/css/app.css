@@ -8526,3 +8526,10 @@ img {
 .modal-analytics {
   height: 320px;
 }
+
+.analytics-body-modal {
+  position: relative;
+  padding: 15px;
+  padding-top: 35px;
+  background-color: #ecf0f5;
+}
