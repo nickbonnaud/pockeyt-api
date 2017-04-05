@@ -112,7 +112,7 @@
 				        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
 				        				</div>
                     		<hr>
-                    		<p class="pull-right">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
+                    		<p class="analytics-date">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
 				        			</div>
 				        		</div>
 				         	</div>

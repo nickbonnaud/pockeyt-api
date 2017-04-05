@@ -8516,5 +8516,11 @@ img {
   text-align: center;
 }
 
+.analytics-date {
+  float: right;
+  font-size: 16px;
+  font-style: italic;
+  padding-right: 15px;
+}
 
 
