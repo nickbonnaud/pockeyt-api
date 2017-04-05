@@ -96,37 +96,24 @@
 					<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
-					      <div class="modal-header">
+					      <div class="modal-header-timeline">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					        <h4 class="modal-title" id="showPostModal">Post Details</h4>
 					      </div>
-					      <div class="modal-body">
-					        <div class="box-body">
-					        	<div class="col-md-6">
-						        	<nav class="navbar-post navbar-fixed-top">
-										    <div class="container-fluid">
-									        <div class="navbarPost-header">
-								            <a class="navbarPost-brand" href="http://www.pockeyt.com/" target="_blank">
-								              <img src="{{ asset('/images/logo-horizontal-white.png') }}" class="logoPost">
-								            </a>
-									        </div>
-										    </div>
-											</nav>
-											<div class="wrapper">
-    										<div class="container">
-    											<img class="photoLogo" src="{{ $user->profile->logo->url }}">
-							         		<span class="partnername">{{ $user->profile->business_name }}</span>
-							         		<img class="postPhoto" :src="selectedPost.thumb_path">
-							         		<hr>
-							         		<article class="postText">
-							         			@{{ selectedPost.message }}
-							         		</article>
-							         		<hr>
-							         		<div class="footer-date">@{{ selectedPost.published_at }}</div>
-    										</div>
-    									</div>
-					         	</div>
-					        </div>
+					      <div class="modal-body-timeline">
+				        	<div class="col-md-6">
+				        		<div class="box box-default">
+				        			<div class="box-header with-border">
+				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message }}</h4>
+				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
+				        			</div>
+				        			<div class="box-body">
+				        				<img v-if="selectedPost.thumb_pat" :src="selectedPost.thumb_path">
+                    		<hr>
+                    		<p>@{{ selectedPost.published_at }}</p>
+				        			</div>
+				        		</div>
+				         	</div>
 					      </div>
 					    </div>
 					  </div>
