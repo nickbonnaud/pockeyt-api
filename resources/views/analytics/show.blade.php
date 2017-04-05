@@ -82,7 +82,7 @@
 										</ul>
 										<div class="tab-content">
 											<div class="chart tab-pane active" id="hour-inter-chart">
-												<canvas id="donutInteractions" width="200" height="200"></canvas>
+												<canvas id="lineInterHour" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="hour-revenue-chart">
 												<canvas id="lineRevenueHour" width="400" height="300"></canvas>
@@ -93,7 +93,9 @@
 										<div class="box-header with-border">
 											<h3 class="box-title">Interaction Breakdown</h3>
 										</div>
-										
+										<div class="box-body">
+											<canvas id="donutInteractions" width="200" height="200"></canvas>
+										</div>
 				         	</div>
 								</div>
 							</div>
@@ -122,11 +124,11 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<!-- <div class="col-md-6">
+				         	<div class="col-md-6">
 				         		<div class="box box-primary">
 				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
 				         		</div>
-				         	</div> -->
+				         	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -244,7 +246,7 @@
     		options: barChartOptions
     	});
 
-    	var donutInteractions = $("#donutInteractions").get(0).getContext("2d");
+    	var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
     		var data = {
     			labels: ['Views', 'Shares', 'Bookmarks'],
   				dataSets: [{
@@ -264,8 +266,8 @@
     		var options = {
     			cutoutPercentage: 0
     		};
-    		var donutChartInter = new Chart(donutInteractions, {
-    			type: 'pie',
+    		var donutChartInter = new Chart(donutInteractionsCanvas, {
+    			type: 'doughnut',
     			data: data,
     			options: options
     		});
