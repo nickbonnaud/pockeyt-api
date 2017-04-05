@@ -108,9 +108,11 @@
 				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
 				        			</div>
 				        			<div class="box-body">
-				        				<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
+				        				<div class="analytics-modal-image">
+				        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
+				        				</div>
                     		<hr>
-                    		<p>@{{ selectedPost.published_at }}</p>
+                    		<p>@{{ selectedPost.published_at | setDate }}</p>
 				        			</div>
 				        		</div>
 				         	</div>
@@ -267,6 +269,13 @@
     		data: lineInteractionsHourData,
     		options: lineChartOptions
     	});
+		},
+
+		filters: {
+			setDate: function(value) {
+	      date = moment(value).format("Do MMM YY");
+	      return date;
+	    }
 		},
 
 		methods: {
