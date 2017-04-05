@@ -116,6 +116,11 @@
 				        			</div>
 				        		</div>
 				         	</div>
+				         	<div class="col-md-6">
+				         		<div class="box box-primary">
+				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
+				         		</div>
+				         	</div>
 					      </div>
 					    </div>
 					  </div>
@@ -239,7 +244,30 @@
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
     		dashboard.$data.selectedPost = post;
-    		console.log(dashboard.$data.selectedPost);
+    		
+    		var donutInteractions = $("#donutInteractions").get(0).getContext("2d");
+    		var donutChartInter = new Chart(donutInteractions, {
+    			type: 'pie',
+    			data: {
+    				labels: ['Views', 'Shares', 'Bookmarks'],
+    				dataSets: [
+    					{
+    						data:[post.views, post.shares, post.bookmarks],
+    						backgroundColor: [
+    							'rgba(52, 152, 219,.8)',
+    							'rgba(155, 89, 182,.8)',
+    							'rgba(46, 204, 113,.8)'
+    						],
+    						hoverBackgroundColor: [
+    							'rgba(41, 128, 185,1.0)',
+    							'rgba(142, 68, 173,1.0)',
+    							'rgba(39, 174, 96,1.0)'
+    						]
+    					}
+    				]
+    			}
+    		})
+
     		$('#showPost').modal('show');
     	};
 
