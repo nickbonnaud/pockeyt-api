@@ -244,7 +244,8 @@
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
     		dashboard.$data.selectedPost = post;
-    		
+
+    		$('#showPost').modal('show');
     		var donutInteractions = $("#donutInteractions").get(0).getContext("2d");
     		var data = {
     			labels: ['Views', 'Shares', 'Bookmarks'],
@@ -272,8 +273,6 @@
     			data: data,
     			options: options
     		});
-
-    		$('#showPost').modal('show');
     	};
 
     	var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
