@@ -112,7 +112,7 @@
 				        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
 				        				</div>
                     		<hr>
-                    		<p class="pull-right">Post on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
+                    		<p class="pull-right">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
 				        			</div>
 				        		</div>
 				         	</div>
@@ -277,7 +277,7 @@
 	      return date;
 	    },
 	    truncate: function(string, value) {
-    		return string.substring(0, 50) + '...';
+    		return string.substring(0, 80) + '...';
     	}
 		},
 
