@@ -89,7 +89,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="box box-primary">
+									<div class="chart">
 				         			<canvas id="donutInteractions" width="200" height="150"></canvas>
 				         		</div>
 								</div>
