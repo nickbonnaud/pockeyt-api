@@ -246,27 +246,31 @@
     		dashboard.$data.selectedPost = post;
     		
     		var donutInteractions = $("#donutInteractions").get(0).getContext("2d");
+    		var data = {
+    			labels: ['Views', 'Shares', 'Bookmarks'],
+  				dataSets: [{
+  						data:[post.views, post.shares, post.bookmarks],
+  						backgroundColor: [
+  							'rgba(52, 152, 219,.8)',
+  							'rgba(155, 89, 182,.8)',
+  							'rgba(46, 204, 113,.8)'
+  						],
+  						hoverBackgroundColor: [
+  							'rgba(41, 128, 185,1.0)',
+  							'rgba(142, 68, 173,1.0)',
+  							'rgba(39, 174, 96,1.0)'
+  						]
+  				}]
+    		};
     		var donutChartInter = new Chart(donutInteractions, {
     			type: 'pie',
-    			data: {
-    				labels: ['Views', 'Shares', 'Bookmarks'],
-    				dataSets: [
-    					{
-    						data:[post.views, post.shares, post.bookmarks],
-    						backgroundColor: [
-    							'rgba(52, 152, 219,.8)',
-    							'rgba(155, 89, 182,.8)',
-    							'rgba(46, 204, 113,.8)'
-    						],
-    						hoverBackgroundColor: [
-    							'rgba(41, 128, 185,1.0)',
-    							'rgba(142, 68, 173,1.0)',
-    							'rgba(39, 174, 96,1.0)'
-    						]
-    					}
-    				]
-    			}
-    		})
+    			data: data
+    			options: {
+		        animation:{
+		          animateScale:true
+		        }
+			    }
+    		});
 
     		$('#showPost').modal('show');
     	};
