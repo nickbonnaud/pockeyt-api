@@ -96,11 +96,11 @@
 					<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
-					      <div class="modal-header">
+					      <div class="modal-header-timeline">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					        <h4 class="modal-title" id="showPostModal">Post Details</h4>
 					      </div>
-					      <div class="modal-body">
+					      <div class="modal-body-timeline">
 				        	<div class="col-md-6">
 				        		<div class="box box-primary modal-analytics">
 				        			<div class="box-header with-border">
