@@ -216,6 +216,10 @@ class ConnectController extends Controller
 					$post->fb_post_id = $fbPost['post_id'];
 					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
 
+					$photos = $fbPost['photos'];
+					if (isset($photos)) {
+						$post->photo_path = $photos[0];
+					}
 					$profile->posts()->save($post);
 				}
 				break;
