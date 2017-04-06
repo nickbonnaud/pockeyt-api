@@ -89,8 +89,8 @@ class AnalyticsController extends Controller
 
     $totalRevenue = $this->getTotalRevenue($profile);
     
-    $revenuePerPost = $totalRevenue / $totalViews;
-    $conversionRate = $totalPurchases / $totalViews;
+    $revenuePerPost = round($totalRevenue / $totalViews, 2);
+    $conversionRate = round($totalPurchases / $totalViews, 2);
 
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour', 'topDay', 'topHour', 'revenuePerPost', 'conversionRate'));
   }

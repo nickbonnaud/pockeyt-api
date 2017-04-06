@@ -21,7 +21,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-aqua">
 										<div class="inner">
-											<h3>{{ $conversionRate }}%</h3>
+											<h4>{{ $conversionRate }}%</h4>
 											<p>Conversion Rate</p>
 										</div>
 										<div class="icon"><i class="fa fa-shopping-cart"></i></div>
@@ -31,7 +31,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-green">
 										<div class="inner">
-											<h3>${{ $revenuePerPost / 100 }}</h3>
+											<h4>${{ $revenuePerPost / 100 }}</h4>
 											<p>Revenue Per Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-usd"></i></div>
@@ -41,7 +41,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-yellow">
 										<div class="inner">
-											<h3>{{ $topDay }}</h3>
+											<h4>{{ $topDay }}</h4>
 											<p>Best Day to Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-calendar-plus-o"></i></div>
@@ -51,7 +51,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-red">
 										<div class="inner">
-											<h3>{{ $topHour }}</h3>
+											<h4>{{ $topHour }}</h4>
 											<p>Best Time to Post</p>
 										</div>
 										<div class="icon"><i class="fa  fa-clock-o"></i></div>
