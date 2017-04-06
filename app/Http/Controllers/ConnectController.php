@@ -218,8 +218,12 @@ class ConnectController extends Controller
 
 					$photos = $fbPost['photos'];
 					if (isset($photos)) {
+						$user = $photos;
+						event(new CustomerRequestBill($user, $business));
 						$post->photo_path = $photos[0];
 					}
+					$user = $post;
+					event(new CustomerRequestBill($user, $business));
 					$profile->posts()->save($post);
 				}
 				break;
