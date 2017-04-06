@@ -217,6 +217,7 @@ class ConnectController extends Controller
 						event(new CustomerRequestBill($user, $business));
 						$post->photo_path = $photos[0];
 					}
+					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
 					$profile->posts()->save($post);
 				}
 				break;
