@@ -15,8 +15,14 @@
           @else
             @if($user->profile->fb_page_id !== null)
               <span class="icon-fb"></span>
+              <div>
+                <p>Auto Post</p>
+              </div>
             @else
               <span class="icon-insta"></span>
+              <div>
+                <p>Auto Post</p>
+              </div>
             @endif
           @endif
         <ol class="breadcrumb">
