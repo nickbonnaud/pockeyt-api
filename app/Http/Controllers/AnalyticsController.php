@@ -405,15 +405,15 @@ class AnalyticsController extends Controller
   public function getTopHour($hour) {
     $topHourM = $hour - 12;
     if ($topHourM == -12) {
-      $topHour = "12AM - 1AM";
+      $topHour = "12am - 1am";
     } elseif ($topHourM < 0) {
       $endTime = $hour + 1;
-      $topHour = $hour . 'AM - ' . $endTime . 'AM';
+      $topHour = $hour . 'am - ' . $endTime . 'am';
     } elseif ($topHourM == 0) {
-      $topHour = "12PM - 1PM";
+      $topHour = "12pm - 1pm";
     } else {
       $endTime = $topHourM + 1;
-      $topHour = $topHourM . 'PM- ' . $endTime . 'PM';
+      $topHour = $topHourM . 'pm - ' . $endTime . 'pm';
     }
     return $topHour;
   }
