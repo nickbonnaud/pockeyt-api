@@ -8535,6 +8535,10 @@ img {
   background-color: #ecf0f5;
 }
 
+.analytics-bubble {
+  font-size: 36px;
+}
+
 .icon-fb {
   content:'';
   display:inline-block;

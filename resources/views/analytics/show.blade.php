@@ -41,7 +41,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-yellow">
 										<div class="inner">
-											<h3>{{ $topDay }}</h3>
+											<h3 class="analytics-bubble">{{ $topDay }}</h3>
 											<p>Best Day to Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-calendar-plus-o"></i></div>
@@ -51,7 +51,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-red">
 										<div class="inner">
-											<h3>{{ $topHour }}</h3>
+											<h3 class="analytics-bubble">{{ $topHour }}</h3>
 											<p>Best Time to Post</p>
 										</div>
 										<div class="icon"><i class="fa  fa-clock-o"></i></div>
