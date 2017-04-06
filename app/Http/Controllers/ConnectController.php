@@ -264,7 +264,12 @@ class ConnectController extends Controller
 	public function addInstaPost($data, $profile, $mediaId) {
 		if ($data->data->type === 'image') {
 			$post = new Post;
-			$post->message = $data->data->caption->text;
+			if (isset($data->data->caption->text)) {
+				$post->message = $data->data->caption->text;
+			} else {
+				$post->message = "Recent photo from " . $profile->business_name;
+			}
+			
 			$post->insta_post_id = $mediaId;
 			$post->photo_path = $data->data->images->standard_resolution->url;
 			$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
@@ -272,7 +277,6 @@ class ConnectController extends Controller
 			$profile->posts()->save($post);
 		}
 	}
-
 }
 
 	
