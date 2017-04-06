@@ -8536,7 +8536,7 @@ img {
 }
 
 .analytics-bubble {
-  font-size: 36px;
+  font-size: 36px !important;
 }
 
 .icon-fb {
