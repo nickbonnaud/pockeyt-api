@@ -37,7 +37,7 @@ class ConnectController extends Controller
 	}
 
 	private function getAuthorizationFB() {
-		return Socialite::with('instagram')
+		return Socialite::with('facebook')
 			->fields(['accounts'])->scopes(['pages_show_list', 'manage_pages'])->redirect();
 	}
 
