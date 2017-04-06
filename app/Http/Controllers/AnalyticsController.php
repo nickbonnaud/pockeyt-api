@@ -55,6 +55,8 @@ class AnalyticsController extends Controller
         array_push($activityByDay, 0);
       }
     }
+    $day = array_keys($activityByDay, max($activityByDay));
+    dd($day);
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
@@ -87,9 +89,6 @@ class AnalyticsController extends Controller
       $query->where('business_id', '=', $profile->id)
         ->where('transaction_resulted', '=', true);
     })->count();
-
-    $day = array_keys($activityByDay, max($activityByDay));
-    dd($day);
     
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour'));
   }

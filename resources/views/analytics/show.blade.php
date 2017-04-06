@@ -18,6 +18,13 @@
 					<div class="row">
 						<div class="scroll-container-analytics">
 							<div class="scroll-contents">
+								<div class="col-lg-3 col-xs-6">
+									<div class="small-box bg-aqua">
+										<div class="inner">
+											<h3></h3>
+										</div>
+									</div>
+								</div>
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
