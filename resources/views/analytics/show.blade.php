@@ -15,9 +15,9 @@
 			    </ol>
 			  </section>
 				<section class="content" id="dashboard">
-					<div class="row">
-						<div class="scroll-container-analytics">
-							<div class="scroll-contents">
+					<div class="scroll-container-analytics">
+						<div class="scroll-contents">
+							<div class="row">
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-aqua">
 										<div class="inner">
@@ -58,6 +58,8 @@
 										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
+							</div>
+							<div class="row">
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
