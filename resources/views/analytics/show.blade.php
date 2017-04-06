@@ -25,7 +25,7 @@
 											<p>Conversion Rate</p>
 										</div>
 										<div class="icon"><i class="fa fa-shopping-cart"></i></div>
-										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer" data-toggle="modal" data-target="#ConversionRateModal">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -35,7 +35,7 @@
 											<p>Revenue Per Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-usd"></i></div>
-										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer" data-toggle="modal" data-target="#RevenuePerPostModal">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -168,6 +168,36 @@
 											</div>
 					         	</div>
 				         	</div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="modal fade" id="ConversionRateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header-timeline">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="ConversionRateModal">Conversion Rate</h4>
+					      </div>
+					      <div class="modal-body-analytics">
+				        	<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
+				        	<p>Conversion Rate shows how effective your Pockeyt Posts are in bringing customers to your business.</p>
+				        	<p>Calculated by the # of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="modal fade" id="RevenuePerPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header-timeline">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="RevenuePerPostModal">Revenue per Post</h4>
+					      </div>
+					      <div class="modal-body-analytics">
+				        	<h3>Your current Revenue per Post is <strong>${{ $revenuePerPost }}</strong></h3>
+				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in generating revenue.</p>
+				        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
 					      </div>
 					    </div>
 					  </div>
