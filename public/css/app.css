@@ -8538,16 +8538,20 @@ img {
 .icon-fb {
   content:'';
   display:inline-block;
-  width:40px;
-  height:40px;
+  width:35px;
+  height:35px;
+  margin-top: 10px;
+  margin-left: 15px;
   background:url('../images/icon-fb.png') center center no-repeat; background-size: contain;
 }
 
 .icon-insta {
   content:'';
   display:inline-block;
-  width:40px;
-  height:40px;
+  width:35px;
+  height:35px;
+  margin-top: 10px;
+  margin-left: 15px;
   background:url('../images/icon-insta.png') center center no-repeat; background-size: contain;
 }
 
