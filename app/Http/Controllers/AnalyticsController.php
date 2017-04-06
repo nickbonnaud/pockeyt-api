@@ -87,7 +87,7 @@ class AnalyticsController extends Controller
         ->where('transaction_resulted', '=', true);
     })->count();
 
-    $totalRevenue = $this->getTotalRevenue();
+    $totalRevenue = $this->getTotalRevenue($profile);
     
     $revenuePerPost = $totalRevenue / $totalViews;
     $conversionRate = $totalPurchases / $totalViews;
@@ -418,7 +418,7 @@ class AnalyticsController extends Controller
     return $topHour;
   }
 
-  public function getTotalRevenue() {
+  public function getTotalRevenue($profile) {
     $postsWithTransaction = PostAnalytic::where(function($query) use ($profile) {
       $query->where('business_id', '=', $profile->id)
         ->where('transaction_resulted', '=', true);
