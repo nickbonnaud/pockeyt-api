@@ -56,6 +56,7 @@ class AnalyticsController extends Controller
       }
     }
     $day = array_keys($activityByDay, max($activityByDay));
+    dd($day);
     $topDay = $this->getTopDay($day);
     $activityByDay = collect($activityByDay);
 
