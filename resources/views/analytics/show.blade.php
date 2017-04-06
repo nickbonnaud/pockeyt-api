@@ -18,7 +18,7 @@
 					<div class="scroll-container-analytics">
 						<div class="scroll-contents">
 							<div class="row">
-								<div class="col-lg-3 col-xs-12">
+								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 									<div class="small-box bg-aqua">
 										<div class="inner">
 											<h3>{{ $conversionRate }}%</h3>
@@ -28,7 +28,7 @@
 										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
-								<div class="col-lg-3 col-xs-12">
+								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 									<div class="small-box bg-green">
 										<div class="inner">
 											<h3>${{ $revenuePerPost }}</h3>
@@ -38,7 +38,7 @@
 										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
-								<div class="col-lg-3 col-xs-12">
+								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 									<div class="small-box bg-yellow">
 										<div class="inner">
 											<h3 class="analytics-bubble">{{ $topDay }}</h3>
@@ -48,7 +48,7 @@
 										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
-								<div class="col-lg-3 col-xs-12">
+								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 									<div class="small-box bg-red">
 										<div class="inner">
 											<h3 class="analytics-bubble">{{ $topHour }}</h3>
