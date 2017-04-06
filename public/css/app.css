@@ -8539,6 +8539,10 @@ img {
   font-size: 36px !important;
 }
 
+.analytics-bubble-hour {
+  font-size: 32px !important;
+}
+
 .icon-fb {
   content:'';
   display:inline-block;
