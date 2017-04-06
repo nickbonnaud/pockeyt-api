@@ -55,8 +55,7 @@ class AnalyticsController extends Controller
         array_push($activityByDay, 0);
       }
     }
-    $day = array_keys($activityByDay, max($activityByDay));
-    dd($day);
+    
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
