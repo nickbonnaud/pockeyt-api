@@ -158,8 +158,12 @@ return [
         Oureastudios\Laravel\BraintreeServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
+<<<<<<< HEAD
         GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class
 
+=======
+        GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
+>>>>>>> deda8771783e224031f1c58f25500e2d2a075ead
     ],
 
     /*
