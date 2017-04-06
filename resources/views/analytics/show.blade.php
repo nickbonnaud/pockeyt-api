@@ -51,7 +51,7 @@
 								<div class="col-lg-3 col-xs-12">
 									<div class="small-box bg-red">
 										<div class="inner">
-											<h3 class="analytics-bubble-hour">{{ $topHour }}</h3>
+											<h3 class="analytics-bubble">{{ $topHour }}</h3>
 											<p>Best Time to Post</p>
 										</div>
 										<div class="icon"><i class="fa  fa-clock-o"></i></div>
