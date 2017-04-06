@@ -209,7 +209,7 @@ class ConnectController extends Controller
 					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
 
-					if ($fbPost['photos']) {
+					if (isset($fbPost['photos'])) {
 						$photos = $fbPost['photos'];
 						$post->photo_path = $photos[0];
 					}
