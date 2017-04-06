@@ -13,7 +13,6 @@ use App\Profile;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use App\Events\CustomerRequestBill;
 
 class ConnectController extends Controller
 {
@@ -210,11 +209,8 @@ class ConnectController extends Controller
 					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
 
-					$photos = $fbPost['photos'];
-					if (isset($photos)) {
-						$user = $fbPost['photos'][0];
-						$business = $profile;
-						event(new CustomerRequestBill($user, $business));
+					if ($fbPost['photos']) {
+						$photos = $fbPost['photos'];
 						$post->photo_path = $photos[0];
 					}
 					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
