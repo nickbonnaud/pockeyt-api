@@ -206,9 +206,14 @@ class ConnectController extends Controller
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
 				if ($existingPost === null) {
 					$post = new Post;
-					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
 
+					if (isset($fbPost['message'])) {
+						$post->message = $fbPost['message'];
+					} else {
+						$post->message = "Recent photo from " . $profile->business_name;
+					}
+				
 					if (isset($fbPost['photos'])) {
 						$photos = $fbPost['photos'];
 						$post->photo_path = $photos[0];
@@ -221,7 +226,11 @@ class ConnectController extends Controller
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
 				if ($existingPost === null) {
 					$post = new Post;
-					$post->message = $fbPost['message'];
+					if (isset($fbPost['message'])) {
+						$post->message = $fbPost['message'];
+					} else {
+						$post->message = "Recent photo from " . $profile->business_name;
+					}
 					$post->fb_post_id = $fbPost['post_id'];
 					$post->photo_path = $fbPost['link'];
 					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
