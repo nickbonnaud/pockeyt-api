@@ -39,15 +39,15 @@ class AnalyticsController extends Controller
     })->orderBy('total_revenue', 'desc')->get();
 
     $activityByDay = [];
-    $totalDaysData = PostAnalytic::where('business_id', '=', $profile->id)->count();
-    if ($totalDaysData !== 0) {
+    $totalDays = PostAnalytic::where('business_id', '=', $profile->id)->count();
+    if ($totalDays !== 0) {
       for ($i = 0; $i <= 6; $i++) {
         $activityPerDayTotal = PostAnalytic::where(function($query) use ($profile, $i) {
           $query->where('business_id', '=', $profile->id)
             ->whereRaw('WEEKDAY(updated_at) = ?', [$i]);
         })->count();
 
-        $percentagePerDay = ($activityPerDayTotal / $totalDaysData) * 100;
+        $percentagePerDay = ($activityPerDayTotal / $totalDays) * 100;
         array_push($activityByDay, $percentagePerDay);
       }
     } else {
@@ -58,21 +58,39 @@ class AnalyticsController extends Controller
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
-    $totalHoursData = PostAnalytic::where('business_id', '=', $profile->id)->count();
-    if ($totalHoursData !== 0) {
+    if ($totalDays !== 0) {
       for ($i = 0; $i <= 23; $i++) {
         $activityPerHourTotal = PostAnalytic::where(function($query) use ($profile, $i) {
           $query->where('business_id', '=', $profile->id)
             ->whereRaw('HOUR(updated_at) = ?', [$i]);
         })->count();
 
-        $percentagePerHour = ($activityPerHourTotal / $totalHoursData) * 100;
+        $percentagePerHour = ($activityPerHourTotal / $totalDays) * 100;
         array_push($activityByHour, $percentagePerHour);
       }
     } else {
       $activityByHour = [0];
     }
     $activityByHour = collect($activityByHour);
+
+    $totalViews = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('viewed', '=', true);
+    })->count();
+
+    $totalPurchases = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('transaction_resulted', '=', true);
+    })->count();
+
+    $total = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('transaction_resulted', '=', true);
+    })->count();
+
+    $day = array_keys($activityByDay, max($activityByDay));
+    dd($day);
+    
     return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour'));
   }
 
