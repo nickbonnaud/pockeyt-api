@@ -56,8 +56,7 @@ class AnalyticsController extends Controller
       }
     }
     $day = array_keys($activityByDay, max($activityByDay));
-    dd($day);
-    $topDay = $this->getTopDay($day);
+    $topDay = $this->getTopDay($day[0]);
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
@@ -75,7 +74,7 @@ class AnalyticsController extends Controller
       $activityByHour = [0];
     }
     $hour = array_keys($activityByHour, max($activityByHour));
-    $topHour = $this->getTopHour($hour);
+    $topHour = $this->getTopHour($hour[0]);
     $activityByHour = collect($activityByHour);
 
     $totalViews = PostAnalytic::where(function($query) use ($profile) {
