@@ -17,6 +17,11 @@ use App\Events\CustomerRequestBill;
 
 class ConnectController extends Controller
 {
+	 public function __construct()
+    {
+      parent::__construct();
+    }
+
 	public function connectFB(Request $request){
 		return $this->isLoggedInFB($request->has('code'));
 	}
@@ -198,7 +203,7 @@ class ConnectController extends Controller
 	public function addFbPost($fbPost, $profile) {
 
 	$user = $fbPost;
-	
+
 	event(new CustomerRequestBill($user, $business));
 
 		switch ($fbPost['item']) {
