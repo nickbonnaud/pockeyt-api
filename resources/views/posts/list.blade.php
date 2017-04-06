@@ -16,7 +16,8 @@
             @if($user->profile->fb_page_id !== null)
               <h4>Connected to </h4><span class="icon-fb"></span>
             @else
-              <h4>Connected to </h4><div class="icon-insta"></div>
+              <div class="icon-insta"></div>
+              <h4>Connected</h4>
             @endif
           @endif
         <ol class="breadcrumb">
