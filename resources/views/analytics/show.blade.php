@@ -31,7 +31,7 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-green">
 										<div class="inner">
-											<h4>${{ $revenuePerPost / 100 }}</h4>
+											<h4>${{ $revenuePerPost }}</h4>
 											<p>Revenue Per Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-usd"></i></div>
