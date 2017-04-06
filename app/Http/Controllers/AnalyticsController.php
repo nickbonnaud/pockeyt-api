@@ -55,7 +55,8 @@ class AnalyticsController extends Controller
         array_push($activityByDay, 0);
       }
     }
-    
+    $day = array_keys($activityByDay, max($activityByDay));
+    $topDay = $this->getTopDay($day);
     $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
@@ -72,6 +73,8 @@ class AnalyticsController extends Controller
     } else {
       $activityByHour = [0];
     }
+    $hour = array_keys($activityByHour, max($activityByHour));
+    $topHour = $this->getTopHour($hour);
     $activityByHour = collect($activityByHour);
 
     $totalViews = PostAnalytic::where(function($query) use ($profile) {
@@ -84,12 +87,12 @@ class AnalyticsController extends Controller
         ->where('transaction_resulted', '=', true);
     })->count();
 
-    $total = PostAnalytic::where(function($query) use ($profile) {
-      $query->where('business_id', '=', $profile->id)
-        ->where('transaction_resulted', '=', true);
-    })->count();
+    $totalRevenue = $this->getTotalRevenue();
     
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour'));
+    $revenuePerPost = $totalRevenue / $totalViews;
+    $conversionRate = $totalPurchases / $totalViews;
+
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour', 'topDay', 'topHour', 'revenuePerPost', 'conversionRate'));
   }
 
   public function getDashboardDataBar(Request $request) {
@@ -371,4 +374,60 @@ class AnalyticsController extends Controller
 		}
 		return response()->json(['success' => 'Updated post analytics'], 200);
 	}
+
+  public function getTopDay($day) {
+    switch ($day) {
+      case 0:
+        $topDay = "Monday";
+        break;
+      case 1:
+        $topDay = "Tueday";
+        break;
+      case 2:
+        $topDay = "Wednesday";
+        break;
+      case 3:
+        $topDay = "Thursday";
+        break;
+      case 4:
+        $topDay = "Friday";
+        break;
+      case 5:
+        $topDay = "Saturday";
+        break;
+      case 6:
+        $topDay = "Sunday";
+        break;
+    }
+    return $topDay;
+  }
+
+  public function getTopHour($hour) {
+    $topHourM = $hour - 12;
+    if ($topHourM == -12) {
+      $topHour = "12AM - 1AM";
+    } elseif ($topHourM < 0) {
+      $endTime = $hour + 1;
+      $topHour = $hour . 'AM - ' . $endTime . 'AM';
+    } elseif ($topHourM == 0) {
+      $topHour = "12PM - 1PM";
+    } else {
+      $endTime = $topHourM + 1;
+      $topHour = $topHourM . 'PM- ' . $endTime . 'PM';
+    }
+    return $topHour;
+  }
+
+  public function getTotalRevenue() {
+    $postsWithTransaction = PostAnalytic::where(function($query) use ($profile) {
+      $query->where('business_id', '=', $profile->id)
+        ->where('transaction_resulted', '=', true);
+    })->get();
+
+    $totalRevenue = 0;
+    foreach ($postsWithTransaction as $post) {
+      $totalRevenue = $totalRevenue + $post->total_revenue;
+    }
+    return $totalRevenue;
+  }
 }

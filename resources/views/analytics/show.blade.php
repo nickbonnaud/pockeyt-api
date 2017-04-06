@@ -21,8 +21,41 @@
 								<div class="col-lg-3 col-xs-6">
 									<div class="small-box bg-aqua">
 										<div class="inner">
-											<h3></h3>
+											<h3>{{ $conversionRate }}%</h3>
+											<p>Conversion Rate</p>
 										</div>
+										<div class="icon"><i class="fa fa-shopping-cart"></i></div>
+										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-xs-6">
+									<div class="small-box bg-green">
+										<div class="inner">
+											<h3>${{ $revenuePerPost / 100 }}</h3>
+											<p>Revenue Per Post</p>
+										</div>
+										<div class="icon"><i class="fa fa-usd"></i></div>
+										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-xs-6">
+									<div class="small-box bg-yellow">
+										<div class="inner">
+											<h3>{{ $topDay }}</h3>
+											<p>Best Day to Post</p>
+										</div>
+										<div class="icon"><i class="fa fa-calendar-plus-o"></i></div>
+										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-xs-6">
+									<div class="small-box bg-red">
+										<div class="inner">
+											<h3>{{ $topHour }}</h3>
+											<p>Best Time to Post</p>
+										</div>
+										<div class="icon"><i class="fa  fa-clock-o"></i></div>
+										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-md-6">
