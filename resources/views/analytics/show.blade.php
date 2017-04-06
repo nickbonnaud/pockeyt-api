@@ -25,7 +25,7 @@
 											<p>Conversion Rate</p>
 										</div>
 										<div class="icon"><i class="fa fa-shopping-cart"></i></div>
-										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-xs-6">
@@ -35,7 +35,7 @@
 											<p>Revenue Per Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-usd"></i></div>
-										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-xs-6">
@@ -45,7 +45,7 @@
 											<p>Best Day to Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-calendar-plus-o"></i></div>
-										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-xs-6">
@@ -55,7 +55,7 @@
 											<p>Best Time to Post</p>
 										</div>
 										<div class="icon"><i class="fa  fa-clock-o"></i></div>
-										<a href="#" class="small-box-footer">More info <iclass="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-md-6">
