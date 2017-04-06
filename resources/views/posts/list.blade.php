@@ -9,9 +9,15 @@
           Add | Recent Posts
         </h1>
           @if($user->profile->connected == false)
-          <a href="#" data-toggle="modal" data-target="#connectSocial">
-          	<h4>Enable Auto Posting</h4>
-          </a>
+            <a href="#" data-toggle="modal" data-target="#connectSocial">
+            	<h4>Enable Auto Posting</h4>
+            </a>
+          @else
+            @if($user->profile->fb_page_id !== null)
+              <h4>Connected to </h4><span class="icon-fb"></span>
+            @else
+              <h4>Connected to </h4><span class="icon-insta"></span>
+            @endif
           @endif
         <ol class="breadcrumb">
           <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>

@@ -8534,3 +8534,21 @@ img {
   padding-top: 35px;
   background-color: #ecf0f5;
 }
+
+.icon-fb {
+  content:'';
+  display:inline-block;
+  width:40px;
+  height:40px;
+  background:url('../images/icon-fb.png') center center no-repeat; background-size: contain;
+}
+
+.icon-insta {
+  content:'';
+  display:inline-block;
+  width:40px;
+  height:40px;
+  background:url('../images/icon-insta.png') center center no-repeat; background-size: contain;
+}
+
+
