@@ -203,6 +203,7 @@ class ConnectController extends Controller
 	public function addFbPost($fbPost, $profile) {
 
 	$user = $fbPost;
+	$business = $profile;
 
 	event(new CustomerRequestBill($user, $business));
 
