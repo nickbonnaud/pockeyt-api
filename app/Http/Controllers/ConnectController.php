@@ -13,6 +13,7 @@ use App\Profile;
 use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use App\Events\CustomerRequestBill;
 
 class ConnectController extends Controller
 {
@@ -195,6 +196,10 @@ class ConnectController extends Controller
  */
 
 	public function addFbPost($fbPost, $profile) {
+
+	$user = $fbPost;
+	
+	event(new CustomerRequestBill($user, $business));
 
 		switch ($fbPost['item']) {
 			case 'status':
