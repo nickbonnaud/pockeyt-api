@@ -202,11 +202,6 @@ class ConnectController extends Controller
 
 	public function addFbPost($fbPost, $profile) {
 
-	$user = $fbPost;
-	$business = $profile;
-
-	event(new CustomerRequestBill($user, $business));
-
 		switch ($fbPost['item']) {
 			case 'status':
 				$existingPost = Post::where('fb_post_id', '=', $fbPost['post_id'])->first();
@@ -214,16 +209,13 @@ class ConnectController extends Controller
 					$post = new Post;
 					$post->message = $fbPost['message'];
 					$post->fb_post_id = $fbPost['post_id'];
-					$post->published_at = Carbon::now(new DateTimeZone(config('app.timezone')));
 
 					$photos = $fbPost['photos'];
 					if (isset($photos)) {
-						$user = $photos;
+						$user = $fbPost['photos'][0];
 						event(new CustomerRequestBill($user, $business));
 						$post->photo_path = $photos[0];
 					}
-					$user = $post;
-					event(new CustomerRequestBill($user, $business));
 					$profile->posts()->save($post);
 				}
 				break;
