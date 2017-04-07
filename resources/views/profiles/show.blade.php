@@ -76,8 +76,8 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <div class="info-box-content">
                                   <span class="info-box-text">Last purchase on</span>
-                                  <span v-if="purchases" class="info-box-number">@{{purchases}}</span>
-                                  <span v-if="purchases" class="info-box-number">No Recent</span>
+                                  <span v-if="purchases" class="info-box-number">112</span>
+                                  <span v-if="!purchases" class="info-box-number">No Recent</span>
                                 </div>
                               </span>
                             </div>
