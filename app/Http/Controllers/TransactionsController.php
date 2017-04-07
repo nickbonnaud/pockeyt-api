@@ -494,7 +494,7 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
-        if ($recentBookmarked) {
+        if (!$recentBookmarked) {
             $recentBookmarkedPost = $recentBookmarked;
         } else {
             $recentBookmarkedPost = Post::findOrFail($recentBookmarked->post_id);
