@@ -492,7 +492,6 @@ class TransactionsController extends Controller
             $recentBookmarked = "none";   
         }
 
-        $customerData = collect($customerData);
         if(isset($purchases)) {
             return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
         } else {
