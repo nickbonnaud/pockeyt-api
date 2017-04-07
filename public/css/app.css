@@ -8566,3 +8566,28 @@ img {
   margin-left: 5px;
   color: #777;
 }
+
+.modal-header-analytics {
+  padding: 15px;
+  border-bottom: 2px solid #d8d8d8;
+  background-color: #00c0ef;
+  color: #fff;
+}
+.conversion_rate {
+  background-color: #00c0ef;
+}
+
+.modal-body-analytics-bubble {
+  position: relative;
+  padding: 15px;
+  background-color: #fff;
+}
+
+
+
+
+
+
+
+
+
