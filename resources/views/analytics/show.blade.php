@@ -195,7 +195,7 @@
 					    <div class="modal-content">
 					      <div class="modal-header-analytics revenue_per_post">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="RevenuePerPostModal">Revenue Per Post</h4>
+					        <h3 class="modal-title" id="RevenuePerPostModal">Revenue Per Post</h3>
 					      </div>
 					      <div class="modal-body-analytics-bubble">
 					      	<div class="sub-header">
@@ -212,7 +212,7 @@
 					    <div class="modal-content">
 					      <div class="modal-header-analytics best_day">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="BestDayModal">Best Day to Post</h4>
+					        <h3 class="modal-title" id="BestDayModal">Best Day to Post</h3>
 					      </div>
 					      <div class="modal-body-analytics-bubble">
 					      	<div class="sub-header">
@@ -229,7 +229,7 @@
 					    <div class="modal-content">
 					      <div class="modal-header-analytics best_hour">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="BestHourModal">Best Time to Post</h4>
+					        <h3 class="modal-title" id="BestHourModal">Best Time to Post</h3>
 					      </div>
 					      <div class="modal-body-analytics-bubble">
 					      	<div class="sub-header">
