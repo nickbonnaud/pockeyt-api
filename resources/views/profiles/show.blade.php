@@ -432,8 +432,9 @@
             var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
             $data = [];
             this.purchases.forEach(function(purchase) {
-              $point = {purchase.updated_at, 0};
-              $data.push($point);
+              $point = purchase.updated_at;
+              $set = {$point, 0};
+              $data.push($set);
             });
             var scatterPurchasesGraph = new Chart(scatterPurchases, {
               type: 'line',
