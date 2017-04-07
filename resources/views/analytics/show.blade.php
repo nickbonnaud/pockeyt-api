@@ -177,10 +177,11 @@
 					    <div class="modal-content">
 					      <div class="modal-header-analytics conversion_rate">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="ConversionRateModal">Conversion Rate</h4>
+					        <h2 class="modal-title" id="ConversionRateModal">Conversion Rate</h2>
 					      </div>
 					      <div class="modal-body-analytics-bubble">
 				        	<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
+				        	<hr>
 				        	<p>Conversion Rate shows how effective your Pockeyt Posts are in bringing customers to your business.</p>
 				        	<p>Calculated by the # of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
 					      </div>
