@@ -219,7 +219,10 @@
         data: {
           users: [],
           purchases: [],
-          deals: []
+          deals: [],
+          lastViewedPost: {},
+          recentBookmarked: {},
+          recentShared: {}
         },
 
         mounted: function() {
