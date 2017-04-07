@@ -429,13 +429,20 @@
             })
           },
           createGraph: function() {
-            var scatterPurchases = $('#scatterPurchases').get(0).getContext("2d");
-            var data = [];
+            var dataPoints = [];
             this.purchases.forEach(function(purchase) {
               var point = {x: new Date(purchase.updated_at), y: 0};
-              data.push(point);
-            })
-            new Chart(scatterPurchases).Scatter(data, {
+              dataPoints.push(point);
+            });
+            var data = [
+              {
+                label: 'Recent Purchases',
+                strokeColor: '#A31515',
+                data: dataPoints
+              }
+            ];
+            var scatterPurchasesChart = $('#scatterPurchases').get(0).getContext("2d");
+            var scatterChart = new Chart(scatterPurchasesChart).Scatter(data, {
               scaleType: "date"
             });
           },
