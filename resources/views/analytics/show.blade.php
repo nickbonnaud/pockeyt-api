@@ -45,7 +45,7 @@
 											<p>Best Day to Post</p>
 										</div>
 										<div class="icon"><i class="fa fa-calendar-plus-o"></i></div>
-										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer" data-toggle="modal" data-target="#BestDayModal">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -55,7 +55,7 @@
 											<p>Best Time to Post</p>
 										</div>
 										<div class="icon"><i class="fa  fa-clock-o"></i></div>
-										<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+										<a href="#" class="small-box-footer" data-toggle="modal" data-target="#BestHourModal">More info <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -192,12 +192,42 @@
 					    <div class="modal-content">
 					      <div class="modal-header-timeline">
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="RevenuePerPostModal">Revenue per Post</h4>
+					        <h4 class="modal-title" id="RevenuePerPostModal">Revenue Per Post</h4>
 					      </div>
 					      <div class="modal-body-analytics">
-				        	<h3>Your current Revenue per Post is <strong>${{ $revenuePerPost }}</strong></h3>
+				        	<h3>Your current Revenue Per Post is <strong>${{ $revenuePerPost }}</strong></h3>
 				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in generating revenue.</p>
 				        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="modal fade" id="BestDayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header-timeline">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="BestDayModal">Best Day to Post</h4>
+					      </div>
+					      <div class="modal-body-analytics">
+				        	<h3>The best day to publish a Post is <strong>{{ $topDay }}</strong>.</h3>
+				        	<p>{{ $topDay }} is the <strong>day of the week</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
+				        	<p>Calculated by the day with highest percentage of Views, Shares, and Bookmarks</p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<div class="modal fade" id="BestHourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header-timeline">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="BestHourModal">Best Time to Post</h4>
+					      </div>
+					      <div class="modal-body-analytics">
+				        	<h3>The best time to publish a Post is <strong>{{ $topHour }}</strong>.</h3>
+				        	<p>{{ $topHour }} is the <strong>time of day</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
+				        	<p>Calculated by the hour with highest percentage of Views, Shares, and Bookmarks</p>
 					      </div>
 					    </div>
 					  </div>
