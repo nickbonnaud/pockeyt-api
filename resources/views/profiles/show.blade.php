@@ -442,7 +442,6 @@
               }
             ];
             var scatterPurchasesChart = $('#scatterPurchases').get(0).getContext("2d");
-            console.log(scatterPurchasesChart);
             var scatterChart = new Chart(scatterPurchasesChart).Scatter(data, {
               scaleType: "date"
             });
