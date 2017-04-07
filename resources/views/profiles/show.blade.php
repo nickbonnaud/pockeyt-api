@@ -431,7 +431,7 @@
           createGraph: function() {
             var dataPoints = [];
             this.purchases.forEach(function(purchase) {
-              var point = {x: new Date(purchase.updated_at), y: 0};
+              var point = {x: purchase.updated_at, y: 0};
               dataPoints.push(point);
             });
             var data = [
