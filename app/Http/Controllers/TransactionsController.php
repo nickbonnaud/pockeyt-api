@@ -483,6 +483,7 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
+        return response()->json($recentBookmarked);
 
         return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
     }
