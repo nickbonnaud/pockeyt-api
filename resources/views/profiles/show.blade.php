@@ -76,7 +76,8 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <div class="info-box-content">
                                   <span class="info-box-text">Last purchase on</span>
-                                  
+                                  <span v-if="purchases" class="info-box-number">@{{purchases[0].updated_at}}</span>
+                                  <span v-if="purchases" class="info-box-number">No Recent</span>
                                 </div>
                               </span>
                             </div>
@@ -356,7 +357,10 @@
               },
               success: data => {
                 console.log(data);
-                this.purchases = data;
+                this.purchases = data.purchases;
+                this.lastViewedPost = data.lastViewedPost;
+                this.recentBookmarked = data.recentBookmarkedPost;
+                this.recentShared = data.recentSharedPost;
               },
               error: data => {
                 console.log(data);
