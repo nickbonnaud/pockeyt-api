@@ -460,7 +460,6 @@ class TransactionsController extends Controller
         $businessId = $request->businessId;
         $currentDate = Carbon::now();
         $fromDate = Carbon::now()->subDays(7);
-        $customerData = [];
 
         $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
@@ -471,11 +470,8 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
-        if (isset($lastPostViewed)) {
-            array_push($customerData, $lastPostViewed);
-        } else {
+        if (!isset($lastPostViewed)) {
             $lastPostViewed = "none";
-            array_push($customerData, $lastPostViewed);
         }
 
         $recentShared = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
@@ -483,11 +479,8 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
-        if (isset($recentShared)) {
-            array_push($customerData, $recentShared);
-        } else {
+        if (!isset($recentShared)) {
             $recentShared = "none";
-            array_push($customerData, $recentShared);
         }
 
         $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
@@ -495,18 +488,15 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
-        if (isset($recentBookmarked)) {
-            array_push($customerData, $recentBookmarked);
-        } else {
-            $recentBookmarked = "none";
-            array_push($customerData, $recentBookmarked);
+        if (!isset($recentBookmarked)) {
+            $recentBookmarked = "none";   
         }
 
         $customerData = collect($customerData);
         if(isset($purchases)) {
-            return response()->json($purchases, $customerData);
+            return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
         } else {
-            return response()->json($customerData);
+            return response()->json($lastPostViewed, $recentShared, $recentBookmarked);
         }
     }
 
