@@ -422,13 +422,22 @@
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
                 
-                var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
+              },
+              error: data => {
+                console.log(data);
+              }
+            })
+          },
+          createGraph: function() {
+            var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
+            console.log(scatterPurchases);
             $data = [];
             this.purchases.forEach(function(purchase) {
               $point = purchase.updated_at;
               $set = {x: $point, y: 0};
               $data.push($set);
             });
+            console.log($data);
             var scatterPurchasesGraph = new Chart(scatterPurchases, {
               type: 'line',
               data: {
@@ -453,14 +462,6 @@
                 }
               }
             })
-              },
-              error: data => {
-                console.log(data);
-              }
-            })
-          },
-          createGraph: function() {
-            
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
