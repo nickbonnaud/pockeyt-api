@@ -470,7 +470,6 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
-        return response()->json($lastPostViewed);
         if (!isset($lastPostViewed)) {
             $lastPostViewed = ["none"];
 
@@ -481,6 +480,7 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
+        return response()->json($recentShared);
         if (!isset($recentShared)) {
             $recentShared = ["none"];
         }
