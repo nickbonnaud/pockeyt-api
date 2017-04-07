@@ -471,7 +471,8 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
         if (!isset($lastPostViewed)) {
-            $lastPostViewed = "none";
+            $lastPostViewed = ["none"];
+
         }
 
         $recentShared = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
@@ -480,7 +481,7 @@ class TransactionsController extends Controller
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
         if (!isset($recentShared)) {
-            $recentShared = "none";
+            $recentShared = ["none"];
         }
 
         $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
@@ -489,7 +490,7 @@ class TransactionsController extends Controller
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
         if (!isset($recentBookmarked)) {
-            $recentBookmarked = "none";   
+            $recentBookmarked = ["none"];   
         }
 
         if(isset($purchases)) {
