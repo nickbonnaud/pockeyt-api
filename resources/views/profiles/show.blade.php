@@ -443,25 +443,14 @@
               data: {
                 datasets: [{
                   label: 'Recent Purchases',
-                  data: $data
-                }]
-              },
-              options: {
-                scales: {
-                  xAxes: [{
-                    type: 'time',
-                    time: {
-                      displayFormats: {
-                        week: 'll'
-                      }
-                    }
-                  }],
-                  yAxes: [{
-                    display: false
+                  data: [
+                  {x: -10, y: 0},
+                  {x: 0, y: 10},
+                  {x:10, y:5}
                   }]
-                }
+                }]
               }
-            })
+            });
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
