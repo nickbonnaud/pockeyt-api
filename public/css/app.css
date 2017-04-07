@@ -8576,13 +8576,20 @@ img {
 .conversion_rate {
   background-color: #00c0ef;
 }
-
+.revenue_per_post {
+  background-color: #00a65a;
+}
+.best_day {
+  background-color: #f39c12;
+}
+.best_hour {
+  background-color: #dd4b39;
+}
 .modal-body-analytics-bubble {
   position: relative;
   padding: 15px;
   background-color: #fff;
 }
-
 .sub-header {
   text-align: center;
 }
