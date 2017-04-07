@@ -138,7 +138,9 @@
                           <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                         </div>
                         <div class="box-body">
-                          <purchases :products="purchase.products"></purchases>
+                          <div v-for="item in lastPurchases">
+                            <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
+                            <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div>
                         </div>
                         <div class="box-footer timeline-list-footer">
                           <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
