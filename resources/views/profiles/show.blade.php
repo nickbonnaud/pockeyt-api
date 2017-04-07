@@ -80,7 +80,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Last Viewed Post</span>
-                          <span v-if="purchases" class="info-box-number">@{{ lastViewedPost.updated_at | setDate }}</span>
+                          <span v-if="purchases" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
@@ -233,6 +233,10 @@
         filters: {
           setDate: function(value) {
             date = moment(value).format("Do MMM YY");
+            return date;
+          },
+          setDateTime: function(value) {
+            date = moment(value).format("Do MMM YY, h:mm:ss a");
             return date;
           },
           setPossessive: function(value) {
