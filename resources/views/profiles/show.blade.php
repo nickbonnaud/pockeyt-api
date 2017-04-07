@@ -105,6 +105,27 @@
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
+                      <div class="box box-success collapsed-box">
+                        <div class="box-header with-border">
+                          <i class="fa fa-eye"></i>
+                          <h3 class="box-title">Post Details</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="box-body">
+                          <div class="box-body-top">
+                            <h4 v-if="lastViewedPost.message" class="box-title">@{{ lastViewedPost.message | truncate }}</h4>
+                            <h4 v-else="!lastViewedPost.message" class="box-title">@{{ lastViewedPost.title }}</h4>
+                          </div>
+                          <div class="analytics-modal-image">
+                            <img v-if="lastViewedPost.thumb_path" :src="lastViewedPost.thumb_path">
+                          </div>
+                          <hr>
+                          <p class="analytics-date">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </section>
