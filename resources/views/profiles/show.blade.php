@@ -138,7 +138,7 @@
                           <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                         </div>
                         <div class="box-body">
-                          <div v-for="item in lastPurchases">
+                          <div v-for="item in lastItemsPurchased">
                             <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
                             <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div>
                           </div>
@@ -371,8 +371,8 @@
                 this.lastViewedPost = data.lastViewedPost;
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
-                this.lastPurchases = JSON.parse(this.purchases[0].products);
-                console.log(this.lastPurchase);
+                this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+                console.log(this.lastItemsPurchased);
               },
               error: data => {
                 console.log(data);
