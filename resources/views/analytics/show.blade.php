@@ -184,7 +184,7 @@
 				        		<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
 				        	</div>
 				        	<hr>
-				        	<p>Conversion Rate shows how effective your Pockeyt Posts are in bringing customers to your business.</p>
+				        	<p>Conversion Rate shows how effective your Posts are in <strong>creating in-store customers.</strong></p>
 				        	<p>Calculated by the number of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
 					      </div>
 					    </div>
@@ -202,7 +202,7 @@
 				        		<h3>Your current Revenue Per Post is <strong>${{ $revenuePerPost }}</strong></h3>
 				        	</div>
 				        	<hr>
-				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in generating revenue.</p>
+				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in <strong>generating revenue.</strong></p>
 				        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
 					      </div>
 					    </div>
