@@ -115,12 +115,12 @@
                           </div>
                         </div>
                         <div class="box-body">
-                          <div class="box-body-top">
-                            <h4 v-if="lastViewedPost.message" class="box-title">@{{ lastViewedPost.message | truncate }}</h4>
-                            <h4 v-else="!lastViewedPost.message" class="box-title">@{{ lastViewedPost.title }}</h4>
-                          </div>
                           <div class="analytics-modal-image">
                             <img v-if="lastViewedPost.thumb_path" :src="lastViewedPost.thumb_path">
+                          </div>
+                          <div class="box-body-bottom">
+                            <h4 v-if="lastViewedPost.message" class="box-title">@{{ lastViewedPost.message | truncate }}</h4>
+                            <h4 v-else="!lastViewedPost.message" class="box-title">@{{ lastViewedPost.title }}</h4>
                           </div>
                           <hr>
                           <p class="analytics-date">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
