@@ -138,7 +138,7 @@
                           <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
                         </div>
                         <div class="box-body">
-                          <p>@{{lastItemsPurchased}}</p>
+                          <p>Hello</p>
                       </div>
                     </div>
                   </div>
