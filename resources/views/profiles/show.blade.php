@@ -433,7 +433,7 @@
             $data = [];
             this.purchases.forEach(function(purchase) {
               $point = purchase.updated_at;
-              $set = {$point, 0};
+              $set = {x: $point, y: 0};
               $data.push($set);
             });
             var scatterPurchasesGraph = new Chart(scatterPurchases, {
