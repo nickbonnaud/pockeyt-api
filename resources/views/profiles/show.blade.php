@@ -82,10 +82,7 @@
                           </div>
                         </div>
                         <div class="box-body">
-                          <purchases :products="lastPurchase.products"></purchases>
-                        </div>
-                        <div class="box-footer timeline-list-footer">
-                          <div class="pull-right"><b>Total: $@{{ lastPurchase.total / 100 }}</b></div>
+
                         </div>
                       </div>
                     </div>
@@ -212,7 +209,6 @@
         props: ['products'],
         template: '<div><div v-for="item in items"><p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p><p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div></div>',
         data: function() {
-          console.log("hello");
           return {
             items: JSON.parse(this.products)
           }
@@ -229,7 +225,8 @@
           lastPurchase: {},
           lastViewedPost: {},
           recentBookmarked: {},
-          recentShared: {}
+          recentShared: {},
+          lastPurchases: {}
         },
 
         mounted: function() {
@@ -372,6 +369,7 @@
                 this.lastViewedPost = data.lastViewedPost;
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
+                this.lastPurchases = JSON.parse(this.purchases[0].products);
               },
               error: data => {
                 console.log(data);
