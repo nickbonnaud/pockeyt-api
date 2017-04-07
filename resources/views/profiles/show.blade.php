@@ -69,7 +69,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
-                          <span v-if="purchases" class="info-box-number">@{{purchases}}</span>
+                          <span v-if="purchases" class="info-box-number">@{{lastPurchase.updated_at}}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
@@ -199,6 +199,7 @@
           users: [],
           purchases: [],
           deals: [],
+          lastPurchase: {},
           lastViewedPost: {},
           recentBookmarked: {},
           recentShared: {}
@@ -336,11 +337,10 @@
               success: data => {
                 console.log(data);
                 this.purchases = data.purchases;
+                this.lastPurchase = this.purchases[0];
                 this.lastViewedPost = data.lastViewedPost;
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
-
-                console.log(this.purchases[0]);
               },
               error: data => {
                 console.log(data);
