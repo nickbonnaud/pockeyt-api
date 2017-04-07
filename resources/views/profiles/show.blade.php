@@ -86,6 +86,9 @@
                             <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
                             <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p>
                           </div>
+                          <div class="box-footer timeline-list-footer">
+                            <div class="pull-right"><b>Total: $@{{ lastItemsPurchased.total / 100 }}</b></div>
+                          </div>
                         </div>
                       </div>
                     </div>
