@@ -69,7 +69,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
-                          <span v-if="purchases" class="info-box-number">@{{ lastPurchase.updated_at | setDate }}</span>
+                          <span v-if="purchases" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
@@ -182,6 +182,18 @@
                           </div>
                           <hr style="margin-top: 10px; margin-bottom: 10px;">
                           <p class="analytics-date-customer-data">Posted on <strong>@{{ recentShared.published_at | setDateTime }}</strong>.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="box box-primary modal-analytics">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Recent Purchases</h3>
+                        </div>
+                        <div class="box-body">
+                          <canvas id="scatterPurchases" width="400" height="300"></canvas>
                         </div>
                       </div>
                     </div>
@@ -409,13 +421,45 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
-                console.log(this.lastItemsPurchased);
+                this.createGraph();
               },
               error: data => {
                 console.log(data);
               }
             })
           },
+          createGraph: function() {
+            var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
+            $data = [];
+            this.purchases.forEach(function(purchase) {
+              $point = {purchase.updated_at, 0};
+              $data.push($point);
+            });
+            var scatterPurchasesGraph = new Chart(scatterPurchases, {
+              type: 'line',
+              data: {
+                datasets: [{
+                  label: 'Recent Purchases',
+                  data: $data
+                }]
+              },
+              options: {
+                scales: {
+                  xAxes: [{
+                    type: 'time',
+                    time: {
+                      displayFormats: {
+                        week: 'll'
+                      }
+                    }
+                  }],
+                  yAxes: [{
+                    display: false
+                  }]
+                }
+              }
+            })
+          }
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
             $.ajax({
