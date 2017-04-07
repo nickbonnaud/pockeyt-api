@@ -470,6 +470,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
+        return response()->json($lastPostViewed);
         if (!isset($lastPostViewed)) {
             $lastPostViewed = ["none"];
 
