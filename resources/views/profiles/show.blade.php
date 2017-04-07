@@ -73,8 +73,9 @@
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
-                      <div class="box box-primary collapsed-box">
+                      <div class="box box-aqua collapsed-box">
                         <div class="box-header with-border">
+                          <i class="fa fa-shopping-cart"></i>
                           <h3 class="box-title">View Purchases</h3>
                           <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
