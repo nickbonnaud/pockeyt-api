@@ -340,7 +340,7 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
 
-                console.log(this.purchases);
+                console.log(this.purchases[0]);
               },
               error: data => {
                 console.log(data);
