@@ -1851,6 +1851,7 @@ a:focus {
 }
 .timeline-list-footer {
   border-top: 1px dotted #080808;
+  clear: both;
 }
 .chart-legend {
   margin: 10px 0;
