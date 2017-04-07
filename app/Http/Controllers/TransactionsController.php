@@ -502,6 +502,7 @@ class TransactionsController extends Controller
             array_push($customerData, $recentBookmarked);
         }
 
+        $customerData = collect($customerData);
         if(isset($purchases)) {
             return response()->json($purchases, $customerData);
         } else {
