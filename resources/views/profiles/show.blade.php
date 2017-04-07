@@ -421,7 +421,7 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
-                this.createGraph();
+                
               },
               error: data => {
                 console.log(data);
