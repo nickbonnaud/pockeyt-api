@@ -429,7 +429,15 @@
             })
           },
           createGraph: function() {
-            
+            var scatterPurchases = $('#scatterPurchases').get(0).getContext("2d");
+            var data = [];
+            this.purchases.forEach(function(purchase) {
+              var point = {x: new Date(purchase.updated_at), y: 0};
+              data.push(point);
+            })
+            new Chart(scatterPurchases).Scatter(data, {
+              scaleType: "date"
+            });
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
