@@ -476,7 +476,7 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
-        return response()->json($recentShared);
+        return response()->json($recentShared, $lastPostViewed);
     
         $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
