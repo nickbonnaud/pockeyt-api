@@ -141,7 +141,7 @@
                           <div v-for="item in lastPurchases">
                             <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
                             <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div>
-                        </div>
+                          </div>
                         <div class="box-footer timeline-list-footer">
                           <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
                         </div>
@@ -372,6 +372,7 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 this.lastPurchases = JSON.parse(this.purchases[0].products);
+                console.log(this.lastPurchase);
               },
               error: data => {
                 console.log(data);
