@@ -465,25 +465,35 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->take(5)->get();
+        if (!isset($purchases)) {
+            ['purchases' => 'none'];
+        }
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
+        if (!isset($lastPostViewed)) {
+            ['lastPostViewed' => 'none'];
+        }
 
         $recentShared = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
-        return response()->json($recentShared, $lastPostViewed);
+        if (!isset($recentShared)) {
+            ['recentShared' => 'none'];
+        }
     
         $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
-        return response()->json($recentBookmarked);
+        if (!isset($recentBookmarked)) {
+            ['recentBookmarked' => 'none'];
+        }
 
         return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
     }
