@@ -422,14 +422,7 @@
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
                 
-              },
-              error: data => {
-                console.log(data);
-              }
-            })
-          },
-          createGraph: function() {
-            var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
+                var scatterPurchases = $("#scatterPurchases").get(0).getContext("2d");
             $data = [];
             this.purchases.forEach(function(purchase) {
               $point = purchase.updated_at;
@@ -460,6 +453,14 @@
                 }
               }
             })
+              },
+              error: data => {
+                console.log(data);
+              }
+            })
+          },
+          createGraph: function() {
+            
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
