@@ -460,7 +460,7 @@
                 }
               }
             })
-          }
+          },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
             $.ajax({
