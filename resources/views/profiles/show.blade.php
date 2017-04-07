@@ -32,11 +32,11 @@
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
-              <a v-on:click="getCustomerPurchases(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
               </a>
               <div class="box-body">
-                <a v-on:click="getCustomerPurchases(user.id)"  href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                <a v-on:click="getCustomerData(user.id)"  href="#" data-toggle="modal" data-target="#CustomerinfoModal">
                   <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
                 </a>
               </div>
@@ -341,7 +341,7 @@
           moment: function() {
             return moment();
           },
-          getCustomerPurchases: function(customerId) {
+          getCustomerData: function(customerId) {
             var businessId = '{{ $profile->id }}'
 
             $.ajax({
@@ -352,7 +352,11 @@
                 'businessId' : businessId
               },
               success: data => {
-                this.purchases = data
+                console.log(data);
+                this.purchases = data;
+              },
+              error: data => {
+                console.log(data);
               }
             })
           },
