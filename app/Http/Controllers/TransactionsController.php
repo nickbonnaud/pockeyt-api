@@ -485,7 +485,7 @@ class TransactionsController extends Controller
         if (!isset($recentShared)) {
             ['recentShared' => 'none'];
         }
-    
+        return response()->json($recentShared);
         $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId)
