@@ -82,7 +82,10 @@
                           </div>
                         </div>
                         <div class="box-body">
-
+                          <div v-for="item in lastItemsPurchased">
+                            <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
+                            <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -103,51 +106,6 @@
             </div>
           </div>
         </div>
-        <div class="modal fade" id="NotCustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header-timeline">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="NotCustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
-              </div>
-              <div class="modal-body-timeline">
-                <ul class="timeline col-sm-4 col-md-4">
-                  <!-- timeline time label -->
-                  <li class="time-label" style="margin-top: -34px">
-                    <span class="bg-aqua">
-                      @{{ moment().format("Do MMM YY") }}
-                    </span>
-                  </li>
-                  <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
-                    <!-- timeline icon -->
-                    <i class="fa fa-trophy bg-yellow"></i>
-                    <div class="timeline-item">
-                      <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
-                    </div>
-                  </li>
-                  <li style="top : 97%">
-                    <i class="fa fa-clock-o bg-gray"></i>
-                  </li>
-                </ul>
-                
-                <div class="scroll-container-timeline col-sm-8 col-md-8">
-                  <div class="scroll-contents">
-                    <div v-for="purchase in purchases">
-                      <div class="box box-primary">
-                        <div class="box-header with-border text-center">
-                          <h3 class="box-title">Purchase on the @{{ purchase.updated_at | setDate }}</h3>
-                        </div>
-                        <div class="box-body">
-                          <p>Hello</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
