@@ -236,7 +236,7 @@
             return date;
           },
           setDateTime: function(value) {
-            date = moment(value).format("Do MMM YY at h:mm a");
+            date = moment(value).format("Do MMM YY, h:mm a");
             return date;
           },
           setPossessive: function(value) {
