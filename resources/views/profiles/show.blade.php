@@ -228,7 +228,7 @@
           lastViewedPost: {},
           recentBookmarked: {},
           recentShared: {},
-          lastPurchases: {}
+          lastItemsPurchased: []
         },
 
         mounted: function() {
