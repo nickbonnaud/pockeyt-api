@@ -465,16 +465,13 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->take(5)->get();
-        if (!$purchases) {
-            $purchases = ['purchases' => 'none'];
-        }
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
         if (!$lastPostViewed) {
-            $lastViewedPost = ['lastViewedPost' => 'none'];
+            $lastViewedPost = $lastPostViewed;
         } else {
             $lastViewedPost = Post::findOrFail($lastPostViewed->post_id);
             $lastViewedPost['viewed_on'] = $lastPostViewed->updated_at;
@@ -486,7 +483,7 @@ class TransactionsController extends Controller
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
         if (!$recentShared) {
-            $recentSharedPost = ['recentSharedPost' => 'none'];
+            $recentSharedPost = $recentShared;
         } else {
             $recentSharedPost = Post::findOrFail($recentShared->post_id);
             $recentSharedPost['shared_on'] = $recentShared->shared_on;
@@ -497,14 +494,14 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
-        if (!$recentBookmarked) {
-            $recentBookmarkedPost = ['recentBookmarkedPost' => 'none'];
+        if ($recentBookmarked) {
+            $recentBookmarkedPost = $recentBookmarked;
         } else {
             $recentBookmarkedPost = Post::findOrFail($recentBookmarked->post_id);
             $recentBookmarkedPost['bookmarked_on'] = $recentBookmarked->bookmarked_on;
         }
 
-        return response()->json(array('purchases' => $purchases, 'lastViewedPost' => $lastViewedPost, 'recentShared' => $recentShared, 'recentBookmarked' => $recentBookmarked));
+        return response()->json(array('purchases' => $purchases, 'lastViewedPost' => $lastViewedPost, 'recentSharedPost' => $recentSharedPost, 'recentBookmarkedPost' => $recentBookmarkedPost));
     }
 
     public function getUserDeals(Request $request) {
