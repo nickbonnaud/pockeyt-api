@@ -482,7 +482,7 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('shared_on', [$fromDate, $currentDate]);
         })->orderBy('shared_on', 'desc')->first();
-        if (!isset($recentShared)) {
+        if (!$recentShared->count()) {
             ['recentShared' => 'none'];
         }
         return response()->json($recentShared);
