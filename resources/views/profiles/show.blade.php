@@ -69,7 +69,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
-                          <span v-if="purchases" class="info-box-number">@{{lastPurchase.updated_at}}</span>
+                          <span v-if="purchases" class="info-box-number">@{{ lastPurchase.updated_at | setDate }}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
