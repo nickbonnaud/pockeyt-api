@@ -494,7 +494,7 @@ class TransactionsController extends Controller
             $recentBookmarked = ['recentBookmarked' => 'none'];
         }
 
-        return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
+        return response()->json(array('purchases' => $purchases, 'lastPostViewed' => $lastPostViewed, 'recentShared' => $recentShared, 'recentBookmarked' => $recentBookmarked));
     }
 
     public function getUserDeals(Request $request) {
