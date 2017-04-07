@@ -212,7 +212,7 @@
         props: ['products'],
         template: '<div><div v-for="item in items"><p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p><p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p></div></div>',
         data: function() {
-          console.log(this.products);
+          console.log("hello");
           return {
             items: JSON.parse(this.products)
           }
