@@ -61,18 +61,20 @@
                 <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h4>
               </div>
               <div class="modal-body-analytics">
-                <div class="row">
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box">
-                      <span class="info-box-icon bg-aqua"><i class="fa a-shopping-cart"></i></span>
+                <section class="content">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
 
-                      <div class="info-box-content">
-                        <span class="info-box-text">Last Purchase</span>
-                        <span class="info-box-number">1,410</span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Last Purchase</span>
+                          <span class="info-box-number">1,410</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </section>
               </div>
             </div>
           </div>
