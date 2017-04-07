@@ -99,7 +99,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Bookmarked</span>
-                          <span v-if="purchases" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
+                          <span class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
                         </div>
                       </div>
                       <div v-if="recentBookmarked" class="box box-warning collapsed-box">
@@ -130,7 +130,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Last Viewed Post</span>
-                          <span v-if="purchases" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
+                          <span v-if="lastViewedPost" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
@@ -153,6 +153,35 @@
                           </div>
                           <hr style="margin-top: 10px; margin-bottom: 10px;">
                           <p class="analytics-date-customer-data">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
+                        </div>
+                      </div>
+                      <div v-if="recentShared" class="info-box">
+                        <span class="info-box-icon bg-red"><i class="fa fa-share"></i></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">Recent Shared</span>
+                          <span class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
+                        </div>
+                      </div>
+                      <div v-if="recentShared" class="box box-danger collapsed-box">
+                        <div class="box-header with-border">
+                          <i class="fa fa-share"></i>
+                          <h3 class="box-title">Shared Post Details</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="box-body">
+                          <div class="analytics-modal-image">
+                            <img v-if="recentShared.thumb_path" :src="recentShared.thumb_path">
+                          </div>
+                          <div class="box-body-bottom">
+                            <h4 v-if="recentShared.message" class="box-title customer-data-message">@{{ recentShared.message }}</h4>
+                            <h4 v-else="!recentShared.message" class="box-title customer-data-message">@{{ recentShared.title }}</h4>
+                          </div>
+                          <hr style="margin-top: 10px; margin-bottom: 10px;">
+                          <p class="analytics-date-customer-data">Posted on <strong>@{{ recentShared.published_at | setDateTime }}</strong>.</p>
                         </div>
                       </div>
                     </div>
