@@ -465,16 +465,16 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->take(5)->get();
-        if (!isset($purchases)) {
-            ['purchases' => 'none'];
+        if (!$purchases) {
+            $purchases = ['purchases' => 'none'];
         }
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
-        if (!isset($lastPostViewed)) {
-            ['lastPostViewed' => 'none'];
+        if (!$lastPostViewed) {
+            $lastPostViewed = ['lastPostViewed' => 'none'];
         }
 
         $recentShared = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
@@ -491,8 +491,8 @@ class TransactionsController extends Controller
                 ->where('business_id', '=', $businessId)
                 ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
         })->orderBy('bookmarked_on', 'desc')->first();
-        if (!isset($recentBookmarked)) {
-            ['recentBookmarked' => 'none'];
+        if (!$recentBookmarked) {
+            $recentBookmarked = ['recentBookmarked' => 'none'];
         }
 
         return response()->json($purchases, $lastPostViewed, $recentShared, $recentBookmarked);
