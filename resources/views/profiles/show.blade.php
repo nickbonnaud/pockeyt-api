@@ -87,9 +87,9 @@
                             <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p>
                           </div>
                           <div class="box-footer timeline-list-footer">
-                            <div class="pull-right">Tax: $@{{ lastPurchase.tax / 100 }}</div>
-                            <div class="pull-right">Tip: $@{{ lastPurchase.tips / 100 }}</div>
-                            <div class="pull-right"><b>Total: $@{{ lastPurchase.total / 100 }}</b></div>
+                            <div class="last-purchase-footer pull-right">Tax: $@{{ lastPurchase.tax / 100 }}</div>
+                            <div class="last-purchase-footer pull-right" style="margin-bottom: 10px;">Tip: $@{{ lastPurchase.tips / 100 }}</div>
+                            <div class="last-purchase-footer pull-right"><b>Total: $@{{ lastPurchase.total / 100 }}</b></div>
                           </div>
                         </div>
                       </div>

@@ -8592,7 +8592,10 @@ img {
 .sub-header {
   text-align: center;
 }
-
+.last-purchase-footer {
+  clear: right;
+  margin-right: -10px;
+}
 
 
 
