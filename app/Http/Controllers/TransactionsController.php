@@ -469,7 +469,7 @@ class TransactionsController extends Controller
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
-                ->where('profile_id', '=', $businessId);
+                ->where('business_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->first();
         if (isset($lastPostViewed)) {
             array_push($customerData, $lastPostViewed);
