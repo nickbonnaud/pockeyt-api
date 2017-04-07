@@ -73,6 +73,21 @@
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
+                      <div class="box box-primary collapsed-box">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">View Purchases</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="box-body">
+                          <purchases :products="purchase.products"></purchases>
+                        </div>
+                        <div class="box-footer timeline-list-footer">
+                          <div class="pull-right"><b>Total: $@{{ purchase.total / 100 }}</b></div>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="info-box">
