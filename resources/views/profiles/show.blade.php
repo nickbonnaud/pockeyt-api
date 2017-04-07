@@ -58,7 +58,55 @@
             <div class="modal-content">
               <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} info</h4>
+              </div>
+              <div class="modal-body-analytics">
+                <div class="col-md-12">
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs pull-right">
+                      <li class="active"><a href="#customer-info" data-toggle="tab">Customer Info</a></li>
+                      <li><a href="#timeline" data-toggle="tab">Transaction Timeline</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="customer-info">
+                        <div class="row">
+                          <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-aqua">
+                                <i class="fa fa-shopping-cart"></i>
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Last purchase on</span>
+                                  <span class="info-box-number">@{{ purchases[0].updated_at | setDate }}</span>
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-aqua">
+                                <i class="fa fa-shopping-cart"></i>
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Latest post viewed on</span>
+                                  <span class="info-box-number">@{{ purchases[0].updated_at | setDate }}</span>
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="NotCustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header-timeline">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="NotCustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} recent purchases</h4>
               </div>
               <div class="modal-body-timeline">
                 <ul class="timeline col-sm-4 col-md-4">

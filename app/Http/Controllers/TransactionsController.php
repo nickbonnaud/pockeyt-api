@@ -458,16 +458,54 @@ class TransactionsController extends Controller
      public function getUserPurchases(Request $request) {
         $customerId = $request->customerId;
         $businessId = $request->businessId;
+        $currentDate = Carbon::now();
+        $fromDate = Carbon::now()->subDays(7);
+        $customerData = [];
 
         $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId);
         })->orderBy('updated_at', 'desc')->take(5)->get();
 
-        if(isset($purchases)) {
-            return response()->json($purchases);
+        $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
+            $query->where('user_id', '=', $customerId)
+                ->where('profile_id', '=', $businessId);
+        })->orderBy('updated_at', 'desc')->first();
+        if (isset($lastPostViewed)) {
+            array_push($customerData, $lastPostViewed);
         } else {
-            return;
+            $lastPostViewed = "none";
+            array_push($customerData, $lastPostViewed);
+        }
+
+        $recentShared = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
+            $query->where('user_id', '=', $customerId)
+                ->where('business_id', '=', $businessId)
+                ->whereBetween('shared_on', [$fromDate, $currentDate]);
+        })->orderBy('shared_on', 'desc')->first();
+        if (isset($recentShared)) {
+            array_push($customerData, $recentShared);
+        } else {
+            $recentShared = "none";
+            array_push($customerData, $recentShared);
+        }
+
+        $recentBookmarked = PostAnalytic::where(function($query) use ($fromDate, $currentDate, $customerId, $businessId) {
+            $query->where('user_id', '=', $customerId)
+                ->where('business_id', '=', $businessId)
+                ->whereBetween('bookmarked_on', [$fromDate, $currentDate]);
+        })->orderBy('bookmarked_on', 'desc')->first();
+        if (isset($recentBookmarked)) {
+            array_push($customerData, $recentBookmarked);
+        } else {
+            $recentBookmarked = "none";
+            array_push($customerData, $recentBookmarked);
+        }
+
+        if(isset($purchases)) {
+            return response()->json($purchases, $customerData);
+        } else {
+            return response()->json($customerData);
         }
     }
 
