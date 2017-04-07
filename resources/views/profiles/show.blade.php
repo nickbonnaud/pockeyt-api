@@ -64,13 +64,13 @@
                 <ul class="timeline col-sm-4 col-md-4">
                   <!-- timeline time label -->
                   <li class="time-label" style="margin-top: -34px">
-                    <span class="bg-blue">
+                    <span class="bg-aqua">
                       @{{ moment().format("Do MMM YY") }}
                     </span>
                   </li>
                   <li v-for="purchase in purchases" v-bind:style="transactionDistance(purchase)">
                     <!-- timeline icon -->
-                    <i class="fa fa-money bg-green"></i>
+                    <i class="fa fa-trophy bg-yellow"></i>
                     <div class="timeline-item">
                       <h3 class="timeline-header">@{{ purchase.updated_at | setDate }}</h3>
                     </div>
