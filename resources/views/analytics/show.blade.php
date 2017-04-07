@@ -201,6 +201,7 @@
 					      	<div class="sub-header">
 				        		<h3>Your current Revenue Per Post is <strong>${{ $revenuePerPost }}</strong></h3>
 				        	</div>
+				        	<hr>
 				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in generating revenue.</p>
 				        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
 					      </div>
@@ -218,6 +219,7 @@
 					      	<div class="sub-header">
 				        		<h3>The best day to publish a Post is <strong>{{ $topDay }}</strong>.</h3>
 				        	</div>
+				        	<hr>
 				        	<p>{{ $topDay }} is the <strong>day of the week</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
 				        	<p>Calculated by the day with highest percentage of Views, Shares, and Bookmarks</p>
 					      </div>
@@ -235,6 +237,7 @@
 					      	<div class="sub-header">
 				        		<h3>The best time to publish a Post is <strong>{{ $topHour }}</strong>.</h3>
 				        	</div>
+				        	<hr>
 				        	<p>{{ $topHour }} is the <strong>time of day</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
 				        	<p>Calculated by the hour with highest percentage of Views, Shares, and Bookmarks</p>
 					      </div>
