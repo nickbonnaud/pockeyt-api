@@ -8601,6 +8601,15 @@ img {
   border-top-color: #00c0ef !important;
 }
 
+.analytics-date-customer-data {
+  float: right;
+  font-size: 12px;
+  font-style: italic;
+  padding-right: 15px;
+  color: #999;
+}
 
-
-
+.customer-data-message {
+  font-size: 16px;
+  color: #545454;
+}

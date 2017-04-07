@@ -119,11 +119,11 @@
                             <img v-if="lastViewedPost.thumb_path" :src="lastViewedPost.thumb_path">
                           </div>
                           <div class="box-body-bottom">
-                            <h4 v-if="lastViewedPost.message" class="box-title">@{{ lastViewedPost.message | truncate }}</h4>
-                            <h4 v-else="!lastViewedPost.message" class="box-title">@{{ lastViewedPost.title }}</h4>
+                            <h4 v-if="lastViewedPost.message" class="box-title customer-data-message">@{{ lastViewedPost.message }}</h4>
+                            <h4 v-else="!lastViewedPost.message" class="box-title customer-data-message">@{{ lastViewedPost.title }}</h4>
                           </div>
-                          <hr>
-                          <p class="analytics-date">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
+                          <hr style="margin-top: 10px; margin-bottom: 10px;">
+                          <p class="analytics-date-customer-data">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
                         </div>
                       </div>
                     </div>
