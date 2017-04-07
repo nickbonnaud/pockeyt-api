@@ -76,7 +76,7 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <div class="info-box-content">
                                   <span class="info-box-text">Last purchase on</span>
-                                  <span class="info-box-number">@{{ purchases[0].updated_at | setDate }}</span>
+                                  
                                 </div>
                               </span>
                             </div>
@@ -87,7 +87,7 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <div class="info-box-content">
                                   <span class="info-box-text">Latest post viewed on</span>
-                                  <span class="info-box-number">@{{ purchases[0].updated_at | setDate }}</span>
+                                  
                                 </div>
                               </span>
                             </div>
