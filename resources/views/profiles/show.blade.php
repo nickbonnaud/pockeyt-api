@@ -74,7 +74,7 @@
                             <div class="info-box">
                               <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
                               <div class="info-box-content">
-                                <span class="info-box-text">Last purchase on</span>
+                                <span class="info-box-text">Last</span>
                                 <span v-if="purchases" class="info-box-number">112</span>
                                 <span v-if="!purchases" class="info-box-number">No Recent</span>
                               </div>
