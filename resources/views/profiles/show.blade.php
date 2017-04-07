@@ -58,29 +58,17 @@
             <div class="modal-content">
               <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} info</h4>
+                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h4>
               </div>
               <div class="modal-body-analytics">
-                <div class="col-md-12">
-                  <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs pull-right">
-                      <li class="active"><a href="#customer-info" data-toggle="tab">Customer Info</a></li>
-                      <li><a href="#timeline" data-toggle="tab">Transaction Timeline</a></li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane active" id="customer-info">
-                        <div class="row">
-                          <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box">
-                              <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
-                              <div class="info-box-content">
-                                <span class="info-box-text">Last</span>
-                                <span v-if="purchases" class="info-box-number">112</span>
-                                <span v-if="!purchases" class="info-box-number">No Recent</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-aqua"><i class="fa a-shopping-cart"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">Last Purchase</span>
+                        <span class="info-box-number">1,410</span>
                       </div>
                     </div>
                   </div>
