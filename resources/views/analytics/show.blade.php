@@ -376,7 +376,7 @@
 				data: {
 					datasets: [{
 						label: 'Test Label',
-						data: testData
+						data: testDataNew
 					}]
 				},
 				options: {
