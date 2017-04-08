@@ -364,14 +364,14 @@
 		},
 
 		mounted: function() {
-			var testCanvas = $("#test").get(0).getContext("2d");
+			var testCanvas = $("#testChart").get(0).getContext("2d");
 			var testDataNew = [];
 			this.testData.forEach(function(data) {
 				var point = {x: data.updated_at, y: 0};
 				testDataNew.push(point);
 			});
 
-			var testChart = new Chart(testCanvas, {
+			var testChartDraw = new Chart(testCanvas, {
 				type: 'line',
 				data: {
 					datasets: [{
