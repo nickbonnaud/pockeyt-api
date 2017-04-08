@@ -131,6 +131,21 @@
 											</div>
 										</div>
 									</div>
+									<div class="nav-tabs-custom">
+										<ul class="nav nav-tabs pull-right">
+											<li class="active"><a href="#test" data-toggle="tab">Interactions</a></li>
+											<li><a href="#test1" data-toggle="tab">Revenue</a></li>
+											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time</li>
+										</ul>
+										<div class="tab-content">
+											<div class="chart tab-pane active" id="test">
+												<canvas id="testChart" width="400" height="300"></canvas>
+											</div>
+											<div class="chart tab-pane" id="test1">
+												<canvas id="test1" width="400" height="300"></canvas>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -343,10 +358,42 @@
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
 
+			testData: {!! $testData !!},
+
 			selectedPost: {}
 		},
 
 		mounted: function() {
+			var testCanvas = $("#test").get(0).getContext("2d");
+			var testDataNew = [];
+			this.testData.forEach(function(data) {
+				var point = {x: data.updated_at, y: 0};
+				testDataNew.push(point);
+			});
+
+			var testChart = new Chart(testCanvas, {
+				type: 'line',
+				data: {
+					datasets: [{
+						label: 'Test Label',
+						data: testData
+					}]
+				},
+				options: {
+					scales: {
+						xAxes: [{
+							type: 'time',
+							time: {
+								unit: 'day',
+								displayFormats: {
+									day: 'll'
+								}
+							}
+						}]
+					}
+				}
+			});
+
 			var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
 			var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
 			var type = "interaction";
