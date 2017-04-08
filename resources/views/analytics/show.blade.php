@@ -389,6 +389,11 @@
 									day: 'll'
 								}
 							}
+						}],
+						yAxes: [{
+							gridlines: {
+								display: false
+							}
 						}]
 					}
 				}
