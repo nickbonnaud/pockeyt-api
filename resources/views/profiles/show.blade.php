@@ -186,18 +186,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="box box-primary modal-analytics">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Recent Purchases</h3>
-                        </div>
-                        <div class="box-body">
-                          <canvas id="scatterPurchases" width="400" height="300"></canvas>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </section>
               </div>
             </div>
@@ -421,30 +409,11 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
-                this.createGraph();
               },
               error: data => {
                 console.log(data);
               }
             })
-          },
-          createGraph: function() {
-            var dataPoints = [];
-            this.purchases.forEach(function(purchase) {
-              var point = {x: new Date(purchase.updated_at), y: 0};
-              dataPoints.push(point);
-            });
-            var data = [
-              {
-                label: 'Recent Purchases',
-                strokeColor: '#A31515',
-                data: dataPoints
-              }
-            ];
-            var scatterPurchasesChart = $('#scatterPurchases').get(0).getContext("2d");
-            var scatterChart = new Chart(scatterPurchasesChart).Scatter(data, {
-              scaleType: "date"
-            });
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
