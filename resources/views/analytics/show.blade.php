@@ -384,7 +384,7 @@
 						yAxes:[{
 							ticks: {
 								beginAtZero: true
-							}
+							},
 							display: false
 						}],
 						xAxes: [{
