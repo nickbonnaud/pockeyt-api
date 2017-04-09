@@ -381,6 +381,9 @@
 				},
 				options: {
 					scales: {
+						yAxes:[{
+							display: false
+						}],
 						xAxes: [{
 							type: 'time',
 							time: {
@@ -388,11 +391,6 @@
 								displayFormats: {
 									day: 'll'
 								}
-							}
-						}],
-						yAxes: [{
-							gridLines: {
-								color: 'transparent'
 							}
 						}]
 					}
