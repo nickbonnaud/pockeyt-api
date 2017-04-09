@@ -385,6 +385,9 @@
 							ticks: {
 								beginAtZero: true
 							},
+							gridLines: {
+								drawBorder: false
+							}
 							display: false
 						}],
 						xAxes: [{
