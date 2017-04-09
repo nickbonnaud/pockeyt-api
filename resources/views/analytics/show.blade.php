@@ -376,8 +376,9 @@
 				data: {
 					datasets: [{
 						data: testDataNew,
+						pointRadius: 5,
 						pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBackgroundColor: "rgba(75,192,192,1)",
 					}]
 				},
 				options: {
