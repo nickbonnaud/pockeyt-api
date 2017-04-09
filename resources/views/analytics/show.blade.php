@@ -376,7 +376,9 @@
 				data: {
 					datasets: [{
 						label: 'Test Label',
-						data: testDataNew
+						data: testDataNew,
+						pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
 					}]
 				},
 				options: {
