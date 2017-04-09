@@ -390,7 +390,8 @@
 						xAxes: [{
 							ticks: {
 								callback: function(value, index, values) {
-									console.log(new Date(value).format('MMM D YY'));
+									console.log(value);
+									console.log(moment(value).format('MMM D YY'));
                   
                 }
 							},
@@ -401,7 +402,7 @@
 							time: {
 								unit: 'day',
 								displayFormats: {
-									day: 'll'
+									day: 'MMM YYYY'
 								}
 							}
 						}]
