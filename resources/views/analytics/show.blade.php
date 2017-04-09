@@ -393,7 +393,7 @@
 									var formattedTick = (moment(value).format('MMM D YY'));
 									testDataNew.forEach(function(date) {
 										var formattedDate = moment(date.x).format('MMM D YY');
-										if (formattedTick == formattedDatet) {
+										if (formattedTick == formattedDate) {
 											return value;
 										}
 									});
