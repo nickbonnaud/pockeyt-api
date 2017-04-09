@@ -389,8 +389,9 @@
 						}],
 						xAxes: [{
 							ticks: {
-								autoSkip: true,
-								maxTicksLimit: 10
+								callback: function(value, index, values) {
+                  console.log(testDataNew);
+                }
 							},
 							gridLines: {
 								display: false
