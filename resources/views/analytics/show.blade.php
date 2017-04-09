@@ -382,10 +382,7 @@
 				options: {
 					scales: {
 						yAxes:[{
-							ticks: {
 							
-								drawBorder: false
-							},
 							display: false
 						}],
 						xAxes: [{
