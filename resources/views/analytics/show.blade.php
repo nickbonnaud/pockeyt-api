@@ -139,7 +139,7 @@
 										</ul>
 										<div class="tab-content">
 											<div class="chart tab-pane active" id="test">
-												<canvas id="testChart" width="400" height="100"></canvas>
+												<canvas id="testChart" width="400" height="150"></canvas>
 											</div>
 											<div class="chart tab-pane" id="test1">
 												<canvas id="test1" width="400" height="300"></canvas>
