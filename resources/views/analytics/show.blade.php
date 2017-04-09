@@ -382,22 +382,7 @@
 				options: {
 					scales: {
 						display: false,
-						yAxes:[{
-							ticks: {
-								maxTicksLimit: 1,
-								drawBorder: false
-							},
-							display: false
-						}],
-						xAxes: [{
-							type: 'time',
-							time: {
-								unit: 'day',
-								displayFormats: {
-									day: 'll'
-								}
-							}
-						}]
+						
 					}
 				}
 			});
