@@ -390,6 +390,7 @@
 						xAxes: [{
 							ticks: {
 								callback: function(value, index, values) {
+									console.log(value);
                   console.log(testDataNew);
                 }
 							},
