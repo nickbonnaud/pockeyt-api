@@ -389,7 +389,9 @@
 						xAxes: [{
 							ticks: {
 								autoSkip: false,
-								maxTicksLimit: 5
+								callback: function(value, index, values) {
+                    return new moment(value).format('DD MMM');
+                }
 							},
 							gridLines: {
 								display: false
