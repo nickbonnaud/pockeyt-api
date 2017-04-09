@@ -383,10 +383,8 @@
 					scales: {
 						yAxes:[{
 							ticks: {
-								beginAtZero: true
-							},
-							gridLines: {
-								drawBorder: false
+								beginAtZero: true,
+								maxTicksLimit: 1
 							},
 							display: false
 						}],
