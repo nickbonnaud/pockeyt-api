@@ -390,10 +390,13 @@
 						xAxes: [{
 							ticks: {
 								callback: function(value, index, values) {
-									console.log(moment(value).format('MMM D YY'));
+									var formattedTick = (moment(value).format('MMM D YY'));
 									testDataNew.forEach(function(date) {
-										console.log(moment(date.x).format('MMM D YY'));
-									})
+										var formattedDate = moment(date.x).format('MMM D YY');
+										if (formattedTick == formattedDatet) {
+											return value;
+										}
+									});
                 }
 							},
 							gridLines: {
