@@ -385,6 +385,9 @@
 							display: false
 						}],
 						xAxes: [{
+							ticks: {
+								maxTicksLimit: 5
+							},
 							gridLines: {
 								display: false
 							},
