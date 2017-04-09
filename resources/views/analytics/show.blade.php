@@ -389,7 +389,7 @@
 						xAxes: [{
 							ticks: {
 								autoSkip: true,
-								maxTicksLimit: 5
+								maxTicksLimit: 10
 							},
 							gridLines: {
 								display: false
