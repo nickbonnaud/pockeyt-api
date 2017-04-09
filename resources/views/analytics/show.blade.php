@@ -386,7 +386,9 @@
 					scales: {
 						yAxes:[{
 							ticks: {
-								maxTicksLimit: 1
+								maxTicksLimit: 1,
+								min: 0,
+								max: 0
 							}
 						}],
 						xAxes: [{
