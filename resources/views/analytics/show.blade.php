@@ -392,6 +392,7 @@
 						}],
 						yAxes: [{
 							gridLines: {
+								drawBorder: false,
 								display: false
 							}
 						}]
