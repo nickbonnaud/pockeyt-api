@@ -387,7 +387,7 @@
 							},
 							gridLines: {
 								drawBorder: false
-							}
+							},
 							display: false
 						}],
 						xAxes: [{
