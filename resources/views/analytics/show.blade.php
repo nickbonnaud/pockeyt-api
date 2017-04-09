@@ -402,7 +402,8 @@
                 }
 							},
 							gridLines: {
-								display: false
+								display: false,
+								drawBorder: false,
 							},
 							type: 'time',
 							time: {
