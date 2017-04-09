@@ -387,6 +387,9 @@
 							display: false
 						}],
 						xAxes: [{
+							ticks: {
+								autoSkip: true
+							},
 							gridLines: {
 								display: false
 							},
