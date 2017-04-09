@@ -400,7 +400,7 @@
 									});
 									return checkDate;
                 },
-                padding: -20
+                padding: -50
 							},
 							gridLines: {
 								display: false,
