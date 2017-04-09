@@ -399,7 +399,8 @@
 										}
 									});
 									return checkDate;
-                }
+                },
+                padding: -20;
 							},
 							gridLines: {
 								display: false,
