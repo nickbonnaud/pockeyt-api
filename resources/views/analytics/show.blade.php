@@ -381,6 +381,7 @@
 				},
 				options: {
 					scales: {
+						display: false,
 						yAxes:[{
 							ticks: {
 								maxTicksLimit: 1,
