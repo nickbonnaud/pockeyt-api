@@ -408,7 +408,7 @@
 							time: {
 								unit: 'day',
 								displayFormats: {
-									day: 'MMM D YY'
+									day: 'MMM Do YY'
 								}
 							}
 						}]
