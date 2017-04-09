@@ -383,7 +383,7 @@
 					scales: {
 						yAxes:[{
 							ticks: {
-								maxTicksLimit: 1,
+							
 								drawBorder: false
 							},
 							display: false
