@@ -380,6 +380,7 @@
 					}]
 				},
 				options: {
+					showLines: false,
 					scales: {
 						yAxes:[{
 							display: false
