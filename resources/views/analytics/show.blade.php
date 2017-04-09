@@ -385,7 +385,6 @@
 					showLines: false,
 					scales: {
 						yAxes:[{
-							display: false,
 							ticks: {
 								maxTicksLimit: 1
 							}
