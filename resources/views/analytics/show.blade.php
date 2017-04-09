@@ -392,8 +392,7 @@
 						}],
 						yAxes: [{
 							gridLines: {
-								drawBorder: false,
-								display: false
+								color: 'transparent'
 							}
 						}]
 					}
