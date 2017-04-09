@@ -375,7 +375,6 @@
 				type: 'line',
 				data: {
 					datasets: [{
-						label: 'Test Label',
 						data: testDataNew,
 						pointBorderColor: "rgba(75,192,192,1)",
             pointBackgroundColor: "#fff",
@@ -389,7 +388,7 @@
 						}],
 						xAxes: [{
 							ticks: {
-								autoSkip: true,
+								autoSkip: false,
 								maxTicksLimit: 5
 							},
 							gridLines: {
