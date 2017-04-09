@@ -390,7 +390,7 @@
 						xAxes: [{
 							ticks: {
 								callback: function(value, index, values) {
-									console.log(moment(value).format('MMM D YYYY'));
+									console.log(moment(value).format('MMM D YY'));
                   
                 }
 							},
