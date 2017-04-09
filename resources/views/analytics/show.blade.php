@@ -394,6 +394,7 @@
 									testDataNew.forEach(function(date) {
 										var formattedDate = moment(date.x).format('MMM D YY');
 										if (formattedTick == formattedDate) {
+											console.log('true');
 											return value;
 										}
 									});
