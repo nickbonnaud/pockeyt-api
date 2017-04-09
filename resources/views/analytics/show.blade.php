@@ -385,6 +385,9 @@
 							display: false
 						}],
 						xAxes: [{
+							gridLines: {
+								display: false
+							},
 							type: 'time',
 							time: {
 								unit: 'day',
