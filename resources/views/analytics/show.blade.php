@@ -390,8 +390,8 @@
 						xAxes: [{
 							ticks: {
 								callback: function(value, index, values) {
-									console.log(moment(value).format("MMM Do YY"));
-                  console.log(moment(testDataNew).format("MMM Do YY"));
+									console.log(value);
+                  console.log(testDataNew);
                 }
 							},
 							gridLines: {
