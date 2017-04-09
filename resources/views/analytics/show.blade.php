@@ -389,6 +389,7 @@
 						}],
 						xAxes: [{
 							ticks: {
+								padding: -100,
 								callback: function(value, index, values) {
 									var formattedTick = (moment(value).format('MMM D YY'));
 									var checkDate = null;
@@ -399,8 +400,7 @@
 										}
 									});
 									return checkDate;
-                },
-                padding: 100
+                }
 							},
 							gridLines: {
 								display: false,
