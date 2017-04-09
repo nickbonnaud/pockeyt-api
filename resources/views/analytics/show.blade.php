@@ -391,13 +391,14 @@
 							ticks: {
 								callback: function(value, index, values) {
 									var formattedTick = (moment(value).format('MMM D YY'));
+									var checkDate = null;
 									testDataNew.forEach(function(date) {
 										var formattedDate = moment(date.x).format('MMM D YY');
 										if (formattedTick == formattedDate) {
-											console.log('true');
-											return value;
+											checkDate = value;
 										}
 									});
+									return checkDate;
                 }
 							},
 							gridLines: {
