@@ -377,12 +377,12 @@
 					datasets: [{
 						data: testDataNew,
 						pointRadius: 5,
-						pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "rgba(75,192,192,1)",
+						borderColor: "borderColor"
+						pointBorderColor: "#f39c12",
+            pointBackgroundColor: "#f39c12",
 					}]
 				},
 				options: {
-					showLines: false,
 					scales: {
 						yAxes:[{
 							display: false,
