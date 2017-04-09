@@ -381,10 +381,7 @@
 				},
 				options: {
 					scales: {
-						yAxes:[{
-							
-							display: false
-						}],
+						
 						xAxes: [{
 							type: 'time',
 							time: {
