@@ -386,12 +386,14 @@
 					legend: {
 						display: false
 					},
-					callbacks: {
-		      	label: function(tooltipItem) {
+					tooltips: {
+			    	callbacks: {
+			      	label: function(tooltipItem) {
 			        console.log(tooltipItem)
-			        	return;
+			        	return tooltipItem.yLabel;
 			        }
-		      },
+			      }
+			    },
 					scales: {
 						yAxes:[{
 							display: false,
