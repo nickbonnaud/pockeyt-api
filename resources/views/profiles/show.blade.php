@@ -58,8 +58,7 @@
             <div class="modal-content">
               <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-info-circle"></i>
-                <h4 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h4>
+                <h3 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h3>
               </div>
               <div class="modal-body-customer-info">
                 <section class="content">
