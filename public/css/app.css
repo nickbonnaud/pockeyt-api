@@ -8613,3 +8613,10 @@ img {
   font-size: 16px;
   color: #545454;
 }
+
+.modal-body-customer-info {
+    position: relative;
+    padding: 15px;
+    padding-top: 35px;
+    background-color: #ecf0f5;
+}
