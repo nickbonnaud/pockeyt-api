@@ -390,7 +390,8 @@
 			    	callbacks: {
 			      	label: function(tooltipItem) {
 			        console.log(tooltipItem)
-			        	return moment(tooltipItem.yLabel).format('MMM D YY');
+			        	var time = moment(tooltipItem.yLabel).format('MMM D YY');
+			        	return time;
 			        }
 			      }
 			    },
