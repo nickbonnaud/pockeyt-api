@@ -105,7 +105,7 @@
 											<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
 										</ul>
 										<div class="tab-content no-padding">
-											<div class="chart tab-pane active" id="week-revenue-chart">
+											<div v-if="postsRevenueWeek.length !== 0" class="chart tab-pane active" id="week-revenue-chart">
 												<canvas id="barRevenueWeek" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="month-revenue-chart">
