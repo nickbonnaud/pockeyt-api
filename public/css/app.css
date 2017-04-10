@@ -8615,8 +8615,8 @@ img {
 }
 
 .modal-body-customer-info {
-    position: relative;
-    padding: 15px;
-    padding-top: 35px;
-    background-color: #ecf0f5;
+  position: relative;
+  padding: 15px;
+  padding-top: 35px;
+  background-color: #ecf0f5;
 }
