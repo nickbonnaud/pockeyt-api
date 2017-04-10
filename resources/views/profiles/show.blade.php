@@ -64,7 +64,7 @@
                 <section class="content">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="info-box">
+                      <div v-if="lastPurchase" class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
@@ -417,11 +417,13 @@
               success: data => {
                 console.log(data);
                 this.purchases = data.purchases;
-                this.lastPurchase = this.purchases[0];
                 this.lastViewedPost = data.lastViewedPost;
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
-                this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+                if (this.purchases.length !== 0 ) {
+                  this.lastPurchase = this.purchases[0];
+                  this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+                }
 
                 
                 console.log(this.purchases);
