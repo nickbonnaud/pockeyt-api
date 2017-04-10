@@ -761,7 +761,11 @@
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
-						if (dataSet.length === 0) { console.log("zero"); }
+						if (dataSet.length === 0) {
+							for ($i = 0; $i <= 10; $i++) {
+				        array_push($dataSet, 0);
+				      }
+						}
 
 						switch(timeSpan) {
 							case "week":
