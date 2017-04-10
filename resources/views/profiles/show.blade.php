@@ -423,6 +423,13 @@
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
 
+                
+                console.log(this.purchases);
+                console.log(this.lastPurchase);
+                console.log(this.lastViewedPost);
+                console.log(this.recentBookmarked);
+                console.log(this.recentShared);
+                console.log(this.lastItemsPurchased);
                 this.drawChart();
               },
               error: data => {
