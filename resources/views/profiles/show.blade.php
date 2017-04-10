@@ -131,10 +131,11 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Last Viewed Post</span>
-                          <span class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
+                          <span v-if="!lastViewedPost.updated_at" class="info-box-number">No Recent</span>
+                          <span v-if="lastViewedPost.updated_at" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
                         </div>
                       </div>
-                      <div class="box box-success collapsed-box">
+                      <div v-if="lastViewedPost.updated_at" class="box box-success collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-eye"></i>
                           <h3 class="box-title">Post Details</h3>
