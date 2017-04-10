@@ -68,7 +68,7 @@
 											<li><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
 											<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Top 10 Posts by Interactions</li>
 										</ul>
-										<div class="tab-content no-padding">
+										<div class="tab-content">
 											<div class="chart tab-pane active" id="week-inter-chart">
 												<canvas id="barInteractionsWeek" width="400" height="300"></canvas>
 											</div>
@@ -104,7 +104,7 @@
 											<li><a href="#2month-revenue-chart" data-toggle="tab" v-on:click="twoMonthRevenueData()">60 Days</a></li>
 											<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
 										</ul>
-										<div class="tab-content no-padding">
+										<div class="tab-content">
 											<div class="chart tab-pane active" id="week-revenue-chart">
 												<canvas id="barRevenueWeek" width="400" height="300"></canvas>
 											</div>
