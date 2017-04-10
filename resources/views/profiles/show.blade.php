@@ -73,7 +73,7 @@
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
-                      <div class="box box-aqua collapsed-box">
+                      <div v-if="purchases.length !== 0" class="box box-aqua collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-shopping-cart"></i>
                           <h3 class="box-title">View Purchases</h3>
@@ -94,7 +94,7 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked" class="info-box">
+                      <div v-if="recentBookmarked !== null" class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
 
                         <div class="info-box-content">
