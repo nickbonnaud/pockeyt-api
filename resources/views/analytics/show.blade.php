@@ -99,13 +99,13 @@
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
-											<li v-if="postsRevenueWeek.length !== 0" class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
+											<li class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
 											<li><a href="#month-revenue-chart" data-toggle="tab" v-on:click="monthRevenueData()">30 Days</a></li>
 											<li><a href="#2month-revenue-chart" data-toggle="tab" v-on:click="twoMonthRevenueData()">60 Days</a></li>
 											<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
 										</ul>
 										<div class="tab-content no-padding">
-											<div v-if="postsRevenueWeek.length !== 0" class="chart tab-pane active" id="week-revenue-chart">
+											<div class="chart tab-pane active" id="week-revenue-chart">
 												<canvas id="barRevenueWeek" width="400" height="300"></canvas>
 											</div>
 											<div class="chart tab-pane" id="month-revenue-chart">
