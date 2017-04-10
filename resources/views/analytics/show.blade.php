@@ -761,6 +761,7 @@
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
+						if (dataSet.length === 0) { console.log("zero"); }
 
 						switch(timeSpan) {
 							case "week":
