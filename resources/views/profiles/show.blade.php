@@ -70,7 +70,6 @@
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
                           <span class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
-                          <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
                       <div v-if="purchases.length !== 0" class="box box-aqua collapsed-box">
@@ -130,8 +129,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Last Viewed Post</span>
-                          <span v-if="lastViewedPost" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
-                          <span v-else class="info-box-number">No Recent</span>
+                          <span class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
                         </div>
                       </div>
                       <div class="box box-success collapsed-box">
