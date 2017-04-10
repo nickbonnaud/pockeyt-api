@@ -386,6 +386,12 @@
 					legend: {
 						display: false
 					},
+					callbacks: {
+		      	label: function(tooltipItem) {
+			        console.log(tooltipItem)
+			        	return tooltipItem.xLabel;
+			        }
+		      },
 					scales: {
 						yAxes:[{
 							display: false,
