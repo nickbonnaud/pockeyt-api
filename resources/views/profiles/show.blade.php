@@ -94,11 +94,10 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked !== null" class="info-box">
+                      <div v-if="recentBookmarked" class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
 
                         <div class="info-box-content">
-                          <p>@{{ recentBookmarked }}</p>
                           <span class="info-box-text">Recent Bookmarked</span>
                           <span class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
                         </div>
@@ -275,10 +274,10 @@
           users: [],
           purchases: [],
           deals: [],
-          lastPurchase: {},
-          lastViewedPost: {},
-          recentBookmarked: {},
-          recentShared: {},
+          lastPurchase: null,
+          lastViewedPost: null,
+          recentBookmarked: null,
+          recentShared: null,
           lastItemsPurchased: []
         },
 
