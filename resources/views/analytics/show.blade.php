@@ -389,7 +389,7 @@
 					callbacks: {
 		      	label: function(tooltipItem) {
 			        console.log(tooltipItem)
-			        	return tooltipItem.xLabel;
+			        	return tooltipItem.datasetIndex;
 			        }
 		      },
 					scales: {
