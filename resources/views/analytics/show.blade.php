@@ -383,6 +383,9 @@
 					}]
 				},
 				options: {
+					legend: {
+						display: false
+					},
 					scales: {
 						yAxes:[{
 							display: false,
