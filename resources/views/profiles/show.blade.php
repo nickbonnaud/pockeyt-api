@@ -421,9 +421,11 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 if (this.purchases.length !== 0 ) {
-                  console.log("inside");
                   this.lastPurchase = this.purchases[0];
                   this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+                } else {
+                  this.lastPurchase = null;
+                  this.lastItemsPurchased = null;
                 }
 
                 
