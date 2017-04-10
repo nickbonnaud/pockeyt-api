@@ -387,10 +387,11 @@
 						display: false
 					},
 					tooltips: {
+						titleFontSize: 0,
 			    	callbacks: {
 			      	label: function(tooltipItem) {
 			        console.log(tooltipItem)
-			        	var time = moment(tooltipItem.xLabel).format('MMM D YY');
+			        	var time = moment(tooltipItem.xLabel).format('MMM Do YY');
 			        	return time;
 			        }
 			      }
