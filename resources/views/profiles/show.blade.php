@@ -186,6 +186,21 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="box box-primary">
+                        <div class="box-header with-border">
+                          <i class="fa fa-history"></i>
+                          <h3 class="box-title">Last 5 Purchases</h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="chart">
+                            <canvas id="purchaseHistory" width="400" height="150"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </section>
               </div>
             </div>
@@ -409,11 +424,80 @@
                 this.recentBookmarked = data.recentBookmarkedPost;
                 this.recentShared = data.recentSharedPost;
                 this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+
+                this.drawChart();
               },
               error: data => {
                 console.log(data);
               }
             })
+          },
+          drawChart: function() {
+            var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
+            var purchasesData = [];
+            this.purchases.forEach(function(purchase) {
+              var point = {x: purchase.updated_at, y: 0};
+              purchasesData.push(point);
+            });
+
+            var purchaseHistoryChart = new Chart(purchaseHistoryCanvas, {
+              type: 'line',
+              data: {
+                datasets: [{
+                  data: purchasesData,
+                  pointRadius: 5,
+                  borderColor: "rgba(52, 152, 219,1.0)",
+                  pointBorderColor: "#f39c12",
+                  pointBackgroundColor: "#f39c12",
+                }]
+              },
+              options: {
+                legend: {
+                  display: false
+                },
+                tooltips: {
+                  titleFontSize: 0,
+                  callbacks: {
+                    label: function(tooltipItem) {
+                    console.log(tooltipItem)
+                      var time = moment(tooltipItem.xLabel).format('MMM Do YY');
+                      return time;
+                    }
+                  }
+                },
+                scales: {
+                  yAxes:[{
+                    display: false,
+                  }],
+                  xAxes: [{
+                    ticks: {
+                      callback: function(value, index, values) {
+                        var formattedTick = (moment(value).format('MMM D YY'));
+                        var checkDate = null;
+                        purchasesData.forEach(function(date) {
+                          var formattedDate = moment(date.x).format('MMM D YY');
+                          if (formattedTick == formattedDate) {
+                            checkDate = value;
+                          }
+                        });
+                        return checkDate;
+                      }
+                    },
+                    gridLines: {
+                      display: false,
+                      drawBorder: false,
+                    },
+                    type: 'time',
+                    time: {
+                      unit: 'day',
+                      displayFormats: {
+                        day: 'll'
+                      }
+                    }
+                  }]
+                }
+              }
+            });
           },
           getRedeemableDeals: function(customerId) {
             var businessId = '{{ $profile->id }}'
