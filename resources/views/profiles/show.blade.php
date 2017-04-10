@@ -94,15 +94,16 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked" class="info-box">
+                      <div class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
 
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Bookmarked</span>
-                          <span class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
+                          <span v-if="!recentBookmarked.bookmarked_on" class="info-box-number">No Recent</span>
+                          <span v-if="recentBookmarked.bookmarked_on" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked" class="box box-warning collapsed-box">
+                      <div v-if="recentBookmarked.bookmarked_on" class="box box-warning collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-bookmark-o"></i>
                           <h3 class="box-title">Bookmark Details</h3>
