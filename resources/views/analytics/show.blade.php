@@ -293,8 +293,8 @@
     		ticks: {
     			beginAtZero: true,
     			callback: function(value, index, values) {
-    				console.log(value.toFixed(2));
-            if(parseInt(value) >= 1000){
+    				value = value.toFixed(2);
+            if(value >= 1000){
               return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             } else {
               return '$' + value;
