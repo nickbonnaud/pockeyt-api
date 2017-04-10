@@ -274,10 +274,10 @@
           users: [],
           purchases: [],
           deals: [],
-          lastPurchase: null,
-          lastViewedPost: null,
-          recentBookmarked: null,
-          recentShared: null,
+          lastPurchase: {},
+          lastViewedPost: {},
+          recentBookmarked: {},
+          recentShared: {},
           lastItemsPurchased: []
         },
 
