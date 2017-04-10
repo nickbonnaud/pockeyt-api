@@ -63,32 +63,19 @@
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
-											<li v-if="postsInteractedWeek.length !== 0" class="active"><a href="#week-inter-chart" data-toggle="tab" v-on:click="weekInteractionData()">7 Days</a></li>
-
-											<li v-if="postsInteractedWeek.length === 0 && postsInteractedMonth.length !== 0" class="active"><a href="#month-inter-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
-											<li v-if="postsInteractedWeek.length !== 0"><a href="#month-inter-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
-
-											<li v-if="postsInteractedMonth.length === 0 && postsInteracted2Month.length !== 0" class="active"><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">30 Days</a></li>
-											<li v-if="postsInteractedMonth.length !== 0"><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
-
+											<li class="active"><a href="#week-inter-chart" data-toggle="tab" v-on:click="weekInteractionData()">7 Days</a></li>
+											<li><a href="#month-inter-chart" data-toggle="tab" v-on:click="monthInteractionData()">30 Days</a></li>
+											<li><a href="#2month-inter-chart" data-toggle="tab" v-on:click="twoMonthInteractionData()">60 Days</a></li>
 											<li class="pull-left header"><i class="fa fa-hand-o-up"></i> Top 10 Posts by Interactions</li>
 										</ul>
 										<div class="tab-content no-padding">
-											<div v-if="postsInteractedWeek.length !== 0" class="chart tab-pane active" id="week-inter-chart">
+											<div class="chart tab-pane active" id="week-inter-chart">
 												<canvas id="barInteractionsWeek" width="400" height="300"></canvas>
 											</div>
-
-											<div v-if="postsInteractedWeek.length === 0 && postsInteractedMonth.length !== 0" class="active" id="month-inter-chart">
+											<div class="chart tab-pane" id="month-inter-chart">
 												<canvas id="barInteractionsMonth" width="400" height="300"></canvas>
 											</div>
-											<div v-if="postsInteractedWeek.length !== 0" class="chart tab-pane" id="month-inter-chart">
-												<canvas id="barInteractionsMonth" width="400" height="300"></canvas>
-											</div>
-
-											<div v-if="postsInteractedMonth.length === 0 && postsInteracted2Month.length !== 0" class="active" id="2month-inter-chart">
-												<canvas id="barInteractions2Month" width="400" height="300"></canvas>
-											</div>
-											<div v-if="postsInteractedMonth.length !== 0" class="chart tab-pane" id="2month-inter-chart">
+											<div class="chart tab-pane" id="2month-inter-chart">
 												<canvas id="barInteractions2Month" width="400" height="300"></canvas>
 											</div>
 										</div>
