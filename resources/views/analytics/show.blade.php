@@ -99,7 +99,7 @@
 								<div class="col-md-6">
 									<div class="nav-tabs-custom">
 										<ul class="nav nav-tabs pull-right">
-											<li class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
+											<li v-if="postsRevenueWeek.length !== 0" class="active"><a href="#week-revenue-chart" data-toggle="tab" v-on:click="weekRevenueData()">7 Days</a></li>
 											<li><a href="#month-revenue-chart" data-toggle="tab" v-on:click="monthRevenueData()">30 Days</a></li>
 											<li><a href="#2month-revenue-chart" data-toggle="tab" v-on:click="twoMonthRevenueData()">60 Days</a></li>
 											<li class="pull-left header"><i class="fa fa-money"></i> Top 10 Posts by Revenue</li>
@@ -760,11 +760,6 @@
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
-						if (dataSet.length === 0) {
-							for ($i = 0; $i <= 10; $i++) {
-				        dataSet.push(0);
-				      }
-						}
 
 						switch(timeSpan) {
 							case "week":
