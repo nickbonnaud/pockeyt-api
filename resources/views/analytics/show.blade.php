@@ -762,7 +762,7 @@
 						var dataSet = data.data;
 						if (dataSet.length === 0) {
 							for ($i = 0; $i <= 10; $i++) {
-				        array_push($dataSet, 0);
+				        dataSet.push(0);
 				      }
 						}
 
