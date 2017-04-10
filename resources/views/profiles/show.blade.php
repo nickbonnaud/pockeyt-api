@@ -64,12 +64,12 @@
                 <section class="content">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div v-if="lastPurchase" class="info-box">
+                      <div v-if="purchases.length !== 0" class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
-                          <span v-if="purchases" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
+                          <span class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
                           <span v-else class="info-box-number">No Recent</span>
                         </div>
                       </div>
