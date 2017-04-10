@@ -93,7 +93,7 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked" class="info-box">
+                      <div v-if="recentBookmarked !== {}" class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
 
                         <div class="info-box-content">
