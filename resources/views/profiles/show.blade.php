@@ -64,15 +64,16 @@
                 <section class="content">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div v-if="purchases.length !== 0" class="info-box">
+                      <div class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
                           <span class="info-box-text">Date Last Purchase</span>
-                          <span class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
+                          <span v-if="purchases.length == 0" class="info-box-number">No Purchases</span>
+                          <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="purchases.length !== 0" class="box box-aqua collapsed-box">
+                      <div v-if="purchases.length != 0" class="box box-aqua collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-shopping-cart"></i>
                           <h3 class="box-title">View Purchases</h3>
@@ -93,7 +94,7 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked.bookmarked_on" class="info-box">
+                      <div v-if="recentBookmarked" class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
 
                         <div class="info-box-content">
