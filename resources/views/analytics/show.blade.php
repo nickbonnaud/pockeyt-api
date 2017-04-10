@@ -757,7 +757,6 @@
 						'type': type
 					},
 					success: data => {
-						console.log(data);
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
