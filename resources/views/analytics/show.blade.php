@@ -131,21 +131,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="nav-tabs-custom">
-										<ul class="nav nav-tabs pull-right">
-											<li class="active"><a href="#test" data-toggle="tab">Interactions</a></li>
-											<li><a href="#test1" data-toggle="tab">Revenue</a></li>
-											<li class="pull-left header"><i class="fa fa-hourglass-2"></i> Percentage Activity by Time</li>
-										</ul>
-										<div class="tab-content">
-											<div class="chart tab-pane active" id="test">
-												<canvas id="testChart" width="400" height="150"></canvas>
-											</div>
-											<div class="chart tab-pane" id="test1">
-												<canvas id="test1" width="400" height="300"></canvas>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -358,78 +343,11 @@
 			postsActivityByHour: {!! $activityByHour !!},
 			postsRevenueByHour: [],
 
-			testData: {!! $testData !!},
-
 			selectedPost: {}
 		},
 
 		mounted: function() {
-			var testCanvas = $("#testChart").get(0).getContext("2d");
-			var testDataNew = [];
-			this.testData.forEach(function(data) {
-				var point = {x: data.updated_at, y: 0};
-				testDataNew.push(point);
-			});
-
-			var testChartDraw = new Chart(testCanvas, {
-				type: 'line',
-				data: {
-					datasets: [{
-						data: testDataNew,
-						pointRadius: 5,
-						borderColor: "rgba(52, 152, 219,1.0)",
-						pointBorderColor: "#f39c12",
-            pointBackgroundColor: "#f39c12",
-					}]
-				},
-				options: {
-					legend: {
-						display: false
-					},
-					tooltips: {
-						titleFontSize: 0,
-			    	callbacks: {
-			      	label: function(tooltipItem) {
-			        console.log(tooltipItem)
-			        	var time = moment(tooltipItem.xLabel).format('MMM Do YY');
-			        	return time;
-			        }
-			      }
-			    },
-					scales: {
-						yAxes:[{
-							display: false,
-						}],
-						xAxes: [{
-							ticks: {
-								callback: function(value, index, values) {
-									var formattedTick = (moment(value).format('MMM D YY'));
-									var checkDate = null;
-									testDataNew.forEach(function(date) {
-										var formattedDate = moment(date.x).format('MMM D YY');
-										if (formattedTick == formattedDate) {
-											checkDate = value;
-										}
-									});
-									return checkDate;
-                }
-							},
-							gridLines: {
-								display: false,
-								drawBorder: false,
-							},
-							type: 'time',
-							time: {
-								unit: 'day',
-								displayFormats: {
-									day: 'll'
-								}
-							}
-						}]
-					}
-				}
-			});
-
+			
 			var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
 			var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
 			var type = "interaction";
@@ -839,6 +757,7 @@
 						'type': type
 					},
 					success: data => {
+						console.log(data);
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
