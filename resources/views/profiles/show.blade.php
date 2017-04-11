@@ -156,15 +156,16 @@
                           <p class="analytics-date-customer-data">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
                         </div>
                       </div>
-                      <div v-if="recentShared" class="info-box">
+                      <div class="info-box">
                         <span class="info-box-icon bg-red"><i class="fa fa-share"></i></span>
 
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Shared</span>
-                          <span class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
+                          <span v-if="!recentShared.shared_on" class="info-box-number">No Recent</span>
+                          <span v-if="recentShared.shared_on" class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="recentShared" class="box box-danger collapsed-box">
+                      <div v-if="recentShared.shared_on" class="box box-danger collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-share"></i>
                           <h3 class="box-title">Shared Post Details</h3>
