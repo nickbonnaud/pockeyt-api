@@ -99,8 +99,8 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Bookmarked</span>
-                          <span v-if="$.isEmpty(recentBookmarked)" class="info-box-number">No Recent</span>
-                          <span v-if="! $.isEmpty(recentBookmarked)" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
+                          <span v-if="!recentBookmarked" class="info-box-number">No Recent</span>
+                          <span v-if="recentBookmarked" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
                         </div>
                       </div>
                       <div v-if="recentBookmarked" class="box box-warning collapsed-box">
@@ -278,7 +278,7 @@
           deals: [],
           lastPurchase: {},
           lastViewedPost: {},
-          recentBookmarked: {},
+          recentBookmarked: null,
           recentShared: {},
           lastItemsPurchased: []
         },
