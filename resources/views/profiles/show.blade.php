@@ -162,7 +162,7 @@
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Shared</span>
                           <span v-if="!recentShared" class="info-box-number">No Recent</span>
-                          <span v-if="recentShared class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
+                          <span v-if="recentShared" class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
                         </div>
                       </div>
                       <div v-if="recentShared" class="box box-danger collapsed-box">
