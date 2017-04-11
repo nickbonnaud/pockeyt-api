@@ -161,11 +161,11 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text">Recent Shared</span>
-                          <span v-if="!recentShared.shared_on" class="info-box-number">No Recent</span>
-                          <span v-if="recentShared.shared_on" class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
+                          <span v-if="!recentShared" class="info-box-number">No Recent</span>
+                          <span v-if="recentShared class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="recentShared.shared_on" class="box box-danger collapsed-box">
+                      <div v-if="recentShared" class="box box-danger collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-share"></i>
                           <h3 class="box-title">Shared Post Details</h3>
@@ -279,7 +279,7 @@
           lastPurchase: {},
           lastViewedPost: null,
           recentBookmarked: null,
-          recentShared: {},
+          recentShared: null,
           lastItemsPurchased: []
         },
 
