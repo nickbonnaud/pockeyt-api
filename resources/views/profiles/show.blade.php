@@ -452,8 +452,8 @@
                   data: purchasesData,
                   pointRadius: 5,
                   borderColor: "rgba(52, 152, 219,1.0)",
-                  pointBorderColor: "#f39c12",
-                  pointBackgroundColor: "#f39c12",
+                  pointBorderColor: ["#f39c12", "#f39c12", "#f39c12", "#f39c12", "#f39c12", "#00a65a"],
+                  pointBackgroundColor: ["#f39c12", "#f39c12", "#f39c12", "#f39c12", "#f39c12", "#00a65a"],
                 }]
               },
               options: {
