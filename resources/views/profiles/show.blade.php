@@ -187,7 +187,7 @@
                         </div>
                       </div>
                     </div>
-                    <div v-if="purchases.length != 0" class="col-md-12">
+                    <div v-show="purchases.length != 0" class="col-md-12">
                       <div class="box box-primary">
                         <div class="box-header with-border">
                           <i class="fa fa-history"></i>
