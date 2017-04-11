@@ -103,7 +103,7 @@
                           <span v-if="recentBookmarked" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="recentBookmarked class="box box-warning collapsed-box">
+                      <div v-if="recentBookmarked" class="box box-warning collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-bookmark-o"></i>
                           <h3 class="box-title">Bookmark Details</h3>
