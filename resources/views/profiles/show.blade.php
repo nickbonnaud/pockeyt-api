@@ -425,19 +425,11 @@
                 if (this.purchases.length !== 0 ) {
                   this.lastPurchase = this.purchases[0];
                   this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
+                  this.drawChart();
                 } else {
                   this.lastPurchase = null;
                   this.lastItemsPurchased = null;
                 }
-
-                
-                console.log(this.purchases);
-                console.log(this.lastPurchase);
-                console.log(this.lastViewedPost);
-                console.log(this.recentBookmarked);
-                console.log(this.recentShared);
-                console.log(this.lastItemsPurchased);
-                this.drawChart();
               },
               error: data => {
                 console.log(data);
