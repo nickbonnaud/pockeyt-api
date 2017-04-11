@@ -94,8 +94,36 @@
                           </div>
                         </div>
                       </div>
-                      
-                     
+                      <div class="info-box">
+                        <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
+
+                        <div class="info-box-content">
+                          <span class="info-box-text">Recent Bookmarked</span>
+                          <span v-if="!recentBookmarked" class="info-box-number">No Recent</span>
+                          <span v-if="recentBookmarked" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
+                        </div>
+                      </div>
+                      <div v-if="recentBookmarked class="box box-warning collapsed-box">
+                        <div class="box-header with-border">
+                          <i class="fa fa-bookmark-o"></i>
+                          <h3 class="box-title">Bookmark Details</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="box-body">
+                          <div class="analytics-modal-image">
+                            <img v-if="recentBookmarked.thumb_path" :src="recentBookmarked.thumb_path">
+                          </div>
+                          <div class="box-body-bottom">
+                            <h4 v-if="recentBookmarked.message" class="box-title customer-data-message">@{{ recentBookmarked.message }}</h4>
+                            <h4 v-else="!recentBookmarked.message" class="box-title customer-data-message">@{{ recentBookmarked.title }}</h4>
+                          </div>
+                          <hr style="margin-top: 10px; margin-bottom: 10px;">
+                          <p class="analytics-date-customer-data">Posted on <strong>@{{ recentBookmarked.published_at | setDateTime }}</strong>.</p>
+                        </div>
+                      </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="info-box">
