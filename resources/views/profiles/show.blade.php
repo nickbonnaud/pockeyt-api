@@ -464,9 +464,12 @@
                   titleFontSize: 0,
                   callbacks: {
                     label: function(tooltipItem) {
-                    console.log(tooltipItem)
                       var time = moment(tooltipItem.xLabel).format('MMM Do YY');
-                      return time;
+                      if (time == moment().format('MMM Do YY')) {
+                        return "Today"
+                      } else {
+                        return time;
+                      }
                     }
                   }
                 },
@@ -483,6 +486,9 @@
                           var formattedDate = moment(date.x).format('MMM D YY');
                           if (formattedTick == formattedDate) {
                             checkDate = value;
+                            if (formattedDate == moment().format('MMM D YY')) {
+                              checkDate = "Today";
+                            }
                           }
                         });
                         return checkDate;
