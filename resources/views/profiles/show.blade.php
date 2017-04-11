@@ -443,7 +443,8 @@
               var point = {x: purchase.updated_at, y: 0};
               purchasesData.push(point);
             });
-            purchasesData.push(moment().format());
+            var today = {x: moment().format(), y: 0};
+            purchasesData.push(today);
             var purchaseHistoryChart = new Chart(purchaseHistoryCanvas, {
               type: 'line',
               data: {
