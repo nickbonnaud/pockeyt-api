@@ -6,15 +6,7 @@
 		font-family: "RealtimeRounded"; 
 		padding-bottom: 20px;
 	}
-	.tips-business-logo {
-		border-radius: 50%;
-		width:70px;
-		height:70px;
-		margin-top: 20px;
-		margin-left: 25px;
-		float: left;
-		display: inline-block;
-		margin-bottom: 30px;
+	.tips-business-logo {border-radius: 50%; width:70px; height:70px; margin-top: 20px; margin-left: 25px; float: left; display: inline-block; margin-bottom: 30px;
 	}
 	.tips-title-section {
 		display: inline-block;
@@ -24,83 +16,35 @@
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-	.tips-business-title{
-		font-size: 16px;
-    display: inline-block;
-    margin-top: 70px;
-    color: #3a3a3a;
+	.tips-business-title{ font-size: 16px; display: inline-block; margin-top: 70px; color: #3a3a3a;
 	}
 	.tips-main-section {
 		clear: both;
 	}
-	.tips-receipt-section-header{
-		border-top: 2px solid #7f7f7f;
-		border-bottom: 2px solid #7f7f7f;
-		margin-left: 10px;
-		margin-right: 10px;
+	.tips-receipt-section-header{ border-top: 2px solid #7f7f7f; border-bottom: 2px solid #7f7f7f; margin-left: 10px; margin-right: 10px;
 	}
-	.tips-receipt-section-header h4 {
-		display: inline;
-		margin-left: 10px;
-		margin-right: 10px;
-		font-size: 16px;
-		margin-top: 4px;
-		color: #3a3a3a;
+	.tips-receipt-section-header h4 { display: inline; margin-left: 10px; margin-right: 10px; font-size: 16px; margin-top: 4px; color: #3a3a3a;
 	}
-	.tips-receipt-section-body {
-		margin-left: 10px;
-		margin-right: 10px;
-		color: #3a3a3a;
+	.tips-receipt-section-body {margin-left: 10px; margin-right: 10px; color: #3a3a3a;
 	}
-	.tips-receipt-section-body h4 {
-		display: inline;
-		margin-left: 10px;
-		margin-right: 10px;
-		font-size: 14px;
+	.tips-receipt-section-body h4 {display: inline; margin-left: 10px; margin-right: 10px; font-size: 14px;
 	}
-	.tips-item-name {
-		float: left;
-		clear: left;
+	.tips-item-name { float: left; clear: left;
 	}
-	.tips-item-amount {
-		float: right;
-		clear: right;
+	.tips-item-amount { float: right; clear: right;
 	}
 	.tips-receipt-section-subtotal {
 		clear: both;
 	}
-	.tips-tax-title {
-		float: left;
-		clear: left;
-		margin-left: 0px;
-		margin-right: 0px;
-		margin-top: 10px;
+	.tips-tax-title { float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;
 	}
-	.tips-tax-total {
-		float: right;
-		clear: right;
-		margin-left: 0px;
-		margin-right: 0px;
-		margin-top: 10px;
+	.tips-tax-total { float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 10px;
 	}
-	.bill-total-section-individual {
-		text-align: center;
-		margin-left: 10px;
-		margin-right: 10px;
-		padding-top: 20px;
-		border-top: 2px dotted #7f7f7f;
-		margin-top: 70px;
-		margin-bottom: 50px;
+	.bill-total-section-individual { text-align: center; margin-left: 10px; margin-right: 10px; padding-top: 20px; border-top: 2px dotted #7f7f7f; margin-top: 70px; margin-bottom: 50px;
 	}
-	.tips-total-title {
-		font-size: 24px;
-		display: inline;
+	.tips-total-title { font-size: 24px; display: inline;
 	}
-	.tips-total-amount {
-		font-size: 22px;
-		float: right;
-		margin-top: 0px;
-		margin-bottom: 0px;
+	.tips-total-amount { font-size: 22px; float: right; margin-top: 0px; margin-bottom: 0px;
 	}
   * {
     margin-bottom: 0px;
@@ -329,33 +273,33 @@
 <td align="center" valign="top">
 
 <!-- Actual receipt goes here. -->
-<div class="tips-top-section">
-  <img class="tips-business-logo" src="{{ $profile->logo->url }}">
-  <h4 class="tips-business-title">Purchase on {{ date_format($transaction->updated_at, 'M-d-Y') }}</h4>
+<div style="padding-bottom: 20px;">
+  <img style="border-radius: 50%; width:70px; height:70px; margin-top: 20px; margin-left: 25px; float: left; display: inline-block; margin-bottom: 30px;" src="{{ $profile->logo->url }}">
+  <h4 style="font-size: 16px; display: inline-block; margin-top: 70px; color: #3a3a3a;">Purchase on {{ date_format($transaction->updated_at, 'M-d-Y') }}</h4>
 </div>
-<div class="tips-main-section">
-  <div class="tips-receipt-section-header">
-    <h4>Item</h4>
-    <h4 class="pull-right">Amount</h4>
+<div style="clear: both;">
+  <div style="border-top: 2px solid #7f7f7f; border-bottom: 2px solid #7f7f7f; margin-left: 10px; margin-right: 10px;">
+    <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 16px; margin-top: 4px; color: #3a3a3a;">Item</h4>
+    <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 16px; margin-top: 4px; color: #3a3a3a; float: right;">Amount</h4>
   </div>
-  <div class="tips-receipt-section-body">
+  <div style="margin-left: 10px; margin-right: 10px; color: #3a3a3a">
     @foreach($items as $item)
-      <h4 class="tips-item-name">{{ $item->quantity }}x {{ $item->name }}</h4>
-      <h4 class="tips-item-amount">${{ ($item->price * $item->quantity) / 100 }}</h4>
+      <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 14px; float: left; clear: left;">{{ $item->quantity }}x {{ $item->name }}</h4>
+      <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 14px; float: right; clear: right;">${{ ($item->price * $item->quantity) / 100 }}</h4>
     @endforeach
-    <div class="tips-receipt-section-subtotal">
-      <h4 class="tips-tax-title">Tax</h4>
-      <h4 class="tips-tax-total">${{$transaction->tax / 100 }}</h4>
+    <div style="clear: both;">
+      <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;">Tax</h4>
+      <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 10px;">${{$transaction->tax / 100 }}</h4>
       @if($transaction->tips != null && $transaction->tips != 0)
-        <h4 class="tips-tax-title">Tip</h4>
-        <h4 class="tips-tax-total">${{ $transaction->tips / 100 }}</h4>
+        <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;">Tip</h4>
+        <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 10px;">${{ $transaction->tips / 100 }}</h4>
       @endif
     </div>
   </div>
 </div>
-<div class="bill-total-section-individual">
-  <h3 class="tips-total-title">Total</h3>
-  <h3 class="tips-total-amount">${{ $transaction->total / 100  }}</h3>
+<div style="text-align: center; margin-left: 10px; margin-right: 10px; padding-top: 20px; border-top: 2px dotted #7f7f7f; margin-top: 70px; margin-bottom: 50px;">
+  <h3 style="font-size: 24px; display: inline;">Total</h3>
+  <h3 style="font-size: 22px; float: right; margin-top: 0px; margin-bottom: 0px;">${{ $transaction->total / 100  }}</h3>
 </div>
 
 </td>
