@@ -27,6 +27,10 @@
 	.tips-business-title{margin-bottom: 0px; font-size: 17px;}
 	.tips-main-section {
 		clear: both;
+		display: inline-block;
+    margin-top: 70px;
+    font-size: 16px;
+    color: #3a3a3a;
 	}
 	.tips-receipt-section-header{
 		border-top: 2px solid #7f7f7f;
@@ -54,13 +58,10 @@
 		font-size: 14px;
 	}
 	.tips-item-name {
-		padding-top: 10px;
 		float: left;
 		clear: left;
 	}
 	.tips-item-amount {
-		padding-top: 3px;
-		padding-bottom: 7px;
 		float: right;
 		clear: right;
 	}
@@ -328,7 +329,7 @@
 <!-- Actual receipt goes here. -->
 <div class="tips-top-section">
   <img class="tips-business-logo" src="{{ $profile->logo->url }}">
-  <h4 class="tips-business-title">Purchase on {{ date_format($transaction->updated_at, 'M-d-y') }}</h4>
+  <h4 class="tips-business-title">purchase on {{ date_format($transaction->updated_at, 'M-d-Y') }}</h4>
 </div>
 <div class="tips-main-section">
   <div class="tips-receipt-section-header">
