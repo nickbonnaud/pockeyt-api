@@ -7,6 +7,7 @@
     <h1>
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
+    <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-block btn-info btn-sm">Custom Item</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
@@ -56,8 +57,38 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="customItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="customItem">Custom</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-10">
+                    <input v-model="name" type="text" class="form-control" id="inputName" placeholder="Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                  <div class="col-sm-10">
+                    <input v-model="price" type="number" class="form-control" id="inputPrice" placeholder="Price">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-block btn-info" v-on:click="addCustomProduct()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-
 </div>
 @stop
 
@@ -70,6 +101,8 @@
 
       data: {
         bill: [],
+        name: '',
+        price: ''
       },
 
       computed: {
@@ -94,6 +127,16 @@
       },
 
       methods: {
+        addCustomProduct: function() {
+          var product = {
+            quantity: 1,
+            name: this.name,
+            price: this.price * 100
+          };
+          this.bill.push(product);
+          $('#customItem').modal('hide');
+        },
+
         addProduct: function(product) {
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});

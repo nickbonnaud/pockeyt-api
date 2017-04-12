@@ -172,16 +172,6 @@ Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
 
 
-
-
-
-Route::get('email/test', 'EmailController@show')->name('emails.receipt');
-
-
-
-
-
-
 //API routes V2
 Route::group(['prefix' => 'api/v2'], function() {
     Route::get('profiles', 'APIController@getProfilesV2');
