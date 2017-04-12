@@ -2,6 +2,103 @@
 The Glass Jug
 </title>
 <style>
+	.tips-top-section {
+		font-family: "RealtimeRounded"; 
+		padding-bottom: 20px;
+	}
+	.tips-business-logo {
+		border-radius: 50%;
+		width:70px;
+		height:70px;
+		margin-top: 20px;
+		margin-left: 10px;
+		float: left;
+		display: inline-block;
+		margin-bottom: 30px;
+	}
+	.tips-title-section {
+		display: inline-block;
+		float: right;
+		position: absolute;
+		margin-top: 40px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.tips-business-title{margin-bottom: 0px; font-size: 17px;}
+	.tips-main-section {
+		clear: both;
+	}
+	.tips-receipt-section-header{
+		border-top: 2px solid #7f7f7f;
+		border-bottom: 2px solid #7f7f7f;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.tips-receipt-section-header h4 {
+		display: inline;
+		margin-left: 10px;
+		margin-right: 10px;
+		font-size: 16px;
+		margin-top: 4px;
+		color: #3a3a3a;
+	}
+	.tips-receipt-section-body {
+		margin-left: 10px;
+		margin-right: 10px;
+		color: #3a3a3a;
+	}
+	.tips-receipt-section-body h4 {
+		display: inline;
+		margin-left: 10px;
+		margin-right: 10px;
+		font-size: 14px;
+	}
+	.tips-item-name {
+		padding-top: 10px;
+		float: left;
+		clear: left;
+	}
+	.tips-item-amount {
+		padding-top: 3px;
+		padding-bottom: 7px;
+		float: right;
+		clear: right;
+	}
+	.tips-receipt-section-subtotal {
+		clear: both;
+	}
+	.tips-tax-title {
+		float: left;
+		clear: left;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 10px;
+	}
+	.tips-tax-total {
+		float: right;
+		clear: right;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 10px;
+	}
+	.bill-total-section-individual {
+		text-align: center;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding-top: 20px;
+		border-top: 2px dotted #7f7f7f;
+		margin-top: 70px;
+		margin-bottom: 50px;
+	}
+	.tips-total-title {
+		font-size: 24px;
+		display: inline;
+	}
+	.tips-total-amount {
+		font-size: 22px;
+		float: right;
+		margin-bottom: 0px;
+	}
   * {
     margin-bottom: 0px;
     padding: 0px;
