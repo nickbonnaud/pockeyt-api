@@ -24,7 +24,12 @@
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-	.tips-business-title{margin-bottom: 0px; font-size: 17px;}
+	.tips-business-title{
+		font-size: 16px;
+    display: inline-block;
+    margin-top: 70px;
+    color: 
+	}
 	.tips-main-section {
 		clear: both;
 	}
@@ -40,7 +45,7 @@
 		margin-right: 10px;
 		font-size: 16px;
 		margin-top: 4px;
-		color: #3a3a3a;
+		color: #505050;
 	}
 	.tips-receipt-section-body {
 		margin-left: 10px;
@@ -54,13 +59,10 @@
 		font-size: 14px;
 	}
 	.tips-item-name {
-		padding-top: 10px;
 		float: left;
 		clear: left;
 	}
 	.tips-item-amount {
-		padding-top: 3px;
-		padding-bottom: 7px;
 		float: right;
 		clear: right;
 	}
