@@ -443,8 +443,8 @@ class TransactionsController extends Controller
 
         return Mail::send('emails.receipt', ['items' => $items, 'profile' => $profile, 'transaction' => $transaction], function($m) use ($customer, $profile) {
             $m->from('receipts@pockeyt.com', 'Pockeyt Receipts');
-            $m->to($customer->email, $customer->first_name)->subject('Pockeyt receipt from ' + $profile->business_name);
-        });
+            $m->to($customer->email, $customer->first_name)->subject('Recent transaction from Pockeyt');
+      });
     }
 
     public function updateLoyaltyCard($newLoyaltyCard, $customer, $profile) {
