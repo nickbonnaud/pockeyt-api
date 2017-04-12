@@ -28,7 +28,7 @@
 		font-size: 16px;
     display: inline-block;
     margin-top: 70px;
-    color: 
+    color: #3a3a3a;
 	}
 	.tips-main-section {
 		clear: both;
@@ -38,7 +38,6 @@
 		border-bottom: 2px solid #7f7f7f;
 		margin-left: 10px;
 		margin-right: 10px;
-		color: #3a3a3a;
 	}
 	.tips-receipt-section-header h4 {
 		display: inline;
