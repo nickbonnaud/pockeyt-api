@@ -11,7 +11,7 @@
 		width:70px;
 		height:70px;
 		margin-top: 20px;
-		margin-left: 10px;
+		margin-left: 25px;
 		float: left;
 		display: inline-block;
 		margin-bottom: 30px;
