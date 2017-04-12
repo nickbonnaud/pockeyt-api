@@ -327,7 +327,7 @@ The Glass Jug
 
 <!-- Actual receipt goes here. -->
 <div class="tips-top-section">
-  <img class="tips-business-logo" src="{{ $profile->logo->thumbnail_path }}">
+  <img class="tips-business-logo" src="{{ $profile->->logo->url }}">
   <span class="tips-title-section">
     <h4 class="tips-business-title">{{ $transaction->business_name }}</h4>
     <p>{{ $transaction->updated_at }}</p>
