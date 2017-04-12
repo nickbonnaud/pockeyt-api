@@ -284,8 +284,8 @@
   </div>
   <div style="margin-left: 10px; margin-right: 10px; color: #3a3a3a">
     @foreach($items as $item)
-      <h4 style="display: inline; font-size: 14px; float: left; clear: left;">{{ $item->quantity }}x {{ $item->name }}</h4>
-      <h4 style="display: inline; font-size: 14px; float: right; clear: right;">${{ ($item->price * $item->quantity) / 100 }}</h4>
+      <h4 style="display: inline; font-size: 14px; float: left; clear: left; margin-top: 10px;">{{ $item->quantity }}x {{ $item->name }}</h4>
+      <h4 style="display: inline; font-size: 14px; float: right; clear: right; margin-top: 10px;">${{ ($item->price * $item->quantity) / 100 }}</h4>
     @endforeach
     <div style="clear: both;">
       <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;">Tax</h4>
