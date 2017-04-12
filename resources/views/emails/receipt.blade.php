@@ -38,6 +38,7 @@
 		border-bottom: 2px solid #7f7f7f;
 		margin-left: 10px;
 		margin-right: 10px;
+		color: #3a3a3a;
 	}
 	.tips-receipt-section-header h4 {
 		display: inline;
@@ -45,7 +46,7 @@
 		margin-right: 10px;
 		font-size: 16px;
 		margin-top: 4px;
-		color: #505050;
+		color: #3a3a3a;
 	}
 	.tips-receipt-section-body {
 		margin-left: 10px;
