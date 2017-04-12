@@ -99,6 +99,7 @@
 	.tips-total-amount {
 		font-size: 22px;
 		float: right;
+		margin-top: 0px;
 		margin-bottom: 0px;
 	}
   * {
@@ -427,7 +428,7 @@ Share Pockeyt with a Friend
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="min-width:100%;" width="100%">
 <tr>
 <td align="left" style="font-family: Arial, sans-serif; font-size:16px; color:#ffffff; text-align:left; line-height:23px;" valign="top">
-Email the Pockeyt team:
+Email the Pockeyt team
 <br>
 <a style="text-decoration:underline; color:#ffffff;" href="mailto:info@pockeyt.com">Email us</a>
 </td>
