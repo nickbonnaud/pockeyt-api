@@ -329,8 +329,8 @@
 <div class="tips-top-section">
   <img class="tips-business-logo" src="{{ $profile->logo->url }}">
   <span class="tips-title-section">
-    <h4 class="tips-business-title">{{ $transaction->business_name }}</h4>
-    <h4>Purchase Date: {{ date_format($transaction->updated_at, 'M-d-y') }}</h4>
+    <h4 class="tips-business-title">{{ $profile->business_name }}</h4>
+    <h4 class="tips-business-title">Purchase Date: {{ date_format($transaction->updated_at, 'M-d-y') }}</h4>
   </span>
 </div>
 <div class="tips-main-section">
