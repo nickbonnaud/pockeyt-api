@@ -173,6 +173,15 @@ Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoi
 
 
 
+
+
+Route::get('email/test', 'EmailController@show')->name('show.email');
+
+
+
+
+
+
 //API routes V2
 Route::group(['prefix' => 'api/v2'], function() {
     Route::get('profiles', 'APIController@getProfilesV2');

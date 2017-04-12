@@ -191,7 +191,7 @@
                       <div class="box box-primary">
                         <div class="box-header with-border">
                           <i class="fa fa-history"></i>
-                          <h3 class="box-title">Last 5 Purchases</h3>
+                          <h3 class="box-title">Date of Last 5 Purchases</h3>
                         </div>
                         <div class="box-body">
                           <div class="chart">
