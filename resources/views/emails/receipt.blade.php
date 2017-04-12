@@ -279,13 +279,13 @@
 </div>
 <div style="clear: both;">
   <div style="border-top: 2px solid #7f7f7f; border-bottom: 2px solid #7f7f7f; margin-left: 10px; margin-right: 10px;">
-    <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 16px; margin-top: 4px; color: #3a3a3a;">Item</h4>
-    <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 16px; margin-top: 4px; color: #3a3a3a; float: right;">Amount</h4>
+    <h4 style="display: inline; font-size: 16px; margin-top: 4px; color: #3a3a3a; float: left; clear: left;">Item</h4>
+    <h4 style="display: inline; font-size: 16px; margin-top: 4px; color: #3a3a3a; float: right;">Amount</h4>
   </div>
   <div style="margin-left: 10px; margin-right: 10px; color: #3a3a3a">
     @foreach($items as $item)
-      <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 14px; float: left; clear: left;">{{ $item->quantity }}x {{ $item->name }}</h4>
-      <h4 style="display: inline; margin-left: 10px; margin-right: 10px; font-size: 14px; float: right; clear: right;">${{ ($item->price * $item->quantity) / 100 }}</h4>
+      <h4 style="display: inline; font-size: 14px; float: left; clear: left;">{{ $item->quantity }}x {{ $item->name }}</h4>
+      <h4 style="display: inline; font-size: 14px; float: right; clear: right;">${{ ($item->price * $item->quantity) / 100 }}</h4>
     @endforeach
     <div style="clear: both;">
       <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;">Tax</h4>
