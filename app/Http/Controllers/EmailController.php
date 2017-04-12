@@ -20,6 +20,6 @@ class EmailController extends Controller
 		$transaction = Transaction::where('profile_id', '=', $profile->id)->first();
 		$items = json_decode($transaction->products);
 
-		return view('show.email', compact('transaction', 'items'));
+		return view('emails.receipt', compact('transaction', 'items'));
 	}
 }

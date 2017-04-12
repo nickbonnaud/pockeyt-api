@@ -175,7 +175,7 @@ Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoi
 
 
 
-Route::get('email/test', 'EmailController@show')->name('show.email');
+Route::get('email/test', 'EmailController@show')->name('emails.receipt');
 
 
 
