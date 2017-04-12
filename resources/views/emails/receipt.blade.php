@@ -285,21 +285,21 @@
   <div style="margin-left: 10px; margin-right: 10px; color: #3a3a3a">
     @foreach($items as $item)
       <h4 style="display: inline; font-size: 14px; float: left; clear: left; margin-top: 10px;">{{ $item->quantity }}x {{ $item->name }}</h4>
-      <h4 style="display: inline; font-size: 14px; float: right; clear: right; margin-top: 10px;">${{ round(($item->price * $item->quantity) / 100, 2) }}</h4>
+      <h4 style="display: inline; font-size: 14px; float: right; clear: right; margin-top: 10px;">${{ number_format((float)round(($item->price * $item->quantity) / 100, 2), 2) }}</h4>
     @endforeach
     <div style="clear: both;">
       <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 15px;">Tax</h4>
-      <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 15px;">${{ round($transaction->tax / 100, 2) }}</h4>
+      <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 15px;">${{ number_format((float)round($transaction->tax / 100, 2), 2) }}</h4>
       @if($transaction->tips != null && $transaction->tips != 0)
         <h4 style="float: left; clear: left; margin-left: 0px; margin-right: 0px; margin-top: 10px;">Tip</h4>
-        <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 10px;">${{ round($transaction->tips / 100, 2) }}</h4>
+        <h4 style="float: right; clear: right; margin-left: 0px; margin-right: 0px; margin-top: 10px;">${{ number_format((float)round($transaction->tips / 100, 2), 2) }}</h4>
       @endif
     </div>
   </div>
 </div>
 <div style="text-align: center; margin-left: 10px; margin-right: 10px; padding-top: 20px; border-top: 2px dotted #7f7f7f; margin-top: 70px; margin-bottom: 50px;">
   <h3 style="font-size: 24px; display: inline;">Total</h3>
-  <h3 style="font-size: 22px; float: right; margin-top: 0px; margin-bottom: 0px;">${{ round($transaction->total / 100, 2)  }}</h3>
+  <h3 style="font-size: 22px; float: right; margin-top: 0px; margin-bottom: 0px;">${{ number_format((float)round($transaction->total / 100, 2), 2)  }}</h3>
 </div>
 
 </td>
