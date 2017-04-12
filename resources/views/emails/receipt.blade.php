@@ -330,7 +330,7 @@
   <img class="tips-business-logo" src="{{ $profile->logo->url }}">
   <span class="tips-title-section">
     <h4 class="tips-business-title">{{ $transaction->business_name }}</h4>
-    <p>{{ date_format($transaction->updated_at, 'M-D-y') }}</p>
+    <p>{{ date_format($transaction->updated_at, 'M-d-y') }}</p>
   </span>
 </div>
 <div class="tips-main-section">
