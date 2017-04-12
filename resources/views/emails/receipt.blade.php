@@ -427,7 +427,7 @@ Share Pockeyt with a Friend
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="min-width:100%;" width="100%">
 <tr>
 <td align="left" style="font-family: Arial, sans-serif; font-size:16px; color:#ffffff; text-align:left; line-height:23px;" valign="top">
-The Pockeyt team wants to hear from you:
+Email the Pockeyt team:
 <br>
 <a style="text-decoration:underline; color:#ffffff;" href="mailto:info@pockeyt.com">Email us</a>
 </td>
