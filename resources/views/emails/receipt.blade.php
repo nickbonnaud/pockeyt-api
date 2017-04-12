@@ -242,16 +242,16 @@ The Glass Jug
     <h4 class="pull-right">Amount</h4>
   </div>
   <div class="tips-receipt-section-body">
-    @foreach($bill as $item)
+    @foreach($items as $item)
       <h4 class="tips-item-name">{{ $item->quantity }}x {{ $item->name }}</h4>
       <h4 class="tips-item-amount">${{ ($item->price * $item->quantity) / 100 }}</h4>
     @endforeach
     <div class="tips-receipt-section-subtotal">
       <h4 class="tips-tax-title">Tax</h4>
       <h4 class="tips-tax-total">${{$transaction->tax / 100 }}</h4>
-      @if($transaction->tips != null && transaction->tips != 0)
+      @if($transaction->tips != null && $transaction->tips != 0)
         <h4 class="tips-tax-title">Tip</h4>
-        <h4 class="tips-tax-total">${{$transaction->tips / 100 }}</h4>
+        <h4 class="tips-tax-total">${{ $transaction->tips / 100 }}</h4>
       @endif
     </div>
   </div>
