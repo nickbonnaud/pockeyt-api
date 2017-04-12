@@ -530,8 +530,8 @@ Email the Pockeyt team
 </tr>
 <tr>
 <td align="left" valign="top">
-<a href="http://shopkeep.com?utm_source=receipt&utm_medium=email&utm_campaign=RECEIPTS" >
-<img border="0" height="118" style="display:block;" width="118" src="{{ asset('/images/full-logo.png') }}" alt="Shopkeep">
+<a href="http://pockeyt.com">
+<img border="0" height="80" style="display:block;" width="80" src="{{ asset('/images/full-logo.png') }}" alt="Shopkeep">
 </a>
 </td>
 </tr>
