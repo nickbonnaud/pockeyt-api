@@ -392,7 +392,7 @@ Share Pockeyt with a Friend
 </tr>
 <tr>
 <td align="left" style="line-height:0px; font-size:0px;" valign="top" width="27">
-<a  href="http://bit.ly/1Dw0Mrb"><img border="0" height="40" style="display:block; margin-right: -5px;" width="40" src="{{ asset('/images/white-logo-sq.png') }}" alt="Pockeyt"></a>
+<a  href="mailto:?body=Download link for Pockeyt: https://bnc.lt/igem/zeKtENCUhC"><img border="0" height="40" style="display:block; margin-right: -5px;" width="40" src="{{ asset('/images/white-logo-sq.png') }}" alt="Pockeyt"></a>
 </td>
 </tr>
 </table>
