@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use DateTimeZone;
 use App\PushId;
 use App\Profile;
+use Mail;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
@@ -172,6 +173,7 @@ class TransactionsController extends Controller
                 event(new TransactionsChange($profile));
                 $this->checkRecentViewedPosts($customer, $profile, $transaction);
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+                $this->sendEmailReceipt($customer, $profile, $transaction);
                 return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
             } else {
                 $transaction->paid = false;
@@ -433,6 +435,16 @@ class TransactionsController extends Controller
             return $loyaltyCard;
 
         }
+    }
+
+    public function sendEmailReceipt($customer, $profile, $transaction) {
+        $items = $transaction->products;
+        $items = json_decode($items);
+
+        return Mail::send('emails.receipt', ['items' => $items, 'profile' => $profile, 'transaction' => $transaction], function($m) use ($customer, $profile) {
+            $m->from('receipts@pockeyt.com', 'Pockeyt Receipts');
+            $m->to($customer->email, $customer->first_name)->subject('Pockeyt receipt from ' + $profile->business_name);
+        });
     }
 
     public function updateLoyaltyCard($newLoyaltyCard, $customer, $profile) {
