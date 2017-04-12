@@ -500,7 +500,7 @@ Email the Pockeyt team
 </tr>
 <tr>
 <td align="center" style="font-family: Arial, sans-serif; font-size:14px; color:#b1c300; text-align:center; line-height:18px;" valign="top">
-<a href="{{$profile->website}}" style="text-decoration:none; color:#b1c300;" >{{ $profile->website }}</a>
+<a href="http://{{$profile->website}}" style="text-decoration:none; color:#b1c300;" >{{ $profile->website }}</a>
 </td>
 </tr>
 </table>
