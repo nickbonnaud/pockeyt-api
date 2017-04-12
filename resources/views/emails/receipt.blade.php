@@ -383,7 +383,7 @@
 <td align="left" style="font-family: Arial, sans-serif; font-size:16px; color:#ffffff; text-align:left; line-height:23px;" valign="top">
 Share Pockeyt with a Friend
 <br>
-<a style="text-decoration:underline; color:#ffffff;"  href="http://bit.ly/1Dw0Mrb">Email Link</a>
+<a style="text-decoration:underline; color:#ffffff;"  href="mailto:?body=Download link for Pockeyt: https://bnc.lt/igem/zeKtENCUhC">Email Link</a>
 </td>
 <td align="left" valign="top" width="27">
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="min-width:27px;" width="27">
@@ -392,7 +392,7 @@ Share Pockeyt with a Friend
 </tr>
 <tr>
 <td align="left" style="line-height:0px; font-size:0px;" valign="top" width="27">
-<a  href="mailto:?body=Download link for Pockeyt: https://bnc.lt/igem/zeKtENCUhC"><img border="0" height="40" style="display:block; margin-right: -5px;" width="40" src="{{ asset('/images/white-logo-sq.png') }}" alt="Pockeyt"></a>
+<a href="mailto:?body=Download link for Pockeyt: https://bnc.lt/igem/zeKtENCUhC"><img border="0" height="40" style="display:block; margin-right: -5px;" width="40" src="{{ asset('/images/white-logo-sq.png') }}" alt="Pockeyt"></a>
 </td>
 </tr>
 </table>
@@ -427,9 +427,9 @@ Share Pockeyt with a Friend
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="min-width:100%;" width="100%">
 <tr>
 <td align="left" style="font-family: Arial, sans-serif; font-size:16px; color:#ffffff; text-align:left; line-height:23px;" valign="top">
-We want to hear from you:
+The Pockeyt team wants to hear from you:
 <br>
-<a style="text-decoration:underline; color:#ffffff;" href="mailto:Info@glass-jug.com" >Email us</a>
+<a style="text-decoration:underline; color:#ffffff;" href="mailto:info@pockeyt.com">Email us</a>
 </td>
 <td align="left" valign="top" width="30">
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="min-width:30px;" width="30">
@@ -438,7 +438,7 @@ We want to hear from you:
 </tr>
 <tr>
 <td align="left" style="line-height:0px; font-size:0px;" valign="top" width="30">
-<a href="mailto:Info@glass-jug.com" ><img border="0" height="24" style="display:block;" width="30" src="https://assets.shopkeepapp.com/assets/custom_receipts_mailer/email-e0f325f7d54ee754260746c392babafc.png" alt="Email"></a>
+<a href="mailto:info@pockeyt.com" ><img border="0" height="24" style="display:block;" width="30" src="{{ asset('/images/email-icon.png') }}" alt="Email"></a>
 </td>
 </tr>
 </table>
