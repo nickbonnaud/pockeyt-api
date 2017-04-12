@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 Use Illuminate\HttpResponse;
 use App\Http\Requests;
 use App\Transaction;
+use Mail;
 use App\Http\Controllers\Controller;
 
 class EmailController extends Controller
@@ -21,6 +22,9 @@ class EmailController extends Controller
 		$items = $transaction->products;
 		$items = json_decode($items);
 
-		return view('emails.receipt', compact('transaction', 'items', 'profile'));
+	return Mail::send('emails.receipt', ['items' => $items, 'profile' => $profile, 'transaction' => $transaction], function($m) use ($customer, $profile) {
+          $m->from('receipts@pockeyt.com', 'Pockeyt Receipts');
+          $m->to($customer->email, $customer->first_name)->subject('Pockeyt receipt from ' + $profile->business_name);
+      });
 	}
 }
