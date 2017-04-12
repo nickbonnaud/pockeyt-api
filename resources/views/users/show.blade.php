@@ -42,27 +42,6 @@
               </a>
             </div>
           @endif
-          <div class="modal fade" id="userPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="userPhotoModalLabel">Change User Photo</h4>
-					      </div>
-					      <div class="modal-body">
-					      		<div class="box-body">
-					      			<p><label>Click or Drag-n-Drop your Profile Photo Here</label></p>
-                       <form id="uploadProfilePhoto" action="{{ route('users.photos', ['users' => $user->id]) }}" method="POST" class="dropzone">
-                            {{ csrf_field() }}
-                        </form>
-					      		</div>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
           <ul class="list-group list-group-unbordered">
           	<li class="list-group-item">
           		<b>First Name</b>
@@ -80,7 +59,15 @@
           <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#userInfoModal">
           	<b>Edit</b>
           </a>
-          <div class="modal fade" id="userPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        </div>
+      </div>
+      @include ('errors.form')
+    </div>
+    <!-- /.box -->
+  </section>
+  <!-- /.content -->
+</div>
+<div class="modal fade" id="userPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -95,14 +82,27 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      @include ('errors.form')
-    </div>
-    <!-- /.box -->
-  </section>
-  <!-- /.content -->
-</div>
+<div class="modal fade" id="userPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="userPhotoModalLabel">Change User Photo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                      <p><label>Click or Drag-n-Drop your Profile Photo Here</label></p>
+                       <form id="uploadProfilePhoto" action="{{ route('users.photos', ['users' => $user->id]) }}" method="POST" class="dropzone">
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 <!-- /.content-wrapper -->
 @stop
 
