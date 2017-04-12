@@ -247,7 +247,7 @@
 </tr>
 <tr>
 <td align="center" style="line-height:0px; font-size:0px;" valign="top">
-<img alt="" border="0" style="display:block;" width="100%" src="https://assets.shopkeepapp.com/assets/custom_receipts_mailer/top-img-07115fd4dd66ba300aa4ec8709c87687.jpg">
+<img alt="" border="0" style="display:block;" width="100%" src="{{ asset('/images/top-receipt.jpg') }}">
 </td>
 </tr>
 <tr>
@@ -516,7 +516,7 @@ Email the Pockeyt team
 </tr>
 <tr>
 <td align="center" style="line-height:0px; font-size:0px;" valign="top">
-<img border="0" style="display:block;" width="100%" src="https://assets.shopkeepapp.com/assets/custom_receipts_mailer/graphic-footer-120dcc1e92dd0d1ce44bbc25c1e0a570.jpg" alt="Graphic footer">
+<img border="0" style="display:block;" width="100%" src="{{ asset('/images/bottom-receipt.jpg') }}" alt="Graphic footer">
 </td>
 </tr>
 <tr>
