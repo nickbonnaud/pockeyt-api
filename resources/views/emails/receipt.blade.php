@@ -500,7 +500,7 @@ Email the Pockeyt team
 </tr>
 <tr>
 <td align="center" style="font-family: Arial, sans-serif; font-size:14px; color:#b1c300; text-align:center; line-height:18px;" valign="top">
-<a href="Glass-Jug.com" style="text-decoration:none; color:#b1c300;" >{{ $profile->website }}</a>
+<a href="{{$profile->website}}" style="text-decoration:none; color:#b1c300;" >{{ $profile->website }}</a>
 </td>
 </tr>
 </table>
@@ -531,7 +531,7 @@ Email the Pockeyt team
 <tr>
 <td align="left" valign="top">
 <a href="http://pockeyt.com">
-<img border="0" height="80" style="display:block;" width="80" src="{{ asset('/images/full-logo.png') }}" alt="Shopkeep">
+<img border="0" height="80" style="display:block; margin-left: 15px;" width="80" src="{{ asset('/images/full-logo.png') }}" alt="Shopkeep">
 </a>
 </td>
 </tr>
