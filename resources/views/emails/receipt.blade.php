@@ -392,7 +392,7 @@ Share Pockeyt with a Friend
 </tr>
 <tr>
 <td align="left" style="line-height:0px; font-size:0px;" valign="top" width="27">
-<a  href="http://bit.ly/1Dw0Mrb"><img border="0" height="22" style="display:block;" width="27" src="{{ asset('/images/white-logo.png') }}" alt="Pockeyt"></a>
+<a  href="http://bit.ly/1Dw0Mrb"><img border="0" src="{{ asset('/images/white-logo.png') }}" alt="Pockeyt"></a>
 </td>
 </tr>
 </table>
