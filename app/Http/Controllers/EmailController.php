@@ -18,7 +18,8 @@ class EmailController extends Controller
 	public function show() {
 		$profile = $this->user->profile;
 		$transaction = Transaction::where('profile_id', '=', $profile->id)->first();
-		$items = json_decode($transaction->products);
+		$items = $transaction->products;
+		$items = json_decode($items);
 
 		return view('emails.receipt', compact('transaction', 'items', 'profile'));
 	}
