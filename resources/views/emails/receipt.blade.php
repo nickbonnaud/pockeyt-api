@@ -392,7 +392,7 @@ Share Pockeyt with a Friend
 </tr>
 <tr>
 <td align="left" style="line-height:0px; font-size:0px;" valign="top" width="27">
-<a  href="http://bit.ly/1Dw0Mrb"><img border="0" height="22" style="display:block;" width="27" src="https://assets.shopkeepapp.com/assets/custom_receipts_mailer/twitter-9601ee167fa00afb6cd8442c5a5b1a73.png" alt="Twitter"></a>
+<a  href="http://bit.ly/1Dw0Mrb"><img border="0" height="22" style="display:block;" width="27" src="{{ asset('/images/white-logo.png') }}" alt="Pockeyt"></a>
 </td>
 </tr>
 </table>
