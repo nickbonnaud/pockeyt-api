@@ -487,25 +487,20 @@ Email the Pockeyt team
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 <td align="center" class="call_text" style="font-family: Arial, sans-serif; font-size:14px; color:#8f969f; text-align:center; line-height:18px;" valign="top">
-5410 Hwy 55, Suite AF, Durham, NC, 27713
-<br class="not-shown">
-919-813-1084
+@if(isset($profile->account->bizStreetAdress))
+{{ $profile->account->bizStreetAdress }}, {{ $profile->account->bizCity }}, {{ $profile->account->bizState }}, {{ $profile->account->bizZip }}
+@endif
 </td>
 </tr>
 <tr>
 <td height="10" style="line-height:0px; font-size:0px;"></td>
 </tr>
 <tr>
-<td align="center" style="font-family: Arial, sans-serif; font-size:14px; color:#b1c300; text-align:center; line-height:18px;" valign="top">
-<a href="mailto:Info@glass-jug.com" style="text-decoration:none; color:#b1c300;" >Info@glass-jug.com</a>
-</td>
-</tr>
-<tr>
 <td height="10" style="line-height:0px; font-size:0px;"></td>
 </tr>
 <tr>
 <td align="center" style="font-family: Arial, sans-serif; font-size:14px; color:#b1c300; text-align:center; line-height:18px;" valign="top">
-<a href="Glass-Jug.com" style="text-decoration:none; color:#b1c300;" >Glass-Jug.com</a>
+<a href="Glass-Jug.com" style="text-decoration:none; color:#b1c300;" >{{ $profile->website }}</a>
 </td>
 </tr>
 </table>
