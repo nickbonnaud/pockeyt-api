@@ -127,14 +127,15 @@
       },
 
       methods: {
+        
         addCustomProduct: function() {
-            var product = {
-              quantity: 1,
-              name: this.name,
-              price: this.price * 100
-            };
-            this.bill.push(product);
-            $('#customItem').modal('hide');
+          var product = {
+            quantity: 1,
+            name: this.name,
+            price: this.price * 100
+          };
+          this.bill.push(product);
+          $('#customItem').modal('hide');
         },
 
         addProduct: function(product) {

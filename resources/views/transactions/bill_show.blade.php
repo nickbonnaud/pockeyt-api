@@ -7,6 +7,7 @@
     <h1>
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
+    <button data-toggle="modal" data-target="#customItem" type="button" class="btn bg-olive btn-sm">Custom Amount</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
@@ -56,8 +57,38 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="customItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header-timeline">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title" id="customItem">Custom Amount</h3>
+          </div>
+          <div class="modal-body-custom-amount">
+            <section class="content custom-amount">
+              <div class="col-md-12">
+                <form class="form-horizontal">
+                  <div class="form-group" style="margin-left: 15%;">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                      <input v-model="name" name="name" type="text" class="form-control" style="width: 50%;" id="inputName" placeholder="Name" required>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-left: 15%;">
+                    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                    <div class="col-sm-10">
+                      <input v-model="price" type="number" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
+                    </div>
+                  </div>
+                  <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-
 </div>
 @stop
 
@@ -77,6 +108,8 @@
 
       data: {
         bill: currentBill.fetch(),
+        name: '',
+        price: ''
         saved: false
       },
 
@@ -106,6 +139,17 @@
       },
 
       methods: {
+        
+        addCustomProduct: function() {
+          var product = {
+            quantity: 1,
+            name: this.name,
+            price: this.price * 100
+          };
+          this.bill.push(product);
+          $('#customItem').modal('hide');
+        },
+
         addProduct: function(product) {
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
