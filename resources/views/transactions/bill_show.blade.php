@@ -118,6 +118,12 @@
          $(window).on('beforeunload', this.leaving);
       },
 
+      filters: {
+        truncate: function(string, value) {
+          return string.substring(0, 20) + '...';
+        }
+      },
+
       computed: {
         subTotal: function() {
           var bill = this.bill;

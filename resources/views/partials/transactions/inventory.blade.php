@@ -6,7 +6,7 @@
         <img v-else src="{{ asset('/images/noImage.png') }}">
       </div>
       <div class="box-footer-inventory">
-        <b>@{{ product.name }}</b>
+        <b>@{{ product.name | truncate}}</b>
       </div>
     </div>
   </div>
