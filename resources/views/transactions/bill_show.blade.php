@@ -147,6 +147,8 @@
             price: this.price * 100
           };
           this.bill.push(product);
+          this.name = '';
+          this.price = '';
           $('#customItem').modal('hide');
         },
 
