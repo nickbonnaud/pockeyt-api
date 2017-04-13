@@ -60,27 +60,29 @@
     <div class="modal fade" id="customItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header-timeline">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="customItem">Custom</h4>
+              <h3 class="modal-title" id="customItem">Custom Amount</h3>
           </div>
-          <div class="modal-body">
-            <div class="col-md-12">
-              <form class="form-horizontal">
-                <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
-                  <div class="col-sm-10">
-                    <input v-model="name" type="text" class="form-control" id="inputName" placeholder="Name">
+          <div class="modal-body-customer-info">
+            <section class="content">
+              <div class="col-md-12">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                      <input v-model="name" type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-                  <div class="col-sm-10">
-                    <input v-model="price" type="number" class="form-control" id="inputPrice" placeholder="Price">
+                  <div class="form-group">
+                    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                    <div class="col-sm-10">
+                      <input v-model="price" type="number" class="form-control" id="inputPrice" placeholder="Price">
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                </form>
+              </div>
+            </section>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-block btn-info" v-on:click="addCustomProduct()">Add</button>
