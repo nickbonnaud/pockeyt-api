@@ -7,7 +7,7 @@
     <h1 class="header-button">
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
-    <button data-toggle="modal" data-target="#customItem" type="button" class="btn bg-olive btn-sm">Custom Amount</button>
+    <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-primary btn-sm custom-amount-btn">Custom Amount</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
@@ -15,11 +15,11 @@
   </section>
 
   <section class="content" id="inventory">
-  <form>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
-      </div>
+  <form class="product-search">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+      <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+    </div>
     </form>
     @include ('errors.form')
     <div class="scroll-container col-md-8">
@@ -86,7 +86,7 @@
                       <input v-model="price" type="number" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
                     </div>
                   </div>
-                  <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
+                  <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
                 </form>
               </div>
             </section>
