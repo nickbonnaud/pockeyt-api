@@ -109,7 +109,7 @@
       data: {
         bill: currentBill.fetch(),
         name: '',
-        price: ''
+        price: '',
         saved: false
       },
 
@@ -139,7 +139,7 @@
       },
 
       methods: {
-        
+
         addCustomProduct: function() {
           var product = {
             quantity: 1,
