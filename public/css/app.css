@@ -8622,8 +8622,8 @@ img {
 }
 
 .custom-amount {
-  min-height: 145px;
-  padding: 0px;
+  min-height: 145px !important;
+  padding: 0px !important;
 }
 
 .modal-body-custom-amount {
@@ -8637,7 +8637,7 @@ img {
 }
 
 .small-input {
-  width: 50%;
+  width: 50% !important;
 }
 
 
