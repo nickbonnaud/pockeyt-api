@@ -18,7 +18,7 @@
     <form class="product-search">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+        <input style="font-size: 28px;" type="text" name="query" class="form-control" placeholder="Search" v-model="query">
       </div>
     </form>
     @include ('errors.form')
