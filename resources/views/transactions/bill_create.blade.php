@@ -81,7 +81,7 @@
                     </div>
                   </div>
                 </form>
-                <button type="button" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
+                <button type="submit" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
               </div>
             </section>
           </div>
