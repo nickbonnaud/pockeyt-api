@@ -72,13 +72,27 @@
                 </div>
                 <!-- Business Location -->
                 <div class="col-md-6">
-                    
-                    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-                    <div id="map"></div>
-                    <div id="infowindow-content">
-                      <span id="place-name"  class="title"></span>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Change Location</h3>
+                        </div>
+                        <div class="box-body no-padding">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pad">
+                                        <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                                        <div id="map"></div>
+                                        <div id="infowindow-content">
+                                          <span id="place-name"  class="title"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
+                    
+
                     <div class="box box-primary collapsed-box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tags</h3>
