@@ -162,9 +162,10 @@
 
       methods: {
 
-        findBy: function(inventory, query, name) {
-          return inventory.filter(function(item) {
-            return item[name].includes(query);
+        findBy: function(list, value, column) {
+          console.log(value);
+          return list.filter(function(product) {
+            return product[column].includes(value);
           });
         },
 
