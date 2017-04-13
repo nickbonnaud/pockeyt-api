@@ -7,7 +7,7 @@
     <h1>
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
-    <button  data-toggle="modal" data-target="#customItem" type="button" class="btn btn-block btn-info btn-sm col-md-3">Custom Item</button>
+    <button  data-toggle="modal" data-target="#customItem" type="button" class="btn btn-block btn-info btn-sm">Custom Item</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
