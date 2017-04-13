@@ -80,7 +80,7 @@
                       <input v-model="price" type="number" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
                     </div>
                   </div>
-                  <button v-bind:disabled="(name == '' && price == '')" type="submit" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
+                  <button v-bind:disabled="(name == '' || price == '')" type="submit" class="btn btn-block bg-olive" v-on:click="addCustomProduct()">Add</button>
                 </form>
               </div>
             </section>
