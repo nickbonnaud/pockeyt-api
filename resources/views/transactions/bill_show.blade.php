@@ -111,7 +111,8 @@
         bill: currentBill.fetch(),
         name: '',
         price: '',
-        saved: false
+        saved: false,
+        query: ''
       },
 
       mounted: function() {
@@ -146,10 +147,20 @@
         totalBill: function() {
           var total = this.subTotal + this.totalTax;
           return total;
+        },
+
+        productsFilter: function() {
+          return this.findBy(this.inventory, this.query, 'name');
         }
       },
 
       methods: {
+
+        findBy: function(inventory, query, name) {
+          return inventory.filter(function(item) {
+            return item[name].includes(query);
+          });
+        },
 
         addCustomProduct: function() {
           var product = {
