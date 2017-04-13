@@ -74,7 +74,7 @@
                       <input v-model="name" type="text" class="form-control small-input" id="inputName" placeholder="Name">
                     </div>
                   </div>
-                  <div class="form-group custom-amount-input"">
+                  <div class="form-group custom-amount-input">
                     <label for="inputPrice" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
                       <input v-model="price" type="number" class="form-control small-input" id="inputPrice" placeholder="Price">
