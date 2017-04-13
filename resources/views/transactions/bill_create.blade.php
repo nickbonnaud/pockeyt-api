@@ -8,10 +8,12 @@
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
     <button data-toggle="modal" data-target="#customItem" type="button" class="btn bg-olive btn-sm">Custom Amount</button>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
-    </div>
+    <form>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+      </div>
+    </form>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
