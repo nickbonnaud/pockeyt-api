@@ -77,11 +77,15 @@
                             <h3 class="box-title">Location used for payments</h3>
                         </div>
                         <div class="box-body">
-                            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-                            <div id="map"></div>
-                            <div id="infowindow-content">
-                              <span id="place-name"  class="title"></span>
-                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                                    <div id="map"></div>
+                                    <div id="infowindow-content">
+                                      <span id="place-name"  class="title"></span>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="box-footer">
                             <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#businessLocationModal">
