@@ -107,7 +107,7 @@
       el: "#inventory",
 
       data: {
-        inventory: {{ $inventory }},
+        inventory: {!! $inventory !!},
         bill: currentBill.fetch(),
         name: '',
         price: '',
