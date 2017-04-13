@@ -18,7 +18,7 @@
     @include ('errors.form')
     <div class="scroll-container col-md-8">
       <div class="scroll-contents">
-        @include('partials.transactions.inventory', ['inventory' => $inventory])  
+        @include('partials.transactions.inventory')  
       </div>
     </div>
     <div class="col-md-4">
@@ -100,9 +100,16 @@
       el: "#inventory",
 
       data: {
+        inventory: {!! $inventory !!},
         bill: [],
         name: '',
         price: ''
+      },
+
+      filters: {
+        truncate: function(string, value) {
+          return string.substring(0, 20) + '...';
+        }
       },
 
       computed: {
