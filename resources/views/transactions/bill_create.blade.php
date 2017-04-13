@@ -128,7 +128,6 @@
 
       methods: {
         addCustomProduct: function() {
-          if ((this.price != '') && (this.name != '')) {
             var product = {
               quantity: 1,
               name: this.name,
@@ -136,7 +135,6 @@
             };
             this.bill.push(product);
             $('#customItem').modal('hide');
-          }
         },
 
         addProduct: function(product) {
