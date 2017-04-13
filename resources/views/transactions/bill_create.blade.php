@@ -4,10 +4,10 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>
+    <h1 class="header-button">
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
-    <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-info btn-sm">Custom Item</button>
+    <button data-toggle="modal" data-target="#customItem" type="button" class="btn bg-olive btn-sm">Custom Amount</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
