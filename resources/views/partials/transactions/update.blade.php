@@ -7,5 +7,5 @@
   <input type="hidden" name="net_sales" :value="subTotal">
   <input type="hidden" name="total" :value="totalBill">
   {{ csrf_field() }}
-  <input type="submit" value="Keep Open" class="btn btn-block btn-primary btn-xs">
+  <input type="submit" value="Keep Open" class="btn btn-block btn-success btn-xs">
 </form>

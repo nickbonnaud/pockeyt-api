@@ -15,11 +15,11 @@
   </section>
 
   <section class="content" id="inventory">
-  <form class="product-search">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-search"></i></span>
-      <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
-    </div>
+    <form class="product-search">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+      </div>
     </form>
     @include ('errors.form')
     <div class="scroll-container col-md-8">
@@ -163,8 +163,6 @@
       methods: {
 
         findBy: function(list, value, column) {
-          console.log(value);
-
           return list.filter(function(product) {
             return product[column].toLowerCase().includes(value.toLowerCase());
           });
