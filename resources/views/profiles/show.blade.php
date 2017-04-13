@@ -61,7 +61,7 @@
                 <h3 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h3>
               </div>
               <div class="modal-body-customer-info">
-                <section class="content">
+                <section class="content custom-amount">
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="info-box">
