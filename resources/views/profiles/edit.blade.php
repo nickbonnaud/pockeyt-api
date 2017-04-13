@@ -75,22 +75,20 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Location used for payments</h3>
-                            <div class="box-body">
-                                <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-                                <div id="map"></div>
-                                <div id="infowindow-content">
-                                  <span id="place-name"  class="title"></span>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#businessLocationModal">
-                                <b>Set Business to THIS Location</b>
-                                </a>
+                        </div>
+                        <div class="box-body">
+                            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+                            <div id="map"></div>
+                            <div id="infowindow-content">
+                              <span id="place-name"  class="title"></span>
                             </div>
                         </div>
+                        <div class="box-footer">
+                            <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#businessLocationModal">
+                            <b>Set Business to THIS Location</b>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="box box-primary collapsed-box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tags</h3>
