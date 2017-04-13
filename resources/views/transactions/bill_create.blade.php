@@ -68,16 +68,16 @@
             <section class="content custom-amount">
               <div class="col-md-12">
                 <form class="form-horizontal">
-                  <div class="form-group custom-amount-input">
+                  <div class="form-group" style="margin-left: 15%;">
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                      <input v-model="name" type="text" class="form-control small-input" id="inputName" placeholder="Name">
+                      <input v-model="name" type="text" class="form-control" style="width: 50%;" id="inputName" placeholder="Name">
                     </div>
                   </div>
                   <div class="form-group custom-amount-input">
                     <label for="inputPrice" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input v-model="price" type="number" class="form-control small-input" id="inputPrice" placeholder="Price">
+                      <input v-model="price" type="number" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price">
                     </div>
                   </div>
                 </form>
