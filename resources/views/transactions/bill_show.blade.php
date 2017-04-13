@@ -4,7 +4,7 @@
 
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>
+    <h1 class="header-button">
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
     <button data-toggle="modal" data-target="#customItem" type="button" class="btn bg-olive btn-sm">Custom Amount</button>
@@ -18,7 +18,7 @@
     @include ('errors.form')
     <div class="scroll-container col-md-8">
       <div class="scroll-contents">
-        @include('partials.transactions.inventory', ['inventory' => $inventory])  
+        @include('partials.transactions.inventory')  
       </div>
     </div>
     <div class="col-md-4">
@@ -107,6 +107,7 @@
       el: "#inventory",
 
       data: {
+        inventory: {{ $inventory }},
         bill: currentBill.fetch(),
         name: '',
         price: '',

@@ -1,18 +1,13 @@
-@if(count($inventory) > 0)
-  @foreach($inventory as $product)
-  	<div class="col-md-3">
-      <div class="box-inventory" v-on:click="addProduct({{ $product }})">
-        <div class="box-body-inventory">
-          @if(! is_null($product->product_photo_path))
-            <img src="{{ $product->product_tn_photo_path }}">
-          @else
-            <img src="{{ asset('/images/noImage.png') }}">
-          @endif
-        </div>
-        <div class="box-footer-inventory">
-          <b>{{ str_limit($product->name, 18) }}</b>
-        </div>
+<div v-if="inventory.length > 0" >
+	<div class="col-md-3" v-for="product in inventory">
+    <div class="box-inventory" v-on:click="addProduct({{ $product }})">
+      <div class="box-body-inventory">
+        <img v-if="product.product_tn_photo_path" :src="product->product_tn_photo_path">
+        <img v-else src="@{{ asset('/images/noImage.png') }}">
       </div>
+      <div class="box-footer-inventory">
+        <b>{{ product.name }}</b>
+      </div>
+    </div>
   </div>
-  @endforeach
-@endif
+</div>
