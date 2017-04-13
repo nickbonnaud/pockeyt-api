@@ -81,11 +81,9 @@
                     </div>
                   </div>
                 </form>
+                <button type="button" class="btn btn-block btn-info" v-on:click="addCustomProduct()">Add</button>
               </div>
             </section>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-block btn-info" v-on:click="addCustomProduct()">Add</button>
           </div>
         </div>
       </div>
