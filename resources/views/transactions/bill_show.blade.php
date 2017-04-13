@@ -120,7 +120,11 @@
 
       filters: {
         truncate: function(string, value) {
-          return string.substring(0, 20) + '...';
+          if (string.length > 20) {
+            return string.substring(0, 20) + '...';
+          } else {
+            return string;
+          }
         }
       },
 
