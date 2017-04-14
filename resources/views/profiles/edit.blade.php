@@ -331,12 +331,7 @@
             maximumSelectionLength: 3
         });
 
-        $('#map').animate({height: '300'}, 1500 ,
-                  function(){google.maps.event.trigger(map, 'resize');});
-        $('#map').animate({height: '300'},
-                         {progress:function()
-                                   {google.maps.event.trigger(map, 'resize');},
-                          duration:1500} );
+        
 
     </script>
 @stop
