@@ -77,7 +77,7 @@
                             <h3 class="box-title">Location used for payments</h3>
                             <div class="box-body">
                                 <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-                                <div style="height: 100%" id="map"></div>
+                                <div style="height: 50%" id="map"></div>
                                 <div id="infowindow-content">
                                   <span id="place-name"  class="title"></span>
                                 </div>
