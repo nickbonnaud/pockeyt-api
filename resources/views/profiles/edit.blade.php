@@ -242,7 +242,7 @@
             var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
             zoom: 17,
-            gestureHandling: 'auto'
+            gestureHandling: 'none'
             });
 
             var defaultMarker = new google.maps.Marker({
