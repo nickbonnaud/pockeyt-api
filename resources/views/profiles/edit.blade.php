@@ -75,7 +75,7 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Location used for payments</h3>
-                            <div style="height: 100px;" class="box-body">
+                            <div class="box-body">
                                 <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
                                 <div id="map"></div>
                                 <div id="infowindow-content">
@@ -341,6 +341,4 @@
                           duration:1500} );
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5bWVb25GSXY-fhI5EFNJ8JualZcSluXE&libraries=places&callback=initMap"
-        async defer></script>
 @stop
