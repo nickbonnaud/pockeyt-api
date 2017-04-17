@@ -295,6 +295,8 @@
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
           window.setInterval(this.removeInactiveUser, 120000);
+
+          this.getCustomersInLocation();
         },
 
         filters: {
@@ -320,6 +322,24 @@
         },
 
         methods: {
+
+          getCustomersInLocation: function() {
+            var businessId = '{{ $profile->id }}'
+
+            $.ajax({
+              method: 'POST',
+              url: 'geo/location/users',
+              data: {
+                'businessId' : businessId
+              },
+              success: data => {
+                console.log(data);
+              },
+              error: data => {
+                console.log(data);
+              }
+            })
+          },
 
           transactionDistance: function(purchase) {
             var mostRecent = Date.parse(this.purchases[0].updated_at);

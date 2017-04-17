@@ -198,6 +198,19 @@ class GeoController extends Controller
         $locationCheck->delete();
     }
 
+    public function getActiveUsers(Request $request) {
+        $business = $request->input('businessId');
+        $usersInLocation = Location::where('location_id', '=', $business)->get();
+
+        if (isset($usersInLocation)) {
+            foreach ($usersInLocation as $userLocation) {
+                $user = User::findOrFail($userLocation->user_id);
+                event(new CustomerEnterRadius($user, $business));
+            }
+        }
+        return response('users set');
+    }
+
     public function sendResponse($user) {
         $currentLocations = Location::where('user_id', '=', $user->id)->get();
         return response()->json($currentLocations);
