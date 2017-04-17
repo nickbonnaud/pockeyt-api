@@ -110,7 +110,7 @@ class GeoController extends Controller
                     event(new CustomerLeaveRadius($user, $business));
                     $storedLocation->delete();
                 } else {
-                    $storedLocation->update(['location_id' => $business]);
+                    $storedLocation->touch();
                     $key = array_search($business, $inLocations);
                     unset($inLocations[$key]);
                 }
