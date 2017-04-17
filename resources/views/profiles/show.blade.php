@@ -334,7 +334,9 @@
               },
               success: data => {
                 if (data != 'none') {
-                  console.log(data);
+                  data.forEach(function(user) {
+                    this.addUser(user);
+                  })
                 }
               },
               error: data => {
@@ -364,7 +366,12 @@
 
           addUser: function(data) {
             console.log(data);
-            var activeCustomer = data.user;
+            if (data.user) {
+              var activeCustomer = data.user;
+            } else {
+              var activeCustomer = data;
+            }
+            
             var users = this.users;
             var purchases = this.purchases;
 
