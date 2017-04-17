@@ -204,10 +204,10 @@ class GeoController extends Controller
         if (isset($usersInLocation)) {
             foreach ($usersInLocation as $userLocation) {
                 $user = User::findOrFail($userLocation->user_id);
-                return response($user);
                 event(new CustomerEnterRadius($user, $business));
             }
-        }   
+        }
+        return response('ok');
     }
 
     public function sendResponse($user) {
