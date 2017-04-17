@@ -335,7 +335,7 @@
               success: data => {
                 if (data != 'none') {
                   data.forEach(function(user) {
-                    customer.$methods.addUser(user);
+                    console.log(user);
                   })
                 }
               },
