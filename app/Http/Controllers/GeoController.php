@@ -200,6 +200,7 @@ class GeoController extends Controller
 
     public function getActiveUsers(Request $request) {
         $business = $request->input('businessId');
+        return response($business);
         $usersInLocation = Location::where('location_id', '=', $business)->get();
 
         if (isset($usersInLocation)) {
@@ -207,8 +208,7 @@ class GeoController extends Controller
                 $user = User::findOrFail($userLocation->user_id);
                 event(new CustomerEnterRadius($user, $business));
             }
-        }
-        return response('users set');
+        }   
     }
 
     public function sendResponse($user) {
