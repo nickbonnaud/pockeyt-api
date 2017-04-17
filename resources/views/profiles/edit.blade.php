@@ -331,7 +331,5 @@
             maximumSelectionLength: 3
         });
 
-        
-
     </script>
 @stop
