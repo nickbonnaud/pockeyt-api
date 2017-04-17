@@ -195,7 +195,12 @@ class GeoController extends Controller
             $query->where('user_id', '=', $userId)
                 ->where('location_id', '=', $businessId);
         })->first();
-        $locationCheck->delete();
+        if (!$locationCheck) {
+            return;
+        } else {
+            $locationCheck->delete();
+        }
+        
     }
 
     public function getActiveUsers(Request $request) {
@@ -205,9 +210,12 @@ class GeoController extends Controller
             $users = [];
             foreach ($usersInLocation as $userLocation) {
                 $timeIdle = strtotime("now") - strtotime($userLocation->updated_at);
-                return response($timeIdle);
-                $user = User::findOrFail($userLocation->user_id);
-                array_push($users, $user);
+                if ($timeIdle > 600) {
+                    $userLocation->delete();
+                } else {
+                    $user = User::findOrFail($userLocation->user_id);
+                    array_push($users, $user);
+                }
             }
             return response()->json($users);
         } else {
