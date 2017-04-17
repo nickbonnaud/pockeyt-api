@@ -294,7 +294,7 @@
           pusher.subscribe("{!! 'remove' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
-          window.setInterval(this.removeInactiveUser, 300);
+          window.setInterval(this.removeInactiveUser, 300000);
 
           this.getCustomersInLocation();
         },
