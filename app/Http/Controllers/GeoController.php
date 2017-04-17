@@ -200,9 +200,8 @@ class GeoController extends Controller
 
     public function getActiveUsers(Request $request) {
         $business = $request->input('businessId');
-        return response($business);
         $usersInLocation = Location::where('location_id', '=', $business)->get();
-
+        return response($usersInLocation);
         if (isset($usersInLocation)) {
             foreach ($usersInLocation as $userLocation) {
                 $user = User::findOrFail($userLocation->user_id);
