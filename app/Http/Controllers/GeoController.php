@@ -202,9 +202,9 @@ class GeoController extends Controller
         $business = $request->input('businessId');
         $usersInLocation = Location::where('location_id', '=', $business)->get();
         if (isset($usersInLocation)) {
-            return response($usersInLocation);
             foreach ($usersInLocation as $userLocation) {
                 $user = User::findOrFail($userLocation->user_id);
+                return response($user);
                 event(new CustomerEnterRadius($user, $business));
             }
         }   
