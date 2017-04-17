@@ -328,7 +328,7 @@
 
             $.ajax({
               method: 'POST',
-              url: 'geo/location/users',
+              url: '/geo/location/users',
               data: {
                 'businessId' : businessId
               },
