@@ -333,6 +333,7 @@
                 'businessId' : businessId
               },
               success: data => {
+                console.log(data);
                 if (data != 'none') {
                   data.forEach(function(user) {
                     customer.addUser(user);
