@@ -366,7 +366,11 @@
 
           addUser: function(data) {
             console.log(data);
-            var activeCustomer = data.user;
+            if ( data.user) {
+              var activeCustomer = data.user;
+            } else {
+              var activeCustomer = data;
+            }
             var users = this.users;
             var purchases = this.purchases;
 
