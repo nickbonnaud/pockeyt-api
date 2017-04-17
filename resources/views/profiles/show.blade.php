@@ -381,6 +381,7 @@
               success: data => {
                 if (data != 'none') {
                   data.forEach(function(user) {
+                    console.log(this);
                     this.addUser(user);
                   })
                 }
@@ -390,7 +391,7 @@
               }
             })
           },
-          
+
           removeUser: function(data) {
             console.log("remove user by distance");
             console.log(data);
