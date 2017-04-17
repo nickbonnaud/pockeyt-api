@@ -323,28 +323,6 @@
 
         methods: {
 
-          getCustomersInLocation: function() {
-            var businessId = '{{ $profile->id }}'
-
-            $.ajax({
-              method: 'POST',
-              url: '/geo/location/users',
-              data: {
-                'businessId' : businessId
-              },
-              success: data => {
-                if (data != 'none') {
-                  data.forEach(function(user) {
-                    this.addUser(user);
-                  })
-                }
-              },
-              error: data => {
-                console.log(data);
-              }
-            })
-          },
-
           transactionDistance: function(purchase) {
             var mostRecent = Date.parse(this.purchases[0].updated_at);
             var last = Date.parse(this.purchases[this.purchases.length - 1].updated_at);
@@ -390,6 +368,29 @@
             }
             this.getRedeemableDeals(activeCustomer.id);
           },
+
+          getCustomersInLocation: function() {
+            var businessId = '{{ $profile->id }}'
+
+            $.ajax({
+              method: 'POST',
+              url: '/geo/location/users',
+              data: {
+                'businessId' : businessId
+              },
+              success: data => {
+                if (data != 'none') {
+                  data.forEach(function(user) {
+                    this.addUser(user);
+                  })
+                }
+              },
+              error: data => {
+                console.log(data);
+              }
+            })
+          },
+          
           removeUser: function(data) {
             console.log("remove user by distance");
             console.log(data);
