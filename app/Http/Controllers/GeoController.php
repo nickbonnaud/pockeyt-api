@@ -202,12 +202,15 @@ class GeoController extends Controller
         $business = $request->input('businessId');
         $usersInLocation = Location::where('location_id', '=', $business)->get();
         if (isset($usersInLocation)) {
+            $users = [];
             foreach ($usersInLocation as $userLocation) {
                 $user = User::findOrFail($userLocation->user_id);
-                event(new CustomerEnterRadius($user, $business));
+                array_push($users, $user);
             }
+            return response()->json($users);
+        } else {
+            return response('none');
         }
-        return response('ok');
     }
 
     public function sendResponse($user) {

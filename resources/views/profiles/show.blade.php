@@ -333,7 +333,9 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data);
+                if (data != 'none') {
+                  console.log(data);
+                }
               },
               error: data => {
                 console.log(data);
