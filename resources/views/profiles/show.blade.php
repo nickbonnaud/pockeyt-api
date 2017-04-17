@@ -409,7 +409,7 @@
               for (i=users.length - 1; i >= 0; i --) {
                 var userLastActive = users[i].lastActive;
                 var currentTime = Date.now();
-                if (currentTime - userLastActive >= 600) {
+                if (currentTime - userLastActive >= 600000) {
                   var businessId = '{{ $profile->id }}'
                   this.deleteInactiveUser(users[i].id, businessId);
                   users.splice(i, 1);
