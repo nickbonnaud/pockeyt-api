@@ -336,6 +336,7 @@
                 if (data != 'none') {
                   data.forEach(function(user) {
                     console.log(user);
+                    console.log(this.users)
                   })
                 }
               },
