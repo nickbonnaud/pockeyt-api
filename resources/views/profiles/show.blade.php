@@ -294,7 +294,7 @@
           pusher.subscribe("{!! 'remove' . $profile->id !!}")
             .bind('App\\Events\\CustomerLeaveRadius', this.removeUser);
 
-          window.setInterval(this.removeInactiveUser, 300000);
+          window.setInterval(this.removeInactiveUser, 60000);
 
           this.getCustomersInLocation();
         },
@@ -409,7 +409,8 @@
               for (i=users.length - 1; i >= 0; i --) {
                 var userLastActive = users[i].lastActive;
                 var currentTime = Date.now();
-                if (currentTime - userLastActive >= 600000) {
+                console.log(currentTime - userLastActive);
+                if (currentTime - userLastActive >= 120000) {
                   var businessId = '{{ $profile->id }}'
                   this.deleteInactiveUser(users[i].id, businessId);
                   users.splice(i, 1);
