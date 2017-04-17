@@ -204,6 +204,8 @@ class GeoController extends Controller
         if (isset($usersInLocation)) {
             $users = [];
             foreach ($usersInLocation as $userLocation) {
+                $timeIdle = strtotime("now") - strtotime($userLocation->updated_at);
+                return response($timeIdle);
                 $user = User::findOrFail($userLocation->user_id);
                 array_push($users, $user);
             }
