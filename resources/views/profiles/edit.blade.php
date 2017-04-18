@@ -231,10 +231,11 @@
 
     <script>
         function initMap() {
-            console.log({!! $profile->geoLocation !!});
-            if () {
-                var lat = {!! $profile !!};
-                var lng = {!! $profile !!};
+            var geo = {!! $profile->geoLocation !!}
+            console.log(geo);
+            if (geo) {
+                var lat = {!! $profile->geoLocation->latitude !!};
+                var lng = {!! $profile->geoLocation->longitude !!};
                 var zoomLevel = 17;
             } else {
                 var lat = 35.7796;
