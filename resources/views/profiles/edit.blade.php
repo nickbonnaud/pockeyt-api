@@ -60,7 +60,7 @@
                                 </li>
                             </ul>
                             <strong>Description</strong>
-                            <p>{{ $user->profile->description }}</p>
+                            <p>{{ substr($user->profile->description, 0, 200) }}</p>
                             <hr>
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessInfoModal">
                                 <b>Edit</b>
