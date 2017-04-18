@@ -231,17 +231,15 @@
 
     <script>
         function initMap() {
-            if ({{ !isset($profile->geoLocation) }}) {
+            @if(isset($profile->geoLocation))
+                var lat = {!! $profile->geoLocation->latitude !!};
+                var lng = {!! $profile->geoLocation->longitude !!}
+                var zoomSet = 17;
+            @else
                 var lat = 35.7796;
                 var lng = -78.6382;
                 var zoomSet = 13;
-            } else {
-                @if(isset($profile->geoLocation))
-                    var lat = {!! $profile->geoLocation->latitude !!};
-                    var lng = {!! $profile->geoLocation->longitude !!}
-                    var zoomSet = 17;
-                @endif
-            }
+            @endif
             
             var bizLatlng = new google.maps.LatLng(lat,lng);
             var map = new google.maps.Map(document.getElementById('map'), {
