@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\AddPhotoRequest;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class ProfilesController extends Controller {
 
@@ -60,7 +62,6 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ProfileRequest $request) {
-        dd($request);
         if(!is_null($this->user->profile))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
@@ -70,13 +71,32 @@ class ProfilesController extends Controller {
 
         $county = $request->county;
         $state = $request->state;
+        $zip = $request->zipCode;
 
         $taxLocation = Tax::where(function($query) use ($county, $state) {
             $query->where('county', '=', $county)
                 ->where('state', '=', $state);
         })->first();
 
-        $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        if ($taxLocation) {
+            $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        } else {
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
+
+            try {
+                $response = $client->request('GET', 'postal', [
+                    'headers' => ['Authorization' => 'AvalaraApiKey' . env('TAX_RATE_KEY')],
+                    'query' => ['country' => 'usa', 'postal' => $zip ]
+                ]);
+            } catch (RequestException $e) {
+                if ($e->hasResponse()) {
+                    return $e->getResponse();
+                }
+            }
+            $data = json_decode($response->getBody());
+            dd($data);
+        }
+
         $profile->save();
 
         $geoLocation = new GeoLocation;
