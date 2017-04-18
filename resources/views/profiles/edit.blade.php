@@ -58,11 +58,10 @@
                                     <b>Website</b>
                                     <p class="pull-right">{{ $user->profile->website }}</p>
                                 </li>
-                                <li class="list-group-item">
-                                    <b>Business Description</b>
-                                    <p class="pull-right">{{ $user->profile->description }}</p>
-                                </li>
                             </ul>
+                            <hr>
+                            <strong>Description</strong>
+                            <p>{{ $user->profile->description }}</p>
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessInfoModal">
                                 <b>Edit</b>
                             </a>
