@@ -231,7 +231,7 @@
 
     <script>
         function initMap() {
-            var geo = {!! $profile->geoLocation !!}
+            var geo = {{ $profile->geoLocation }};
             console.log(geo);
             if (geo) {
                 var lat = {!! $profile->geoLocation !!};
