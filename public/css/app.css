@@ -8652,9 +8652,10 @@ img {
 
 #pac-input {
   margin-top: 15px;
+  width: 60%;
 }
 
-#pac-item-query {
+.pac-item-query {
   font-size: 6px;
 }
 
