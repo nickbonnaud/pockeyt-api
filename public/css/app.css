@@ -8649,3 +8649,11 @@ img {
   padding: 6px;
   margin-right: 20px;
 }
+
+#pac-input {
+  margin-top: 15px;
+}
+
+.pac-item-query {
+  font-size: 12px;
+}
