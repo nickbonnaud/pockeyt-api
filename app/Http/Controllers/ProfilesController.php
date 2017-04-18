@@ -93,6 +93,7 @@ class ProfilesController extends Controller {
                 }
             }
             $data = json_decode($response->getBody());
+            dd($data);
             $profile->tax_rate = $data->totalRate;
 
             $newTaxRate = new Tax;
