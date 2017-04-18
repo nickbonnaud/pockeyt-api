@@ -59,9 +59,9 @@
                                     <p class="pull-right">{{ $user->profile->website }}</p>
                                 </li>
                             </ul>
-                            <hr>
                             <strong>Description</strong>
                             <p>{{ $user->profile->description }}</p>
+                            <hr>
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessInfoModal">
                                 <b>Edit</b>
                             </a>
