@@ -231,7 +231,7 @@
 
     <script>
         function initMap() {
-            if ({!! $profile->geoLocation !!} == '') {
+            if ({{ isset($profile->geoLocation) }}) {
                 var lat = 35.7796;
                 var lng = -78.6382;
                 var zoomSet = 13;
