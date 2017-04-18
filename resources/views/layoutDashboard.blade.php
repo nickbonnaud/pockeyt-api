@@ -132,6 +132,7 @@
                   <li><a href="{{ route('accounts.edit'}}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
                 @else
                   <li><a href="{{ route('accounts.create') }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
+                @endif
               </ul>
             </li>
             <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span>Posts</span></a></li>
