@@ -8654,6 +8654,7 @@ img {
   margin-top: 15px;
 }
 
-.pac-item-query {
+.pac-container {
+  width: 100%;
   font-size: 12px;
 }
