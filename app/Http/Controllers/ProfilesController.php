@@ -107,7 +107,7 @@ class ProfilesController extends Controller {
                     $countyRate = $countyRate + ($rate->rate * 100);
                 } 
             }
-            $newTaxRate->county_tax = $countyRat;
+            $newTaxRate->county_tax = $countyRate;
             $newTaxRate->save();
         }
 
