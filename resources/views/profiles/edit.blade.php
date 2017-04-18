@@ -60,7 +60,11 @@
                                 </li>
                             </ul>
                             <strong>Description</strong>
-                            <p>{{ substr($user->profile->description, 0, 200) }}</p>
+                            @if( strlen($user->profile->description) > 250 )
+                                <p>{{ substr($user->profile->description, 0, 250) }}...</p>
+                            @else
+                                <p>{{ $user->profile->description }}</p>
+                            @endif
                             <hr>
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessInfoModal">
                                 <b>Edit</b>
