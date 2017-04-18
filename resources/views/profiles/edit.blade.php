@@ -231,13 +231,21 @@
 
     <script>
         function initMap() {
-            var lat = {!! $profile->geoLocation->latitude !!};
-            var lng = {!! $profile->geoLocation->longitude !!}
+            var geoLocation = {!! $profile->geoLocation !!};
+            if (geoLocation) {
+                var lat = geoLocation.latitude;
+                var lng = geoLocation.longitude;
+                var zoomLevel = 17;
+            } else {
+                var lat = 35.7796;
+                var lng = -78.6382;
+                var zoomLevel = 13;
+            }
             var bizLatlng = new google.maps.LatLng(lat,lng);
 
             var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: lat, lng: lng},
-            zoom: 17,
+            zoom: zoomLevel,
             gestureHandling: 'cooperative'
             });
 
