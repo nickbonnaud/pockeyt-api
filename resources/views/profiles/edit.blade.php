@@ -60,8 +60,8 @@
                                 </li>
                             </ul>
                             <strong>Description</strong>
-                            @if( strlen($user->profile->description) > 250 )
-                                <p>{{ substr($user->profile->description, 0, 250) }}...</p>
+                            @if( strlen($user->profile->description) > 225 )
+                                <p>{{ substr($user->profile->description, 0, 225) }}...</p>
                             @else
                                 <p>{{ $user->profile->description }}</p>
                             @endif

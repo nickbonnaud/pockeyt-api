@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="description" class="col-sm-2 control-label">Business Description</label>
     <div class="col-sm-10">
-      <input type="text" name="description" class="form-control" id="description" value="{{ $user->profile->description }}" required>
+      <textarea type="text" name="description" class="form-control" id="description" value="{{ $user->profile->description }}" required>
     </div>
   </div>
   <div class="modal-footer">
