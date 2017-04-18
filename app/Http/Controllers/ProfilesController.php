@@ -93,7 +93,22 @@ class ProfilesController extends Controller {
                 }
             }
             $data = json_decode($response->getBody());
-            dd($data);
+            $profile->tax_rate = $data->totalRate;
+
+            $newTaxRate = new Tax;
+            $newTaxRate->county = $county;
+            $newTaxRate->state = $state;
+
+            $countyRate = 0;
+            foreach ($data->rates as $rate) {
+                if ($rate->type = 'State') {
+                    $newTaxRate->state_tax = $rate->rate * 100;
+                } else {
+                    $countyRate = $countyRate + ($rate->rate * 100);
+                } 
+            }
+            $newTaxRate->county_tax = $countyRat;
+            $newTaxRate->save();
         }
 
         $profile->save();
