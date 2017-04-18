@@ -236,9 +236,11 @@
                 var lng = -78.6382;
                 var zoomSet = 13;
             } else {
-                var lat = {{ if(isset($profile->geoLocation)) $profile->geoLocation->latitude }};
-                var lng = {{ if(isset($profile->geoLocation)) $profile->geoLocation->longitude }};
-                var zoomSet = 17;
+                @if(isset($profile->geoLocation))
+                    var lat = {!! $profile->geoLocation->latitude !!};
+                    var lng = {!! $profile->geoLocation->longitude !!}
+                    var zoomSet = 17;
+                @endif
             }
             
             var bizLatlng = new google.maps.LatLng(lat,lng);
