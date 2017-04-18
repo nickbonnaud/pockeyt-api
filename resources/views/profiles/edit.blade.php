@@ -236,8 +236,8 @@
                 var lng = -78.6382;
                 var zoomSet = 13;
             } else {
-                var lat = {!! if(isset($profile->geoLocation)) $profile->geoLocation->latitude !!};
-                var lng = {!! if(isset($profile->geoLocation)) $profile->geoLocation->longitude !!}
+                var lat = {{ if(isset($profile->geoLocation)) $profile->geoLocation->latitude }};
+                var lng = {{ if(isset($profile->geoLocation)) $profile->geoLocation->longitude }};
                 var zoomSet = 17;
             }
             
