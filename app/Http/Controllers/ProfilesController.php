@@ -148,13 +148,6 @@ class ProfilesController extends Controller {
      */
     public function edit(EditProfileRequest $request, $id) {
         $profile = Profile::findOrFail($id);
-        if (!$profile->geoLocation) {
-            $geoLocation = new GeoLocation;
-            $geoLocation->latitude = null;
-            $geoLocation->longitude = null;
-            $geoLocation->identifier = $profile->business_name;
-            $profile->geoLocation()->save($geoLocation);
-        }
         $tags = \App\Tag::lists('name', 'id');
         return view('profiles.edit', compact('profile', 'tags'));
     }
