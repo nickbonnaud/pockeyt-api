@@ -205,13 +205,14 @@ class ProfilesController extends Controller {
             $geoLocation->latitude = $request->lat;
             $geoLocation->longitude = $request->lng;
             $geoLocation->identifier = $profile->business_name;
+            $geoLocation->save();
         } else {
             $geoLocation = new GeoLocation;
             $geoLocation->latitude = $request->lat;
             $geoLocation->longitude = $request->lng;
             $geoLocation->identifier = $profile->business_name;
+            $profile->geoLocation()->save($geoLocation);
         }
-        $geoLocation->save();
 
         return redirect()->route('profiles.edit', compact('profile', 'tags'));
     }
