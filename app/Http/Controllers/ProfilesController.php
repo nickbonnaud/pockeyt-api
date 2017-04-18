@@ -60,6 +60,7 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ProfileRequest $request) {
+        dd($request);
         if(!is_null($this->user->profile))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
