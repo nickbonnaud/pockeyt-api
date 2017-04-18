@@ -127,11 +127,7 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                @if($user->profile->geoLocation)
-                  <li><a href="{{ route('profiles.edit', ['profiles' => $user->profile->id])  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
-                @else
-                  <li><a href="{{ route('profiles.create')  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
-                @endif
+                <li><a href="{{ route('profiles.edit', ['profiles' => $user->profile->id])  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
                 @if($user->profile->account)
                   <li><a href="{{ route('accounts.edit', ['account' => $user->profile->account->id]) }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
                 @else

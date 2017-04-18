@@ -48,7 +48,7 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        if(!is_null($this->user->profile->geoLocation))
+        if(!is_null($this->user->profile))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
         $tags = \App\Tag::lists('name', 'id');
