@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="description" class="col-sm-2 control-label">Business Description</label>
     <div class="col-sm-10">
-      <textarea type="text" name="description" class="form-control" id="description" required>{{ $user->profile->description }}</textarea>
+      <textarea type="text" name="description" class="form-control" rows="5" id="description" required>{{ $user->profile->description }}</textarea>
     </div>
   </div>
   <div class="modal-footer">
