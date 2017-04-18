@@ -85,8 +85,7 @@ class ProfilesController extends Controller {
 
             try {
                 $response = $client->request('GET', 'postal', [
-                    'headers' => ['Authorization' => 'AvalaraApiKey' . env('TAX_RATE_KEY')],
-                    'query' => ['country' => 'usa', 'postal' => $zip ]
+                    'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
                 ]);
             } catch (RequestException $e) {
                 if ($e->hasResponse()) {
