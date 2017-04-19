@@ -8662,3 +8662,19 @@ img {
 .photo-modal {
   text-align: center;
 }
+
+.modal-footer-form {
+  margin-right: -15px;
+  margin-left: -15px;
+  background-color: #fff;
+  margin-bottom: -15px;
+  padding-bottom: 0px;
+}
+
+.btn-form-footer {
+  margin-right: 15px;
+}
+
+
+
+
