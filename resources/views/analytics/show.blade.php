@@ -313,7 +313,7 @@
     		ticks: {
     			beginAtZero: true,
     			callback: function(value, index, values) {
-            return value + '%';
+            return value.toFixed(0) + '%';
           } 
     		}
     	}],
