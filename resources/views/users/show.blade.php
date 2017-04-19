@@ -70,11 +70,11 @@
 <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header-timeline">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPasswordModalLabel">Edit Info</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body-customer-info">
         {!! Form::open(['method' => 'PATCH', 'route' => ['users.update', $user->id], 'class' => 'form-horizontal']) !!}
           @include ('users.form')
         {!! Form::close() !!}
@@ -85,11 +85,11 @@
 <div class="modal fade" id="userPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header-timeline">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPasswordModalLabel">Change Password</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body-customer-info">
         {!! Form::open(['method' => 'PATCH', 'route' => ['users.credentials', $user->id], 'class' => 'form-horizontal']) !!}
           @include ('users.passwordForm')
         {!! Form::close() !!}
@@ -100,11 +100,11 @@
 <div class="modal fade" id="userPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header-timeline">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPhotoModalLabel">Change User Photo</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body-customer-info">
           <div class="box-body">
             <p><label>Click or Drag-n-Drop your Profile Photo Here</label></p>
              <form id="uploadProfilePhoto" action="{{ route('users.photos', ['users' => $user->id]) }}" method="POST" class="dropzone">
