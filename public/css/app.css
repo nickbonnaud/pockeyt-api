@@ -8695,9 +8695,15 @@ img {
 
 .invite-code {
   display: inline-block;
+  font-size: 18px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #545454;
 }
 
 .invite-code-hide {
   display: inline-block;
+  font-size: 12px;
+  margin-left: 5px;
 }
 
