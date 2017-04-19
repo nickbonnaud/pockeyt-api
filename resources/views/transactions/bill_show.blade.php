@@ -168,17 +168,7 @@
           });
         },
 
-        addCustomProduct: function() {
-          var product = {
-            quantity: 1,
-            name: this.name,
-            price: this.price * 100
-          };
-          this.bill.push(product);
-          this.name = '';
-          this.price = '';
-          $('#customItem').modal('hide');
-        },
+        
 
         addProduct: function(product) {
           console.log(product);
