@@ -62,7 +62,7 @@ class AnalyticsController extends Controller
       $topDay = $this->getTopDay($day[0]);
       $activityByDay = collect($activityByDay);
     }
-
+    dd($topDay);
     $activityByHour = [];
     if ($totalDays !== 0) {
       for ($i = 0; $i <= 23; $i++) {
