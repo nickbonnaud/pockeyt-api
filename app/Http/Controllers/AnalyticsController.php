@@ -89,23 +89,15 @@ class AnalyticsController extends Controller
 
     $totalRevenue = $this->getTotalRevenue($profile);
     
-    $revenuePerPost = round(($totalRevenue / $totalViews) / 100, 2);
-    $conversionRate = round(($totalPurchases / $totalViews) * 100, 2);
+    if ($totalViews == 0) {
+      $revenuePerPost = 0;
+      $conversionRate = 0;
+    } else {
+      $revenuePerPost = round(($totalRevenue / $totalViews) / 100, 2);
+      $conversionRate = round(($totalPurchases / $totalViews) * 100, 2);
+    }
 
-    
-
-
-    $customerId = 413;
-    $businessId = $profile->id;
-    $testData = Transaction::where(function($query) use ($customerId, $businessId) {
-        $query->where('user_id', '=', $customerId)
-            ->where('profile_id', '=', $businessId);
-    })->orderBy('updated_at', 'desc')->take(5)->get();
-
-
-
-
-    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour', 'topDay', 'topHour', 'revenuePerPost', 'conversionRate', 'testData'));
+    return view('analytics.show', compact('mostInteracted', 'mostRevenueGenerated', 'activityByDay', 'activityByHour', 'topDay', 'topHour', 'revenuePerPost', 'conversionRate'));
   }
 
   public function getDashboardDataBar(Request $request) {
