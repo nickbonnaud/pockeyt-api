@@ -122,11 +122,11 @@
 <div class="modal fade" id="businessHeroModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="userPhotoModalLabel">Change Background Image</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-analytics">
                 <div class="box-body">
                     <p><label>Click or Drag-n-Drop your Background Image Here</label></p>
                     <form id="uploadHero" action="{{ route('profiles.photos', ['profiles' => $user->profile->id]) }}" method="POST" class="dropzone">
