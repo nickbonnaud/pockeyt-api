@@ -181,15 +181,21 @@
 <div class="modal fade" id="businessTagsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="businessTagsModalLabel">Change tags by typing and selecting new ones or deleting old ones</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-customer-info">
                <div class="form-group">
                     {!! Form::model($profile, ['method' => 'PATCH', 'route' => ['profiles.tags', $user->profile->id], 'class' => 'form-horizontal']) !!}
                         {!! Form::label('tag_list', 'Tags:') !!}
                         {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'multiple', 'required']) !!}
+                        <div class="modal-footer modal-footer-form">
+                          <div class="form-group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-form-footer">Save</button>
+                          </div>
+                        </div>
                     {!! Form::close() !!}
               </div>
             </div>
