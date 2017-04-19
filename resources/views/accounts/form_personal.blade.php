@@ -52,7 +52,7 @@
     <input type="string" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
   </div>
 </div>
-<div class="modal-footer  modal-footer-form-tags">
+<div class="modal-footer modal-footer-form-tags">
   <div class="form-group">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary btn-form-footer">Save changes</button>
