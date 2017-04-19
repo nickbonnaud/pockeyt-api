@@ -6,11 +6,13 @@
 		<div class="scroll-main-contents">
 			<section class="content-header">
 		    <h1>
+		      Add | Recent Events
+		    </h1>
 		    @if($user->profile->connected == false)
-            <a href="#" data-toggle="modal" data-target="#connectSocial">
-            	<h4>Enable Auto Posting</h4>
-            </a>
-          @else
+          <a href="#" data-toggle="modal" data-target="#connectSocial">
+          	<h4>Enable Auto Posting</h4>
+          </a>
+        @else
             @if($user->profile->fb_page_id !== null)
               <span class="icon-fb"></span>
               <div class="auto-post">
