@@ -185,7 +185,7 @@
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
-            product['quantity'] = 2;
+            this.$set(product, 'quantity', 1);
             bill.push(product);
           } else {
             result[0].quantity++
