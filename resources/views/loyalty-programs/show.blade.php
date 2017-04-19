@@ -49,11 +49,11 @@
 	<div class="modal fade" id="LoyaltyProgramModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-header-timeline">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="LoyaltyProgramModal">Details about using Pockeyt Rewards</h4>
 	      </div>
-	      <div class="modal-body">
+	      <div class="modal-body-customer-info">
 	      	<div class="box-body">
 						<h4><strong>Pockeyt does not provide or pay for these rewards</strong></h4>
 						<p>Pockeyt's reward system is meant for tracking your customer's progress towards a designated number of purchases or set dollar amount, the Goal, determined by you, the Business.</p>
@@ -61,7 +61,7 @@
 						<p>It is the Businesses' responsibility to provide the customer with reward specified when the Business created the Reward Program. Pockeyt <strong>does not provide</strong> rewards to your customers.</p>
 					</div>
 					<div class="box-footer">
-					  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					  <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Close</button>
 					</div>
 	      </div>
 	    </div>
@@ -81,7 +81,7 @@
 					</div>
 	      </div>
 	      <div class="modal-footer">
-				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
 				  @include('partials.loyalty-programs.delete')
 				</div>
 	    </div>
