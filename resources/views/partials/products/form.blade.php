@@ -27,6 +27,8 @@
     <p class="help-block">Optional</p>
 </div>
 
-<div class="box-footer">
-    <button type="submit" class="btn btn-success pull-right">Add product</button>
+<div class="modal-footer modal-footer-form-tags">
+    <div class="form-group">
+        <button type="submit" class="btn btn-success btn-form-footer">Add product</button>
+    </div>
 </div>
