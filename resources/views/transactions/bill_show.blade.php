@@ -155,14 +155,32 @@
           return total;
         },
 
+        productsFilter: function() {
+          return this.findBy(this.inventory, this.query, 'name');
+        }
       },
 
       methods: {
 
-        
+        findBy: function(list, value, column) {
+          return list.filter(function(product) {
+            return product[column].toLowerCase().includes(value.toLowerCase());
+          });
+        },
+
+        addCustomProduct: function() {
+          var product = {
+            quantity: 1,
+            name: this.name,
+            price: this.price * 100
+          };
+          this.bill.push(product);
+          this.name = '';
+          this.price = '';
+          $('#customItem').modal('hide');
+        },
 
         addProduct: function(product) {
-          console.log(product);
           var bill = this.bill;
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
@@ -170,7 +188,6 @@
             bill.push(product);
           } else {
             result[0].quantity++
-            console.log(result[0]);
           }
         },
         subtractProduct: function(product) {
