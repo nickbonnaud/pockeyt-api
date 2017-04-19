@@ -60,10 +60,10 @@
 						<p>Pockeyt's reward system will notify you immediately after a customer's transaction meets or exceeds the Goal.</p>
 						<p>It is the Businesses' responsibility to provide the customer with reward specified when the Business created the Reward Program. Pockeyt <strong>does not provide</strong> rewards to your customers.</p>
 					</div>
-					<div class="box-footer">
-					  <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Close</button>
-					</div>
 	      </div>
+	      <div class="modal-footer">
+				  <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Close</button>
+				</div>
 	    </div>
 	  </div>
 	</div>
