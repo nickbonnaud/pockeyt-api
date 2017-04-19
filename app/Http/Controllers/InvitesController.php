@@ -14,7 +14,7 @@ class InvitesController extends Controller
 	
 	public function __construct() {
     parent::__construct();
-    $this->middleware('jwt.auth', ['only' => ['sync']]);
+    $this->middleware('jwt.auth', ['only' => ['userCreate']]);
  	}
 
 	public function businessCreate(Request $request) {
@@ -25,5 +25,17 @@ class InvitesController extends Controller
 		$invite->invite_code = $inviteCode;
 		$this->user->invites()->save($invite);
 		return response($inviteCode);
+	}
+
+	public function userCreate(Request $request) {
+		$customer = JWTAuth::parseToken()->authenticate();
+		if ($customer->id === $request->userId) {
+			$inviteCode = str_random(6);
+
+			$invite = new Invite;
+			$invite->invite_code = $inviteCode;
+			$this->user->invites()->save($invite);
+			return response($inviteCode);
+		}
 	}
 }
