@@ -169,8 +169,8 @@
         },
 
         addProduct: function(product) {
+          console.log(product);
           var bill = this.bill;
-          console.log("hello");
           var result = $.grep(bill, function(item) { return item.id === product.id});
           if (result.length === 0) {
             product['quantity'] = 1;
