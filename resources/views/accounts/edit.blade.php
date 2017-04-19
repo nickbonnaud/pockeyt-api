@@ -183,11 +183,11 @@ $qbo_connect = $qbo_obj->qboConnect();
 <div class="modal fade" id="sensitiveAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header-timeline">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="sensitiveAccountInfoModal">Edit Business Info</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body-customer-info">
         {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.pay', $account->id], 'class' => 'form-horizontal']) !!}
           @include ('accounts.form_sensitive')
         {!! Form::close() !!}
