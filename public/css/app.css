@@ -8693,3 +8693,11 @@ img {
   margin-top: -16px !important;
 }
 
+.invite-code {
+  display: inline-block;
+}
+
+.invite-code-hide {
+  display: inline-block;
+}
+
