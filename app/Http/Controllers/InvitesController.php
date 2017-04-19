@@ -23,9 +23,7 @@ class InvitesController extends Controller
 		$invite = new Invite;
 		$invite->business_id = $request->businessId;
 		$invite->invite_code = $inviteCode;
-
 		$this->user->invites()->save($invite);
-
 		return response($inviteCode);
 	}
 }

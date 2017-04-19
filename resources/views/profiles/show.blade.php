@@ -26,7 +26,8 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
-    <button type="button" class="btn bg-navy btn-flat" v-on:click="createInviteCode()">New Invite Code</button>
+    <button type="button" class="btn bg-navy btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()">New Invite Code</button>
+    <h4 v-if="inviteCodeGenerated">@{{ inviteCodeGenerated }}</h4>
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
@@ -280,7 +281,8 @@
           lastViewedPost: null,
           recentBookmarked: null,
           recentShared: null,
-          lastItemsPurchased: []
+          lastItemsPurchased: [],
+          inviteCodeGenerated: null
         },
 
         mounted: function() {
@@ -333,7 +335,7 @@
                 'businessId' : businessId
               },
               success: data => {
-                console.log(data);
+                $this.inviteCodeGenerated = data;
               },
               error: data => {
                 console.log(data);
