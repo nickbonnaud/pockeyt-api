@@ -335,7 +335,7 @@
                 'businessId' : businessId
               },
               success: data => {
-                $this.inviteCodeGenerated = data;
+                this.inviteCodeGenerated = data;
               },
               error: data => {
                 console.log(data);
