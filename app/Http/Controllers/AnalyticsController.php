@@ -56,11 +56,12 @@ class AnalyticsController extends Controller
       }
     }
     $day = array_keys($activityByDay, max($activityByDay));
-    if ($day[0] == 0) {
-      dd(count(array_unique($activityByDay)));
+    if (($day[0] == 0) && (count(array_unique($activityByDay)) == 1)) {
+      $topday = "Not Enough data";
+    } else {
+      $topDay = $this->getTopDay($day[0]);
+      $activityByDay = collect($activityByDay);
     }
-    $topDay = $this->getTopDay($day[0]);
-    $activityByDay = collect($activityByDay);
 
     $activityByHour = [];
     if ($totalDays !== 0) {
