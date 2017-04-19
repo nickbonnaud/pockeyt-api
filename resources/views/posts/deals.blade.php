@@ -40,11 +40,11 @@
 	<div class="modal fade" id="dealInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-header-timeline">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="dealInfoModal">Details about using Pockeyt Deals</h4>
 	      </div>
-	      <div class="modal-body">
+	      <div class="modal-body-customer-info">
 	      	<div class="box-body">
 						<h4><strong>Pockeyt does not provide or pay for these Deals</strong></h4>
 						<p>Pockeyt's Deal system is meant for tracking purchases that your Customers make in the Pockeyt app.</p>
@@ -54,10 +54,10 @@
 						<p>Pockeyt's Deal system allows customers to redeem purchased Deals when they are physically in your establishment. Customers who have bought a Deal will have a Redeem Deal button under their profile when visible on your Customer Dashboard.</p>
 						<p>It is the Businesses' responsibility to provide the customer with Deal specified when the Business created the Deal. Pockeyt <strong>does not provide</strong> Deals to your customers.</p>
 					</div>
-					<div class="box-footer">
-					  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-					</div>
 	      </div>
+	      <div class="modal-footer">
+				  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
 	    </div>
 	  </div>
 	</div>
