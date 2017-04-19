@@ -122,7 +122,7 @@
       },
 
       mounted: function() {
-         $(window).on('beforeunload', this.leaving);
+        $(window).on('beforeunload', this.leaving);
       },
 
       filters: {
@@ -155,18 +155,9 @@
           return total;
         },
 
-        productsFilter: function() {
-          return this.findBy(this.inventory, this.query, 'name');
-        }
       },
 
       methods: {
-
-        findBy: function(list, value, column) {
-          return list.filter(function(product) {
-            return product[column].toLowerCase().includes(value.toLowerCase());
-          });
-        },
 
         
 
