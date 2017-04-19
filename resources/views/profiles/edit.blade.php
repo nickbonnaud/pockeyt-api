@@ -215,11 +215,11 @@
                     {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
                     {!! Form::hidden('state', null, ['id' => 'state']) !!}
                     {!! Form::hidden('county', null, ['id' => 'county']) !!}
-                    <div class="modal-footer-form">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
+                    <div class="modal-footer modal-footer-form">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-form-footer">Save changes</button>
+                      </div>
                     </div>
                 {!! Form::close() !!}
             </div>
