@@ -6,13 +6,23 @@
 		<div class="scroll-main-contents">
 			<section class="content-header">
 		    <h1>
-		      Add | Recent Events
-		    </h1>
 		    @if($user->profile->connected == false)
-          <a href="#" data-toggle="modal" data-target="#connectSocial">
-          	<h4>Enable Auto Posting</h4>
-          </a>
-        @endif
+            <a href="#" data-toggle="modal" data-target="#connectSocial">
+            	<h4>Enable Auto Posting</h4>
+            </a>
+          @else
+            @if($user->profile->fb_page_id !== null)
+              <span class="icon-fb"></span>
+              <div class="auto-post">
+                <p class="auto-post-text">Auto Post</p>
+              </div>
+            @else
+              <span class="icon-insta"></span>
+              <div class="auto-post">
+                <p class="auto-post-text">Auto Post</p>
+              </div>
+            @endif
+          @endif
 		    <ol class="breadcrumb">
 		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Events</li>
