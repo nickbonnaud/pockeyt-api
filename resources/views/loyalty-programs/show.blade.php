@@ -70,11 +70,11 @@
 	<div class="modal fade" id="deleteLoyaltyProgram" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-header-timeline">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="deleteLoyaltyProgram">Are you sure?</h4>
 	      </div>
-	      <div class="modal-body">
+	      <div class="modal-body-customer-info">
 	      	<div class="box-body">
 						<h4><strong>All customer Loyalty Program data will be lost!</strong></h4>
 						<p>If you create a new Loyalty Program all your current customers' progress will reset to 0.</p>
