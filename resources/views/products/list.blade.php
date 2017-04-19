@@ -58,15 +58,14 @@
     </div>
   </div>
 </div>
-
 <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header-timeline">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="addProductModal">Add new product</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body-customer-info">
         {!! Form::open(['method' => 'POST', 'route' => ['products.store'], 'files' => true]) !!}
           @include ('partials.products.form')
         {!! Form::close() !!}
