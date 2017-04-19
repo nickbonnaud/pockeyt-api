@@ -170,7 +170,7 @@
 
         addCustomProduct: function() {
           var product = {
-            quantity: 1,
+            quantity: 2,
             name: this.name,
             price: this.price * 100
           };

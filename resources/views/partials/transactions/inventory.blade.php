@@ -7,7 +7,6 @@
       </div>
       <div class="box-footer-inventory">
         <b>@{{ product.name | truncate}}</b>
-        <b>@{{ product.quantity }}</b>
       </div>
     </div>
   </div>
