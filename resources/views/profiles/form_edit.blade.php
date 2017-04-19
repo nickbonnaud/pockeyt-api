@@ -16,3 +16,7 @@
     <textarea type="text" name="description" class="form-control" rows="5" id="description" required>{{ $user->profile->description }}</textarea>
   </div>
 </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </div>
