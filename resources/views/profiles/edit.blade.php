@@ -205,17 +205,17 @@
 <div class="modal fade" id="businessLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header-timeline">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="businessTagsModalLabel"><b>Warning</b> this changes the location of your business, which impacts your ability to collect payments</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body-customer-info">
                 {!! Form::model($profile, ['method' => 'PATCH', 'route' => ['profiles.location', $user->profile->id], 'class' => 'form-horizontal']) !!}
                     {!! Form::hidden('lat', null, ['id' => 'lat']) !!}
                     {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
                     {!! Form::hidden('state', null, ['id' => 'state']) !!}
                     {!! Form::hidden('county', null, ['id' => 'county']) !!}
-                    <div class="modal-footer">
+                    <div class="modal-footer-form">
                         <div class="form-group">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
