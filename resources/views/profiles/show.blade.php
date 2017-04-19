@@ -26,9 +26,11 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
-    <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()">New Invite Code</button>
-    <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
-    <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
+    <div class="invite-code-section">
+      <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()">New Invite Code</button>
+      <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
+      <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
+    </div>
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">

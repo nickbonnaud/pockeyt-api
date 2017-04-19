@@ -8693,6 +8693,10 @@ img {
   margin-top: -16px !important;
 }
 
+.invite-code-section {
+  margin-bottom: 10px;
+}
+
 .invite-code {
   display: inline-block;
   font-size: 18px;
