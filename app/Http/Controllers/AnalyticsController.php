@@ -57,12 +57,12 @@ class AnalyticsController extends Controller
     }
     $day = array_keys($activityByDay, max($activityByDay));
     if (($day[0] == 0) && (count(array_unique($activityByDay)) == 1)) {
-      $topDay = "Not Enough data";
+      $topDay = "Not enough data";
     } else {
       $topDay = $this->getTopDay($day[0]);
     }
     $activityByDay = collect($activityByDay);
-    
+
     $activityByHour = [];
     if ($totalDays !== 0) {
       for ($i = 0; $i <= 23; $i++) {
@@ -78,7 +78,11 @@ class AnalyticsController extends Controller
       $activityByHour = [0];
     }
     $hour = array_keys($activityByHour, max($activityByHour));
-    $topHour = $this->getTopHour($hour[0]);
+    if (($hour[0] == 0) && (count(array_unique($activityByHour)) == 1)) {
+      $topHour = "Not enough data";
+    } else {
+      $topHour = $this->getTopHour($hour[0]);
+    }
     $activityByHour = collect($activityByHour);
 
     $totalViews = PostAnalytic::where(function($query) use ($profile) {
