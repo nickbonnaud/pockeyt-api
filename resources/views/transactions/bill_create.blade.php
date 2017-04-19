@@ -177,6 +177,7 @@
             bill.push(product);
           } else {
             result[0].quantity++
+            console.log(result[0]);
           }
         },
         subtractProduct: function(product) {
