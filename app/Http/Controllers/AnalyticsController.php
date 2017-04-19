@@ -57,7 +57,7 @@ class AnalyticsController extends Controller
     }
     $day = array_keys($activityByDay, max($activityByDay));
     if ($day[0] == 0) {
-      dd($activityByDay);
+      dd(count(array_unique($activityByDay)));
     }
     $topDay = $this->getTopDay($day[0]);
     $activityByDay = collect($activityByDay);
