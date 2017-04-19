@@ -194,10 +194,8 @@
               </div>
             </div>
             <div class="modal-footer">
-                <div class="form-group">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
         </div>
     </div>
