@@ -39,7 +39,29 @@
 		</div>
 	</div>
 </div>
-
+<div class="modal fade" id="connectSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="connectSocial">Pull posts from social media</h4>
+      </div>
+      <div class="modal-body">
+  			<p>Which website should Pockeyt pull {{$user->profile->business_name}}'s posts and photos from?</p>
+      </div>
+      <div class="modal-footer">
+	      <a href="{{ action('ConnectController@connectFB') }}" class="btn btn-block btn-social btn-facebook">
+	      	<i class="fa fa-facebook"></i>
+	      	Connect With Facebook
+  			</a>
+  			<a href="{{ action('ConnectController@connectInsta') }}" class="btn btn-block btn-social btn-instagram">
+	      	<i class="fa fa-instagram"></i>
+	      	Connect With Instagram
+  			</a>
+	    </div>
+    </div>
+  </div>
+</div>
 
 @stop
 
