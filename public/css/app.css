@@ -8688,8 +8688,8 @@ img {
 }
 
 .modal-tags-form-input {
-  width: 80%;
-  margin-bottom: -7px;
-  margin-top: -16px;
+  width: 80% !important;
+  margin-bottom: -7px !important;
+  margin-top: -16px !important;
 }
 
