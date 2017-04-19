@@ -31,5 +31,5 @@
 </div>
 
 <div class="box-footer">
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-success pull-right">Update</button>
 </div>
