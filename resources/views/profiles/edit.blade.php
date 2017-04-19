@@ -189,7 +189,7 @@
                <div class="form-group">
                     {!! Form::model($profile, ['method' => 'PATCH', 'route' => ['profiles.tags', $user->profile->id], 'class' => 'form-horizontal']) !!}
                         {!! Form::label('tag_list', 'Tags:', ['class' => 'modal-tags-form-label']) !!}
-                        {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'required' => 'required', 'multiple']) !!}
+                        {!! Form::select('tag_list[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'required' => 'required', 'style' => 'width: 80%', 'multiple']) !!}
                         <div class="modal-footer modal-footer-form-tags">
                           <div class="form-group">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
