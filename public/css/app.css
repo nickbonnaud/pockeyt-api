@@ -8671,10 +8671,25 @@ img {
   padding-bottom: 0px;
 }
 
+.modal-footer-form-tags {
+  margin-right: -15px;
+  margin-left: -15px;
+  background-color: #fff;
+  margin-bottom: -30px;
+  padding-bottom: 0px;
+}
+
 .btn-form-footer {
   margin-right: 15px;
 }
 
+.modal-tags-form-label {
+  margin-bottom: 10px;
+}
 
-
+.modal-tags-form-input {
+  width: 80%;
+  margin-bottom: -7px;
+  margin-top: -16px;
+}
 
