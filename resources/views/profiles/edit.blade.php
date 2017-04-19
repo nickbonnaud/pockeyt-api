@@ -126,8 +126,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="userPhotoModalLabel">Change Background Image</h4>
             </div>
-            <div class="modal-body-analytics">
-                <div class="box-body">
+            <div class="modal-body-customer-info">
+                <div class="box-body photo-modal">
                     <p><label>Click or Drag-n-Drop your Background Image Here</label></p>
                     <form id="uploadHero" action="{{ route('profiles.photos', ['profiles' => $user->profile->id]) }}" method="POST" class="dropzone">
                     {{ csrf_field() }}
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
