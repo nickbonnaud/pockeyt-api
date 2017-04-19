@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Builder;
 
 class LoyaltyCard extends Model {
-    /**
-     * Fillable fields for a Product
-     *
-     * @var array
-     */
+   
     protected $fillable = [
     	'user_id',
     	'program_id',
@@ -27,7 +23,7 @@ class LoyaltyCard extends Model {
     }
 
     /**
-     * A Loyalty Program belongs to its profile
+     * A Loyalty Card belongs to its user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

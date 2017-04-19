@@ -26,7 +26,7 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
-    <!-- Default box -->
+    <button type="button" class="btn bg-navy btn-flat" v-on:click="createInviteCode()">New Invite Code</button>
     <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
@@ -322,6 +322,24 @@
         },
 
         methods: {
+
+          createInviteCode: function() {
+            var businessId = '{{ $profile->id }}'
+
+            $.ajax({
+              method: 'POST',
+              url: '/invites/business/new',
+              data: {
+                'businessId' : businessId
+              },
+              success: data => {
+                console.log(data);
+              },
+              error: data => {
+                console.log(data);
+              }
+            })
+          },
 
           getCustomersInLocation: function() {
             var businessId = '{{ $profile->id }}'

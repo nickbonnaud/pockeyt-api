@@ -72,6 +72,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\PostAnalytic');
     }
 
+    public function invites() {
+        return $this->hasMany('App\Invite');
+    }
+
     /**
      * current user saves and associates with profile
      *
