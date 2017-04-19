@@ -1,4 +1,4 @@
-<div class="box-body">
+
   <div class="form-group">
     <label for="business_name" class="col-sm-2 control-label">Business name</label>
     <div class="col-sm-10">
@@ -21,4 +21,3 @@
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       <button type="submit" class="btn btn-primary">Save changes</button>
     </div>
-</div>
