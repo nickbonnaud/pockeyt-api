@@ -30,11 +30,12 @@ class InvitesController extends Controller
 	public function userCreate(Request $request) {
 		$customer = JWTAuth::parseToken()->authenticate();
 		if ($customer->id === $request->userId) {
+			$user = User::findOrFail($customer->id);
 			$inviteCode = str_random(6);
 
 			$invite = new Invite;
 			$invite->invite_code = $inviteCode;
-			$this->user->invites()->save($invite);
+			$user->invites()->save($invite);
 			return response($inviteCode);
 		}
 	}
