@@ -50,6 +50,7 @@ class InvitesController extends Controller
 			if (!$invite->used) {
 				$invite->used = true;
 				$invite->date_used = Carbon::now();
+				$invite->save();
 				return response('unlock');
 			} else {
 				return response('used');
