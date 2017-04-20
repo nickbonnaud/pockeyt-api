@@ -7,6 +7,8 @@ Use Illuminate\HttpResponse;
 use App\Http\Requests;
 use App\Invite;
 use App\User;
+use Carbon\Carbon;
+use DateTimeZone;
 use JWTAuth;
 use App\Http\Controllers\Controller;
 
@@ -40,4 +42,26 @@ class InvitesController extends Controller
 			return response($inviteCode);
 		}
 	}
+
+	public function checkInviteCode(Request $request) {
+		$inviteCode = $request->inviteCode;
+		$invite = Invite::where('invite_code', '=', $inviteCode)->first();
+		if ($invite) {
+			if (!$invite->used) {
+				$invite->used = true;
+				$invite->date_used = Carbon::now();
+				return response('unlock');
+			} else {
+				return response('used');
+			}
+		} else {
+			return response('invalid');
+		}
+	}
 }
+
+
+
+
+
+

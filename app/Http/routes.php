@@ -176,6 +176,7 @@ Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoi
 Route::post('invites/business/new', 'InvitesController@businessCreate');
 Route::group(['prefix' => 'api'], function() {
     Route::post('invites/user/new', 'InvitesController@userCreate');
+    Route::post('invites/user/check', 'InvitesController@checkInviteCode');
 });
 
 //API routes V2
