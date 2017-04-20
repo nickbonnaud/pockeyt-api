@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 Use Illuminate\HttpResponse;
 use App\Http\Requests;
 use App\Invite;
+use App\User;
 use JWTAuth;
 use App\Http\Controllers\Controller;
 
