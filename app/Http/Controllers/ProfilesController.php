@@ -81,34 +81,7 @@ class ProfilesController extends Controller {
         if ($taxLocation) {
             $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
         } else {
-            $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
-
-            try {
-                $response = $client->request('GET', 'postal', [
-                    'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
-                ]);
-            } catch (RequestException $e) {
-                if ($e->hasResponse()) {
-                    return $e->getResponse();
-                }
-            }
-            $data = json_decode($response->getBody());
-            $profile->tax_rate = $data->totalRate * 100;
-
-            $newTaxRate = new Tax;
-            $newTaxRate->county = $county;
-            $newTaxRate->state = $state;
-
-            $countyRate = 0;
-            foreach ($data->rates as $rate) {
-                if ($rate->type == "State") {
-                    $newTaxRate->state_tax = $rate->rate * 100;
-                } else {
-                    $countyRate = $countyRate + ($rate->rate * 100);
-                } 
-            }
-            $newTaxRate->county_tax = $countyRate;
-            $newTaxRate->save();
+            $this->getTaxRate($county, $state, $zip, $profile);
         }
 
         $profile->save();
@@ -176,6 +149,37 @@ class ProfilesController extends Controller {
      * Other actions
      */
 
+    public function getTaxRate($county, $state, $zip, $profile) {
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
+
+        try {
+            $response = $client->request('GET', 'postal', [
+                'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
+            ]);
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+        }
+        $data = json_decode($response->getBody());
+        $profile->tax_rate = $data->totalRate * 100;
+
+        $newTaxRate = new Tax;
+        $newTaxRate->county = $county;
+        $newTaxRate->state = $state;
+
+        $countyRate = 0;
+        foreach ($data->rates as $rate) {
+            if ($rate->type == "State") {
+                $newTaxRate->state_tax = $rate->rate * 100;
+            } else {
+                $countyRate = $countyRate + ($rate->rate * 100);
+            } 
+        }
+        $newTaxRate->county_tax = $countyRate;
+        return $newTaxRate->save();
+    }
+
     public function changeTags(UpdateBusinessTagsRequest $request, $id) {
         /** @var Profile $profile */
         $profile = Profile::findOrFail($id);
@@ -191,13 +195,19 @@ class ProfilesController extends Controller {
         
         $county = $request->county;
         $state = $request->state;
+        $zip = $request->zipCode;
 
         $taxLocation = Tax::where(function($query) use ($county, $state) {
             $query->where('county', '=', $county)
                 ->where('state', '=', $state);
         })->first();
 
-        $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        if ($taxLocation) {
+            $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
+        } else {
+            $this->getTaxRate($county, $state, $zip, $profile);
+        }
+        
         $profile->save();
 
         $geoLocation = $this->user->profile->geoLocation;

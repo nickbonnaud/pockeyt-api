@@ -215,6 +215,7 @@
                     {!! Form::hidden('lng', null, ['id' => 'lng']) !!}
                     {!! Form::hidden('state', null, ['id' => 'state']) !!}
                     {!! Form::hidden('county', null, ['id' => 'county']) !!}
+                    {!! Form::hidden('zipCode', null, ['id' => 'zipCode']) !!}
                     <div class="modal-footer modal-footer-form">
                       <div class="form-group">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -305,8 +306,12 @@
                 place.address_components.forEach(function(e) {
                     if (e.types.includes("administrative_area_level_1")) {
                         $('#state').val(e.short_name);
-                    } else if (e.types.includes("administrative_area_level_2")) {
+                    } 
+                    if (e.types.includes("administrative_area_level_2")) {
                         $('#county').val(e.short_name);
+                    }
+                    if (e.types.includes("postal_code")) {
+                        $('#zipCode').val(e.short_name);
                     }
                 });
                 $('#lat').val(latitude);
