@@ -487,7 +487,7 @@
               }
             })
           },
-          drawChart: function() {
+          drawChart: function(dataStorage) {
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
             dataStorage.purchases.forEach(function(purchase) {
