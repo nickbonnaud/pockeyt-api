@@ -693,18 +693,18 @@
 						var dataSet = data.data;
 
 						if (type === 'interaction') {
-							this.postsActivityByHour = dataSet;
+							dashboard.$data.postsActivityByHour = dataSet;
 							var lineInteractionsHour = $("#lineInterHour").get(0).getContext("2d");
-				    	var lineInteractionsHourData = this.formatLineDataHour(this.postsActivityByHour, type);
+				    	var lineInteractionsHourData = dashboard.formatLineDataHour(dashboard.$data.postsActivityByHour, type);
 				    	var lineChartInterHour = new Chart(lineInteractionsHour, {
 				    		type: 'line',
 				    		data: lineInteractionsHourData,
 				    		options: lineChartOptions
 				    	});
 						} else {
-							this.postsRevenueByHour = dataSet;
+							dashboard.$data.postsRevenueByHour = dataSet;
 							var lineRevenueHour = $("#lineRevenueHour").get(0).getContext("2d");
-				    	var lineRevenueHourData = this.formatLineDataHour(this.postsRevenueByHour, type);
+				    	var lineRevenueHourData = dashboard.formatLineDataHour(dashboard.$data.postsRevenueByHour, type);
 				    	var lineChartRevenueHour= new Chart(lineRevenueHour, {
 				    		type: 'line',
 				    		data: lineRevenueHourData,
@@ -727,18 +727,18 @@
 						var dataSet = data.data;
 
 						if (type === 'interaction') {
-							this.postsActivityByDay = dataSet;
+							dashboard.$data.postsActivityByDay = dataSet;
 							var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
-				    	var lineInteractionsDayData = this.formatLineData(this.postsActivityByDay, type);
+				    	var lineInteractionsDayData = dashboard.formatLineData(dashboard.$data.postsActivityByDay, type);
 				    	var lineChartInter = new Chart(lineInteractionsDay, {
 				    		type: 'line',
 				    		data: lineInteractionsDayData,
 				    		options: lineChartOptions
 				    	});
 						} else {
-							this.postsRevenueByDay = dataSet;
+							dashboard.$data.postsRevenueByDay = dataSet;
 							var lineRevenueDay = $("#lineRevenueDay").get(0).getContext("2d");
-				    	var lineRevenueDayData = this.formatLineData(this.postsRevenueByDay, type);
+				    	var lineRevenueDayData = dashboard.formatLineData(dashboard.$data.postsRevenueByDay, type);
 				    	var lineChartRevenue= new Chart(lineRevenueDay, {
 				    		type: 'line',
 				    		data: lineRevenueDayData,
@@ -765,10 +765,10 @@
 						switch(timeSpan) {
 							case "week":
 								if (type === 'interaction') {
-									this.postsInteractedWeek = dataSet;
+									dashboard.$data.postsInteractedWeek = dataSet;
 									var barInteractionsWeekRaw = $("#barInteractionsWeek").get(0);
 									var barInteractionsWeek = barInteractionsWeekRaw.getContext("2d");
-									var barInteractionsWeekData = this.formatBarData(this.postsInteractedWeek, type);
+									var barInteractionsWeekData = dashboard.formatBarData(dashboard.$data.postsInteractedWeek, type);
 									
 						    	var barChartInter7 = new Chart(barInteractionsWeek, {
 						    		type: 'bar',
@@ -776,9 +776,9 @@
 						    		options: barChartOptions
 						    	});
 								} else {
-									this.postsRevenueWeek = dataSet;
+									dashboard.$data.postsRevenueWeek = dataSet;
 									var barRevenueWeek = $("#barRevenueWeek").get(0).getContext("2d");
-									var barRevenueWeekData = this.formatBarData(this.postsRevenueWeek, type);
+									var barRevenueWeekData = dashboard.formatBarData(dashboard.$data.postsRevenueWeek, type);
 									
 						    	var barChartRevenue7 = new Chart(barRevenueWeek, {
 						    		type: 'bar',
@@ -789,10 +789,10 @@
 								break;
 							case "month":
 								if (type === 'interaction') {
-									this.postsInteractedMonth = dataSet;
+									dashboard.$data.postsInteractedMonth = dataSet;
 									var barInteractionsMonthRaw = $("#barInteractionsMonth").get(0);
 									var barInteractionsMonth = barInteractionsMonthRaw.getContext("2d");
-									var barInteractionsMonthData = this.formatBarData(this.postsInteractedMonth, type);
+									var barInteractionsMonthData = dashboard.formatBarData(dashboard.$data.postsInteractedMonth, type);
 									var barChartInter30 = new Chart(barInteractionsMonth, {
 						    		type: 'bar',
 						    		data: barInteractionsMonthData,
@@ -828,10 +828,10 @@
 						    		$('#showPost').modal('show');
 						    	};
 								} else {
-									this.postsRevenueMonth = dataSet;
+									dashboard.$data.postsRevenueMonth = dataSet;
 									var barRevenueMonthRaw = $("#barRevenueMonth").get(0);
 									var barRevenueMonth = barRevenueMonthRaw.getContext("2d");
-									var barRevenueMonthData = this.formatBarData(this.postsRevenueMonth, type);
+									var barRevenueMonthData = dashboard.formatBarData(dashboard.$data.postsRevenueMonth, type);
 									
 						    	var barChartRevenue30 = new Chart(barRevenueMonth, {
 						    		type: 'bar',
@@ -870,10 +870,10 @@
 								break;
 							case "2month":
 								if (type === 'interaction') {
-									this.postsInteracted2Month = dataSet;
+									dashboard.$data.postsInteracted2Month = dataSet;
 									var barInteractions2MonthRaw = $("#barInteractions2Month").get(0);
 									var barInteractions2Month = barInteractions2MonthRaw.getContext("2d");
-									var barInteractions2MonthData = this.formatBarData(this.postsInteracted2Month, type);
+									var barInteractions2MonthData = dashboard.formatBarData(dashboard.$data.postsInteracted2Month, type);
 									var barChartInter60 = new Chart(barInteractions2Month, {
 						    		type: 'bar',
 						    		data: barInteractions2MonthData,
@@ -908,10 +908,10 @@
 						    		$('#showPost').modal('show');
 						    	};
 								} else {
-									this.postsRevenue2Month = dataSet;
+									dashboard.$data.postsRevenue2Month = dataSet;
 									var barRevenue2MonthRaw = $("#barRevenue2Month").get(0);
 									var barRevenue2Month = barRevenue2MonthRaw.getContext("2d");
-									var barRevenue2MonthData = this.formatBarData(this.postsRevenue2Month, type);
+									var barRevenue2MonthData = dashboard.formatBarData(dashboard.$data.postsRevenue2Month, type);
 									
 						    	var barChartRevenue60 = new Chart(barRevenue2Month, {
 						    		type: 'bar',
