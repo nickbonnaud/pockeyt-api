@@ -338,7 +338,7 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                this.inviteCodeGenerated = data;
+                customer.$data.inviteCodeGenerated = data;
               },
               error: function(data) {
                 console.log(data);
@@ -468,18 +468,18 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                console.log(data);
-                this.purchases = data.purchases;
-                this.lastViewedPost = data.lastViewedPost;
-                this.recentBookmarked = data.recentBookmarkedPost;
-                this.recentShared = data.recentSharedPost;
-                if (this.purchases.length !== 0 ) {
-                  this.lastPurchase = this.purchases[0];
-                  this.lastItemsPurchased = JSON.parse(this.purchases[0].products);
-                  this.drawChart();
+                var dataStorage = customer.$data;
+                dataStorage.purchases = data.purchases;
+                dataStorage.lastViewedPost = data.lastViewedPost;
+                dataStorage.recentBookmarked = data.recentBookmarkedPost;
+                dataStorage.recentShared = data.recentSharedPost;
+                if (dataStorage.purchases.length !== 0 ) {
+                  dataStorage.lastPurchase = dataStorage.purchases[0];
+                  dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
+                  customer.drawChart(dataStorage);
                 } else {
-                  this.lastPurchase = null;
-                  this.lastItemsPurchased = null;
+                  dataStorage.lastPurchase = null;
+                  dataStorage.lastItemsPurchased = null;
                 }
               },
               error: function(data) {
@@ -490,7 +490,7 @@
           drawChart: function() {
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
-            this.purchases.forEach(function(purchase) {
+            dataStorage.purchases.forEach(function(purchase) {
               var point = {x: purchase.updated_at, y: 0};
               purchasesData.push(point);
             });
@@ -571,7 +571,8 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                var deals = this.deals;
+                var dataStorage = customer.$data;
+                var deals = dataStorage.deals;
                 if (data.length > 0 ) {
                   data.forEach(function (userDeal) {
                     var found = false;
@@ -593,9 +594,10 @@
             })
           },
           checkForDeal(userId) {
-            if (this.deals.length > 0 ) {
+            var dataStorage = customer.$data;
+            if (dataStorage.deals.length > 0 ) {
               var found = false;
-              this.deals.forEach(function(e) {
+              dataStorage.deals.forEach(function(e) {
                 if (e.user_id === userId) {
                   found = true;
                 }
@@ -611,7 +613,8 @@
                 'dealId' : dealId,
               },
               success: function(data) {
-                var deals = this.deals;
+                var dataStorage = customer.$data;
+                var deals = dataStorage.deals;
                 for (i=deals.length - 1; i >= 0; i --) {
                   if (deals[i].id === dealId) {
                     deals.splice(i, 1);
