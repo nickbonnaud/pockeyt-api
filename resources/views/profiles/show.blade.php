@@ -337,10 +337,10 @@
               data: {
                 'businessId' : businessId
               },
-              success: data => {
+              success: function(data) {
                 this.inviteCodeGenerated = data;
               },
-              error: data => {
+              error: function(data) {
                 console.log(data);
               }
             })
@@ -355,14 +355,14 @@
               data: {
                 'businessId' : businessId
               },
-              success: data => {
+              success: function(data) {
                 if (data != 'none') {
                   data.forEach(function(user) {
                     customer.addUser(user);
                   })
                 }
               },
-              error: data => {
+              error: function(data) {
                 console.log(data);
               }
             })
@@ -467,7 +467,7 @@
                 'customerId' : customerId,
                 'businessId' : businessId
               },
-              success: data => {
+              success: function(data) {
                 console.log(data);
                 this.purchases = data.purchases;
                 this.lastViewedPost = data.lastViewedPost;
@@ -482,7 +482,7 @@
                   this.lastItemsPurchased = null;
                 }
               },
-              error: data => {
+              error: function(data) {
                 console.log(data);
               }
             })
@@ -570,7 +570,7 @@
                 'customerId' : customerId,
                 'businessId' : businessId
               },
-              success: data => {
+              success: function(data) {
                 var deals = this.deals;
                 if (data.length > 0 ) {
                   data.forEach(function (userDeal) {
@@ -610,7 +610,7 @@
               data: {
                 'dealId' : dealId,
               },
-              success: data => {
+              success: function(data) {
                 var deals = this.deals;
                 for (i=deals.length - 1; i >= 0; i --) {
                   if (deals[i].id === dealId) {
