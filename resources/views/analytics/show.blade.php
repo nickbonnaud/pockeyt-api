@@ -164,7 +164,7 @@
 												<h3 class="box-title">Interaction Breakdown</h3>
 											</div>
 											<div class="box-body">
-												<canvas id="donutInteractions" width="100" height="100"></canvas>
+												<canvas id="donutInteractions" width="200" height="200"></canvas>
 											</div>
 					         	</div>
 				         	</div>
@@ -360,6 +360,7 @@
     	});
 
     	barInteractionsWeekRaw.onclick = function(evt) {
+    		$('#showPost').modal('show');
     		var activePoints = barChartInter7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsInteractedWeek[idx];
@@ -385,7 +386,6 @@
 	  					}]
 	    			}
 	    		});
-    		$('#showPost').modal('show');
     	};
 
     	var barRevenueWeekRaw = $("#barRevenueWeek").get(0);
@@ -399,6 +399,7 @@
     	});
 
     	barRevenueWeekRaw.onclick = function(evt) {
+    		$('#showPost').modal('show');
     		var activePoints = barChartRevenue7.getElementsAtEvent(evt);
     		var idx = activePoints[0]['_index'];
     		var post = dashboard.$data.postsRevenueWeek[idx];
@@ -424,7 +425,6 @@
 	  					}]
 	    			}
 	    		});
-    		$('#showPost').modal('show');
     	};
 
     	var lineInteractionsDay = $("#lineInterDay").get(0).getContext("2d");
@@ -800,6 +800,7 @@
 						    	});
 
 						    	barInteractionsMonthRaw.onclick = function(evt) {
+						    		$('#showPost').modal('show');
 						    		var activePoints = barChartInter30.getElementsAtEvent(evt);
 						    		var idx = activePoints[0]['_index'];
 						    		var post = dashboard.$data.postsInteractedMonth[idx];
@@ -825,7 +826,6 @@
 							  					}]
 							    			}
 							    		});
-						    		$('#showPost').modal('show');
 						    	};
 								} else {
 									dashboard.$data.postsRevenueMonth = dataSet;
@@ -839,6 +839,7 @@
 						    		options: barChartOptionsRevenue
 						    	});
 						    	barRevenueMonthRaw.onclick = function(evt) {
+						    		$('#showPost').modal('show');
 						    		var activePoints = barChartRevenue30.getElementsAtEvent(evt);
 						    		var idx = activePoints[0]['_index'];
 						    		var post = dashboard.$data.postsRevenueMonth[idx];
@@ -864,7 +865,6 @@
 							  					}]
 							    			}
 							    		});
-						    		$('#showPost').modal('show');
 						    	};
 								}
 								break;
@@ -880,6 +880,7 @@
 						    		options: barChartOptions
 						    	});
 						    	barInteractions2MonthRaw.onclick = function(evt) {
+						    		$('#showPost').modal('show');
 						    		var activePoints = barChartInter60.getElementsAtEvent(evt);
 						    		var idx = activePoints[0]['_index'];
 						    		var post = dashboard.$data.postsInteracted2Month[idx];
@@ -905,7 +906,6 @@
 							  					}]
 							    			}
 							    		});
-						    		$('#showPost').modal('show');
 						    	};
 								} else {
 									dashboard.$data.postsRevenue2Month = dataSet;
@@ -920,6 +920,7 @@
 						    	});
 
 						    	barRevenue2MonthRaw.onclick = function(evt) {
+						    		$('#showPost').modal('show');
 						    		var activePoints = barChartRevenue60.getElementsAtEvent(evt);
 						    		var idx = activePoints[0]['_index'];
 						    		var post = dashboard.$data.postsRevenue2Month[idx];
@@ -945,7 +946,6 @@
 							  					}]
 							    			}
 							    		});
-						    		$('#showPost').modal('show');
 						    	};
 								}
 						}
