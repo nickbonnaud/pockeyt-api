@@ -382,7 +382,10 @@
 	  							'rgba(142, 68, 173, 1.0)',
 	  							'rgba(39, 174, 96, 1.0)'
 	  						],
-	  						data: [post.views, post.shares, post.bookmarks]
+	  						data: [post.views, post.shares, post.bookmarks],
+	  						options: {
+	  							responsive: true
+	  						}
 	  					}]
 	    			}
 	    		});
@@ -421,7 +424,10 @@
 	  							'rgba(142, 68, 173, 1.0)',
 	  							'rgba(39, 174, 96, 1.0)'
 	  						],
-	  						data: [post.views, post.shares, post.bookmarks]
+	  						data: [post.views, post.shares, post.bookmarks],
+	  						options: {
+	  							responsive: true
+	  						}
 	  					}]
 	    			}
 	    		});
@@ -822,7 +828,10 @@
 							  							'rgba(142, 68, 173, 1.0)',
 							  							'rgba(39, 174, 96, 1.0)'
 							  						],
-							  						data: [post.views, post.shares, post.bookmarks]
+							  						data: [post.views, post.shares, post.bookmarks],
+							  						options: {
+							  							responsive: true
+							  						}
 							  					}]
 							    			}
 							    		});
@@ -861,7 +870,10 @@
 							  							'rgba(142, 68, 173, 1.0)',
 							  							'rgba(39, 174, 96, 1.0)'
 							  						],
-							  						data: [post.views, post.shares, post.bookmarks]
+							  						data: [post.views, post.shares, post.bookmarks],
+							  						options: {
+							  							responsive: true
+							  						}
 							  					}]
 							    			}
 							    		});
@@ -902,7 +914,10 @@
 							  							'rgba(142, 68, 173, 1.0)',
 							  							'rgba(39, 174, 96, 1.0)'
 							  						],
-							  						data: [post.views, post.shares, post.bookmarks]
+							  						data: [post.views, post.shares, post.bookmarks],
+							  						options: {
+							  							responsive: true
+							  						}
 							  					}]
 							    			}
 							    		});
@@ -942,7 +957,10 @@
 							  							'rgba(142, 68, 173, 1.0)',
 							  							'rgba(39, 174, 96, 1.0)'
 							  						],
-							  						data: [post.views, post.shares, post.bookmarks]
+							  						data: [post.views, post.shares, post.bookmarks],
+							  						options: {
+							  							responsive: true
+							  						}
 							  					}]
 							    			}
 							    		});
