@@ -8381,7 +8381,8 @@ img {
   }
 
   .scroll-contents {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 100%;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
@@ -8408,11 +8409,11 @@ img {
     overflow: hidden;
     will-change: overflow;
     display: flex; 
-    padding-bottom: 50px;
   }
 
   .scroll-contents {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 100%;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
