@@ -164,7 +164,7 @@
 												<h3 class="box-title">Interaction Breakdown</h3>
 											</div>
 											<div class="box-body">
-												<canvas id="donutInteractions" width="200" height="200"></canvas>
+												<canvas id="donutInteractions" width="100" height="100"></canvas>
 											</div>
 					         	</div>
 				         	</div>
