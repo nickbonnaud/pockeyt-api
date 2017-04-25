@@ -2,7 +2,7 @@
   {{ csrf_field() }}
 	<div class="form-group">
     <label for="message">Message:</label>
-    <textarea type="text" name="message" id="message" class="form-control" rows="5" required></textarea>
+    <textarea type="text" name="message" id="message" class="form-control" rows="3" required></textarea>
   </div>
   <div class="form-group">
     <label for="deal_item">Purchase this post to receive:</label>
