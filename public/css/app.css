@@ -8408,6 +8408,7 @@ img {
     overflow: hidden;
     will-change: overflow;
     display: flex; 
+    padding-bottom: 50px;
   }
 
   .scroll-contents {
