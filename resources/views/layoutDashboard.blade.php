@@ -342,11 +342,11 @@
             data: {
               'businessId' : businessId
             },
-            success: data => {
+            success: function(data) {
               this.transactionsPending = data.transactionsPending;
               this.transactionsFinalized = data.transactionsFinalized;
             },
-            error: err => {
+            error: function(data) {
               console.log(err);
             }
           })
