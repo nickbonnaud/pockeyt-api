@@ -349,7 +349,7 @@
 
 		mounted: function() {
 			
-			$('#exampleModal').on('shown.bs.modal', function (event) {
+			$('#showPost').on('shown.bs.modal', function (event) {
 				var post = dashboard.$data.selectedPost;
 				var donutInteractionsCanvas = $("#donutInteractions").get(0).getContext("2d");
 	    	var donutChartInter = new Chart(donutInteractionsCanvas, {
