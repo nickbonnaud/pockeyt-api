@@ -687,7 +687,7 @@
 						'businessId': businessId,
 						'type': type
 					},
-					success: data => {
+					success: function(data) {
 						console.log(data);
 						var type = data.type;
 						var dataSet = data.data;
@@ -722,7 +722,7 @@
 						'businessId': businessId,
 						'type': type
 					},
-					success: data => {
+					success: function(data) {
 						var type = data.type;
 						var dataSet = data.data;
 
@@ -757,7 +757,7 @@
 						'timeSpan': timeSpan,
 						'type': type
 					},
-					success: data => {
+					success: function(data) {
 						var timeSpan = data.timeSpan;
 						var type = data.type;
 						var dataSet = data.data;
@@ -950,7 +950,7 @@
 								}
 						}
 					},
-					error: data => {
+					error: function(data) {
 						console.log(data);
 					}
 				})

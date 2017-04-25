@@ -185,7 +185,7 @@
 						data: {
 							'postId' : postId
 						},
-						success: data => {
+						success: function(data) {
 							this.purchasedDeals = data
 						}
 					})
