@@ -36,11 +36,11 @@
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
-              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
                 <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
               </a>
               <div class="box-body">
-                <a v-on:click="getCustomerData(user.id)"  href="#" data-toggle="modal" data-target="#CustomerinfoModal">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
                   <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
                 </a>
               </div>
@@ -291,7 +291,7 @@
         mounted: function() {
 
           $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-            this.drawChart();
+            
           });
 
           var pusher = new Pusher('f4976d40a137b96b52ea', {
@@ -481,6 +481,7 @@
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
+                  return $('#CustomerinfoModal').modal('show');
                 } else {
                   dataStorage.lastPurchase = null;
                   dataStorage.lastItemsPurchased = null;
