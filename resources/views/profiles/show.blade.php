@@ -627,6 +627,11 @@
                     deals.splice(i, 1);
                   }
                 }
+               toastr["success"]("Deal Redeemed!", "Success", {
+                  "newestOnTop": true,
+                  "timeOut": 5000,
+                  "extendedTimeOut": 5000,
+                })
               }
             })
           }
