@@ -8423,6 +8423,13 @@ img {
 }
 
 @media(max-width: 991px) {
+  .scroll-container {
+    height: 80vh;
+    overflow: hidden;
+    will-change: overflow;
+    display: flex; 
+  }
+  
   .scroll-main {
     height: 95vh;
     overflow: hidden;
