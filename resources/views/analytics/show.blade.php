@@ -135,120 +135,119 @@
 							</div>
 						</div>
 					</div>
-					<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-timeline">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="showPostModal">Post Details | Interaction Type Breakdown</h4>
-					      </div>
-					      <div class="modal-body-analytics">
-				        	<div class="col-md-6 col-sm-6 col-xs-12">
-				        		<div class="box box-primary modal-analytics">
-				        			<div class="box-header with-border">
-				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
-				                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
-				        			</div>
-				        			<div class="box-body">
-				        				<div class="analytics-modal-image">
-				        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
-				        				</div>
-                    		<hr>
-                    		<p class="analytics-date">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
-				        			</div>
-				        		</div>
-				         	</div>
-				         	<div class="col-md-6 col-sm-6 col-xs-12">
-				         		<div class="box box-primary modal-analytics">
-											<div class="box-header with-border">
-												<h3 class="box-title">Interaction Breakdown</h3>
-											</div>
-											<div class="box-body">
-												<canvas id="donutInteractions" width="200" height="200"></canvas>
-											</div>
-					         	</div>
-				         	</div>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					
-					<div class="modal fade" id="RevenuePerPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-analytics revenue_per_post">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h3 class="modal-title" id="RevenuePerPostModal">Revenue Per Post</h3>
-					      </div>
-					      <div class="modal-body-analytics-bubble">
-					      	<div class="sub-header">
-				        		<h3>Your current Revenue Per Post is <strong>${{ $revenuePerPost }}</strong></h3>
-				        	</div>
-				        	<hr>
-				        	<p>Revenue per Post shows how effective your Pockeyt Posts are in <strong>generating revenue.</strong></p>
-				        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<div class="modal fade" id="BestDayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-analytics best_day">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h3 class="modal-title" id="BestDayModal">Best Day to Post</h3>
-					      </div>
-					      <div class="modal-body-analytics-bubble">
-					      	<div class="sub-header">
-				        		<h3>The best day to publish a Post is <strong>{{ $topDay }}</strong>.</h3>
-				        	</div>
-				        	<hr>
-				        	<p>{{ $topDay }} is the <strong>day of the week</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
-				        	<p>Calculated by the day with highest percentage of Views, Shares, and Bookmarks</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<div class="modal fade" id="BestHourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-analytics best_hour">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h3 class="modal-title" id="BestHourModal">Best Time to Post</h3>
-					      </div>
-					      <div class="modal-body-analytics-bubble">
-					      	<div class="sub-header">
-				        		<h3>The best time to publish a Post is <strong>{{ $topHour }}</strong>.</h3>
-				        	</div>
-				        	<hr>
-				        	<p>{{ $topHour }} is the <strong>time of day</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
-				        	<p>Calculated by the hour with highest percentage of Views, Shares, and Bookmarks</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
 				</section>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-timeline">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="showPostModal">Post Details | Interaction Type Breakdown</h4>
+	      </div>
+	      <div class="modal-body-analytics">
+        	<div class="col-md-6 col-sm-6 col-xs-12">
+        		<div class="box box-primary modal-analytics">
+        			<div class="box-header with-border">
+                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
+                <h4 v-else="!selectedPost.message" class="box-title">@{{ selectedPost.title }}</h4>
+        			</div>
+        			<div class="box-body">
+        				<div class="analytics-modal-image">
+        					<img v-if="selectedPost.thumb_path" :src="selectedPost.thumb_path">
+        				</div>
+            		<hr>
+            		<p class="analytics-date">Posted on <strong>@{{ selectedPost.published_at | setDate }}</strong>.</p>
+        			</div>
+        		</div>
+         	</div>
+         	<div class="col-md-6 col-sm-6 col-xs-12">
+         		<div class="box box-primary modal-analytics">
+							<div class="box-header with-border">
+								<h3 class="box-title">Interaction Breakdown</h3>
+							</div>
+							<div class="box-body">
+								<canvas id="donutInteractions" width="200" height="200"></canvas>
+							</div>
+	         	</div>
+         	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<div class="modal fade" id="ConversionRateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-analytics conversion_rate">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h3 class="modal-title" id="ConversionRateModal">Conversion Rate</h3>
-					      </div>
-					      <div class="modal-body-analytics-bubble">
-					      	<div class="sub-header">
-				        		<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
-				        	</div>
-				        	<hr>
-				        	<p>Conversion Rate shows how effective your Posts are in <strong>creating in-store customers.</strong></p>
-				        	<p>Calculated by the number of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-analytics conversion_rate">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h3 class="modal-title" id="ConversionRateModal">Conversion Rate</h3>
+	      </div>
+	      <div class="modal-body-analytics-bubble">
+	      	<div class="sub-header">
+        		<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
+        	</div>
+        	<hr>
+        	<p>Conversion Rate shows how effective your Posts are in <strong>creating in-store customers.</strong></p>
+        	<p>Calculated by the number of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="RevenuePerPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-analytics revenue_per_post">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h3 class="modal-title" id="RevenuePerPostModal">Revenue Per Post</h3>
+	      </div>
+	      <div class="modal-body-analytics-bubble">
+	      	<div class="sub-header">
+        		<h3>Your current Revenue Per Post is <strong>${{ $revenuePerPost }}</strong></h3>
+        	</div>
+        	<hr>
+        	<p>Revenue per Post shows how effective your Pockeyt Posts are in <strong>generating revenue.</strong></p>
+        	<p>Calculated by your total revenue earned on Pockeyt divided by the number of uniquely viewed posts.</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="BestDayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-analytics best_day">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h3 class="modal-title" id="BestDayModal">Best Day to Post</h3>
+	      </div>
+	      <div class="modal-body-analytics-bubble">
+	      	<div class="sub-header">
+        		<h3>The best day to publish a Post is <strong>{{ $topDay }}</strong>.</h3>
+        	</div>
+        	<hr>
+        	<p>{{ $topDay }} is the <strong>day of the week</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
+        	<p>Calculated by the day with highest percentage of Views, Shares, and Bookmarks</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="BestHourModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-analytics best_hour">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h3 class="modal-title" id="BestHourModal">Best Time to Post</h3>
+	      </div>
+	      <div class="modal-body-analytics-bubble">
+	      	<div class="sub-header">
+        		<h3>The best time to publish a Post is <strong>{{ $topHour }}</strong>.</h3>
+        	</div>
+        	<hr>
+        	<p>{{ $topHour }} is the <strong>time of day</strong> your Post is most likely to be Viewed, Shared, or Bookmarked.</p>
+        	<p>Calculated by the hour with highest percentage of Views, Shares, and Bookmarks</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 @stop
 
