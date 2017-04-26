@@ -289,10 +289,6 @@
           window.setInterval(this.removeInactiveUser, 300000);
 
           this.getCustomersInLocation();
-
-          $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-            console.log('shit');
-          });
         },
 
         filters: {
@@ -448,6 +444,7 @@
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
+                  console.log(JSON.parse(dataStorage.purchases[0].products));
                   $('#CustomerinfoModal').modal('show');
                   customer.drawChart();
                 } else {
