@@ -13,8 +13,8 @@
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper-scroll" id="customer">
-  <div class="scroll-main">
+<div class="content-wrapper-scroll">
+  <div class="scroll-main" id="customer">
     <div class="scroll-main-contents">
       <section class="content-header">
         <h1>
@@ -225,8 +225,6 @@
       </section>
       <form><input type="hidden" name="_token" value="{{ csrf_token() }}"></form>
     </div>
-  </div>
-  <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header-timeline">
@@ -249,6 +247,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
