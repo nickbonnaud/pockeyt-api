@@ -34,6 +34,7 @@
       <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
     </div>
     <div class="scroll-container">
+      <div class="scroll-contents">
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
@@ -1030,8 +1031,8 @@
             </div>
           </div>
         </div>
-
       </template>
+    </div>
     </div>
     <!-- /.box -->
   </section>
