@@ -14,7 +14,7 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper-scroll">
-  <div class="scroll-main" id="customer">
+  <div class="scroll-main">
     <div class="scroll-main-contents">
       <section class="content-header">
         <h1>
@@ -25,7 +25,7 @@
         </ol>
       </section>
 
-      <section class="content">
+      <section class="content"  id="customer">
         <form class="customer-search">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
