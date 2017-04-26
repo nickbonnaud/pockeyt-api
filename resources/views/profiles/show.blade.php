@@ -77,21 +77,24 @@
                           <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="purchases.length != 0" class="box box-aqua">
+                      <div v-if="purchases.length != 0" class="box box-aqua collapsed-box">
                         <div class="box-header with-border">
                           <i class="fa fa-shopping-cart"></i>
                           <h3 class="box-title">View Purchases</h3>
-                         
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                            </button>
+                          </div>
                         </div>
                         <div class="box-body">
                           <div v-for="item in lastItemsPurchased">
-                            <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
-                            <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p>
+                            <p class="timeline-purchases-left">Something</p>
+                            <p class="timeline-purchases-right">$10</p>
                           </div>
                           <div class="box-footer timeline-list-footer">
-                            <div class="last-purchase-footer pull-right">Tax: $@{{ lastPurchase.tax / 100 }}</div>
-                            <div class="last-purchase-footer pull-right" style="margin-bottom: 10px;">Tip: $@{{ lastPurchase.tips / 100 }}</div>
-                            <div class="last-purchase-footer pull-right"><b>Total: $@{{ lastPurchase.total / 100 }}</b></div>
+                            <div class="last-purchase-footer pull-right">Tax: $1</div>
+                            <div class="last-purchase-footer pull-right" style="margin-bottom: 10px;">Tip: $2</div>
+                            <div class="last-purchase-footer pull-right"><b>Total: $4</b></div>
                           </div>
                         </div>
                       </div>
