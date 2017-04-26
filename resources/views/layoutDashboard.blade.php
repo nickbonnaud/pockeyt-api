@@ -117,11 +117,11 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> <span class="menu-text">Dashboard</span></a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-building"></i>
-                <span>Your Business Info</span>
+                <span class="menu-text">Your Business Info</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -135,12 +135,12 @@
                 @endif
               </ul>
             </li>
-            <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span>Posts</span></a></li>
-            <li><a href="{{ route('posts.events') }}"><i class="fa fa-calendar"></i> <span>Events</span></a></li>
-            <li><a href="{{ route('products.list') }}"><i class="fa fa-shopping-cart"></i> <span>Inventory</span></a></li>
-            <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span>Loyalty Program</span></a></li>
-            <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span>Deals</span></a></li>
-            <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span>Analytics Dashboard</span></a></li>
+            <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span class="menu-text">Posts</span></a></li>
+            <li><a href="{{ route('posts.events') }}"><i class="fa fa-calendar"></i> <span class="menu-text">Events</span></a></li>
+            <li><a href="{{ route('products.list') }}"><i class="fa fa-shopping-cart"></i> <span class="menu-text">Inventory</span></a></li>
+            <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span class="menu-text">Loyalty Program</span></a></li>
+            <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span class="menu-text">Deals</span></a></li>
+            <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span class="menu-text">Analytics Dashboard</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
