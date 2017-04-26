@@ -191,6 +191,8 @@
                         </div>
                       </div>
                     </div>
+                    </div>
+                    <div class="row">
                     <div v-show="purchases.length != 0" class="col-md-12">
                       <div class="box box-primary">
                         <div class="box-header with-border">
