@@ -382,7 +382,7 @@
 
           addUser: function(data) {
             console.log(data);
-            if ( data.user) {
+            if (data.user) {
               var activeCustomer = data.user;
             } else {
               var activeCustomer = data;
@@ -559,6 +559,7 @@
             });
           },
           getRedeemableDeals: function(customerId) {
+            console.log("inside get deals");
             var businessId = '{{ $profile->id }}'
             $.ajax({
               method: 'POST',
