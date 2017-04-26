@@ -143,7 +143,7 @@
 					        <h4 class="modal-title" id="showPostModal">Post Details | Interaction Type Breakdown</h4>
 					      </div>
 					      <div class="modal-body-analytics">
-				        	<div class="col-md-6">
+				        	<div class="col-md-6 col-sm-6 col-xs-12">
 				        		<div class="box box-primary modal-analytics">
 				        			<div class="box-header with-border">
 				                <h4 v-if="selectedPost.message" class="box-title">@{{ selectedPost.message | truncate }}</h4>
@@ -158,7 +158,7 @@
 				        			</div>
 				        		</div>
 				         	</div>
-				         	<div class="col-md-6">
+				         	<div class="col-md-6 col-sm-6 col-xs-12">
 				         		<div class="box box-primary modal-analytics">
 											<div class="box-header with-border">
 												<h3 class="box-title">Interaction Breakdown</h3>
