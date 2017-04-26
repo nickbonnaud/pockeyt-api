@@ -31,7 +31,7 @@
 		    </ol>
 		  </section>
 			<section class="content">
-			<div class="col-md-6">
+			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">Create a New Event</h3>
@@ -42,7 +42,7 @@
 						{!! Form::close() !!}
 				</div>
 			</div>
-				<div class="scroll-container col-md-6">
+				<div class="scroll-container col-md-6 col-sm-6 col-xs-12">
 					<div class="scroll-contents">
 						@include('partials.posts.events', ['posts' => $posts, 'no_icons' => true])
 					</div>
