@@ -64,30 +64,7 @@
                   </div>
                 </div>
               </div>
-              <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header-timeline">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="redeemDealModal">@{{user.first_name}} @{{user.last_name | setPossessive}} purchased Deal</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="box-body">
-                        <div v-for="deal in deals">
-                          <div v-if="deal.user_id === user.id">
-                            <span class="pull-left">
-                              <h3 class="deal-item">@{{ deal.products }}</h3>
-                            </span>
-                            <span class="pull-right">
-                              <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
