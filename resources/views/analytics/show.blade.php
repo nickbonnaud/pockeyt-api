@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div id="content">
+<div id="dashboard">
 	<div class="content-wrapper-scroll">
 		<div class="scroll-main">
 			<div class="scroll-main-contents">
@@ -14,7 +14,7 @@
 			      <li class="active">Analytics Dashboard</li>
 			    </ol>
 			  </section>
-				<section class="content" id="dashboard">
+				<section class="content">
 					<div class="scroll-container-analytics">
 						<div class="scroll-contents">
 							<div class="row">
@@ -134,7 +134,7 @@
 								</div>
 							</div>
 						</div>
-					
+					</div>
 					<div class="modal fade" id="showPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
@@ -172,24 +172,7 @@
 					    </div>
 					  </div>
 					</div>
-					<div class="modal fade" id="ConversionRateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header-analytics conversion_rate">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h3 class="modal-title" id="ConversionRateModal">Conversion Rate</h3>
-					      </div>
-					      <div class="modal-body-analytics-bubble">
-					      	<div class="sub-header">
-				        		<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
-				        	</div>
-				        	<hr>
-				        	<p>Conversion Rate shows how effective your Posts are in <strong>creating in-store customers.</strong></p>
-				        	<p>Calculated by the number of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+					
 					<div class="modal fade" id="RevenuePerPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
@@ -244,11 +227,28 @@
 					    </div>
 					  </div>
 					</div>
-					</div>
 				</section>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="ConversionRateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header-analytics conversion_rate">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h3 class="modal-title" id="ConversionRateModal">Conversion Rate</h3>
+					      </div>
+					      <div class="modal-body-analytics-bubble">
+					      	<div class="sub-header">
+				        		<h3>Your current Conversion Rate is <strong>{{ $conversionRate }}%</strong></h3>
+				        	</div>
+				        	<hr>
+				        	<p>Conversion Rate shows how effective your Posts are in <strong>creating in-store customers.</strong></p>
+				        	<p>Calculated by the number of users who made a purchases at {{ $user->profile->business_name }} within <strong>2 days</strong> of viewing a Post on your Pockeyt Feed.</p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 </div>
 @stop
 
