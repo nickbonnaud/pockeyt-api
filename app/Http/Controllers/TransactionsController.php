@@ -545,11 +545,11 @@ class TransactionsController extends Controller
 
         $transaction->redeemed = true;
         $transaction->save();
-        $message =  \PushNotification::Message('Deal redeemed at ' . $post->profile->business_name . 'for ' . $post->deal_item , 
+        $message =  \PushNotification::Message('Deal redeemed at ' . $post->profile->business_name . ' for ' . $post->deal_item , 
             array(  'category' => 'default',
                     'locKey' => '1',
                     'custom' => array(
-                        'inAppMessage' => 'Deal redeemed at ' . $post->profile->business_name . 'for ' . $post->deal_item
+                        'inAppMessage' => 'Deal redeemed at ' . $post->profile->business_name . ' for ' . $post->deal_item
                     )
         ));
         $token = PushId::where('user_id', '=', $transaction->user_id)->first();
