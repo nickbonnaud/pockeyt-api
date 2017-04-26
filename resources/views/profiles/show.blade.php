@@ -443,8 +443,7 @@
                 dataStorage.recentShared = data.recentSharedPost;
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
-                  dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
-                  console.log(dataStorage.lastItemsPurchased);
+                  dataStorage.lastItemsPurchased = JSON.parse(dataStorage.lastPurchase.products);
                   $('#CustomerinfoModal').modal('show');
                   customer.drawChart();
                 } else {
