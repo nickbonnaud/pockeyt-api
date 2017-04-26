@@ -13,20 +13,74 @@
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="customer">
   <div class="scroll-main">
-    <div class="scroll-main-contents" id="customer">
-    <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="scroll-main-contents">
+      <section class="content-header">
+        <h1>
+          Customer Dashboard
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        </ol>
+      </section>
+      <section class="content">
+        <form class="customer-search">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input style="font-size: 28px; padding: 0px;" type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+          </div>
+        </form>
+        <div class="invite-code-section">
+          <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()" style="padding: 8px;">New Invite Code</button>
+          <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
+          <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
+        </div>
+        <div class="scroll-container">
+          <div class="scroll-contents">
+            <template v-for="user in customerFilter">
+              <div class="col-sm-4 col-md-3">
+                <div class="box box-primary">
+                  <div class="box-header with-border text-center">
+                    <a v-on:click="getCustomerData(user)" class="customer-name-title" href="#">
+                      <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+                    </a>
+                    <div class="box-body">
+                      <a v-on:click="getCustomerData(user)"  href="#">
+                        <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                      </a>
+                    </div>
+                    <div class="box-footer">
+                      <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                        <b>Bill</b>
+                      </a>
+                      <div v-if="checkForDeal(user.id)">
+                        <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                          <b>Redeem Deal</b>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+      <form><input type="hidden" name="_token" value="{{ csrf_token() }}"></form>
+    </div>
+  </div>
+  <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header-timeline">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="redeemDealModal">@{{user.first_name}} @{{user.last_name | setPossessive}} purchased Deal</h4>
+                      <h4 class="modal-title" id="redeemDealModal">@{{selectedUser.first_name}} @{{selectedUser.last_name | setPossessive}} purchased Deal</h4>
                     </div>
                     <div class="modal-body">
                       <div class="box-body">
                         <div v-for="deal in deals">
-                          <div v-if="deal.user_id === user.id">
+                          <div v-if="deal.user_id === selectedUser.id">
                             <span class="pull-left">
                               <h3 class="deal-item">@{{ deal.products }}</h3>
                             </span>
@@ -45,7 +99,7 @@
                   <div class="modal-content">
                     <div class="modal-header-timeline">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h3 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h3>
+                      <h3 class="modal-title" id="CustomerinfoModal">@{{selectedUser.first_name}} @{{selectedUser.last_name | setPossessive}} Info</h3>
                     </div>
                     <div class="modal-body-customer-info">
                       <section class="content">
@@ -195,61 +249,6 @@
                   </div>
                 </div>
               </div>
-      <section class="content-header">
-        <h1>
-          Customer Dashboard
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        </ol>
-      </section>
-
-      <section class="content">
-        <form class="customer-search">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input style="font-size: 28px; padding: 0px;" type="text" name="query" class="form-control" placeholder="Search" v-model="query">
-          </div>
-        </form>
-        <div class="invite-code-section">
-          <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()" style="padding: 8px;">New Invite Code</button>
-          <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
-          <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
-        </div>
-        <div class="scroll-container">
-          <div class="scroll-contents">
-            <template v-for="user in customerFilter">
-              <div class="col-sm-4 col-md-3">
-                <div class="box box-primary">
-                  <div class="box-header with-border text-center">
-                    <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
-                      <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
-                    </a>
-                    <div class="box-body">
-                      <a v-on:click="getCustomerData(user.id)"  href="#">
-                        <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
-                      </a>
-                    </div>
-                    <div class="box-footer">
-                      <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
-                        <b>Bill</b>
-                      </a>
-                      <div v-if="checkForDeal(user.id)">
-                        <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
-                          <b>Redeem Deal</b>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </section>
-      <form><input type="hidden" name="_token" value="{{ csrf_token() }}"></form>
-    </div>
-  </div>
 </div>
 
 <!-- /.content-wrapper -->
@@ -281,7 +280,8 @@
           recentShared: null,
           lastItemsPurchased: [],
           inviteCodeGenerated: null,
-          query: ''
+          query: '',
+          selectedUser: {}
         },
 
         mounted: function() {
@@ -441,18 +441,19 @@
           moment: function() {
             return moment();
           },
-          getCustomerData: function(customerId) {
+          getCustomerData: function(user) {
             var businessId = '{{ $profile->id }}'
 
             $.ajax({
               method: 'POST',
               url: '/user/purchases',
               data: {
-                'customerId' : customerId,
+                'customerId' : user.id,
                 'businessId' : businessId
               },
               success: function(data) {
                 var dataStorage = customer.$data;
+                dataStorage.selectedUser = user;
                 dataStorage.purchases = data.purchases;
                 dataStorage.lastViewedPost = data.lastViewedPost;
                 dataStorage.recentBookmarked = data.recentBookmarkedPost;
