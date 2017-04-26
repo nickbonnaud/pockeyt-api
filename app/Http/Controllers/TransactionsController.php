@@ -291,13 +291,13 @@ class TransactionsController extends Controller
     public function purchaseDeal(Request $request) {
         $customer = JWTAuth::parseToken()->authenticate();
         $profile = Profile::findOrFail($request->business_id);
-
         $transaction = new Transaction;
 
         $transaction->profile_id = $profile->id;
         $transaction->user_id = $customer->id;
         $transaction->paid = false;
         $transaction->deal_id = $request->id;
+        $transaction->products = json_encode($request->deal_item);
         $transaction->net_sales = $request->price;
 
         $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales);
