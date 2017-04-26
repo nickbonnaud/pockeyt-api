@@ -531,7 +531,7 @@
                   xAxes: [{
                     ticks: {
                       callback: function(value, index, values) {
-                        console.log(moment(value).format('MMM D YY'));
+                        console.log(moment(value).format());
                         var formattedTick = (moment(value).format('MMM D YY'));
                         var checkDate = null;
                         purchasesData.forEach(function(date) {
