@@ -77,14 +77,11 @@
                           <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
                         </div>
                       </div>
-                      <div v-if="purchases.length != 0" class="box box-aqua collapsed-box">
+                      <div v-if="purchases.length != 0" class="box box-aqua">
                         <div class="box-header with-border">
                           <i class="fa fa-shopping-cart"></i>
                           <h3 class="box-title">View Purchases</h3>
-                          <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                            </button>
-                          </div>
+                         
                         </div>
                         <div class="box-body">
                           <div v-for="item in lastItemsPurchased">
