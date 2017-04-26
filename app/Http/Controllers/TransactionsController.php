@@ -311,6 +311,7 @@ class TransactionsController extends Controller
         if ($result->success) {
             $transaction->paid = true;
             $transaction->status = 20;
+            $transaction->redeemed = false;
             $transaction->save();
 
             return response()->json(['success' => 'Post Purchased'], 200);
@@ -523,7 +524,8 @@ class TransactionsController extends Controller
         $redeemableDeals = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId)
-                ->where('redeemed', '=', false);     
+                ->where('redeemed', '=', false)
+                ->where('paid', '=', true);     
         })->get();
         if (isset($redeemableDeals)) {
             return response()->json($redeemableDeals);

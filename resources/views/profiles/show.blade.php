@@ -558,7 +558,6 @@
             });
           },
           getRedeemableDeals: function(customerId) {
-            console.log(customerId);
             var businessId = '{{ $profile->id }}'
             $.ajax({
               method: 'POST',
