@@ -289,6 +289,11 @@
         },
 
         mounted: function() {
+
+          $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
+            customer.drawChart();
+          });
+
           var pusher = new Pusher('f4976d40a137b96b52ea', {
             encrypted: true
           });
@@ -476,7 +481,6 @@
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
-                  customer.drawChart(dataStorage);
                 } else {
                   dataStorage.lastPurchase = null;
                   dataStorage.lastItemsPurchased = null;
@@ -487,7 +491,8 @@
               }
             })
           },
-          drawChart: function(dataStorage) {
+          drawChart: function() {
+            var dataStorage = customer.$data;
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
             dataStorage.purchases.forEach(function(purchase) {
@@ -508,6 +513,7 @@
                 }]
               },
               options: {
+                responsive: true,
                 legend: {
                   display: false
                 },
