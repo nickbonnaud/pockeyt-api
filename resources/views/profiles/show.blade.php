@@ -403,7 +403,7 @@
                 }
               }
             }
-            this.getRedeemableDeals(activeCustomer.id);
+            customer.getRedeemableDeals(activeCustomer.id);
           },
           removeUser: function(data) {
             console.log("remove user by distance");
