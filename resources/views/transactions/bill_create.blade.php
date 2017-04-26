@@ -7,9 +7,7 @@
     <h1 class="header-button">
       {{$customer->first_name}} {{$customer->last_name}}'s Bill
     </h1>
-    <div class="auto-post">
-      <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-primary btn-sm custom-amount-btn">Custom Amount</button>
-    </div>
+    <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-primary btn-sm custom-amount-btn">Custom Amount</button>
     <ol class="breadcrumb">
       <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Bill</li>
@@ -24,12 +22,12 @@
       </div>
     </form>
     @include ('errors.form')
-    <div class="scroll-container col-md-8">
+    <div class="scroll-container col-md-8 col-sm-8 col-xs-8">
       <div class="scroll-contents">
         @include('partials.transactions.inventory')  
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-4 col-xs-4">
       <div class="box box-black">
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
