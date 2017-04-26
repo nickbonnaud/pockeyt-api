@@ -28,6 +28,12 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
+  <form class="product-search">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input style="font-size: 28px; padding: 0px;" type="text" name="query" class="form-control" placeholder="Search" v-model="query">
+      </div>
+    </form>
     <div class="invite-code-section">
       <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()">New Invite Code</button>
       <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
@@ -1070,7 +1076,8 @@
           recentBookmarked: null,
           recentShared: null,
           lastItemsPurchased: [],
-          inviteCodeGenerated: null
+          inviteCodeGenerated: null,
+          query: ''
         },
 
         mounted: function() {
@@ -1109,10 +1116,19 @@
           getDealItem: function(value) {
             dealItem = JSON.parse(value);
             return dealItem[0].name;
+          },
+          customerFilter: function() {
+            return this.findBy(this.users, this.query, 'first_name', 'last_name');
           }
         },
 
         methods: {
+
+          findBy: function(list, value, column_first, column_last) {
+            return list.filter(function(customer) {
+              return (product[column_first].toLowerCase().includes(value.toLowerCase()) || product[column_last].toLowerCase().includes(value.toLowerCase()));
+            });
+          },
 
           createInviteCode: function() {
             var businessId = '{{ $profile->id }}'
