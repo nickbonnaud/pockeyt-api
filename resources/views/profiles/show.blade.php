@@ -1,10 +1,22 @@
 @extends('layoutDashboard')
+
+@if(is_null($profile))
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Profile not found.</h2>
+    </div>
+</div>
+
+@else
+
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper-scroll">
-  <div class="scroll-main" id="customer">
-  <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="scroll-main">
+    <div class="scroll-main-contents" id="customer">
+    <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header-timeline">
@@ -183,7 +195,6 @@
                   </div>
                 </div>
               </div>
-    <div class="scroll-main-contents">
       <section class="content-header">
         <h1>
           Customer Dashboard
@@ -243,6 +254,7 @@
 
 <!-- /.content-wrapper -->
 @stop
+@endif
 
 @section('scripts.footer')
     <script src="//js.pusher.com/3.2/pusher.min.js"></script>
