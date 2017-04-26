@@ -1128,7 +1128,7 @@
         methods: {
           findBy: function(list, value, column_first, column_last) {
             return list.filter(function(customer) {
-              return (product[column_first].toLowerCase().includes(value.toLowerCase()) || product[column_last].toLowerCase().includes(value.toLowerCase()));
+              return (customer[column_first].toLowerCase().includes(value.toLowerCase()) || customer[column_last].toLowerCase().includes(value.toLowerCase()));
             });
           },
 
