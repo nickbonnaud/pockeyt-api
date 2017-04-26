@@ -541,9 +541,26 @@ class TransactionsController extends Controller
     public function redeemUserDeal(Request $request) {
         $transactionId = $request->dealId;
         $transaction = Transaction::findOrFail($transactionId);
+        $post = Post::findOrFail($transaction->deal_id);
 
         $transaction->redeemed = true;
         $transaction->save();
+        $message =  \PushNotification::Message('Deal redeemed at ' . $post->profile->business_name . 'for ' . $post->deal_item , 
+            array(  'category' => 'default',
+                    'locKey' => '1',
+                    'custom' => array(
+                        'inAppMessage' => 'Deal redeemed at ' . $post->profile->business_name . 'for ' . $post->deal_item
+                    )
+        ));
+        $token = PushId::where('user_id', '=', $transaction->user_id)->first();
+        if ($token->device_type === 'iOS') {
+            $pushService = 'PockeytIOS';
+        } else {
+            $pushService = 'PockeytAndroid';
+        }
+        $collection = \PushNotification::app($pushService)
+          ->to($token->push_token)
+          ->send($message);
         return response('success');
     }
 
