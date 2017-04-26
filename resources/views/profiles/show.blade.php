@@ -462,13 +462,8 @@
                 dataStorage.recentBookmarked = data.recentBookmarkedPost;
                 dataStorage.recentShared = data.recentSharedPost;
                 if (dataStorage.purchases.length !== 0 ) {
-                  for (i=dataStorage.purchases.length - 1; i >= 0; i --) {
-                    if (dataStorage.purchases[i].products) {
-                      dataStorage.lastPurchase = dataStorage.purchases[i];
-                      dataStorage.lastItemsPurchased = JSON.parse(dataStorage.lastPurchase.products);
-                      break;
-                    }
-                  }
+                  dataStorage.lastPurchase = dataStorage.purchases[0];
+                  dataStorage.lastItemsPurchased = JSON.parse(dataStorage.lastPurchase.products);
                   $('#CustomerinfoModal').modal('show');
                   customer.drawChart();
                 } else {

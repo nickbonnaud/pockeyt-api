@@ -475,7 +475,8 @@ class TransactionsController extends Controller
 
         $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
-                ->where('profile_id', '=', $businessId);
+                ->where('profile_id', '=', $businessId)
+                ->where('products', '!=', '');
         })->orderBy('updated_at', 'desc')->take(5)->get();
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
