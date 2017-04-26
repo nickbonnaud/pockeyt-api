@@ -41,7 +41,7 @@
     </div>
     <div class="scroll-container">
       <div class="scroll-contents">
-      <template v-if="users.length > 0" v-for="user in customerFilter">
+      <template v-for="user in customerFilter">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
@@ -1116,14 +1116,16 @@
           getDealItem: function(value) {
             dealItem = JSON.parse(value);
             return dealItem[0].name;
-          },
+          }
+        },
+
+        computed: {
           customerFilter: function() {
             return this.findBy(this.users, this.query, 'first_name', 'last_name');
           }
         },
 
         methods: {
-
           findBy: function(list, value, column_first, column_last) {
             return list.filter(function(customer) {
               return (product[column_first].toLowerCase().includes(value.toLowerCase()) || product[column_last].toLowerCase().includes(value.toLowerCase()));
