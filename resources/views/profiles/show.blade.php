@@ -492,6 +492,7 @@
             })
           },
           drawChart: function() {
+            console.log("hello");
             var dataStorage = customer.$data;
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
