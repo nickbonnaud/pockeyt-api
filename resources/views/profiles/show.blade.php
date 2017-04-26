@@ -13,9 +13,7 @@
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper-scroll">
-<div class="scroll-main">
-<div class="scroll-main-contents">
+<div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -33,7 +31,7 @@
       <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
       <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
     </div>
-    <div class="scroll-container">
+    <div>
       <template v-for="user in users">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
@@ -1038,8 +1036,7 @@
   <!-- /.content -->
 <form><input type="hidden" name="_token" value="{{ csrf_token() }}"></form>
 </div>
-</div>
-</div>
+
 
 <!-- /.content-wrapper -->
 @stop
