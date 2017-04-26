@@ -8,7 +8,7 @@
         <h1>
           Current Inventory
         </h1>
-        <span class="pull-right">
+        <div class="auto-post">
           @if(isset($profile->square_token))
             <a href="{{ action('ProductsController@syncSquareItems') }}">
               <button type="button" class="btn btn-block btn-social btn-github">
@@ -24,7 +24,7 @@
               </button>
             </a>
           @endif
-        </span>
+        </div>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Inventory</li>
