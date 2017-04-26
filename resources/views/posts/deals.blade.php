@@ -26,7 +26,7 @@
 							{!! Form::close() !!}
 					</div>
 				</div>
-				<div class="scroll-container col-md-6 col-sm-6 col-xs-12">
+				<div class="scroll-container-deals col-md-6 col-sm-6 col-xs-12">
 					<div class="scroll-contents">
 						@include('partials.posts.deals', ['posts' => $posts, 'no_icons' => true])
 					</div>
