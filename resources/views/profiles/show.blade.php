@@ -75,7 +75,7 @@
                   <div class="modal-content">
                     <div class="modal-header-timeline">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="redeemDealModal">@{{selectedUser.first_name}} @{{selectedUser.last_name | setPossessive}} purchased Deal</h4>
+                      <h4 class="modal-title" id="redeemDealModal">Purchased Deals | @{{selectedUser.first_name}} @{{selectedUser.last_name}}</h4>
                     </div>
                     <div class="modal-body">
                       <div class="box-body">
@@ -99,7 +99,7 @@
                   <div class="modal-content">
                     <div class="modal-header-timeline">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h3 class="modal-title" id="CustomerinfoModal">@{{selectedUser.first_name}} @{{selectedUser.last_name | setPossessive}} Info</h3>
+                      <h3 class="modal-title" id="CustomerinfoModal">Info | @{{selectedUser.first_name}} @{{selectedUser.last_name}}</h3>
                     </div>
                     <div class="modal-body-customer-info">
                       <section class="content">
@@ -310,13 +310,6 @@
             date = moment(value).format("Do MMM YY [at] h:mm a");
             return date;
           },
-          setPossessive: function(value) {
-            if (value.endsWith('s')) {
-              return value.concat("'");
-            } else{
-              return value.concat("'s");
-            }
-          }
         },
 
         computed: {
