@@ -291,7 +291,8 @@
         mounted: function() {
 
           $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-            
+            console.log('something');
+            customer.drawChart();
           });
 
           var pusher = new Pusher('f4976d40a137b96b52ea', {
