@@ -291,7 +291,7 @@
           this.getCustomersInLocation();
 
           $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-            console.log('hello');
+            console.log('shit');
           });
         },
 
