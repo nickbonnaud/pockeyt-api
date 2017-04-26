@@ -296,7 +296,6 @@
       },
 
       methods: {
-
         notifyReward: function(data) {
           toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn btn-default'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
             "newestOnTop": true,
@@ -343,8 +342,8 @@
               'businessId' : businessId
             },
             success: function(data) {
-              this.transactionsPending = data.transactionsPending;
-              this.transactionsFinalized = data.transactionsFinalized;
+              tab.$data.transactionsPending = data.transactionsPending;
+              tab.$data.transactionsFinalized = data.transactionsFinalized;
             },
             error: function(data) {
               console.log(err);
