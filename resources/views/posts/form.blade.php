@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <label for="message">Message:</label>
-            <textarea type="text" name="message" id="message" class="form-control" rows="10" required></textarea>
+            <textarea type="text" name="message" id="message" class="form-control" rows="5" required></textarea>
         </div>
 
         <div class="photo-input">
