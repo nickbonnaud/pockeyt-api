@@ -28,14 +28,14 @@
 
   <!-- Main content -->
   <section class="content" id="customer">
-  <form class="product-search">
+  <form class="customer-search">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
         <input style="font-size: 28px; padding: 0px;" type="text" name="query" class="form-control" placeholder="Search" v-model="query">
       </div>
     </form>
     <div class="invite-code-section">
-      <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()">New Invite Code</button>
+      <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()" style="padding: 8px;">New Invite Code</button>
       <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
       <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
     </div>
