@@ -8392,7 +8392,7 @@ img {
 
 @media (min-width: 991px) {
   .scroll-container {
-    height: 80vh;
+    height: 65vh;
     overflow: hidden;
     will-change: overflow;
     display: flex; 
@@ -8424,7 +8424,7 @@ img {
 
 @media(max-width: 991px) {
   .scroll-container {
-    height: 80vh;
+    height: 71vh;
     overflow: hidden;
     will-change: overflow;
     display: flex; 
