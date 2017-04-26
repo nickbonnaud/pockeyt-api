@@ -135,8 +135,8 @@
         },
 
         truncateLong: function(string, value) {
-          if (string.length > 60) {
-            return string.substring(0, 60) + '...';
+          if (string.length > 55) {
+            return string.substring(0, 55) + '...';
           } else {
             return string;
           }
