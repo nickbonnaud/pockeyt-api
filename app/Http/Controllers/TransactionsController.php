@@ -530,6 +530,7 @@ class TransactionsController extends Controller
             $posts = [];
             foreach ($redeemableDeals as $deal) {
                 $post = Post::findOrFail($deal->deal_id);
+                return response($post);
                 array_prepend($posts, $post);
             }
             return response()->json(array('redeemableDeals' => $redeemableDeals, 'posts' => $posts));
