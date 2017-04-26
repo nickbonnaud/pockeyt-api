@@ -482,8 +482,7 @@
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
-                  console.log('Here');
-                  return $('#CustomerinfoModal').modal('show');
+                  $('#CustomerinfoModal').modal('show');
                 } else {
                   dataStorage.lastPurchase = null;
                   dataStorage.lastItemsPurchased = null;
