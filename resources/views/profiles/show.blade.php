@@ -320,10 +320,6 @@
             } else{
               return value.concat("'s");
             }
-          },
-          getDealItem: function(value) {
-            dealItem = JSON.parse(value);
-            return dealItem[0].name;
           }
         },
 
@@ -466,7 +462,11 @@
                 dataStorage.recentBookmarked = data.recentBookmarkedPost;
                 dataStorage.recentShared = data.recentSharedPost;
                 if (dataStorage.purchases.length !== 0 ) {
-                  dataStorage.lastPurchase = dataStorage.purchases[0];
+                  for (i=dataStorage.purchases.length - 1; i >= 0; i --) {
+                    console.log(dataStorage.purchases[i].products);
+                    if (dataStorage.purchases[i].products) {break;}
+                    dataStorage.lastPurchase = dataStorage.purchases[i];
+                  }
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.lastPurchase.products);
                   $('#CustomerinfoModal').modal('show');
                   customer.drawChart();
