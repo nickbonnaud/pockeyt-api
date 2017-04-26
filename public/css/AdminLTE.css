@@ -386,6 +386,13 @@ a:focus {
   .content-header > .breadcrumb li:before {
     color: #97a0b3;
   }
+  .custom-amount-btn {
+    float: right;
+    margin-top: 53px;
+    font-size: 15px;
+    padding: 6px;
+    margin-right: 20px;
+  }
 }
 .navbar-toggle {
   color: #fff;

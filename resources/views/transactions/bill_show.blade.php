@@ -22,12 +22,12 @@
       </div>
     </form>
     @include ('errors.form')
-    <div class="scroll-container col-md-8">
+    <div class="scroll-container col-md-8 col-sm-6 col-xs-6">
       <div class="scroll-contents">
         @include('partials.transactions.inventory')  
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-6 col-xs-6">
       <div class="box box-black">
         <div class="box-header with-border">
           <h3 class="box-title">{{$customer->first_name}}'s Receipt</h3>
