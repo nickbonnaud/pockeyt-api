@@ -8733,4 +8733,6 @@ img {
 .inventory-text {
   text-align: center;
   color: #6d6d6d;
+  padding-left: 2px;
+  padding-right: 2px;
 }

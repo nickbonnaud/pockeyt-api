@@ -132,6 +132,14 @@
           } else {
             return string;
           }
+        },
+
+        truncateLong: function(string, value) {
+          if (string.length > 65) {
+            return string.substring(0, 65) + '...';
+          } else {
+            return string;
+          }
         }
       },
 
