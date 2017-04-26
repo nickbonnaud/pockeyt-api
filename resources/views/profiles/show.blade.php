@@ -381,7 +381,6 @@
           },
 
           addUser: function(data) {
-            console.log(data);
             if (data.user) {
               var activeCustomer = data.user;
             } else {
@@ -569,6 +568,7 @@
                 'businessId' : businessId
               },
               success: function(data) {
+                console.log(data);
                 var dataStorage = customer.$data;
                 var deals = dataStorage.deals;
                 if (data.length > 0 ) {
