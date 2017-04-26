@@ -15,7 +15,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper-scroll">
   <div class="scroll-main">
-    <div class="scroll-main-contents">
+    <div class="scroll-main-contents" id="customer">
       <section class="content-header">
         <h1>
           Customer Dashboard
@@ -25,7 +25,7 @@
         </ol>
       </section>
 
-      <section class="content"  id="customer">
+      <section class="content">
         <form class="customer-search">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -59,30 +59,6 @@
                         <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
                           <b>Redeem Deal</b>
                         </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header-timeline">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="redeemDealModal">@{{user.first_name}} @{{user.last_name | setPossessive}} purchased Deal</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="box-body">
-                        <div v-for="deal in deals">
-                          <div v-if="deal.user_id === user.id">
-                            <span class="pull-left">
-                              <h3 class="deal-item">@{{ deal.products }}</h3>
-                            </span>
-                            <span class="pull-right">
-                              <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
-                            </span>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
