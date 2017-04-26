@@ -252,6 +252,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
     <script>
+
+    $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
+      console.log('something');
+      customer.drawChart();
+    });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -303,11 +309,6 @@
           window.setInterval(this.removeInactiveUser, 300000);
 
           this.getCustomersInLocation();
-
-          $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-            console.log('something');
-            customer.drawChart();
-          });
         },
 
         filters: {
@@ -482,7 +483,7 @@
                 if (dataStorage.purchases.length !== 0 ) {
                   dataStorage.lastPurchase = dataStorage.purchases[0];
                   dataStorage.lastItemsPurchased = JSON.parse(dataStorage.purchases[0].products);
-                 
+                  $('#CustomerinfoModal').modal('show');
                 } else {
                   dataStorage.lastPurchase = null;
                   dataStorage.lastItemsPurchased = null;
