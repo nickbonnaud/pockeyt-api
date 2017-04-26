@@ -64,158 +64,26 @@
                   </div>
                 </div>
               </div>
-              
-              <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header-timeline">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h3 class="modal-title" id="CustomerinfoModal">@{{user.first_name}} @{{user.last_name | setPossessive}} Info</h3>
+                      <h4 class="modal-title" id="redeemDealModal">@{{user.first_name}} @{{user.last_name | setPossessive}} purchased Deal</h4>
                     </div>
-                    <div class="modal-body-customer-info">
-                      <section class="content">
-                        <div class="row">
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="info-box">
-                              <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text">Date Last Purchase</span>
-                                <span v-if="purchases.length == 0" class="info-box-number">No Purchases</span>
-                                <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
-                              </div>
-                            </div>
-                            <div v-if="purchases.length != 0" class="box box-aqua collapsed-box">
-                              <div class="box-header with-border">
-                                <i class="fa fa-shopping-cart"></i>
-                                <h3 class="box-title">View Purchases</h3>
-                                <div class="box-tools pull-right">
-                                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="box-body">
-                                <div v-for="item in lastItemsPurchased">
-                                  <p class="timeline-purchases-left">@{{ item.quantity }} x @{{ item.name }}</p>
-                                  <p class="timeline-purchases-right">$@{{ (item.price / 100) }}</p>
-                                </div>
-                                <div class="box-footer timeline-list-footer">
-                                  <div class="last-purchase-footer pull-right">Tax: $@{{ lastPurchase.tax / 100 }}</div>
-                                  <div class="last-purchase-footer pull-right" style="margin-bottom: 10px;">Tip: $@{{ lastPurchase.tips / 100 }}</div>
-                                  <div class="last-purchase-footer pull-right"><b>Total: $@{{ lastPurchase.total / 100 }}</b></div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="info-box">
-                              <span class="info-box-icon bg-yellow"><i class="fa fa-bookmark-o"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text">Recent Bookmarked</span>
-                                <span v-if="!recentBookmarked" class="info-box-number">No Recent</span>
-                                <span v-if="recentBookmarked" class="info-box-number">@{{ recentBookmarked.bookmarked_on | setDateTime }}</span>
-                              </div>
-                            </div>
-                            <div v-if="recentBookmarked" class="box box-warning collapsed-box">
-                              <div class="box-header with-border">
-                                <i class="fa fa-bookmark-o"></i>
-                                <h3 class="box-title">Bookmark Details</h3>
-                                <div class="box-tools pull-right">
-                                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="box-body">
-                                <div class="analytics-modal-image">
-                                  <img v-if="recentBookmarked.thumb_path" :src="recentBookmarked.thumb_path">
-                                </div>
-                                <div class="box-body-bottom">
-                                  <h4 v-if="recentBookmarked.message" class="box-title customer-data-message">@{{ recentBookmarked.message }}</h4>
-                                  <h4 v-else="!recentBookmarked.message" class="box-title customer-data-message">@{{ recentBookmarked.title }}</h4>
-                                </div>
-                                <hr style="margin-top: 10px; margin-bottom: 10px;">
-                                <p class="analytics-date-customer-data">Posted on <strong>@{{ recentBookmarked.published_at | setDateTime }}</strong>.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="info-box">
-                              <span class="info-box-icon bg-green"><i class="fa fa-eye"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text">Last Viewed Post</span>
-                                <span v-if="!lastViewedPost" class="info-box-number">No Recent</span>
-                                <span v-if="lastViewedPost" class="info-box-number">@{{ lastViewedPost.updated_at | setDateTime }}</span>
-                              </div>
-                            </div>
-                            <div v-if="lastViewedPost" class="box box-success collapsed-box">
-                              <div class="box-header with-border">
-                                <i class="fa fa-eye"></i>
-                                <h3 class="box-title">Post Details</h3>
-                                <div class="box-tools pull-right">
-                                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="box-body">
-                                <div class="analytics-modal-image">
-                                  <img v-if="lastViewedPost.thumb_path" :src="lastViewedPost.thumb_path">
-                                </div>
-                                <div class="box-body-bottom">
-                                  <h4 v-if="lastViewedPost.message" class="box-title customer-data-message">@{{ lastViewedPost.message }}</h4>
-                                  <h4 v-else="!lastViewedPost.message" class="box-title customer-data-message">@{{ lastViewedPost.title }}</h4>
-                                </div>
-                                <hr style="margin-top: 10px; margin-bottom: 10px;">
-                                <p class="analytics-date-customer-data">Posted on <strong>@{{ lastViewedPost.published_at | setDateTime }}</strong>.</p>
-                              </div>
-                            </div>
-                            <div class="info-box">
-                              <span class="info-box-icon bg-red"><i class="fa fa-share"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text">Recent Shared</span>
-                                <span v-if="!recentShared" class="info-box-number">No Recent</span>
-                                <span v-if="recentShared" class="info-box-number">@{{ recentShared.shared_on | setDateTime }}</span>
-                              </div>
-                            </div>
-                            <div v-if="recentShared" class="box box-danger collapsed-box">
-                              <div class="box-header with-border">
-                                <i class="fa fa-share"></i>
-                                <h3 class="box-title">Shared Post Details</h3>
-                                <div class="box-tools pull-right">
-                                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="box-body">
-                                <div class="analytics-modal-image">
-                                  <img v-if="recentShared.thumb_path" :src="recentShared.thumb_path">
-                                </div>
-                                <div class="box-body-bottom">
-                                  <h4 v-if="recentShared.message" class="box-title customer-data-message">@{{ recentShared.message }}</h4>
-                                  <h4 v-else="!recentShared.message" class="box-title customer-data-message">@{{ recentShared.title }}</h4>
-                                </div>
-                                <hr style="margin-top: 10px; margin-bottom: 10px;">
-                                <p class="analytics-date-customer-data">Posted on <strong>@{{ recentShared.published_at | setDateTime }}</strong>.</p>
-                              </div>
-                            </div>
+                    <div class="modal-body">
+                      <div class="box-body">
+                        <div v-for="deal in deals">
+                          <div v-if="deal.user_id === user.id">
+                            <span class="pull-left">
+                              <h3 class="deal-item">@{{ deal.products }}</h3>
+                            </span>
+                            <span class="pull-right">
+                              <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
+                            </span>
                           </div>
                         </div>
-                        <div class="row">
-                          <div v-show="purchases.length != 0" class="col-md-12">
-                            <div class="box box-primary">
-                              <div class="box-header with-border">
-                                <i class="fa fa-history"></i>
-                                <h3 class="box-title">Date of Last 5 Purchases</h3>
-                              </div>
-                              <div class="box-body">
-                                <div class="chart">
-                                  <canvas id="purchaseHistory" width="400" height="150"></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
+                      </div>
                     </div>
                   </div>
                 </div>
