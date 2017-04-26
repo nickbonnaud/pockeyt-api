@@ -3,7 +3,7 @@
     <div class="box-inventory" v-on:click="addProduct(product)">
       <div class="box-body-inventory">
         <img v-if="product.product_tn_photo_path" :src="product.product_tn_photo_path">
-        <p v-else>@{{ product.name }}</p>
+        <p v-else class="inventory-text"><strong>@{{ product.name }}</strong></p>
       </div>
       <div class="box-footer-inventory">
         <b v-if="product.product_tn_photo_path">@{{ product.name | truncate}}</b>

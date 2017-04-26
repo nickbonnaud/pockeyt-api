@@ -8471,6 +8471,10 @@ img {
   border-top-right-radius: 0;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
+  height: 100px;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
 }
 
 .box-body-inventory img {
@@ -8724,4 +8728,9 @@ img {
 
 .menu-text {
   font-size: 20px;
+}
+
+.inventory-text {
+  text-align: center;
+  color: #6d6d6d;
 }
