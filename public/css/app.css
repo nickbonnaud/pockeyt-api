@@ -8477,6 +8477,13 @@ img {
   -webkit-box-align: center;
 }
 
+.box-body-inventory-image {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
 .box-body-inventory img {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
