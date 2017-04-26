@@ -41,7 +41,7 @@
     </div>
     <div class="scroll-container">
       <div class="scroll-contents">
-      <template v-for="user in customerFilter">
+      <template v-if="users.length > 0" v-for="user in customerFilter">
         <div class="col-sm-4 col-md-3">
           <div class="box box-primary">
             <div class="box-header with-border text-center">
