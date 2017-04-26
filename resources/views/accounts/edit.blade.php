@@ -122,9 +122,9 @@ $qbo_connect = $qbo_obj->qboConnect();
 				</div>
 
 				<div class="col-md-6">
-					<div class="box box-primary">
+					<div class="box box-primary last-box">
 						<div class="box-header with-border">
-							<h3 class="box-title">Business Info</h3>
+							<h3 class="box-title">Business Account Info</h3>
 						</div>
 						<div class="box-body">
 							<ul class="list-group list-group-unbordered">

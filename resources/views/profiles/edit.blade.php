@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box box-primary collapsed-box">
+                    <div class="box box-primary collapsed-box last-box">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tags</h3>
                             <div class="box-tools pull-right">
