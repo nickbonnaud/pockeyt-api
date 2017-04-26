@@ -491,8 +491,7 @@
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
             dataStorage.purchases.forEach(function(purchase) {
-              var updated = moment(purchase.updated_at).format();
-              var point = {x: updated, y: 0};
+              var point = {x: purchase.updated_at, y: 0};
               purchasesData.push(point);
             });
             var today = {x: moment().format(), y: 0};
@@ -532,6 +531,7 @@
                   xAxes: [{
                     ticks: {
                       callback: function(value, index, values) {
+                        console.log(value);
                         var formattedTick = (moment(value).format('MMM D YY'));
                         var checkDate = null;
                         purchasesData.forEach(function(date) {
