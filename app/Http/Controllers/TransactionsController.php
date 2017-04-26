@@ -297,7 +297,6 @@ class TransactionsController extends Controller
         $transaction->user_id = $customer->id;
         $transaction->paid = false;
         $transaction->deal_id = $request->id;
-        $transaction->products = json_encode($request->deal_item);
         $transaction->net_sales = $request->price;
 
         $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales);
@@ -528,7 +527,12 @@ class TransactionsController extends Controller
                 ->where('paid', '=', true);     
         })->get();
         if (isset($redeemableDeals)) {
-            return response()->json($redeemableDeals);
+            $posts = [];
+            foreach ($redeemableDeals as $deal) {
+                $post = Post::findOrFail($deal->deal_id);
+                array_prepend($posts, $post);
+            }
+            return response()->json(array('redeemableDeals' => $redeemableDeals, 'posts' => $posts));
         } else {
             return;
         }
