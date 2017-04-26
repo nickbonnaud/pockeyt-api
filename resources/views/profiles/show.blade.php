@@ -66,6 +66,798 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="box box-primary">
+            <div class="box-header with-border text-center">
+              <a v-on:click="getCustomerData(user.id)" class="customer-name-title" href="#">
+                <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
+              </a>
+              <div class="box-body">
+                <a v-on:click="getCustomerData(user.id)"  href="#">
+                  <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                </a>
+              </div>
+              <div class="box-footer">
+                <a v-on:click="goToTransaction(user.id)" class="btn btn-primary btn-block">
+                  <b>Bill</b>
+                </a>
+                <div v-if="checkForDeal(user.id)">
+                  <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                    <b>Redeem Deal</b>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="modal fade" id="CustomerinfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
