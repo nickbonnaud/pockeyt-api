@@ -11,14 +11,14 @@
         <div class="auto-post">
           @if(isset($profile->square_token))
             <a href="{{ action('ProductsController@syncSquareItems') }}">
-              <button type="button" class="btn btn-block btn-social btn-github">
+              <button type="button" class="btn btn-social btn-github">
                 <i class="fa fa-sign-in"></i>
                 Sync
               </button>
             </a>
           @else
             <a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20MERCHANT_PROFILE_READ&state=' . env('SQUARE_STATE') }}">
-              <button type="button" class="btn btn-block btn-social btn-github">
+              <button type="button" class="btn btn-social btn-github">
                 <i class="fa fa-sign-in"></i>
                 Sync Square Inventory
               </button>
