@@ -233,7 +233,7 @@
                   <div v-for="deal in deals">
                     <div v-if="deal.user_id === user.id">
                       <span class="pull-left">
-                        <h3 class="deal-item">@{{ deal.products | getDealItem }}</h3>
+                        <h3 class="deal-item">@{{ deal.products }}</h3>
                       </span>
                       <span class="pull-right">
                         <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
@@ -570,8 +570,8 @@
                 console.log(data);
                 var dataStorage = customer.$data;
                 var deals = dataStorage.deals;
-                if (data.length > 0 ) {
-                  data.forEach(function (userDeal) {
+                if (data.redeemableDeals.length > 0 ) {
+                  data.redeemableDeals.forEach(function (userDeal) {
                     var found = false;
                     if (deals.length > 0) {
                       deals.forEach(function(currentUserDeals) {
@@ -580,9 +580,19 @@
                         }
                       }); 
                       if (found === false) {
+                        data.posts.forEach(function(post) {
+                          if (post.id === userDeal.deal_id) {
+                            userDeal.products = post.deal_item;
+                          }
+                        });
                         deals.push(userDeal)
                       }
                     } else {
+                      data.posts.forEach(function(post) {
+                        if (post.id === userDeal.deal_id) {
+                          userDeal.products = post.deal_item;
+                        }
+                      });
                       deals.push(userDeal)
                     }
                   });
