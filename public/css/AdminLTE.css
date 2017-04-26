@@ -746,7 +746,7 @@ a:focus {
 }
 @media (max-width: 768px) {
   .control-sidebar {
-    padding-top: 100px;
+    padding-top: 50px;
   }
 }
 .control-sidebar > .tab-content {
@@ -795,9 +795,6 @@ a:focus {
   border-bottom: none;
 }
 @media (max-width: 768px) {
-  .nav-tabs.control-sidebar-tabs {
-    display: table;
-  }
   .nav-tabs.control-sidebar-tabs > li {
     display: table-cell;
   }
