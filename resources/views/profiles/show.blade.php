@@ -491,7 +491,8 @@
               error: function(data) {
                 console.log(data);
               }
-            })
+            });
+            return;
           },
           drawChart: function() {
             console.log("hello");
