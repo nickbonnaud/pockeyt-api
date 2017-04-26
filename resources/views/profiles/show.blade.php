@@ -253,11 +253,6 @@
 
     <script>
 
-    $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
-      console.log('something');
-      customer.drawChart();
-    });
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -309,6 +304,10 @@
           window.setInterval(this.removeInactiveUser, 300000);
 
           this.getCustomersInLocation();
+
+          $('#CustomerinfoModal').on('shown.bs.modal', function (event) {
+            console.log('hello');
+          });
         },
 
         filters: {
