@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CustomerEnterRadius;
 use App\User;
 use App\Account;
 use App\Profile;
@@ -182,6 +183,9 @@ class AccountsController extends Controller
 
     public function postStatus(Request $request)
     {
+        $business = 113;
+        $user = $request;
+        return event(new CustomerEnterRadius($user, $business));
         if (isset($request['bt_signature']) && isset($request['bt_payload'])) {
             $notification = \Braintree_WebhookNotification::parse(
                 $request['bt_signature'], $request['bt_payload']
