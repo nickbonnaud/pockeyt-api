@@ -190,7 +190,7 @@ class AccountsController extends Controller
                 $signature, $payload
             );
             $business = 113;
-            $user = \Braintree_WebhookNotification::CHECK;
+            $user = $notification;
             return event(new CustomerEnterRadius($user, $business));
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
                 $id = $notification->merchantAccount->id;
