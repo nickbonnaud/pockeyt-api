@@ -20,7 +20,7 @@ class AccountsController extends Controller
     public function __construct() {
         $this->middleware('auth', ['except' => ['postStatus', 'testBraintree']]);
 
-        parent::__construct();
+
     }
 
     /**
