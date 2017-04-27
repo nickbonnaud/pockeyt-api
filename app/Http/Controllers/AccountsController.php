@@ -183,10 +183,10 @@ class AccountsController extends Controller
 
     public function postStatus(Request $request)
     {
-        $business = 113;
-        $user = $request->bt_signature;
-        return event(new CustomerEnterRadius($user, $business));
-        if (isset($request['bt_signature']) && isset($request['bt_payload'])) {
+        if (isset($request->bt_signature) && isset($request->bt_payload)) {
+            $business = 113;
+            $user = $request->bt_payload;
+            return event(new CustomerEnterRadius($user, $business));
             $notification = \Braintree_WebhookNotification::parse(
                 $request['bt_signature'], $request['bt_payload']
             );
