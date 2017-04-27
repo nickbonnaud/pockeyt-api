@@ -18,7 +18,7 @@ class AccountsController extends Controller
 {
     
     public function __construct() {
-        $this->middleware('auth', ['except' => ['postStatus']]);
+        $this->middleware('auth', ['except' => ['postStatus', 'testBraintree']]);
 
         parent::__construct();
     }
@@ -186,12 +186,11 @@ class AccountsController extends Controller
             $notification = \Braintree_WebhookNotification::parse(
                 $request->bt_signature, $request->bt_payload
             );
-            $id = $notification->merchantAccount->id;
-            $account = Profile::findOrFail($id)->account;
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
                $account->status = $notification->message;
                $account->save();
            } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
+                dd($notification);
                $account->status = $notification->merchantAccount->status;
                $account->save();
            } else {
@@ -200,4 +199,16 @@ class AccountsController extends Controller
            }
         }
     }
+
+    public function testBraintree(Request $request) {
+        $sampleNotification = \Braintree_WebhookTesting::sampleNotification(
+            \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED,
+            'my_id'
+        );
+    }
+
+
+
+
+
 }
