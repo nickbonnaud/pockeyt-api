@@ -83,7 +83,7 @@
                   <div class="form-group" style="margin-left: 15%;">
                     <label for="inputPrice" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input type="text" name="price" style="width: 50%;" id="inputPrice" required>
+                      <input v-model="price" type="tel" name="price" class="currency" style="width: 50%;" id="inputPrice" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
                     </div>
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
@@ -102,7 +102,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-    $("#inputPrice").inputmask('currency', {
+    $(".currency").inputmask('currency', {
       rightAlign: true
     });
 
