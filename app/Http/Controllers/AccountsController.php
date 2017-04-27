@@ -194,6 +194,8 @@ class AccountsController extends Controller
            } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
                $account->status = $notification->merchantAccount->status;
                $account->save();
+           } elseif ($notification->kind == \Braintree_WebhookNotification::CHECK) {
+               return response("success");
            } else {
                 $account->status = "Uknown Error";
                 $account->save();

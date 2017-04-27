@@ -57,7 +57,7 @@ class AnalyticsController extends Controller
     }
     $day = array_keys($activityByDay, max($activityByDay));
     if (($day[0] == 0) && (count(array_unique($activityByDay)) == 1)) {
-      $topDay = "Not enough data";
+      $topDay = "No data";
     } else {
       $topDay = $this->getTopDay($day[0]);
     }
@@ -79,7 +79,7 @@ class AnalyticsController extends Controller
     }
     $hour = array_keys($activityByHour, max($activityByHour));
     if (($hour[0] == 0) && (count(array_unique($activityByHour)) == 1)) {
-      $topHour = "Not enough data";
+      $topHour = "No data";
     } else {
       $topHour = $this->getTopHour($hour[0]);
     }
