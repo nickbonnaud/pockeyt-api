@@ -64,7 +64,7 @@ Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness'
 Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
 Route::post('accounts/status', 'AccountsController@postStatus');
 
-Route::post('accounts/test', 'AccountsController@testBraintree');
+Route::get('accounts/test', 'AccountsController@testBraintree');
 
 Route::resource('accounts', 'AccountsController');
 
