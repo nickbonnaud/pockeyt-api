@@ -205,6 +205,26 @@ class AccountsController extends Controller
             \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED,
             'my_id'
         );
+
+        if (isset($sampleNotification->bt_signature) && isset($sampleNotification->bt_payload)) {
+            $notification = \Braintree_WebhookNotification::parse(
+                $sampleNotification->bt_signature, $sampleNotification->bt_payload
+            );
+           if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
+               dd($notification)
+               $account->status = $notification->message;
+               $account->save();
+           } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
+                dd($notification)
+               $account->status = $notification->merchantAccount->status;
+               $account->save();
+           } else {
+                dd($notification)
+                $account->status = "Uknown Error";
+                $account->save();
+           }
+        }
+
     }
 
 
