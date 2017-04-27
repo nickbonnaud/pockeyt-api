@@ -83,7 +83,7 @@
                   <div class="form-group" style="margin-left: 15%;">
                     <label for="inputPrice" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input v-model="price" id="customAmount" type="number" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" required>
+                      <input v-model="price" type="text" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" required>
                     </div>
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
@@ -102,7 +102,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
-    $("#customAmount").maskMoney();
+    $("#inputPrice").maskMoney();
 
     var inventory = new Vue({
       el: "#inventory",
