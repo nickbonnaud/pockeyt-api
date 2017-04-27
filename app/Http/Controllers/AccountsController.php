@@ -189,9 +189,6 @@ class AccountsController extends Controller
             $notification = \Braintree_WebhookNotification::parse(
                 $signature, $payload
             );
-            $business = 113;
-            $user = $notification->kind;
-            return event(new CustomerEnterRadius($user, $business));
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
                 $id = $notification->merchantAccount->id;
                 $account = Profile::findOrFail($id)->account;
@@ -203,7 +200,9 @@ class AccountsController extends Controller
                 $account->status = $notification->merchantAccount->status;
                 $account->save();
            } elseif($notification->kind == \Braintree_WebhookNotification::CHECK) {
-                return respose('ok');
+                $business = 113;
+                $user = $notification->kind;
+                return event(new CustomerEnterRadius($user, $business));
            }
         }
     }
