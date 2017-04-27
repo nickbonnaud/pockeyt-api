@@ -83,7 +83,7 @@
                   <div class="form-group" style="margin-left: 15%;">
                     <label for="inputPrice" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input v-model="price" type="tel" name="price" class="form-control" style="width: 50%;" id="inputPrice" required>
+                      <input type="text" name="price" style="width: 50%;" id="inputPrice" required>
                     </div>
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
