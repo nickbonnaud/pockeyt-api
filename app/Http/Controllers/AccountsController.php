@@ -20,7 +20,7 @@ class AccountsController extends Controller
     public function __construct() {
         $this->middleware('auth', ['except' => ['postStatus', 'testBraintree']]);
 
-
+        parent::__construct();
     }
 
     /**
@@ -190,7 +190,7 @@ class AccountsController extends Controller
                $account->status = $notification->message;
                $account->save();
            } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
-                dd($notification);
+                return response('ok');
                $account->status = $notification->merchantAccount->status;
                $account->save();
            } else {
