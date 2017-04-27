@@ -205,7 +205,7 @@ class AccountsController extends Controller
             \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED,
             'my_id'
         );
-
+        dd($sampleNotification);
         if (isset($sampleNotification->bt_signature) && isset($sampleNotification->bt_payload)) {
             $notification = \Braintree_WebhookNotification::parse(
                 $sampleNotification->bt_signature, $sampleNotification->bt_payload
