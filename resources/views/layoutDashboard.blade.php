@@ -259,7 +259,6 @@
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
   <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('/vendor/chart.js/dist/Chart.min.js') }}"></script>
-  <script src="{{ asset('/vendor/maskMoney/jquery.inputmask.bundle.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
