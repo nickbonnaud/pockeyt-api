@@ -218,8 +218,9 @@ class AccountsController extends Controller
               
            } else {
                 dd($notification);
-                
            }
+        } else {
+            dd('shit');
         }
 
     }
