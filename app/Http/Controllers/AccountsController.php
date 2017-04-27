@@ -18,7 +18,7 @@ class AccountsController extends Controller
 {
     
     public function __construct() {
-        $this->middleware('auth', ['except' => ['postStatus', 'testBraintree']]);
+        $this->middleware('auth', ['except' => ['postStatus']]);
 
         parent::__construct();
     }
@@ -182,51 +182,23 @@ class AccountsController extends Controller
 
     public function postStatus(Request $request)
     {
-        if (isset($request->bt_signature) && isset($request->bt_payload)) {
+        if (isset($request['bt_signature']) && isset($request['bt_payload'])) {
             $notification = \Braintree_WebhookNotification::parse(
-                $request->bt_signature, $request->bt_payload
+                $request['bt_signature'], $request['bt_payload']
             );
            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
-               $account->status = $notification->message;
-               $account->save();
-           } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
-                return response('ok');
-               $account->status = $notification->merchantAccount->status;
-               $account->save();
-           } else {
-                $account->status = "Uknown Error";
+                $id = $notification->merchantAccount->id;
+                $account = Profile::findOrFail($id)->account;
+                $account->status = $notification->message;
                 $account->save();
-           }
-        }
-    }
-
-    public function testBraintree(Request $request) {
-        $sampleNotification = \Braintree_WebhookTesting::sampleNotification(
-            \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED,
-            'my_id'
-        );
-
-        if (isset($sampleNotification['bt_signature']) && isset($sampleNotification['bt_payload'])) {
-            $notification = \Braintree_WebhookNotification::parse(
-                $sampleNotification['bt_signature'], $sampleNotification['bt_payload']
-            );
-           if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
-               dd($notification);
-              
            } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
-                dd($notification);
-              
-           } else {
-                dd($notification);
+                $id = $notification->merchantAccount->id;
+                $account = Profile::findOrFail($id)->account;
+                $account->status = $notification->merchantAccount->status;
+                $account->save();
+           } elseif($notification->kind == \Braintree_WebhookNotification::CHECK) {
+                return respose('ok');
            }
-        } else {
-            dd('shit');
         }
-
     }
-
-
-
-
-
 }
