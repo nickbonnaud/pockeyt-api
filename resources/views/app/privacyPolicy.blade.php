@@ -1,8 +1,6 @@
 @extends('layout')
-
-
 @section('content')
-	<h4>Pockeyt's Privacy Policy</h4>
+	<h3>Pockeyt's Privacy Policy</h3>
 	<p>Pockeyt is a web based application allowing registered users (businesses) to share content and media with users of Pockeyt's mobile application (customers) for the purpose of customer recruitment and retention</p>
 	<p>This Privacy Policy describes how and when Pockeyt collects, uses, and shares your information when you use our Services. Pockeyt receives your information through our APIs and application. When using any of our Services you consent to the collection, transfer, storage, disclosure and other uses of your information as described in this Privacy Policy. Irrespective of which country you reside in or supply information from, you authorize Pockeyt to use your information in any country where Pockeyt operates.</p>
 	<p>If you have any questions or comments about this Privacy Policy, please contact us at <a href="mailto:info@pockeyt.com">info@pockeyt.com</a>.</p>
@@ -13,6 +11,9 @@
 	<br>
 	<h4>Google Analytics</h4>
 	<p>We will also install Google Analytics in the apps, devices, or mobile apps to collect your behaviors in using our Services to improve our Services.</p>
+	<br>
+	<h4>Accounting and Quickbooks</h4>
+	<p>Should you choose to authorize Intuit Quickbooks access to your Pockeyt Profile, Pockeyt will automatically update your Quickbooks account with your transactions completed on Pockeyt. Pockeyt will update your Quickbooks account once daily, which includes creating and completing invoices for all Pockeyt transactions, including tips and sales tax. This service is offered to ensure seamless accounting using the Pockeyt Pay system and other payment methods.</p>
 	<br>
 	<h4>Information Sharing and Disclosure</h4>
 	<p>We do not disclose your private personal information except in the limited circumstances described here.</p>

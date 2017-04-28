@@ -10,7 +10,6 @@ use App\Post;
 use Carbon\Carbon;
 use DateTimeZone;
 use App\Profile;
-use App\Events\BusinessFeedUpdate;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 

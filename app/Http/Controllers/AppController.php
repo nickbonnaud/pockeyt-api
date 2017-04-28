@@ -29,7 +29,11 @@ class AppController extends Controller {
         }
     }
 
-    public function policy() {
-    	return view('app.policy');
+    public function privacyPolicy() {
+    	return view('app.privacyPolicy');
+    }
+
+    public function endPolicy() {
+        return view('app.endPolicy');
     }
 }

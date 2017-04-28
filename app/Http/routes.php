@@ -1,7 +1,8 @@
 <?php
 
 Route::get('/', 'AppController@index')->name('app.index');
-Route::get('data_use_policy', 'AppController@policy')->name('app.policy');
+Route::get('data_use_policy', 'AppController@privacyPolicy')->name('app.privacyPolicy');
+Route::get('end_use_policy', 'AppController@endPolicy')->name('app.endPolicy');
 
 // Auth routes...
 Route::get('auth/login',        'Auth\AuthController@getLogin')->name('auth.login');

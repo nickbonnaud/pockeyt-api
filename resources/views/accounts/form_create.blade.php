@@ -57,7 +57,7 @@
     <div class="checkbox">
         <label for="ToS">
             <input type="checkbox" name="ToS" id="ToS" value="true" required>
-            Agree to <a href="#" data-toggle="modal" data-target="#ToSModal">Terms of Service</a>
+            Agree to <a href="#" data-toggle="modal" data-target="#ToSModal">Terms of Service and Privacy Policy</a>
         </label>
     </div>
 </div>
@@ -74,12 +74,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="ToSModal">Account Terms of Service</h4>
+        <h4 class="modal-title" id="ToSModal">Account Terms of Service and Privacy Policy</h4>
       </div>
       <div class="modal-body">
         <p>
-            Pockeyt, Inc. uses Braintree, a division of PayPal, Inc. (Braintree) for payment processing services. By using the Braintree payment processing services you agree to the Braintree Payment Services Agreement available at <a href="https://www.braintreepayments.com/legal/gateway-agreement" target="_blank">https://www.braintreepayments.com/legal/gateway-agreement</a>, and the applicable bank agreement available at <a href="https://www.braintreepayments.com/legal/cea-wells" target="_blank">https://www.braintreepayments.com/legal/cea-wells</a>.
+            1. Pockeyt, Inc. uses Braintree, a division of PayPal, Inc. (Braintree) for payment processing services. By using the Braintree payment processing services you agree to the Braintree Payment Services Agreement available at <a href="https://www.braintreepayments.com/legal/gateway-agreement" target="_blank">https://www.braintreepayments.com/legal/gateway-agreement</a>, and the applicable bank agreement available at <a href="https://www.braintreepayments.com/legal/cea-wells" target="_blank">https://www.braintreepayments.com/legal/cea-wells</a>.
         </p>
+        <p>2. Please review Pockeyt's Privacy Policy, found <a href="{{ route('app.privacyPolicy') }}" target="_blank">here</a></p>
+        <p>2. Please review Pockeyt's End-User License Agreement, found <a href="{{ route('app.endPolicy') }}" target="_blank">here</a></p>
       </div>
     </div>
   </div>
