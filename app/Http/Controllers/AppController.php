@@ -36,4 +36,8 @@ class AppController extends Controller {
     public function endPolicy() {
         return view('app.endPolicy');
     }
+
+    public function qbDisconnect() {
+        return view('app.qbDisconnect');
+    }
 }

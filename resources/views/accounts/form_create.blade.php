@@ -81,7 +81,7 @@
             1. Pockeyt, Inc. uses Braintree, a division of PayPal, Inc. (Braintree) for payment processing services. By using the Braintree payment processing services you agree to the Braintree Payment Services Agreement available at <a href="https://www.braintreepayments.com/legal/gateway-agreement" target="_blank">https://www.braintreepayments.com/legal/gateway-agreement</a>, and the applicable bank agreement available at <a href="https://www.braintreepayments.com/legal/cea-wells" target="_blank">https://www.braintreepayments.com/legal/cea-wells</a>.
         </p>
         <p>2. Please review Pockeyt's Privacy Policy, found <a href="{{ route('app.privacyPolicy') }}" target="_blank">here</a></p>
-        <p>2. Please review Pockeyt's End-User License Agreement, found <a href="{{ route('app.endPolicy') }}" target="_blank">here</a></p>
+        <p>3. Please review Pockeyt's End-User License Agreement, found <a href="{{ route('app.endPolicy') }}" target="_blank">here</a></p>
       </div>
     </div>
   </div>
