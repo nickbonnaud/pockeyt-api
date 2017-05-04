@@ -59,8 +59,7 @@ class QuickBookController extends Controller
         }
 
         $user->save();
-        $profile = new Profile;
-        $user->profile()->save();
+        $user->publish(new Profile);
         $account = new Account;
         $profile->account()->save();
         dd("ok");
