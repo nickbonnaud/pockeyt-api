@@ -169,6 +169,7 @@ Route::group(['prefix' => 'api'], function() {
 
 //Quickbook Routes
 Route::get('qbo/openid', 'QuickBookController@qboOpenId');
+Route::post('qbo/openid', 'QuickBookController@qboOpenId');
 Route::get('qbo/oauth','QuickBookController@qboOauth');
 Route::get('qbo/success','QuickBookController@qboSuccess');
 Route::get('qbo/tax', 'QuickBookController@qboTax')->name('qbo.tax');
