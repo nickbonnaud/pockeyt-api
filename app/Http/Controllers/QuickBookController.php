@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\User;
 use App\Transaction;
 use Carbon\Carbon;
 use DateTimeZone;
@@ -36,7 +37,22 @@ class QuickBookController extends Controller
       $openid->optional = array('namePerson/first', 'namePerson/last');
       header('Location: ' . $openid->authUrl());
     } else {
-      dd($openid->getAttributes());
+      $userData = $openid->getAttributes();
+      $user = new User;
+      $user->email = $userData['contact/email'];
+      if ($user['namePerson/first']) {
+        $user->first_name = $user['namePerson/first'];
+      } else {
+        $user->first_name = $user['namePerson'];
+      }
+      if ($user['namePerson/last']) {
+        $user->last_name = $user['namePerson/last'];
+      } else {
+        $user->last = "Please set";
+      }
+
+      $user->save();
+      dd($user);
     }
   }
 
