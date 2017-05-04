@@ -33,7 +33,8 @@ class QuickBookController extends Controller
     if (!$openid->mode) {
       $openid->identity = "https://openid.intuit.com/Identity-me";
       $openid->required = array('contact/email');
-      $openid->optional = array('namePerson', 'namePerson/first', 'namePerson/last');
+      $openid->optional = array('namePerson');
+       $openid->optional = array('namePerson/first');
       header('Location: ' . $openid->authUrl());
     } else {
       dd($openid->getAttributes());
