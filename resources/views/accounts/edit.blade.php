@@ -15,7 +15,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 		    	<span class="pull-right" style="margin-top: -5px;">
 						<ipp:connectToIntuit></ipp:connectToIntuit>
 					</span>
-				@else
+				@elseif($qbo_connect)
 					<span class="pull-right" style="margin-top: -5px;">
 						<a href="{{ action('QuickBookController@qboDisconnect') }}"></a>
 					</span>
