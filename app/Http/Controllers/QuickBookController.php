@@ -32,7 +32,7 @@ class QuickBookController extends Controller
     $openid = new \LightOpenID('https://openid.intuit.com/OpenID/Provider');
     if (!$openid->mode) {
       if (isset($request)) {
-        dd($request);
+        dd($$openid->getAttributes());
       }
       $openid->identity = "https://openid.intuit.com/Identity-me";
       $openid->required = array('contact/email');
