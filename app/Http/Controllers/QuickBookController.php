@@ -38,21 +38,28 @@ class QuickBookController extends Controller
       header('Location: ' . $openid->authUrl());
     } else {
       $userData = $openid->getAttributes();
-      $user = new User;
-      $user->email = $userData['contact/email'];
-      if ($user['namePerson/first']) {
-        $user->first_name = $userData['namePerson/first'];
+      $user = User::where('email', '=', $userData['contact/email'])->first();
+      if ($user) {
+        if (!$user->profile->connected_qb) {
+          # code...
+        }
       } else {
-        $user->first_name = $userData['namePerson'];
-      }
-      if ($user['namePerson/last']) {
-        $user->last_name = $userData['namePerson/last'];
-      } else {
-        $user->last_name = "Please set";
-      }
+        $user = new User;
+        $user->email = $userData['contact/email'];
+        if ($user['namePerson/first']) {
+          $user->first_name = $userData['namePerson/first'];
+        } else {
+          $user->first_name = $userData['namePerson'];
+        }
+        if ($user['namePerson/last']) {
+          $user->last_name = $userData['namePerson/last'];
+        } else {
+          $user->last_name = "Please set";
+        }
 
-      $user->save();
-      dd($user);
+        $user->save();
+        dd($user);
+      }
     }
   }
 
