@@ -29,6 +29,7 @@ class QuickBookController extends Controller
   }
 
   public function qboOpenId() {
+    dd("hello");
     $openid = new \LightOpenID('https://openid.intuit.com/OpenID/Provider');
     dd($openid);
     $openid->identity = "https://openid.intuit.com/Identity-me";
