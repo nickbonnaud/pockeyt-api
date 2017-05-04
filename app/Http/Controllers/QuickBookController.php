@@ -31,8 +31,7 @@ class QuickBookController extends Controller
   public function qboOpenId() {
     $oidc = new \OpenIDConnectClient("https://openid.intuit.com/OpenID/Provider");
     $oidc->register();
-    $oidc->required = array('contact/email');
-    dd($oidc->required);
+    dd($oidc);
     $client_id = $oidc->getClientID();
     $client_secret = $oidc->getClientSecret();
   }
