@@ -26,7 +26,7 @@
         "consolibyte/quickbooks": "^3.2",
         "davibennun/laravel-push-notification": "dev-laravel5",
         "genealabs/laravel-caffeine": "~0.2.0",
-        "iignatov/lightopenid": "^1.0"
+        "kounta/lightopenid": "^0.7.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

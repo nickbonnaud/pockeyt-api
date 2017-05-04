@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "602afa2689eaa931deae3406cfe78321",
+    "content-hash": "905f14d4441b1d0fe105d8d351aff4fd",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1507,53 +1507,6 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
-            "name": "iignatov/lightopenid",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WillSkates/LightOpenID.git",
-                "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WillSkates/LightOpenID/zipball/15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
-                "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "openid.php",
-                    "provider/provider.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ignat Ignatov",
-                    "homepage": "https://github.com/iignatov/LightOpenID"
-                },
-                {
-                    "name": "Mewp",
-                    "homepage": "https://code.google.com/p/lightopenid/"
-                }
-            ],
-            "description": "Lightweight PHP5 library for easy OpenID authentication.",
-            "homepage": "https://github.com/iignatov/LightOpenID",
-            "keywords": [
-                "Authentication",
-                "OpenId",
-                "security"
-            ],
-            "time": "2014-01-27T06:01:05+00:00"
-        },
-        {
             "name": "intervention/image",
             "version": "2.3.11",
             "source": {
@@ -1759,6 +1712,40 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
+        },
+        {
+            "name": "kounta/lightopenid",
+            "version": "v0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kounta/lightopenid.git",
+                "reference": "684f8e97f370cc41f5025899a1e01e886b3af3d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kounta/lightopenid/zipball/684f8e97f370cc41f5025899a1e01e886b3af3d6",
+                "reference": "684f8e97f370cc41f5025899a1e01e886b3af3d6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "From https://gitorious.org/lightopenid/lightopenid.git",
+            "homepage": "https://github.com/kounta/lightopenid",
+            "keywords": [
+                "OpenId"
+            ],
+            "time": "2015-04-01T22:37:36+00:00"
         },
         {
             "name": "laravel/framework",
