@@ -15,9 +15,9 @@ $qbo_connect = $qbo_obj->qboConnect();
 		    	<span class="pull-right" style="margin-top: -5px;">
 						<ipp:connectToIntuit></ipp:connectToIntuit>
 					</span>
-				@elseif($qbo_connect)
+				@else
 					<span class="pull-right" style="margin-top: -5px;">
-						<a href="{{ action('QuickBookController@qboDisconnect') }}"></a>
+						<a href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect QuickBooks</a>
 					</span>
 				@endif
 		    @if($account->status == 'pending')
