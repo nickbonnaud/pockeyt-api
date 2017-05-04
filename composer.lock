@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7b574c87387b36733447095c2f81096",
+    "content-hash": "602afa2689eaa931deae3406cfe78321",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1507,6 +1507,53 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
+            "name": "iignatov/lightopenid",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WillSkates/LightOpenID.git",
+                "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WillSkates/LightOpenID/zipball/15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
+                "reference": "15264c31aef8bbe7ea18f12b6da4ccdb9927f9fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "openid.php",
+                    "provider/provider.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignat Ignatov",
+                    "homepage": "https://github.com/iignatov/LightOpenID"
+                },
+                {
+                    "name": "Mewp",
+                    "homepage": "https://code.google.com/p/lightopenid/"
+                }
+            ],
+            "description": "Lightweight PHP5 library for easy OpenID authentication.",
+            "homepage": "https://github.com/iignatov/LightOpenID",
+            "keywords": [
+                "Authentication",
+                "OpenId",
+                "security"
+            ],
+            "time": "2014-01-27T06:01:05+00:00"
+        },
+        {
             "name": "intervention/image",
             "version": "2.3.11",
             "source": {
@@ -1712,36 +1759,6 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
-        },
-        {
-            "name": "jumbojett/openid-connect-php",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jumbojett/OpenID-Connect-PHP.git",
-                "reference": "b9624675d5cfe78c07511314d91af02fd332ee25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jumbojett/OpenID-Connect-PHP/zipball/b9624675d5cfe78c07511314d91af02fd332ee25",
-                "reference": "b9624675d5cfe78c07511314d91af02fd332ee25",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=5.2",
-                "phpseclib/phpseclib": "~0.3.10"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "OpenIDConnectClient.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Bare-bones OpenID Connect client",
-            "time": "2016-03-04T02:50:16+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5033,12 +5050,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },
