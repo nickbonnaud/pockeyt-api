@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca0cea9218b4781ac66d201a1e9f97da",
+    "content-hash": "f7b574c87387b36733447095c2f81096",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1712,6 +1712,36 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
+        },
+        {
+            "name": "jumbojett/openid-connect-php",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jumbojett/OpenID-Connect-PHP.git",
+                "reference": "b9624675d5cfe78c07511314d91af02fd332ee25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jumbojett/OpenID-Connect-PHP/zipball/b9624675d5cfe78c07511314d91af02fd332ee25",
+                "reference": "b9624675d5cfe78c07511314d91af02fd332ee25",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.2",
+                "phpseclib/phpseclib": "~0.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "OpenIDConnectClient.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Bare-bones OpenID Connect client",
+            "time": "2016-03-04T02:50:16+00:00"
         },
         {
             "name": "laravel/framework",

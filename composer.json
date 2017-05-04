@@ -25,7 +25,8 @@
         "socialiteproviders/instagram": "^2.0",
         "consolibyte/quickbooks": "^3.2",
         "davibennun/laravel-push-notification": "dev-laravel5",
-        "genealabs/laravel-caffeine": "~0.2.0"
+        "genealabs/laravel-caffeine": "~0.2.0",
+        "jumbojett/openid-connect-php": "0.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

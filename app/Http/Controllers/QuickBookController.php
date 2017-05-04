@@ -28,6 +28,15 @@ class QuickBookController extends Controller
     parent::__construct();
   }
 
+  public function qboOpenId() {
+    $oidc = new \OpenIDConnectClient("https://id.provider.com");
+    dd($oidc);
+    $oidc->register();
+    $client_id = $oidc->getClientID();
+    $client_secret = $oidc->getClientSecret();
+  }
+
+
   public function qboTax() {
     return view('qbo.tax');
   }
