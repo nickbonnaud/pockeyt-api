@@ -36,7 +36,6 @@ class QuickBookController extends Controller
       $openid->optional = array('namePerson/first', 'namePerson/last');
       header('Location: ' . $openid->authUrl());
     } else {
-      dd($openid);
       dd($openid->getAttributes());
     }
   }
