@@ -28,7 +28,7 @@ class QuickBookController extends Controller
     parent::__construct();
   }
 
-  public function qboOpenId() {
+  public function qboOpenId(Request $request) {
     $openid = new \LightOpenID('https://openid.intuit.com/OpenID/Provider');
     if (!$openid->mode) {
       $openid->identity = "https://openid.intuit.com/Identity-me";
@@ -36,7 +36,7 @@ class QuickBookController extends Controller
       $openid->optional = array('namePerson', 'namePerson/friendly');
       header('Location: ' . $openid->authUrl());
     } else {
-      dd($openid);
+      dd($request);
     }
     
   }
