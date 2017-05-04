@@ -41,12 +41,12 @@ class QuickBookController extends Controller
       $user = new User;
       $user->email = $userData['contact/email'];
       if ($user['namePerson/first']) {
-        $user->first_name = $user['namePerson/first'];
+        $user->first_name = $userData['namePerson/first'];
       } else {
-        $user->first_name = $user['namePerson'];
+        $user->first_name = $userData['namePerson'];
       }
       if ($user['namePerson/last']) {
-        $user->last_name = $user['namePerson/last'];
+        $user->last_name = $userData['namePerson/last'];
       } else {
         $user->last_name = "Please set";
       }
