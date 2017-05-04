@@ -48,7 +48,7 @@ class QuickBookController extends Controller
       if ($user['namePerson/last']) {
         $user->last_name = $user['namePerson/last'];
       } else {
-        $user->last = "Please set";
+        $user->last_name = "Please set";
       }
 
       $user->save();
