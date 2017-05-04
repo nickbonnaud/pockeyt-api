@@ -15,6 +15,10 @@ $qbo_connect = $qbo_obj->qboConnect();
 		    	<span class="pull-right" style="margin-top: -5px;">
 						<ipp:connectToIntuit></ipp:connectToIntuit>
 					</span>
+				@else
+					<span class="pull-right" style="margin-top: -5px;">
+						<a href="{{ action('QuickBookController@qboDisconnect') }}"></a>
+					</span>
 				@endif
 		    @if($account->status == 'pending')
 		    	<p><i class="fa fa-circle text-warning"></i> Account Pending</p>

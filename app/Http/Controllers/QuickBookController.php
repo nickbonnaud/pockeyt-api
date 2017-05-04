@@ -115,7 +115,7 @@ class QuickBookController extends Controller
 
   public function qboSuccess(){
     $this->setTaxAccount();
-     $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
+    $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
     if (isset($taxCodeId)) {
       $this->setPockeytId();
       $this->createPockeytAccount();
@@ -136,8 +136,9 @@ class QuickBookController extends Controller
 
   public function qboDisconnect(){
   	$the_tenant = $this->user->profile->id;
+    $account = $this->user->profile->account;
     $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
-    return redirect()->intended("/yourpath");// afer disconnect redirect where you want
+    return view('accounts.edit', compact('account'));
   }
 
   public function setPockeytId() {
