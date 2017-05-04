@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Profile;
 use App\User;
+use App\Account;
 use App\Transaction;
 use Carbon\Carbon;
 use DateTimeZone;
@@ -58,7 +59,11 @@ class QuickBookController extends Controller
         }
 
         $user->save();
-        dd($user);
+        $profile = new Profile;
+        $user->profile()->save();
+        $account = new Account;
+        $profile->account()->save();
+        dd("ok");
       }
     }
   }
