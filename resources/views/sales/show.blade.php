@@ -96,7 +96,7 @@
 		data: {
 			transactions: {!! $salesToday !!},
 			fromDate: "today",
-			toDate: ""
+			toDate: "",
 			modalPick: "",
 			modalPickData: ""
 		},
