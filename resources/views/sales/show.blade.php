@@ -194,8 +194,8 @@
 			getTransactions: function(start, end) {
 				startDate = moment(start).format();
 				endDate = moment(end).format();
-				this.fromDate = moment(start).format('MMM Do YY');
-				this.toDate = moment(end).format('MMM Do YY');
+				this.fromDate = moment(start).format('MMM Do, YY');
+				this.toDate = moment(end).format('MMM Do, YY');
 				// $.ajax({
 				// 	method: 'POST',
 				// 	url: '/analytics/dashboard/data/line/hour',
