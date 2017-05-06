@@ -9,10 +9,10 @@
 			    <h1>
 			      Sales Center
 			    </h1>
-			    <h4 v-if="fromDate == 'today'">Date Range: Today</h4>
-			    <h4 v-else>Date Range: @{{ fromDate | setDate }} to @{{ toDate | setDate }}</h4>
-			    <a href="#" v-on:click="toggleDate()">Change</a>
-			    <input v-show="customDate" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
+			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
+			    <h4 style="display: inline-block; v-show="customDate">Date Range: </h4>
+			    <a style="display: inline-block; v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
+			    <input style="display: inline-block; v-show="customDate" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
