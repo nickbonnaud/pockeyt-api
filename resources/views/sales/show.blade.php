@@ -194,7 +194,7 @@
 
 			toggleDate: function() {
 				this.customDate = !this.customDate;
-				console.log(this.customDate);
+				$('#dateRange').focus();
 			},
 
 			getTransactions: function(dateRange) {
