@@ -183,6 +183,7 @@
 
 			toggleDate: function() {
 				return !this.customDate;
+				console.log(this.customDate);
 			},
 
 			getTransactions: function(fromDate, toDate) {
