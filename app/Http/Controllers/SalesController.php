@@ -40,7 +40,7 @@ class SalesController extends Controller
     return view('sales.show', compact('salesToday'));
   }
 
-  public function customDate(Requests $request) {
+  public function customDate(Request $request) {
   	$fromDate = $request->fromDate;
   	$toDate = $request->toDate;
   	return response($fromDate);
