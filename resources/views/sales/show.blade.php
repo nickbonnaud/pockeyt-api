@@ -196,7 +196,7 @@
 				console.log(this.customDate);
 			},
 
-			getTransactions: function(fromDate, toDate) {
+			getTransactions: function() {
 				
 				console.log("hello");
 				// $.ajax({
