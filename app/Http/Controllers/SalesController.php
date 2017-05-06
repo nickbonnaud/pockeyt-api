@@ -43,7 +43,17 @@ class SalesController extends Controller
   public function customDate(Request $request) {
   	$fromDate = $request->fromDate;
   	$toDate = $request->toDate;
-  	return response($toDate);
+  	$profileId = $request->businessId;
+
+  	$sales = Transaction::where(function($query) use ($fromDate, $toDate, $profile) {
+      $query->whereBetween('updated_at', [$fromDate, $toDate])
+        ->where('profile_id', '=', $profileId);
+    })->get();
+
+    if (!$sales) {
+    	$sales = 0;
+    }
+  	return response()->json($sales);
   }
 }
 

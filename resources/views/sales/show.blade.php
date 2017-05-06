@@ -192,8 +192,10 @@
 			},
 
 			getTransactions: function(start, end) {
-				startDate = moment(start).format();
-				endDate = moment(end).format();
+				var startDate = moment(start).format();
+				var endDate = moment(end).format();
+				var businessId = '{{ $user->profile->id }}';
+
 				this.fromDate = moment(start).format('MMM Do, YY');
 				this.toDate = moment(end).format('MMM Do, YY');
 				$.ajax({
@@ -201,7 +203,8 @@
 					url: '/sales/date',
 					data: {
 						'fromDate': startDate,
-						'toDate': endDate
+						'toDate': endDate,
+						'businessId': businessId
 					},
 					success: function(data) {
 						console.log(data);
