@@ -51,9 +51,9 @@ class SalesController extends Controller
     })->get();
 
     if (!$sales) {
-    	$sales = 0;
+    	
     }
-  	return response()->json($sales);
+  	return response($sales);
   }
 }
 
