@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta property="og:site_name" content="Pockeyt" />
-    <title>Pockeyt Business</title>
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/skin-yellow.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/sweetalert/dist/sweetalert.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <meta property="og:site_name" content="Pockeyt" />
+  <title>Pockeyt Business</title>
+  <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/AdminLTE.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/skin-yellow.css') }}">
+  <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/vendor/sweetalert/dist/sweetalert.css') }}">
+  <link rel="stylesheet" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/vendor/daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" />
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -260,6 +261,7 @@
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
   <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('/vendor/chart.js/dist/Chart.min.js') }}"></script>
+  <script src="{{ asset('/vendor/daterangepicker/daterangepicker.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
