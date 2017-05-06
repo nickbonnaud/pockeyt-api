@@ -104,11 +104,6 @@
         format: 'MM/DD/YYYY h:mm A'
       }
     });
-
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-			$('#daterange').trigger('input');
-			sales.getTransactions();
-		});
 	});
 
 	var sales = new Vue({
@@ -124,7 +119,12 @@
 			customDate: false
 		},
 
-		mounted: function() {},
+		mounted: function() {
+			$('#daterange').on('apply.daterangepicker', function(ev, picker) {
+				this.dateRange = $('#daterange').val();
+				sales.getTransactions();
+			});
+		},
 
 		computed: {
 			netSales: function() {
