@@ -178,7 +178,7 @@
 			
 			changeDate: function() {
 				console.log("hello");
-				$('#daterange').daterangepicker();
+				daterangepicker();
 			},
 
 			getTransactions: function(fromDate, toDate) {
