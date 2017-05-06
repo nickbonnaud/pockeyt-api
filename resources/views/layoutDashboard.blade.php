@@ -141,6 +141,7 @@
             <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span class="menu-text">Loyalty Program</span></a></li>
             <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span class="menu-text">Deals</span></a></li>
             <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span class="menu-text">Analytics Dashboard</span></a></li>
+            <li><a href="{{ route('sales.show') }}"><i class="fa fa-calculator"></i> <span class="menu-text">Sales Center</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

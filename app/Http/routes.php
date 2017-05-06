@@ -167,6 +167,9 @@ Route::group(['prefix' => 'api'], function() {
     Route::post('analytics/posts/interaction', 'AnalyticsController@interactionPosts');
 });
 
+//Sales routes
+Route::get('sales/show', 'SalesController@show')->name('sales.show');
+
 //Quickbook Routes
 Route::get('qbo/openid', 'QuickBookController@qboOpenId');
 Route::post('qbo/openid', 'QuickBookController@qboOpenId');
