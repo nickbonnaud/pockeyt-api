@@ -13,6 +13,7 @@
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
 			    <input style="display: inline-block;" v-show="customDate" type="text" id="daterange" value="" v-model="dateRange"/>
+			    <p>@{{ dateRange }}</p>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
