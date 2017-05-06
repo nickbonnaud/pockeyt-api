@@ -106,6 +106,7 @@
     });
 
     $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+			$('#daterange').trigger('change');
 			sales.getTransactions();
 		});
 	});
