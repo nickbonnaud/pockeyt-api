@@ -53,7 +53,7 @@ class SalesController extends Controller
     if (!$sales) {
     	$sales = 0;
     }
-  	return response($sales);
+  	return response()->json($sales);
   }
 }
 

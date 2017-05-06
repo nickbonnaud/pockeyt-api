@@ -207,7 +207,11 @@
 						'businessId': businessId
 					},
 					success: function(data) {
-						console.log(data);
+						if (data.lenfth == 0) {
+							sales.$data.transactions = 0;
+						} else {
+							sales.$data.transactions = data.sales;
+						}
 					}
 				})
 			}
