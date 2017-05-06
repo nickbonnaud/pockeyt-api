@@ -192,9 +192,10 @@
 			},
 
 			getTransactions: function(start, end) {
-				startDate = moment(start).format('MMMM Do YYYY, h:mm:ss');
+				startDate = moment(start).format();
 				endDate = moment(end).format();
-				console.log(startDate);
+				this.fromDate = moment(start).format('MMM Do YY');
+				this.toDate = moment(end).format('MMM Do YY');
 				// $.ajax({
 				// 	method: 'POST',
 				// 	url: '/analytics/dashboard/data/line/hour',
