@@ -12,8 +12,7 @@
 			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
-			    <input style="display: inline-block;" v-show="customDate" type="text" id="dateRange" value="" v-model="dateRange"/>
-			    <p>@{{ dateRange }}</p>
+			    <input style="display: inline-block;" v-show="customDate" type="text" id="dateRange" value=""/>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
@@ -115,15 +114,13 @@
 			toDate: "",
 			modalPick: "",
 			modalPickData: "",
-			dateRange: "",
 			customDate: false
 		},
 
 		mounted: function() {
 			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-				console.log($('#dateRange').val());
-				this.dateRange = $('#dateRange').val();
-				sales.getTransactions();
+				var dateRange = $('#dateRange').val();
+				this.getTransactions(dateRange);
 			});
 		},
 
@@ -200,7 +197,7 @@
 				console.log(this.customDate);
 			},
 
-			getTransactions: function() {
+			getTransactions: function(dateRange) {
 				
 				console.log(this.dateRange);
 				// $.ajax({
