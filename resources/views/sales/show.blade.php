@@ -119,10 +119,6 @@
 			customDate: false
 		},
 
-		mounted: function() {
-	
-		},
-
 		computed: {
 			netSales: function() {
 				var transactions = this.transactions;
@@ -196,8 +192,9 @@
 			},
 
 			getTransactions: function(start, end) {
-				
-				console.log(start);
+				startDate = moment(start).format();
+				endDate = moment(end).format();
+				console.log(startDate);
 				// $.ajax({
 				// 	method: 'POST',
 				// 	url: '/analytics/dashboard/data/line/hour',
