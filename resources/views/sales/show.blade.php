@@ -11,7 +11,7 @@
 			    </h1>
 			    <h4 v-if="fromDate == 'today'">Date Range: Today</h4>
 			    <h4 v-else>Date Range: @{{ fromDate | setDate }} to @{{ toDate | setDate }}</h4>
-			    <a href="#">Change</a>
+			    <a href="#"  v-on:click="changeDate()">Change</a>
 			    <input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -182,7 +182,7 @@
 			
 			changeDate: function() {
 				console.log("hello");
-				daterangepicker();
+				$('input[name="daterange"]').daterangepicker();
 			},
 
 			getTransactions: function(fromDate, toDate) {
