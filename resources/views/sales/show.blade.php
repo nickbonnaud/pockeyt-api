@@ -103,7 +103,7 @@
         format: 'MM/DD/YYYY h:mm A'
       }
     }, function(start, end) {
-    	console.log(start);
+    	sales.getTransactions(start, end);
     });
 	});
 
@@ -120,10 +120,7 @@
 		},
 
 		mounted: function() {
-			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-				var dateRange = $('#dateRange').val();
-				sales.getTransactions(dateRange);
-			});
+	
 		},
 
 		computed: {
@@ -198,9 +195,9 @@
 				this.customDate = !this.customDate;
 			},
 
-			getTransactions: function(dateRange) {
+			getTransactions: function(start, end) {
 				
-				console.log(dateRange);
+				console.log(start);
 				// $.ajax({
 				// 	method: 'POST',
 				// 	url: '/analytics/dashboard/data/line/hour',
