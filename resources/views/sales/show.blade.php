@@ -102,6 +102,8 @@
       locale: {
         format: 'MM/DD/YYYY h:mm A'
       }
+    }, function(start, end) {
+    	console.log(start);
     });
 	});
 
@@ -120,8 +122,6 @@
 		mounted: function() {
 			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
 				var dateRange = $('#dateRange').val();
-				dateRange.split("-");
-				console.log(dateRange);
 				sales.getTransactions(dateRange);
 			});
 		},
