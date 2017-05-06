@@ -98,6 +98,7 @@
 	$(function() {
     $('#daterange').daterangepicker({
     	timePicker: true,
+    	autoUpdateInput: true,
       timePickerIncrement: 30,
       locale: {
         format: 'MM/DD/YYYY h:mm A'
