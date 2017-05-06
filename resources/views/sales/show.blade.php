@@ -119,8 +119,8 @@
 
 		mounted: function() {
 			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-				this.dateRange = $('#dateRange').val();
-				console.log(this.dateRange);
+				var dateRange = $('#dateRange').val();
+				sales.getTransactions(dateRange);
 			});
 		},
 
