@@ -13,7 +13,7 @@ use App\Transaction;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class AnalyticsController extends Controller
+class SalesController extends Controller
 {
 	public function __construct() {
     parent::__construct();
