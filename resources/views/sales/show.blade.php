@@ -76,8 +76,8 @@
 	      </div>
 	      <div class="modal-body-analytics-bubble">
 	      	<div class="sub-header">
-        		<h3 v-if="fromDate == 'today'">@{{ modalPick }} for Today: <strong>${{ modalPickData }}</strong>.</h3>
-        		<h3 v-else>@{{ modalPick }} from @{{ fromDate }} to @{{ toDate }}: <strong>${{ modalPickData }}</strong>.</h3>
+        		<h3 v-if="fromDate == 'today'">@{{ modalPick }} for Today: <strong>$@{{ modalPickData }}</strong>.</h3>
+        		<h3 v-else>@{{ modalPick }} from @{{ fromDate }} to @{{ toDate }}: <strong>$@{{ modalPickData }}</strong>.</h3>
         	</div>
 	      </div>
 	    </div>
