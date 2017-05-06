@@ -22,7 +22,8 @@ class SalesController extends Controller
 	
   public function show() {
     $currentDate = Carbon::now();
-    $fromDate = Carbon::now()->hour = 4;
+    $fromDate = Carbon::now();
+    $fromDate->hour = 4;
     if ($currentDate <= $fromDate) {
     	$fromDate = Carbon::now()->subDay()->hour = 4;
     }
