@@ -101,7 +101,7 @@
 			modalPickData: ""
 		},
 
-		mounted: function() {}
+		mounted: function() {},
 
 		computed: {
 			netSales: function() {
