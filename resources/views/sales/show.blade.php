@@ -192,7 +192,7 @@
 			},
 
 			getTransactions: function(start, end) {
-				startDate = moment(start).format();
+				startDate = moment(start).format('MMMM Do YYYY, h:mm:ss');
 				endDate = moment(end).format();
 				console.log(startDate);
 				// $.ajax({
