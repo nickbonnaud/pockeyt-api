@@ -177,6 +177,7 @@
 			},
 			
 			changeDate: function() {
+				console.log("hello");
 				$('input[name="daterange"]').daterangepicker();
 			},
 
