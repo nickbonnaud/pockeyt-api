@@ -196,18 +196,17 @@
 				endDate = moment(end).format();
 				this.fromDate = moment(start).format('MMM Do, YY');
 				this.toDate = moment(end).format('MMM Do, YY');
-				// $.ajax({
-				// 	method: 'POST',
-				// 	url: '/analytics/dashboard/data/line/hour',
-				// 	data: {
-				// 		'fromDate': fromDate,
-				// 		'toDate': toDate
-				// 	},
-				// 	success: function(data) {
-				// 		console.log(data);
-				// 		var type = data.type;
-				// 	}
-				// })
+				$.ajax({
+					method: 'POST',
+					url: '/sales/date',
+					data: {
+						'fromDate': startDate,
+						'toDate': endDate
+					},
+					success: function(data) {
+						console.log(data);
+					}
+				})
 			}
 		}
 	})

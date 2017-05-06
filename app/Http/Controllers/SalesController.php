@@ -37,7 +37,18 @@ class SalesController extends Controller
     if (!$salesToday) {
     	$salesToday = 0;
     }
-
     return view('sales.show', compact('salesToday'));
   }
+
+  public function customDate(Requests $request) {
+  	$fromDate = $request->fromDate;
+  	$toDate = $request->toDate;
+  	return response($fromDate);
+  }
 }
+
+
+
+
+
+
