@@ -119,7 +119,7 @@
 
 		mounted: function() {
 			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-				var dateRange = $('#dateRange').val().start;
+				var dateRange = $('#dateRange').val();
 				dateRange.split(" - ");
 				console.log(dateRange);
 				sales.getTransactions(dateRange);
