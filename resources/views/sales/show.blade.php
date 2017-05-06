@@ -11,8 +11,8 @@
 			    </h1>
 			    <h4 v-if="fromDate == 'today'">Date Range: Today</h4>
 			    <h4 v-else>Date Range: @{{ fromDate | setDate }} to @{{ toDate | setDate }}</h4>
-			    <a href="#"  v-on:click="changeDate()" name="daterange">Change</a>
-			    <input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
+			    <a href="#" v-on:click="changeDate()">Change</a>
+			    <input v-show="!customDate" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
@@ -107,7 +107,8 @@
 			toDate: "",
 			modalPick: "",
 			modalPickData: "",
-			dateRange: ""
+			dateRange: "",
+			customDate: false
 		},
 
 		mounted: function() {},
