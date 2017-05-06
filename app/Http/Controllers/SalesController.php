@@ -45,7 +45,7 @@ class SalesController extends Controller
   	$toDate = $request->toDate;
   	$profileId = $request->businessId;
 
-  	$sales = Transaction::where(function($query) use ($fromDate, $toDate, $profile) {
+  	$sales = Transaction::where(function($query) use ($fromDate, $toDate, $profileId) {
       $query->whereBetween('updated_at', [$fromDate, $toDate])
         ->where('profile_id', '=', $profileId);
     })->get();
