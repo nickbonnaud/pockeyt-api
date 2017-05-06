@@ -11,7 +11,7 @@
 			    </h1>
 			    <h4 v-if="fromDate == 'today'">Date Range: Today</h4>
 			    <h4 v-else>Date Range: @{{ fromDate | setDate }} to @{{ toDate | setDate }}</h4>
-			    <a href="#" v-on:click="!customDate">Change</a>
+			    <a href="#" v-on:click="toggleDate()">Change</a>
 			    <input v-show="customDate" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -179,6 +179,10 @@
 				this.modalPick = "Net Total";
 				this.modalPickData = this.netTotal;
 				$('#infoModal').modal('show');
+			},
+
+			toggleDate: function() {
+				return !customDate;
 			},
 
 			getTransactions: function(fromDate, toDate) {
