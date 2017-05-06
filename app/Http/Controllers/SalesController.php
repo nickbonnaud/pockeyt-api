@@ -43,7 +43,7 @@ class SalesController extends Controller
   public function customDate(Request $request) {
   	$fromDate = $request->fromDate;
   	$toDate = $request->toDate;
-  	return response($fromDate);
+  	return response($toDate);
   }
 }
 
