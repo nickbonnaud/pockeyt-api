@@ -178,7 +178,7 @@
 			
 			changeDate: function() {
 				$('input[name="daterange"]').daterangepicker();
-			}
+			},
 
 			getTransactions: function(fromDate, toDate) {
 				$.ajax({
