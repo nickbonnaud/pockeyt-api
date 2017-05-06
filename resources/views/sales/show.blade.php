@@ -182,7 +182,7 @@
 			},
 
 			toggleDate: function() {
-				return !this.customDate;
+				!this.customDate;
 				console.log(this.customDate);
 			},
 
