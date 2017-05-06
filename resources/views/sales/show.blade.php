@@ -207,7 +207,7 @@
 						'businessId': businessId
 					},
 					success: function(data) {
-						if (data.lenfth == 0) {
+						if (data.length == 0) {
 							sales.$data.transactions = 0;
 						} else {
 							sales.$data.transactions = data.sales;
