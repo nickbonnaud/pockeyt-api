@@ -12,7 +12,7 @@
 			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
-			    <input style="display: inline-block;" v-show="customDate" type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
+			    <input style="display: inline-block;" v-show="customDate" type="text" id="daterange" value="" v-model="dateRange"/>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
@@ -95,8 +95,16 @@
 <script>
 
 	$(function() {
-    $('input[name="daterange"]').daterangepicker();
-});
+    $('#daterange').daterangepicker({
+    	timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY h:mm A'
+      }
+    });
+
+    
+	});
 
 	var sales = new Vue({
 		el: '#sales',
