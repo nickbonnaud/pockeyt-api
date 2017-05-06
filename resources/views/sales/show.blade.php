@@ -198,7 +198,7 @@
 
 			getTransactions: function() {
 				
-				console.log("hello");
+				console.log(this.dateRange);
 				// $.ajax({
 				// 	method: 'POST',
 				// 	url: '/analytics/dashboard/data/line/hour',
