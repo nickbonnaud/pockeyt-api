@@ -119,7 +119,9 @@
 
 		mounted: function() {
 			$('#dateRange').on('apply.daterangepicker', function(ev, picker) {
-				var dateRange = $('#dateRange').val();
+				var dateRange = $('#dateRange').val().start;
+				dateRange.split(" - ");
+				console.log(dateRange);
 				sales.getTransactions(dateRange);
 			});
 		},
@@ -194,7 +196,6 @@
 
 			toggleDate: function() {
 				this.customDate = !this.customDate;
-				$('#dateRange').focus();
 			},
 
 			getTransactions: function(dateRange) {
