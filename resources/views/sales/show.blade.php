@@ -12,7 +12,7 @@
 			    <h4 v-if="fromDate == 'today'">Date Range: Today</h4>
 			    <h4 v-else>Date Range: @{{ fromDate | setDate }} to @{{ toDate | setDate }}</h4>
 			    <a href="#">Change</a>
-			    <input type="text" id="daterange">
+			    <input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
@@ -94,7 +94,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 
-	$('#daterange').daterangepicker();
+	$(function() {
+    $('input[name="daterange"]').daterangepicker();
+});
 
 	var sales = new Vue({
 		el: '#sales',
