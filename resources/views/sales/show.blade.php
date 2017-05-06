@@ -103,7 +103,9 @@
       }
     });
 
-    
+    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+			sales.getTransactions();
+		});
 	});
 
 	var sales = new Vue({
@@ -195,18 +197,20 @@
 			},
 
 			getTransactions: function(fromDate, toDate) {
-				$.ajax({
-					method: 'POST',
-					url: '/analytics/dashboard/data/line/hour',
-					data: {
-						'fromDate': fromDate,
-						'toDate': toDate
-					},
-					success: function(data) {
-						console.log(data);
-						var type = data.type;
-					}
-				})
+				
+				console.log("hello");
+				// $.ajax({
+				// 	method: 'POST',
+				// 	url: '/analytics/dashboard/data/line/hour',
+				// 	data: {
+				// 		'fromDate': fromDate,
+				// 		'toDate': toDate
+				// 	},
+				// 	success: function(data) {
+				// 		console.log(data);
+				// 		var type = data.type;
+				// 	}
+				// })
 			}
 		}
 	})
