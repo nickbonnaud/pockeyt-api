@@ -9,6 +9,11 @@
 			    <h1>
 			      Sales Center
 			    </h1>
+			    @if(!$user->profile->tipManager)
+			    	<button class="btn btn-block btn-primary">Enable Tip Tracking</button>
+			    @else
+			    	<button class="btn btn-block btn-primary">Disable Tip Tracking</button>
+			    @endif
 			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
