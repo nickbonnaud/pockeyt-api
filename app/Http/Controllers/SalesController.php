@@ -68,12 +68,12 @@ class SalesController extends Controller
         ->where('profile_id', '=', $profileId);
     })->get();
 
-    if (!$sales) {
+    if (count($sales) == 0) {
     	$sales = 0;
     }
 
     $employees = [];
-    if ($profile->tip_tracking_enabled && $salesToday != 0) {
+    if ($profile->tip_tracking_enabled && $sales != 0) {
     	$employeeIds = [];
     	foreach ($sales as $sale) {
     		if (!in_array($sale->employee_id, $employeeIds)) {
