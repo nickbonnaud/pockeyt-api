@@ -10,9 +10,13 @@
 			      Sales Center
 			    </h1>
 			    @if(!$user->profile->tip_tracking_enabled)
-			    	<button class="btn pull-right btn-primary">Enable Tip Tracking</button>
+			    	<a href="{{ action('SalesController@toggleTipTracking') }}">
+			    		<button class="btn pull-right btn-primary">Enable Tip Tracking</button>
+			    	</a>
 			    @else
-			    	<button class="btn pull-right btn-primary">Disable Tip Tracking</button>
+			    	<a href="{{ action('SalesController@toggleTipTracking') }}">
+			    		<button class="btn pull-right btn-primary">Disable Tip Tracking</button>
+			    	</a>
 			    @endif
 			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>

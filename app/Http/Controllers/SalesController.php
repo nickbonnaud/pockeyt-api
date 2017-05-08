@@ -56,6 +56,15 @@ class SalesController extends Controller
     }
   	return response()->json($sales);
   }
+
+  public function toggleTipTracking() {
+  	$profile = $this->user->profile;
+
+  	$profile->tip_tracking_enabled = !$profile->tip_tracking_enabled;
+  	$profile->save();
+  	return redirect()->back();
+  }
+
 }
 
 
