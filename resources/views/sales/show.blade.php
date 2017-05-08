@@ -9,7 +9,7 @@
 			    <h1>
 			      Sales Center
 			    </h1>
-			    @if(!$user->profile->tipManager)
+			    @if(!$user->profile->tip_tracking_enabled)
 			    	<button class="btn btn-block btn-primary">Enable Tip Tracking</button>
 			    @else
 			    	<button class="btn btn-block btn-primary">Disable Tip Tracking</button>
