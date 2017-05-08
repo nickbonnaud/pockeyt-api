@@ -292,13 +292,13 @@
 					},
 					success: function(data) {
 						console.log(data);
-						if (data.sales.length == 0) {
+						if (data.sales == 0) {
 							sales.$data.transactions = 0;
 						} else {
 							sales.$data.transactions = data.sales;
 						}
 
-						if (data.employees.length == 0) {
+						if (data.employees == 0) {
 							sales.$data.employees = 0;
 						} else {
 							sales.$data.employees = data.employees;
