@@ -61,6 +61,7 @@ class SalesController extends Controller
   	$fromDate = $request->fromDate;
   	$toDate = $request->toDate;
   	$profileId = $request->businessId;
+  	$profile = Profile::findOrFail($profileId);
 
   	$sales = Transaction::where(function($query) use ($fromDate, $toDate, $profileId) {
       $query->whereBetween('updated_at', [$fromDate, $toDate])
@@ -70,7 +71,22 @@ class SalesController extends Controller
     if (!$sales) {
     	$sales = 0;
     }
-  	return response()->json($sales);
+
+    $employees = [];
+    if ($profile->tip_tracking_enabled && $salesToday != 0) {
+    	$employeeIds = [];
+    	foreach ($sales as $sale) {
+    		if (!in_array($sale->employee_id, $employeeIds)) {
+    			array_push($employeeIds, $sale->employee_id);
+    			array_push($employees, User::findOrFail($sale->employee_id));
+    		}
+    	}
+    }
+    if (count($employees == 0)) {
+  		$employees = 0;
+  	}
+
+  	return response()->json(array('sales' => $sales, 'employees' => $employees));
   }
 
   public function toggleTipTracking() {
