@@ -9,6 +9,7 @@ use JWTAuth;
 use Carbon\Carbon;
 use DateTimeZone;
 use App\Profile;
+use App\User;
 use App\Transaction;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -38,7 +39,22 @@ class SalesController extends Controller
     if (!$salesToday) {
     	$salesToday = 0;
     }
-    return view('sales.show', compact('salesToday'));
+
+    $employees = [];
+    if ($profile->tip_tracking_enabled && $salesToday != 0) {
+    	$employeeIds = [];
+    	foreach ($salesToday as $sale) {
+    		if (!in_array($sale->employee_id, $employeeIds)) {
+    			array_push($employeeIds, $sale->employee_id);
+    			array_push($employees, User::findOrFail($sale->employee_id));
+    		}
+    	}
+    }
+    if (count($employees == 0)) {
+  		$employees = 0;
+  	}
+
+    return view('sales.show', compact('salesToday', 'employees'));
   }
 
   public function customDate(Request $request) {
