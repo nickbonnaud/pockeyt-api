@@ -35,8 +35,8 @@ class SalesController extends Controller
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id);
     })->get();
-    dd($salesToday);
-    if (!$salesToday) {
+
+    if (count($salesToday) == 0) {
     	$salesToday = 0;
     }
 
