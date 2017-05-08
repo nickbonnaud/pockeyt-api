@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use Illuminate\HttpResponse;
 use App\Http\Requests;
-use JWTAuth;
 use Carbon\Carbon;
 use DateTimeZone;
 use App\Profile;
 use App\User;
 use App\Transaction;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class SalesController extends Controller

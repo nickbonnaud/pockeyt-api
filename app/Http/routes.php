@@ -172,6 +172,9 @@ Route::get('sales/show', 'SalesController@show')->name('sales.show');
 Route::get('sales/tip_tracking', 'SalesController@toggleTipTracking');
 Route::post('sales/date', 'SalesController@customDate');
 
+// Employee Routes
+Route::get('employees.show', 'EmployeesController@show')->name('employees.show');
+
 //Quickbook Routes
 Route::get('qbo/openid', 'QuickBookController@qboOpenId');
 Route::post('qbo/openid', 'QuickBookController@qboOpenId');
