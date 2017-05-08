@@ -169,6 +169,7 @@ Route::group(['prefix' => 'api'], function() {
 
 //Sales routes
 Route::get('sales/show', 'SalesController@show')->name('sales.show');
+Route::get('sales/tip_tracking', 'SalesController@toggleTipTracking');
 Route::post('sales/date', 'SalesController@customDate');
 
 //Quickbook Routes
