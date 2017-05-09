@@ -143,7 +143,7 @@
             <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span class="menu-text">Deals</span></a></li>
             <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span class="menu-text">Analytics Dashboard</span></a></li>
             <li><a href="{{ route('sales.show') }}"><i class="fa fa-calculator"></i> <span class="menu-text">Sales Center</span></a></li>
-            @if(!$user->profile->tip_tracking_enabled)
+            @if($user->profile->tip_tracking_enabled)
               <li><a href="{{ route('employees.show') }}"><i class="fa fa-users"></i> <span class="menu-text">Team</span></a></li>
             @endif
           </ul>
