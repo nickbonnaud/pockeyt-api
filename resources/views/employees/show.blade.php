@@ -25,8 +25,8 @@
 									<div class="box box-success">
 										<div class="box-header with-border">
 											<h3 class="box-title">On Shift</h3>
-											<div v-if="employeesOn != 0" class="box-tools pull-right"><span class="label label-success">@{{ employeesOn.length }} on shift</span></div>
-											<div v-else class="box-tools pull-right"><span class="label label-success">0 on shift</span></div>
+											<div v-if="employeesOn != 0" class="box-tools pull-right"><span class="label label-success">@{{ employeesOn.length }} on</span></div>
+											<div v-else class="box-tools pull-right"><span class="label label-success">0 on</span></div>
 										</div>
 										<div class="box-body no-padding">
 											<ul class="users-list clearfix">
@@ -44,8 +44,8 @@
 									<div class="box box-warning">
 										<div class="box-header with-border">
 											<h3 class="box-title">Off Shift</h3>
-											<div v-if="employeesOff != 0" class="box-tools pull-right"><span class="label label-warning">@{{ employeesOff.length }} off shift</span></div>
-											<div v-else class="box-tools pull-right"><span class="label label-warning">0 off shift</span></div>
+											<div v-if="employeesOff != 0" class="box-tools pull-right"><span class="label label-warning">@{{ employeesOff.length }} off</span></div>
+											<div v-else class="box-tools pull-right"><span class="label label-warning">0 off</span></div>
 										</div>
 										<div class="box-body no-padding">
 											<ul class="users-list clearfix">
@@ -72,13 +72,14 @@
 	      <div class="modal-header-timeline">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="addProductModal">Add Team Member*</h4>
+	        <p>For Security Purposes new Team Members must have an account on the Pockeyt mobile app.</p>
 	      </div>
 	      <div class="modal-body-customer-info">
 	        <div class="input-group">
 	        	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 	        	<input :disabled="queryFirst.length != 0 || queryLast.length != 0" v-model="queryEmail" name="queryEmail" type="email" class="form-control" placeholder="Email">
 	        </div>
-	        <p>- OR -</p>
+	        <p class="input-divider">- OR -</p>
 	        <div class="input-group">
 	        	<span class="input-group-addon"><i class="fa fa-user"></i></span>
 	        	<input :disabled="queryEmail.length != 0" v-model="queryFirst" name="queryFirst" type="text" class="form-control" placeholder="First Name">
@@ -87,7 +88,7 @@
 	        	<span class="input-group-addon"><i class="fa fa-user"></i></span>
 	        	<input :disabled="queryEmail.length != 0" v-model="queryLast" name="queryLast" type="text" class="form-control" placeholder="Last Name">
 	        </div>
-	        <button :disabled="queryFirst.length == 0 && queryLast.length == 0 && queryEmail.length == 0" class="btn btn-block btn-primary" v-on:click="searchUsers()">Search</button>
+	        <button style="margin-top: 10px;" :disabled="queryFirst.length == 0 && queryLast.length == 0 && queryEmail.length == 0" class="btn btn-block btn-primary" v-on:click="searchUsers()">Search</button>
 	        <table class="table" v-if="searchResult.length != 0 || searchResult != 'No Results'">
 	        	<tbody>
 	        		<tr v-for="person in searchResult">
