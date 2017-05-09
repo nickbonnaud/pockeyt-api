@@ -48,8 +48,7 @@ class SalesController extends Controller
     		}
     	}
     }
-    dd($employees);
-    if (count($employees == 0)) {
+    if (count($employees) == 0) {
   		$employees = 0;
   	}
     return view('sales.show', compact('salesToday', 'employees'));
