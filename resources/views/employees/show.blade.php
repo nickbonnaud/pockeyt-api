@@ -136,7 +136,7 @@
 						console.log(data);
 					}
 				})
-			}
+			},
 
 			searchUsers: function() {
 				if (this.queryEmail.length != 0) {
