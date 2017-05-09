@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use DateTimeZone;
 use App\Profile;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
 class EmployeesController extends Controller
