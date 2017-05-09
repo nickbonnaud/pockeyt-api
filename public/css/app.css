@@ -8782,3 +8782,14 @@ img {
   margin-bottom: 5px;
 }
 
+.searchPhoto {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.searchTableData {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
