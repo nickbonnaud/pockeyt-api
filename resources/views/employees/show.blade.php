@@ -171,7 +171,7 @@
 						}
 					}
 				})
-			}
+			},
 
 			submitPassword: function() {
 				var password = this.password;
