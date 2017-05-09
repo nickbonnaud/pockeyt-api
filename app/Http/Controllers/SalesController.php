@@ -43,7 +43,6 @@ class SalesController extends Controller
         ->groupBy('users.id')
         ->get();
     }
-    dd($employees);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
@@ -58,24 +57,14 @@ class SalesController extends Controller
         ->where('profile_id', '=', $profileId);
     })->get();
 
-    if (count($sales) == 0) {
-    	$sales = 0;
+    if ($profile->tip_tracking_enabled && (count($sales) != 0)) {
+    	$employees = DB::table('users')
+        ->leftJoin('transactions', 'users.id', '=', 'employee_id')
+        ->whereBetween('transactions.updated_at', [$fromDate, $currentDate])
+        ->select('users.id', 'first_name', 'last_name', 'photo_path', 'role', 'employer_id', 'on_shift')
+        ->groupBy('users.id')
+        ->get();
     }
-
-    $employees = [];
-    if ($profile->tip_tracking_enabled && $sales != 0) {
-    	$employeeIds = [];
-    	foreach ($sales as $sale) {
-    		if (!in_array($sale->employee_id, $employeeIds)) {
-    			array_push($employeeIds, $sale->employee_id);
-    			array_push($employees, User::findOrFail($sale->employee_id));
-    		}
-    	}
-    }
-    if (count($employees == 0)) {
-  		$employees = 0;
-  	}
-
   	return response()->json(array('sales' => $sales, 'employees' => $employees));
   }
 
