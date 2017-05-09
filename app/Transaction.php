@@ -19,7 +19,8 @@ class Transaction extends Model {
         'tax',
         'tips',
         'net_sales',
-    	'total'
+    	'total',
+        'employeeId'
     ];
 
     public static function boot() {
