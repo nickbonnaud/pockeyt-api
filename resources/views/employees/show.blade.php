@@ -139,7 +139,7 @@
 					},
 					success: function(data) {
 						team.$data.employeesOff.push(data);
-						$('#addEmployeeModal').modal('show');
+						$('#addEmployeeModal').modal('hide');
 					}
 				})
 			},
