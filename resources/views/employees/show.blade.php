@@ -90,7 +90,7 @@
 	        </div>
 	        <button style="margin-top: 10px;" :disabled="queryFirst.length == 0 && queryLast.length == 0 && queryEmail.length == 0" class="btn btn-block btn-primary" v-on:click="searchUsers()">Search</button>
 	      </div>
-	      <div class="box-footer">
+	      <div class="modal-footer">
 			    <table class="table" v-if="searchResult.length != 0 || searchResult != 'User not Found'">
 	        	<tbody>
 	        		<tr v-for="person in searchResult">
