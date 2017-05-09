@@ -271,13 +271,14 @@
                 <div class="box-tools pull-right"><span class="label label-success">@{{ employees.length }} on</span></div>
               </div>
               <div class="box-body no-padding">
-                <ul class="users-list clearfix">
+                <ul v-if="employees.length > 0" class="users-list clearfix">
                   <li v-for="employee in employees" v-on:click="setEmployee(employee.id)">
                     <img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
                     <img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
                     <a class="users-list-name" href="#" v-on:click="toggleShift(employee.id)">@{{ employee.first_name }} @{{ employee.last_name }}</a>
                   </li>
                 </ul>
+                <h4 v-else>You are currently using Tip Tracking. At least one Team Member must be clocked-in. Please clock-in in the Team tab.</h4>
               </div>
             </div>
           </div>
