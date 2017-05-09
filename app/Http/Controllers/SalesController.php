@@ -39,7 +39,7 @@ class SalesController extends Controller
     }
 
     $employees = [];
-    if (($profile->tip_tracking_enabled) && ($salesToday != 0)) {
+    if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
     	$employeeIds = [];
     	foreach ($salesToday as $sale) {
     		if (!in_array($sale->employee_id, $employeeIds)) {
