@@ -52,7 +52,7 @@
                     </div>
                     <div class="box-footer">
                       @if($profile->tip_tracking_enabled)
-                        <a href="#" v-on:click="openEmployeeModal()" class="btn btn-primary btn-block">
+                        <a href="#" v-on:click="openEmployeeModal(user.id)" class="btn btn-primary btn-block">
                           <b>Bill</b>
                         </a>
                       @else
@@ -312,7 +312,8 @@
           inviteCodeGenerated: null,
           query: '',
           selectedUser: {},
-          employees:[]
+          employees:[],
+          customerIdBill: ''
         },
 
         mounted: function() {
@@ -376,7 +377,6 @@
 
           getCustomersInLocation: function() {
             var businessId = '{{ $profile->id }}'
-
             $.ajax({
               method: 'POST',
               url: '/geo/location/users',
@@ -448,8 +448,9 @@
               }
             }
           },
-          openEmployeeModal: function() {
+          openEmployeeModal: function(customerId) {
             var businessId = '{{ $profile->id }}';
+            this.customerIdBill = customerId;
             $.ajax({
               method: 'POST',
               url: '/employees/on',
@@ -457,7 +458,12 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                console.log(data);
+                customer.$data.employees = data;
+                if (data.length == 1) {
+                  return customer.goToTransaction(customerId);
+                } else {
+                  $('#CustomerinfoModal').modal('show');
+                }
               }
             })
           },
