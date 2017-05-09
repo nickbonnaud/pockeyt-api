@@ -45,6 +45,24 @@ class EmployeesController extends Controller
     $user->save();
     return response()->json($user);
   }
+
+  public function search(Request $request) {
+  	if ($request->email) {
+  		$employee = User::where('email', '=', $request->email)->first();
+  	} else {
+  		$firstName = $request->firstName;
+  		$lastName = $request->lastName;
+  		$employee = User::where(function($query) use ($firstName, $lastName) {
+	    	$query->where('first_name', '=', $firstName)
+	      	->where('last_name', '=', $lastName);
+	    })->first();
+  	}
+  	if ($employee) {
+  		return response()->json($employee);
+  	} else {
+  		return response('User not Found');
+  	}
+  }
 }
 
 
