@@ -83,8 +83,12 @@ class ProfilesController extends Controller {
         } else {
             $this->getTaxRate($county, $state, $zip, $profile);
         }
-
         $profile->save();
+        if ($this->user->role == 'manager') {
+            $user = $this->user;
+            $user->employer_id = $profile->id;
+            $user->save();
+        }
 
         $geoLocation = new GeoLocation;
         $geoLocation->identifier = $request->business_name;
