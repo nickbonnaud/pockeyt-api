@@ -39,7 +39,7 @@
 												<li v-for="employee in employeesOn">
 													<img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
-													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
+													<a class="users-list-name" href="#" v-on:click="toggleShift(employee.id)">@{{ employee.first_name }} @{{ employee.last_name }}</a>
 													<button class="btn btn-danger shift-toggle" v-on:click="toggleShift(employee.id)">Clock Out</button>
 												</li>
 											</ul>
@@ -58,7 +58,7 @@
 												<li v-for="employee in employeesOff">
 													<img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
-													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
+													<a class="users-list-name" href="#" v-on:click="toggleShift(employee.id)">@{{ employee.first_name }} @{{ employee.last_name }}</a>
 													<button v-if="unlock != true" class="btn btn-success shift-toggle" v-on:click="toggleShift(employee.id)">Clock In</button>
 													<button v-if="unlock == true" class="btn btn-danger shift-toggle" v-on:click="removeEmployee(employee.id)">Delete</button>
 												</li>
