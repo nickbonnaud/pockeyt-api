@@ -124,7 +124,7 @@
 	        	<span class="input-group-addon"><i class="fa fa-unlock"></i></span>
 	        	<input :v-model="password" name="password" type="password" class="form-control" placeholder="Password">
 	        </div>
-	        <button style="margin-top: 10px;" :disabled="password.length == 0" class="btn btn-block btn-primary" v-on:click="submitPassword()">Submit</button>
+	        <button style="margin-top: 10px;" :disabled="password == ''" class="btn btn-block btn-primary" v-on:click="submitPassword()">Submit</button>
 	      </div>
 	      <div v-if="unlock == 'incorrect Password'" class="modal-footer" style="padding: 0px; text-align: center;">
 	        <h5 class="noResult">Oops! Incorrect Password</h5>
