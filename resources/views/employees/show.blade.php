@@ -34,7 +34,7 @@
 													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
-													<button class="btn btn-danger" v-on:click="toggleShift(employee.id)">Remove</button>
+													<button class="btn btn-danger shift-toggle" v-on:click="toggleShift(employee.id)">Remove</button>
 												</li>
 											</ul>
 										</div>
@@ -53,7 +53,7 @@
 													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
-													<button class="btn btn-success" v-on:click="toggleShift(employee.id)">Add</button>
+													<button class="btn btn-success shift-toggle" v-on:click="toggleShift(employee.id)">Add</button>
 												</li>
 											</ul>
 										</div>

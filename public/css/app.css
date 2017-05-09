@@ -8769,7 +8769,12 @@ img {
   margin-bottom: 80px;
 }
 
-
+.shift-toggle {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
 
 
 
