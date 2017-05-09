@@ -115,8 +115,8 @@
 		el: '#team',
 
 		data: {
-			employeesOn: [],
-			employeesOff: [],
+			employeesOn: {{ $employeesOn }},
+			employeesOff: {{ $employeesOff }},
 			queryEmail: '',
 			queryFirst: '',
 			queryLast: '',
