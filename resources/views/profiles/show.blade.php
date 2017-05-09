@@ -461,15 +461,21 @@
               method: 'POST',
               url: '/employees/on',
               data: {
-                'businessId' : businessId
+                'businessId': businessId,
+                'customerId': customerId
               },
               success: function(data) {
-                customer.$data.employees = data;
-                if (data.length == 1) {
-                  this.selectedEmployeeId = data[0].id;
-                  return customer.goToTransaction(customerId);
+                if (data.employeesOn) {
+                  customer.$data.employees = data.employeesOn;
+                  if (data.employeesOn.length == 1) {
+                    customer.$data.selectedEmployeeId = data[0].id;
+                    return customer.goToTransaction(customerId);
+                  } else {
+                    $('#EmployeeChooseModal').modal('show');
+                  }
                 } else {
-                  $('#EmployeeChooseModal').modal('show');
+                  customer.$data.selectedEmployeeId = data.billOpen.employeeId;
+                  return customer.goToTransaction(customerId);
                 }
               }
             })
@@ -485,7 +491,6 @@
             } else {
               employeeId = 'empty';
             }
-            console.log(employeeId);
             route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
             location.href = route.replace('id', customerId);
             location.href = route.replace('eId', employeeId);

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use DateTimeZone;
 use App\Profile;
 use App\User;
+use App\Transaction;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
@@ -92,11 +93,22 @@ class EmployeesController extends Controller
 
   public function getEmployeesOn(Request $request) {
     $businessId = $request->businessId;
-    $employeesOn = User::where(function($query) use ($businessId) {
-      $query->where('employer_id', '=', $businessId)
-        ->where('on_shift', '=', true);
-    })->get();
-    return response()->json($employeesOn);
+    $customerId = $request->customerId;
+    $billOpen = Transaction::where(function($query) use ($businessId, $customerId) {
+      $query->where('profile_id', '=', $businessId)
+        ->where('user_id', '=', $customerId)
+        ->where('paid', '=', false);
+    })->first();
+    if (!$billOpen) {
+      $employeesOn = User::where(function($query) use ($businessId) {
+        $query->where('employer_id', '=', $businessId)
+          ->where('on_shift', '=', true);
+      })->get();
+      return response()->json(array('employeesOn' => $employeesOn));
+    } else {
+      return response()->json(array('billOpen' => $billOpen));
+    }
+    
   }
 }
 
