@@ -44,6 +44,7 @@ class SalesController extends Controller
     		}
     	}
     }
+    $employees = array('employees' => $employees);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
