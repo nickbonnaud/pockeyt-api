@@ -43,7 +43,7 @@ class SalesController extends Controller
         ->groupBy('users.id')
         ->get();
     }
-    dd($employees);
+    $employees = collect($employees);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
