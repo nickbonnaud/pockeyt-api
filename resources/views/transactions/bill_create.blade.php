@@ -5,7 +5,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1 class="header-button">
-      {{$customer->first_name}} {{$customer->last_name}}'s Bill
+      {{$customer->first_name}} {{$customer->last_name}}'s Bill {{ $employeeId }}
     </h1>
     <button data-toggle="modal" data-target="#customItem" type="button" class="btn btn-primary btn-sm custom-amount-btn">Custom Amount</button>
     <ol class="breadcrumb">
