@@ -39,7 +39,8 @@ class TransactionsController extends Controller
         $this->middleware('jwt.auth', ['only' => ['UserConfirmBill', 'requestBill', 'userDeclineBill', 'customTip', 'getCurrentBill', 'hasBill', 'getRecentTransactions', 'purchaseDeal']]);
     }
 
-    public function showBill($customerId) {
+    public function showBill($customerId, $employeeId) {
+        dd($employeeId);
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();

@@ -260,18 +260,23 @@
       <div class="modal-content">
         <div class="modal-header-timeline">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="EmployeeChooseModal">Team Member</h4>
+          <h4 class="modal-title" id="EmployeeChooseModal">Please choose Team Member</h4>
         </div>
         <div class="modal-body">
-          <div class="box-body">
-            <div v-for="deal in deals">
-              <div v-if="deal.user_id === selectedUser.id">
-                <span class="pull-left">
-                  <h3 class="deal-item">@{{ deal.products }}</h3>
-                </span>
-                <span class="pull-right">
-                  <button v-on:click="RedeemDeal(deal.id)" data-dismiss="modal" class="btn btn-block btn-success pull-right">Redeem!</button>
-                </span>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">On Shift</h3>
+                <div class="box-tools pull-right"><span class="label label-success">@{{ employees.length }} on</span></div>
+              </div>
+              <div class="box-body no-padding">
+                <ul class="users-list clearfix">
+                  <li v-for="employee in employees" v-on:click="setEmployee(employee.id)">
+                    <img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
+                    <img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
+                    <a class="users-list-name" href="#" v-on:click="toggleShift(employee.id)">@{{ employee.first_name }} @{{ employee.last_name }}</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -313,7 +318,8 @@
           query: '',
           selectedUser: {},
           employees:[],
-          customerIdBill: ''
+          customerIdBill: '',
+          selectedEmployeeId: ''
         },
 
         mounted: function() {
@@ -460,16 +466,28 @@
               success: function(data) {
                 customer.$data.employees = data;
                 if (data.length == 1) {
+                  this.selectedEmployeeId = data[0].id;
                   return customer.goToTransaction(customerId);
                 } else {
-                  $('#CustomerinfoModal').modal('show');
+                  $('#EmployeeChooseModal').modal('show');
                 }
               }
             })
           },
+          setEmployee: function(employeeId) {
+            this.selectedEmployeeId = employeeId;
+            $('#EmployeeChooseModal').modal('hide');
+            return this.goToTransaction(this.customerIdBill);
+          },
           goToTransaction: function(customerId) {
-            route = "{{ route('bill.show', ['customerId' => 'id']) }}"
-            location.href = route.replace('id', customerId)
+            if (this.selectedEmployeeId != '') {
+              employeeId = this.selectedEmployeeId;
+            } else {
+              employeeId = 'empty';
+            }
+            route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
+            location.href = route.replace('id', customerId);
+            location.href = route.replace('eId', employeeId);
           },
           deleteInactiveUser: function(customerId, businessId) {
             $.ajax({
