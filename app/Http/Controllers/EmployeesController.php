@@ -60,7 +60,7 @@ class EmployeesController extends Controller
   	if ($employee) {
   		return response()->json($employee);
   	} else {
-  		return response('User not Found');
+  		return response('User not found');
   	}
   }
 }

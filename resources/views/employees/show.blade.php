@@ -77,16 +77,16 @@
 	      <div class="modal-body-customer-info">
 	        <div class="input-group">
 	        	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-	        	<input :disabled="queryFirst.length != 0 || queryLast.length != 0" v-model="queryEmail" name="queryEmail" type="email" class="form-control" placeholder="Email">
+	        	<input :disabled="queryFirst.length != 0 || queryLast.length != 0" v-model="queryEmail" name="queryEmail" type="search" class="form-control" placeholder="Email">
 	        </div>
 	        <p class="input-divider">- OR -</p>
 	        <div class="input-group">
 	        	<span class="input-group-addon"><i class="fa fa-user"></i></span>
-	        	<input :disabled="queryEmail.length != 0" v-model="queryFirst" name="queryFirst" type="text" class="form-control" placeholder="First Name">
+	        	<input :disabled="queryEmail.length != 0" v-model="queryFirst" name="queryFirst" type="search" class="form-control" placeholder="First Name">
 	        </div>
 	        <div class="input-group">
 	        	<span class="input-group-addon"><i class="fa fa-user"></i></span>
-	        	<input :disabled="queryEmail.length != 0" v-model="queryLast" name="queryLast" type="text" class="form-control" placeholder="Last Name">
+	        	<input :disabled="queryEmail.length != 0" v-model="queryLast" name="queryLast" type="search" class="form-control" placeholder="Last Name">
 	        </div>
 	        <button style="margin-top: 10px;" :disabled="queryFirst.length == 0 && queryLast.length == 0 && queryEmail.length == 0" class="btn btn-block btn-primary" v-on:click="searchUsers()">Search</button>
 	        <table class="table" v-if="searchResult.length != 0 || searchResult != 'User not Found'">
@@ -101,6 +101,7 @@
 	        		</tr>
 	        	</tbody>
 	        </table>
+	        <h5 v-if="searchResult != 'User not Found'">User not Found</h5>
 	      </div>
 	    </div>
 	  </div>
@@ -148,7 +149,11 @@
 							'email': this.queryEmail
 						},
 						success: function(data) {
-							console.log(data);
+							if (data == 'User not found') {
+								team.$data.searchResult = data;
+							} else {
+								team.$data.searchResult.push(data);
+							}
 						}
 					})
 				} else {
@@ -160,7 +165,11 @@
 							'lastName': this.queryLast
 						},
 						success: function(data) {
-							console.log(data);
+							if (data == 'User not found') {
+								team.$data.searchResult = data;
+							} else {
+								team.$data.searchResult.push(data);
+							}
 						}
 					})
 				}
