@@ -9,8 +9,8 @@
 			    <h1>
 			      Team
 			    </h1>
-			    <a v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
-		    		<button class="btn pull-right btn-danger">Remove Team Member</button>
+			    <a class="pull-right" v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
+		    		<button class="btn btn-danger">Remove Team Member</button>
 		    	</a>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
 		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
