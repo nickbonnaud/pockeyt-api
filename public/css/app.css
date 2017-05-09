@@ -8571,6 +8571,14 @@ img {
   background-color: #ecf0f5;
 }
 
+.modal-body-employee-picker {
+  position: relative;
+  padding: 15px;
+  padding-top: 35px;
+  background-color: #ecf0f5;
+  overflow-y: auto;
+}
+
 .analytics-bubble {
   font-size: 36px !important;
 }

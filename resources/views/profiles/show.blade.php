@@ -263,7 +263,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="EmployeeChooseModal">Please choose Team Member</h4>
         </div>
-        <div class="modal-body-analytics">
+        <div class="modal-body-employee-picker">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="box box-success">
               <div class="box-header with-border">
@@ -281,7 +281,7 @@
               </div>
               <div v-else class="box-body">
                 <h4>You are currently using Tip Tracking.At least one Team Member must be clocked-in.</h4>
-                <h5>Please clock-in in the Team tab.</h5>
+                <h4>Please clock-in in the Team tab.</h4>
                 <a href="{{ route('employees.show') }}">
                   <button class="btn btn-primary pull-right">Go to Team</button>
                 </a>
