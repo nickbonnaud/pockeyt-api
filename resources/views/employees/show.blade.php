@@ -9,7 +9,7 @@
 			    <h1>
 			      Team
 			    </h1>
-		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal">
+		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
 		    		<button class="btn pull-left btn-primary">New Team Member</button>
 		    	</a>
 			    <ol class="breadcrumb">
