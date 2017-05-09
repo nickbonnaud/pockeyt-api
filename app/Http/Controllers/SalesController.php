@@ -10,6 +10,7 @@ use DateTimeZone;
 use App\Profile;
 use App\User;
 use App\Transaction;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class SalesController extends Controller
@@ -34,17 +35,13 @@ class SalesController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->get();
 
-    $employees = [];
     if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
-    	$employeeIds = [];
-    	foreach ($salesToday as $sale) {
-    		if (!in_array($sale->employee_id, $employeeIds)) {
-    			array_push($employeeIds, $sale->employee_id);
-    			array_push($employees, User::findOrFail($sale->employee_id));
-    		}
-    	}
+    	$employees = DB::table('users')
+        ->leftJoin('transactions', 'users.id', '=', 'employee_id')
+        ->whereBetween('updated_at', [$fromDate, $currentDate])
+        ->get();
     }
-    $employees = array('employees' => $employees);
+    dd($employees);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
