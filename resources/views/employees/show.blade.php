@@ -184,6 +184,7 @@
 								if (employeesOff[i].id == user.id) {
 									employeesOn.push(user);
 									employeesOff.splice(i, 1);
+									break;
 								}
 							}
 						} else {
@@ -191,6 +192,7 @@
 								if (employeesOn[i].id == user.id) {
 									employeesOff.push(user);
 									employeesOn.splice(i, 1);
+									break;
 								}
 							}
 						}
