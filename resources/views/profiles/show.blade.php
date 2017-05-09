@@ -47,7 +47,8 @@
                     </a>
                     <div class="box-body">
                       <a v-on:click="getCustomerData(user)"  href="#">
-                        <img :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                        <img v-if="user.photo_path" :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
+                        <img v-else src="{{ asset('/images/icon-profile-photo.png') }}" class="profile-user-img img-responsive img-circle">
                       </a>
                     </div>
                     <div class="box-footer">
