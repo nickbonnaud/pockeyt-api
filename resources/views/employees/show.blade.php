@@ -89,7 +89,9 @@
 	        	<input :disabled="queryEmail.length != 0" v-model="queryLast" name="queryLast" type="search" class="form-control" placeholder="Last Name">
 	        </div>
 	        <button style="margin-top: 10px;" :disabled="queryFirst.length == 0 && queryLast.length == 0 && queryEmail.length == 0" class="btn btn-block btn-primary" v-on:click="searchUsers()">Search</button>
-	        <table class="table" v-if="searchResult.length != 0 || searchResult != 'User not Found'">
+	      </div>
+	      <div class="box-footer">
+			    <table class="table" v-if="searchResult.length != 0 || searchResult != 'User not Found'">
 	        	<tbody>
 	        		<tr v-for="person in searchResult">
 	        			<td v-if="person.photo_path"><img :src="person.photo_path" alt="User Photo"></td>
@@ -102,7 +104,7 @@
 	        	</tbody>
 	        </table>
 	        <h5 v-if="searchResult == 'User not found'">User not Found</h5>
-	      </div>
+			</div>
 	    </div>
 	  </div>
 	</div>
