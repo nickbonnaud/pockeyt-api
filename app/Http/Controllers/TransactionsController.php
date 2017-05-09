@@ -69,7 +69,6 @@ class TransactionsController extends Controller
     }
 
     public function store(TransactionRequest $request) {
-        dd($request->all());
         if ($request->employeeId == 'empty') {
             $request->employeeId = null;
         }
