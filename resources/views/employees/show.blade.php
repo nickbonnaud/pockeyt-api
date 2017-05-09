@@ -10,7 +10,7 @@
 			      Team
 			    </h1>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
-		    		<button v-on:click="this.searchResult = ''" class="btn pull-left btn-primary">New Team Member</button>
+		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
 		    	</a>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -141,6 +141,7 @@
 			},
 
 			searchUsers: function() {
+				this.searchResult = [];
 				if (this.queryEmail.length != 0) {
 					$.ajax({
 						method: 'POST',
