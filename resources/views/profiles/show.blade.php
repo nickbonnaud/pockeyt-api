@@ -486,6 +486,7 @@
             return this.goToTransaction(this.customerIdBill);
           },
           goToTransaction: function(customerId) {
+            console.log(customerId);
             if (this.selectedEmployeeId != '') {
               employeeId = this.selectedEmployeeId;
             } else {
