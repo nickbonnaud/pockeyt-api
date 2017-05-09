@@ -39,6 +39,8 @@ class SalesController extends Controller
     	$employees = DB::table('users')
         ->leftJoin('transactions', 'users.id', '=', 'employee_id')
         ->whereBetween('transactions.updated_at', [$fromDate, $currentDate])
+        ->select('id', 'first_name', 'last_name', 'photo_path', 'role', 'employer_id', 'on_shift')
+        ->groupBy('id')
         ->get();
     }
     dd($employees);
