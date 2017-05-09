@@ -36,7 +36,6 @@ class EmployeesController extends Controller
     	$employeesOn = 0;
     	$employeesOff = 0;
     }
-    dd($employeesOff);
     return view('employees.show', compact('employeesOn', 'employeesOff'));
   }
 

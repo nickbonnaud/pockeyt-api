@@ -116,7 +116,7 @@
 
 		data: {
 			employeesOn: {!! $employeesOn !!},
-			employeesOff: {!! $employeesOff !!},
+			employeesOff: [],
 			queryEmail: '',
 			queryFirst: '',
 			queryLast: '',
