@@ -176,7 +176,24 @@
 						'employeeId': employeeId
 					},
 					success: function(data) {
-						console.log(data.email);
+						var user = data;
+						var employeesOff = team.$data.employeesOff;
+						var employeesOn = team.$data.employeesOn;
+						if (user.on_shift) {
+							for (i = employeesOff.length -1; 1 >= 0; i --) {
+								if (employeesOff[i].id == user.id) {
+									employeesOff.splice(i, 1);
+								}
+							}
+							employeesOn.push(user);
+						} else {
+							for (i = employeesOn.length -1; 1 >= 0; i --) {
+								if (employeesOn[i].id == user.id) {
+									employeesOn.splice(i, 1);
+								}
+							}
+							employeesOff.push(user);
+						}
 					}
 				})
 			}
