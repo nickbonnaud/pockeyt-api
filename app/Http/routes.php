@@ -68,7 +68,7 @@ Route::post('accounts/status', 'AccountsController@postStatus');
 Route::resource('accounts', 'AccountsController');
 
 // Transaction Routes
-Route::get('bill/{customerId}', 'TransactionsController@showBill')->name('bill.show');
+Route::get('bill/{customerId}/{employeeId}', 'TransactionsController@showBill')->name('bill.show');
 Route::post('bill', 'TransactionsController@store')->name('bill.store');
 Route::patch('bill/{transactionId}', 'TransactionsController@update')->name('bill.update');
 Route::post('bill/charge', 'TransactionsController@charge')->name('bill.charge');
