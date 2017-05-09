@@ -166,6 +166,7 @@
 					},
 					success: function(data) {
 						var user = data;
+						var employeesOff = team.$data.employeesOff;
 						for (i = employeesOff.length -1; 1 >= 0; i --) {
 							if (employeesOff[i].id == user.id) {
 								employeesOff.splice(i, 1);
