@@ -468,7 +468,7 @@
                 if (data.employeesOn) {
                   customer.$data.employees = data.employeesOn;
                   if (data.employeesOn.length == 1) {
-                    customer.$data.selectedEmployeeId = data[0].id;
+                    customer.$data.selectedEmployeeId = data.employeesOn[0].id;
                     return customer.goToTransaction(customerId);
                   } else {
                     $('#EmployeeChooseModal').modal('show');
