@@ -38,7 +38,7 @@ class SalesController extends Controller
     if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
     	$employees = DB::table('users')
         ->leftJoin('transactions', 'users.id', '=', 'employee_id')
-        ->whereBetween('updated_at', [$fromDate, $currentDate])
+        ->whereBetween('transactions.updated_at', [$fromDate, $currentDate])
         ->get();
     }
     dd($employees);
