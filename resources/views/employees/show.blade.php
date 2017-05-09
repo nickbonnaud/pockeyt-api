@@ -96,8 +96,7 @@
 	        		<tr v-for="person in searchResult">
 	        			<td v-if="person.photo_path"><img class="searchPhoto" :src="person.photo_path" alt="User Photo"></td>
 	        			<td v-else><img class="searchPhoto" src="{{ asset('/images/icon-profile-photo.png') }}"></td>
-	        			<td class="searchTableData">@{{ person.first_name }}</td>
-	        			<td class="searchTableData">@{{ person.last_name }}</td>
+	        			<td class="searchTableData">@{{ person.first_name }} @{{ person.last_name }}</td>
 	        			<td class="searchTableData">@{{ person.email }}</td>
 	        			<td><button class="btn btn-success" v-on:click="addUser(person.id)">Add</button></td>
 	        		</tr>
