@@ -22,7 +22,7 @@
 						<div class="scroll-contents">
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-									<div class="box-success">
+									<div class="box box-success">
 										<div class="box-header with-border">
 											<h3 class="box-title">On Shift</h3>
 											<div v-if="employeesOn != 0" class="box-tools pull-right"><span class="label label-success">@{{ employeesOn.length }} on shift</span></div>
@@ -41,10 +41,10 @@
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-									<div class="box-warning">
+									<div class="box box-warning">
 										<div class="box-header with-border">
 											<h3 class="box-title">Off Shift</h3>
-											<div v-if="employeesOff != 0" class="box-tools pull-right"><span class="label label-warning">@{{ employeesOff.length }} on shift</span></div>
+											<div v-if="employeesOff != 0" class="box-tools pull-right"><span class="label label-warning">@{{ employeesOff.length }} off shift</span></div>
 											<div v-else class="box-tools pull-right"><span class="label label-warning">0 off shift</span></div>
 										</div>
 										<div class="box-body no-padding">
@@ -53,7 +53,7 @@
 													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
-													<button class="btn btn-danger" v-on:click="toggleShift(employee.id)">Put on</button>
+													<button class="btn btn-success" v-on:click="toggleShift(employee.id)">Put on</button>
 												</li>
 											</ul>
 										</div>
