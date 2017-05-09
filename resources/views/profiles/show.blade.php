@@ -485,6 +485,7 @@
             } else {
               employeeId = 'empty';
             }
+            console.log(employeeId);
             route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
             location.href = route.replace('id', customerId);
             location.href = route.replace('eId', employeeId);
