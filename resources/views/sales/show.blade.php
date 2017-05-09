@@ -72,7 +72,7 @@
 									</div>
 								</div>
 							</div>
-							@if(!$user->profile->tip_tracking_enabled)
+							@if($user->profile->tip_tracking_enabled)
 								<div class="row">
 									<div v-if="employees.length > 0">
 										<h2 class="page-header">Employee Sales Breakdown</h2>
