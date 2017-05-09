@@ -169,42 +169,6 @@
 		},
 
 		computed: {
-			employeeSales: function(employeeId) {
-				var transactions = this.transactions;
-				if (transactions == 0) { return 0}
-				var total = 0;
-				transactions.forEach(function(transaction) {
-					if (transaction.employee_id == employeeId) {
-						total = total + transaction.net_sales + transaction.tax;
-					}
-				});
-				return (total / 100).toFixed(2);
-			},
-
-			employeeTips: function(employeeId) {
-				var transactions = this.transactions;
-				if (transactions == 0) { return 0}
-				var totalTips = 0;
-				transactions.forEach(function(transaction) {
-					if (transaction.employee_id == employeeId) {
-						totalTips = totalTips + transaction.tips;
-					}
-				});
-				return (totalTips / 100).toFixed(2);
-			},
-
-			employeeTotal: function(employeeId) {
-				var transactions = this.transactions;
-				if (transactions == 0) { return 0}
-				var total = 0;
-				transactions.forEach(function(transaction) {
-					if (transaction.employee_id == employeeId) {
-						total = total + transaction.total;
-					}
-				});
-				return (total / 100).toFixed(2);
-			},
-
 			netSales: function() {
 				var transactions = this.transactions;
 				if (transactions == 0) { return 0}
@@ -251,6 +215,41 @@
 		},
 
 		methods: {
+			employeeSales: function(employeeId) {
+				var transactions = this.transactions;
+				if (transactions == 0) { return 0}
+				var total = 0;
+				transactions.forEach(function(transaction) {
+					if (transaction.employee_id == employeeId) {
+						total = total + transaction.net_sales + transaction.tax;
+					}
+				});
+				return (total / 100).toFixed(2);
+			},
+
+			employeeTips: function(employeeId) {
+				var transactions = this.transactions;
+				if (transactions == 0) { return 0}
+				var totalTips = 0;
+				transactions.forEach(function(transaction) {
+					if (transaction.employee_id == employeeId) {
+						totalTips = totalTips + transaction.tips;
+					}
+				});
+				return (totalTips / 100).toFixed(2);
+			},
+
+			employeeTotal: function(employeeId) {
+				var transactions = this.transactions;
+				if (transactions == 0) { return 0}
+				var total = 0;
+				transactions.forEach(function(transaction) {
+					if (transaction.employee_id == employeeId) {
+						total = total + transaction.total;
+					}
+				});
+				return (total / 100).toFixed(2);
+			},
 			modalNetSales: function() {
 				this.modalPick = "Net Sales";
 				this.modalPickData = this.netSales;
