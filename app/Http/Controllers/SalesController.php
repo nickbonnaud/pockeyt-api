@@ -34,10 +34,6 @@ class SalesController extends Controller
         ->where('profile_id', '=', $profile->id);
     })->get();
 
-    if (count($salesToday) == 0) {
-    	$salesToday = 0;
-    }
-
     $employees = [];
     if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
     	$employeeIds = [];
@@ -48,9 +44,6 @@ class SalesController extends Controller
     		}
     	}
     }
-    if (count($employees) == 0) {
-  		$employees = 0;
-  	}
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
