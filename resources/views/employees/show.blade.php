@@ -9,8 +9,11 @@
 			    <h1>
 			      Team
 			    </h1>
-			    <a class="pull-right" v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
+			    <a v-if="unlock != true" class="pull-right" v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
 		    		<button class="btn btn-danger">Remove Team Member</button>
+		    	</a>
+		    	<a v-if="unlock == true" class="pull-right" href="#" style="display: inline-block;" v-on:click="unlock = false">
+		    		<button class="btn btn-success">Finish</button>
 		    	</a>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
 		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
@@ -34,8 +37,8 @@
 										<div class="box-body no-padding">
 											<ul class="users-list clearfix">
 												<li v-for="employee in employeesOn">
-													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
-													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
+													<img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
+													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
 													<button class="btn btn-danger shift-toggle" v-on:click="toggleShift(employee.id)">Remove</button>
 												</li>
@@ -53,11 +56,11 @@
 										<div class="box-body no-padding">
 											<ul class="users-list clearfix">
 												<li v-for="employee in employeesOff">
-													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
-													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
+													<img v-if="employee.photo_path" :src="employee.photo_path" style="max-height: 75px;" alt="Employee Image">
+													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" style="max-height: 75px;" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
 													<button v-if="unlock != true" class="btn btn-success shift-toggle" v-on:click="toggleShift(employee.id)">Add</button>
-													<button v-if="unlock == true" class="btn btn-danger shift-toggle" v-on:click="removeEmployee(employee.id)">Add</button>
+													<button v-if="unlock == true" class="btn btn-danger shift-toggle" v-on:click="removeEmployee(employee.id)">Delete</button>
 												</li>
 											</ul>
 										</div>
