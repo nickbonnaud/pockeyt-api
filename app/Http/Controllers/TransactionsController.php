@@ -69,6 +69,9 @@ class TransactionsController extends Controller
     }
 
     public function store(TransactionRequest $request) {
+        if ($request->employeeId == 'empty') {
+            $request->employeeId = null;
+        }
         $transaction = new Transaction($request->all());
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
@@ -85,6 +88,9 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
+         if ($request->employeeId == 'empty') {
+            $request->employeeId = null;
+        }
         $transaction = new Transaction($request->all());
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;
