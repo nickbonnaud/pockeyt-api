@@ -63,6 +63,15 @@ class EmployeesController extends Controller
   		return response('User not found');
   	}
   }
+
+  public function employeeAdd(Request $request) {
+  	$user = User::findOrFail($request->userId);
+  	$user->role = 'employee';
+  	$user->employer_id = $request->businessId;
+  	$user->save();
+
+  	return response()->json($user);
+  }
 }
 
 

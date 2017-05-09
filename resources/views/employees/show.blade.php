@@ -102,7 +102,7 @@
 	        		</tr>
 	        	</tbody>
 	        </table>
-	        <h5 v-if="searchResult == 'User not found'">User not Found</h5>
+	        <h5 v-if="searchResult == 'User not found'" class="noResult">User not found</h5>
 			</div>
 	    </div>
 	  </div>
@@ -129,14 +129,16 @@
 
 		methods: {
 			addUser: function(userId) {
+				var businessId = '{{ $user->profile->id }}';
 				$.ajax({
 					method: 'POST',
 					url: '/employees/add',
 					data: {
+						'businessId': businessId,
 						'userId': userId
 					},
 					success: function(data) {
-						console.log(data);
+						team.$data.employeesOff.push(data);
 					}
 				})
 			},

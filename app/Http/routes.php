@@ -175,7 +175,7 @@ Route::post('sales/date', 'SalesController@customDate');
 // Employee Routes
 Route::get('employees/show', 'EmployeesController@show')->name('employees.show');
 Route::post('employees/toggle', 'EmployeesController@toggleShift');
-Route:post('employees/search', 'EmployeesController@search');
+Route::post('employees/search', 'EmployeesController@search');
 Route::post('employees/add', 'EmployeesController@employeeAdd');
 
 //Quickbook Routes
