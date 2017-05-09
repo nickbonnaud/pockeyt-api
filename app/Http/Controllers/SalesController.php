@@ -42,8 +42,8 @@ class SalesController extends Controller
         ->select('users.id', 'first_name', 'last_name', 'photo_path', 'role', 'employer_id', 'on_shift')
         ->groupBy('users.id')
         ->get();
+      $employees = collect($employees);
     }
-    $employees = collect($employees);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
