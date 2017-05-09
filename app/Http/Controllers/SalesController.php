@@ -43,9 +43,8 @@ class SalesController extends Controller
         ->groupBy('users.id')
         ->get();
       $employees = collect($employees);
-    }
-    if (!$employees) {
-      $employees = [];
+    } else {
+      $employees = collect();
     }
     return view('sales.show', compact('salesToday', 'employees'));
   }
