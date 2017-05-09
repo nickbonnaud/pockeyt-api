@@ -20,22 +20,15 @@ class EmployeesController extends Controller
 
 	
   public function show() {
-    $employees = User::where('employer_id', '=', $this->user->profile->id)->get();
-
-    if (count($employees) != 0) {
-    	$employeesOn = [];
-    	$employeesOff = [];
-	    foreach ($employees as $employee) {
-	    	if ($employee->on_shift) {
-	    		array_push($employeesOn, $employee);
-	    	} else {
-	    		array_push($employeesOff, $employee);
-	    	}
-	    }
-    } else {
-    	$employeesOn = 0;
-    	$employeesOff = 0;
-    }
+  	$user = $this->user;
+    $employeesOn = User::where(function($query) use ($user) {
+    	$query->where('employer_id', '=', $user->profile->id)
+      	->where('on_shift', '=', true);
+    })->get();
+    $employeesOff = User::where(function($query) use ($user) {
+    	$query->where('employer_id', '=', $user->profile->id)
+      	->where('on_shift', '=', false);
+    })->get();
     return view('employees.show', compact('employeesOn', 'employeesOff'));
   }
 
