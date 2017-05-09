@@ -10,7 +10,7 @@
 			      Team
 			    </h1>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal">
-		    		<button class="btn pull-right btn-primary">New Team Member</button>
+		    		<button class="btn pull-left btn-primary">New Team Member</button>
 		    	</a>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
