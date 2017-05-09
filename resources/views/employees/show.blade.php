@@ -101,7 +101,7 @@
 	        		</tr>
 	        	</tbody>
 	        </table>
-	        <h5 v-if="searchResult = 'User not Found'">User not Found</h5>
+	        <h5 v-if="searchResult == 'User not found'">User not Found</h5>
 	      </div>
 	    </div>
 	  </div>
