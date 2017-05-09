@@ -72,7 +72,7 @@
 	      <div class="modal-header-timeline">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="addProductModal">Add Team Member*</h4>
-	        <p style="margin: 0px; color: #777777;">For security purposes, new Team Members must first have an account on the Pockeyt mobile app.</p>
+	        <p style="margin: 0px; color: #777777; font-size: 12px;">For security purposes, new Team Members must first have an account on the Pockeyt mobile app.</p>
 	      </div>
 	      <div class="modal-body-customer-info">
 	        <div class="input-group">
@@ -176,7 +176,7 @@
 						'employeeId': employeeId
 					},
 					success: function(data) {
-						console.log(data);
+						console.log(data.email);
 					}
 				})
 			}
