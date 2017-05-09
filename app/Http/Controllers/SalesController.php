@@ -44,7 +44,7 @@ class SalesController extends Controller
         ->get();
     }
     $employees = collect($employees);
-    dd($employees);
+    dd($salesToday);
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
