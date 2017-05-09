@@ -491,7 +491,9 @@
             } else {
               employeeId = 'empty';
             }
-            window.location.replace("{{ url('/') }}/bill?customerId=" + customerId + "&employeeId=" + employeeId)
+            route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
+            route = route.replace('id', customerId);
+            location.href = route.replace('eId', employeeId);
           },
           deleteInactiveUser: function(customerId, businessId) {
             $.ajax({
