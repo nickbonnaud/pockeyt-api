@@ -486,15 +486,14 @@
             return this.goToTransaction(this.customerIdBill);
           },
           goToTransaction: function(customerId) {
-            console.log(customerId);
             if (this.selectedEmployeeId != '') {
               employeeId = this.selectedEmployeeId;
             } else {
               employeeId = 'empty';
             }
             route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
-            location.href = route.replace('id', customerId);
             location.href = route.replace('eId', employeeId);
+            location.href = route.replace('id', customerId);
           },
           deleteInactiveUser: function(customerId, businessId) {
             $.ajax({
