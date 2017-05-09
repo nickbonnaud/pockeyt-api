@@ -179,6 +179,7 @@ Route::post('employees/search', 'EmployeesController@search');
 Route::post('employees/add', 'EmployeesController@employeeAdd');
 Route::post('employees/remove/password', 'EmployeesController@authorizeRemove');
 Route::post('employees/remove', 'EmployeesController@employeeRemove');
+Route::post('employees/on', 'EmployeesController@getEmployeesOn');
 
 //Quickbook Routes
 Route::get('qbo/openid', 'QuickBookController@qboOpenId');

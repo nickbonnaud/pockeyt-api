@@ -89,6 +89,15 @@ class EmployeesController extends Controller
   	$employee->save();
   	return response()->json($employee);
   }
+
+  public function getEmployeesOn(Request $request) {
+    $businessId = $request->businessId;
+    $employeesOn = User::where(function($query) use ($businessId) {
+      $query->where('employer_id', '=', $businessId)
+        ->where('on_shift', '=', true);
+    })->get();
+    return response()->json($employeesOn);
+  }
 }
 
 
