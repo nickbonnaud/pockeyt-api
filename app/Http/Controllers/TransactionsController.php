@@ -40,7 +40,6 @@ class TransactionsController extends Controller
     }
 
     public function showBill($customerId, $employeeId) {
-        dd($customerId);
         $customer = User::findOrFail($customerId);
         $business = $this->user->profile;
         $inventory = Product::where('profile_id', '=', $business->id)->get();
@@ -53,9 +52,9 @@ class TransactionsController extends Controller
         if(isset($transaction) && isset($locationCheck)) {
             $bill = $transaction->products;
             $billId = $transaction->id;
-            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId', 'employeeId'));
+            return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
         } elseif(isset($locationCheck)) {
-            return view('transactions.bill_create', compact('customer', 'business', 'inventory'));
+            return view('transactions.bill_create', compact('customer', 'business', 'inventory', 'employeeId'));
         } else {
             flash()->error('Oops', 'Customer not in business radius!');
             return redirect()->route('profiles.show', ['profiles' => $business->id]);
