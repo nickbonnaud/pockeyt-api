@@ -177,6 +177,8 @@ Route::get('employees/show', 'EmployeesController@show')->name('employees.show')
 Route::post('employees/toggle', 'EmployeesController@toggleShift');
 Route::post('employees/search', 'EmployeesController@search');
 Route::post('employees/add', 'EmployeesController@employeeAdd');
+Route::post('employees/remove/password', 'EmployeesController@authorizeRemove');
+Route::post('employees/remove', 'EmployeesController@employeeRemove');
 
 //Quickbook Routes
 Route::get('qbo/openid', 'QuickBookController@qboOpenId');

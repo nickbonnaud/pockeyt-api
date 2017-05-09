@@ -18,7 +18,6 @@ class EmployeesController extends Controller
     parent::__construct();
  	}
 
-	
   public function show() {
   	$user = $this->user;
     $employeesOn = User::where(function($query) use ($user) {
@@ -71,6 +70,23 @@ class EmployeesController extends Controller
   	$user->save();
 
   	return response()->json($user);
+  }
+
+  public function authorizeRemove(Request $request) {
+  	$password = $request->password;
+  	$user = User::findOrFail($request->userId);
+  	if (Hash::check($password, $user->getAuthPassword())) {
+  		return response('unlock');
+  	} else {
+  		return response('Incorrect Password');
+  	}
+  }
+
+  public function employeeRemove(Request $request) {
+  	$employee = User::findOrFail($request->employeeId);
+  	$employee->employer_id = null;
+  	$employee->save();
+  	return response()->json($employee);
   }
 }
 

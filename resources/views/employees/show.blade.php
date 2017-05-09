@@ -9,6 +9,9 @@
 			    <h1>
 			      Team
 			    </h1>
+			    <a v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
+		    		<button class="btn pull-right btn-danger">Remove Team Member</button>
+		    	</a>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
 		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
 		    	</a>
@@ -53,7 +56,8 @@
 													<img v-if="employee.photo_path" :src="employee.photo_path" alt="Employee Image">
 													<img v-else src="{{ asset('/images/icon-profile-photo.png') }}" alt="User Image">
 													<a class="users-list-name" href="#" v-on:click="toggleShift()">@{{ employee.first_name }} @{{ employee.last_name }}</a>
-													<button class="btn btn-success shift-toggle" v-on:click="toggleShift(employee.id)">Add</button>
+													<button v-if="unlock != true" class="btn btn-success shift-toggle" v-on:click="toggleShift(employee.id)">Add</button>
+													<button v-if="unlock == true" class="btn btn-danger shift-toggle" v-on:click="removeEmployee(employee.id)">Add</button>
 												</li>
 											</ul>
 										</div>
@@ -103,7 +107,28 @@
 	        	</tbody>
 	        </table>
 	        <h5 v-if="searchResult == 'User not found'" class="noResult">User not found</h5>
-			</div>
+				</div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="removeEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-timeline">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="addProductModal">Please Enter Manager Password*</h4>
+	        <p style="margin: 0px; color: #777777; font-size: 12px;">Only managers can remove Team Members</p>
+	      </div>
+	      <div class="modal-body-customer-info">
+	        <div class="input-group">
+	        	<span class="input-group-addon"><i class="fa fa-unlock"></i></span>
+	        	<input :v-model="password" name="password" type="password" class="form-control" placeholder="Password">
+	        </div>
+	        <button style="margin-top: 10px;" :disabled="password.length == 0" class="btn btn-block btn-primary" v-on:click="submitPassword()">Submit</button>
+	      </div>
+	      <div v-if="unlock == 'incorrect Password'" class="modal-footer" style="padding: 0px; text-align: center;">
+	        <h5 class="noResult">Oops! Incorrect Password</h5>
+				</div>
 	    </div>
 	  </div>
 	</div>
@@ -124,10 +149,51 @@
 			queryFirst: '',
 			queryLast: '',
 			searchResult: [],
-
+			password: '',
+			unlock: false
 		},
 
 		methods: {
+			removeEmployee: function(employeeId) {
+				$.ajax({
+					method: 'POST',
+					url: '/employees/remove',
+					data: {
+						'employeeId': employeeId
+					},
+					success: function(data) {
+						var user = data;
+						for (i = employeesOff.length -1; 1 >= 0; i --) {
+							if (employeesOff[i].id == user.id) {
+								employeesOff.splice(i, 1);
+								break;
+							}
+						}
+					}
+				})
+			}
+
+			submitPassword: function() {
+				var password = this.password;
+				var userId = '{{ $user->id }}';
+				$.ajax({
+					method: 'POST',
+					url: '/employees/remove/password',
+					data: {
+						'userId': userId,
+						'password': password
+					},
+					success: function(data) {
+						if (data = 'unlock') {
+							team.$data.unlock = true;
+							$('#removeEmployeeModal').modal('hide');
+						} else {
+							team.$data.unlock = 'incorrect Password';
+						}
+					}
+				})
+			},
+
 			addUser: function(userId) {
 				var businessId = '{{ $user->profile->id }}';
 				$.ajax({
