@@ -159,8 +159,8 @@
 		el: '#sales',
 
 		data: {
-			transactions: {{ $salesToday }},
-			employees: {{ $employees }},
+			transactions: {!! $salesToday !!},
+			employees: {!! $employees !!},
 			fromDate: "today",
 			toDate: "",
 			modalPick: "",
