@@ -44,6 +44,9 @@ class SalesController extends Controller
         ->get();
       $employees = collect($employees);
     }
+    if (!$employees) {
+      $employees = [];
+    }
     return view('sales.show', compact('salesToday', 'employees'));
   }
 
