@@ -160,7 +160,7 @@
 
 		data: {
 			transactions: {!! $salesToday !!},
-			employees: [],
+			employees: {!! $employees !!},
 			fromDate: "today",
 			toDate: "",
 			modalPick: "",
