@@ -30,44 +30,6 @@ class QuickBookController extends Controller
     parent::__construct();
   }
 
-  public function qboOpenId(Request $request) {
-    $openid = new \LightOpenID('https://pockeyt-test.com');
-    if (!$openid->mode) {
-      $openid->identity = "https://openid.intuit.com/Identity-me";
-      $openid->required = array('contact/email', 'namePerson');
-      $openid->optional = array('namePerson/first', 'namePerson/last');
-      header('Location: ' . $openid->authUrl());
-    } else {
-      $userData = $openid->getAttributes();
-      $user = User::where('email', '=', $userData['contact/email'])->first();
-      if ($user) {
-        if (!$user->profile->connected_qb) {
-          # code...
-        }
-      } else {
-        $user = new User;
-        $user->email = $userData['contact/email'];
-        if ($user['namePerson/first']) {
-          $user->first_name = $userData['namePerson/first'];
-        } else {
-          $user->first_name = $userData['namePerson'];
-        }
-        if ($user['namePerson/last']) {
-          $user->last_name = $userData['namePerson/last'];
-        } else {
-          $user->last_name = "Please set";
-        }
-
-        $user->save();
-        $profile = $user->publish(new Profile);
-        $account = new Account;
-        $profile->account()->save();
-        dd("ok");
-      }
-    }
-  }
-
-
   public function qboTax() {
     return view('qbo.tax');
   }
@@ -139,6 +101,10 @@ class QuickBookController extends Controller
     $account = $this->user->profile->account;
     $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
     return view('accounts.edit', compact('account'));
+  }
+
+  public function qboDisconnectPublic() {
+    return view('app.qbDisconnect');
   }
 
   public function setPockeytId() {

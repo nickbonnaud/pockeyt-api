@@ -182,12 +182,11 @@ Route::post('employees/remove', 'EmployeesController@employeeRemove');
 Route::post('employees/on', 'EmployeesController@getEmployeesOn');
 
 //Quickbook Routes
-Route::get('qbo/openid', 'QuickBookController@qboOpenId');
-Route::post('qbo/openid', 'QuickBookController@qboOpenId');
 Route::get('qbo/oauth','QuickBookController@qboOauth');
 Route::get('qbo/success','QuickBookController@qboSuccess');
 Route::get('qbo/tax', 'QuickBookController@qboTax')->name('qbo.tax');
-Route::get('qbo/disconnect','QuickBookController@qboDisconnect');
+Route::get('qbo/disconnect', 'QuickBookController@qboDisconnect');
+Route::get('qbo/disconnect/public', 'QuickBookController@qboDisconnectPublic');
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
 
 //Invites Routes
