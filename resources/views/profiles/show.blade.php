@@ -527,6 +527,7 @@
                 'businessId' : businessId
               },
               success: function(data) {
+                console.log(user);
                 var dataStorage = customer.$data;
                 dataStorage.selectedUser = user;
                 dataStorage.purchases = data.purchases;
