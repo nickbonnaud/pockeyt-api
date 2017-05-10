@@ -88,7 +88,8 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
-         if ($request->employeeId == 'empty') {
+        dd($request->employeeId);
+        if ($request->employeeId == 'empty') {
             $request->employeeId = null;
         }
         $transaction = new Transaction($request->all());
