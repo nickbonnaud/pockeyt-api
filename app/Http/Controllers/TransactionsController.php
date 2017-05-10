@@ -70,7 +70,9 @@ class TransactionsController extends Controller
 
     public function store(TransactionRequest $request) {
         $transaction = new Transaction($request->all());
-        $transaction->employee_id = null;
+        if ($transaction->employee_id) {
+            $transaction->employee_id = null;
+        }
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
 
@@ -87,6 +89,9 @@ class TransactionsController extends Controller
 
     public function charge(ChargeRequest $request) {
         $transaction = new Transaction($request->all());
+        if ($transaction->employee_id) {
+            $transaction->employee_id = null;
+        }
         $customer = User::findOrFail($transaction->user_id);
         $profile = $this->user->profile;
         $transaction->paid = false;
