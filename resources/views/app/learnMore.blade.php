@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-	<div class="learn_top">
+	<div class="learn-top">
 		<h3>Automatically Sync your Pockeyt transactions with QuickBooks</h3>
 		<p>Keep your QuickBooks account current and up-to-date with Pockeyt Sync</p>
 	</div>
