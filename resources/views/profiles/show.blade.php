@@ -46,7 +46,7 @@
                       <h3 class="box-title">@{{user.first_name}} @{{user.last_name}}</h3>
                     </a>
                     <div class="box-body">
-                      <a v-on:click="getCustomerData(user)"  href="#">
+                      <a v-on:click="getCustomerData(user)" href="#">
                         <img v-if="user.photo_path" :src="user.photo_path" class="profile-user-img img-responsive img-circle" alt="User Image">
                         <img v-else src="{{ asset('/images/icon-profile-photo.png') }}" class="profile-user-img img-responsive img-circle">
                       </a>
@@ -62,7 +62,7 @@
                         </a>
                       @endif
                       <div v-if="checkForDeal(user.id)">
-                        <a href="#" data-toggle="modal" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
+                        <a href="#" data-toggle="modal" v-on:click="selectedUser = user" data-target="#redeemDealModal" class="btn btn-success btn-block btn-redeem">
                           <b>Redeem Deal</b>
                         </a>
                       </div>
