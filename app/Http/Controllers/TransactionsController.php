@@ -76,7 +76,7 @@ class TransactionsController extends Controller
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
 
-        return view('profiles.show', compact('profile'));
+        return redirect('profiles.show', compact('profile'));
     }
 
     public function update(UpdateTransactionRequest $request, $id) {
