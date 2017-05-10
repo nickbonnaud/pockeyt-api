@@ -70,6 +70,7 @@ class TransactionsController extends Controller
 
     public function store(TransactionRequest $request) {
         $transaction = new Transaction($request->all());
+        $transaction->employee_id = null;
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
 
