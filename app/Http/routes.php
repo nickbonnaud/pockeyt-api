@@ -187,6 +187,7 @@ Route::get('qbo/success','QuickBookController@qboSuccess');
 Route::get('qbo/tax', 'QuickBookController@qboTax')->name('qbo.tax');
 Route::get('qbo/disconnect', 'QuickBookController@qboDisconnect');
 Route::get('qbo/disconnect/public', 'QuickBookController@qboDisconnectPublic');
+Route::get('qbo/learn', 'QuickBookController@qboLearnMore');
 Route::post('sync/invoice', 'QuickBookController@syncInvoice')->name('sync.invoice');
 
 //Invites Routes

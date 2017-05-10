@@ -30,6 +30,14 @@ class QuickBookController extends Controller
     parent::__construct();
   }
 
+  public function qboDisconnectPublic() {
+    return view('app.qbDisconnect');
+  }
+
+  public function qboLearnMore() {
+    return view('app.learnMore');
+  }
+
   public function qboTax() {
     return view('qbo.tax');
   }
@@ -101,10 +109,6 @@ class QuickBookController extends Controller
     $account = $this->user->profile->account;
     $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
     return view('accounts.edit', compact('account'));
-  }
-
-  public function qboDisconnectPublic() {
-    return view('app.qbDisconnect');
   }
 
   public function setPockeytId() {
