@@ -8806,8 +8806,13 @@ img {
   color: #dd4b39;
 }
 
-
+.learn-top {
+  text-align: center;
+}
 .learn-middle {
+  text-align: center;
+}
+.learn-bottom {
   text-align: center;
 }
 

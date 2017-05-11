@@ -2,7 +2,6 @@
 @section('content')
 	<div class="learn-top">
 		<h3>Automatically sync your Pockeyt transactions with QuickBooks.</h3>
-		
 	</div>
 	<div class="learn-middle">
 		<div class="col-md-6">
