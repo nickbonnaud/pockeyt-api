@@ -68,7 +68,7 @@
 					<h4>Features:</h4>
 					<ul>
 						<li>Syncs every transaction on Pockeyt to your QuickBooks Account.</li>
-						<li>Every transaction synced creates an invoice and closes the Invoice once payment confirmed.</li>
+						<li>Every transaction synced creates an invoice and closes the invoice once payment confirmed.</li>
 						<li>Pockeyt easily tracks sales, tips, and taxes and automatically syncs them with your QuickBooks account for every transaction.</li>
 						<li>Seamless and automatic once connected!</li>
 					</ul>
