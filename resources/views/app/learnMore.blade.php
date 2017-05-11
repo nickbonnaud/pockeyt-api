@@ -74,13 +74,13 @@
 					</ul>
 				</div>
 				<div class="col-md-6">
-					<img src="{{ asset('/images/qboConnectScreen.png') }}">
+					<img style="margin-top: 50px;" src="{{ asset('/images/qboConnectScreen.png') }}">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="learn-bottom">
-				<p>To connect to your Pockeyt account, please go to the <a href="{{ route('app.index') }}">Pockeyt Dashboard</a> and click QuickBooks in your Inventory tab.</p>
+				<h3 style="margin-top: 20px;">To connect to your Pockeyt account, please go to the <a href="{{ route('app.index') }}">Pockeyt Dashboard</a> and click QuickBooks in your Inventory tab.</h3>
 			</div>
 		</div>
 	</div>
