@@ -81,6 +81,9 @@
 		<div class="row">
 			<div class="learn-bottom">
 				<h3 style="margin-top: 20px;">To connect to your Pockeyt account, please go to the <a href="{{ route('app.index') }}">Pockeyt Dashboard</a> and click QuickBooks in your Inventory tab.</h3>
+				<a href="{{ route('app.index') }}">
+					<button class="btn btn-primary" style="background-color: #337ab7; border-color: #2e6da4;">Create Account</button>
+				</a>
 			</div>
 		</div>
 	</div>
