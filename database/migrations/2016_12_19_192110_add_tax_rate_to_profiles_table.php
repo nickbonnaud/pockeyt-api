@@ -13,7 +13,7 @@ class AddTaxRateToProfilesTable extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->integer('tax_rate')->nullable()->after('lng');
+            $table->integer('tax_rate')->nullable()->after('hero_photo_id');
         });
     }
 
