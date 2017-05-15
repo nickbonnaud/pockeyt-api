@@ -20,8 +20,8 @@ $qbo_connect = $qbo_obj->qboConnect();
 						<a href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect QuickBooks</a>
 					</span>
 				@endif
-				@if(!$this->user->profile->account->pockeyt_qb_taxcode && $qbo_connect)
-					<a href="{{ action('QuickBookController@setTaxRate') }}"><button class="btn btn-warning">Set Sales Taxes</button></a>
+				@if(!$account->pockeyt_qb_taxcode && $qbo_connect)
+					<a href="{{ action('QuickBookController@setTaxRate') }}"><button class="btn btn-warning">Set Sales Tax</button></a>
 				@endif
 		    @if($account->status == 'pending')
 		    	<p><i class="fa fa-circle text-warning"></i> Payment Account Pending</p>
