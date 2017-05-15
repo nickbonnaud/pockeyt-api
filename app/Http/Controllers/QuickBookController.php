@@ -84,23 +84,19 @@ class QuickBookController extends Controller
   }
 
   public function qboSuccess(){
-    $this->setTaxAccount();
-    $taxCodeId = $this->user->profile->account->pockeyt_qb_taxcode;
-    if (isset($taxCodeId)) {
-      $this->setPockeytId();
-      $this->createPockeytAccount();
-      $this->createPockeytTipsAccount();
-      $this->createPockeytItem();
-      $this->createPockeytTipsItem();
-      $this->createPockeytPaymentMethod();
-      $this->setQbActive();
+    $this->setPockeytId();
+    $this->createPockeytAccount();
+    $this->createPockeytTipsAccount();
+    $this->createPockeytItem();
+    $this->createPockeytTipsItem();
+    $this->createPockeytPaymentMethod();
+    $this->setQbActive();
+    $qbTaxRate = $this->setTaxAccount();
+    if (!isset($qbTaxRate)) {
       return view('qbo.success');
     } else {
-      $the_tenant = $this->user->profile->id;
-      $account = $this->user->profile->account;
-      $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
-      flash()->overlay('Oops', 'Your current Sales Tax for Pockeyt Pay is ' . $this->user->profile->tax_rate / 100 . '%, based on your location. This does not match your Quickbooks Sales Tax. Please make sure your location is correct on Pockeyt or your Sales Tax on QuickBooks is correct, and try again', 'error');
-      return redirect()->route('qbo.tax');;
+      $pockeytTaxRate = round($this->user->profile->tax_rate / 100, 2);
+      return view('qbo.tax', compact('qbTaxRate', 'pockeytTaxRate'));
     }
   }
 
@@ -243,6 +239,9 @@ class QuickBookController extends Controller
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    if (!$taxCodes || !$taxRates) {
+      return $qbTaxRate = 'Not set';
+    }
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
       if ($taxRateList !== null) {
@@ -268,10 +267,13 @@ class QuickBookController extends Controller
           $taxCodeId = str_replace('}','',$taxCodeId);
           $taxCodeId = abs($taxCodeId);
           return $this->setPockeytTaxCode($taxCodeId);
+        } else {
+          return $qbTaxRate;
         }
+      } else {
+        return $qbTaxRate = 'Not set'; 
       }
     }
-    return;
   }
 
   public function setQbActive() {
