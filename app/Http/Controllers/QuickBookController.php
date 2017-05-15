@@ -276,6 +276,55 @@ class QuickBookController extends Controller
     }
   }
 
+  public function setTaxRate() {
+    $this->qboConnect();
+    
+    $taxRateService = new \QuickBooks_IPP_Service_TaxRate();
+    $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
+    $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
+    $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    if (!$taxCodes || !$taxRates) {
+      flash()->error('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!');
+      return redirect()->back();
+    }
+    foreach ($taxCodes as $taxCode) {
+      $taxRateList = $taxCode->getSalesTaxRateList();
+      if ($taxRateList !== null) {
+        $qbTaxRate = 0;
+
+        $taxRateDetailLine = $taxRateList->countTaxRateDetail();
+        for ($i = 0; $i < $taxRateDetailLine; $i++) {
+          $taxRateDetail = $taxRateList->getTaxRateDetail($i);
+          $taxRateRef = $taxRateDetail->getTaxRateRef();
+
+          foreach ($taxRates as $taxRate) {
+            $taxId = $taxRate->getId();
+            if ($taxId == $taxRateRef) {
+              $componentRate = floatval($taxRate->getRateValue());
+              $qbTaxRate = $qbTaxRate + $componentRate;
+            }
+          }
+        }
+        $businessTaxRate = $this->user->profile->tax_rate / 100;
+        if ($qbTaxRate == round($businessTaxRate, 2)) {
+          $taxCodeId = $taxCode->getId();
+          $taxCodeId = str_replace('{','',$taxCodeId);
+          $taxCodeId = str_replace('}','',$taxCodeId);
+          $taxCodeId = abs($taxCodeId);
+          $this->setPockeytTaxCode($taxCodeId);
+          flash()->success('Success', 'Pockeyt Sync now active!');
+          return redirect()->back();
+        } else {
+          flash()->error('Tax Rates do not match', 'Please ensure your tax rates on QuickBooks and Pockeyt match');
+          return redirect()->back();
+        }
+      } else {
+        flash()->error('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!');
+        return redirect()->back();
+      }
+    }
+  }
+
   public function setQbActive() {
   	$profile = $this->user->profile;
     $profile->connected_qb = true;
