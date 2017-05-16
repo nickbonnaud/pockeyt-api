@@ -197,7 +197,6 @@ class QuickBookController extends Controller
   	$itemService = new \QuickBooks_IPP_Service_Item();
     if ($itemId) {
       $qbItemId = $itemService->query($this->context, $this->realm, "SELECT * FROM Item WHERE Id = '{$itemId}'");
-      dd($qbItemId);
       if (count($qbItemId) != 0) { return; }
     }
   	$item = new \QuickBooks_IPP_Object_Item();
@@ -220,6 +219,13 @@ class QuickBookController extends Controller
 
   public function createPockeytTipsItem() {
     $this->qboConnect();
+    $itemId = $this->user->profile->account->pockeyt_tips_item;
+    $itemService = new \QuickBooks_IPP_Service_Item();
+    if ($itemId) {
+      $qbItemId = $itemService->query($this->context, $this->realm, "SELECT * FROM Item WHERE Id = '{$itemId}'");
+      dd($qbItemId);
+      if (count($qbItemId) != 0) { return; }
+    }
     $itemService = new \QuickBooks_IPP_Service_Item();
     $item = new \QuickBooks_IPP_Object_Item();
 
