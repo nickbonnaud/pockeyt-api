@@ -115,7 +115,7 @@ class QuickBookController extends Controller
     $customerId = $this->user->profile->account->pockeyt_qb_id;
     $customerService = new \QuickBooks_IPP_Service_Customer();
     if ($customerId) {
-      $qbCustomerId = $customerService->query($this->context, $this->realm, "SELECT * FROM Customer WHERE Id = " . $customerId);
+      $qbCustomerId = $customerService->query($this->context, $this->realm, "SELECT * FROM Customer");
       dd($qbCustomerId);
       if (count($qbCustomerId) != 0) { return; }
     }
