@@ -240,7 +240,7 @@ class QuickBookController extends Controller
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
     if (!$taxCodes || !$taxRates) {
-      return $qbTaxRate = 'Not set';
+      return $qbTaxRate = 'not set';
     }
     foreach ($taxCodes as $taxCode) {
       $taxRateList = $taxCode->getSalesTaxRateList();
@@ -271,7 +271,7 @@ class QuickBookController extends Controller
           return $qbTaxRate;
         }
       } else {
-        return $qbTaxRate = 'Not set'; 
+        return $qbTaxRate = 'not set'; 
       }
     }
   }

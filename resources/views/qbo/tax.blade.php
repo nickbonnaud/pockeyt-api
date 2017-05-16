@@ -4,8 +4,14 @@
 	<section class="content">
 		<div style="text-align: center">
 			<h2>Success! Connected to QuickBooks Online</h2>
-			<h4>Warning</h4>
-			<h4>Your current Sales Tax Rate in Pockeyt is {{ $pockeytTaxRate }}%. Your Sales Tax Rate in QuickBooks is {{ $qbTaxRate }}%. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			<h3>Warning</h3>
+			@if($qbTaxRate == 'not set')
+			<h4>Your current Sales Tax Rate in Pockeyt is <strong>{{ $pockeytTaxRate }}%</strong>. Your Sales Tax Rate in QuickBooks is <strong>{{ $qbTaxRate }}</strong>.</h4>
+			<h4>In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			@else
+			<h4>Your current Sales Tax Rate in Pockeyt is <strong>{{ $pockeytTaxRate }}%</strong>. Your Sales Tax Rate in QuickBooks is <strong>{{ $qbTaxRate }}%</strong>.</h4>
+			<h4>In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			@endif
 			<p>Please correct by adjusting your Sales Tax in QuickBooks or adjusting your location in Pockey*.</p>
 			<p>Once Sales Taxes are matching click the Set Sales Tax Button in you Business Account Profile Section to finish setting up Pockeyt Sync.</p>
 			<button type="button" class="btn btn-block btn-primary btn-lg" onclick="self.close()">Close Window</button>
