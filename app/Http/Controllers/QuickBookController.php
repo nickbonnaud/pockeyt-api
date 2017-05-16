@@ -116,7 +116,6 @@ class QuickBookController extends Controller
     $customerService = new \QuickBooks_IPP_Service_Customer();
     if ($customerId) {
       $qbCustomerId = $customerService->query($this->context, $this->realm, "SELECT * FROM Customer WHERE Id = '{$customerId}'");
-      dd($qbCustomerId);
       if (count($qbCustomerId) != 0) { return; }
     }
 
@@ -136,7 +135,14 @@ class QuickBookController extends Controller
 
   public function createPockeytAccount() {
   	$this->qboConnect();
+    $accountId = $this->user->profile->account->pockeyt_qb_account;
   	$accountService = new \QuickBooks_IPP_Service_Account();
+    if ($accountId) {
+      $qbAccountId = $accountService->query($this->context, $this->realm, "SELECT * FROM Account WHERE Id = '{$accountId}'");
+      dd($qbAccountId );
+      if (count($qbAccountId) != 0) { return; }
+    }
+
   	$account = new \QuickBooks_IPP_Object_Account();
 
   	$account->setName('Pockeyt Income');
