@@ -316,10 +316,7 @@ class QuickBookController extends Controller
           flash()->overlay('Tax Rates do not match', 'Please ensure your tax rates on QuickBooks and Pockeyt match', 'error');
           return redirect()->back();
         }
-      } else {
-        flash()->overlay('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!', 'error');
-        return redirect()->back();
-      }
+      } 
     }
   }
 
