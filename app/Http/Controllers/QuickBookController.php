@@ -239,8 +239,7 @@ class QuickBookController extends Controller
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-    dd($taxCodes);
-    if (!$taxCodes || count($taxRates) == 0) {
+    if (count($taxCodes) == 0 || count($taxRates) == 0) {
       return $qbTaxRate = 'not set';
     }
     foreach ($taxCodes as $taxCode) {
@@ -271,9 +270,7 @@ class QuickBookController extends Controller
         } else {
           return $qbTaxRate;
         }
-      } else {
-        return $qbTaxRate = 'not set'; 
-      }
+      } 
     }
   }
 
