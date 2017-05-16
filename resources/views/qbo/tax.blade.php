@@ -6,11 +6,11 @@
 			<h2>Success! Connected to QuickBooks Online</h2>
 			<h3>Warning</h3>
 			@if($qbTaxRate == 'not set')
-			<h4>Your current Sales Tax Rate in Pockeyt is <strong>{{ $pockeytTaxRate }}%</strong>. Your Sales Tax Rate in QuickBooks is <strong>{{ $qbTaxRate }}</strong>.</h4>
-			<h4>In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			<h4>Your current Sales Tax Rate in QuickBooks is <strong>not set</strong>.</h4>
+			<h4>Please set your Sales Tax Rate in QuickBooks to <strong>{{ $pockeytTaxRate }}%</strong>if that is the correct value for your location. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
 			@else
-			<h4>Your current Sales Tax Rate in Pockeyt is <strong>{{ $pockeytTaxRate }}%</strong>. Your Sales Tax Rate in QuickBooks is <strong>{{ $qbTaxRate }}%</strong>.</h4>
-			<h4>In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			<h4>Your current Sales Tax Rate in QuickBooks does <strong>not match</strong> your Sales Tax in Pockeyt.</h4>
+			<h4>Please set your Sales Tax Rate in QuickBooks to <strong>{{ $pockeytTaxRate }}%</strong> if that is the correct value for your location. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
 			@endif
 			<p>Please correct by adjusting your Sales Tax in QuickBooks or adjusting your location in Pockeyt*.</p>
 			<p>Once Sales Taxes are matching click the Set Sales Tax Button in you Business Account Profile Section to finish setting up Pockeyt Sync.</p>
