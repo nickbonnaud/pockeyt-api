@@ -281,8 +281,8 @@ class QuickBookController extends Controller
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
-    if (!$taxCodes || !$taxRates) {
-      flash()->error('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!');
+    if (count($taxCodes) == 0 || count($taxRates) == 0) {
+      flash()->overlay('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!', 'error');
       return redirect()->back();
     }
     foreach ($taxCodes as $taxCode) {
@@ -313,11 +313,11 @@ class QuickBookController extends Controller
           flash()->success('Success', 'Pockeyt Sync now active!');
           return redirect()->back();
         } else {
-          flash()->error('Tax Rates do not match', 'Please ensure your tax rates on QuickBooks and Pockeyt match');
+          flash()->overlay('Tax Rates do not match', 'Please ensure your tax rates on QuickBooks and Pockeyt match', 'error');
           return redirect()->back();
         }
       } else {
-        flash()->error('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!');
+        flash()->overlay('Tax Rate Not Set', 'Your Tax Rate in QuickBooks is not set!', 'error');
         return redirect()->back();
       }
     }
