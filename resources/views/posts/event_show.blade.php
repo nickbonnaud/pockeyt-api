@@ -1,7 +1,7 @@
 @extends('layoutPost')
 <head>
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https:www.pockeyt-test.com/events/{{ $post->id }}" /> 
+    <meta property="og:url" content="https:www.pockeytbiz.com/events/{{ $post->id }}" /> 
     <meta property="og:title" content="{{ $post->title }}" />
     @if(! is_null($post->photo_path))
         <meta property="og:image"  content="{{ $post->photo_path }}" />

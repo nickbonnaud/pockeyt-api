@@ -70,7 +70,7 @@
 
 <h2>Privacy Policy</h2>
 
-<p>Pockeyt, Inc collects, stores, maintains, and shares information about you in accordance with its Privacy Policy, which is available at https://pockeyt-test.com/data_use_policy. By accepting this Agreement, you acknowledge that you hereby agree and consent to the terms and conditions of our Privacy Policy.</p>
+<p>Pockeyt, Inc collects, stores, maintains, and shares information about you in accordance with its Privacy Policy, which is available at https://pockeytbiz.com/data_use_policy. By accepting this Agreement, you acknowledge that you hereby agree and consent to the terms and conditions of our Privacy Policy.</p>
 
 <h2>Term and Termination</h2>
 

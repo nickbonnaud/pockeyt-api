@@ -353,7 +353,7 @@ class QuickBookController extends Controller
       }
     }
     if (!$this->user->profile->account->pockeyt_qb_taxcode) {
-      flash()->overlay('Sales Tax Rates do not match', 'Your Sales Tax Rate in Pockeyt is ' . $businessTaxRate . '% . Pockeyt cannot sync with QuickBooks if your Sales Tax in Pockeyt and QuickBooks do not match', 'error');
+      flash()->overlay('Sales Tax Rates do not match', 'Your Sales Tax Rate in Pockeyt is ' . $businessTaxRate . '%. Pockeyt cannot sync with QuickBooks if your Sales Tax in Pockeyt and QuickBooks do not match', 'error');
           return redirect()->back();
     }
   }
