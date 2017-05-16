@@ -303,8 +303,8 @@ class QuickBookController extends Controller
             }
           }
         }
-        $businessTaxRate = $this->user->profile->tax_rate / 100;
-        if ($qbTaxRate == round($businessTaxRate, 2)) {
+        $businessTaxRate = round($this->user->profile->tax_rate / 100, 2);
+        if ($qbTaxRate == $businessTaxRate) {
           $taxCodeId = $taxCode->getId();
           $taxCodeId = str_replace('{','',$taxCodeId);
           $taxCodeId = str_replace('}','',$taxCodeId);
@@ -313,7 +313,7 @@ class QuickBookController extends Controller
           flash()->success('Success', 'Pockeyt Sync now active!');
           return redirect()->back();
         } else {
-          flash()->overlay('Tax Rates do not match', 'Please ensure your tax rates on QuickBooks and Pockeyt match', 'error');
+          flash()->overlay('Tax Rates do not match', 'Tax Rate in QuickBooks is ' . $qbTaxRate . '%. Your tax rate in Pockeyt is ' . $businessTaxRate . '%. Pockeyt cannot sync with QuickBooks if these do not match.', 'error');
           return redirect()->back();
         }
       } 
