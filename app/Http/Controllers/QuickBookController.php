@@ -223,7 +223,6 @@ class QuickBookController extends Controller
     $itemService = new \QuickBooks_IPP_Service_Item();
     if ($itemId) {
       $qbItemId = $itemService->query($this->context, $this->realm, "SELECT * FROM Item WHERE Id = '{$itemId}'");
-      dd($qbItemId);
       if (count($qbItemId) != 0) { return; }
     }
     $itemService = new \QuickBooks_IPP_Service_Item();
@@ -247,7 +246,13 @@ class QuickBookController extends Controller
 
   public function createPockeytPaymentMethod() {
   	$this->qboConnect();
+    $methodId =  $this->user->profile->account->pockeyt_payment_method;
   	$paymentMethodService = new \QuickBooks_IPP_Service_PaymentMethod();
+    if ($methodId) {
+      $qbMethodId = $paymentMethodService->query($this->context, $this->realm, "SELECT * FROM PaymentMethod WHERE Id = '{$methodId}'");
+      dd($qbMethodId);
+      if (count($qbItemId) != 0) { return; }
+    }
   	$paymentMethod = new \QuickBooks_IPP_Object_PaymentMethod();
 
   	$paymentMethod->setName('Pockeyt Payment');
