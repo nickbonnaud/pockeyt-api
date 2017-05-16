@@ -92,6 +92,7 @@ class QuickBookController extends Controller
     $this->createPockeytPaymentMethod();
     $this->setQbActive();
     $qbTaxRate = $this->setTaxAccount();
+    dd($qbTaxRate);
     if (!isset($qbTaxRate)) {
       return view('qbo.success');
     } else {
@@ -240,7 +241,6 @@ class QuickBookController extends Controller
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
     if (count($taxCodes) == 0 || count($taxRates) == 0) {
-      dd("hello");
       return $qbTaxRate = 'not set';
     }
     $businessTaxRate = round($this->user->profile->tax_rate / 100, 2);
