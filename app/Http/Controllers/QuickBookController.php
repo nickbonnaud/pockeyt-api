@@ -373,7 +373,8 @@ class QuickBookController extends Controller
   public function setPockeytTaxCode($taxCodeId) {
     $account = $this->user->profile->account;
     $account->pockeyt_qb_taxcode = $taxCodeId;
-    return $account->save();
+    $account->save();
+    return;
   }
 }
 
