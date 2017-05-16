@@ -250,7 +250,6 @@ class QuickBookController extends Controller
   	$paymentMethodService = new \QuickBooks_IPP_Service_PaymentMethod();
     if ($methodId) {
       $qbMethodId = $paymentMethodService->query($this->context, $this->realm, "SELECT * FROM PaymentMethod WHERE Id = '{$methodId}'");
-      dd($qbMethodId);
       if (count($qbItemId) != 0) { return; }
     }
   	$paymentMethod = new \QuickBooks_IPP_Object_PaymentMethod();
