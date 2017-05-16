@@ -92,7 +92,6 @@ class QuickBookController extends Controller
     $this->createPockeytPaymentMethod();
     $this->setQbActive();
     $qbTaxRate = $this->setTaxAccount();
-    dd($qbTaxRate);
     if (!isset($qbTaxRate)) {
       return view('qbo.success');
     } else {
