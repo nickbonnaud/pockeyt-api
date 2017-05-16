@@ -239,6 +239,7 @@ class QuickBookController extends Controller
     $taxRates = $taxRateService->query($this->context, $this->realm, "SELECT * FROM TaxRate");
     $TaxCodeService = new \QuickBooks_IPP_Service_TaxCode();
     $taxCodes = $TaxCodeService->query($this->context, $this->realm, "SELECT * FROM TaxCode");
+    dd(count($taxCodes));
     if (count($taxCodes) == 0 || count($taxRates) == 0) {
       return $qbTaxRate = 'not set';
     }
@@ -268,7 +269,7 @@ class QuickBookController extends Controller
           $taxCodeId = abs($taxCodeId);
           return $this->setPockeytTaxCode($taxCodeId);
         } 
-      } 
+      }
     }
     if (!$this->user->profile->account->pockeyt_qb_taxcode) {
       return $qbTaxRate = 'not matching';
