@@ -7,7 +7,7 @@
 			<h3>Warning</h3>
 			@if($qbTaxRate == 'not set')
 			<h4>Your current Sales Tax Rate in QuickBooks is <strong>not set</strong>.</h4>
-			<h4>Please set your Sales Tax Rate in QuickBooks to <strong>{{ $pockeytTaxRate }}%</strong>if that is the correct value for your location. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
+			<h4>Please set your Sales Tax Rate in QuickBooks to <strong>{{ $pockeytTaxRate }}%</strong> if that is the correct value for your location. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
 			@else
 			<h4>Your current Sales Tax Rate in QuickBooks does <strong>not match</strong> your Sales Tax in Pockeyt.</h4>
 			<h4>Please set your Sales Tax Rate in QuickBooks to <strong>{{ $pockeytTaxRate }}%</strong> if that is the correct value for your location. In order for Pockeyt to sync with Quickbooks, your Sales Taxes must match.</h4>
