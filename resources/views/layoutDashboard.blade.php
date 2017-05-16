@@ -311,13 +311,16 @@
         },
 
         notifyBill: function(data) {
+          console.log(data);
           toastr["info"](data.user.first_name + " " + data.user.last_name + " has requested their bill.<br /><br /><button type='button' class='btn btn-default'>Send Bill</button>", "Bill Requested!", {
             "newestOnTop": true,
             "timeOut": 0,
             "extendedTimeOut": 0,
             "onclick": function() {
-              route = "{{ route('bill.show', ['customerId' => 'id']) }}"
-              location.href = route.replace('id', data.user.id)
+              var employeeId = 'empty';
+              route = "{{ route('bill.show', ['customerId' => 'id', 'employeeId' => 'eId']) }}"
+              route = route.replace('id', data.user.id)
+              location.href = route.replace('eId', employeeId);
             }
           })
         },
