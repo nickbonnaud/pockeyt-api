@@ -291,7 +291,6 @@
 						'businessId': businessId
 					},
 					success: function(data) {
-						console.log(data);
 						if (data.sales.length == 0) {
 							sales.$data.transactions = 0;
 						} else {

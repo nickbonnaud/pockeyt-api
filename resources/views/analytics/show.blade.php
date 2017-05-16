@@ -501,7 +501,6 @@
 				return lineChartData;
 			},
 			formatLineData: function(dataSet, type) {
-				console.log(dataSet);
 				var data = dataSet;
 				var labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -673,7 +672,6 @@
 						'type': type
 					},
 					success: function(data) {
-						console.log(data);
 						var type = data.type;
 						var dataSet = data.data;
 

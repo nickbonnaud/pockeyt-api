@@ -101,7 +101,6 @@
 			} else {
 				var selected = "amounts";
 			}
-			console.log(selected);
 			return selected;
 		}
 	}

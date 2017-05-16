@@ -435,8 +435,6 @@
             customer.getRedeemableDeals(activeCustomer.id);
           },
           removeUser: function(data) {
-            console.log("remove user by distance");
-            console.log(data);
             var leavingCustomer = data.user;
             var users = this.users;
             
@@ -527,8 +525,6 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                console.log("hello");
-                console.log(user);
                 var dataStorage = customer.$data;
                 dataStorage.selectedUser = user;
                 dataStorage.purchases = data.purchases;
@@ -551,7 +547,6 @@
             });
           },
           drawChart: function() {
-            console.log("hello");
             var dataStorage = customer.$data;
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
@@ -637,7 +632,6 @@
                 'businessId' : businessId
               },
               success: function(data) {
-                console.log(data);
                 var dataStorage = customer.$data;
                 var deals = dataStorage.deals;
                 if (data.redeemableDeals.length > 0 ) {
