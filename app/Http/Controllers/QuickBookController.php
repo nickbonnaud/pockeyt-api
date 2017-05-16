@@ -104,7 +104,8 @@ class QuickBookController extends Controller
   	$the_tenant = $this->user->profile->id;
     $account = $this->user->profile->account;
     $this->IntuitAnywhere->disconnect(env('QBO_USERNAME'), $the_tenant, true);
-    $profile = $this->user->profile->connected_qb = false;
+    $profile = $this->user->profile;
+    $profile->connected_qb = false;
     $profile->save();
     return view('accounts.edit', compact('account'));
   }
