@@ -13,8 +13,6 @@ use App\Profile;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-use App\Events\CustomerEnterRadius;
-
 class ConnectController extends Controller
 {
 	 public function __construct()
@@ -27,23 +25,7 @@ class ConnectController extends Controller
 	}
 
 	public function connectInsta(Request $request) {
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1']);
-
-		try {
-			$response = $client->request('POST', 'subscriptions', [
-        	'client_id' => env('INSTAGRAM_KEY'),
-        	'client_secret' => env('INSTAGRAM_SECRET'),
-        	'object' => 'user',
-        	'aspect' => 'media',
-        	'callback_url' => 'https://pockeytbiz.com/connect/subscribe/instagram'
-        
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
-        dd($e->getResponse());
-      }
-		}
-		dd($response->getBody());
+		return $this->isLoggedInInsta($request->has('code'));
 	}
 
 	private function isLoggedInFB($hasCode) {
@@ -124,9 +106,6 @@ class ConnectController extends Controller
 	}
 
 	public function verifySubscribeInsta(Request $request) {
-		$business = 116;
-		$user = $request;
-		event(new CustomerEnterRadius($user, $business));
 		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env('INSTA_VERIFY_TOKEN'))) {
 			return response($request->hub_challenge);
 		}
