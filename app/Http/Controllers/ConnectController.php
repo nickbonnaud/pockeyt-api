@@ -25,7 +25,24 @@ class ConnectController extends Controller
 	}
 
 	public function connectInsta(Request $request) {
-		return $this->isLoggedInInsta($request->has('code'));
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1']);
+
+		try {
+			$response = $client->request('POST', 'subscriptions', [
+        'query' => [
+        	'client_id' => env('INSTAGRAM_KEY'),
+        	'client_secret' => env('INSTAGRAM_SECRET'),
+        	'object' => 'user',
+        	'aspect' => 'media',
+        	'verify_token' => env('INSTA_VERIFY_TOKEN'),
+        	'callback_url' => 'https://pockeytbiz.com/connect/subscribe/instagram'
+        ]
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+        dd($e->getResponse());
+      }
+		}
 	}
 
 	private function isLoggedInFB($hasCode) {
