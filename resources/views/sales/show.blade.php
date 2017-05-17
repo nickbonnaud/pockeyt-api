@@ -75,7 +75,7 @@
 							@if($user->profile->tip_tracking_enabled)
 								<div class="row">
 									<div v-if="employees.length > 0">
-										<h2 class="page-header">Employee Sales Breakdown</h2>
+										<h2 class="page-header" style="padding-left: 15px;">Employee Sales Breakdown</h2>
 										<div v-for="employee in employees" class="col-md-4">
 											<div class="box box-widget widget-user">
 												<div class="widget-user-header bg-aqua-active">
