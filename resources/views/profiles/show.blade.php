@@ -280,7 +280,7 @@
                 </ul>
               </div>
               <div v-else class="box-body">
-                <h4>You are currently using Tip Tracking.At least one Team Member must be clocked-in.</h4>
+                <h4>You are currently using Tip Tracking. At least one Team Member must be clocked-in.</h4>
                 <h4>Please clock-in in the Team tab.</h4>
                 <a href="{{ route('employees.show') }}">
                   <button class="btn btn-primary pull-right">Go to Team</button>
