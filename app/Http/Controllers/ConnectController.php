@@ -13,8 +13,6 @@ use App\Profile;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-use App\Events\CustomerEnterRadius;
-
 class ConnectController extends Controller
 {
 	 public function __construct()
@@ -108,9 +106,6 @@ class ConnectController extends Controller
 	}
 
 	public function verifySubscribeInsta(Request $request) {
-		$business = 116;
-		$user = $request;
-		event(new CustomerEnterRadius($user, $business));
 		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env('INSTA_VERIFY_TOKEN'))) {
 			return response($request->hub_challenge);
 		}
