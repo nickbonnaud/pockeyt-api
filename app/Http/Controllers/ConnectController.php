@@ -43,6 +43,7 @@ class ConnectController extends Controller
         dd($e->getResponse());
       }
 		}
+		dd($response);
 	}
 
 	private function isLoggedInFB($hasCode) {
