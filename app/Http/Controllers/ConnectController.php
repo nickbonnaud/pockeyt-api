@@ -106,6 +106,7 @@ class ConnectController extends Controller
 	}
 
 	public function verifySubscribeInsta(Request $request) {
+		return response($request);
 		if (($request->hub_mode == 'subscribe') && ($request->hub_verify_token == env('INSTA_VERIFY_TOKEN'))) {
 			return response($request->hub_challenge);
 		}
