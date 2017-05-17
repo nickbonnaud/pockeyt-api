@@ -31,14 +31,13 @@ class ConnectController extends Controller
 
 		try {
 			$response = $client->request('POST', 'subscriptions', [
-        'query' => [
         	'client_id' => env('INSTAGRAM_KEY'),
         	'client_secret' => env('INSTAGRAM_SECRET'),
         	'object' => 'user',
         	'aspect' => 'media',
         	'verify_token' => env('INSTA_VERIFY_TOKEN'),
         	'callback_url' => 'https://pockeytbiz.com/connect/subscribe/instagram'
-        ]
+        
       ]);
 		} catch (RequestException $e) {
 			if ($e->hasResponse()) {
