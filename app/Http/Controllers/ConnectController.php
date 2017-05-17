@@ -35,7 +35,6 @@ class ConnectController extends Controller
         	'client_secret' => env('INSTAGRAM_SECRET'),
         	'object' => 'user',
         	'aspect' => 'media',
-        	'verify_token' => env('INSTA_VERIFY_TOKEN'),
         	'callback_url' => 'https://pockeytbiz.com/connect/subscribe/instagram'
         
       ]);
