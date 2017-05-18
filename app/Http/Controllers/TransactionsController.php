@@ -134,6 +134,7 @@ class TransactionsController extends Controller
           ->send($message);
 
         foreach ($collection->pushManager as $push) {
+            dd($push->getAdapter()->getResponse());
           $response = $push->getAdapter()->getResponse()->getCode();
         }
 
