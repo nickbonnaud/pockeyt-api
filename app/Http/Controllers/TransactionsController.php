@@ -115,18 +115,32 @@ class TransactionsController extends Controller
 
     public function confirmTransaction($transaction, $customer, $profile) {
         $subTotal = round(($transaction->tax + $transaction->net_sales) / 100, 2);
-        $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
-          'category' => 'payment',
-          'locKey' => '1',
-          'custom' => array('transactionId' => $transaction->id,
-                            'businessId' => $profile->id,
-                            'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
-                        )
-        ));
         $token = PushId::where('user_id', '=', $customer->id)->first();
+
         if ($token->device_type === 'iOS') {
+            $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
+              'category' => 'payment',
+              'locKey' => '1',
+              'custom' => array('transactionId' => $transaction->id,
+                                'businessId' => $profile->id,
+                                'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
+                            )
+            ));
             $pushService = 'PockeytIOS';
         } else {
+            $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
+              'title' => 'Pockeyt Payment',
+              'actions' => array(
+                            (object) array('title' => 'CONFIRM', 'callback' => "window.acceptCharge", "foreground" => false),
+                            (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => false),
+                            (object) array('title' => 'CUSTOM TIP', 'callback' => "window.changeTip", "foreground" => false),
+                            ),
+              'custom' => array(
+                                'transactionId' => $transaction->id,
+                                'businessId' => $profile->id,
+                                'inAppMessage' => 'You have been charged $' . $subTotal . ' by ' . $profile->business_name
+                            )
+            ));
             $pushService = 'PockeytAndroid';
         }
         $collection = \PushNotification::app($pushService)
