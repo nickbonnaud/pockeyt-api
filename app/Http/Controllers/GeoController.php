@@ -159,23 +159,30 @@ class GeoController extends Controller
     }
 
     public function sendEnterNotif($user, $business) {
-        $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
-            array(  'category' => 'default',
-                    'locKey' => '1',
-                    'custom' => array(
-                        'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
-                    )
-        ));
         $token =  PushId::where('user_id', '=', $user->id)->first();
         if ($token->device_type === 'iOS') {
+            $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
+                array(  'category' => 'default',
+                        'locKey' => '1',
+                        'custom' => array(
+                            'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
+                        )
+            ));
             $pushService = 'PockeytIOS';
         } else {
+            $message =  \PushNotification::Message('Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!', 
+                array(
+                    'category' => 'default',
+                    'title' => 'Pockeyt Pay Available',
+                    'custom' => array(
+                    'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
+                        )
+            ));
             $pushService = 'PockeytAndroid';
         }
         $collection = \PushNotification::app($pushService)
           ->to($token->push_token)
           ->send($message);
-        return;
     }
 
     public function customerEnter($user, $business) {

@@ -13,5 +13,4 @@ return array(
         'apiKey'      =>env('GCM_KEY'),
         'service'     =>'gcm'
     )
-
 );
