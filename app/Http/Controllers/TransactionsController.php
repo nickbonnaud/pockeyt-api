@@ -130,6 +130,7 @@ class TransactionsController extends Controller
         } else {
             $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
               'title' => 'Pockeyt Payment',
+              'category' => 'payment',
               'actions' => array(
                             (object) array('title' => 'CONFIRM', 'callback' => "window.acceptCharge", "foreground" => false),
                             (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => false),
