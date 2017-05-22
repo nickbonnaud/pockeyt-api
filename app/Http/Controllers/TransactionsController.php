@@ -150,7 +150,6 @@ class TransactionsController extends Controller
 
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
-          dd($response);
         }
 
         if ($response === 0) {
