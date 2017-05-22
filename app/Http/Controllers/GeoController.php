@@ -175,7 +175,7 @@ class GeoController extends Controller
                     'category' => 'default',
                     'title' => 'Pockeyt Pay Available',
                     'custom' => array(
-                    'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
+                    'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt'
                         )
             ));
             $pushService = 'PockeytAndroid';
