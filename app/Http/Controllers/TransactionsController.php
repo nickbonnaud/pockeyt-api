@@ -152,7 +152,7 @@ class TransactionsController extends Controller
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($response);
+        dd($response->getCntSuccess());
         if ($response === 0 || $response->cntSuccess === 1) {
             $transaction->status = 11;
             $profile->transactions()->save($transaction);
