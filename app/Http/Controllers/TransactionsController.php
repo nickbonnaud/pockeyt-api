@@ -135,7 +135,7 @@ class TransactionsController extends Controller
               'actions' => array(
                             (object) array('title' => 'CONFIRM', 'callback' => "window.acceptCharge", "foreground" => false),
                             (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => false),
-                            (object) array('title' => 'CUSTOM TIP', 'callback' => "window.changeTip", "foreground" => false),
+                            (object) array('title' => 'CUSTOM TIP', 'callback' => "window.changeTip", "foreground" => true),
                             ),
               'custom' => array(
                                 'transactionId' => $transaction->id,
