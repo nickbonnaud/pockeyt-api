@@ -152,8 +152,8 @@ class TransactionsController extends Controller
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($response);
-        if ($response === 0) {
+
+        if ($response === 0 || $response->cntSuccess === 1) {
             $transaction->status = 11;
             $profile->transactions()->save($transaction);
             return $this->flashSuccessPush($customer, $profile);
