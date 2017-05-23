@@ -174,6 +174,7 @@ class GeoController extends Controller
                 array(
                     'category' => 'default',
                     'title' => 'Pockeyt Pay Available',
+                    'locKey' => '1',
                     'custom' => array(
                     'inAppMessage' => 'Pockeyt Pay available for ' . $business->business_name . '. Just say you are paying with Pockeyt!'
                         )

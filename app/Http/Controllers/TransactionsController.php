@@ -128,9 +128,10 @@ class TransactionsController extends Controller
             ));
             $pushService = 'PockeytIOS';
         } else {
-            $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
+            $message = \PushNotification::Message('You have been charged $' . $subTotal . ' by ' . $profile->business_name . '. Please swipe down if payment options not visible.', array(
               'title' => 'Pockeyt Payment',
               'category' => 'payment',
+              'locKey' => '1',
               'actions' => array(
                             (object) array('title' => 'CONFIRM', 'callback' => "window.acceptCharge", "foreground" => false),
                             (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => false),
