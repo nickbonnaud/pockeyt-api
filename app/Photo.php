@@ -118,7 +118,7 @@ class Photo extends Model {
      */
     protected function makeThumbnail() {
         Image::make($this->filePath())
-            ->fit(150, 150, function($constraint) {
+            ->fit(200, 200, function($constraint) {
                 $constraint->upsize();
             }, 'center')
             ->save($this->thumbnailPath());
