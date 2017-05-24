@@ -53,18 +53,6 @@ class Photo extends Model {
         ]);
     }
 
-    public static function fromAppUpload($file) {
-        $photo = new static;
-
-        $photo->file = $file;
-        $photo->name = $photo->fileName();
-
-        return $photo->fill([
-            'path' => $photo->filePath(),
-            'thumbnail_path' => $photo->thumbnailPath()
-        ]);
-    }
-
     /**
      * Get the file name for the photo
      *

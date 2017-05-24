@@ -94,7 +94,7 @@ class UsersController extends Controller
             }
 
             $file = $request->file('file');
-            $photo = Photo::fromAppUpload($file);
+            $photo = Photo::fromForm($file);
             $photo->save();
 
             $user['photo_path'] = url($photo->path);
