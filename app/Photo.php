@@ -56,7 +56,12 @@ class Photo extends Model {
     public static function fromAppUpload($file) {
         $photo = new static;
 
-        $photo->file = $file;
+        $editedPhoto = Image::make($file)
+            ->fit(150, 150, function($constraint) {
+                $constraint->upsize();
+            }, 'center');
+
+        $photo->file = $editedPhoto;
         $photo->name = $photo->fileName();
 
         return $photo->fill([
