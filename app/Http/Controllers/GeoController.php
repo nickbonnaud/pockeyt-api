@@ -28,7 +28,8 @@ class GeoController extends Controller
         $geoCoords = GeoLocation::with('profile.logo')->get();
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
-            dd($geoCoord->profile->logo);
+            $logo = $geoCoord->profile->logo;
+            dd($logo->thumbnail_url);
             $data['latitude'] = $geoCoord->latitude;
             $data['longitude'] = $geoCoord->longitude;
             $data['identifier'] = $geoCoord->identifier;
