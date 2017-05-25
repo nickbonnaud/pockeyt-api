@@ -42,7 +42,6 @@ class GeoController extends Controller
 
             array_push($geoFences, (object) $data);
         }
-        dd($geoFences);
         return response()->json($geoFences);
     }
 
