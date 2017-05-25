@@ -152,9 +152,8 @@ class TransactionsController extends Controller
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($response->getCode());
         if ($pushService == 'PockeytIOS') {
-            if ($response === 0) {
+            if ($response->getCode() === 0) {
                 $transaction->status = 11;
                 $profile->transactions()->save($transaction);
                 return $this->flashSuccessPush($customer, $profile);
