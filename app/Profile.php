@@ -121,7 +121,7 @@ class Profile extends Model {
     }
 
     public function geoLocation() {
-        return $this->hasOne('App\geoLocation');
+        return $this->hasOne(GeoLocation::class);
     }
 
     public function loyaltyProgram() {
