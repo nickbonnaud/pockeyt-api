@@ -25,23 +25,8 @@ class GeoController extends Controller
     }
 
     public function getGeoFences() {
-        $geoCoords = GeoLocation::with('profile.logo')->first();
-        $geoFences = [];
-        foreach ($geoCoords as $geoCoord) {
-            $data['latitude'] = $geoCoord->latitude;
-            $data['longitude'] = $geoCoord->longitude;
-            $data['identifier'] = $geoCoord->identifier;
-            $data['radius'] = 50;
-            $data['notifyOnEntry'] = true;
-            $data['notifyOnExit'] = true;
-            $data['extras'] = (object) [
-                'business_logo' => $geoCoord->profile->logo->thumbnail_url,
-                'location_id' => $geoCoord->profile_id
-            ];
-
-            array_push($geoFences, (object) $data);
-        }
-        return response()->json($geoFences);
+        $geoCoords = GeoLocation::with('profile.logo')->get();
+        return response($geoCoords);
     }
 
     public function postLocationMonitor(Request $request)
