@@ -25,7 +25,7 @@ class GeoController extends Controller
     }
 
     public function getGeoFences() {
-        $geoCoords = GeoLocation::with('profile')->get();
+        $geoCoords = GeoLocation::with('profile', 'logo')->get();
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
             $data['latitude'] = $geoCoord->latitude;
