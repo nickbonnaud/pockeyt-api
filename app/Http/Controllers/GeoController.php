@@ -25,7 +25,7 @@ class GeoController extends Controller
     }
 
     public function getGeoFences() {
-        $geoCoords = DB::table('geo_locations')->select('profile_id', 'identifier', 'latitude', 'longitude')->get();
+        $geoCoords = DB::table('geo_locations')->get();
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
             $data['latitude'] = $geoCoord->latitude;
@@ -34,7 +34,10 @@ class GeoController extends Controller
             $data['radius'] = 50;
             $data['notifyOnEntry'] = true;
             $data['notifyOnExit'] = true;
-            $data['extras'] = (object) ['profile' => $geoCoord->profile_id];
+            $data['extras'] = (object) [
+                'business_logo' => $geoCoord->profile->logo->thumbnail_url,
+                'location_id' => $geoCoord->profile_id
+            ];
 
             array_push($geoFences, (object) $data);
         }
@@ -58,7 +61,7 @@ class GeoController extends Controller
             } elseif ($geoFence->action === 'EXIT') {
                 $business = $profile->id;
                 $this->customerExit($user, $business);
-                return response('exit');
+                return $this->sendResponse($user);
             }
         } elseif ($isHeartBeat || (!$isHeartBeat && !isset($data->geofence))) {
             $geoLocation = $data->coords;
@@ -143,7 +146,7 @@ class GeoController extends Controller
             if (!isset($bill)) {
                 $this->sendEnterNotif($user, $profile);
             }
-            return $location;
+            return;
         }
     }
 
@@ -232,7 +235,7 @@ class GeoController extends Controller
     }
 
     public function sendResponse($user) {
-        $currentLocations = Location::where('user_id', '=', $user->id)->get();
+        $currentLocations = DB::table('locations')->select('location_id', 'business_logo')->get();
         return response()->json($currentLocations);
     }
 
