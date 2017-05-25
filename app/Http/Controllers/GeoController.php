@@ -29,6 +29,7 @@ class GeoController extends Controller
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
             $thumbnail_url = $geoCoord->profile->logo->thumbnail_url;
+            dd($thumbnail_url);
             $data['latitude'] = $geoCoord->latitude;
             $data['longitude'] = $geoCoord->longitude;
             $data['identifier'] = $geoCoord->identifier;
