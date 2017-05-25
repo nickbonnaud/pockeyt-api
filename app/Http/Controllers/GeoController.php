@@ -91,13 +91,13 @@ class GeoController extends Controller
             return $this->checkIfUserInLocation($user, $inLocations);
         } else {
             $storedLocations = Location::where('user_id', '=', $user->id)->get();
-            if (!isset($storedLocations)) { return response()->json('none');}
+            if (!isset($storedLocations)) { return response('none');}
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
             }
-            return response()->json('none');
+            return response('none');
         }
     }
 
