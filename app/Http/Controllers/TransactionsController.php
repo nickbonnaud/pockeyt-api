@@ -152,7 +152,7 @@ class TransactionsController extends Controller
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($pushService);
+        dd($response);
         if ($pushService == 'PockeytIOS') {
             if ($response === 0) {
                 $transaction->status = 11;
