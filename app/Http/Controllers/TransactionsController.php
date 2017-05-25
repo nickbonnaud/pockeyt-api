@@ -116,7 +116,7 @@ class TransactionsController extends Controller
     public function confirmTransaction($transaction, $customer, $profile) {
         $subTotal = round(($transaction->tax + $transaction->net_sales) / 100, 2);
         $token = PushId::where('user_id', '=', $customer->id)->first();
-        dd($token);
+
         if ($token->device_type === 'iOS') {
             $message = \PushNotification::Message('Please swipe left or down to view bill and pay. You have been charged $' . $subTotal . ' by ' . $profile->business_name . '.', array(
               'category' => 'payment',
@@ -152,7 +152,6 @@ class TransactionsController extends Controller
         foreach ($collection->pushManager as $push) {
           $response = $push->getAdapter()->getResponse();
         }
-        dd($response);
         if ($pushService == 'PockeytIOS') {
             if ($response === 0) {
                 $transaction->status = 11;
