@@ -2,7 +2,7 @@
 .env.*.php
 .env.php
 .env.example
-distcert.pem
+apnsProduction.pem
 
 /vendor
 composer.phar

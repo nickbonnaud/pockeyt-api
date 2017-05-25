@@ -4,7 +4,7 @@ return array(
 
     'PockeytIOS'     => array(
         'environment' =>'production',
-        'certificate' =>'../distcert.pem',
+        'certificate' =>'../apnsProduction.pem',
         'passPhrase'  =>env('APN_PASSWORD'),
         'service'     =>'apns'
     ),
