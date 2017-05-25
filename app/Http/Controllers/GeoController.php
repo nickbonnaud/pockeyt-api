@@ -35,7 +35,7 @@ class GeoController extends Controller
             $data['notifyOnEntry'] = true;
             $data['notifyOnExit'] = true;
             $data['extras'] = (object) [
-                'business_logo' => $geoCoord->profile()->logo->thumbnail_url,
+                'business_logo' => $geoCoord->profile->logo->thumbnail_url,
                 'location_id' => $geoCoord->profile_id
             ];
 
