@@ -133,7 +133,7 @@ class TransactionsController extends Controller
               'category' => 'payment',
               'locKey' => '1',
               'actions' => array(
-                            (object) array('title' => 'CONFIRM', 'callback' => "window.acceptChargeBackground", "foreground" => true),
+                            (object) array('title' => 'CONFIRM', 'callback' => "window.acceptCharge", "foreground" => true),
                             (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => true),
                             (object) array('title' => 'CUSTOM TIP', 'callback' => "window.changeTip", "foreground" => true),
                             ),
