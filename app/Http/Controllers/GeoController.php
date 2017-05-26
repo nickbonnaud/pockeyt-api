@@ -147,8 +147,8 @@ class GeoController extends Controller
             if (!isset($bill)) {
                 $this->sendEnterNotif($user, $profile);
             }
-            return;
         }
+        return;
     }
 
     public function removeSetLocation($user, $business) {
