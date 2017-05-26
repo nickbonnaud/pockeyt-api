@@ -121,7 +121,7 @@ class GeoController extends Controller
             }
             if (count($inLocations) > 0) {
                 foreach ($inLocations as $inLocation) {
-                    return $this->setLocation($user, $inLocation);
+                    $this->setLocation($user, $inLocation);
                 }
             }
         }
