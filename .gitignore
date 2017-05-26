@@ -3,6 +3,7 @@
 .env.php
 .env.example
 pushcert.pem
+devcert.pem
 
 /vendor
 composer.phar
