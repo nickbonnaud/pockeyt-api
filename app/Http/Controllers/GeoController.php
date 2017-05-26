@@ -105,7 +105,7 @@ class GeoController extends Controller
         $storedLocations = Location::where('user_id', '=', $user->id)->get();
         if (!isset($storedLocations)) { 
             foreach ($inLocations as $inLocation) {
-                return $this->setLocation($user, $inLocation);
+                $this->setLocation($user, $inLocation);
             }
         } else {
             foreach ($storedLocations as $storedLocation) {
