@@ -132,9 +132,10 @@ class TransactionsController extends Controller
               'title' => 'Pockeyt Payment',
               'category' => 'payment',
               'locKey' => '1',
+              "force-start" => 1,
               'actions' => array(
-                            (object) array('title' => 'CONFIRM', 'callback' => "window.acceptChargeBackground", "foreground" => true),
-                            (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => true),
+                            (object) array('title' => 'CONFIRM', 'callback' => "window.acceptChargeBackground", "foreground" => false),
+                            (object) array('title' => 'REJECT', 'callback' => "window.declineCharge", "foreground" => false),
                             (object) array('title' => 'CUSTOM TIP', 'callback' => "window.changeTip", "foreground" => true),
                             ),
               'custom' => array(
