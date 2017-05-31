@@ -240,8 +240,7 @@ class ConnectController extends Controller
       }
 		}
 		$body = json_decode($response->getBody());
-		dd($body->success);
-		if ($response->success == true) {
+		if ($body->success == true) {
 			$profile = $this->user->profile;
 			$profile->connected = false;
 			$profile->save();
@@ -269,8 +268,7 @@ class ConnectController extends Controller
       }
 		}
 		$body = json_decode($response->getBody());
-		dd($body->success);
-		if ($response->success == true) {
+		if ($body->success == true) {
 			$profile = $this->user->profile;
 			$profile->connected = true;
 			$profile->save();
