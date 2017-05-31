@@ -284,10 +284,10 @@ class ConnectController extends Controller
 			$profile->connected = 'facebook';
 			$profile->save();
 			flash()->success('Enabled!', 'Auto updates enabled for Facebook');
-    	return redirect()->view('accounts.connections');
+    	return redirect()->route('accounts.connections');
 		} else {
 			flash()->overlay('Oops! Unable to enable', 'Please try again', 'error');
-    	return redirect()->view('accounts.connections');
+    	return redirect()->route('accounts.connections');
 		}
   }
 
