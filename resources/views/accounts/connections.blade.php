@@ -84,6 +84,7 @@
 												@endif
 											@else
 												<td><button class="btn btn-success">Connect</button></td>
+												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
 										<tr>
