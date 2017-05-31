@@ -92,8 +92,9 @@ Route::get('connect/subscribe/instagram', 'ConnectController@verifySubscribeInst
 Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaMedia');
 Route::get('connect/instagram/disable_auto', 'ConnectController@removeInstaSubscription');
 
-Route::post('products/square/connect', 'ConnectController@connectSquare');
-Route::get('products/square/connect', 'ConnectController@connectSquare');
+Route::post('connect/square', 'ConnectController@connectSquare');
+Route::get('connect/square', 'ConnectController@connectSquare');
+Route::get('connect/square/subscribe', 'ConnectController@subscribeSquare');
 
 // Loyalty Programs
 Route::resource('loyalty-programs', 'LoyaltyProgramsController');
