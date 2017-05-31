@@ -239,6 +239,8 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
+		$body = $response->getBody();
+		dd($body);
 		if ($response->success == true) {
 			$profile = $this->user->profile;
 			$profile->connected = false;
@@ -252,22 +254,22 @@ class ConnectController extends Controller
   }
 
   public function addfBSubscription() {
-  	$access_token = $this->user->profile->fb_app_id;
-  	$verifyToken = env('FB_VERIFY_TOKEN');
-  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.9/']);
+  	$accessToken = $this->user->profile->fb_app_id;
+  	$pageId = $this->user->profile->fb_page_id;
+
+		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+
 		try {
-			$response = $client->request('POST',  env('FB_APP_ID') . '/subscriptions', [
-				'query' => ['access_token' => $access_token ],
-        'object' => 'page',
-        'callback_url' => 'https://pockeytbiz.com/connect/subscribe/facebook',
-        'fields' => 'feed',
-        'verify_token' => $verifyToken
+			$response = $client->request('POST', $pageId . '/subscribed_apps', [
+        'query' => ['access_token' => $accessToken ]
       ]);
 		} catch (RequestException $e) {
 			if ($e->hasResponse()) {
         return $e->getResponse();
       }
 		}
+		$body = $response->getBody();
+		dd($body);
 		if ($response->success == true) {
 			$profile = $this->user->profile;
 			$profile->connected = true;
