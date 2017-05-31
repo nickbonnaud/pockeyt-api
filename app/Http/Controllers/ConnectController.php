@@ -229,7 +229,7 @@ class ConnectController extends Controller
   	$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.9/']);
 		try {
 			$response = $client->request('DELETE',  env('FB_APP_ID') . '/subscriptions', [
-				'query' => ['access_token' => $access_token ],
+				'access_token' => $access_token ,
         'object' => 'page',
         'fields' => 'feed'
       ]);
