@@ -239,7 +239,7 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-		$body = $response->getResponse();
+		$body = json_decode($response->getBody());
 		dd($body);
 		if ($response->success == true) {
 			$profile = $this->user->profile;
@@ -268,7 +268,7 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-		$body = $response->getBody();
+		$body = json_decode($response->getBody());
 		dd($body);
 		if ($response->success == true) {
 			$profile = $this->user->profile;
