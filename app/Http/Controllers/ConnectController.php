@@ -410,7 +410,7 @@ class ConnectController extends Controller
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
       return redirect()->route('accounts.connections');
     } else {
-      flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
+      flash()->error('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.');
       return redirect()->route('accounts.connections');
     }
   }
