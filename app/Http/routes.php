@@ -65,6 +65,7 @@ Route::patch('accounts/{accounts}/personal', 'AccountsController@changePersonal'
 Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness')->name('accounts.business');
 Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
 Route::post('accounts/status', 'AccountsController@postStatus');
+Route::get('accounts/connections', 'AccountsController@getConnections')->name('accounts.connections');
 Route::resource('accounts', 'AccountsController');
 
 // Transaction Routes
@@ -154,6 +155,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transaction/sent', 'TransactionsController@getSentTransaction');
     Route::get('transactions/recent', 'TransactionsController@getRecentTransactions');
     Route::get('transactions/deals', 'TransactionsController@getDeals');
+    Route::post('transaction/square', 'TransactionsController@receiveSquareTransaction');
+    Route::get('transactions/square/subscribe', 'TransactionsController@subscribeSquare');
 });
 
 //Analytics routes

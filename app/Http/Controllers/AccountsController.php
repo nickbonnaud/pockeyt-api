@@ -201,4 +201,8 @@ class AccountsController extends Controller
             }
         }
     }
+
+    public function getConnections() {
+        return view('accounts.connections');
+    }
 }

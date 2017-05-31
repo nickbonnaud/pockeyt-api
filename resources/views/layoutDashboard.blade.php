@@ -134,6 +134,7 @@
                 @else
                   <li><a href="{{ route('accounts.create') }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
                 @endif
+                  <li><a href="{{ route('accounts.connections') }}"><i class="fa fa-circle-o"></i> Account Connections</a></li>
               </ul>
             </li>
             <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span class="menu-text">Posts</span></a></li>
