@@ -8,12 +8,12 @@
 		    <h1>
 		      Add | Recent Events
 		    </h1>
-		    @if($user->profile->connected == false)
+		     @if(!$user->profile->connected)
           <a href="#" data-toggle="modal" data-target="#connectSocial">
           	<h4>Enable Auto Posting</h4>
           </a>
         @else
-            @if($user->profile->fb_page_id !== null)
+            @if($user->profile->connected == 'facebook')
               <span class="icon-fb"></span>
               <div class="auto-post">
                 <p class="auto-post-text">Auto Post</p>

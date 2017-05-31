@@ -85,7 +85,7 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->fb_page_id = $pageID;
 		$profile->fb_app_id = $access_token;
-		$profile->connected = true;
+		$profile->connected = 'facebook';
 		$profile->save();
 		flash()->success('Connected!', 'Account connected to Facebook');
     return redirect()->back();
@@ -95,7 +95,7 @@ class ConnectController extends Controller
 		$profile = $this->user->profile;
 		$profile->insta_account_id = $userData->id;
 		$profile->insta_account_token = $userData->token;
-		$profile->connected = true;
+		$profile->connected = 'instagram';
 		$profile->save();
 		flash()->success('Connected!', 'Account connected to Instagram');
     return redirect()->back();
@@ -244,7 +244,7 @@ class ConnectController extends Controller
 		$body = json_decode($response->getBody());
 		if ($body->success == true) {
 			$profile = $this->user->profile;
-			$profile->connected = false;
+			$profile->connected = null;
 			$profile->save();
 			flash()->success('Disabled!', 'Auto updates disabled for Facebook');
     	return redirect()->back();
@@ -257,6 +257,7 @@ class ConnectController extends Controller
   public function removeInstaSubscription() {
   	$profile = $this->user->profile;
   	$profile->insta_account_token = null;
+  	$profile->connected = null;
   	$profile->save();
   	flash()->success('Disabled!', 'Auto updates disabled for Facebook');
     return redirect()->back();
@@ -280,7 +281,7 @@ class ConnectController extends Controller
 		$body = json_decode($response->getBody());
 		if ($body->success == true) {
 			$profile = $this->user->profile;
-			$profile->connected = true;
+			$profile->connected = 'facebook';
 			$profile->save();
 			flash()->success('Enabled!', 'Auto updates enabled for Facebook');
     	return redirect()->view('accounts.connections');
@@ -288,10 +289,6 @@ class ConnectController extends Controller
 			flash()->overlay('Oops! Unable to enable', 'Please try again', 'error');
     	return redirect()->view('accounts.connections');
 		}
-  }
-
-  public function addInstaSubscription() {
-
   }
 
 	/**************************

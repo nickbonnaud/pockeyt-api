@@ -40,7 +40,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<td>Auto Posting</td>
 											@if($user->profile->fb_app_id !== null)
 												<td><span class="label label-success">Connected</span></td>
-												@if($user->profile->fb_page_id !== null && $user->profile->connected == true)
+												@if($user->profile->fb_page_id !== null && $user->profile->connected == 'facebook')
 													<td>
 														<a href="{{ action('ConnectController@removefBSubscription') }}">
 															<button class="btn btn-danger">Disable</button>
