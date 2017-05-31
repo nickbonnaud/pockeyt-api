@@ -26,7 +26,7 @@
 										<tr>
 											<th>Company</th>
 											<th>Service</th>
-											<th>Connection</th>
+											<th>Change Connection</th>
 											<th>Feature</th>
 										</tr>
 									</thead>
@@ -42,7 +42,12 @@
 													<td><button class="btn btn-success">Enable</button></td>
 												@endif
 											@else
-												<td><button class="btn btn-success">Connect</button></td>
+												<td>
+													<a href="{{ action('ConnectController@connectFB') }}" class="btn btn-block btn-social btn-facebook">
+											      <i class="fa fa-facebook"></i>
+											      Connect With Facebook
+										  		</a>
+										  	</td>
 												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
@@ -57,7 +62,7 @@
 													<td><button class="btn btn-success">Enable</button></td>
 												@endif
 											@else
-												<td><button class="btn btn-success">Connect</button></td>
+												<td><a href="{{ action('ConnectController@connectInsta') }}"><button class="btn btn-success">Connect</button></a></td>
 												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
@@ -68,7 +73,7 @@
 												<td><button class="btn btn-danger">Disconnect</button></td>
 												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><button class="btn btn-success">Connect</button></td>
+												<td><a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}"><button class="btn btn-success">Connect</button></a></td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
@@ -80,10 +85,10 @@
 												@if($user->profile->account->pockeyt_lite_enabled)
 													<td><button class="btn btn-danger">Disable</button></td>
 												@else
-													<td><button class="btn btn-success">Enable</button></td>
+													<td><a href="{{ action('ConnectController@connectPockeytLite') }}"><button class="btn btn-success">Enable</button></a></td>
 												@endif
 											@else
-												<td><button class="btn btn-success">Connect</button></td>
+												<td><a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}"><button class="btn btn-success">Connect</button></a></td>
 												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
@@ -94,7 +99,7 @@
 												<td><button class="btn btn-danger">Disconnect</button></td>
 												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><button class="btn btn-success">Connect</button></td>
+												<td><a href="#"><button class="btn btn-success">Connect</button></a></td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>

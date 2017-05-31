@@ -8612,24 +8612,24 @@ img {
 .icon-insta-connect {
   content:'';
   display:inline-block;
-  width:15px;
-  height:15px;
+  width:25px;
+  height:25px;
   background:url('../images/icon-insta.png') center center no-repeat; background-size: contain;
 }
 
 .icon-square-connect {
   content:'';
   display:inline-block;
-  width:15px;
-  height:15px;
+  width:25px;
+  height:25px;
   background:url('../images/icon-square.png') center center no-repeat; background-size: contain;
 }
 
 .icon-quickbooks-connect {
   content:'';
   display:inline-block;
-  width:15px;
-  height:15px;
+  width:25px;
+  height:25px;
   background:url('../images/icon-quickbooks.png') center center no-repeat; background-size: contain;
 }
 

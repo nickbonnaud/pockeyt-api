@@ -87,7 +87,8 @@ class ConnectController extends Controller
 		$profile->fb_app_id = $access_token;
 		$profile->connected = true;
 		$profile->save();
-		return view('profiles.show', compact('profile'));
+		flash()->success('Connected!', 'Account connected to Facebook');
+    return redirect()->back();
 	}
 
 	private function addPageIdToProfileInsta($userData) {
@@ -96,7 +97,8 @@ class ConnectController extends Controller
 		$profile->insta_account_token = $userData->token;
 		$profile->connected = true;
 		$profile->save();
-		return view('profiles.show', compact('profile'));
+		flash()->success('Connected!', 'Account connected to Instagram');
+    return redirect()->back();
 	}
 
 	public function verifySubscribeFB(Request $request) {
@@ -275,6 +277,35 @@ class ConnectController extends Controller
 			$profile->posts()->save($post);
 		}
 	}
+
+	public function connectSquare(Request $request) {
+    return $this->isLoggedInSquare($request->all());
+  }
+
+  public function isLoggedInSquare($data) {
+    if ($data['state'] = env('SQUARE_STATE')) return $this->getAccessToken($data['code']);
+  }
+
+  public function getAccessToken($code) {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
+    try {
+      $response = $client->request('POST', 'token', [
+        'json' => ['client_id' => env('SQUARE_ID'),
+        'client_secret' => env('SQUARE_SECRET'),
+        'code'=> $code]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $body = json_decode($response->getBody());
+    $profile = $this->user->profile;
+    $profile->square_token = Crypt::encrypt($body->access_token);
+    $profile->save();
+    flash()->success('Connected!', 'You can now import inventory from Square');
+    return redirect()->route('products.list');
+  }
 }
 
 	

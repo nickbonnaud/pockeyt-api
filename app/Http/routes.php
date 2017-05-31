@@ -36,8 +36,6 @@ Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show'
 Route::get('products/list', 'ProductsController@listProducts')->name('products.list');
 Route::post('products/{products}/photos', 'ProductsController@postPhotos')->name('products.photos');
 Route::get('products/inventory/{profiles}', 'ProductsController@getInventory');
-Route::post('products/square/connect', 'ProductsController@connectSquare');
-Route::get('products/square/connect', 'ProductsController@connectSquare');
 Route::get('products/square/sync', 'ProductsController@syncSquareItems');
 Route::resource('products', 'ProductsController', ['only' => ['store', 'destroy', 'edit', 'update']]);
 
@@ -90,6 +88,9 @@ Route::post('connect/subscribe/facebook', 'ConnectController@receiveFBFeed');
 Route::get('connect/instagram', 'ConnectController@connectInsta');
 Route::get('connect/subscribe/instagram', 'ConnectController@verifySubscribeInsta');
 Route::post('connect/subscribe/instagram', 'ConnectController@receiveInstaMedia');
+
+Route::post('products/square/connect', 'ConnectController@connectSquare');
+Route::get('products/square/connect', 'ConnectController@connectSquare');
 
 // Loyalty Programs
 Route::resource('loyalty-programs', 'LoyaltyProgramsController');
