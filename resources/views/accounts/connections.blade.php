@@ -62,7 +62,12 @@
 													<td><button class="btn btn-success">Enable</button></td>
 												@endif
 											@else
-												<td><a href="{{ action('ConnectController@connectInsta') }}"><button class="btn btn-success">Connect</button></a></td>
+												<td>
+													<a href="{{ action('ConnectController@connectInsta') }}" class="btn btn-block btn-social btn-instagram">
+	      										<i class="fa fa-instagram"></i>
+	      										Connect With Instagram
+  												</a>
+  											</td>
 												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
@@ -73,7 +78,13 @@
 												<td><button class="btn btn-danger">Disconnect</button></td>
 												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}"><button class="btn btn-success">Connect</button></a></td>
+												<td>
+													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
+													<i class="fa fa-square-o"></i>
+														Connect With Square
+													</a>
+													</a>
+												</td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
