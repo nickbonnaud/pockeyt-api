@@ -1,5 +1,9 @@
 @extends('layoutDashboard')
 @section('content')
+<?php
+$qbo_obj = new \App\Http\Controllers\QuickBookController();
+$qbo_connect = $qbo_obj->qboConnect();
+?>
 <div class="content-wrapper-scroll">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
@@ -80,9 +84,8 @@
 											@else
 												<td>
 													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
-													<i class="fa fa-square-o"></i>
+														<i class="fa fa-square-o"></i>
 														Connect With Square
-													</a>
 													</a>
 												</td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
@@ -99,7 +102,12 @@
 													<td><a href="{{ action('ConnectController@connectPockeytLite') }}"><button class="btn btn-success">Enable</button></a></td>
 												@endif
 											@else
-												<td><a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}"><button class="btn btn-success">Connect</button></a></td>
+												<td>
+													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
+														<i class="fa fa-square-o"></i>
+														Connect With Square
+													</a>
+												</td>
 												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
@@ -107,10 +115,10 @@
 											<td><span class="icon-quickbooks-connect"></span></td>
 											<td>Pockeyt Sync</td>
 											@if($user->profile->connected_qb)
-												<td><button class="btn btn-danger">Disconnect</button></td>
+												<td><button class="btn btn-danger" href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect</button></td>
 												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><a href="#"><button class="btn btn-success">Connect</button></a></td>
+												<td><ipp:connectToIntuit></ipp:connectToIntuit></td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
@@ -125,6 +133,14 @@
 	</div>
 </div>
 @stop
+@section('scripts.footer')
+<script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
 
+<script>
+	intuit.ipp.anywhere.setup({
+    menuProxy: '{{ env("QBO_MENU_URL") }}',
+    grantUrl: '{{ env("QBO_OAUTH_URL") }}'
+  });
+</script>
 
 
