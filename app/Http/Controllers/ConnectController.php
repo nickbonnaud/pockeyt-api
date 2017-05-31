@@ -239,7 +239,7 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
 		}
-		$body = $response->getBody();
+		$body = $response->getResponse();
 		dd($body);
 		if ($response->success == true) {
 			$profile = $this->user->profile;
