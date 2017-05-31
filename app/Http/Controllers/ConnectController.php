@@ -383,6 +383,8 @@ class ConnectController extends Controller
       }
     }
     $body = json_decode($response->getBody());
+
+    dd($body);
     if (count($body) > 1) {
       $this->matchLocation($body);
       flash()->success('Success', 'You can now import inventory from Square');
