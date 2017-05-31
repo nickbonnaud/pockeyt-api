@@ -96,7 +96,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<td>Inventory Import</td>
 											@if(isset($user->profile->square_token))
 												<td><span class="label label-success">Connected</span></td>
-												if($user->profile->account->square_location_id)
+												@if($user->profile->account->square_location_id)
 													<td><span class="label label-primary">Enabled while connected</span></td>
 												@else
 													<td>
