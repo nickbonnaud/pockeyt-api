@@ -132,13 +132,15 @@ class ConnectController extends Controller
 			$accountId = $post->object_id;
 			$mediaId = $post->data->media_id;
 
-			return $this->getInstaPost($accountId, $mediaId);
+			$profile = Profile::where('insta_account_id', '=', $accountId)->first();
+			$access_token = $profile->insta_account_token;
+			if ($access_token) {
+				return $this->getInstaPost($mediaId, $profile, $access_token);
+			}
 		}
 	}
 
-	private function getInstaPost($accountId, $mediaId) {
-			$profile = Profile::where('insta_account_id', '=', $accountId)->first();
-			$access_token = $profile->insta_account_token;
+	private function getInstaPost($mediaId, $profile, $access_token) {
 			$clientInsta = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media/']);
 			try {
 				$responseInsta = $clientInsta->request('GET', $mediaId, [
@@ -252,6 +254,14 @@ class ConnectController extends Controller
 		}
   }
 
+  public function removeInstaSubscription() {
+  	$profile = $this->user->profile;
+  	$profile->insta_account_token = null;
+  	$profile->save();
+  	flash()->success('Disabled!', 'Auto updates disabled for Facebook');
+    return redirect()->back();
+  }
+
   public function addfBSubscription() {
   	$accessToken = $this->user->profile->fb_app_id;
   	$pageId = $this->user->profile->fb_page_id;
@@ -273,11 +283,15 @@ class ConnectController extends Controller
 			$profile->connected = true;
 			$profile->save();
 			flash()->success('Enabled!', 'Auto updates enabled for Facebook');
-    	return redirect()->back();
+    	return redirect()->view('accounts.connections');
 		} else {
 			flash()->overlay('Oops! Unable to enable', 'Please try again', 'error');
-    	return redirect()->back();
+    	return redirect()->view('accounts.connections');
 		}
+  }
+
+  public function addInstaSubscription() {
+
   }
 
 	/**************************

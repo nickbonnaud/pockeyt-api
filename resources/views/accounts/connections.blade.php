@@ -66,12 +66,20 @@ $qbo_connect = $qbo_obj->qboConnect();
 										<tr>
 											<td><span class="icon-insta-connect"></span></td>
 											<td>Auto Posting</td>
-											@if($user->profile->insta_account_token !== null)
-												<td><button class="btn btn-danger">Disconnect</button></td>
-												@if($user->profile->insta_account_id !== null)
-													<td><button class="btn btn-danger">Disable</button></td>
+											@if($user->profile->insta_account_id !== null)
+												<td><span class="label label-success">Connected</span></td>
+												@if($user->profile->insta_account_token !== null)
+													<td>
+														<a href="{{ action('ConnectController@removeInstaSubscription') }}">
+															<button class="btn btn-danger">Disable</button>
+														</a>
+													</td>
 												@else
-													<td><button class="btn btn-success">Enable</button></td>
+													<td>
+														<a href="{{ action('ConnectController@connectInsta') }}">
+															<button class="btn btn-success">Enable</button>
+														</a>
+													</td>
 												@endif
 											@else
 												<td>
