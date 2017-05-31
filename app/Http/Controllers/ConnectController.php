@@ -384,7 +384,8 @@ class ConnectController extends Controller
     }
     $body = json_decode($response->getBody());
 
-    dd($body);
+    flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
+      return redirect()->route('accounts.connections');
     if (count($body) > 1) {
       $this->matchLocation($body);
       flash()->success('Success', 'You can now import inventory from Square');
