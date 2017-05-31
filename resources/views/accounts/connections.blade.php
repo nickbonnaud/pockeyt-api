@@ -95,8 +95,16 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<td><span class="icon-square-connect"></span></td>
 											<td>Inventory Import</td>
 											@if(isset($user->profile->square_token))
-												<td><button class="btn btn-danger">Disconnect</button></td>
-												<td><span class="label label-primary">Disable by disconnecting</span></td>
+												<td><span class="label label-success">Connected</span></td>
+												if($user->profile->account->square_location_id)
+													<td><span class="label label-primary">Enabled while connected</span></td>
+												@else
+													<td>
+														<a href="{{ action('ConnectController@getSquareLocationId') }}">
+															<button class="btn btn-success">Enable</button>
+														</a>
+													</td>
+												@endif
 											@else
 												<td>
 													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
@@ -104,7 +112,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 														Connect With Square
 													</a>
 												</td>
-												<td><span class="label label-primary">Enable by connecting</span></td>
+												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
 										<tr>

@@ -362,6 +362,40 @@ class ConnectController extends Controller
     }
   }
 
+  public function getSquareLocationId() {
+    try {
+      $token = Crypt::decrypt($this->user->profile->square_token);
+    } catch (DecryptException $e) {
+      dd($e);
+    }
+
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', 'me/locations', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $body = json_decode($response->getBody());
+    if (count($body) > 1) {
+      $this->matchLocation($body);
+      flash()->success('Success', 'You can now import inventory from Square');
+    	return redirect()->route('accounts.connections');
+    } elseif(count($body) == 1) {
+      $account = $this->user->profile->account;
+      $account->square_location_id = $body[0]->id;
+      $account->save();
+      flash()->success('Success', 'You can now import inventory from Square');
+    	return redirect()->route('accounts.connections');
+    }
+  }
+
   public function matchLocation($locations) {
     $businessLocation = $this->user->profile->account->bizStreetAdress;
     if(isset($businessLocation)) {
