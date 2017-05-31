@@ -119,7 +119,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<td><span class="icon-square-connect"></span></td>
 											<td>Pockeyt Lite</td>
 											@if(isset($user->profile->square_token))
-												<td><button class="btn btn-danger">Disconnect</button></td>
+												<td><span class="label label-success">Connected</span></td>
 												@if($user->profile->account->pockeyt_lite_enabled)
 													<td><button class="btn btn-danger">Disable</button></td>
 												@else
