@@ -26,64 +26,75 @@
 										<tr>
 											<th>Company</th>
 											<th>Service</th>
-											<th>Status</th>
-											<th>Toggle</th>
+											<th>Connection</th>
+											<th>Feature</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td><span class="icon-fb-connect"></span></td>
 											<td>Auto Posting</td>
-											@if($user->profile->fb_page_id !== null)
-												<td><span class="label label-success">Enabled</span></td>
-												<td><span class="label label-danger">Disable</span></td>
+											@if($user->profile->fb_app_id !== null)
+												<td><button class="btn btn-danger">Disconnect</button></td>
+												@if($user->profile->fb_page_id !== null)
+													<td><button class="btn btn-danger">Disable</button></td>
+												@else
+													<td><button class="btn btn-success">Enable</button></td>
+												@endif
 											@else
-												<td><span class="label label-warning">Disabled</span></td>
-												<td><span class="label label-info">Enable</span></td>
+												<td><button class="btn btn-success">Connect</button></td>
+												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
 										<tr>
 											<td><span class="icon-insta-connect"></span></td>
 											<td>Auto Posting</td>
-											@if(($user->profile->fb_page_id == null) && ($user->profile->connected == true))
-												<td><span class="label label-success">Enabled</span></td>
-												<td><span class="label label-danger">Disable</span></td>
+											@if($user->profile->insta_account_token !== null)
+												<td><button class="btn btn-danger">Disconnect</button></td>
+												@if($user->profile->insta_account_id !== null)
+													<td><button class="btn btn-danger">Disable</button></td>
+												@else
+													<td><button class="btn btn-success">Enable</button></td>
+												@endif
 											@else
-												<td><span class="label label-warning">Disabled</span></td>
-												<td><span class="label label-info">Enable</span></td>
+												<td><button class="btn btn-success">Connect</button></td>
+												<td><button class="btn btn-success disabled">Enable</button></td>
 											@endif
 										</tr>
 										<tr>
 											<td><span class="icon-square-connect"></span></td>
 											<td>Inventory Import</td>
 											@if(isset($user->profile->square_token))
-												<td><span class="label label-success">Enabled</span></td>
-												<td><span class="label label-danger">Disable</span></td>
+												<td><button class="btn btn-danger">Disconnect</button></td>
+												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><span class="label label-warning">Disabled</span></td>
-												<td><span class="label label-info">Enable</span></td>
+												<td><button class="btn btn-success">Connect</button></td>
+												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
 										<tr>
 											<td><span class="icon-square-connect"></span></td>
 											<td>Pockeyt Lite</td>
-											@if($user->profile->account->pockeyt_lite_enabled)
-												<td><span class="label label-success">Enabled</span></td>
-												<td><span class="label label-danger">Disable</span></td>
+											@if(isset($user->profile->square_token))
+												<td><button class="btn btn-danger">Disconnect</button></td>
+												@if($user->profile->account->pockeyt_lite_enabled)
+													<td><button class="btn btn-danger">Disable</button></td>
+												@else
+													<td><button class="btn btn-success">Enable</button></td>
+												@endif
 											@else
-												<td><span class="label label-warning">Disabled</span></td>
-												<td><span class="label label-info">Enable</span></td>
+												<td><button class="btn btn-success">Connect</button></td>
 											@endif
 										</tr>
 										<tr>
 											<td><span class="icon-quickbooks-connect"></span></td>
 											<td>Pockeyt Sync</td>
 											@if($user->profile->connected_qb)
-												<td><span class="label label-success">Enabled</span></td>
-												<td><span class="label label-danger">Disable</span></td>
+												<td><button class="btn btn-danger">Disconnect</button></td>
+												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><span class="label label-warning">Disabled</span></td>
-												<td><span class="label label-info">Enable</span></td>
+												<td><button class="btn btn-success">Connect</button></td>
+												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
 									</tbody>
