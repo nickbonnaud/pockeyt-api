@@ -225,8 +225,7 @@ class ConnectController extends Controller
   }
 
   public function removefBSubscription() {
-  	$access_token = $this->user->profile->fb_app_id;
-  	dd($access_token);
+  	$access_token = env('FB_SECRET');
   	$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.9/']);
 		try {
 			$response = $client->request('DELETE',  env('FB_APP_ID') . '/subscriptions', [
