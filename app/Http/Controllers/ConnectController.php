@@ -195,6 +195,90 @@ class ConnectController extends Controller
 		}
 	}
 
+	public function connectSquare(Request $request) {
+    return $this->isLoggedInSquare($request->all());
+  }
+
+  public function isLoggedInSquare($data) {
+    if ($data['state'] = env('SQUARE_STATE')) return $this->getAccessToken($data['code']);
+  }
+
+  public function getAccessToken($code) {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
+    try {
+      $response = $client->request('POST', 'token', [
+        'json' => ['client_id' => env('SQUARE_ID'),
+        'client_secret' => env('SQUARE_SECRET'),
+        'code'=> $code]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $body = json_decode($response->getBody());
+    $profile = $this->user->profile;
+    $profile->square_token = Crypt::encrypt($body->access_token);
+    $profile->save();
+    flash()->success('Connected!', 'You can now import inventory from Square');
+    return redirect()->route('products.list');
+  }
+
+  public function removefBSubscription() {
+  	$access_token = $this->user->profile->fb_app_id;
+  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.9/']);
+		try {
+			$response = $client->request('DELETE',  env('FB_APP_ID') . '/subscriptions', [
+				'query' => ['access_token' => $access_token ],
+        'object' => 'page',
+        'fields' => 'feed'
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+		}
+		if ($response->success == true) {
+			$profile = $this->user->profile;
+			$profile->connected = false;
+			$profile->save();
+			flash()->success('Disabled!', 'Auto updates disabled for Facebook');
+    	return redirect()->back();
+		} else {
+			flash()->overlay('Oops! Unable to disable', 'Please try again', 'error');
+    	return redirect()->back();
+		}
+  }
+
+  public function addfBSubscription() {
+  	$access_token = $this->user->profile->fb_app_id;
+  	$verifyToken = env('FB_VERIFY_TOKEN');
+  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.9/']);
+		try {
+			$response = $client->request('POST',  env('FB_APP_ID') . '/subscriptions', [
+				'query' => ['access_token' => $access_token ],
+        'object' => 'page',
+        'callback_url' => 'https://pockeytbiz.com/connect/subscribe/facebook',
+        'fields' => 'feed',
+        'verify_token' => $verifyToken
+      ]);
+		} catch (RequestException $e) {
+			if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+		}
+		if ($response->success == true) {
+			$profile = $this->user->profile;
+			$profile->connected = true;
+			$profile->save();
+			flash()->success('Enabled!', 'Auto updates enabled for Facebook');
+    	return redirect()->back();
+		} else {
+			flash()->overlay('Oops! Unable to enable', 'Please try again', 'error');
+    	return redirect()->back();
+		}
+  }
+
 	/**************************
  * Post actions
  */
@@ -277,35 +361,6 @@ class ConnectController extends Controller
 			$profile->posts()->save($post);
 		}
 	}
-
-	public function connectSquare(Request $request) {
-    return $this->isLoggedInSquare($request->all());
-  }
-
-  public function isLoggedInSquare($data) {
-    if ($data['state'] = env('SQUARE_STATE')) return $this->getAccessToken($data['code']);
-  }
-
-  public function getAccessToken($code) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
-    try {
-      $response = $client->request('POST', 'token', [
-        'json' => ['client_id' => env('SQUARE_ID'),
-        'client_secret' => env('SQUARE_SECRET'),
-        'code'=> $code]
-      ]);
-    } catch (RequestException $e) {
-      if ($e->hasResponse()) {
-        return $e->getResponse();
-      }
-    }
-    $body = json_decode($response->getBody());
-    $profile = $this->user->profile;
-    $profile->square_token = Crypt::encrypt($body->access_token);
-    $profile->save();
-    flash()->success('Connected!', 'You can now import inventory from Square');
-    return redirect()->route('products.list');
-  }
 }
 
 	

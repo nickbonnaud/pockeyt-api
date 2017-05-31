@@ -84,6 +84,8 @@ Route::post('business/transactions/finalized', 'TransactionsController@getFinali
 Route::get('connect/facebook', 'ConnectController@connectFB');
 Route::get('connect/subscribe/facebook', 'ConnectController@verifySubscribeFB');
 Route::post('connect/subscribe/facebook', 'ConnectController@receiveFBFeed');
+Route::get('connect/facebook/disable_auto', 'ConnectController@removefBSubscription');
+Route::get('connect/facebook/enable_auto', 'ConnectController@addfBSubscription');
 
 Route::get('connect/instagram', 'ConnectController@connectInsta');
 Route::get('connect/subscribe/instagram', 'ConnectController@verifySubscribeInsta');

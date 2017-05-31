@@ -39,11 +39,19 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<td><span class="icon-fb-connect"></span></td>
 											<td>Auto Posting</td>
 											@if($user->profile->fb_app_id !== null)
-												<td><button class="btn btn-danger">Disconnect</button></td>
-												@if($user->profile->fb_page_id !== null)
-													<td><button class="btn btn-danger">Disable</button></td>
+												<td><span class="label label-success">Connected</span></td>
+												@if($user->profile->fb_page_id !== null && $user->profile->connected == true)
+													<td>
+														<a href="{{ action('ConnectController@removefBSubscription') }}">
+															<button class="btn btn-danger">Disable</button>
+														</a>
+													</td>
 												@else
-													<td><button class="btn btn-success">Enable</button></td>
+													<td>
+														<a href="{{ action('ConnectController@addfBSubscription') }}">
+															<button class="btn btn-success">Enable</button>
+														</a>
+													</td>
 												@endif
 											@else
 												<td>
@@ -118,7 +126,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 												<td><button class="btn btn-danger" href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect</button></td>
 												<td><span class="label label-primary">Disable by disconnecting</span></td>
 											@else
-												<td><ipp:connectToIntuit></ipp:connectToIntuit></td>
+												<td style="text-align: center;"><ipp:connectToIntuit></ipp:connectToIntuit></td>
 												<td><span class="label label-primary">Enable by connecting</span></td>
 											@endif
 										</tr>
