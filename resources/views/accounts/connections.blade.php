@@ -115,7 +115,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 												@if($user->profile->account->pockeyt_lite_enabled)
 													<td><button class="btn btn-danger">Disable</button></td>
 												@else
-													<td><a href="{{ action('ConnectController@connectPockeytLite') }}"><button class="btn btn-success">Enable</button></a></td>
+													<td><a href="{{ action('ConnectController@subscribeSquare') }}"><button class="btn btn-success">Enable</button></a></td>
 												@endif
 											@else
 												<td>
