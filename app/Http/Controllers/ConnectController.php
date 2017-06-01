@@ -533,8 +533,7 @@ class ConnectController extends Controller
 
   public function createCell($row, $column, $token, $squareLocationId, $pageId) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    $objectId = $this->user->profile->account->squareCategoryId;
-    dd($objectId);
+    $objectId = $this->user->profile->account->square_category_id;
     try {
       $response = $client->request('PUT', $squareLocationId . '/pages' . '/' . $pageId . '/cells', [
         'headers' => [
