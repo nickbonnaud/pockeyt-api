@@ -303,8 +303,8 @@ class ConnectController extends Controller
     if (!isset($squareLocationId)) {
     	$this->setLocation($token);
     }
-    $this->createSquarePockeytCategory($squareLocationId, $token);
-    $this->createSquareItem($squareLocationId, $token);
+    $this->checkSquarePockeytCategory($squareLocationId, $token);
+    $this->checkSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
     $this->subscribeEventType($squareLocationId, $token);
     flash()->success('Success', 'Pockeyt Lite connected with Square!');
@@ -329,7 +329,8 @@ class ConnectController extends Controller
     }       
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = true;
-    return $account->save();
+    $account->save();
+    return $this;
   }
 
   public function setLocation($token) {
@@ -431,7 +432,7 @@ class ConnectController extends Controller
     }
   }
 
-  public function createSquarePockeytCategory($squareLocationId, $token) {
+  public function checkSquarePockeytCategory($squareLocationId, $token) {
   	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
       $response = $client->request('GET', $squareLocationId . '/categories', [
@@ -445,32 +446,39 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
     }
-    $body = json_decode($response->getBody());
-    dd($body);
+    $categories = json_decode($response->getBody());
+    $savedCategoryId = $this->user->profile->account->square_category_id;
+    foreach ($categories as $category) {
+    	if ($category->name == "Pockeyt Customers" || (isset($savedCategoryId) && $savedCategoryId == $category->id)) {
+    		$account = $this->user->profile->account;
+	    	$account->square_category_id = $category->id;
+	    	$account->save();
+	    	return $this;
+    	}
+    }
+    return $this->createSquarePockeytCategory($squareLocationId, $token);
+  }
 
-  	if (!$this->user->profile->account->square_category_id) {
-	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-	    try {
-	      $response = $client->request('POST', $squareLocationId . '/categories', [
-	        'headers' => [
-	          'Authorization' => 'Bearer ' . $token,
-	          'Accept' => 'application/json'
-	        ],
-	        'json' => ['name' => 'Pockeyt Customers']
-	      ]);
-	    } catch (RequestException $e) {
-	      if ($e->hasResponse()) {
-	        return $e->getResponse();
-	      }
-	    }
-	    dd($response);
-	    $body = json_decode($response->getBody());
-	    $account = $this->user->profile->account;
-	    $account->squareCategoryId = $body->id;
-	    return $account->save();
-	  } else {
-	  	return;
-	  }
+  public function createSquarePockeytCategory($squareLocationId, $token) {
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('POST', $squareLocationId . '/categories', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ],
+        'json' => ['name' => 'Pockeyt Customers']
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $category = json_decode($response->getBody());
+   	$account = $this->user->profile->account;
+	  $account->square_category_id = $category->id;
+	  $account->save();
+	  return $this;
   }
 
   public function getSquarePages($squareLocationId, $token) {
@@ -496,11 +504,7 @@ class ConnectController extends Controller
         return $this->createCell($row, $column, $token, $squareLocationId, $pageId);
       }
     } else {
-      $this->createSquarePage($squareLocationId, $token);
-      $pageId = 0;
-      $row = 4;
-      $column = 4;
-      return $this->createCell($row, $column, $token, $squareLocationId, $pageId);
+      return $this->createSquarePage($squareLocationId, $token);
     }
   }
 
@@ -512,14 +516,20 @@ class ConnectController extends Controller
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
-        'page_index' => 0
+        'json' => [
+        	'page_index' => 0
+        ]
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
-    return;
+    $page = json_decode($response->getBody());
+   	$pageId = $page->id;
+    $row = 4;
+    $column = 4;
+    return $this->createCell($row, $column, $token, $squareLocationId, $pageId);
   }
 
   public function createCell($row, $column, $token, $squareLocationId, $pageId) {
@@ -531,30 +541,59 @@ class ConnectController extends Controller
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
-        'row' => $row,
-        'column' => $column,
-        'object_type' => 'CATEGORY',
-        'object_id' =>  $objectId
+        'json' => [
+        	'row' => $row,
+	        'column' => $column,
+	        'object_type' => 'CATEGORY',
+	        'object_id' =>  $objectId
+        ]
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
-    return;
+    return $this;
+  }
+
+  public function checkSquareItem($squareLocationId, $token) {
+  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', $squareLocationId . '/items', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $items = json_decode($response->getBody());
+    $savedItemId = $this->user->profile->account->square_item_id;
+    foreach ($items as $item) {
+    	if ($item->name == "Pockeyt Customer" || (isset($savedItemId) && $savedItemId == $item->id)) {
+    		$account = $this->user->profile->account;
+	    	$account->square_item_id = $item->id;
+	    	$account->save();
+	    	return $this;
+    	}
+    }
+    return $this->createSquareItem($squareLocationId, $token);
   }
 
   public function createSquareItem($squareLocationId, $token) {
-  	if ($this->user->profile->account->square_item_id) {
-	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-	    $objectId = $this->user->profile->account->squareCategoryId;
-	    try {
-	      $response = $client->request('POST', $squareLocationId . '/items', [
-	        'headers' => [
-	          'Authorization' => 'Bearer ' . $token,
-	          'Accept' => 'application/json'
-	        ],
-	        'name' => 'Pockeyt Customer',
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $objectId = $this->user->profile->account->squareCategoryId;
+    try {
+      $response = $client->request('POST', $squareLocationId . '/items', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ],
+        'json' => [
+        	'name' => 'Pockeyt Customer',
 	        'category_id' => $objectId,
 	        'abbreviation' => 'PC',
 	        'variations' => [
@@ -568,19 +607,18 @@ class ConnectController extends Controller
 	          ],
 	          'track_inventory' => false,
 	        ]
-	      ]);
-	    } catch (RequestException $e) {
-	      if ($e->hasResponse()) {
-	        return $e->getResponse();
-	      }
-	    }
-	    $body = json_decode($response->getBody());
-	    $account = $this->user->profile->account;
-	    $account->squareItemId = $body->id;
-	    return $account->save();
-	  } else {
-	  	return;
-	  }
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $item = json_decode($response->getBody());
+    $account = $this->user->profile->account;
+    $account->square_item_id = $item->id;
+    $account->save();
+    return $this;
   }
 
 	/**************************
