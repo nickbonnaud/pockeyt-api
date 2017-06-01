@@ -622,6 +622,35 @@ class ConnectController extends Controller
     return $account->save();
   }
 
+  public function disablePockeytLite() {
+  	$squareToken = $this->user->profile->square_token;
+    try {
+      $token = Crypt::decrypt($squareToken);
+    } catch (DecryptException $e) {
+      dd($e);
+    }
+    $squareLocationId = $this->user->profile->account->square_location_id;
+  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('PUT', $squareLocationId . '/webhooks', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ],
+        'json' => []
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        dd($e->getResponse());
+      }
+    }
+    $account = $this->user->profile->account;
+    $account->pockeyt_lite_enabled = false;
+    $account->save();
+    flash()->success('Disconnected!', 'Pockeyt Lite is now disabled');
+    return redirect()->route('accounts.connections');
+  }
+
 	/**************************
  * Post actions
  */

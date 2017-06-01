@@ -96,6 +96,7 @@ Route::post('connect/square', 'ConnectController@connectSquare');
 Route::get('connect/square', 'ConnectController@connectSquare');
 Route::get('connect/square/subscribe', 'ConnectController@subscribeSquare');
 Route::get('connect/square/location', 'ConnectController@getSquareLocationId');
+Route::get('connect/square/unsubscribe', 'ConnectController@disablePockeytLite');
 
 // Loyalty Programs
 Route::resource('loyalty-programs', 'LoyaltyProgramsController');
