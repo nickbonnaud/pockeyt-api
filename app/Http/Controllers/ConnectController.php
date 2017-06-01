@@ -319,6 +319,7 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
+    dd($pages);
     $pageId = $pages[0]->id;
 
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
@@ -335,7 +336,6 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
-    dd($pages);
 
 
 
