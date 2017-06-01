@@ -595,15 +595,12 @@ class ConnectController extends Controller
 	        'category_id' => $objectId,
 	        'abbreviation' => 'PC',
 	        'variations' => [
-	          'id' => 'placeholder_variation',
 	          'name' => 'Placeholder default Pockeyt Customer',
-	          'ordinal' => 100,
 	          'pricing_type' => 'FIXED_PRICING',
 	          'price_money' => [
-	              'amount' => 0,
-	              'currency_code' => 'USD'
-	          ],
-	          'track_inventory' => false,
+	          	'currency_code' => 'USD',
+	            'amount' => 0,
+	          ]
 	        ]
         ]
       ]);
