@@ -302,9 +302,14 @@ class ConnectController extends Controller
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
     	$this->setLocation($token);
+    } else {
+    	$this->createSquareAccount($squareLocationId, $token);
     }
-    dd('here');
-    $this->checkSquarePockeytCategory($squareLocationId, $token);
+  }
+
+  public function createSquareAccount($squareLocationId, $token) {
+  	dd("here");
+  	$this->checkSquarePockeytCategory($squareLocationId, $token);
     $this->checkSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
     $this->subscribeEventType($squareLocationId, $token);
@@ -353,7 +358,8 @@ class ConnectController extends Controller
       $account = $this->user->profile->account;
       $squareLocationId = $body[0]->id;
       $account->square_location_id = $squareLocationId;
-      return $account->save();
+      $account->save();
+      return $this->createSquareAccount($squareLocationId, $token);
     }
   }
 
@@ -422,7 +428,7 @@ class ConnectController extends Controller
         }
       }
       if ($this->user->profile->account->square_location_id) {
-      	return;
+      	return $this->createSquareAccount($squareLocationId, $token);
       } else {
       	flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
       	return redirect()->route('accounts.connections');
