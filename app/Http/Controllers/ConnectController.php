@@ -584,7 +584,6 @@ class ConnectController extends Controller
   public function createSquareItem($squareLocationId, $token) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     $objectId = $this->user->profile->account->square_category_id;
-    dd($squareLocationId);
     try {
       $response = $client->request('POST', $squareLocationId . '/items', [
         'headers' => [
@@ -596,12 +595,14 @@ class ConnectController extends Controller
 	        'category_id' => $objectId,
 	        'abbreviation' => 'PC',
 	        'variations' => [
-	          'name' => 'Placeholder default Pockeyt Customer',
-	          'pricing_type' => 'FIXED_PRICING',
-	          'price_money' => [
-	          	'currency_code' => 'USD',
-	            'amount' => 0,
-	          ]
+	        	[
+		          'name' => 'Placeholder default Pockeyt Customer',
+		          'pricing_type' => 'FIXED_PRICING',
+		          'price_money' => [
+		          	'currency_code' => 'USD',
+		            'amount' => 0,
+		          ]
+		        ]
 	        ]
         ]
       ]);
