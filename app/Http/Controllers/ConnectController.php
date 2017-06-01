@@ -303,6 +303,7 @@ class ConnectController extends Controller
     if (!isset($squareLocationId)) {
       return $this->setLocation($token);
     }
+    dd("here");
     $this->createSquarePockeytCategory($squareLocationId, $token);
     $this->createSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
