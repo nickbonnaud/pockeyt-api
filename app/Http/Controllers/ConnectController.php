@@ -556,6 +556,7 @@ class ConnectController extends Controller
   }
 
   public function checkSquareItem($squareLocationId, $token) {
+  	dd("here");
   	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
       $response = $client->request('GET', $squareLocationId . '/items', [
