@@ -320,7 +320,7 @@ class ConnectController extends Controller
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
-        'PAYMENT_UPDATED'
+        'body' => 'PAYMENT_UPDATED'
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
