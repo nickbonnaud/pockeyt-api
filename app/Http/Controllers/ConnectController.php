@@ -584,6 +584,7 @@ class ConnectController extends Controller
   public function createSquareItem($squareLocationId, $token) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     $objectId = $this->user->profile->account->square_category_id;
+    dd($objectId);
     try {
       $response = $client->request('POST', $squareLocationId . '/items', [
         'headers' => [
@@ -599,7 +600,7 @@ class ConnectController extends Controller
 	          'pricing_type' => 'FIXED_PRICING',
 	          'price_money' => [
 	          	'currency_code' => 'USD',
-	            'amount' => 10,
+	            'amount' => 0,
 	          ]
 	        ]
         ]
