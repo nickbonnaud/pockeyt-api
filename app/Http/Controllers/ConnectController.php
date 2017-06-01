@@ -308,7 +308,6 @@ class ConnectController extends Controller
   }
 
   public function createSquareAccount($squareLocationId, $token) {
-  	dd("here");
   	$this->checkSquarePockeytCategory($squareLocationId, $token);
     $this->checkSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
