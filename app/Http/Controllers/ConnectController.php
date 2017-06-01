@@ -301,7 +301,7 @@ class ConnectController extends Controller
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
-      return $this->setLocation($token);
+    	$this->setLocation($token);
     }
     $this->createSquarePockeytCategory($squareLocationId, $token);
     $this->createSquareItem($squareLocationId, $token);
@@ -354,12 +354,7 @@ class ConnectController extends Controller
       $squareLocationId = $body[0]->id;
       $account->square_location_id = $squareLocationId;
       $account->save();
-      $this->createSquarePockeytCategory($squareLocationId, $token);
-      $this->createSquareItem($squareLocationId, $token);
-      $this->getSquarePages($squareLocationId, $token);
-	    $this->subscribeEventType($squareLocationId, $token);
-	    flash()->success('Success', 'Pockeyt Lite connected with Square!');
-	    return redirect()->route('accounts.connections');
+      return $this;
     }
   }
 
@@ -425,12 +420,7 @@ class ConnectController extends Controller
           $squareLocationId = $location->id;
           $account->square_location_id = $squareLocationId;
           $account->save();
-          $this->createSquarePockeytCategory($squareLocationId, $token);
-		      $this->createSquareItem($squareLocationId, $token);
-		      $this->getSquarePages($squareLocationId, $token);
-			    $this->subscribeEventType($squareLocationId, $token);
-			    flash()->success('Success', 'Pockeyt Lite connected with Square!');
-			    return redirect()->route('accounts.connections');
+        	return $this;
         } 
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
@@ -442,6 +432,22 @@ class ConnectController extends Controller
   }
 
   public function createSquarePockeytCategory($squareLocationId, $token) {
+  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', $squareLocationId . '/categories', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $body = json_decode($response->getBody());
+    dd($body);
+
   	if (!$this->user->profile->account->square_category_id) {
 	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
 	    try {
