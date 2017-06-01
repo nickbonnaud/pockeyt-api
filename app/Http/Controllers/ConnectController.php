@@ -301,9 +301,9 @@ class ConnectController extends Controller
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
-    	$this->setLocation($token);
+    	return $this->setLocation($token);
     }
-    $this->checkSquarePockeytCategory($squareLocationId, $token);
+    return $this->checkSquarePockeytCategory($squareLocationId, $token);
     $this->checkSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
     $this->subscribeEventType($squareLocationId, $token);
