@@ -301,9 +301,9 @@ class ConnectController extends Controller
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
-    	$this->setLocation($token);
+    	return $this->setLocation($token);
     } else {
-    	$this->createSquareAccount($squareLocationId, $token);
+    	return $this->createSquareAccount($squareLocationId, $token);
     }
   }
 
