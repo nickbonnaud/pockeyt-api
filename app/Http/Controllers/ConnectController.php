@@ -302,15 +302,9 @@ class ConnectController extends Controller
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
       return $this->setLocation($token);
-      $squareLocationId = $this->user->profile->account->square_location_id;
     }
-    dd("here");
-    if ($this->user->profile->account->square_category_id) {
-      $this->createSquarePockeytCategory($squareLocationId, $token);
-    }
-    if ($this->user->profile->account->square_item_id) {
-      $this->createSquareItem($squareLocationId, $token);
-    }
+    $this->createSquarePockeytCategory($squareLocationId, $token);
+    $this->createSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
     $this->subscribeEventType($squareLocationId, $token);
     flash()->success('Success', 'Pockeyt Lite connected with Square!');
@@ -357,9 +351,15 @@ class ConnectController extends Controller
       return $this->matchLocationLite($body);
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
-      $account->square_location_id = $body[0]->id;
+      $squareLocationId = $body[0]->id;
+      $account->square_location_id = $squareLocationId;
       $account->save();
-      return;
+      $this->createSquarePockeytCategory($squareLocationId, $token);
+      $this->createSquareItem($squareLocationId, $token);
+      $this->getSquarePages($squareLocationId, $token);
+	    $this->subscribeEventType($squareLocationId, $token);
+	    flash()->success('Success', 'Pockeyt Lite connected with Square!');
+	    return redirect()->route('accounts.connections');
     }
   }
 
@@ -424,7 +424,12 @@ class ConnectController extends Controller
           $account = $this->user->profile->account;
           $account->square_location_id = $location->id;
           $account->save();
-          return;
+          $this->createSquarePockeytCategory($squareLocationId, $token);
+		      $this->createSquareItem($squareLocationId, $token);
+		      $this->getSquarePages($squareLocationId, $token);
+			    $this->subscribeEventType($squareLocationId, $token);
+			    flash()->success('Success', 'Pockeyt Lite connected with Square!');
+			    return redirect()->route('accounts.connections');
         } 
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
@@ -436,24 +441,28 @@ class ConnectController extends Controller
   }
 
   public function createSquarePockeytCategory($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    try {
-      $response = $client->request('POST', $squareLocationId . '/categories', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $token,
-          'Accept' => 'application/json'
-        ],
-        'name' => 'Pockeyt Customers'
-      ]);
-    } catch (RequestException $e) {
-      if ($e->hasResponse()) {
-        return $e->getResponse();
-      }
-    }
-    $body = json_decode($response->getBody());
-    $account = $this->user->profile->account;
-    $account->squareCategoryId = $body->id;
-    return $account->save();
+  	if (!$this->user->profile->account->square_category_id) {
+	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+	    try {
+	      $response = $client->request('POST', $squareLocationId . '/categories', [
+	        'headers' => [
+	          'Authorization' => 'Bearer ' . $token,
+	          'Accept' => 'application/json'
+	        ],
+	        'name' => 'Pockeyt Customers'
+	      ]);
+	    } catch (RequestException $e) {
+	      if ($e->hasResponse()) {
+	        return $e->getResponse();
+	      }
+	    }
+	    $body = json_decode($response->getBody());
+	    $account = $this->user->profile->account;
+	    $account->squareCategoryId = $body->id;
+	    return $account->save();
+	  } else {
+	  	return;
+	  }
   }
 
   public function getSquarePages($squareLocationId, $token) {
@@ -476,16 +485,15 @@ class ConnectController extends Controller
         $pageId = $page->id;
         $row = 4;
         $column = 4;
-        $this->createCell($row, $column, $token, $squareLocationId, $pageId);
+        return $this->createCell($row, $column, $token, $squareLocationId, $pageId);
       }
     } else {
       $this->createSquarePage($squareLocationId, $token);
       $pageId = 0;
       $row = 4;
       $column = 4;
-      $this->createCell($row, $column, $token, $squareLocationId, $pageId);
+      return $this->createCell($row, $column, $token, $squareLocationId, $pageId);
     }
-    return;
   }
 
   public function createSquarePage($squareLocationId, $token) {
@@ -529,38 +537,42 @@ class ConnectController extends Controller
   }
 
   public function createSquareItem($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    $objectId = $this->user->profile->account->squareCategoryId;
-    try {
-      $response = $client->request('POST', $squareLocationId . '/items', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $token,
-          'Accept' => 'application/json'
-        ],
-        'name' => 'Pockeyt Customer',
-        'category_id' => $objectId,
-        'abbreviation' => 'PC',
-        'variations' => [
-          'id' => 'placeholder_variation',
-          'name' => 'Placeholder default Pockeyt Customer',
-          'ordinal' => 100,
-          'pricing_type' => 'FIXED_PRICING',
-          'price_money' => [
-              'amount' => 0,
-              'currency_code' => 'USD'
-          ],
-          'track_inventory' => false,
-        ]
-      ]);
-    } catch (RequestException $e) {
-      if ($e->hasResponse()) {
-        return $e->getResponse();
-      }
-    }
-    $body = json_decode($response->getBody());
-    $account = $this->user->profile->account;
-    $account->squareItemId = $body->id;
-    return $account->save();
+  	if ($this->user->profile->account->square_item_id) {
+	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+	    $objectId = $this->user->profile->account->squareCategoryId;
+	    try {
+	      $response = $client->request('POST', $squareLocationId . '/items', [
+	        'headers' => [
+	          'Authorization' => 'Bearer ' . $token,
+	          'Accept' => 'application/json'
+	        ],
+	        'name' => 'Pockeyt Customer',
+	        'category_id' => $objectId,
+	        'abbreviation' => 'PC',
+	        'variations' => [
+	          'id' => 'placeholder_variation',
+	          'name' => 'Placeholder default Pockeyt Customer',
+	          'ordinal' => 100,
+	          'pricing_type' => 'FIXED_PRICING',
+	          'price_money' => [
+	              'amount' => 0,
+	              'currency_code' => 'USD'
+	          ],
+	          'track_inventory' => false,
+	        ]
+	      ]);
+	    } catch (RequestException $e) {
+	      if ($e->hasResponse()) {
+	        return $e->getResponse();
+	      }
+	    }
+	    $body = json_decode($response->getBody());
+	    $account = $this->user->profile->account;
+	    $account->squareItemId = $body->id;
+	    return $account->save();
+	  } else {
+	  	return;
+	  }
   }
 
 	/**************************
