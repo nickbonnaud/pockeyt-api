@@ -423,7 +423,8 @@ class ConnectController extends Controller
         if ($location->business_address->address_line_1 == $businessLocation) {
           $account = $this->user->profile->account;
           $account->square_location_id = $location->id;
-          return $account->save();
+          $account->save();
+          return;
         } 
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
