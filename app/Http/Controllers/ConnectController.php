@@ -324,9 +324,11 @@ class ConnectController extends Controller
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
-        return $e->getResponse();
+        dd($e->getResponse());
       }
-    }       
+    }
+    $body = json_decode($response->getBody());
+    dd($body);
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = true;
     return $account->save();
@@ -552,8 +554,6 @@ class ConnectController extends Controller
         dd($e->getResponse());
       }
     }
-    $page = json_decode($response->getBody());
-    dd($page);
     return;
   }
 
