@@ -495,6 +495,7 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
+    dd($pages);
     if (count($pages) > 0) {
       foreach ($pages as $page) {
         $pageId = $page->id;
@@ -612,7 +613,6 @@ class ConnectController extends Controller
       }
     }
     $item = json_decode($response->getBody());
-    dd($item);
     $account = $this->user->profile->account;
     $account->square_item_id = $item->id;
     return $account->save();
