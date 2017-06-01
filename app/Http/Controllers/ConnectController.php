@@ -303,7 +303,6 @@ class ConnectController extends Controller
     if (!isset($squareLocationId)) {
       return $this->setLocation($token);
     }
-    dd("here");
     $this->createSquarePockeytCategory($squareLocationId, $token);
     $this->createSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
@@ -459,6 +458,7 @@ class ConnectController extends Controller
 	      }
 	    }
 	    $body = json_decode($response->getBody());
+	    dd($body);
 	    $account = $this->user->profile->account;
 	    $account->squareCategoryId = $body->id;
 	    return $account->save();
