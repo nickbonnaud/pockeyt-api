@@ -348,7 +348,7 @@ class ConnectController extends Controller
     }
     $body = json_decode($response->getBody());
     if (count($body) > 1) {
-      return $this->matchLocationLite($body);
+      return $this->matchLocationLite($body, $token);
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
       $squareLocationId = $body[0]->id;
@@ -416,7 +416,7 @@ class ConnectController extends Controller
     }
   }
 
-   public function matchLocationLite($locations) {
+   public function matchLocationLite($locations, $token) {
     $businessLocation = $this->user->profile->account->bizStreetAdress;
     if(isset($businessLocation)) {
       foreach ($locations as $location) {
