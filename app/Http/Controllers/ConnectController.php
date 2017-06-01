@@ -301,11 +301,10 @@ class ConnectController extends Controller
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
-      $this->setLocation($token);
+      return $this->setLocation($token);
       $squareLocationId = $this->user->profile->account->square_location_id;
     }
     if ($this->user->profile->account->square_category_id) {
-    	dd("here");
       $this->createSquarePockeytCategory($squareLocationId, $token);
     }
     if ($this->user->profile->account->square_item_id) {
@@ -354,7 +353,7 @@ class ConnectController extends Controller
     }
     $body = json_decode($response->getBody());
     if (count($body) > 1) {
-      return $this->matchLocation($body);
+      return $this->matchLocationLite($body);
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
       $account->square_location_id = $body[0]->id;
@@ -416,6 +415,23 @@ class ConnectController extends Controller
     }
   }
 
+   public function matchLocationLite($locations) {
+    $businessLocation = $this->user->profile->account->bizStreetAdress;
+    if(isset($businessLocation)) {
+      foreach ($locations as $location) {
+        if ($location->business_address->address_line_1 == $businessLocation) {
+          $account = $this->user->profile->account;
+          $account->square_location_id = $location->id;
+          return $account->save();
+        } 
+      }
+      flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
+      return redirect()->route('accounts.connections');
+    } else {
+      flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
+      return redirect()->route('accounts.connections');
+    }
+  }
 
   public function createSquarePockeytCategory($squareLocationId, $token) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
