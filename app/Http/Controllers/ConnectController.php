@@ -304,6 +304,7 @@ class ConnectController extends Controller
       return $this->setLocation($token);
       $squareLocationId = $this->user->profile->account->square_location_id;
     }
+    dd("here");
     if ($this->user->profile->account->square_category_id) {
       $this->createSquarePockeytCategory($squareLocationId, $token);
     }
