@@ -10,8 +10,6 @@ use App\Account;
 use App\Transaction;
 use Carbon\Carbon;
 use DateTimeZone;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 
 class QuickBookController extends Controller
 {
