@@ -450,11 +450,10 @@ class ConnectController extends Controller
 	          'Authorization' => 'Bearer ' . $token,
 	          'Accept' => 'application/json'
 	        ],
-	        'name' => 'Pockeyt Customers'
+	        'json' => ['name' => 'Pockeyt Customers']
 	      ]);
 	    } catch (RequestException $e) {
 	      if ($e->hasResponse()) {
-	      	dd($e->getResponse());
 	        return $e->getResponse();
 	      }
 	    }
