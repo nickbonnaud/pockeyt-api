@@ -599,7 +599,7 @@ class ConnectController extends Controller
 	          'pricing_type' => 'FIXED_PRICING',
 	          'price_money' => [
 	          	'currency_code' => 'USD',
-	            'amount' => 0,
+	            'amount' => 10,
 	          ]
 	        ]
         ]
