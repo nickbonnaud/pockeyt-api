@@ -442,6 +442,7 @@ class ConnectController extends Controller
   }
 
   public function createSquarePockeytCategory($squareLocationId, $token) {
+  	dd("here");
   	if (!$this->user->profile->account->square_category_id) {
 	    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
 	    try {
@@ -458,7 +459,6 @@ class ConnectController extends Controller
 	      }
 	    }
 	    $body = json_decode($response->getBody());
-	    dd($body);
 	    $account = $this->user->profile->account;
 	    $account->squareCategoryId = $body->id;
 	    return $account->save();
