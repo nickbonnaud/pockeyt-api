@@ -384,12 +384,8 @@ class ConnectController extends Controller
     }
     $body = json_decode($response->getBody());
 
-    flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
-      return redirect()->route('accounts.connections');
     if (count($body) > 1) {
-      $this->matchLocation($body);
-      flash()->success('Success', 'You can now import inventory from Square');
-    	return redirect()->route('accounts.connections');
+      return $this->matchLocation($body);
     } elseif(count($body) == 1) {
       $account = $this->user->profile->account;
       $account->square_location_id = $body[0]->id;
@@ -407,7 +403,8 @@ class ConnectController extends Controller
           $account = $this->user->profile->account;
           $account->square_location_id = $location->id;
           $account->save();
-          return;
+          flash()->success('Success', 'You can now import inventory from Square');
+    			return redirect()->route('accounts.connections');
         } 
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
