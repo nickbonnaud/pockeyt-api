@@ -301,9 +301,9 @@ class ConnectController extends Controller
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
     if (!isset($squareLocationId)) {
-    	return $this->setLocation($token);
+    	$this->setLocation($token);
     }
-    return $this->checkSquarePockeytCategory($squareLocationId, $token);
+    $this->checkSquarePockeytCategory($squareLocationId, $token);
     $this->checkSquareItem($squareLocationId, $token);
     $this->getSquarePages($squareLocationId, $token);
     $this->subscribeEventType($squareLocationId, $token);
@@ -329,8 +329,7 @@ class ConnectController extends Controller
     }       
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = true;
-    $account->save();
-    return $this;
+    return $account->save();
   }
 
   public function setLocation($token) {
@@ -354,8 +353,7 @@ class ConnectController extends Controller
       $account = $this->user->profile->account;
       $squareLocationId = $body[0]->id;
       $account->square_location_id = $squareLocationId;
-      $account->save();
-      return $this;
+      return $account->save();
     }
   }
 
@@ -420,9 +418,8 @@ class ConnectController extends Controller
           $account = $this->user->profile->account;
           $squareLocationId = $location->id;
           $account->square_location_id = $squareLocationId;
-          $account->save();
-        	return $this;
-        } 
+          return $account->save();
+        }
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
       return redirect()->route('accounts.connections');
@@ -452,8 +449,7 @@ class ConnectController extends Controller
     	if ($category->name == "Pockeyt Customers" || (isset($savedCategoryId) && $savedCategoryId == $category->id)) {
     		$account = $this->user->profile->account;
 	    	$account->square_category_id = $category->id;
-	    	$account->save();
-	    	return $this;
+	    	return $account->save();
     	}
     }
     return $this->createSquarePockeytCategory($squareLocationId, $token);
@@ -477,8 +473,7 @@ class ConnectController extends Controller
     $category = json_decode($response->getBody());
    	$account = $this->user->profile->account;
 	  $account->square_category_id = $category->id;
-	  $account->save();
-	  return $this;
+	  return $account->save();
   }
 
   public function getSquarePages($squareLocationId, $token) {
@@ -553,7 +548,7 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
     }
-    return $this;
+    return;
   }
 
   public function checkSquareItem($squareLocationId, $token) {
@@ -576,8 +571,7 @@ class ConnectController extends Controller
     	if ($item->name == "Pockeyt Customer" || (isset($savedItemId) && $savedItemId == $item->id)) {
     		$account = $this->user->profile->account;
 	    	$account->square_item_id = $item->id;
-	    	$account->save();
-	    	return $this;
+	    	return $account->save();
     	}
     }
     return $this->createSquareItem($squareLocationId, $token);
@@ -617,8 +611,7 @@ class ConnectController extends Controller
     $item = json_decode($response->getBody());
     $account = $this->user->profile->account;
     $account->square_item_id = $item->id;
-    $account->save();
-    return $this;
+    return $account->save();
   }
 
 	/**************************
