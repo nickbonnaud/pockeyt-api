@@ -316,7 +316,7 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
-
+    dd($pages);
     foreach ($pages as $page) {
     	$pageId = $page->id;
     	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
@@ -334,7 +334,6 @@ class ConnectController extends Controller
 	      }
 	    }
 	    $code = $response->getStatusCode();
-	    dd($code);
     }
 
 
