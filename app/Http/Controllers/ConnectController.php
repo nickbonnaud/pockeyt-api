@@ -320,11 +320,10 @@ class ConnectController extends Controller
     }
     $pages = json_decode($response->getBody());
     $pageId = $pages[0]->id;
-    dd($pageId);
 
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     try {
-      $response = $client->request('GET', $squareLocationId . '/pages', [
+      $response = $client->request('DELETE', $squareLocationId . '/pages' . '/' . $pageId, [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
@@ -332,7 +331,7 @@ class ConnectController extends Controller
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
-        return $e->getResponse();
+        dd($e->getResponse());
       }
     }
     $pages = json_decode($response->getBody());
