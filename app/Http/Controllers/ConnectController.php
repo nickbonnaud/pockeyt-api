@@ -495,7 +495,6 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
-    dd(count($pages));
     if (count($pages) > 0) {
       foreach ($pages as $page) {
         $pageId = $page->id;
@@ -536,7 +535,7 @@ class ConnectController extends Controller
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     $objectId = $this->user->profile->account->squareCategoryId;
     try {
-      $response = $client->request('PUT', $squareLocationId . '/pages' . $pageId . 'cells', [
+      $response = $client->request('PUT', $squareLocationId . '/pages' . '/' . $pageId . '/cells', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
@@ -550,9 +549,11 @@ class ConnectController extends Controller
       ]);
     } catch (RequestException $e) {
       if ($e->hasResponse()) {
-        return $e->getResponse();
+        dd($e->getResponse());
       }
     }
+    $data = json_decode($response->getBody());
+    dd($data);
     return;
   }
 
