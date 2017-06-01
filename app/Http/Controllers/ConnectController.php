@@ -320,7 +320,7 @@ class ConnectController extends Controller
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com']);
 
     try {
-      $response = $client->request('PUT', 'v1/' . $locationId . '/webhooks', [
+      $response = $client->request('PUT', 'v1/' . $squareLocationId . '/webhooks', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
