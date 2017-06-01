@@ -402,8 +402,7 @@ class ConnectController extends Controller
       foreach ($locations as $location) {
         if ($location->business_address->address_line_1 == $businessLocation) {
           $account = $this->user->profile->account;
-          $squareLocationId = $location->id;
-      		$account->square_location_id = $squareLocationId;
+          $account->square_location_id = $location->id;
           $account->save();
           flash()->success('Success', 'You can now import inventory from Square');
     			return redirect()->route('accounts.connections');
@@ -423,7 +422,8 @@ class ConnectController extends Controller
       foreach ($locations as $location) {
         if ($location->business_address->address_line_1 == $businessLocation) {
           $account = $this->user->profile->account;
-          $account->square_location_id = $location->id;
+          $squareLocationId = $location->id;
+          $account->square_location_id = $squareLocationId;
           $account->save();
           $this->createSquarePockeytCategory($squareLocationId, $token);
 		      $this->createSquareItem($squareLocationId, $token);
