@@ -495,7 +495,6 @@ class ConnectController extends Controller
       }
     }
     $pages = json_decode($response->getBody());
-    dd($pages);
     if (count($pages) > 0) {
       foreach ($pages as $page) {
         $pageId = $page->id;
@@ -553,6 +552,8 @@ class ConnectController extends Controller
         dd($e->getResponse());
       }
     }
+    $page = json_decode($response->getBody());
+    dd($page);
     return;
   }
 
