@@ -300,6 +300,60 @@ class ConnectController extends Controller
       dd($e);
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
+
+
+
+
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('GET', $squareLocationId . '/pages', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $pages = json_decode($response->getBody());
+    $pageId = $pages[0]->id;
+
+
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    try {
+      $response = $client->request('DELETE', $squareLocationId . '/pages' . '/' . $pageId, [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $token,
+          'Accept' => 'application/json'
+        ]
+      ]);
+    } catch (RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+    $pages = json_decode($response->getBody());
+    dd($pages);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (!isset($squareLocationId)) {
     	$this->setLocation($token);
     }
