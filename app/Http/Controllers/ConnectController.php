@@ -312,10 +312,10 @@ class ConnectController extends Controller
   }
 
   public function subscribeEventType($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com']);
+    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
 
     try {
-      $response = $client->request('PUT', 'v1/' . $squareLocationId . '/webhooks', [
+      $response = $client->request('PUT', $squareLocationId . '/webhooks', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
