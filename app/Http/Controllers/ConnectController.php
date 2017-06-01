@@ -300,26 +300,6 @@ class ConnectController extends Controller
       dd($e);
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
-
-
-
-     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    try {
-      $response = $client->request('GET', $squareLocationId . '/webhooks', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $token,
-          'Accept' => 'application/json'
-        ]
-      ]);
-    } catch (RequestException $e) {
-      if ($e->hasResponse()) {
-        dd($e->getResponse());
-      }
-    }
-    $body = json_decode($response->getBody());
-    dd($body);
-
-
     if (!isset($squareLocationId)) {
     	return $this->setLocation($token);
     } else {
