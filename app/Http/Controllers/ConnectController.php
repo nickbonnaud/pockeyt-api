@@ -418,11 +418,15 @@ class ConnectController extends Controller
           $account = $this->user->profile->account;
           $squareLocationId = $location->id;
           $account->square_location_id = $squareLocationId;
-          return $account->save();
+         	$account->save();
         }
       }
-      flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
-      return redirect()->route('accounts.connections');
+      if ($this->user->profile->account->square_location_id) {
+      	return;
+      } else {
+      	flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
+      	return redirect()->route('accounts.connections');
+      }
     } else {
       flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
       return redirect()->route('accounts.connections');
