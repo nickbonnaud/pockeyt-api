@@ -286,6 +286,9 @@ class GeoController extends Controller
                     dd($e->getResponse());
                   }
                 }
+                $user = json_decode($response->getBody());
+                $business = $business->id;
+                event(new CustomerLeaveRadius($user, $business));
                 return;
             } else {
                 $userId = 'pockeyt' . $user->id;
@@ -301,6 +304,9 @@ class GeoController extends Controller
                     dd($e->getResponse());
                   }
                 }
+                $user = json_decode($response->getBody());
+                $business = $business->id;
+                event(new CustomerLeaveRadius($user, $business));
                 return;
             }
         } else {
