@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\PushId;
 use JWTAuth;
+use Crypt;
 use App\Location;
 use App\Profile;
 use App\Transaction;
@@ -14,6 +15,8 @@ use App\Http\Requests;
 use App\Events\CustomerEnterRadius;
 use App\Events\CustomerLeaveRadius;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Controller;
 
 class GeoController extends Controller
@@ -83,6 +86,8 @@ class GeoController extends Controller
                 if (!in_array($businessCoord->profile_id, $inLocations)) {
                     array_push($inLocations, $businessCoord->profile_id);
                     $business = $businessCoord->profile_id;
+                    $status = 'enter';
+                    $this->checkPockeytLite($user, $business, $status);
                     event(new CustomerEnterRadius($user, $business));
                 }
             }
@@ -94,6 +99,8 @@ class GeoController extends Controller
             if (!isset($storedLocations)) { return response('none');}
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->profile_id;
+                $status = 'exit';
+                $this->checkPockeytLite($user, $business, $status);
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
             }
@@ -111,6 +118,8 @@ class GeoController extends Controller
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->location_id;
                 if (!in_array($business, $inLocations)) {
+                    $status = 'exit';
+                    $this->checkPockeytLite($user, $business, $status);
                     event(new CustomerLeaveRadius($user, $business));
                     $storedLocation->delete();
                 } else {
@@ -192,11 +201,15 @@ class GeoController extends Controller
 
     public function customerEnter($user, $business) {
         event(new CustomerEnterRadius($user, $business));
+        $status = 'enter';
+        $this->checkPockeytLite($user, $business, $status);
         return $this->setLocation($user, $business);
     }
 
     public function customerExit($user, $business) {
         event(new CustomerLeaveRadius($user, $business));
+        $status = 'exit';
+        $this->checkPockeytLite($user, $business, $status);
         return $this->removeSetLocation($user, $business);
     }
 
@@ -238,6 +251,70 @@ class GeoController extends Controller
     public function sendResponse($user) {
         $currentLocations = DB::table('locations')->select('location_id', 'business_logo')->get();
         return response()->json($currentLocations);
+    }
+
+    public function checkPockeytLite($user, $business, $status) {
+        if ($business->account->pockeyt_lite_enabled) {
+            $squareToken = $business->square_token;
+            try {
+              $token = Crypt::decrypt($squareToken);
+            } catch (DecryptException $e) {
+              dd($e);
+            }
+            $squareLocationId = $business->account->square_location_id;
+            $squareItemId = $business->account->square_item_id;
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+            if ($status == "enter") {
+                try {
+                    $response = $client->request('POST', $squareLocationId . '/items' . '/' .  $squareItemId . '/variations', [
+                        'headers' => [
+                            'Authorization' => 'Bearer ' . $token,
+                            'Accept' => 'application/json'
+                        ],
+                        'json' => [
+                            'id' => 'pockeyt' . $user->id,
+                            'name' => $user->first_name . ' ' . $user->last_name,
+                            'price_money' => [
+                                'currency_code' => 'USD',
+                                'amount' => 0,
+                            ]
+                        ]
+                    ]);
+                } catch (RequestException $e) {
+                  if ($e->hasResponse()) {
+                    dd($e->getResponse());
+                  }
+                }
+                $data = json_decode($response->getBody());
+                dd($data);
+            } else {
+                $userId = 'pockeyt' . $user->id;
+                try {
+                    $response = $client->request('DELETE', $squareLocationId . '/items' . '/' .  $squareItemId . '/variations' . '/' . $userId, [
+                        'headers' => [
+                            'Authorization' => 'Bearer ' . $token,
+                            'Accept' => 'application/json'
+                        ],
+                        'json' => [
+                            'id' => 'pockeyt' . $user->id,
+                            'name' => $user->first_name . ' ' . $user->last_name,
+                            'price_money' => [
+                                'currency_code' => 'USD',
+                                'amount' => 0,
+                            ]
+                        ]
+                    ]);
+                } catch (RequestException $e) {
+                  if ($e->hasResponse()) {
+                    dd($e->getResponse());
+                  }
+                }
+                $data = json_decode($response->getBody());
+                dd($data);
+            }
+        } else {
+            return;
+        }
     }
 
     private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
