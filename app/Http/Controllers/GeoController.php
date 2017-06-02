@@ -253,7 +253,7 @@ class GeoController extends Controller
         return response()->json($currentLocations);
     }
 
-    public function checkPockeytLite($user, $business, $status) {
+    public function checkPockeytLite() {
         $status = 'enter';
         $user = User::findOrFail(198);
         $business = Profile::findOrFail(119);
