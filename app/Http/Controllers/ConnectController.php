@@ -89,7 +89,7 @@ class ConnectController extends Controller
 		$profile->connected = 'facebook';
 		$profile->save();
 		flash()->success('Connected!', 'Account connected to Facebook');
-    return redirect()->back();
+    return redirect()->route('accounts.connections');
 	}
 
 	private function addPageIdToProfileInsta($userData) {
@@ -99,7 +99,7 @@ class ConnectController extends Controller
 		$profile->connected = 'instagram';
 		$profile->save();
 		flash()->success('Connected!', 'Account connected to Instagram');
-    return redirect()->back();
+    return redirect()->route('accounts.connections');
 	}
 
 	public function verifySubscribeFB(Request $request) {
@@ -248,10 +248,10 @@ class ConnectController extends Controller
 			$profile->connected = null;
 			$profile->save();
 			flash()->success('Disabled!', 'Auto updates disabled for Facebook');
-    	return redirect()->back();
+    	return redirect()->route('accounts.connections');
 		} else {
 			flash()->overlay('Oops! Unable to disable', 'Please try again', 'error');
-    	return redirect()->back();
+    	return redirect()->route('accounts.connections');
 		}
   }
 
@@ -261,7 +261,7 @@ class ConnectController extends Controller
   	$profile->connected = null;
   	$profile->save();
   	flash()->success('Disabled!', 'Auto updates disabled for Facebook');
-    return redirect()->back();
+    return redirect()->route('accounts.connections');
   }
 
   public function addfBSubscription() {
