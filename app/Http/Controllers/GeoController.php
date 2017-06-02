@@ -74,8 +74,6 @@ class GeoController extends Controller
     }
 
     public function checkDistance($user, $geoLocation) {
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
         $businessCoords = DB::table('geo_locations')->get();
     	$userLat = $geoLocation->latitude;
     	$userLng = $geoLocation->longitude;
@@ -101,6 +99,7 @@ class GeoController extends Controller
                 $business = $storedLocation->profile_id;
                 $status = 'exit';
                 $this->checkPockeytLite($user, $business, $status);
+                $business = 119;
                 event(new CustomerLeaveRadius($user, $business));
                 $storedLocation->delete();
             }
@@ -120,6 +119,7 @@ class GeoController extends Controller
                 if (!in_array($business, $inLocations)) {
                     $status = 'exit';
                     $this->checkPockeytLite($user, $business, $status);
+                    $business = 119;
                     event(new CustomerLeaveRadius($user, $business));
                     $storedLocation->delete();
                 } else {
@@ -170,6 +170,8 @@ class GeoController extends Controller
                 ->where('location_id', '=', $business);
         })->first();
         if (isset($location)) {
+            $business = 119;
+            event(new CustomerLeaveRadius($user, $business));
            return $location->delete();
         }
         return;
@@ -225,6 +227,8 @@ class GeoController extends Controller
         if (!$locationCheck) {
             return;
         } else {
+            $business = 119;
+            event(new CustomerLeaveRadius($user, $business));
             $locationCheck->delete();
         }
         
@@ -238,6 +242,8 @@ class GeoController extends Controller
             foreach ($usersInLocation as $userLocation) {
                 $timeIdle = strtotime("now") - strtotime($userLocation->updated_at);
                 if ($timeIdle > 600) {
+                    $business = 119;
+                    event(new CustomerLeaveRadius($user, $business));
                     $userLocation->delete();
                 } else {
                     $user = User::findOrFail($userLocation->user_id);
