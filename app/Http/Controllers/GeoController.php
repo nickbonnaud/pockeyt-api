@@ -35,7 +35,7 @@ class GeoController extends Controller
             $data['latitude'] = $geoCoord->latitude;
             $data['longitude'] = $geoCoord->longitude;
             $data['identifier'] = $geoCoord->identifier;
-            $data['radius'] = 50;
+            $data['radius'] = 1000;
             $data['notifyOnEntry'] = true;
             $data['notifyOnExit'] = true;
             $data['extras'] = (object) [
@@ -82,7 +82,7 @@ class GeoController extends Controller
     		$businessLat = $businessCoord->latitude;
     		$businessLng = $businessCoord->longitude;
 			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-			if ($distance <= 50) {
+			if ($distance <= 1000) {
                 if (!in_array($businessCoord->profile_id, $inLocations)) {
                     array_push($inLocations, $businessCoord->profile_id);
                     $business = $businessCoord->profile_id;
