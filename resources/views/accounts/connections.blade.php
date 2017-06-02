@@ -137,7 +137,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 											@if(isset($user->profile->square_token))
 												<td class="text-center"><span class="label label-success">Connected</span></td>
 												@if($user->profile->account->pockeyt_lite_enabled)
-													<td class="text-center"><a href="{{ action('ConnectController@disablePockeytLite') }}"><button class="btn btn-danger">Disable</button></a></td>
+													<td class="text-center"><a href="{{ action('GeoController@checkPockeytLite') }}"><button class="btn btn-danger">Disable</button></a></td>
 												@else
 													<td class="text-center"><a href="{{ action('ConnectController@subscribeSquare') }}"><button class="btn btn-success">Enable</button></a></td>
 												@endif
