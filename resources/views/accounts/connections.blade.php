@@ -56,7 +56,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 													@else
 														<td class="text-center">
 															<a href="{{ action('ConnectController@addfBSubscription') }}">
-																<button class="btn btn-success disabled">Enable</button>
+																<button class="btn btn-success disabled" disabled>Enable</button>
 															</a>
 														</td>
 													@endif
@@ -68,7 +68,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 											      Connect With Facebook
 										  		</a>
 										  	</td>
-												<td class="text-center"><button class="btn btn-success disabled">Enable</button></td>
+												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 											@endif
 										</tr>
 										<tr>
@@ -92,7 +92,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 													@else
 														<td class="text-center">
 															<a href="{{ action('ConnectController@connectInsta') }}">
-																<button class="btn btn-success disabled">Enable</button>
+																<button class="btn btn-success disabled" disabled>Enable</button>
 															</a>
 														</td>
 													@endif
@@ -104,7 +104,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 	      										Connect With Instagram
   												</a>
   											</td>
-												<td class="text-center"><button class="btn btn-success disabled">Enable</button></td>
+												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 											@endif
 										</tr>
 										<tr>
@@ -128,7 +128,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 														Connect With Square
 													</a>
 												</td>
-												<td class="text-center"><button class="btn btn-success disabled">Enable</button></td>
+												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 											@endif
 										</tr>
 										<tr>
@@ -148,7 +148,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 														Connect With Square
 													</a>
 												</td>
-												<td class="text-center"><button class="btn btn-success disabled">Enable</button></td>
+												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 											@endif
 										</tr>
 										<tr>
