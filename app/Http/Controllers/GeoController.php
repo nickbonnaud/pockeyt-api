@@ -260,7 +260,7 @@ class GeoController extends Controller
             $squareLocationId = $business->account->square_location_id;
             $itemId = $business->account->square_item_id;
             $variationId = 'pockeyt' . $user->id;
-            $squareToken = $this->user->profile->square_token;
+            $squareToken = $business->square_token;
 
             try {
               $token = Crypt::decrypt($squareToken);
