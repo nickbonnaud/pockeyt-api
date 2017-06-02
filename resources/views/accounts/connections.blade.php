@@ -47,11 +47,19 @@ $qbo_connect = $qbo_obj->qboConnect();
 														</a>
 													</td>
 												@else
-													<td class="text-center">
-														<a href="{{ action('ConnectController@addfBSubscription') }}">
-															<button class="btn btn-success">Enable</button>
-														</a>
-													</td>
+													@if($user->profile->fb_page_id !== null && $user->profile->connected != "instagram")
+														<td class="text-center">
+															<a href="{{ action('ConnectController@addfBSubscription') }}">
+																<button class="btn btn-success">Enable</button>
+															</a>
+														</td>
+													@else
+														<td class="text-center">
+															<a href="{{ action('ConnectController@addfBSubscription') }}">
+																<button class="btn btn-success disabled">Enable</button>
+															</a>
+														</td>
+													@endif
 												@endif
 											@else
 												<td class="text-center">
@@ -75,11 +83,19 @@ $qbo_connect = $qbo_obj->qboConnect();
 														</a>
 													</td>
 												@else
-													<td class="text-center">
-														<a href="{{ action('ConnectController@connectInsta') }}">
-															<button class="btn btn-success">Enable</button>
-														</a>
-													</td>
+													@if($user->profile->connected != "facebook")
+														<td class="text-center">
+															<a href="{{ action('ConnectController@connectInsta') }}">
+																<button class="btn btn-success">Enable</button>
+															</a>
+														</td>
+													@else
+														<td class="text-center">
+															<a href="{{ action('ConnectController@connectInsta') }}">
+																<button class="btn btn-success disabled">Enable</button>
+															</a>
+														</td>
+													@endif
 												@endif
 											@else
 												<td class="text-center">
