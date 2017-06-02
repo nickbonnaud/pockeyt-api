@@ -253,11 +253,8 @@ class GeoController extends Controller
         return response()->json($currentLocations);
     }
 
-    public function checkPockeytLite() {
-        $status = 'exit';
-        $user = User::findOrFail(198);
-        $business = Profile::findOrFail(119);
-
+    public function checkPockeytLite($user, $business, $status) {
+        $business = Profile::findOrFail($business);
         if ($business->account->pockeyt_lite_enabled) {
             $squareToken = $business->square_token;
             try {
@@ -289,8 +286,7 @@ class GeoController extends Controller
                     dd($e->getResponse());
                   }
                 }
-                $data = json_decode($response->getBody());
-                dd($data);
+                return;
             } else {
                 $userId = 'pockeyt' . $user->id;
                 try {
@@ -313,11 +309,9 @@ class GeoController extends Controller
                     dd($e->getResponse());
                   }
                 }
-                $data = json_decode($response->getBody());
-                dd($data);
+                return;
             }
         } else {
-            dd("not enabled");
             return;
         }
     }
