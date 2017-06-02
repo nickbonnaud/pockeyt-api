@@ -200,16 +200,16 @@ class GeoController extends Controller
     }
 
     public function customerEnter($user, $business) {
-        event(new CustomerEnterRadius($user, $business));
         $status = 'enter';
         $this->checkPockeytLite($user, $business, $status);
+        event(new CustomerEnterRadius($user, $business));
         return $this->setLocation($user, $business);
     }
 
     public function customerExit($user, $business) {
-        event(new CustomerLeaveRadius($user, $business));
         $status = 'exit';
         $this->checkPockeytLite($user, $business, $status);
+        event(new CustomerLeaveRadius($user, $business));
         return $this->removeSetLocation($user, $business);
     }
 
