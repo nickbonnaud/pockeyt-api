@@ -74,6 +74,8 @@ class GeoController extends Controller
     }
 
     public function checkDistance($user, $geoLocation) {
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
         $businessCoords = DB::table('geo_locations')->get();
     	$userLat = $geoLocation->latitude;
     	$userLng = $geoLocation->longitude;
