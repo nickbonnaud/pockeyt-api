@@ -254,7 +254,7 @@ class GeoController extends Controller
     }
 
     public function checkPockeytLite() {
-        $status = 'enter';
+        $status = 'exit';
         $user = User::findOrFail(198);
         $business = Profile::findOrFail(119);
 
