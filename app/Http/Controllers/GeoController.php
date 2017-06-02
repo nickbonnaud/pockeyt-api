@@ -86,8 +86,6 @@ class GeoController extends Controller
                 if (!in_array($businessCoord->profile_id, $inLocations)) {
                     array_push($inLocations, $businessCoord->profile_id);
                     $business = $businessCoord->profile_id;
-                    $status = 'enter';
-                    $this->checkPockeytLite($user, $business, $status);
                     event(new CustomerEnterRadius($user, $business));
                 }
             }
@@ -144,6 +142,8 @@ class GeoController extends Controller
                 ->where('location_id', '=', $profile->id);
         })->first();
         if (!$location) {
+            $status = 'enter';
+            $this->checkPockeytLite($user, $business, $status);
             $location = $user->locations()->create([
                 'location_id' => $business,
                 'business_logo' => $profile->logo->thumbnail_url
@@ -161,6 +161,8 @@ class GeoController extends Controller
     }
 
     public function removeSetLocation($user, $business) {
+        $status = 'exit';
+        $this->checkPockeytLite($user, $business, $status);
         $location = Location::where(function($query) use ($user, $business) {
             $query->where('user_id', '=', $user->id)
                 ->where('location_id', '=', $business);
@@ -207,8 +209,6 @@ class GeoController extends Controller
     }
 
     public function customerExit($user, $business) {
-        $status = 'exit';
-        $this->checkPockeytLite($user, $business, $status);
         event(new CustomerLeaveRadius($user, $business));
         return $this->removeSetLocation($user, $business);
     }
@@ -294,14 +294,6 @@ class GeoController extends Controller
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json'
-                        ],
-                        'json' => [
-                            'id' => 'pockeyt' . $user->id,
-                            'name' => $user->first_name . ' ' . $user->last_name,
-                            'price_money' => [
-                                'currency_code' => 'USD',
-                                'amount' => 0,
-                            ]
                         ]
                     ]);
                 } catch (RequestException $e) {
