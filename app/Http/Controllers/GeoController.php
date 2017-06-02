@@ -286,7 +286,6 @@ class GeoController extends Controller
                   }
                 }
                 $data = json_decode($response->getBody());
-                dd($data);
             } else {
                 $userId = 'pockeyt' . $user->id;
                 try {
@@ -310,7 +309,6 @@ class GeoController extends Controller
                   }
                 }
                 $data = json_decode($response->getBody());
-                dd($data);
             }
         } else {
             return;
