@@ -240,6 +240,27 @@ class GeoController extends Controller
         return response()->json($currentLocations);
     }
 
+    // public function pockeytLite($user, $businessId, $status) {
+    //     $business = Profile::findOrFail($businessId);
+    //     if ($business->account->pockeyt_lite_enabled) {
+    //         $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    //         try {
+    //           $response = $client->request('GET', $squareLocationId . '/items', [
+    //             'headers' => [
+    //               'Authorization' => 'Bearer ' . $token,
+    //               'Accept' => 'application/json'
+    //             ]
+    //           ]);
+    //         } catch (RequestException $e) {
+    //           if ($e->hasResponse()) {
+    //             return $e->getResponse();
+    //           }
+    //         }
+    //     } else {
+    //         return;
+    //     }
+    // }
+
     private function getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng) {
         $r = 6371000; // Radius of the earth in m
         $dLat = $this->deg2rad($userLat-$businessLat);  // deg2rad below

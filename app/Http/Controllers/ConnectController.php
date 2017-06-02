@@ -538,7 +538,7 @@ class ConnectController extends Controller
 
   public function createCell($row, $column, $token, $squareLocationId, $pageId) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    $objectId = $this->user->profile->account->square_category_id;
+    $itemId = $this->user->profile->account->square_item_id;
     try {
       $response = $client->request('PUT', $squareLocationId . '/pages' . '/' . $pageId . '/cells', [
         'headers' => [
@@ -548,8 +548,8 @@ class ConnectController extends Controller
         'json' => [
         	'row' => $row,
 	        'column' => $column,
-	        'object_type' => 'CATEGORY',
-	        'object_id' =>  $objectId
+	        'object_type' => 'ITEM',
+	        'object_id' =>  $itemId
         ]
       ]);
     } catch (RequestException $e) {
@@ -588,7 +588,7 @@ class ConnectController extends Controller
 
   public function createSquareItem($squareLocationId, $token) {
     $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-    $objectId = $this->user->profile->account->square_category_id;
+    $categoryId = $this->user->profile->account->square_category_id;
     try {
       $response = $client->request('POST', $squareLocationId . '/items', [
         'headers' => [
@@ -597,7 +597,7 @@ class ConnectController extends Controller
         ],
         'json' => [
         	'name' => 'Pockeyt Customer',
-	        'category_id' => $objectId,
+	        'category_id' => $categoryId,
 	        'abbreviation' => 'PC',
 	        'variations' => [
 	        	[
