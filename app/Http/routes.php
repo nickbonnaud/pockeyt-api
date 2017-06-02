@@ -150,6 +150,9 @@ Route::group(['prefix' => 'api'], function() {
 Route::post('geo/user/destroy', 'GeoController@deleteInactiveUser')->name('inactiveUser.delete');
 Route::post('geo/location/users', 'GeoController@getActiveUsers');
 
+
+Route::get('test/geo', 'GeoController@checkPockeytLite');
+
 //Transaction api routes
 Route::group(['prefix' => 'api'], function() {
     Route::put('transaction/accept', 'TransactionsController@userConfirmBill');

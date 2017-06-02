@@ -254,6 +254,10 @@ class GeoController extends Controller
     }
 
     public function checkPockeytLite($user, $business, $status) {
+        $status = 'enter';
+        $user = User::findOrFail(198);
+        $business = Profile::findOrFail(119);
+
         if ($business->account->pockeyt_lite_enabled) {
             $squareToken = $business->square_token;
             try {
@@ -264,7 +268,7 @@ class GeoController extends Controller
             $squareLocationId = $business->account->square_location_id;
             $squareItemId = $business->account->square_item_id;
             $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-            if ($status == "enter") {
+            if ($status == 'enter') {
                 try {
                     $response = $client->request('POST', $squareLocationId . '/items' . '/' .  $squareItemId . '/variations', [
                         'headers' => [
@@ -286,6 +290,7 @@ class GeoController extends Controller
                   }
                 }
                 $data = json_decode($response->getBody());
+                dd($data);
             } else {
                 $userId = 'pockeyt' . $user->id;
                 try {
@@ -309,8 +314,10 @@ class GeoController extends Controller
                   }
                 }
                 $data = json_decode($response->getBody());
+                dd($data);
             }
         } else {
+            dd("not enabled");
             return;
         }
     }
