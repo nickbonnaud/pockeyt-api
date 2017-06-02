@@ -223,6 +223,9 @@ class GeoController extends Controller
         if (!$locationCheck) {
             return;
         } else {
+            $status = "exit";
+            $user = User::findOrFail($userId);
+            $this->pockeytLite($user, $businessId, $status);
             $locationCheck->delete();
         }
         
@@ -235,10 +238,12 @@ class GeoController extends Controller
             $users = [];
             foreach ($usersInLocation as $userLocation) {
                 $timeIdle = strtotime("now") - strtotime($userLocation->updated_at);
+                $user = User::findOrFail($userLocation->user_id);
                 if ($timeIdle > 600) {
+                    $status = "exit";
+                    $this->pockeytLite($user, $business, $status);
                     $userLocation->delete();
                 } else {
-                    $user = User::findOrFail($userLocation->user_id);
                     array_push($users, $user);
                 }
             }
