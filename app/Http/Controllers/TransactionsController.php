@@ -728,7 +728,7 @@ class TransactionsController extends Controller
     }
 
     public function receiveSquareTransaction(Request $request) {
-        $user = "hello";
+        $user = $request->all();
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
         // $squareLocationId = $request->location_id;
