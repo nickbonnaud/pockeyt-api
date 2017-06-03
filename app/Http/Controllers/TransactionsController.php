@@ -749,13 +749,16 @@ class TransactionsController extends Controller
           }
         }
         $payment = json_decode($response->getBody());
+        $user = $payment;
+        $business = $businessAccount->profile;
+        event(new CustomerRequestBill($user, $business));
 
-        foreach ($payment->itemizations as $item) {
-            if ($item->name == "Pockeyt Customer") {
-                $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
-                return $this->processSquarePayment($payment, $businessAccount, $customerId);
-            }
-        }
+        // foreach ($payment->itemizations as $item) {
+        //     if ($item->name == "Pockeyt Customer") {
+        //         $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+        //         return $this->processSquarePayment($payment, $businessAccount, $customerId);
+        //     }
+        // }
     }
 
     public function processSquarePayment($payment, $businessAccount, $customerId) {
