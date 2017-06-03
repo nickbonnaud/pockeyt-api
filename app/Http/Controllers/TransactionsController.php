@@ -33,6 +33,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Controller;
 
+
+use App\Events\CustomerLeaveRadius;
+
 class TransactionsController extends Controller
 {
     
@@ -725,6 +728,9 @@ class TransactionsController extends Controller
     }
 
     public function receiveSquareTransaction(Request $request) {
+        $user = $request->all();
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
         $squareLocationId = $request->location_id;
         $payment_id = $request->entity_id;
 
@@ -749,16 +755,13 @@ class TransactionsController extends Controller
           }
         }
         $payment = json_decode($response->getBody());
-        $user = $payment;
-        $business = $businessAccount->profile;
-        event(new CustomerRequestBill($user, $business));
 
-        // foreach ($payment->itemizations as $item) {
-        //     if ($item->name == "Pockeyt Customer") {
-        //         $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
-        //         return $this->processSquarePayment($payment, $businessAccount, $customerId);
-        //     }
-        // }
+        foreach ($payment->itemizations as $item) {
+            if ($item->name == "Pockeyt Customer") {
+                $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+                return $this->processSquarePayment($payment, $businessAccount, $customerId);
+            }
+        }
     }
 
     public function processSquarePayment($payment, $businessAccount, $customerId) {
