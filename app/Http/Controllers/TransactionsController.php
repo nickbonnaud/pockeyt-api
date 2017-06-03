@@ -728,34 +728,33 @@ class TransactionsController extends Controller
     }
 
     public function receiveSquareTransaction(Request $request) {
-        $user = $request->all();
+        $squareLocationId = $request->location_id;
+        $payment_id = $request->entity_id;
+
+        $businessAccount = Account::where('square_location_id', '=', $squareLocationId)->first();
+        $squareToken = $businessAccount->profile->square_token;
+        try {
+          $token = Crypt::decrypt($squareToken);
+        } catch (DecryptException $e) {
+          dd($e);
+        }
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+        try {
+          $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
+            'headers' => [
+              'Authorization' => 'Bearer ' . $token,
+              'Accept' => 'application/json'
+            ]
+          ]);
+        } catch (RequestException $e) {
+          if ($e->hasResponse()) {
+            dd($e->getResponse());
+          }
+        }
+        $payment = json_decode($response->getBody());
+        $user = $payment;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
-        // $squareLocationId = $request->location_id;
-        // $payment_id = $request->entity_id;
-
-        // $businessAccount = Account::where('square_location_id', '=', $squareLocationId)->first();
-        // $squareToken = $businessAccount->profile->square_token;
-        // try {
-        //   $token = Crypt::decrypt($squareToken);
-        // } catch (DecryptException $e) {
-        //   dd($e);
-        // }
-        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-        // try {
-        //   $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
-        //     'headers' => [
-        //       'Authorization' => 'Bearer ' . $token,
-        //       'Accept' => 'application/json'
-        //     ]
-        //   ]);
-        // } catch (RequestException $e) {
-        //   if ($e->hasResponse()) {
-        //     dd($e->getResponse());
-        //   }
-        // }
-        // $payment = json_decode($response->getBody());
-
         // foreach ($payment->itemizations as $item) {
         //     if ($item->name == "Pockeyt Customer") {
         //         $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
