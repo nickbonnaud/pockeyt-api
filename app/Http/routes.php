@@ -164,8 +164,6 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('transaction/sent', 'TransactionsController@getSentTransaction');
     Route::get('transactions/recent', 'TransactionsController@getRecentTransactions');
     Route::get('transactions/deals', 'TransactionsController@getDeals');
-    Route::post('transaction/square', 'TransactionsController@receiveSquareTransaction');
-    Route::get('transactions/square/subscribe', 'TransactionsController@subscribeSquare');
 });
 
 //Analytics routes
