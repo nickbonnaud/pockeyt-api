@@ -15,6 +15,7 @@ use DateTimeZone;
 use App\PushId;
 use App\Profile;
 use Mail;
+use Crypt;
 use App\Product;
 use App\Transaction;
 use App\Http\Requests;
