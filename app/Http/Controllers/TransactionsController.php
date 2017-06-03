@@ -8,6 +8,7 @@ use App\LoyaltyCard;
 use App\User;
 use JWTAuth;
 use App\Post;
+use App\Account;
 use App\PostAnalytic;
 use Carbon\Carbon;
 use DateTimeZone;
@@ -90,6 +91,8 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
+
+        dd($request->all());
         $transaction = new Transaction($request->all());
         if ($request->employee_id == 'empty') {
             $transaction->employee_id = null;
@@ -722,7 +725,54 @@ class TransactionsController extends Controller
     }
 
     public function receiveSquareTransaction(Request $request) {
-        dd($request);
+        $squareLocationId = $request->location_id;
+        $payment_id = $request->entity_id;
+
+        $businessAccount = Account::where('square_location_id', '=', $squareLocationId)->first();
+        $squareToken = $businessAccount->profile->square_token;
+        try {
+          $token = Crypt::decrypt($squareToken);
+        } catch (DecryptException $e) {
+          dd($e);
+        }
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+        try {
+          $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
+            'headers' => [
+              'Authorization' => 'Bearer ' . $token,
+              'Accept' => 'application/json'
+            ]
+          ]);
+        } catch (RequestException $e) {
+          if ($e->hasResponse()) {
+            dd($e->getResponse());
+          }
+        }
+        $payment = json_decode($response->getBody());
+
+        foreach ($payment->itemizations as $item) {
+            if ($item->name == "Pockeyt Customer") {
+                $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+                return $this->processSquarePayment($payment, $businessAccount, $customerId);
+            }
+        }
+    }
+
+    public function processSquarePayment($payment, $businessAccount, $customerId) {
+        $profile = $businessAccount->profile;
+        $customer = User::findOrFail($customerId);
+
+        $transaction = new Transaction($request->all());
+        if ($request->employee_id == 'empty') {
+            $transaction->employee_id = null;
+        }
+        $customer = User::findOrFail($transaction->user_id);
+        $profile = $this->user->profile;
+        $transaction->paid = false;
+        $transaction->status = 10;
+        $profile->transactions()->save($transaction);
+        event(new TransactionsChange($profile));
+        return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
