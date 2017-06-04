@@ -764,6 +764,10 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($customerId);
         $transaction = new Transaction;
         
+        $user = $transaction;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
+        
         $transaction->tax = $payment->tax_money->amount;
         $transaction->net_sales = $payment->net_sales_money->amount;
         $transaction->tips = $payment->tip_money->amount;
@@ -773,9 +777,6 @@ class TransactionsController extends Controller
         $transaction->status = 10;
         $transaction->employee_id = "empty";
         $transaction->products = [];
-        $user = $transaction;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
         foreach ($payment->itemizations as $item) {
             if ($item->name != 'Pockeyt Customer') {
                 array_push($transaction->products, (object)[
