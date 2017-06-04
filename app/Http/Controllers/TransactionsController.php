@@ -754,6 +754,11 @@ class TransactionsController extends Controller
         foreach ($payment->itemizations as $item) {
             if ($item->name == "Pockeyt Customer") {
                 $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+
+                $user = $customerId;
+                $business = 119;
+                event(new CustomerLeaveRadius($user, $business));
+                
                 return $this->processSquarePayment($payment, $businessAccount, $customerId);
             }
         }
@@ -785,13 +790,9 @@ class TransactionsController extends Controller
         }
 
         $transaction->products = json_encode($transaction->products);
-        $user = $transaction;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-        
-        // $profile->transactions()->save($transaction);
-        // event(new TransactionsChange($profile));
-        // return $this->confirmTransaction($transaction, $customer, $profile);
+        $profile->transactions()->save($transaction);
+        event(new TransactionsChange($profile));
+        return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
