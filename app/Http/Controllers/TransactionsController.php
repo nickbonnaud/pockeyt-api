@@ -765,11 +765,6 @@ class TransactionsController extends Controller
         $transaction = new Transaction;
 
         $transaction->tax = $payment->tax_money->amount;
-
-        $user = $transaction;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
         $transaction->net_sales = $payment->net_sales_money->amount;
         $transaction->tips = $payment->tip_money->amount;
         $transaction->total = $payment->total_collected_money->amount;
@@ -791,8 +786,11 @@ class TransactionsController extends Controller
 
         $transaction->products = json_encode($transaction->products);
         $profile->transactions()->save($transaction);
-        event(new TransactionsChange($profile));
-        return $this->confirmTransaction($transaction, $customer, $profile);
+        $user = $transaction;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
+        // event(new TransactionsChange($profile));
+        // return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
