@@ -95,8 +95,6 @@ class TransactionsController extends Controller
     }
 
     public function charge(ChargeRequest $request) {
-
-        dd($request->all());
         $transaction = new Transaction($request->all());
         if ($request->employee_id == 'empty') {
             $transaction->employee_id = null;
@@ -753,32 +751,47 @@ class TransactionsController extends Controller
           }
         }
         $payment = json_decode($response->getBody());
-        $user = $payment;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-        // foreach ($payment->itemizations as $item) {
-        //     if ($item->name == "Pockeyt Customer") {
-        //         $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
-        //         return $this->processSquarePayment($payment, $businessAccount, $customerId);
-        //     }
-        // }
+        foreach ($payment->itemizations as $item) {
+            if ($item->name == "Pockeyt Customer") {
+                $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+                return $this->processSquarePayment($payment, $businessAccount, $customerId);
+            }
+        }
     }
 
     public function processSquarePayment($payment, $businessAccount, $customerId) {
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
-
-        $transaction = new Transaction($request->all());
-        if ($request->employee_id == 'empty') {
-            $transaction->employee_id = null;
-        }
-        $customer = User::findOrFail($transaction->user_id);
-        $profile = $this->user->profile;
+        $transaction = new Transaction;
+        
+        $transaction->tax = $payment->tax_money->amount;
+        $transaction->net_sales = $payment->net_sales_money->amount;
+        $transaction->tips = $payment->tip_money->amount;
+        $transaction->total = $payment->total_collected_money->amount;
+        $transaction->user_id = $customer->id;
         $transaction->paid = false;
         $transaction->status = 10;
-        $profile->transactions()->save($transaction);
-        event(new TransactionsChange($profile));
-        return $this->confirmTransaction($transaction, $customer, $profile);
+        $transaction->employee_id = "empty";
+        $transaction->products = [];
+        foreach ($payment->itemizations as $item) {
+            if ($item->name != 'Pockeyt Customer') {
+                array_push($transaction->products, (object)[
+                        "name" => $item->name . ', ' . $item->item_variation_name,
+                        "quantity" => $item->quantity,
+                        "price" => $item->single_quantity_money->amount
+                    ]
+                );
+            }
+        }
+
+        $transaction->products = json_encode($transaction->products);
+        $user = $transaction;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
+        
+        // $profile->transactions()->save($transaction);
+        // event(new TransactionsChange($profile));
+        // return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
