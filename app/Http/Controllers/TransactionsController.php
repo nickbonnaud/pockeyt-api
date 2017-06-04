@@ -762,9 +762,6 @@ class TransactionsController extends Controller
     public function processSquarePayment($payment, $businessAccount, $customerId) {
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
-        $user = $customer;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
         $transaction = new Transaction;
         
         $transaction->tax = $payment->tax_money->amount;
@@ -776,6 +773,9 @@ class TransactionsController extends Controller
         $transaction->status = 10;
         $transaction->employee_id = "empty";
         $transaction->products = [];
+        $user = $transaction;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
         foreach ($payment->itemizations as $item) {
             if ($item->name != 'Pockeyt Customer') {
                 array_push($transaction->products, (object)[
