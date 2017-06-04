@@ -763,12 +763,13 @@ class TransactionsController extends Controller
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
         $transaction = new Transaction;
-        
-        $user = $customer;
+
+        $transaction->tax = $payment->tax_money->amount;
+
+        $user = $transaction;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
 
-        $transaction->tax = $payment->tax_money->amount;
         $transaction->net_sales = $payment->net_sales_money->amount;
         $transaction->tips = $payment->tip_money->amount;
         $transaction->total = $payment->total_collected_money->amount;
