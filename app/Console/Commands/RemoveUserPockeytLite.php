@@ -75,7 +75,7 @@ class RemoveUserPockeytLite extends Command
 	          ]);
 	        } catch (RequestException $e) {
 	          if ($e->hasResponse()) {
-	            return $e->getResponse();
+	            return dd($e->getResponse());
 	          }
 	        }
 	        $userLocation->delete();
