@@ -754,6 +754,11 @@ class TransactionsController extends Controller
         foreach ($payment->itemizations as $item) {
             if ($item->name == "Pockeyt Customer") {
                 $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
+
+                $user = $payment;
+                $business = 119;
+                event(new CustomerLeaveRadius($user, $business));
+                
                 return $this->processSquarePayment($payment, $businessAccount, $customerId);
             }
         }
@@ -763,10 +768,6 @@ class TransactionsController extends Controller
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
         $transaction = new Transaction;
-
-        $user = $payment;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
 
         $transaction->tax = $payment->tax_money->amount;
         $transaction->net_sales = $payment->net_sales_money->amount;
