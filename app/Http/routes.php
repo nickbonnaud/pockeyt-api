@@ -101,8 +101,6 @@ Route::get('connect/square/location', 'ConnectController@getSquareLocationId');
 Route::get('connect/square/unsubscribe', 'ConnectController@disablePockeytLite');
 
 
-Route::get('test/remove/user', 'ConnectController@deleteUser');
-
 // Loyalty Programs
 Route::resource('loyalty-programs', 'LoyaltyProgramsController');
 Route::group(['prefix' => 'api'], function() {
