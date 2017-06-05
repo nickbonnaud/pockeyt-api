@@ -742,7 +742,6 @@ class ConnectController extends Controller
     $timeLimit =  Carbon::now()->subMinutes(20);
 
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
-    dd($userLocations);
 
     foreach ($userLocations as $userLocation) {
       $business = Profile::findOrFail($userLocation->location_id);
@@ -772,7 +771,6 @@ class ConnectController extends Controller
             return $e->getResponse();
           }
         }
-        $data = json_decode($response->getBody());
         $userLocation->delete();
       }
     }
