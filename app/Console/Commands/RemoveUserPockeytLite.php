@@ -34,7 +34,7 @@ class RemoveUserPockeytLite extends Command
    */
   public function __construct()
   {
-      parent::__construct();
+    parent::__construct();
   }
 
   /**
@@ -45,7 +45,7 @@ class RemoveUserPockeytLite extends Command
   public function handle()
   {
     $timeNow = Carbon::now();
-    $timeLimit =  Carbon::now()->subMinutes(20);
+    $timeLimit =  Carbon::now()->subMinutes(5);
 
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
 
