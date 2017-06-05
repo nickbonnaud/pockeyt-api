@@ -764,6 +764,10 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($customerId);
         $transaction = new Transaction;
 
+        $user = $payment;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
+
         $transaction->tax = $payment->tax_money->amount;
         $transaction->net_sales = $payment->net_sales_money->amount;
         $transaction->tips = $payment->tip_money->amount;
@@ -789,8 +793,8 @@ class TransactionsController extends Controller
         $user = $transaction;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
-        // event(new TransactionsChange($profile));
-        // return $this->confirmTransaction($transaction, $customer, $profile);
+        event(new TransactionsChange($profile));
+        return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
