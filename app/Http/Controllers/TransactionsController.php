@@ -751,15 +751,9 @@ class TransactionsController extends Controller
           }
         }
         $payment = json_decode($response->getBody());
-        $user = $payment;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
         foreach ($payment->itemizations as $item) {
             if ($item->name == "Pockeyt Customer") {
                 $customerId = str_replace('pockeyt', '', $item->item_detail->item_variation_id);
-                $user = $customerId;
-                $business = 119;
-                event(new CustomerLeaveRadius($user, $business));
                 return $this->processSquarePayment($payment, $businessAccount, $customerId);
             }
         }
@@ -768,6 +762,9 @@ class TransactionsController extends Controller
     public function processSquarePayment($payment, $businessAccount, $customerId) {
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
+        $user = $customer;
+        $business = 119;
+        event(new CustomerLeaveRadius($user, $business));
         $transaction = new Transaction;
 
         $transaction->tax = $payment->tax_money->amount;
