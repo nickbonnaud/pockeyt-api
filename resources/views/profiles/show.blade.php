@@ -436,16 +436,16 @@
           },
           removeUser: function(data) {
             console.log(data);
-            // var leavingCustomer = data.user;
-            // var users = this.users;
+            var leavingCustomer = data.user;
+            var users = this.users;
             
-            // if(users.length > 0) {
-            //   for (i=users.length - 1; i >= 0; i --) {
-            //     if (users[i].id == leavingCustomer.id) {
-            //       users.splice(i, 1);
-            //     }
-            //   }
-            // }
+            if(users.length > 0) {
+              for (i=users.length - 1; i >= 0; i --) {
+                if (users[i].id == leavingCustomer.id) {
+                  users.splice(i, 1);
+                }
+              }
+            }
           },
           removeInactiveUser: function() {
             var users = this.users;

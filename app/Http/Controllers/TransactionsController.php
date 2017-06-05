@@ -785,14 +785,10 @@ class TransactionsController extends Controller
             }
         }
 
-        $user =  json_encode($products);
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
-        // $transaction->products = json_encode($transaction->products);
-        // $profile->transactions()->save($transaction);
-        // event(new TransactionsChange($profile));
-        // return $this->confirmTransaction($transaction, $customer, $profile);
+        $transaction->products = json_encode($products);
+        $profile->transactions()->save($transaction);
+        event(new TransactionsChange($profile));
+        return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
