@@ -741,7 +741,7 @@ class ConnectController extends Controller
     $timeNow = Carbon::now();
     $timeLimit = $timeNow->subMinutes(20);
 
-    $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow]);
+    $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
     dd($userLocations);
 
     foreach ($userLocations as $userLocation) {
