@@ -228,7 +228,6 @@ class GeoController extends Controller
             $this->pockeytLite($user, $businessId, $status);
             $locationCheck->delete();
         }
-        
     }
 
     public function getActiveUsers(Request $request) {
