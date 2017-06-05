@@ -772,26 +772,27 @@ class TransactionsController extends Controller
         $transaction->paid = false;
         $transaction->status = 10;
         $transaction->employee_id = "empty";
-        // $transaction->products = [];
-        // foreach ($payment->itemizations as $item) {
-        //     if ($item->name != 'Pockeyt Customer') {
-        //         array_push($transaction->products, (object)[
-        //                 "name" => $item->name . ', ' . $item->item_variation_name,
-        //                 "quantity" => $item->quantity,
-        //                 "price" => $item->single_quantity_money->amount
-        //             ]
-        //         );
-        //     }
-        // }
 
-        // $transaction->products = json_encode($transaction->products);
-        $profile->transactions()->save($transaction);
-        
-        $user = $transaction;
+        $products = [];
+        foreach ($payment->itemizations as $item) {
+            if ($item->name != 'Pockeyt Customer') {
+                array_push($products, (object)[
+                        "name" => $item->name . ', ' . $item->item_variation_name,
+                        "quantity" => $item->quantity,
+                        "price" => $item->single_quantity_money->amount
+                    ]
+                );
+            }
+        }
+
+        $user = $products;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
-        // event(new TransactionsChange($profile));
-        // return $this->confirmTransaction($transaction, $customer, $profile);
+
+        $transaction->products = json_encode($transaction->products);
+        $profile->transactions()->save($transaction);
+        event(new TransactionsChange($profile));
+        return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
