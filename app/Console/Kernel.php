@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel {
      */
     protected $commands = [
         \App\Console\Commands\AddEvents::class,
-        \App\Console\Commands\AddPurchasesQb::class
+        \App\Console\Commands\AddPurchasesQb::class,
+        \App\Console\Commands\RemoveUserPockeytLite::class
     ];
 
     /**
@@ -25,5 +26,6 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule) {
         $schedule->command('app:add-events')->dailyAt('23:30');
         $schedule->command('app:add-purchases-qb')->dailyAt('03:00');
+        $schedule->command('app:remove-user-pockeyt-lite')->everyTenMinutes();
     }
 }
