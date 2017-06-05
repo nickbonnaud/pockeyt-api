@@ -771,6 +771,8 @@ class ConnectController extends Controller
             return $e->getResponse();
           }
         }
+        $data = json_decode($response->getBody());
+        dd($data);
         $userLocation->delete();
       }
     }
