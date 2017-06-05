@@ -740,7 +740,7 @@ class ConnectController extends Controller
   public function deleteUser() {
     $timeNow = Carbon::now();
     $timeLimit = $timeNow->subMinutes(20);
-    dd($timeLimit);
+    dd($timeNow);
 
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
     dd($userLocations);
