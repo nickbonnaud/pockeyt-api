@@ -435,7 +435,6 @@
             customer.getRedeemableDeals(activeCustomer.id);
           },
           removeUser: function(data) {
-            console.log(data);
             var leavingCustomer = data.user;
             var users = this.users;
             
