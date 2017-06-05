@@ -765,48 +765,33 @@ class TransactionsController extends Controller
         $transaction = new Transaction;
 
         $transaction->tax = $payment->tax_money->amount;
-        $user = $payment->tax_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
         $transaction->net_sales = $payment->net_sales_money->amount;
-        $user = $payment->net_sales_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
         $transaction->tips = $payment->tip_money->amount;
-        $user = $payment->tip_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
         $transaction->total = $payment->total_collected_money->amount;
-        $user = $payment->total_collected_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-        
         $transaction->user_id = $customer->id;
         $transaction->paid = false;
         $transaction->status = 10;
         $transaction->employee_id = "empty";
-        $transaction->products = [];
-        foreach ($payment->itemizations as $item) {
-            if ($item->name != 'Pockeyt Customer') {
-                array_push($transaction->products, (object)[
-                        "name" => $item->name . ', ' . $item->item_variation_name,
-                        "quantity" => $item->quantity,
-                        "price" => $item->single_quantity_money->amount
-                    ]
-                );
-            }
-        }
+        // $transaction->products = [];
+        // foreach ($payment->itemizations as $item) {
+        //     if ($item->name != 'Pockeyt Customer') {
+        //         array_push($transaction->products, (object)[
+        //                 "name" => $item->name . ', ' . $item->item_variation_name,
+        //                 "quantity" => $item->quantity,
+        //                 "price" => $item->single_quantity_money->amount
+        //             ]
+        //         );
+        //     }
+        // }
 
-        $transaction->products = json_encode($transaction->products);
+        // $transaction->products = json_encode($transaction->products);
         $profile->transactions()->save($transaction);
+        
         $user = $transaction;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
-        event(new TransactionsChange($profile));
-        return $this->confirmTransaction($transaction, $customer, $profile);
+        // event(new TransactionsChange($profile));
+        // return $this->confirmTransaction($transaction, $customer, $profile);
     }
 }
 
