@@ -14,6 +14,8 @@ use App\Profile;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
+use App\Location;
+
 class ConnectController extends Controller
 {
 	 public function __construct()

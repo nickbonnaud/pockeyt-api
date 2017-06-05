@@ -34,9 +34,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Controller;
 
-
-use App\Events\CustomerLeaveRadius;
-
 class TransactionsController extends Controller
 {
     
