@@ -762,38 +762,15 @@ class TransactionsController extends Controller
     public function processSquarePayment($payment, $businessAccount, $customerId) {
         $profile = $businessAccount->profile;
         $customer = User::findOrFail($customerId);
-        // $transaction = new Transaction;
-
-        // $transaction->tax = $payment->tax_money->amount;
-
-        $user = $payment->tax_money->amount;
+        $user = $profile;
         $business = 119;
         event(new CustomerLeaveRadius($user, $business));
+        $transaction = new Transaction;
 
-        // $transaction->net_sales = $payment->net_sales_money->amount;
-
-        $user = $payment->net_sales_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
-
-        // $transaction->tips = $payment->tip_money->amount;
-
-
-        $user = $payment->tip_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
-
-        // $transaction->total = $payment->total_collected_money->amount;
-
-
-        $user = $payment->total_collected_money->amount;
-        $business = 119;
-        event(new CustomerLeaveRadius($user, $business));
-
-
-        
+        $transaction->tax = $payment->tax_money->amount;
+        $transaction->net_sales = $payment->net_sales_money->amount;
+        $transaction->tips = $payment->tip_money->amount;
+        $transaction->total = $payment->total_collected_money->amount;
         $transaction->user_id = $customer->id;
         $transaction->paid = false;
         $transaction->status = 10;
