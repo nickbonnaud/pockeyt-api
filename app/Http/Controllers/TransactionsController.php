@@ -778,7 +778,7 @@ class TransactionsController extends Controller
             if ($item->name != 'Pockeyt Customer') {
                 array_push($products, (object)[
                         "name" => $item->name . ', ' . $item->item_variation_name,
-                        "quantity" => $item->quantity,
+                        "quantity" => round($item->quantity),
                         "price" => $item->single_quantity_money->amount
                     ]
                 );
