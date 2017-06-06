@@ -49,26 +49,16 @@ class RemoveUserPockeytLite extends Command
     $timeNow = Carbon::now();
     $timeLimit = Carbon::now()->subMinutes(5);
 
-		$user = $timeNow;
-  	$business = 119;
-  	event(new CustomerLeaveRadius($user, $business));
-  	$user = $timeLimit;
-  	$business = 119;
-  	event(new CustomerLeaveRadius($user, $business));
-
-
 
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
     $user = $userLocations;
   	$business = 119;
   	event(new CustomerLeaveRadius($user, $business));
 
-  	$location = Location::all();
-
     if (count($userLocations) > 0 ) {
 	    foreach ($userLocations as $userLocation) {
 	      $business = Profile::findOrFail($userLocation->location_id);
-	      $user = $business;
+	      $user = $business->account;
   			$business = 119;
   			event(new CustomerLeaveRadius($user, $business));
 	      if ($business->account->pockeyt_lite_enabled) {
