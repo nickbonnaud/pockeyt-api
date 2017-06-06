@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use App\Profile;
 use App\Post;
-use App\Crypt;
+use Crypt;
 use App\Location;
 use Carbon\Carbon;
 use DateTimeZone;
