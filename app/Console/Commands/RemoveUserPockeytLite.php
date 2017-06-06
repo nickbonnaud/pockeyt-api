@@ -10,7 +10,6 @@ use Crypt;
 use App\Location;
 use Carbon\Carbon;
 use DateTimeZone;
-use App\Events\CustomerLeaveRadius;
 use GuzzleHttp\Exception\RequestException;
 
 class RemoveUserPockeytLite extends Command
@@ -61,21 +60,12 @@ class RemoveUserPockeytLite extends Command
 	        $itemId = $account->square_item_id;
 	        $variationId = 'pockeyt' . $userLocation->user_id;
 	        $squareToken = $business->square_token;
-	        $user = $squareToken;
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
 
 	        try {
 	          $token = Crypt::decrypt($squareToken);
 	        } catch (DecryptException $e) {
-	        	$user = $e;
-  					$business = 119;
-  					event(new CustomerLeaveRadius($user, $business));
 	          dd($e);
 	        }
-	        $user = $token;
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
 
 	        $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
 
@@ -88,15 +78,9 @@ class RemoveUserPockeytLite extends Command
 	          ]);
 	        } catch (RequestException $e) {
 	          if ($e->hasResponse()) {
-	          	$user = $e->getResponse();
-  						$business = 119;
-  						event(new CustomerLeaveRadius($user, $business));
 	            return dd($e->getResponse());
 	          }
 	        }
-	        $user = json_decode($response->getBody());
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
 	        $userLocation->delete();
 	      }
 	    }
