@@ -9,6 +9,7 @@ use App\Post;
 use App\Crypt;
 use App\Location;
 use Carbon\Carbon;
+use DateTimeZone;
 use App\Events\CustomerLeaveRadius;
 use GuzzleHttp\Exception\RequestException;
 
@@ -45,10 +46,6 @@ class RemoveUserPockeytLite extends Command
    */
   public function handle()
   {
-
-  	$user = "cron run";
-  	$business = 119;
-  	event(new CustomerLeaveRadius($user, $business));
     $timeNow = Carbon::now();
     $timeLimit =  Carbon::now()->subMinutes(5);
 
