@@ -55,12 +55,10 @@ class RemoveUserPockeytLite extends Command
     if (count($userLocations) > 0 ) {
 	    foreach ($userLocations as $userLocation) {
 	      $business = Profile::findOrFail($userLocation->location_id);
-	      if ($business->account->pockeyt_lite_enabled) {
-	        $squareLocationId = $business->account->square_location_id;
-	        $user = $squareLocationId;
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
-	        $itemId = $business->account->square_item_id;
+	      $account = $business->account;
+	      if ($account->pockeyt_lite_enabled) {
+	        $squareLocationId = $account->square_location_id;
+	        $itemId = $account->square_item_id;
 	        $user = $itemId;
   				$business = 119;
   				event(new CustomerLeaveRadius($user, $business));
@@ -96,6 +94,9 @@ class RemoveUserPockeytLite extends Command
 	          ]);
 	        } catch (RequestException $e) {
 	          if ($e->hasResponse()) {
+	          	$user = $e->getResponse();
+  						$business = 119;
+  						event(new CustomerLeaveRadius($user, $business));
 	            return dd($e->getResponse());
 	          }
 	        }
