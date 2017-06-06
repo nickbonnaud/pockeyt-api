@@ -51,25 +51,34 @@ class RemoveUserPockeytLite extends Command
 
 
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
-    $user = $userLocations;
-  	$business = 119;
-  	event(new CustomerLeaveRadius($user, $business));
 
     if (count($userLocations) > 0 ) {
 	    foreach ($userLocations as $userLocation) {
 	      $business = Profile::findOrFail($userLocation->location_id);
-	      $user = $business->account;
-  			$business = 119;
-  			event(new CustomerLeaveRadius($user, $business));
 	      if ($business->account->pockeyt_lite_enabled) {
 	        $squareLocationId = $business->account->square_location_id;
+	        $user = $squareLocationId;
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 	        $itemId = $business->account->square_item_id;
+	        $user = $itemId;
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 	        $variationId = 'pockeyt' . $userLocation->user_id;
+	        $user = $variationId;
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 	        $squareToken = $business->square_token;
+	        $user = $squareToken;
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 
 	        try {
 	          $token = Crypt::decrypt($squareToken);
 	        } catch (DecryptException $e) {
+	        	$user = $e;
+  					$business = 119;
+  					event(new CustomerLeaveRadius($user, $business));
 	          dd($e);
 	        }
 	        $user = $token;
