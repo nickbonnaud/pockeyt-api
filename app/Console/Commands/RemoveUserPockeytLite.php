@@ -9,6 +9,7 @@ use App\Post;
 use App\Crypt;
 use App\Location;
 use Carbon\Carbon;
+use App\Events\CustomerLeaveRadius;
 use GuzzleHttp\Exception\RequestException;
 
 class RemoveUserPockeytLite extends Command
@@ -44,14 +45,28 @@ class RemoveUserPockeytLite extends Command
    */
   public function handle()
   {
+
+  	$user = "cron run";
+  	$business = 119;
+  	event(new CustomerLeaveRadius($user, $business));
     $timeNow = Carbon::now();
     $timeLimit =  Carbon::now()->subMinutes(5);
 
+		$user = $timeLimit;
+  	$business = 119;
+  	event(new CustomerLeaveRadius($user, $business));
+
     $userLocations = Location::whereNotBetween('updated_at', [$timeLimit, $timeNow])->get();
+    $user = $userLocations;
+  	$business = 119;
+  	event(new CustomerLeaveRadius($user, $business));
 
     if (count($userLocations) > 0 ) {
 	    foreach ($userLocations as $userLocation) {
 	      $business = Profile::findOrFail($userLocation->location_id);
+	      $user = $business;
+  			$business = 119;
+  			event(new CustomerLeaveRadius($user, $business));
 	      if ($business->account->pockeyt_lite_enabled) {
 	        $squareLocationId = $business->account->square_location_id;
 	        $itemId = $business->account->square_item_id;
@@ -63,6 +78,9 @@ class RemoveUserPockeytLite extends Command
 	        } catch (DecryptException $e) {
 	          dd($e);
 	        }
+	        $user = $token;
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 
 	        $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
 
@@ -78,6 +96,9 @@ class RemoveUserPockeytLite extends Command
 	            return dd($e->getResponse());
 	          }
 	        }
+	        $user = json_decode($response->getBody());
+  				$business = 119;
+  				event(new CustomerLeaveRadius($user, $business));
 	        $userLocation->delete();
 	      }
 	    }
