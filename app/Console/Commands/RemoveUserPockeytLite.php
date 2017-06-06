@@ -59,13 +59,7 @@ class RemoveUserPockeytLite extends Command
 	      if ($account->pockeyt_lite_enabled) {
 	        $squareLocationId = $account->square_location_id;
 	        $itemId = $account->square_item_id;
-	        $user = $itemId;
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
 	        $variationId = 'pockeyt' . $userLocation->user_id;
-	        $user = $variationId;
-  				$business = 119;
-  				event(new CustomerLeaveRadius($user, $business));
 	        $squareToken = $business->square_token;
 	        $user = $squareToken;
   				$business = 119;
