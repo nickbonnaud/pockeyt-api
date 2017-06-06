@@ -239,9 +239,9 @@ class GeoController extends Controller
                 $timeIdle = strtotime("now") - strtotime($userLocation->updated_at);
                 $user = User::findOrFail($userLocation->user_id);
                 if ($timeIdle > 600) {
-                    // $status = "exit";
-                    // $this->pockeytLite($user, $business, $status);
-                    // $userLocation->delete();
+                    $status = "exit";
+                    $this->pockeytLite($user, $business, $status);
+                    $userLocation->delete();
                 } else {
                     array_push($users, $user);
                 }
