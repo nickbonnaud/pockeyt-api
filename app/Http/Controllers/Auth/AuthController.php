@@ -24,6 +24,7 @@ class AuthController extends Controller {
 
     // Where to redirect upon succesful registration
     protected $redirectPath = '/';
+    protected $lockoutTime = 1800;
 
     /**
      * Create a new authentication controller instance.
