@@ -72,7 +72,16 @@
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
 @yield('scripts.footer')
-
 @include('flash')
+<style>
+    html { display:none; }
+</style>
+<script>
+    if (self == top) { 
+        document.documentElement.style.display = 'block'; 
+    } else {
+        top.location = self.location;
+    }
+</script>
 </body>
 </html>
