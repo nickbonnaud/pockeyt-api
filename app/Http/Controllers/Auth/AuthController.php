@@ -73,7 +73,7 @@ class AuthController extends Controller {
 
      protected function getLockoutErrorMessage($seconds)
     {
-        $minutes = $seconds/60;
+        $minutes = round($seconds/60);
         return Lang::has('auth.throttle')
             ? Lang::get('auth.throttle', ['seconds' => $minutes])
             : 'Too many login attempts. Please try again in '.$minutes.' minutes.';
