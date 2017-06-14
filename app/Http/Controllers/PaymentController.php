@@ -31,20 +31,20 @@ class PaymentController extends Controller
     }
 
     public function sendToken($user, $stripeToken) {
-        // if ($user->email) {
-        //     $customer = \Stripe\Customer::create(array(
-        //         'email' => $user->email,
-        //         'source' => $stripeToken
-        //     ));
-        // } else {
-        //     $customer = \Stripe\Customer::create(array(
-        //         'description' => $user->first_name . $user->last_name,
-        //         'source' => $stripeToken
-        //     ));
-        // }
+        if ($user->email) {
+            $customer = \Stripe\Customer::create(array(
+                'email' => $user->email,
+                'source' => $stripeToken
+            ));
+        } else {
+            $customer = \Stripe\Customer::create(array(
+                'description' => $user->first_name . $user->last_name,
+                'source' => $stripeToken
+            ));
+        }
 
-        // $user->customer_id = $customer->id;
-        // $user->save();
+        $user->customer_id = $customer->id;
+        $user->save();
         return response()->json($user);
     }
 
