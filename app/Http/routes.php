@@ -139,8 +139,7 @@ Route::group(['prefix' => 'api'], function() {
 
 // Payment Routes
 Route::group(['prefix' => 'api'], function() {
-    Route::get('token/client', 'PaymentController@clientToken');
-    Route::post('customer', 'PaymentController@createCustomer');
+    Route::post('stripe/customer', 'PaymentController@createCustomer');
     Route::put('customer', 'PaymentController@editPaymentMethod');
 });
 
