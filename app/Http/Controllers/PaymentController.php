@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class PaymentController extends Controller
 {
     
-    public function paylineForm(Request $response) {
+    public function paylineForm(Request $request) {
         if ($request->has(token)) {
             dd($token);
         } else {
