@@ -833,9 +833,8 @@
 
 	function buildFrame(url, cssStyles) {
 	  var frame = document.createElement('iframe');
-	  var cssStyles = cssStyles;
 	  frame.src = url;
-	  frame.style = style(cssStyles);
+	  
 	  frame.setAttribute('frameborder', '0');
 	  frame.setAttribute('allowtransparency', 'true');
 	  return frame;
