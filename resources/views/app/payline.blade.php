@@ -9,12 +9,7 @@
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
       document.getElementById('show-form').addEventListener('click', function() {
-        Payline.openTokenizeCardForm({
-          applicationName: 'Pollos Hermanos',
-          applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
-        }, function (tokenizedResponse) {
-          document.getElementById('preview').innerText = JSON.stringify(tokenizedResponse, null, '  ');
-        });
+        window.close();
       });
     });
   </script>
