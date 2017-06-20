@@ -15,7 +15,14 @@ class PaymentController extends Controller
     
     public function paylineForm(Request $request) {
         if ($request->has('token')) {
-            return view('app.payline');
+            $authUser = JWTAuth::parseToken()->authenticate();
+            if ($authUser) {
+                return view('app.payline');
+            } else {
+
+            }
+        } else {
+            dd("none");
         }
     }
 
