@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use JWTAuth;
-use Stripe;
 use App\User;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -14,10 +13,12 @@ use App\Http\Controllers\Controller;
 class PaymentController extends Controller
 {
     
-    public function clientToken() {
-        JWTAuth::parseToken()->authenticate();
-        $clientToken = \Braintree_ClientToken::generate();
-        return response()->json(compact('clientToken'));
+    public function paylineForm(Request $response) {
+        if ($request->has(token)) {
+            dd($token);
+        } else {
+            dd("none");
+        }
     }
 
     public function createCustomer(Request $request) {
