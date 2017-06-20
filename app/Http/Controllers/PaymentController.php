@@ -17,7 +17,7 @@ class PaymentController extends Controller
         if ($request->has('token')) {
             $authUser = JWTAuth::parseToken()->authenticate();
             if ($authUser) {
-                return view('payline');
+                return view('app.payline');
             } else {
 
             }
