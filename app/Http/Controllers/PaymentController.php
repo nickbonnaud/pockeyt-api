@@ -14,7 +14,7 @@ class PaymentController extends Controller
 {
     
     public function paylineForm(Request $request) {
-        if ($request->has(token)) {
+        if ($request->has('token')) {
             dd($token);
         } else {
             dd("none");
