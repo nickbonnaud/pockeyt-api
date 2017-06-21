@@ -363,7 +363,7 @@
               tab.$data.transactionsFinalized = data.transactionsFinalized;
             },
             error: function(data) {
-              console.log(err);
+              console.log(data);
             }
           })
         }

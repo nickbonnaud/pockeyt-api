@@ -12,7 +12,7 @@
     }, function (tokenizedResponse) {
       $.ajax({
         method: 'POST',
-        url: '/payline',
+        url: '/api/payline',
         data: {
           'tokenizedResponse' : tokenizedResponse
         },
@@ -21,7 +21,7 @@
           
         },
         error: function(data) {
-          console.log(err);
+          console.log(data);
         }
       })
     });
