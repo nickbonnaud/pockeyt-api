@@ -228,18 +228,38 @@ class ConnectController extends Controller
   }
 
   public function getAccessToken($code) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
+
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'oauth2']],
+    ]);
+
     try {
-      $response = $client->request('POST', 'token', [
-        'json' => ['client_id' => env('SQUARE_ID'),
-        'client_secret' => env('SQUARE_SECRET'),
-        'code'=> $code]
+      $response = $client->post('token', [
+        'body' => [
+          'client_secret' => env('SQUARE_SECRET'),
+          'code' => $code
+        ],
+        'json' => ['client_id' => env('SQUARE_ID')]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/oauth2/']);
+    // try {
+    //   $response = $client->request('POST', 'token', [
+    //     'json' => ['client_id' => env('SQUARE_ID'),
+    //     'client_secret' => env('SQUARE_SECRET'),
+    //     'code'=> $code]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
     $body = json_decode($response->getBody());
     $profile = $this->user->profile;
     $profile->square_token = Crypt::encrypt($body->access_token);
@@ -252,17 +272,34 @@ class ConnectController extends Controller
   	$accessToken = $this->user->profile->fb_app_id;
   	$pageId = $this->user->profile->fb_page_id;
 
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+    $client = new Client([
+      'base_url' => ['https://graph.facebook.com/{version}/', ['version' => 'v2.8']],
+      'defaults' => [
+        'query' => ['access_token' => $accessToken ] 
+      ]
+    ]);
 
-		try {
-			$response = $client->request('DELETE', $pageId . '/subscribed_apps', [
-        'query' => ['access_token' => $accessToken ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
+    try {
+      $response = $client->delete($pageId . '/subscribed_apps');
+    } catch(RequestException $e) {
+      if ($e->hasResponse()) {
         return $e->getResponse();
       }
-		}
+    }
+
+
+		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+		// try {
+		// 	$response = $client->request('DELETE', $pageId . '/subscribed_apps', [
+  //       'query' => ['access_token' => $accessToken ]
+  //     ]);
+		// } catch (RequestException $e) {
+		// 	if ($e->hasResponse()) {
+  //       return $e->getResponse();
+  //     }
+		// }
+
+    
 		$body = json_decode($response->getBody());
 		if ($body->success == true) {
 			$profile = $this->user->profile;
