@@ -81,17 +81,7 @@ class ConnectController extends Controller
         return $e->getResponse();
       }
     }
-    
 
-		// try {
-		// 	$response = $client->request('POST', $pageID . '/subscribed_apps', [
-  //       'query' => ['access_token' => $access_token ]
-  //     ]);
-		// } catch (RequestException $e) {
-		// 	if ($e->hasResponse()) {
-  //       return $e->getResponse();
-  //     }
-		// }
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
 			return $this->addPageIdToProfileFB($pageID, $access_token);
@@ -158,19 +148,34 @@ class ConnectController extends Controller
 	}
 
 	private function getInstaPost($mediaId, $profile, $access_token) {
-			$clientInsta = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media/']);
-			try {
-				$responseInsta = $clientInsta->request('GET', $mediaId, [
-	        'query' => ['access_token' => $access_token ]
-	      ]);
-			} catch (RequestException $e) {
-				if ($e->hasResponse()) {
-					dd($e->getResponse());
-	        return $e->getResponse();
-	      }
-			}
-			$data = json_decode($responseInsta->getBody());
-			return $this->addInstaPost($data, $profile, $mediaId);
+    $clientInsta = new Client([
+      'base_url' => ['https://api.instagram.com/{version}/', ['version' => 'v1']],
+      'defaults' => [
+        'query' => ['access_token' => $access_token ]
+      ]
+    ]);
+
+    try {
+      $responseInsta = $clientInsta->get('media/' . $mediaId);
+    } catch(RequestException $e) {
+      if ($e->hasResponse()) {
+        return $e->getResponse();
+      }
+    }
+
+			// $clientInsta = new \GuzzleHttp\Client(['base_uri' => 'https://api.instagram.com/v1/media/']);
+			// try {
+			// 	$responseInsta = $clientInsta->request('GET', $mediaId, [
+	  //       'query' => ['access_token' => $access_token ]
+	  //     ]);
+			// } catch (RequestException $e) {
+			// 	if ($e->hasResponse()) {
+			// 		dd($e->getResponse());
+	  //       return $e->getResponse();
+	  //     }
+			// }
+		$data = json_decode($responseInsta->getBody());
+		return $this->addInstaPost($data, $profile, $mediaId);
 	}
 
 
