@@ -67,17 +67,31 @@ class ConnectController extends Controller
 
 	private function installApp($pageID, $access_token) {
 		
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+		$client = new Client([
+      'base_url' => ['https://graph.facebook.com/{version}/', ['version' => 'v2.8']],
+      'defaults' => [
+        'query' => ['access_token' => $access_token ] 
+      ]
+    ]);
 
-		try {
-			$response = $client->request('POST', $pageID . '/subscribed_apps', [
-        'query' => ['access_token' => $access_token ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
+    try {
+      $response = $client->post($pageID . '/subscribed_apps');
+    } catch(RequestException $e) {
+      if ($e->hasResponse()) {
         return $e->getResponse();
       }
-		}
+    }
+    
+
+		// try {
+		// 	$response = $client->request('POST', $pageID . '/subscribed_apps', [
+  //       'query' => ['access_token' => $access_token ]
+  //     ]);
+		// } catch (RequestException $e) {
+		// 	if ($e->hasResponse()) {
+  //       return $e->getResponse();
+  //     }
+		// }
 		$data = json_decode($response->getBody());
 		if ($data->success === true) {
 			return $this->addPageIdToProfileFB($pageID, $access_token);
