@@ -272,16 +272,34 @@ class ConnectController extends Controller
   	$accessToken = $this->user->profile->fb_app_id;
   	$pageId = $this->user->profile->fb_page_id;
 
-		$client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-		try {
-			$response = $client->request('DELETE', $pageId . '/subscribed_apps', [
-        'query' => ['access_token' => $accessToken ]
-      ]);
-		} catch (RequestException $e) {
-			if ($e->hasResponse()) {
+    $client = new Client([
+      'base_url' => ['https://graph.facebook.com/{version}/', ['version' => 'v2.8']],
+      'defaults' => [
+        'query' => ['access_token' => $accessToken ] 
+      ]
+    ]);
+
+    try {
+      $response = $client->delete($pageId . '/subscribed_apps');
+    } catch(RequestException $e) {
+      if ($e->hasResponse()) {
         return $e->getResponse();
       }
-		}
+    }
+
+
+		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
+		// try {
+		// 	$response = $client->request('DELETE', $pageId . '/subscribed_apps', [
+  //       'query' => ['access_token' => $accessToken ]
+  //     ]);
+		// } catch (RequestException $e) {
+		// 	if ($e->hasResponse()) {
+  //       return $e->getResponse();
+  //     }
+		// }
+
+    
 		$body = json_decode($response->getBody());
 		if ($body->success == true) {
 			$profile = $this->user->profile;
