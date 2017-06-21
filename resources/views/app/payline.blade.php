@@ -10,8 +10,6 @@
       applicationName: 'Pollos Hermanos',
       applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
     }, function (tokenizedResponse) {
-    	var token = '{{ $token }}';
-    	console.log(token);
       console.log(tokenizedResponse);
     });
   });
