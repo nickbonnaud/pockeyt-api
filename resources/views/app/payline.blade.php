@@ -11,7 +11,8 @@
       applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
     }, function (tokenizedResponse) {
     	var token = '{{ $token }}';
-      dd(token);
+    	console.log(token);
+      console.log(tokenizedResponse);
     });
   });
   </script>
