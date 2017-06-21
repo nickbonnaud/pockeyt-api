@@ -10,7 +10,20 @@
       applicationName: 'Pollos Hermanos',
       applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
     }, function (tokenizedResponse) {
-      console.log(tokenizedResponse);
+      $.ajax({
+        method: 'POST',
+        url: '/payline',
+        data: {
+          'tokenizedResponse' : tokenizedResponse
+        },
+        success: function(data) {
+        	console.log(data);
+          
+        },
+        error: function(data) {
+          console.log(err);
+        }
+      })
     });
   });
   </script>

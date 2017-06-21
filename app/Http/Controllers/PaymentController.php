@@ -27,14 +27,8 @@ class PaymentController extends Controller
     }
 
     public function createCustomer(Request $request) {
-        $authUser = JWTAuth::parseToken()->authenticate();
-        $user = User::findOrFail($authUser->id);
-        $stripeToken = $request->stripeToken;
-
-        $user->card_type = $request->cardType;
-        $user->last_four_card = $request->lastFour;
-        $user->save();
-        return $this->sendToken($user, $stripeToken);
+        $response = $request->tokenizedResponse;
+        return response()->json($response); 
     }
 
     public function sendToken($user, $stripeToken) {
