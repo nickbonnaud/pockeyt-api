@@ -235,11 +235,11 @@ class ConnectController extends Controller
 
     try {
       $response = $client->post('token', [
-        'body' => [
+        'json' => [
+          'client_id' => env('SQUARE_ID'),
           'client_secret' => env('SQUARE_SECRET'),
           'code' => $code
-        ],
-        'json' => ['client_id' => env('SQUARE_ID')]
+        ]
       ]);
     } catch(RequestException $e) {
       if ($e->hasResponse()) {
@@ -260,6 +260,8 @@ class ConnectController extends Controller
     //     return $e->getResponse();
     //   }
     // }
+
+    
     $body = json_decode($response->getBody());
     $profile = $this->user->profile;
     $profile->square_token = Crypt::encrypt($body->access_token);
@@ -944,7 +946,7 @@ class ConnectController extends Controller
    //    }
    //  }
 
-    
+
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = false;
     $account->save();
