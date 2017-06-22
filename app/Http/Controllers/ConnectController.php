@@ -230,7 +230,7 @@ class ConnectController extends Controller
   public function getAccessToken($code) {
 
     $client = new Client([
-      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'oauth2']],
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'oauth2']]
     ]);
 
     try {
@@ -328,16 +328,6 @@ class ConnectController extends Controller
       }
     }
 
-		// $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com/v2.8']);
-		// try {
-		// 	$response = $client->request('POST', $pageId . '/subscribed_apps', [
-  //       'query' => ['access_token' => $accessToken ]
-  //     ]);
-		// } catch (RequestException $e) {
-		// 	if ($e->hasResponse()) {
-  //       return $e->getResponse();
-  //     }
-		// }
 		$body = json_decode($response->getBody());
 		if ($body->success == true) {
 			$profile = $this->user->profile;
@@ -376,39 +366,78 @@ class ConnectController extends Controller
   }
 
   public function subscribeEventType($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('PUT', $squareLocationId . '/webhooks', [
+      $response = $client->put($squareLocationId . '/webhooks', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
         'json' => ['PAYMENT_UPDATED']
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
-        dd($e->getResponse());
+        return $e->getResponse();
       }
     }
+
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('PUT', $squareLocationId . '/webhooks', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ],
+    //     'json' => ['PAYMENT_UPDATED']
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     dd($e->getResponse());
+    //   }
+    // }
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = true;
     return $account->save();
   }
 
   public function setLocation($token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', 'me/locations', [
+      $response = $client->get('me/locations', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('GET', 'me/locations', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
     $body = json_decode($response->getBody());
     if (count($body) > 1) {
       return $this->matchLocationLite($body, $token);
@@ -428,19 +457,41 @@ class ConnectController extends Controller
       dd($e);
     }
 
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', 'me/locations', [
+      $response = $client->get('me/locations', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('GET', 'me/locations', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
+
+
     $body = json_decode($response->getBody());
 
     if (count($body) > 1) {
@@ -498,19 +549,41 @@ class ConnectController extends Controller
   }
 
   public function checkSquarePockeytCategory($squareLocationId, $token) {
-  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', $squareLocationId . '/categories', [
+      $response = $client->get($squareLocationId . '/categories', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+
+
+  	// $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+   //  try {
+   //    $response = $client->request('GET', $squareLocationId . '/categories', [
+   //      'headers' => [
+   //        'Authorization' => 'Bearer ' . $token,
+   //        'Accept' => 'application/json'
+   //      ]
+   //    ]);
+   //  } catch (RequestException $e) {
+   //    if ($e->hasResponse()) {
+   //      return $e->getResponse();
+   //    }
+   //  }
+
+
     $categories = json_decode($response->getBody());
     $savedCategoryId = $this->user->profile->account->square_category_id;
     foreach ($categories as $category) {
@@ -524,20 +597,42 @@ class ConnectController extends Controller
   }
 
   public function createSquarePockeytCategory($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('POST', $squareLocationId . '/categories', [
+      $response = $client->post($squareLocationId . '/categories', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
         'json' => ['name' => 'Pockeyt Customers']
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('POST', $squareLocationId . '/categories', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ],
+    //     'json' => ['name' => 'Pockeyt Customers']
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
+
+
+
     $category = json_decode($response->getBody());
    	$account = $this->user->profile->account;
 	  $account->square_category_id = $category->id;
@@ -545,19 +640,40 @@ class ConnectController extends Controller
   }
 
   public function getSquarePages($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', $squareLocationId . '/pages', [
+      $response = $client->get($squareLocationId . '/pages', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('GET', $squareLocationId . '/pages', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
+
+
+
     $pages = json_decode($response->getBody());
     if (count($pages) > 0) {
       foreach ($pages as $page) {
@@ -572,22 +688,44 @@ class ConnectController extends Controller
   }
 
   public function createSquarePage($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('POST', $squareLocationId . '/pages', [
+      $response = $client->post($squareLocationId . '/pages', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
-        'json' => [
-        	'page_index' => 0
-        ]
+        'json' => ['page_index' => 0]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
-        dd($e->getResponse());
+        return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('POST', $squareLocationId . '/pages', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ],
+    //     'json' => [
+    //     	'page_index' => 0
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     dd($e->getResponse());
+    //   }
+    // }
+
+
+
     $page = json_decode($response->getBody());
    	$pageId = $page->id;
     $row = 4;
@@ -596,43 +734,91 @@ class ConnectController extends Controller
   }
 
   public function createCell($row, $column, $token, $squareLocationId, $pageId) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     $itemId = $this->user->profile->account->square_item_id;
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('PUT', $squareLocationId . '/pages' . '/' . $pageId . '/cells', [
+      $response = $client->put($squareLocationId . '/pages' . '/' . $pageId . '/cells', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
         'json' => [
-        	'row' => $row,
-	        'column' => $column,
-	        'object_type' => 'ITEM',
-	        'object_id' =>  $itemId
+          'row' => $row,
+          'column' => $column,
+          'object_type' => 'ITEM',
+          'object_id' =>  $itemId
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
-        dd($e->getResponse());
+        return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('PUT', $squareLocationId . '/pages' . '/' . $pageId . '/cells', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ],
+    //     'json' => [
+    //     	'row' => $row,
+	   //      'column' => $column,
+	   //      'object_type' => 'ITEM',
+	   //      'object_id' =>  $itemId
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     dd($e->getResponse());
+    //   }
+    // }
+
+
+
     return;
   }
 
   public function checkSquareItem($squareLocationId, $token) {
-  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', $squareLocationId . '/items', [
+      $response = $client->get($squareLocationId . '/items', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+  	// $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+   //  try {
+   //    $response = $client->request('GET', $squareLocationId . '/items', [
+   //      'headers' => [
+   //        'Authorization' => 'Bearer ' . $token,
+   //        'Accept' => 'application/json'
+   //      ]
+   //    ]);
+   //  } catch (RequestException $e) {
+   //    if ($e->hasResponse()) {
+   //      return $e->getResponse();
+   //    }
+   //  }
+
+
+
     $items = json_decode($response->getBody());
     $savedItemId = $this->user->profile->account->square_item_id;
     foreach ($items as $item) {
@@ -646,35 +832,70 @@ class ConnectController extends Controller
   }
 
   public function createSquareItem($squareLocationId, $token) {
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
     $categoryId = $this->user->profile->account->square_category_id;
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('POST', $squareLocationId . '/items', [
+      $response = $client->post($squareLocationId . '/items', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
         'json' => [
-        	'name' => 'Pockeyt Customer',
-	        'category_id' => $categoryId,
-	        'abbreviation' => 'PC',
-	        'variations' => [
-	        	[
-		          'name' => 'Placeholder default Pockeyt Customer',
-		          'pricing_type' => 'FIXED_PRICING',
-		          'price_money' => [
-		          	'currency_code' => 'USD',
-		            'amount' => 0,
-		          ]
-		        ]
-	        ]
+          'name' => 'Pockeyt Customer',
+          'category_id' => $categoryId,
+          'abbreviation' => 'PC',
+          'variations' => [
+            [
+              'name' => 'Placeholder default Pockeyt Customer',
+              'pricing_type' => 'FIXED_PRICING',
+              'price_money' => [
+                'currency_code' => 'USD',
+                'amount' => 0,
+              ]
+            ]
+          ]
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
-        dd($e->getResponse());
+        return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('POST', $squareLocationId . '/items', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ],
+    //     'json' => [
+    //     	'name' => 'Pockeyt Customer',
+	   //      'category_id' => $categoryId,
+	   //      'abbreviation' => 'PC',
+	   //      'variations' => [
+	   //      	[
+		  //         'name' => 'Placeholder default Pockeyt Customer',
+		  //         'pricing_type' => 'FIXED_PRICING',
+		  //         'price_money' => [
+		  //         	'currency_code' => 'USD',
+		  //           'amount' => 0,
+		  //         ]
+		  //       ]
+	   //      ]
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     dd($e->getResponse());
+    //   }
+    // }
+
+
     $item = json_decode($response->getBody());
     $account = $this->user->profile->account;
     $account->square_item_id = $item->id;
@@ -689,20 +910,41 @@ class ConnectController extends Controller
       dd($e);
     }
     $squareLocationId = $this->user->profile->account->square_location_id;
-  	$client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('PUT', $squareLocationId . '/webhooks', [
+      $response = $client->put($squareLocationId . '/webhooks', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ],
         'json' => []
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
-        dd($e->getResponse());
+        return $e->getResponse();
       }
-    }
+    }    
+
+
+  	// $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+   //  try {
+   //    $response = $client->request('PUT', $squareLocationId . '/webhooks', [
+   //      'headers' => [
+   //        'Authorization' => 'Bearer ' . $token,
+   //        'Accept' => 'application/json'
+   //      ],
+   //      'json' => []
+   //    ]);
+   //  } catch (RequestException $e) {
+   //    if ($e->hasResponse()) {
+   //      dd($e->getResponse());
+   //    }
+   //  }
+
+    
     $account = $this->user->profile->account;
     $account->pockeyt_lite_enabled = false;
     $account->save();
