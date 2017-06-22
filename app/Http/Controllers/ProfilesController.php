@@ -154,15 +154,12 @@ class ProfilesController extends Controller {
      */
 
     public function getTaxRate($county, $state, $zip, $profile) {
-        $client = new Client([
-            'base_url' => ['https://taxrates.api.avalara.com:443/'],
-            'defaults' => [
-                'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
-            ]
-        ]);
+        $client = new Client();
 
         try {
-            $response = $client->get('postal');
+            $response = $client->get('https://taxrates.api.avalara.com:443/postal', [
+                'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
+            ]);
         } catch(RequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
@@ -182,7 +179,7 @@ class ProfilesController extends Controller {
         //     }
         // }
 
-        
+
         $data = json_decode($response->getBody());
         $profile->tax_rate = $data->totalRate * 100;
 
