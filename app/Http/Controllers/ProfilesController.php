@@ -154,17 +154,16 @@ class ProfilesController extends Controller {
 
     public function getTaxRate($county, $state, $zip, $profile) {
         $client = new Client();
-        dd("here");
         try {
             $response = $client->get('https://taxrates.api.avalara.com:443/postal', [
                 'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
             ]);
         } catch(RequestException $e) {
             if ($e->hasResponse()) {
-                return $e->getResponse();
+                dd($e->getResponse());
             }
         }
-
+        dd($response);
 
         // $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
 
