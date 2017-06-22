@@ -77,7 +77,6 @@ class ProfilesController extends Controller {
             $query->where('county', '=', $county)
                 ->where('state', '=', $state);
         })->first();
-        dd($taxLocation);
         if ($taxLocation) {
             $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
         } else {
@@ -155,7 +154,7 @@ class ProfilesController extends Controller {
 
     public function getTaxRate($county, $state, $zip, $profile) {
         $client = new Client();
-
+        dd("here");
         try {
             $response = $client->get('https://taxrates.api.avalara.com:443/postal', [
                 'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
