@@ -122,17 +122,32 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->input('token');
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com']);
+        $client = new Client([
+            'base_url' => ['https://graph.facebook.com/'],
+            'defaults' => [
+                'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
+            ]
+        ]);
 
         try {
-            $response = $client->request('GET', '/me', [
-                'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
-            ]);
-        } catch (RequestException $e) {
+            $response = $client->get('me');
+        } catch(RequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
         }
+
+
+        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://graph.facebook.com']);
+        // try {
+        //     $response = $client->request('GET', '/me', [
+        //         'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
+        //     ]);
+        // } catch (RequestException $e) {
+        //     if ($e->hasResponse()) {
+        //         return $e->getResponse();
+        //     }
+        // }
 
         $data = json_decode($response->getBody());
 

@@ -272,10 +272,14 @@ class GeoController extends Controller
               dd($e);
             }
 
-            $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+
+            $client = new Client([
+                'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+            ]);
+            // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
             if ($status == "enter") {
                 try {
-                    $response = $client->request('POST', $squareLocationId . '/items' . '/' . $itemId . '/variations', [
+                    $response = $client->post($squareLocationId . '/items' . '/' . $itemId . '/variations', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json'
@@ -289,25 +293,64 @@ class GeoController extends Controller
                             ]
                         ]
                     ]);
-                } catch (RequestException $e) {
+                } catch(RequestException $e) {
                     if ($e->hasResponse()) {
                         return $e->getResponse();
                     }
                 }
+
+
+                // try {
+                //     $response = $client->request('POST', $squareLocationId . '/items' . '/' . $itemId . '/variations', [
+                //         'headers' => [
+                //             'Authorization' => 'Bearer ' . $token,
+                //             'Accept' => 'application/json'
+                //         ],
+                //         'json' => [
+                //             'id' => $variationId,
+                //             'name' => $user->first_name . ' ' . $user->last_name,
+                //             'price_money' => [
+                //                 'currency_code' => 'USD',
+                //                 'amount' => 0,
+                //             ]
+                //         ]
+                //     ]);
+                // } catch (RequestException $e) {
+                //     if ($e->hasResponse()) {
+                //         return $e->getResponse();
+                //     }
+                // }
+
+
                 return;
             } else {
                 try {
-                    $response = $client->request('DELETE', $squareLocationId . '/items' . '/' . $itemId . '/variations' . '/' . $variationId , [
+                    $response = $client->delete($squareLocationId . '/items' . '/' . $itemId . '/variations' . '/' . $variationId, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json'
                         ]
                     ]);
-                } catch (RequestException $e) {
+                } catch(RequestException $e) {
                     if ($e->hasResponse()) {
                         return $e->getResponse();
                     }
                 }
+
+
+
+                // try {
+                //     $response = $client->request('DELETE', $squareLocationId . '/items' . '/' . $itemId . '/variations' . '/' . $variationId , [
+                //         'headers' => [
+                //             'Authorization' => 'Bearer ' . $token,
+                //             'Accept' => 'application/json'
+                //         ]
+                //     ]);
+                // } catch (RequestException $e) {
+                //     if ($e->hasResponse()) {
+                //         return $e->getResponse();
+                //     }
+                // }
                 return;
             }
         } else {

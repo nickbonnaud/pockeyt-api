@@ -116,19 +116,39 @@ class ProductsController extends Controller {
       dd($e);
     }
 
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', 'me/locations', [
+      $response = $client->get('me/locations', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('GET', 'me/locations', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
+
+
     $body = json_decode($response->getBody());
     if (count($body) > 1) {
       return $this->matchLocation($body);
@@ -146,19 +166,39 @@ class ProductsController extends Controller {
     } catch (DecryptException $e) {
       dd($e);
     }
-    $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    $client = new Client([
+      'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+    ]);
+
     try {
-      $response = $client->request('GET', $squareLocationId . '/items', [
+      $response = $client->get($squareLocationId . '/items', [
         'headers' => [
           'Authorization' => 'Bearer ' . $token,
           'Accept' => 'application/json'
         ]
       ]);
-    } catch (RequestException $e) {
+    } catch(RequestException $e) {
       if ($e->hasResponse()) {
         return $e->getResponse();
       }
     }
+
+
+    // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+    // try {
+    //   $response = $client->request('GET', $squareLocationId . '/items', [
+    //     'headers' => [
+    //       'Authorization' => 'Bearer ' . $token,
+    //       'Accept' => 'application/json'
+    //     ]
+    //   ]);
+    // } catch (RequestException $e) {
+    //   if ($e->hasResponse()) {
+    //     return $e->getResponse();
+    //   }
+    // }
+
+    
     $body = json_decode($response->getBody());
     return $this->syncPockeytInventory($body);
   }

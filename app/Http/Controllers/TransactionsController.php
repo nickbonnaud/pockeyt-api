@@ -734,19 +734,41 @@ class TransactionsController extends Controller
         } catch (DecryptException $e) {
           dd($e);
         }
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+        
+        $client = new Client([
+            'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
+        ]);
+
         try {
-          $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
-            'headers' => [
-              'Authorization' => 'Bearer ' . $token,
-              'Accept' => 'application/json'
-            ]
-          ]);
-        } catch (RequestException $e) {
-          if ($e->hasResponse()) {
-            dd($e->getResponse());
-          }
+            $response = $client->get($squareLocationId . '/payments' . '/' . $payment_id, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                    'Accept' => 'application/json'
+                ]
+            ]);
+        } catch(RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
         }
+
+
+        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
+        // try {
+        //   $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
+        //     'headers' => [
+        //       'Authorization' => 'Bearer ' . $token,
+        //       'Accept' => 'application/json'
+        //     ]
+        //   ]);
+        // } catch (RequestException $e) {
+        //   if ($e->hasResponse()) {
+        //     dd($e->getResponse());
+        //   }
+        // }
+
+
+
         $payment = json_decode($response->getBody());
         foreach ($payment->itemizations as $item) {
             if ($item->name == "Pockeyt Customer") {
