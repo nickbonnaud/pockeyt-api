@@ -77,7 +77,6 @@ class ProfilesController extends Controller {
             $query->where('county', '=', $county)
                 ->where('state', '=', $state);
         })->first();
-        dd($taxLocation);
         if ($taxLocation) {
             $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
         } else {
@@ -179,7 +178,7 @@ class ProfilesController extends Controller {
         //     }
         // }
 
-
+        dd($response);
         $data = json_decode($response->getBody());
         $profile->tax_rate = $data->totalRate * 100;
 
