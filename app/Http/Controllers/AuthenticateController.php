@@ -165,9 +165,13 @@ class AuthenticateController extends Controller
             return $errors->toJson();
         } else {
 
-            $res = $client->request('GET', "/$userfbID/picture", [
+            $res = $client->get("https://graph.facebook.com/$userfbID/picture", [
                 'query' => ['type' => 'large', 'redirect' =>'false']
             ]);
+
+            // $res = $client->request('GET', "/$userfbID/picture", [
+            //     'query' => ['type' => 'large', 'redirect' =>'false']
+            // ]);
 
             $photoData = json_decode($res->getBody());
             if($photoData->data->is_silhouette === false) {
