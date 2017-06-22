@@ -122,15 +122,12 @@ class AuthenticateController extends Controller
 
     public function facebook(Request $request) {
         $token = $request->input('token');
-        $client = new Client([
-            'base_url' => ['https://graph.facebook.com/'],
-            'defaults' => [
-                'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
-            ]
-        ]);
+        $client = new Client();
 
         try {
-            $response = $client->get('me');
+            $response = $client->get('https://graph.facebook.com/me', [
+                'query' => ['fields' => 'first_name, last_name, email', 'access_token' => $token, ]
+            ]);
         } catch(RequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
