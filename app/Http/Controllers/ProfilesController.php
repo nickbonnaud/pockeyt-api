@@ -163,7 +163,6 @@ class ProfilesController extends Controller {
                 dd($e->getResponse());
             }
         }
-        dd($response);
 
         // $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
 

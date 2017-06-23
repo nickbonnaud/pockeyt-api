@@ -2,7 +2,7 @@
 <head>
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https:www.pockeytbiz.com/events/{{ $post->id }}" /> 
-    <meta property="og:title" content="{{ $post->title }}" />
+    <meta property="og:title" content="{{ $post->message }}" />
     @if(! is_null($post->photo_path))
         <meta property="og:image"  content="{{ $post->photo_path }}" />
     @else
@@ -11,7 +11,7 @@
 </head>
 
 @section('content')
-		@if(is_null($post))
+	@if(is_null($post))
         <h2 class="text-center">Sorry! Looks like this post was deleted! :(</h2>
     @endif
     <div class="row">
@@ -31,5 +31,4 @@
 
         </div>
     </div>
-
 @stop

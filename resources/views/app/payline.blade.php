@@ -7,14 +7,15 @@
   <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(event) {
     Payline.openTokenizeCardForm({
-      applicationName: 'Pollos Hermanos',
+      applicationName: 'Secure Card Vault',
       applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
     }, function (tokenizedResponse) {
       $.ajax({
         method: 'POST',
         url: '/api/payline',
         data: {
-          'tokenizedResponse' : tokenizedResponse
+          'tokenizedResponse' : tokenizedResponse,
+          'user' : '{{ $authUser }}'
         },
         success: function(data) {
         	console.log(data);
