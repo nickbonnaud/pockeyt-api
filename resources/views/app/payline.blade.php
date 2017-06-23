@@ -19,8 +19,10 @@
         },
         success: function(data) {
         	console.log(data);
-          if (data) {
-            window.location.replace("mobile/close");
+          if (data == true) {
+            window.location.replace("mobile/close/success");
+          } else {
+            window.location.replace("mobile/close/fail");
           }
         },
         error: function(data) {
