@@ -69,6 +69,8 @@ class PaymentController extends Controller
     }
 
     public function associateToken($tokenId, $identity, $user) {
+        dd($identity);
+
         $card = new Payline\Resources\PaymentInstrument(
             array (
                 "token"=> $tokenId,
