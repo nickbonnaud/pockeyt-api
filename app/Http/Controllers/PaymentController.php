@@ -35,12 +35,12 @@ class PaymentController extends Controller
     }
 
     public function createCustomer(Request $request) {
-        $tokenizedResponse = $request->tokenizedResponse;
+        $tokenId = $request->tokenId;
         $user = User::findOrFail($request->userId);
 
         $this->initPayline();
         $identity = $this->createCustomerID($user);
-        $updatedUser = $this->associateToken($tokenizedResponse, $identity, $user);
+        $updatedUser = $this->associateToken($tokenId, $identity, $user);
         return response()->json($updatedUser); 
     }
 
@@ -68,10 +68,10 @@ class PaymentController extends Controller
         return $identity;
     }
 
-    public function associateToken($tokenizedResponse, $identity, $user) {
+    public function associateToken($tokenId, $identity, $user) {
         $card = new Payline\Resources\PaymentInstrument(
             array (
-                "token"=> $tokenizedResponse->id,
+                "token"=> $tokenId,
                 "type"=> "TOKEN",
                 "identity"=> $identity->id
             )
