@@ -65,7 +65,7 @@ class PaymentController extends Controller
                 )
             );
         }
-        return $identity;
+        return $identity = $identity->save();
     }
 
     public function associateToken($tokenId, $identity, $user) {
