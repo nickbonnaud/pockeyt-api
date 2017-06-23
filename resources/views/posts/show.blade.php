@@ -1,5 +1,14 @@
 @extends('layoutPost')
-
+<head>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https:www.pockeytbiz.com/posts/{{ $post->id }}" /> 
+    <meta property="og:title" content="{{ $post->message }}" />
+    @if(! is_null($post->photo_path))
+        <meta property="og:image"  content="{{ $post->photo_path }}" />
+    @else
+        <meta property="og:image"  content="{{ $profile->logo->url }}" />
+    @endif
+</head>
 
 @section('content')
     @if(is_null($post))
