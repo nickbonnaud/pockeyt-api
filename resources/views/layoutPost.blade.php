@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https:www.pockeytbiz.com/events/{{ $post->id }}" /> 
+    <meta property="og:title" content="{{ $post->message }}" />
+    @if(! is_null($post->photo_path))
+        <meta property="og:image"  content="{{ $post->photo_path }}" />
+    @else
+        <meta property="og:image"  content="{{ $profile->logo->url }}" />
+    @endif
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pockeyt Business</title>
