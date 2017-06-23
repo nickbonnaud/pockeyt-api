@@ -10,6 +10,7 @@
       applicationName: 'Secure Card Vault',
       applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
     }, function (tokenizedResponse) {
+      console.log(tokenizedResponse);
       $.ajax({
         method: 'POST',
         url: '/api/payline',
