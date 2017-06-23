@@ -15,7 +15,7 @@
         url: '/api/payline',
         data: {
           'tokenizedResponse' : tokenizedResponse,
-          'user' : '{{ $authUser }}'
+          'userId' : '{{ $authUser->id }}'
         },
         success: function(data) {
         	console.log(data);

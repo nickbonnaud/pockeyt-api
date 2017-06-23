@@ -35,10 +35,52 @@ class PaymentController extends Controller
     }
 
     public function createCustomer(Request $request) {
-        // $this->initPayline();
-        // $this->createCustomerID();
-        // $response = $request->tokenizedResponse;
-        return response()->json($response); 
+        $tokenizedResponse = $request->tokenizedResponse;
+        $user = User::findOrFail($request->userId);
+
+        $this->initPayline();
+        $identity = $this->createCustomerID($user);
+        $updatedUser = $this->associateToken($tokenizedResponse, $identity, $user);
+        return response()->json($updatedUser); 
+    }
+
+    public function createCustomerID($user) {
+        if ($user->email) {
+            $identity = new Payline\Resources\Identity(
+                array(
+                    "entity" => array(
+                        "first_name" => $user->first_name,
+                        "last_name" => $user->last_name,
+                        "email" => $user->email
+                    )
+                )
+            );
+        } else {
+            $identity = new Payline\Resources\Identity(
+                array(
+                    "entity" => array(
+                        "first_name" => $user->first_name,
+                        "last_name" => $user->last_name
+                    )
+                )
+            );
+        }
+        return $identity;
+    }
+
+    public function associateToken($tokenizedResponse, $identity, $user) {
+        $card = new Payline\Resources\PaymentInstrument(
+            array (
+                "token"=> $tokenizedResponse->id,
+                "type"=> "TOKEN",
+                "identity"=> $identity->id
+            )
+        );
+        $user->customer_id = $card->id;
+        $user->card_type = $card->brand;
+        $user->last_four_card = $card->last_four;
+        $user = $user->save();
+        return $user;
     }
 
     public function sendToken($user, $stripeToken) {
