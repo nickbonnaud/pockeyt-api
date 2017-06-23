@@ -19,7 +19,9 @@
         },
         success: function(data) {
         	console.log(data);
-          
+          if (data) {
+            window.location.replace("mobile/close");
+          }
         },
         error: function(data) {
           console.log(data);
