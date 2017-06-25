@@ -34,17 +34,21 @@ class PaymentController extends Controller
         return Payline\Bootstrap::init();
     }
 
-    public function createCustomer(Request $request) {
+    public function setPayment(Request $request) {
         $tokenId = $request->tokenId;
         $user = User::findOrFail($request->userId);
-
         $this->initPayline();
-        $identity = $this->createCustomerID($user);
-        $updatedUser = $this->associateToken($tokenId, $identity, $user);
+        if (!$user->payline_id) {
+            $identity = $this->createPaylineID($user);
+            $identityID = $identity->id;
+        } else {
+            $identityID = $user->payline_id;
+        }
+        $updatedUser = $this->associateToken($tokenId, $identityID, $user);
         return response()->json($updatedUser); 
     }
 
-    public function createCustomerID($user) {
+    public function createPaylineID($user) {
         if ($user->email) {
             $identity = new Payline\Resources\Identity(
                 array(
@@ -68,55 +72,20 @@ class PaymentController extends Controller
         return $identity = $identity->save();
     }
 
-    public function associateToken($tokenId, $identity, $user) {
+    public function associateToken($tokenId, $identityID, $user) {
         $card = new Payline\Resources\PaymentInstrument(
             array (
                 "token"=> $tokenId,
                 "type"=> "TOKEN",
-                "identity"=> $identity->id
+                "identity"=> $identityID
             )
         );
         $card = $card->save();
         $user->customer_id = $card->id;
-        $user->payline_id = $identity->id;
+        $user->payline_id = $identityID;
         $user->card_type = $card->brand;
         $user->last_four_card = $card->last_four;
         $user = $user->save();
         return $user;
-    }
-
-    public function sendToken($user, $stripeToken) {
-        if ($user->email) {
-            $customer = Stripe\Customer::create(array(
-                'email' => $user->email,
-                'source' => $stripeToken
-            ));
-        } else {
-            $customer = Stripe\Customer::create(array(
-                'description' => $user->first_name . $user->last_name,
-                'source' => $stripeToken
-            ));
-        }
-
-        $user->customer_id = $customer->id;
-        $user->save();
-        return response()->json($user);
-    }
-
-    public function editPaymentMethod(Request $request) {
-        $authUser = JWTAuth::parseToken()->authenticate();
-        $result = \Braintree_PaymentMethod::update(
-            $request->payToken,
-            [
-                'paymentMethodNonce' => $request->userNonce
-            ]
-        );
-        if ($result->success) {
-            return response('Success', 200);
-        } else {
-            foreach($result->errors->deepAll() AS $error) {
-                return($error->code . ": " . $error->message . "\n");
-            }
-        }
     }
 }
