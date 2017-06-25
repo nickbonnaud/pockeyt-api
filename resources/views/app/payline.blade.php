@@ -2,6 +2,7 @@
 <title>Card Info</title>
 </head>
 <body>
+  <h1 class="loading-payline">Loading...</h1>
   <script type="text/javascript" src="https://vgs-assets.s3.amazonaws.com/payline-1.latest.js"></script>
   <script src="{{ asset('/vendor/jquery/jquery-1.12.0.min.js') }}"></script>
   <script type="text/javascript">

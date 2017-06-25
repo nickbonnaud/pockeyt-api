@@ -78,6 +78,7 @@ class PaymentController extends Controller
         );
         $card = $card->save();
         $user->customer_id = $card->id;
+        $user->payline_id = $identity->id;
         $user->card_type = $card->brand;
         $user->last_four_card = $card->last_four;
         $user = $user->save();
