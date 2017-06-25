@@ -40,4 +40,8 @@ class AppController extends Controller {
     public function qbDisconnect() {
         return view('app.qbDisconnect');
     }
+
+    public function unauthorized() {
+        return view('errors.400');
+    }
 }
