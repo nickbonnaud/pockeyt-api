@@ -18,10 +18,10 @@ class PaymentController extends Controller
             if ($authUser) {
                 return view('app.payline', compact('authUser'));
             } else {
-
+                return view ('errors.400');
             }
         } else {
-            
+            return view ('errors.400');
         }
     }
 
