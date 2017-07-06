@@ -100,8 +100,8 @@ class ProfilesController extends Controller {
             $this->syncTags($profile, $request->input('tags'));
         else
             $this->syncTags($profile, $request->input('tag_list'));
-        dd($this->user->profile);
-        return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
+        dd($profile);
+        return redirect()->route('profiles.show', ['profiles' => $profile->id]);
     }
 
     /**
