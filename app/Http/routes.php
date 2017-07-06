@@ -65,6 +65,13 @@ Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness'
 Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
 Route::post('accounts/status', 'AccountsController@postStatus');
 Route::get('accounts/connections', 'AccountsController@getConnections')->name('accounts.connections');
+
+Route::post('accounts/create/business', 'AccountsController@setBusinessInfo')->name('accounts.setBusiness');
+Route::get('accounts/create/owner', 'AccountsController@createOwnerInfo')->name('accounts.createOwner');
+Route::patch('accounts/create/owner', 'AccountsController@setOwnerInfo')->name('accounts.setOwner');
+Route::get('accounts/create/bank', 'AccountsController@createBankInfo')->name('accounts.createBank');
+Route::patch('accounts/create/bank', 'AccountsController@setBankInfo')->name('accounts.setBank');
+
 Route::resource('accounts', 'AccountsController');
 
 // Transaction Routes

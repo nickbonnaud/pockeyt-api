@@ -21,17 +21,17 @@ class AccountRequest extends Request {
      */
     public function rules() {
         return [
-          'accountUserFirst' => 'required',
-	        'accountUserLast' => 'required',
-	        'accountEmail' => 'required',
-	        'dateOfBirth' => 'required|date_format: Y-m-d',
-	        'last4' => 'required',
-	        'indivStreetAdress' => 'required',
-	        'indivCity' => 'required',
-	        'indivState' => 'required',
-	        'indivZip' => 'required',
-	        'routingNumber4' => 'required',
-        	'accountNumber4' => 'required'
+            'legalBizName' => 'required',
+	        'businessType' => 'required',
+	        'bizTaxId' => 'required',
+	        'established' => 'required|date_format: Y-m-d',
+	        'annualCCSales' => 'required',
+	        'bizStreetAdress' => 'required',
+	        'bizCity' => 'required',
+	        'bizState' => 'required',
+	        'bizZip' => 'required',
+	        'phone' => 'required',
+            'accountEmail' => 'required'
         ];
     }
 }

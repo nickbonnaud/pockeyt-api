@@ -7,8 +7,11 @@ use App\Account;
 use App\Profile;
 use Illuminate\Http\Request;
 use Validator;
+use Crypt;
 use App\Http\Requests;
 use App\Http\Requests\AccountRequest;
+use App\Http\Requests\AccountOwnerRequest;
+use App\Http\Requests\AccountBankRequest;
 use App\Http\Requests\UpdateAccountIndividualRequest;
 use App\Http\Requests\UpdateAccountBusinessRequest;
 use App\Http\Requests\UpdateAccountPayRequest;
@@ -39,55 +42,44 @@ class AccountsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountRequest $request)
+    public function setBusinessInfo(AccountRequest $request)
     {
         if(!is_null($this->user->profile->account))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
-        $merchantAccountParams = [
-            'individual' => [
-                'firstName' => $request->accountUserFirst,
-                'lastName' => $request->accountUserLast,
-                'email' => $request->accountEmail,
-                'dateOfBirth' => $request->dateOfBirth,
-                'ssn' => $request->last4,
-                'address' => [
-                    'streetAddress' => $request->indivStreetAdress,
-                    'locality' => $request->indivCity,
-                    'region' => $request->indivState,
-                    'postalCode' => $request->indivZip
-                ]
-            ],
-            'business' => [
-                'legalName' => $request->legalBizName,
-                'taxId' => $request->bizTaxId
-            ],
-            'funding' => [
-                'destination' => \Braintree_MerchantAccount::FUNDING_DESTINATION_BANK,
-                'accountNumber' => $request->accountNumber4,
-                'routingNumber' => $request->routingNumber4
-            ],
-            'tosAccepted' => $request->ToS,
-            'masterMerchantAccountId' => "pockeytinc",
-            'id' => $this->user->profile->id
-        ];
+        $account = $this->user->profile->publish(
+            new Account($request->all())
+        );
 
-        $result = \Braintree_MerchantAccount::create($merchantAccountParams);
-        if ($result->success) {
-            $data = $request->all();
-            $data['status'] = $result->merchantAccount->status;
-            $data['accountNumber4'] = substr($request->accountNumber4, -4);
-            $data['routingNumber4'] = substr($request->routingNumber4, -4);
+        return redirect()->route('accounts.createOwner');
+    }
 
-            $account = $this->user->profile->publish(
-                new Account($data)
-            );
+    public function createOwnerInfo()
+    {
+       return view('accounts.create_owner');
+    }
 
-            return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
-        } else {
-            return redirect()->route('accounts.create')
-                ->withErrors($result->errors->deepAll());
-        }
+    public function setOwnerInfo (AccountOwnerRequest $request) {
+        $account = $this->user->account;
+        $account->update($request->except('ssn'));
+        $account->ssn = Crypt::encrypt($request->ssn);
+        $account->save();
+        return redirect()->route('accounts.createBank');
+    }
+
+    public function createBankInfo()
+    {
+       return view('accounts.create_bank');
+    }
+
+    public function setBankInfo(AccountBankRequest $request) {
+        $account = $this->user->account;
+        $account->method = $request->method;
+        $account->account_number = Crypt::encrypt($request->account_number);
+        $account->routing = Crypt::encrypt($request->routing);
+        $account->save();
+        flash()->success('Account Info Submitted!', 'Awaiting Pockeyt Approval');
+        return view('accounts.edit', compact('account'));
     }
 
     /**

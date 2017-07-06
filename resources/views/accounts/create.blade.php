@@ -6,8 +6,8 @@
 
         <div class="col-md-12">
 
-            <h1>Add Payment Account Details</h1>
-
+            <h1>Payment Account Setup</h1>
+            <h4>Business Info</h4>
             <hr>
 
             @if($isAdmin)
@@ -17,7 +17,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['route' => 'accounts.store']) !!}
+            {!! Form::open(['route' => 'accounts.setBusiness']) !!}
                 @include ('errors.form')
                 @include ('accounts.form_create')
             {!! Form::close() !!}
