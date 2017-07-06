@@ -131,8 +131,8 @@
                 <li><a href="{{ route('profiles.edit', ['profiles' => $user->profile->id])  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
                 @if($user->profile->account)
                   <li><a href="{{ route('accounts.edit', ['account' => $user->profile->account->id]) }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
-                @else
-                  <li><a href="{{ route('accounts.create') }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
+                @elseif(!$user->profile->account && $user->profile->approved)
+                  <li><a href="{{ route('accounts.create') }}"><i class="fa fa-circle-o"></i> Create Payment Account</a></li>
                 @endif
                   <li><a href="{{ route('accounts.connections') }}"><i class="fa fa-circle-o"></i> Account Connections</a></li>
               </ul>

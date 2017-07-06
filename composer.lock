@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2209fb4d806a3473c2b780c8dd49b7b3",
+    "content-hash": "4fc0cb1b5c7044b9974fa6f9fef5212c",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1198,49 +1198,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
-        },
-        {
-            "name": "finix/processing-php",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/finix-payments/processing-php-client.git",
-                "reference": "db4558eb790e2d0ee14918a7c0010f7b0be8a24f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/finix-payments/processing-php-client/zipball/db4558eb790e2d0ee14918a7c0010f7b0be8a24f",
-                "reference": "db4558eb790e2d0ee14918a7c0010f7b0be8a24f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "5.3.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Finix\\": "./src"
-                },
-                "psr-4": {
-                    "Finix\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Finix Development",
-                    "email": "dev@finixpayments.com"
-                }
-            ],
-            "description": "A PHP HTTP Client conforming to the HAL hypermedia type for the Finix processing API",
-            "time": "2016-12-27T04:36:10+00:00"
         },
         {
             "name": "genealabs/laravel-caffeine",
@@ -2778,49 +2735,6 @@
             "time": "2017-03-13T16:22:52+00:00"
         },
         {
-            "name": "payline-data/payline-php",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Payline/payline-php.git",
-                "reference": "82a57822fd718f48cb009c2ee8c0fcf61c2d04bc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Payline/payline-php/zipball/82a57822fd718f48cb009c2ee8c0fcf61c2d04bc",
-                "reference": "82a57822fd718f48cb009c2ee8c0fcf61c2d04bc",
-                "shasum": ""
-            },
-            "require": {
-                "finix/processing-php": "==1.0.5",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Payline\\": "./src"
-                },
-                "psr-4": {
-                    "Payline\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Payline Data",
-                    "email": "support@paylinedata.com"
-                }
-            ],
-            "description": "A PHP HTTP Client conforming to the HAL hypermedia type for the Payline processing API",
-            "time": "2016-12-27T04:51:38+00:00"
-        },
-        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -3326,6 +3240,36 @@
                 "transform"
             ],
             "time": "2016-08-23T16:11:39+00:00"
+        },
+        {
+            "name": "splashpayments/splashpayments-php",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bmsolutions/splashpayments-php.git",
+                "reference": "68379eb915096ecc8b767dcc12a637f8132d93ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bmsolutions/splashpayments-php/zipball/68379eb915096ecc8b767dcc12a637f8132d93ef",
+                "reference": "68379eb915096ecc8b767dcc12a637f8132d93ef",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-openssl": "*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SplashPayments\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "SplashPayments PHP SDK package",
+            "homepage": "https://portal.splashpayments.com",
+            "time": "2017-03-28T20:51:45+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

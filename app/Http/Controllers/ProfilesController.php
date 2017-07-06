@@ -101,7 +101,7 @@ class ProfilesController extends Controller {
         else
             $this->syncTags($profile, $request->input('tag_list'));
 
-        return redirect()->route('accounts.create');
+        return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
     }
 
     /**
@@ -164,17 +164,17 @@ class ProfilesController extends Controller {
             }
         }
 
-        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://taxrates.api.avalara.com:443']);
 
-        // try {
-        //     $response = $client->request('GET', 'postal', [
-        //         'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
-        //     ]);
-        // } catch (RequestException $e) {
-        //     if ($e->hasResponse()) {
-        //         return $e->getResponse();
-        //     }
-        // }
+        try {
+            $response = $client->request('GET', 'postal', [
+                'query' => ['country' => 'usa', 'postal' => $zip, 'apikey' => env('TAX_RATE_KEY')]
+            ]);
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+        }
 
         $data = json_decode($response->getBody());
         $profile->tax_rate = $data->totalRate * 100;
