@@ -21,13 +21,14 @@ class UpdateAccountIndividualRequest extends Request {
       return [
         'accountUserFirst' => 'required',
         'accountUserLast' => 'required',
-        'accountEmail' => 'required',
         'dateOfBirth' => 'required|date_format: Y-m-d',
-        'last4' => 'required',
+        'ownership' => 'required',
         'indivStreetAdress' => 'required',
         'indivCity' => 'required',
         'indivState' => 'required',
-        'indivZip' => 'required'
+        'indivZip' => 'required',
+        'accountEmail' => 'required',
+        'last4' => 'required',
       ];
     }
 }

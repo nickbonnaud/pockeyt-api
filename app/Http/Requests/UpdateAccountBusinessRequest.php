@@ -20,11 +20,16 @@ class UpdateAccountBusinessRequest extends Request {
     public function rules() {
       return [
         'legalBizName' => 'required',
+        'businessType' => 'required',
         'bizTaxId' => 'required',
+        'established' => 'required|date_format: Y-m-d',
+        'annualCCSales' => 'required',
         'bizStreetAdress' => 'required',
         'bizCity' => 'required',
         'bizState' => 'required',
-        'bizZip' => 'required'
+        'bizZip' => 'required',
+        'phone' => 'required',
+        'accountEmail' => 'required'
       ];
     }
 }

@@ -50,6 +50,8 @@ class AccountsController extends Controller
         $account = $this->user->profile->publish(
             new Account($request->all())
         );
+        $account->status = 'pending';
+        $account->save();
 
         return redirect()->route('accounts.createOwner');
     }
@@ -61,8 +63,9 @@ class AccountsController extends Controller
 
     public function setOwnerInfo (AccountOwnerRequest $request) {
         $account = $this->user->account;
-        $account->update($request->except('ssn'));
+        $account->update($request->except('ssn', 'ownership'));
         $account->ssn = Crypt::encrypt($request->ssn);
+        $account->ownership = $request->ownership * 100;
         $account->save();
         return redirect()->route('accounts.createBank');
     }
@@ -91,6 +94,10 @@ class AccountsController extends Controller
     public function edit(Request $request, $id)
     {
         $account = Account::findOrFail($id);
+        $account->ssn = substr(Crypt::decrypt($account->ssn), -4);
+        $account->accountNumber = substr(Crypt::decrypt($account->accountNumber), -4);
+        $account->routing = substr(Crypt::decrypt($account->routing), -4);
+
         return view('accounts.edit', compact('account'));
     }
 
@@ -98,78 +105,33 @@ class AccountsController extends Controller
     {
         $account = Account::findOrFail($id);
 
-        $result = \Braintree_MerchantAccount::update(
-            $account->profile_id,
-            [
-                'individual' => [
-                    'firstName' => $request->accountUserFirst,
-                    'lastName' => $request->accountUserLast,
-                    'email' => $request->accountEmail,
-                    'dateOfBirth' => $request->dateOfBirth,
-                    'ssn' => $request->last4,
-                    'address' => [
-                        'streetAddress' => $request->indivStreetAdress,
-                        'locality' => $request->indivCity,
-                        'region' => $request->indivState,
-                        'postalCode' => $request->indivZip
-                    ]
-                ]
-            ]
-        );
-        if ($result->success) {
-            $account->update($request->all());
-            return view('accounts.edit', compact('account'));
-        } else {
-            return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors->deepAll());
-        }
+        $account->update($request->except('ssn'));
+        $account->ssn = Crypt::encrypt($request->ssn);
+        $account->status = 'pending';
+        $account->save();
+        return view('accounts.edit', compact('account'));
     }
 
     public function changeBusiness(UpdateAccountBusinessRequest $request, $id)
     {
         $account = Account::findOrFail($id);
 
-        $result = \Braintree_MerchantAccount::update(
-            $account->profile_id,
-            [
-                'business' => [
-                    'legalName' => $request->legalBizName,
-                    'taxId' => $request->bizTaxId
-                ]
-            ]
-        );
-        if ($result->success) {
-            $account->update($request->all());
-            return view('accounts.edit', compact('account'));
-        } else {
-            return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors->deepAll());
-        }
+        $account->update($request->all());
+        $account->status = 'pending';
+        $account->save();
+        return view('accounts.edit', compact('account'));
     }
 
     public function changePay(UpdateAccountPayRequest $request, $id)
     {
         $account = Account::findOrFail($id);
 
-        $result = \Braintree_MerchantAccount::update(
-            $account->profile_id,
-            [
-                'funding' => [
-                    'destination' => \Braintree_MerchantAccount::FUNDING_DESTINATION_BANK,
-                    'accountNumber' => $request->accountNumber4,
-                    'routingNumber' => $request->routingNumber4
-                ],
-            ]
-        );
-        if ($result->success) {
-            $account->accountNumber4 = substr($request->accountNumber4, -4);
-            $account->routingNumber4 = substr($request->routingNumber4, -4);
-            $account->save();
-            return view('accounts.edit', compact('account'));
-        } else {
-            return view('accounts.edit', compact('account'))
-                ->withErrors($result->errors->deepAll());
-        }
+        $account->accountNumber = Crypt::encrypt($request->accountNumber);
+        $account->routing = Crypt::encrypt($request->routing);
+        $account->method = $request->method;
+        $account->status = 'pending';
+        $account->save();
+        return view('accounts.edit', compact('account'));
     }
 
     public function postStatus(Request $request)

@@ -55,15 +55,19 @@ $qbo_connect = $qbo_obj->qboConnect();
 								</li>
 								<li class="list-group-item">
 									<b>Email</b>
-									<p class="pull-right">{{ $account->accountEmail }}</p>
+									<p class="pull-right">{{ $account->ownerEmail }}</p>
 								</li>
 								<li class="list-group-item">
 									<b>Date of Birth</b>
 									<p class="pull-right">{{ $account->dateOfBirth }}</p>
 								</li>
 								<li class="list-group-item">
-									<b>Last Four SSN</b>
-									<p class="pull-right">{{ $account->last4 }}</p>
+									<b>SSN last 4</b>
+									<p class="pull-right">{{ $account->ssn }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Percentage Ownership</b>
+									<p class="pull-right">{{ $account->ownership / 100 }}%</p>
 								</li>
 								<li class="list-group-item">
 									<b>Street Address</b>
@@ -101,8 +105,26 @@ $qbo_connect = $qbo_obj->qboConnect();
 									<p class="pull-right">{{ $account->legalBizName }}</p>
 								</li>
 								<li class="list-group-item">
-									<b>Business Tax ID</b>
+									<b>Legal Business Name</b>
+									@if($account->businessType == 0)
+										<p class="pull-right">Sole Proprietor</p>
+									@elseif($account->businessType == 2)
+										<p class="pull-right">LLC</p>
+									@elseif($account->businessType == 3)
+										<p class="pull-right">Partnership</p>
+									@elseif($account->businessType == 1)
+										<p class="pull-right">Corporation</p>
+									@elseif($account->businessType == 4)
+										<p class="pull-right">Association</p>
+									@endif
+								</li>
+								<li class="list-group-item">
+									<b>Business Tax ID (EIN)</b>
 									<p class="pull-right">{{ $account->bizTaxId }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Date Business Established</b>
+									<p class="pull-right">{{ $account->established }}</p>
 								</li>
 								<li class="list-group-item">
 									<b>Street Address</b>
@@ -120,6 +142,14 @@ $qbo_connect = $qbo_obj->qboConnect();
 									<b>Zip</b>
 									<p class="pull-right">{{ $account->bizZip }}</p>
 								</li>
+								<li class="list-group-item">
+									<b>Business Phone Number</b>
+									<p class="pull-right">{{ $account->phone }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Business Email</b>
+									<p class="pull-right">{{ $account->accountEmail }}</p>
+								</li>
 							</ul>
 							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessAccountInfoModal">
 		          	<b>Change</b>
@@ -136,12 +166,24 @@ $qbo_connect = $qbo_obj->qboConnect();
 						<div class="box-body">
 							<ul class="list-group list-group-unbordered">
 								<li class="list-group-item">
-									<b>Account Number</b>
-									<p class="pull-right">{{ $account->accountNumber4 }}</p>
+									<b>Account Type</b>
+									@if($account->method == 8)
+										<p class="pull-right">Checking Account</p>
+									@elseif($account->method == 9)
+										<p class="pull-right">Savings Account</p>
+									@elseif($account->method == 10)
+										<p class="pull-right">Corporate Checking Account</p>
+									@elseif($account->method == 11)
+										<p class="pull-right">Corporate Savings Account</p>
+									@endif
 								</li>
 								<li class="list-group-item">
-									<b>Routing Number</b>
-									<p class="pull-right">{{ $account->routingNumber4 }}</p>
+									<b>Account Number last 4</b>
+									<p class="pull-right">{{ $account->accountNumber }}</p>
+								</li>
+								<li class="list-group-item">
+									<b>Routing Number last 4</b>
+									<p class="pull-right">{{ $account->routing }}</p>
 								</li>
 							</ul>
 							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sensitiveAccountInfoModal">

@@ -1,4 +1,3 @@
-
 <div class="form-group">
   <label for="legalBizName" class="col-sm-2 control-label">Legal Business Name</label>
   <div class="col-sm-10">
@@ -6,13 +5,35 @@
   </div>
 </div>
 <div class="form-group">
- <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID</label>
+  <label for="businessType">Business Type</label>
+  <select name="businessType" id="businessType" class="form-control" value="{{ $account->businessType }}" required>
+    <option value="0">Sole Proprietor</option>
+    <option value="2">LLC</option>
+    <option value="3">Partnership</option>
+    <option value="1">Corporation</option>
+    <option value="4">Association</option>
+  </select>
+</div>
+<div class="form-group">
+ <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID (EIN)</label>
   <div class="col-sm-10">
     <input type="integer" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
   </div>
 </div>
 <div class="form-group">
- <label for="bizStreetAdress" class="col-sm-2 control-label">Street Address</label>
+ <label for="established" class="col-sm-2 control-label">Business Established</label>
+  <div class="col-sm-10">
+    <input type="date" name="established" class="form-control" id="established" value="{{ $account->established }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="annualCCSales" class="col-sm-2 control-label">Business Established</label>
+  <div class="col-sm-10">
+    <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="bizStreetAdress" class="col-sm-2 control-label">Business Street Address</label>
   <div class="col-sm-10">
     <input type="string" name="bizStreetAdress" class="form-control" id="bizStreetAdress" value="{{ $account->bizStreetAdress }}" required>
   </div>
@@ -32,7 +53,19 @@
 <div class="form-group">
  <label for="bizZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input type="string" name="bizZip" class="form-control" id="bizZip" value="{{ $account->bizZip }}" required>
+    <input type="integer" name="bizZip" class="form-control" id="bizZip" value="{{ $account->bizZip }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="phone" class="col-sm-2 control-label">Business Phone Number</label>
+  <div class="col-sm-10">
+    <input type="integer" name="phone" class="form-control" id="phone" value="{{ $account->phone }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="accountEmail" class="col-sm-2 control-label">Business Email</label>
+  <div class="col-sm-10">
+    <input type="integer" name="accountEmail" class="form-control" id="accountEmail" value="{{ $account->accountEmail }}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">

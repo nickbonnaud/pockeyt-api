@@ -1,13 +1,23 @@
 <div class="form-group">
-  <label for="accountNumber4" class="col-sm-2 control-label">Full Account Number</label>
+    <label for="method" class="col-sm-2 control-label">Account Type</label>
+    <select name="method" id="method" class="form-control" value="{{ $account->method }}" required>
+        <option value="8">Checking Account</option>
+        <option value="9">Savings Account </option>
+        <option value="10">Corporate Checking Account</option>
+        <option value="11">Corporate Savings Account</option>
+    </select>
+</div>
+
+<div class="form-group">
+  <label for="accountNumber" class="col-sm-2 control-label">Full Account Number</label>
   <div class="col-sm-10">
-    <input type="text" name="accountNumber4" class="form-control" id="accountNumber4" required>
+    <input type="text" name="accountNumber" class="form-control" id="accountNumber" required>
   </div>
 </div>
 <div class="form-group">
- <label for="routingNumber4" class="col-sm-2 control-label">Full Routing Number</label>
+ <label for="routing" class="col-sm-2 control-label">Full Routing Number</label>
   <div class="col-sm-10">
-    <input type="integer" name="routingNumber4" class="form-control" id="routingNumber4" required>
+    <input type="integer" name="routing" class="form-control" id="routing" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">

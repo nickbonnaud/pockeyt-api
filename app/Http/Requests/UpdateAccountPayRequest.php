@@ -19,8 +19,9 @@ class UpdateAccountPayRequest extends Request {
      */
     public function rules() {
       return [
-        'routingNumber4' => 'required',
-        'accountNumber4' => 'required'
+        'routing' => 'required',
+        'accountNumber' => 'required',
+        'method' => 'required'
       ];
     }
 }

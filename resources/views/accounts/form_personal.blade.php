@@ -11,25 +11,19 @@
   </div>
 </div>
 <div class="form-group">
- <label for="accountEmail" class="col-sm-2 control-label">Email</label>
-  <div class="col-sm-10">
-    <input type="email" name="accountEmail" class="form-control" id="accountEmail" value="{{ $account->accountEmail }}" required>
-  </div>
-</div>
-<div class="form-group">
  <label for="dateOfBirth" class="col-sm-2 control-label">Date of Birth</label>
   <div class="col-sm-10">
     <input type="date" name="dateOfBirth" class="form-control" id="dateOfBirth" value="{{ $account->dateOfBirth }}" required>
   </div>
 </div>
 <div class="form-group">
- <label for="last4" class="col-sm-2 control-label">Last 4 SSN</label>
+ <label for="ownership" class="col-sm-2 control-label">Percentage Ownership</label>
   <div class="col-sm-10">
-    <input type="integer" name="last4" class="form-control" id="last4" value="{{ $account->last4 }}" required>
+    <input type="integer" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership }}%" required>
   </div>
 </div>
 <div class="form-group">
- <label for="indivStreetAdress" class="col-sm-2 control-label">Street Address</label>
+ <label for="indivStreetAdress" class="col-sm-2 control-label">Owner Home Address</label>
   <div class="col-sm-10">
     <input type="string" name="indivStreetAdress" class="form-control" id="indivStreetAdress" value="{{ $account->indivStreetAdress }}" required>
   </div>
@@ -50,6 +44,18 @@
  <label for="indivZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
     <input type="string" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="ownerEmail" class="col-sm-2 control-label">Owner Email</label>
+  <div class="col-sm-10">
+    <input type="email" name="ownerEmail" class="form-control" id="ownerEmail" value="{{ $account->ownerEmail }}" required>
+  </div>
+</div>
+<div class="form-group">
+ <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
+  <div class="col-sm-10">
+    <input type="integer" name="ssn" class="form-control" id="ssn" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
