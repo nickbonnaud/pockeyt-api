@@ -68,7 +68,7 @@ Route::get('accounts/connections', 'AccountsController@getConnections')->name('a
 
 Route::post('accounts/create/business', 'AccountsController@setBusinessInfo')->name('accounts.setBusiness');
 Route::get('accounts/create/owner', 'AccountsController@createOwnerInfo')->name('accounts.createOwner');
-Route::patch('accounts/set/owner', 'AccountsController@setOwnerInfo')->name('accounts.setOwner');
+Route::patch('accounts/create/owner', 'AccountsController@setOwnerInfo')->name('accounts.setOwner');
 Route::get('accounts/create/bank', 'AccountsController@createBankInfo')->name('accounts.createBank');
 Route::patch('accounts/create/bank', 'AccountsController@setBankInfo')->name('accounts.setBank');
 

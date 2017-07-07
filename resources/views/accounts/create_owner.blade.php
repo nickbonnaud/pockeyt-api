@@ -13,7 +13,7 @@
           </div>
       @endif
 
-      {!! Form::open(['route' => 'accounts.setOwner']) !!}
+      {!! Form::open(['method' => 'PATCH', 'route' => 'accounts.setOwner']) !!}
           @include ('errors.form')
           @include ('accounts.form_create_owner')
       {!! Form::close() !!}
