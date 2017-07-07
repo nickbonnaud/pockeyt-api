@@ -65,7 +65,7 @@
 <div class="form-group">
  <label for="accountEmail" class="col-sm-2 control-label">Business Email</label>
   <div class="col-sm-10">
-    <input type="integer" name="accountEmail" class="form-control" id="accountEmail" value="{{ $account->accountEmail }}" required>
+    <input type="email" name="accountEmail" class="form-control" id="accountEmail" value="{{ $account->accountEmail }}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
