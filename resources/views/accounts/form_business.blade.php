@@ -32,8 +32,10 @@
 <div class="form-group">
  <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
-    <span class="input-group-addon">$</span>
-    <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+    </div>
   </div>
 </div>
 <div class="form-group">
