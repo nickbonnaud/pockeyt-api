@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Payment Account Setup</h1>
-      <h4>Owner Info</h4>
+      <h4>Business Owner Info</h4>
       <hr>
 
       @if($isAdmin)
