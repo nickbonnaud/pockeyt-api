@@ -14,7 +14,7 @@
 </div>
 
 <div class="form-group">
-    <label for="ownership">Percentage of Business owned</label>
+    <label for="ownership">Percentage of Business Owned</label>
     <input type="integer" name="ownership" id="ownership" placeholder="100" class="form-control" required>
 </div>
 
