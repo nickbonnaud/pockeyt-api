@@ -44,7 +44,7 @@ class AccountsController extends Controller
      */
     public function setBusinessInfo(AccountRequest $request)
     {
-        dd($request->all());
+        
 
         if(!is_null($this->user->profile->account))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
