@@ -99,7 +99,7 @@ class AccountsController extends Controller
         $account->ssn = substr(Crypt::decrypt($account->ssn), -4);
         $account->accountNumber = substr(Crypt::decrypt($account->accountNumber), -4);
         $account->routing = substr(Crypt::decrypt($account->routing), -4);
-
+        dd($account);
         return view('accounts.edit', compact('account'));
     }
 
