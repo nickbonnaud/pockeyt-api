@@ -27,8 +27,8 @@ class UpdateAccountIndividualRequest extends Request {
         'indivCity' => 'required',
         'indivState' => 'required',
         'indivZip' => 'required',
-        'accountEmail' => 'required',
-        'last4' => 'required',
+        'ownerEmail' => 'required',
+        'ssn' => 'required',
       ];
     }
 }
