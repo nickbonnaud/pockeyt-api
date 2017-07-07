@@ -38,157 +38,161 @@ $qbo_connect = $qbo_obj->qboConnect();
 		  </section>
 		  @include ('errors.form')
 			<section class="content">
-				<div class="col-md-4">
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">Individual Account Holder Info</h3>
+				<div class="scroll-container">
+					<div class="scroll-contents">
+						<div class="col-md-6">
+							<div class="box box-primary">
+								<div class="box-header with-border">
+									<h3 class="box-title">Individual Account Holder Info</h3>
+								</div>
+								<div class="box-body">
+									<ul class="list-group list-group-unbordered">
+										<li class="list-group-item">
+											<b>First Name</b>
+											<p class="pull-right">{{ $account->accountUserFirst }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Last Name</b>
+											<p class="pull-right">{{ $account->accountUserLast }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Email</b>
+											<p class="pull-right">{{ $account->ownerEmail }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Date of Birth</b>
+											<p class="pull-right">{{ $account->dateOfBirth }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>SSN last 4</b>
+											<p class="pull-right">{{ $account->ssn }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Percentage Ownership</b>
+											<p class="pull-right">{{ $account->ownership / 100 }}%</p>
+										</li>
+										<li class="list-group-item">
+											<b>Street Address</b>
+											<p class="pull-right">{{ $account->indivStreetAdress }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>City</b>
+											<p class="pull-right">{{ $account->indivCity }} </p>
+										</li>
+										<li class="list-group-item">
+											<b>State</b>
+											<p class="pull-right">{{ $account->indivState }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Zip</b>
+											<p class="pull-right">{{ $account->indivZip }}</p>
+										</li>
+									</ul>
+									<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#individualAccountInfoModal">
+				          	<b>Change</b>
+				        	</a>
+								</div>
+							</div>
 						</div>
-						<div class="box-body">
-							<ul class="list-group list-group-unbordered">
-								<li class="list-group-item">
-									<b>First Name</b>
-									<p class="pull-right">{{ $account->accountUserFirst }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Last Name</b>
-									<p class="pull-right">{{ $account->accountUserLast }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Email</b>
-									<p class="pull-right">{{ $account->ownerEmail }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Date of Birth</b>
-									<p class="pull-right">{{ $account->dateOfBirth }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>SSN last 4</b>
-									<p class="pull-right">{{ $account->ssn }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Percentage Ownership</b>
-									<p class="pull-right">{{ $account->ownership / 100 }}%</p>
-								</li>
-								<li class="list-group-item">
-									<b>Street Address</b>
-									<p class="pull-right">{{ $account->indivStreetAdress }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>City</b>
-									<p class="pull-right">{{ $account->indivCity }} </p>
-								</li>
-								<li class="list-group-item">
-									<b>State</b>
-									<p class="pull-right">{{ $account->indivState }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Zip</b>
-									<p class="pull-right">{{ $account->indivZip }}</p>
-								</li>
-							</ul>
-							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#individualAccountInfoModal">
-		          	<b>Change</b>
-		        	</a>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-md-4">
-					<div class="box box-primary">
-						<div class="box-header with-border">
-							<h3 class="box-title">Business Info</h3>
+						<div class="col-md-6">
+							<div class="box box-primary">
+								<div class="box-header with-border">
+									<h3 class="box-title">Business Info</h3>
+								</div>
+								<div class="box-body">
+									<ul class="list-group list-group-unbordered">
+										<li class="list-group-item">
+											<b>Legal Business Name</b>
+											<p class="pull-right">{{ $account->legalBizName }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Legal Business Name</b>
+											@if($account->businessType == 0)
+												<p class="pull-right">Sole Proprietor</p>
+											@elseif($account->businessType == 2)
+												<p class="pull-right">LLC</p>
+											@elseif($account->businessType == 3)
+												<p class="pull-right">Partnership</p>
+											@elseif($account->businessType == 1)
+												<p class="pull-right">Corporation</p>
+											@elseif($account->businessType == 4)
+												<p class="pull-right">Association</p>
+											@endif
+										</li>
+										<li class="list-group-item">
+											<b>Business Tax ID (EIN)</b>
+											<p class="pull-right">{{ $account->bizTaxId }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Date Business Established</b>
+											<p class="pull-right">{{ $account->established }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Street Address</b>
+											<p class="pull-right">{{ $account->bizStreetAdress }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>City</b>
+											<p class="pull-right">{{ $account->bizCity }} </p>
+										</li>
+										<li class="list-group-item">
+											<b>State</b>
+											<p class="pull-right">{{ $account->bizState }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Zip</b>
+											<p class="pull-right">{{ $account->bizZip }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Business Phone Number</b>
+											<p class="pull-right">{{ $account->phone }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Business Email</b>
+											<p class="pull-right">{{ $account->accountEmail }}</p>
+										</li>
+									</ul>
+									<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessAccountInfoModal">
+				          	<b>Change</b>
+				        	</a>
+								</div>
+							</div>
 						</div>
-						<div class="box-body">
-							<ul class="list-group list-group-unbordered">
-								<li class="list-group-item">
-									<b>Legal Business Name</b>
-									<p class="pull-right">{{ $account->legalBizName }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Legal Business Name</b>
-									@if($account->businessType == 0)
-										<p class="pull-right">Sole Proprietor</p>
-									@elseif($account->businessType == 2)
-										<p class="pull-right">LLC</p>
-									@elseif($account->businessType == 3)
-										<p class="pull-right">Partnership</p>
-									@elseif($account->businessType == 1)
-										<p class="pull-right">Corporation</p>
-									@elseif($account->businessType == 4)
-										<p class="pull-right">Association</p>
-									@endif
-								</li>
-								<li class="list-group-item">
-									<b>Business Tax ID (EIN)</b>
-									<p class="pull-right">{{ $account->bizTaxId }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Date Business Established</b>
-									<p class="pull-right">{{ $account->established }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Street Address</b>
-									<p class="pull-right">{{ $account->bizStreetAdress }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>City</b>
-									<p class="pull-right">{{ $account->bizCity }} </p>
-								</li>
-								<li class="list-group-item">
-									<b>State</b>
-									<p class="pull-right">{{ $account->bizState }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Zip</b>
-									<p class="pull-right">{{ $account->bizZip }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Business Phone Number</b>
-									<p class="pull-right">{{ $account->phone }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Business Email</b>
-									<p class="pull-right">{{ $account->accountEmail }}</p>
-								</li>
-							</ul>
-							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#businessAccountInfoModal">
-		          	<b>Change</b>
-		        	</a>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-md-4">
-					<div class="box box-primary last-box">
-						<div class="box-header with-border">
-							<h3 class="box-title">Business Account Info</h3>
-						</div>
-						<div class="box-body">
-							<ul class="list-group list-group-unbordered">
-								<li class="list-group-item">
-									<b>Account Type</b>
-									@if($account->method == 8)
-										<p class="pull-right">Checking Account</p>
-									@elseif($account->method == 9)
-										<p class="pull-right">Savings Account</p>
-									@elseif($account->method == 10)
-										<p class="pull-right">Corporate Checking Account</p>
-									@elseif($account->method == 11)
-										<p class="pull-right">Corporate Savings Account</p>
-									@endif
-								</li>
-								<li class="list-group-item">
-									<b>Account Number last 4</b>
-									<p class="pull-right">{{ $account->accountNumber }}</p>
-								</li>
-								<li class="list-group-item">
-									<b>Routing Number last 4</b>
-									<p class="pull-right">{{ $account->routing }}</p>
-								</li>
-							</ul>
-							<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sensitiveAccountInfoModal">
-		          	<b>Change</b>
-		        	</a>
+						<div class="col-md-6">
+							<div class="box box-primary last-box">
+								<div class="box-header with-border">
+									<h3 class="box-title">Business Account Info</h3>
+								</div>
+								<div class="box-body">
+									<ul class="list-group list-group-unbordered">
+										<li class="list-group-item">
+											<b>Account Type</b>
+											@if($account->method == 8)
+												<p class="pull-right">Checking Account</p>
+											@elseif($account->method == 9)
+												<p class="pull-right">Savings Account</p>
+											@elseif($account->method == 10)
+												<p class="pull-right">Corporate Checking Account</p>
+											@elseif($account->method == 11)
+												<p class="pull-right">Corporate Savings Account</p>
+											@endif
+										</li>
+										<li class="list-group-item">
+											<b>Account Number last 4</b>
+											<p class="pull-right">{{ $account->accountNumber }}</p>
+										</li>
+										<li class="list-group-item">
+											<b>Routing Number last 4</b>
+											<p class="pull-right">{{ $account->routing }}</p>
+										</li>
+									</ul>
+									<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#sensitiveAccountInfoModal">
+				          	<b>Change</b>
+				        	</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
