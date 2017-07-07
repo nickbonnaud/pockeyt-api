@@ -7,13 +7,14 @@
 <div class="form-group">
   <label for="businessType" class="col-sm-2 control-label">Business Type</label>
   <div class="col-sm-10">
-    <select name="businessType" id="businessType" class="form-control" value="{{ $account->businessType }}" required>
-      <option value="0">Sole Proprietor</option>
-      <option value="2">LLC</option>
-      <option value="3">Partnership</option>
-      <option value="1">Corporation</option>
-      <option value="4">Association</option>
-    </select>
+    {{ Form::select('businessType', [
+      '0' => 'Sole Proprietor',
+      '2' => 'LLC',
+      '3' => 'Partnership',
+      '1' => 'Corporation',
+      '4' => 'Association'
+      ], $account->businessType) 
+    }}
   </div>
 </div>
 <div class="form-group">
@@ -29,7 +30,7 @@
   </div>
 </div>
 <div class="form-group">
- <label for="annualCCSales" class="col-sm-2 control-label">Business Established</label>
+ <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
     <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
   </div>
