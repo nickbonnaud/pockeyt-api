@@ -7,14 +7,14 @@
 <div class="form-group">
   <label for="businessType" class="col-sm-2 control-label">Business Type</label>
   <div class="col-sm-10">
-    {{ Form::select('businessType', [
+    {!! Form::select('businessType', [
       '0' => 'Sole Proprietor',
       '2' => 'LLC',
       '3' => 'Partnership',
       '1' => 'Corporation',
       '4' => 'Association'
       ], $account->businessType) 
-    }}
+    !!}
   </div>
 </div>
 <div class="form-group">
