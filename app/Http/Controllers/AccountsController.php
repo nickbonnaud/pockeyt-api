@@ -106,7 +106,9 @@ class AccountsController extends Controller
         $account = Account::findOrFail($id);
 
         $account->update($request->except('ssn'));
-        $account->ssn = Crypt::encrypt($request->ssn);
+        if(!starts_with($request->ssn, 'X')) {
+            $account->ssn = Crypt::encrypt($request->ssn);
+        }
         $account->status = 'pending';
         $account->save();
         $account = $this->shortenSensitive($account);
