@@ -76,7 +76,7 @@ class AccountsController extends Controller
     }
 
     public function setBankInfo(AccountBankRequest $request) {
-        $account = $this->user->account;
+        $account = $this->user->profile->account;
         $account->method = $request->method;
         $account->account_number = Crypt::encrypt($request->account_number);
         $account->routing = Crypt::encrypt($request->routing);

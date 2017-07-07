@@ -13,7 +13,7 @@
           </div>
       @endif
 
-      {!! Form::open(['route' => 'accounts.setBank']) !!}
+      {!! Form::open(['method' => 'PATCH', 'route' => 'accounts.setBank']) !!}
           @include ('errors.form')
           @include ('accounts.form_create_bank')
       {!! Form::close() !!}
