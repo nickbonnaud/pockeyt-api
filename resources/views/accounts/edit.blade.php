@@ -38,7 +38,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 		  </section>
 		  @include ('errors.form')
 			<section class="content">
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Individual Account Holder Info</h3>
@@ -93,7 +93,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Business Info</h3>
@@ -158,7 +158,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<div class="box box-primary last-box">
 						<div class="box-header with-border">
 							<h3 class="box-title">Business Account Info</h3>
