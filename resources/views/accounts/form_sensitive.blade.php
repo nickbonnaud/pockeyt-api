@@ -2,10 +2,10 @@
   <label for="method" class="col-sm-2 control-label">Account Type</label>
   <div class="col-sm-10">
     {!! Form::select('method', [
-      '8' => 'Sole Proprietor',
-      '9' => 'LLC',
-      '10' => 'Partnership',
-      '11' => 'Corporation'
+      '8' => 'Checking Account',
+      '9' => 'Savings Account',
+      '10' => 'Corporate Checking Account',
+      '11' => 'Corporate Savings Account'
       ], $account->method, ['class' => 'form-control']) 
     !!}
   </div>
