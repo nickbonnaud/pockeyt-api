@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input type="integer" name="ssn" class="form-control" id="ssn" required>
+    <input type="integer" name="ssn" class="form-control" id="ssn" value="***-**-{{$account->ssn}}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
