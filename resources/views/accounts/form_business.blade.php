@@ -5,14 +5,16 @@
   </div>
 </div>
 <div class="form-group">
-  <label for="businessType">Business Type</label>
-  <select name="businessType" id="businessType" class="form-control" value="{{ $account->businessType }}" required>
-    <option value="0">Sole Proprietor</option>
-    <option value="2">LLC</option>
-    <option value="3">Partnership</option>
-    <option value="1">Corporation</option>
-    <option value="4">Association</option>
-  </select>
+  <label for="businessType" class="col-sm-2 control-label">Business Type</label>
+  <div class="col-sm-10">
+    <select name="businessType" id="businessType" class="form-control" value="{{ $account->businessType }}" required>
+      <option value="0">Sole Proprietor</option>
+      <option value="2">LLC</option>
+      <option value="3">Partnership</option>
+      <option value="1">Corporation</option>
+      <option value="4">Association</option>
+    </select>
+  </div>
 </div>
 <div class="form-group">
  <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID (EIN)</label>
