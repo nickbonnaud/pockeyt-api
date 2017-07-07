@@ -52,7 +52,7 @@ class AccountsController extends Controller
         $account = $this->user->profile->publish(
             new Account($request->all())
         );
-        $account->status = 'pending';
+        $account->status = 'review';
         $account->save();
 
         return redirect()->route('accounts.createOwner');
@@ -110,7 +110,7 @@ class AccountsController extends Controller
             $account->ssn = Crypt::encrypt($request->ssn);
         }
         $account->ownership = $request->ownership * 100;
-        $account->status = 'pending';
+        $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
@@ -121,7 +121,7 @@ class AccountsController extends Controller
         $account = Account::findOrFail($id);
 
         $account->update($request->all());
-        $account->status = 'pending';
+        $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
@@ -137,7 +137,7 @@ class AccountsController extends Controller
             $account->routing = Crypt::encrypt($request->routing);
         }
         $account->method = $request->method;
-        $account->status = 'pending';
+        $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));

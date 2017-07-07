@@ -23,7 +23,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 				@if(!$account->pockeyt_qb_taxcode && $qbo_connect)
 					<a href="{{ action('QuickBookController@setTaxRate') }}"><button class="btn btn-warning">Set Sales Tax</button></a>
 				@endif
-		    @if($account->status == 'pending')
+		    @if($account->status == 'pending' || $account->status == 'review')
 		    	<p><i class="fa fa-circle text-warning"></i> Payment Account Pending</p>
 		    @elseif($account->status == 'active')
 		    	<p><i class="fa fa-circle text-success"></i> Payment Account Active</p>
