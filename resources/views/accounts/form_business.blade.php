@@ -13,7 +13,7 @@
       '3' => 'Partnership',
       '1' => 'Corporation',
       '4' => 'Association'
-      ], $account->businessType) 
+      ], $account->businessType, ['class' => 'form-control']) 
     !!}
   </div>
 </div>
