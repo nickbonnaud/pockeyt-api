@@ -32,7 +32,7 @@
 <div class="form-group">
  <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
-    <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+    <input type="integer" name="annualCCSales" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
   </div>
 </div>
 <div class="form-group">
