@@ -1,11 +1,14 @@
 <div class="form-group">
-    <label for="method" class="col-sm-2 control-label">Account Type</label>
-    <select name="method" id="method" class="form-control" value="{{ $account->method }}" required>
-        <option value="8">Checking Account</option>
-        <option value="9">Savings Account </option>
-        <option value="10">Corporate Checking Account</option>
-        <option value="11">Corporate Savings Account</option>
-    </select>
+  <label for="method" class="col-sm-2 control-label">Account Type</label>
+  <div class="col-sm-10">
+    {!! Form::select('method', [
+      '8' => 'Sole Proprietor',
+      '9' => 'LLC',
+      '10' => 'Partnership',
+      '11' => 'Corporation'
+      ], $account->method, ['class' => 'form-control']) 
+    !!}
+  </div>
 </div>
 
 <div class="form-group">
