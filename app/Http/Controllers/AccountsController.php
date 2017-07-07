@@ -130,9 +130,12 @@ class AccountsController extends Controller
     public function changePay(UpdateAccountPayRequest $request, $id)
     {
         $account = Account::findOrFail($id);
-
-        $account->accountNumber = Crypt::encrypt($request->accountNumber);
-        $account->routing = Crypt::encrypt($request->routing);
+        if(!starts_with($request->accountNumber, 'X')) {
+            $account->accountNumber = Crypt::encrypt($request->accountNumber);
+        }
+        if(!starts_with($request->routing, 'X')) {
+            $account->routing = Crypt::encrypt($request->routing);
+        }
         $account->method = $request->method;
         $account->status = 'pending';
         $account->save();
