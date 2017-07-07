@@ -38,7 +38,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 		  </section>
 		  @include ('errors.form')
 			<section class="content">
-				<div class="scroll-container">
+				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
 						<div class="col-md-6">
 							<div class="box box-primary">
