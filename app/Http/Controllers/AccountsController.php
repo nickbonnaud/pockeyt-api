@@ -105,10 +105,11 @@ class AccountsController extends Controller
     {
         $account = Account::findOrFail($id);
 
-        $account->update($request->except('ssn'));
+        $account->update($request->except('ssn', 'ownership'));
         if(!starts_with($request->ssn, 'X')) {
             $account->ssn = Crypt::encrypt($request->ssn);
         }
+        $account->ownership = $request->ownership * 100;
         $account->status = 'pending';
         $account->save();
         $account = $this->shortenSensitive($account);
