@@ -83,6 +83,7 @@ class AccountsController extends Controller
         $account->accountNumber = Crypt::encrypt($request->accountNumber);
         $account->routing = Crypt::encrypt($request->routing);
         $account->save();
+        $account = $this->shortenSensitive($account);
         flash()->success('Account Info Submitted!', 'Awaiting Pockeyt Approval');
         return view('accounts.edit', compact('account'));
     }
@@ -96,10 +97,7 @@ class AccountsController extends Controller
     public function edit(Request $request, $id)
     {
         $account = Account::findOrFail($id);
-        $account->ssn = substr(Crypt::decrypt($account->ssn), -4);
-        dd(Crypt::decrypt($account->accountNumber));
-        $account->accountNumber = substr(Crypt::decrypt($account->accountNumber), -4);
-        $account->routing = substr(Crypt::decrypt($account->routing), -4);
+        $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }
 
@@ -111,6 +109,7 @@ class AccountsController extends Controller
         $account->ssn = Crypt::encrypt($request->ssn);
         $account->status = 'pending';
         $account->save();
+        $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }
 
@@ -121,6 +120,7 @@ class AccountsController extends Controller
         $account->update($request->all());
         $account->status = 'pending';
         $account->save();
+        $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }
 
@@ -133,6 +133,7 @@ class AccountsController extends Controller
         $account->method = $request->method;
         $account->status = 'pending';
         $account->save();
+        $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }
 
@@ -160,5 +161,12 @@ class AccountsController extends Controller
 
     public function getConnections() {
         return view('accounts.connections');
+    }
+
+    public function shortenSensitive($account) {
+        $account->ssn = substr(Crypt::decrypt($account->ssn), -4);
+        $account->accountNumber = substr(Crypt::decrypt($account->accountNumber), -4);
+        $account->routing = substr(Crypt::decrypt($account->routing), -4);
+        return $account;
     }
 }
