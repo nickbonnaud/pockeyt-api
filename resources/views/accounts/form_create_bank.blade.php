@@ -1,6 +1,7 @@
 <div class="form-group">
     <label for="method">Account Type</label>
     <select name="method" id="method" class="form-control" required>
+        <option value="">Please select Account Type</option>
         <option value="8">Checking Account</option>
         <option value="9">Savings Account </option>
         <option value="10">Corporate Checking Account</option>

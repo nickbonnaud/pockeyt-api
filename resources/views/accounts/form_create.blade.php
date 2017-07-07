@@ -5,6 +5,7 @@
 <div class="form-group">
     <label for="businessType">Business Type</label>
     <select name="businessType" id="businessType" class="form-control" required>
+        <option value="">Please select Business Type</option>
         <option value="0">Sole Proprietor</option>
         <option value="2">LLC</option>
         <option value="3">Partnership</option>
