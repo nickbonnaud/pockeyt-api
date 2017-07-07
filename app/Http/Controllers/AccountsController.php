@@ -97,7 +97,7 @@ class AccountsController extends Controller
     {
         $account = Account::findOrFail($id);
         $account->ssn = substr(Crypt::decrypt($account->ssn), -4);
-        dd($account->accountNumber);
+        dd(Crypt::decrypt($account->accountNumber));
         $account->accountNumber = substr(Crypt::decrypt($account->accountNumber), -4);
         $account->routing = substr(Crypt::decrypt($account->routing), -4);
         return view('accounts.edit', compact('account'));
