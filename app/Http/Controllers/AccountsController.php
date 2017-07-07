@@ -62,7 +62,7 @@ class AccountsController extends Controller
     }
 
     public function setOwnerInfo (AccountOwnerRequest $request) {
-        $account = $this->user->account;
+        $account = $this->user->profile->account;
         $account->update($request->except('ssn', 'ownership'));
         $account->ssn = Crypt::encrypt($request->ssn);
         $account->ownership = $request->ownership * 100;
