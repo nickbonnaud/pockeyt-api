@@ -49,10 +49,11 @@ class AccountsController extends Controller
         if(!is_null($this->user->profile->account))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
-        dd(preg_replace("/[^0-9]/","",$request->annualCCSales));
         $account = $this->user->profile->publish(
             new Account($request->except('annualCCSales'))
         );
+        
+        $account->annualCCSales = preg_replace("/[^0-9]/","",$request->annualCCSales);
         $account->status = 'review';
         $account->save();
 
