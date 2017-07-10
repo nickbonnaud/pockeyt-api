@@ -39,15 +39,15 @@
 </div>
 <div class="form-group">
     <label for="bizZip">Zip</label>
-    <input type="number" name="bizZip" id="bizZip" class="form-control" required>
+    <input data-inputmask="'mask': '99999'" type="text" name="bizZip" id="bizZip" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="phone">Business Phone Number</label>
-    <input type="integer" name="phone" id="phone" class="form-control" required>
+    <input data-inputmask="'mask': '(999) 999-9999'" type="tel" name="phone" id="phone" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="accountEmail">Business Email</label>
-    <input type="text" name="accountEmail" id="accountEmail" value="{{ $user->email }}" class="form-control" required>
+    <input type="email" name="accountEmail" id="accountEmail" value="{{ $user->email }}" class="form-control" required>
 </div>
 
 <div class="form-group">
