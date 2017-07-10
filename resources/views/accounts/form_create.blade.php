@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <label for="bizTaxId">Federal Tax ID (EIN)</label>
-    <input type="number" name="bizTaxId" id="bizTaxId" placeholder="12-3456789" maxlength="10" class="form-control" required>
+    <input data-inputmask="'mask': '99-9999999'" type="text" name="bizTaxId" id="bizTaxId" placeholder="12-3456789" maxlength="10" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="established">Date Business Established</label>
