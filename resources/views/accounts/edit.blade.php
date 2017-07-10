@@ -129,6 +129,10 @@ $qbo_connect = $qbo_obj->qboConnect();
 											<p class="pull-right">{{ $account->established }}</p>
 										</li>
 										<li class="list-group-item">
+											<b>Estimated Annual Credit Card Sales</b>
+											<p class="pull-right">${{ $account->annualCCSales }}</p>
+										</li>
+										<li class="list-group-item">
 											<b>Street Address</b>
 											<p class="pull-right">{{ $account->bizStreetAdress }}</p>
 										</li>
