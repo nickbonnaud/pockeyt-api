@@ -16,7 +16,7 @@
 
 <div class="form-group">
     <label for="routing">Routing Number</label>
-    <input data-inputmask="'mask': '99999'" type="tel" name="routing" id="routing" class="form-control" required>
+    <input data-inputmask="'mask': '999999999'" type="tel" name="routing" id="routing" class="form-control" required>
 </div>
 
 <div class="form-group">
