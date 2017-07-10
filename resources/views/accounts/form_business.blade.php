@@ -20,7 +20,7 @@
 <div class="form-group">
  <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID (EIN)</label>
   <div class="col-sm-10">
-    <input type="integer" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
+    <input data-inputmask="'mask': '99-9999999'"  type="text" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
   </div>
 </div>
 <div class="form-group">
