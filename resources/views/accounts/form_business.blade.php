@@ -20,7 +20,7 @@
 <div class="form-group">
  <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID (EIN)</label>
   <div class="col-sm-10">
-    <input type="text" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
+    <input data-inputmask="'mask': '99-9999999'" type="tel" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
   </div>
 </div>
 <div class="form-group">
@@ -34,7 +34,7 @@
   <div class="col-sm-10">
     <div class="input-group">
       <span class="input-group-addon">$</span>
-      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="text" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
     </div>
   </div>
 </div>
@@ -59,13 +59,13 @@
 <div class="form-group">
  <label for="bizZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input type="integer" name="bizZip" class="form-control" id="bizZip" value="{{ $account->bizZip }}" required>
+    <input data-inputmask="'mask': '99999'" type="tel" name="bizZip" class="form-control" id="bizZip" value="{{ $account->bizZip }}" required>
   </div>
 </div>
 <div class="form-group">
  <label for="phone" class="col-sm-2 control-label">Business Phone Number</label>
   <div class="col-sm-10">
-    <input type="integer" name="phone" class="form-control" id="phone" value="{{ $account->phone }}" required>
+    <input data-inputmask="'mask': '(999) 999-9999'" type="tel" name="phone" class="form-control" id="phone" value="{{ $account->phone }}" required>
   </div>
 </div>
 <div class="form-group">
