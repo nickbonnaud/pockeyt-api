@@ -35,7 +35,7 @@
 
 <div class="form-group">
     <label for="indivZip">Zip</label>
-    <input data-inputmask="'mask': '99999'" type="number" name="indivZip" id="indivZip" class="form-control" required>
+    <input data-inputmask="'mask': '99999'" type="tel" name="indivZip" id="indivZip" class="form-control" required>
 </div>
 
 <div class="form-group">
