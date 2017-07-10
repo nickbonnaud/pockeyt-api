@@ -35,7 +35,7 @@
 </div>
 <div class="form-group">
     <label for="bizState">State</label>
-    <input type="text" name="bizState" id="bizState" placeholder="NC" maxlength="2" class="form-control" required>
+    <input data-inputmask="'mask': 'aa'" type="text" name="bizState" id="bizState" placeholder="NC" maxlength="2" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="bizZip">Zip</label>
