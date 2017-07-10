@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label for="ssn">Owner SSN:</label>
-    <input data-inputmask="'mask': '999-99-9999'" type="password" name="ssn" id="ssn" class="form-control" required>
+    <input data-inputmask="'mask': '999-99-9999'" type="tel" name="ssn" id="ssn" class="form-control" required>
 </div>
 
 <div class="form-group">
