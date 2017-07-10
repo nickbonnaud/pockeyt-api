@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="ownership">Percentage of Business Owned</label>
-    <input data-inputmask="'mask': '9[99999]%', 'greedy': 'true'" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
+    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
 </div>
 
 <div class="form-group">
