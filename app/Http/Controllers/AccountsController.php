@@ -48,9 +48,9 @@ class AccountsController extends Controller
 
         if(!is_null($this->user->profile->account))
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
-        dd($request->all());
         $businessInfo = $request->except('annualCCSales');
-        $businessInfo->annualCCSales = str_replace(',', '', $request->annualCCSales);
+        $businessInfo->annualCCSales = preg_replace("/[^0-9]/", "", $request->annualCCSales);
+        dd($businessInfo);
         $account = $this->user->profile->publish(
             new Account($businessInfo)
         );
