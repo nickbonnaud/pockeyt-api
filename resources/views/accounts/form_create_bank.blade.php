@@ -11,12 +11,12 @@
 
 <div class="form-group">
     <label for="accountNumber">Account Number</label>
-    <input type="integer" name="accountNumber" id="accountNumber" class="form-control" required>
+    <input type="tel" name="accountNumber" id="accountNumber" class="form-control" required>
 </div>
 
 <div class="form-group">
     <label for="routing">Routing Number</label>
-    <input type="integer" name="routing" id="routing" class="form-control" required>
+    <input data-inputmask="'mask': '999999999'" type="tel" name="routing" id="routing" class="form-control" required>
 </div>
 
 <div class="form-group">
