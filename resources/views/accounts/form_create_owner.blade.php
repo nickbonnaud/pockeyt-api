@@ -30,12 +30,12 @@
 
 <div class="form-group">
     <label for="indivState">State</label>
-    <input type="text" name="indivState" id="indivState" placeholder="NC" maxlength="2" class="form-control" required>
+    <input data-inputmask="'mask': 'aa'" type="text" name="indivState" id="indivState" placeholder="NC" maxlength="2" class="form-control" required>
 </div>
 
 <div class="form-group">
     <label for="indivZip">Zip</label>
-    <input type="integer" name="indivZip" id="indivZip" class="form-control" required>
+    <input data-inputmask="'mask': '99999'" type="number" name="indivZip" id="indivZip" class="form-control" required>
 </div>
 
 <div class="form-group">
@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label for="ssn">Owner SSN:</label>
-    <input type="password" min="9" max="9" name="ssn" id="ssn" class="form-control" required>
+    <input data-inputmask="'mask': '999-99-9999'" type="password" name="ssn" id="ssn" class="form-control" required>
 </div>
 
 <div class="form-group">
