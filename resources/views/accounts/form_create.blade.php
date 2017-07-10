@@ -23,7 +23,7 @@
 </div>
 <div class="form-group">
     <label for="annualCCSales">Estimate of Annual Credit Card Sales</label>
-    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" id="annualCCSales" class="form-control" required>
+    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" id="annualCCSales" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="bizStreetAdress">Business Street Address</label>
