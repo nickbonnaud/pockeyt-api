@@ -34,7 +34,7 @@
   <div class="col-sm-10">
     <div class="input-group">
       <span class="input-group-addon">$</span>
-      <input type="integer" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="text" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
     </div>
   </div>
 </div>

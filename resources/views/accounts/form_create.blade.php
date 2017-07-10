@@ -53,9 +53,3 @@
 <div class="form-group">
     <button type="submit" class="btn btn-primary pull-right">Next</button>
 </div>
-
-<script>
-    $(document).ready(function(){
-        Inputmask().mask(document.querySelectorAll("input"));
-    });
-</script>
