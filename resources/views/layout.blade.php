@@ -70,6 +70,8 @@
 <script src="{{ asset('/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/js/libs.js') }}"></script>
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
+<script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
 @yield('scripts.footer')
 @include('flash')

@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <label for="bizTaxId">Federal Tax ID (EIN)</label>
-    <input type="integer" name="bizTaxId" id="bizTaxId" placeholder="12-3456789" maxlength="10" class="form-control" required>
+    <input type="number" name="bizTaxId" id="bizTaxId" placeholder="12-3456789" maxlength="10" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="established">Date Business Established</label>
@@ -23,7 +23,7 @@
 </div>
 <div class="form-group">
     <label for="annualCCSales">Estimate of Annual Credit Card Sales</label>
-    <input type="integer" name="annualCCSales" id="annualCCSales" class="form-control" required>
+    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="text" name="annualCCSales" id="annualCCSales" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="bizStreetAdress">Business Street Address</label>
@@ -39,7 +39,7 @@
 </div>
 <div class="form-group">
     <label for="bizZip">Zip</label>
-    <input type="integer" name="bizZip" id="bizZip" class="form-control" required>
+    <input type="number" name="bizZip" id="bizZip" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="phone">Business Phone Number</label>
@@ -53,3 +53,9 @@
 <div class="form-group">
     <button type="submit" class="btn btn-primary pull-right">Next</button>
 </div>
+
+<script>
+    $(document).ready(function(){
+        Inputmask().mask(document.querySelectorAll("input"));
+    });
+</script>
