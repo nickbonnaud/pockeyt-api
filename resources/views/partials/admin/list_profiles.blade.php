@@ -2,7 +2,7 @@
   @foreach($profiles as $profile)
   	<tr class="product-row">
   		<td class="product-row-data">{{ $profile->business_name }}</td>
-  		<td class="product-row-data"><a href="{{ $profile->website }}" target="_blank"></a></td>
+  		<td class="product-row-data"><a href="{{ $profile->website }}" target="_blank">{{ $profile->website }}</a></td>
       <td class="product-row-data">{{ $profile->description }}</td>
   		@if($profile->logo)
   			<td><img src="{{ $profile->logo->thumbnail_url }}" class="product-image"></td>

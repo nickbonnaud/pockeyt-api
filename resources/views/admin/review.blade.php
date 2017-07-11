@@ -14,7 +14,7 @@
         </ol>
       </section>
     	<section class="content">
-      	<div class="col-md-6">
+      	<div class="col-md-12">
       		<div class="box box-primary">
       			<div class="box-header with-border">
       				<h3 class="box-title-inventory">Pending Profile Approval</h3>
@@ -36,7 +36,7 @@
       			</div>
       		</div>
       	</div>
-      	<div class="col-md-6">
+      	<div class="col-md-12">
       		<div class="box box-primary">
       			<div class="box-header with-border">
       				<h3 class="box-title-inventory">Pending Account Approval</h3>
