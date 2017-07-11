@@ -19,7 +19,7 @@
 <div class="form-group">
  <label for="ownership" class="col-sm-2 control-label">Percentage Ownership</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}%" required>
+    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}" required>
   </div>
 </div>
 <div class="form-group">
