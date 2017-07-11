@@ -34,7 +34,7 @@
   <div class="col-sm-10">
     <div class="input-group">
       <span class="input-group-addon">$</span>
-      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
 <div class="form-group">
  <label for="bizState" class="col-sm-2 control-label">State</label>
   <div class="col-sm-10">
-    <input type="string" name="bizState" class="form-control" id="bizState" value="{{ $account->bizState }}" required>
+    <input data-inputmask="'mask': 'aa'" type="string" name="bizState" class="form-control" id="bizState" value="{{ $account->bizState }}" required>
   </div>
 </div>
 <div class="form-group">

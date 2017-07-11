@@ -19,31 +19,31 @@
 <div class="form-group">
  <label for="ownership" class="col-sm-2 control-label">Percentage Ownership</label>
   <div class="col-sm-10">
-    <input type="integer" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}%" required>
+    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}%" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivStreetAdress" class="col-sm-2 control-label">Owner Home Address</label>
   <div class="col-sm-10">
-    <input type="string" name="indivStreetAdress" class="form-control" id="indivStreetAdress" value="{{ $account->indivStreetAdress }}" required>
+    <input type="text" name="indivStreetAdress" class="form-control" id="indivStreetAdress" value="{{ $account->indivStreetAdress }}" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivCity" class="col-sm-2 control-label">City</label>
   <div class="col-sm-10">
-    <input type="string" name="indivCity" class="form-control" id="indivCity" value="{{ $account->indivCity }}" required>
+    <input type="text" name="indivCity" class="form-control" id="indivCity" value="{{ $account->indivCity }}" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivState" class="col-sm-2 control-label">State</label>
   <div class="col-sm-10">
-    <input type="string" name="indivState" class="form-control" id="indivState" value="{{ $account->indivState }}" required>
+    <input data-inputmask="'mask': 'aa'" type="text" name="indivState" class="form-control" id="indivState" value="{{ $account->indivState }}" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input type="string" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
+    <input data-inputmask="'mask': '99999'" type="tel" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
   </div>
 </div>
 <div class="form-group">
@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input type="password" name="ssn" class="form-control" id="ssn" value="XXX-XX-{{$account->ssn}}" required>
+    <input data-inputmask="'mask': '999-99-9999'" type="tel" name="ssn" class="form-control" id="ssn" value="XXX-XX-{{$account->ssn}}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
