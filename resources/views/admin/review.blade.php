@@ -28,7 +28,7 @@
       							<th>Description</th>
       							<th>Hero</th>
       							<th>Logo</th>
-      							<th width="70px"></th>
+      							<th>Approve</th>
       						</tr>
       						@include('partials.admin.list_profiles', ['profiles' => $profiles])
       					</tbody>
@@ -50,7 +50,7 @@
       							<th>Owner Info</th>
       							<th>Bank Info</th>
       							<th>Description</th>
-      							<th width="70px"></th>
+      							<th>Approve</th>
       						</tr>
       						@include('partials.admin.list_accounts', ['accounts' => $accounts])
       					</tbody>
