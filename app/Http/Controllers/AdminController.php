@@ -20,10 +20,10 @@ class AdminController extends Controller
  	}
 
 	public function getPendingBusinesses() {
-    $businesses = Profile::where('approved', '=', false)->get();
+    $profiles = Profile::where('approved', '=', false)->get();
     $accounts = Account::where('status', '=', 'review')->get();
 
-    return view('admin.review', compact('businesses', 'accounts'));
+    return view('admin.review', compact('profiles', 'accounts'));
   }
 }
 
