@@ -14,50 +14,54 @@
         </ol>
       </section>
     	<section class="content">
-      	<div class="col-md-12">
-      		<div class="box box-primary">
-      			<div class="box-header with-border">
-      				<h3 class="box-title-inventory">Pending Profile Approval</h3>
-      			</div>
-      			<div class="box-body no-padding">
-      				<table class="table table-striped">
-      					<tbody>
-      						<tr>
-      							<th>Name</th>
-      							<th>Website</th>
-      							<th>Description</th>
-      							<th>Hero</th>
-      							<th>Logo</th>
-      							<th>Approve</th>
-      						</tr>
-      						@include('partials.admin.list_profiles', ['profiles' => $profiles])
-      					</tbody>
-      				</table>
-      			</div>
-      		</div>
-      	</div>
-      	<div class="col-md-12">
-      		<div class="box box-primary">
-      			<div class="box-header with-border">
-      				<h3 class="box-title-inventory">Pending Account Approval</h3>
-      			</div>
-      			<div class="box-body no-padding">
-      				<table class="table table-striped">
-      					<tbody>
-      						<tr>
-      							<th>Name</th>
-      							<th>Business Info</th>
-      							<th>Owner Info</th>
-      							<th>Bank Info</th>
-      							<th>Description</th>
-      							<th>Approve</th>
-      						</tr>
-      						@include('partials.admin.list_accounts', ['accounts' => $accounts])
-      					</tbody>
-      				</table>
-      			</div>
-      		</div>
-      	</div>
+    		<div class="row">
+	      	<div class="col-xs-12">
+	      		<div class="box box-primary">
+	      			<div class="box-header with-border">
+	      				<h3 class="box-title-inventory">Pending Profile Approval</h3>
+	      			</div>
+	      			<div class="box-body table-responsive no-padding">
+	      				<table class="table table-striped">
+	      					<tbody>
+	      						<tr>
+	      							<th>Name</th>
+	      							<th>Website</th>
+	      							<th>Description</th>
+	      							<th>Hero</th>
+	      							<th>Logo</th>
+	      							<th>Approve</th>
+	      						</tr>
+	      						@include('partials.admin.list_profiles', ['profiles' => $profiles])
+	      					</tbody>
+	      				</table>
+	      			</div>
+	      		</div>
+	      	</div>
+	      </div>
+	      <div class="row">
+	      	<div class="col-xs-12">
+	      		<div class="box box-primary">
+	      			<div class="box-header with-border">
+	      				<h3 class="box-title-inventory">Pending Account Approval</h3>
+	      			</div>
+	      			<div class="box-body table-responsive no-padding">
+	      				<table class="table table-striped">
+	      					<tbody>
+	      						<tr>
+	      							<th>Name</th>
+	      							<th>Business Info</th>
+	      							<th>Owner Info</th>
+	      							<th>Bank Info</th>
+	      							<th>Description</th>
+	      							<th>Approve</th>
+	      						</tr>
+	      						@include('partials.admin.list_accounts', ['accounts' => $accounts])
+	      					</tbody>
+	      				</table>
+	      			</div>
+	      		</div>
+	      	</div>
+	      </div>
     	</section>
     </div>
   </div>
