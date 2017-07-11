@@ -32,10 +32,7 @@
 <div class="form-group">
  <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
-    <div class="input-group">
-      <span class="input-group-addon">$</span>
-      <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
-    </div>
+    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
   </div>
 </div>
 <div class="form-group">
