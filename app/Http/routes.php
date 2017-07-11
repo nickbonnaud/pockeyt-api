@@ -201,7 +201,7 @@ Route::post('employees/remove', 'EmployeesController@employeeRemove');
 Route::post('employees/on', 'EmployeesController@getEmployeesOn');
 
 // Admin Routes
-Route::get('businesses/review', 'ProfilesController@getPendingBusinesses')->name('businesses.review');
+Route::get('businesses/review', 'AdminController@getPendingBusinesses')->name('businesses.review');
 
 //Quickbook Routes
 Route::get('qbo/oauth','QuickBookController@qboOauth');
