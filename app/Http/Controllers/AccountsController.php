@@ -52,7 +52,7 @@ class AccountsController extends Controller
         $account = $this->user->profile->publish(
             new Account($request->except('annualCCSales'))
         );
-        
+
         $account->annualCCSales = preg_replace("/[^0-9]/","",$request->annualCCSales);
         $account->status = 'review';
         $account->save();
@@ -121,8 +121,9 @@ class AccountsController extends Controller
     public function changeBusiness(UpdateAccountBusinessRequest $request, $id)
     {
         $account = Account::findOrFail($id);
+        $account->update($request->except('annualCCSales'));
 
-        $account->update($request->all());
+        $account->annualCCSales = preg_replace("/[^0-9]/","",$request->annualCCSales);
         $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
