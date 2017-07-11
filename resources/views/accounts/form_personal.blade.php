@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '999-99-9999'" type="tel" name="ssn" class="form-control" id="ssn" value="*****{{$account->ssn}}" required>
+    <input data-inputmask="'mask': '999-99-9999'" type="tel" name="ssn" class="form-control" id="ssn" value="11111{{$account->ssn}}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
