@@ -100,7 +100,7 @@ class ProfilesController extends Controller {
             $this->syncTags($profile, $request->input('tags'));
         else
             $this->syncTags($profile, $request->input('tag_list'));
-        
+
         return redirect()->route('profiles.show', ['profiles' => $profile->id]);
     }
 
@@ -265,7 +265,7 @@ class ProfilesController extends Controller {
         $profile = Profile::findOrFail($profile_id);
         $profile->approved = true;
         $profile->save();
-        return redirect()->to(\URL::previous() . '#profile-' . $profile->id);
+        return redirect()->back();
     }
 
     public function postUnapprove($profile_id) {

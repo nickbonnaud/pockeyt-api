@@ -178,4 +178,11 @@ class AccountsController extends Controller
         $account->routing = substr(Crypt::decrypt($account->routing), -4);
         return $account;
     }
+
+    public function postApprove($account_id) {
+        $account = Account::findOrFail($account_id);
+        $account->status = 'pending';
+        $account->save();
+        return redirect()->back();
+    }
 }

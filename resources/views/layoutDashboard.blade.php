@@ -151,6 +151,9 @@
             @if($user->profile->tip_tracking_enabled)
               <li><a href="{{ route('employees.show') }}"><i class="fa fa-users"></i> <span class="menu-text">Team</span></a></li>
             @endif
+            @if($user->is_admin)
+              <li><a href="{{ route('businesses.review') }}"><i class="fa fa-key"></i> <span class="menu-text">Pending Businesses</span></a></li>
+            @endif
           </ul>
         </section>
         <!-- /.sidebar -->
