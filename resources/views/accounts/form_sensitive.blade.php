@@ -14,7 +14,7 @@
 <div class="form-group">
   <label for="accountNumber" class="col-sm-2 control-label">Full Account Number</label>
   <div class="col-sm-10">
-    <input type="text" name="accountNumber" class="form-control" value="XXXXX{{$account->accountNumber}}" id="accountNumber" required>
+    <input type="tel" name="accountNumber" class="form-control" value="XXXXX{{$account->accountNumber}}" id="accountNumber" required>
   </div>
 </div>
 <div class="form-group">
