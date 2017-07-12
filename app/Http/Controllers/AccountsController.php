@@ -184,9 +184,7 @@ class AccountsController extends Controller
         $account = Account::findOrFail($account_id);
         $account->status = 'pending';
         $account->save();
-        $this->sendToSplash($account);
+        
         return redirect()->back();
     }
-
-    public function sendToSplash($account)
 }
