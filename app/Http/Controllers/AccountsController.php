@@ -238,6 +238,7 @@ class AccountsController extends Controller
         );
 
         try {
+            dd($object);
             $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
