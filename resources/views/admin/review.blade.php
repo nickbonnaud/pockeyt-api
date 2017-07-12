@@ -78,25 +78,13 @@
         </div>
         <div class="modal-body">
           <div class="modal-body-customer-info">
-            <p>@{{ selectedAccount.id }}</p>
+            <p></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-@stop
-@section('scripts.footer')
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-	<script>
-		var attach = new Vue({
-			el: '#attach',
-
-			data: {
-				selectedAccount: {}
-			}
-		})
-	</script>
 @stop
 
 
