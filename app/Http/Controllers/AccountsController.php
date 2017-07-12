@@ -181,7 +181,7 @@ class AccountsController extends Controller
     }
 
     public function postApprove(Request $request) {
-        $account = Account::findOrFail($request->$accountId);
+        $account = Account::findOrFail($request->accountId);
         $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
