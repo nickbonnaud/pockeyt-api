@@ -66,7 +66,7 @@ class ProfilesController extends Controller {
             return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
 
         $profile = $this->user->publish(
-            new Profile($request->except(['lat', 'lng', 'county', 'state']))
+            new Profile($request->except(['lat', 'lng', 'county', 'state', 'website']))
         );
 
         $county = $request->county;
@@ -81,6 +81,9 @@ class ProfilesController extends Controller {
             $profile->tax_rate = $taxLocation->county_tax + $taxLocation->state_tax;
         } else {
             $this->getTaxRate($county, $state, $zip, $profile);
+        }
+        if (starts_with($request->website, 'www')) {
+            $profile->website = "http://" . $request->website;
         }
         $profile->save();
         if ($this->user->role == 'manager') {
