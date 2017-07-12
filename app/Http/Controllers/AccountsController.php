@@ -191,7 +191,6 @@ class AccountsController extends Controller
 
     public function sendToSplash($account, $mcc) {
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        dd(SplashPayments\Utilities\Config::getApiKey());
         $object = new SplashPayments\merchants(
             array (
                 'new' => 0,
