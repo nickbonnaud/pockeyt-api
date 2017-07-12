@@ -179,10 +179,14 @@ class AccountsController extends Controller
         return $account;
     }
 
-    public function postApprove($account_id) {
+    public function postApprove(Request $request) {
+        dd($request);
         $account = Account::findOrFail($account_id);
         $account->status = 'pending';
         $account->save();
+        $this->sendToSplash($account);
         return redirect()->back();
     }
+
+    public function sendToSplash($account)
 }
