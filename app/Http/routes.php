@@ -63,7 +63,7 @@ Route::resource('users', 'BusinessUsersController');
 Route::patch('accounts/{accounts}/personal', 'AccountsController@changePersonal')->name('accounts.personal');
 Route::patch('accounts/{accounts}/business', 'AccountsController@changeBusiness')->name('accounts.business');
 Route::patch('accounts/{accounts}/pay', 'AccountsController@changePay')->name('accounts.pay');
-Route::post('accounts/{accounts}/approve', 'AccountsController@postApprove')->name('accounts.approve');
+Route::post('accounts/approve', 'AccountsController@postApprove')->name('accounts.approve');
 Route::post('accounts/status', 'AccountsController@postStatus');
 Route::get('accounts/connections', 'AccountsController@getConnections')->name('accounts.connections');
 

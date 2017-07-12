@@ -180,7 +180,7 @@ class AccountsController extends Controller
     }
 
     public function postApprove(Request $request) {
-        dd($request);
+        dd($request->all());
         $account = Account::findOrFail($account_id);
         $account->status = 'pending';
         $account->save();
