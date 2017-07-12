@@ -182,7 +182,7 @@ class AccountsController extends Controller
 
     public function postApprove(Request $request) {
         $account = Account::findOrFail($request->accountId);
-        dd(preg_replace("/[^0-9]/","", $account->bizTaxId));
+        dd(preg_replace("/[^0-9]/","", $account->phone));
         $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
@@ -208,9 +208,9 @@ class AccountsController extends Controller
                     'state' => $account->bizState,
                     'zip' => $account->bizZip,
                     'country' => "USA",
-                    'phone' => $account->phone,
+                    'phone' => preg_replace("/[^0-9]/","", $account->phone),
                     'email' => $account->accountEmail,
-                    'ein' => $account->bizTaxId,
+                    'ein' => preg_replace("/[^0-9]/","", $account->bizTaxId),
                     'website' => $account->profile->website,
                     'accounts' => array(
                         array(
