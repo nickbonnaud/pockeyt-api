@@ -182,6 +182,7 @@ class AccountsController extends Controller
 
     public function postApprove(Request $request) {
         $account = Account::findOrFail($request->accountId);
+        dd(preg_replace("/[^0-9]/","", $request->bizTaxId));
         $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
@@ -190,52 +191,47 @@ class AccountsController extends Controller
     }
 
     public function sendToSplash($account, $mcc) {
-        dd(date_format(date_create($account->established), 'Ymd'));
         SplashPayments\Utilities\Config::setSessionKey("nsub8et5IuJ7JP3lvsWrQbK");
         $object = new \SplashPayments\merchants(
             array (
                 'new' => 0,
-                'established' => 20101020,
-                'annualCCSales' => 1000000,
-                'mcc' => "8111",
+                'established' => date_format(date_create($account->established), 'Ymd'),
+                'annualCCSales' => $account->annualCCSales * 100,
+                'mcc' => $mcc,
                 'status' => 1,
                 'tcVersion' => 1,
                 'entity' => array(
-                    'login' => "g1585063d05833f",
-                    'type' => "1",
-                    'name' => "Smith Company LLC",
-                    'address1' => "123 North 12 St",
-                    'city' => "Miami",
-                    'state' => "FL",
-                    'zip' => "33024",
+                    'type' => $account->businessType,
+                    'name' => $account->legalBizName,
+                    'address1' => $account->bizStreetAdress,
+                    'city' => $account->bizCity,
+                    'state' => $account->bizState,
+                    'zip' => $account->bizZip,
                     'country' => "USA",
-                    'phone' => "1234567891",
-                    'email' => "support@example.com",
-                    'ein' => "123456789",
-                    'website' => "http://www.example.com",
+                    'phone' => $account->phone,
+                    'email' => $account->accountEmail,
+                    'ein' => $account->bizTaxId,
+                    'website' => $account->profile->website,
                     'accounts' => array(
                         array(
                             'primary' => 1,
                             'account' => array(
-                            'method' => 8,
-                            'number' => "023456789012345",
-                            'routing' => "0123456789"
+                                'method' => $account->method,
+                                'number' => Crypt::decrypt($account->accountNumber),
+                                'routing' => Crypt::decrypt($account->routing)
                             )
                         )
                     )
                 ),
                 'members' => array(
                     array(
-                    'title' => "CEO",
-                    'first' => "James",
-                    'last' => "Smith",
-                    'dob' => 19590122,
-                    'ownership' => 8000,
-                    'email' => "james.smith@example.com",
-                    'ssn' => "123456789",
-                    'dl' => "123456789",
-                    'dlstate' => "FL",
-                    'primary' => 1
+                        'first' => $account->accountUserFirst,
+                        'last' => $account->accountUserLast,
+                        'dob' => date_format(date_create($account->dateOfBirth), 'Ymd'),
+                        'ownership' => $account->ownership,
+                        'email' => $account->ownerEmail,
+                        'ssn' => Crypt::decrypt($account->ssn),
+                        'primary' => 1
                     )
                 )
             )
