@@ -240,8 +240,8 @@ class AccountsController extends Controller
             $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            dd($e);
+            
         }
-        // dd($object->getErrors());
+        dd($object->getDetails());
     }
 }
