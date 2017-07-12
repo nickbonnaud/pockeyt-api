@@ -77,7 +77,7 @@
           <h4 class="modal-title" id="mccModal">Select Business MCC</h4>
         </div>
         <div class="modal-body">
-          <div class="box-body">
+          <div class="modal-body-customer-info">
             <p>@{{ selectedAccount.id }}</p>
           </div>
         </div>
