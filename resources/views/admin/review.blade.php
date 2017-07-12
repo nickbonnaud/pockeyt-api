@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll" id="businesses">
+<div class="content-wrapper-scroll" id="attach">
   <div class="scroll-main">
     <div class="scroll-main-contents">
     	<section class="content-header">
@@ -88,8 +88,8 @@
 @stop
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
-	var businesses = new Vue({
-		el: '#businesses',
+	var attach = new Vue({
+		el: '#attach',
 
 		data: {
 			selectAccount: {}
