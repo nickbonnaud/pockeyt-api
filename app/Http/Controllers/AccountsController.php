@@ -194,7 +194,6 @@ class AccountsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $object = new SplashPayments\merchants(
             array (
-                'id' => 'g1596689691e29e',
                 'new' => 0,
                 'established' => date_format(date_create($account->established), 'Ymd'),
                 'annualCCSales' => $account->annualCCSales * 100,
@@ -239,7 +238,7 @@ class AccountsController extends Controller
         );
 
         try {
-            $object->update();
+            $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
