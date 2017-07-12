@@ -183,8 +183,8 @@ class AccountsController extends Controller
     public function postApprove(Request $request) {
         $account = Account::findOrFail($request->accountId);
         $mcc = $request->mcc;
-        $account->status = 'pending';
-        $account->save();
+        // $account->status = 'pending';
+        // $account->save();
         $this->sendToSplash($account, $mcc);
         return redirect()->back();
     }
@@ -242,5 +242,6 @@ class AccountsController extends Controller
         catch (SplashPayments\Exceptions\Base $e) {
             
         }
+        dd($object->getResponse());
     }
 }
