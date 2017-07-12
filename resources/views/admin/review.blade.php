@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="businesses">
   <div class="scroll-main">
     <div class="scroll-main-contents">
     	<section class="content-header">
@@ -13,7 +13,7 @@
           <li class="active">Business Review</li>
         </ol>
       </section>
-    	<section class="content" id="businesses">
+    	<section class="content">
     		<div class="scroll-container-analytics">
     			<div class="scroll-contents">
 		    		<div class="row">
@@ -69,8 +69,7 @@
     	</section>
     </div>
   </div>
-</div>
-<div class="modal fade" id="mccModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="mccModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header-timeline">
@@ -85,6 +84,7 @@
       </div>
     </div>
   </div>
+</div>
 @stop
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
