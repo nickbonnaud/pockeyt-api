@@ -245,6 +245,7 @@ class AccountsController extends Controller
 
         }
         $response = $object->getResponse();
-        dd($response[0]);
+        $account->splashId = $response[0]->id;
+        return $account->save();
     }
 }
