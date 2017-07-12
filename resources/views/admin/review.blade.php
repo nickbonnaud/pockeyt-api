@@ -86,6 +86,7 @@
     </div>
   </div>
 @stop
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 	var businesses = new Vue({
 		el: '#businesses',
