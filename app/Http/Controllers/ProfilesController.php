@@ -145,6 +145,7 @@ class ProfilesController extends Controller {
         if (starts_with($request->website, 'www')) {
             $profile->website = "http://" . $request->website;
         }
+        $profile->save();
         $tagList = $request->input('tag_list');
 
         if (isset($tag_list)) {
