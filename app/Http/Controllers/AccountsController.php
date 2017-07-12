@@ -237,11 +237,10 @@ class AccountsController extends Controller
         );
 
         try {
-            $response = $object->create();
-            dd($response->getResponse());
+            $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            dd($e->getErrors());
+            dd($e->getDetails());
         }
     }
 }
