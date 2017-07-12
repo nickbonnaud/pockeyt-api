@@ -69,21 +69,6 @@
     	</section>
     </div>
   </div>
-  <div class="modal fade" id="mccModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header-timeline">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="mccModal">Select Business MCC</h4>
-        </div>
-        <div class="modal-body">
-          <div class="modal-body-customer-info">
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 @stop
 
