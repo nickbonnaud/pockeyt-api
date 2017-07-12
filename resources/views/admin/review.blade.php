@@ -78,7 +78,7 @@
         </div>
         <div class="modal-body">
           <div class="box-body">
-            <p>@{{ selectAccount.id }}</p>
+            <p>@{{ selectedAccount.id }}</p>
           </div>
         </div>
       </div>
