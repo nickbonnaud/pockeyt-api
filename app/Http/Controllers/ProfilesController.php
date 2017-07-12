@@ -141,7 +141,10 @@ class ProfilesController extends Controller {
     public function update(UpdateProfileRequest $request, $id) {
         /** @var Profile $profile */
         $profile = Profile::findOrFail($id);
-        $profile->update($request->all());
+        $profile->update($request->except('website'));
+        if (starts_with($request->website, 'www')) {
+            $profile->website = "http://" . $request->website;
+        }
         $tagList = $request->input('tag_list');
 
         if (isset($tag_list)) {
