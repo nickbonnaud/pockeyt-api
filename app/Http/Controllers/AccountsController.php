@@ -243,6 +243,6 @@ class AccountsController extends Controller
         catch (SplashPayments\Exceptions\Base $e) {
 
         }
-        dd($object->getResponse());
+        dd($object->getErrors());
     }
 }
