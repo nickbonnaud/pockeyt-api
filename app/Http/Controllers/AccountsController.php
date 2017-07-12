@@ -8,6 +8,7 @@ use App\Profile;
 use Illuminate\Http\Request;
 use Validator;
 use Crypt;
+use SplashPayments;
 use App\Http\Requests;
 use App\Http\Requests\AccountRequest;
 use App\Http\Requests\AccountOwnerRequest;
@@ -180,11 +181,71 @@ class AccountsController extends Controller
     }
 
     public function postApprove(Request $request) {
-        dd($request->all());
-        $account = Account::findOrFail($account_id);
+        $account = Account::findOrFail($request->$accountId);
+        $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
-        
+        $this->sendToSplash($account, $mcc);
         return redirect()->back();
+    }
+
+    public function sendToSplash($account, $mcc) {
+        dd(date_format($account->established, 'YYYYMMDD '));
+        SplashPayments\Utilities\Config::setSessionKey("nsub8et5IuJ7JP3lvsWrQbK");
+        $object = new \SplashPayments\merchants(
+            array (
+                'new' => 0,
+                'established' => 20101020,
+                'annualCCSales' => 1000000,
+                'mcc' => "8111",
+                'status' => 1,
+                'tcVersion' => 1,
+                'entity' => array(
+                    'login' => "g1585063d05833f",
+                    'type' => "1",
+                    'name' => "Smith Company LLC",
+                    'address1' => "123 North 12 St",
+                    'city' => "Miami",
+                    'state' => "FL",
+                    'zip' => "33024",
+                    'country' => "USA",
+                    'phone' => "1234567891",
+                    'email' => "support@example.com",
+                    'ein' => "123456789",
+                    'website' => "http://www.example.com",
+                    'accounts' => array(
+                        array(
+                            'primary' => 1,
+                            'account' => array(
+                            'method' => 8,
+                            'number' => "023456789012345",
+                            'routing' => "0123456789"
+                            )
+                        )
+                    )
+                ),
+                'members' => array(
+                    array(
+                    'title' => "CEO",
+                    'first' => "James",
+                    'last' => "Smith",
+                    'dob' => 19590122,
+                    'ownership' => 8000,
+                    'email' => "james.smith@example.com",
+                    'ssn' => "123456789",
+                    'dl' => "123456789",
+                    'dlstate' => "FL",
+                    'primary' => 1
+                    )
+                )
+            )
+        );
+
+        try {
+        $object->create();
+        }
+        catch (\SplashPayments\Exceptions\Base $e) {
+        // Handle Exceptions
+        }
     }
 }
