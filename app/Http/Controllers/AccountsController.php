@@ -190,7 +190,7 @@ class AccountsController extends Controller
     }
 
     public function sendToSplash($account, $mcc) {
-        dd(date_create($account->established));
+        dd(date_format(date_create($account->established), 'YYYYMMDD' ));
         SplashPayments\Utilities\Config::setSessionKey("nsub8et5IuJ7JP3lvsWrQbK");
         $object = new \SplashPayments\merchants(
             array (
