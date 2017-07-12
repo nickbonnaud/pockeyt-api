@@ -192,57 +192,65 @@ class AccountsController extends Controller
     public function sendToSplash($account, $mcc) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\merchants(
-            array (
-                'new' => 0,
-                'established' => date_format(date_create($account->established), 'Ymd'),
-                'annualCCSales' => $account->annualCCSales * 100,
-                'mcc' => $mcc,
-                'status' => 1,
-                'tcVersion' => 1,
-                'entity' => array(
-                    'type' => $account->businessType,
-                    'name' => $account->legalBizName,
-                    'address1' => $account->bizStreetAdress,
-                    'city' => $account->bizCity,
-                    'state' => $account->bizState,
-                    'zip' => $account->bizZip,
-                    'country' => "USA",
-                    'phone' => preg_replace("/[^0-9]/","", $account->phone),
-                    'email' => $account->accountEmail,
-                    'ein' => preg_replace("/[^0-9]/","", $account->bizTaxId),
-                    'website' => $account->profile->website,
-                    'accounts' => array(
-                        array(
-                            'primary' => 1,
-                            'account' => array(
-                                'method' => $account->method,
-                                'number' => Crypt::decrypt($account->accountNumber),
-                                'routing' => Crypt::decrypt($account->routing)
-                            )
-                        )
-                    )
-                ),
-                'members' => array(
-                    array(
-                        'first' => $account->accountUserFirst,
-                        'last' => $account->accountUserLast,
-                        'dob' => date_format(date_create($account->dateOfBirth), 'Ymd'),
-                        'ownership' => $account->ownership,
-                        'email' => $account->ownerEmail,
-                        'ssn' => preg_replace("/[^0-9]/","", Crypt::decrypt($account->ssn)),
-                        'primary' => 1
-                    )
-                )
-            )
-        );
-
+        $object = new SplashPayments\merchants('g1596689691d029');
         try {
-            $object->create();
+            $object->delete();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
         }
-        dd($object->getErrors());
+        dd($object->getResponse());
+        // $object = new SplashPayments\merchants(
+        //     array (
+        //         'new' => 0,
+        //         'established' => date_format(date_create($account->established), 'Ymd'),
+        //         'annualCCSales' => $account->annualCCSales * 100,
+        //         'mcc' => $mcc,
+        //         'status' => 1,
+        //         'tcVersion' => 1,
+        //         'entity' => array(
+        //             'type' => $account->businessType,
+        //             'name' => $account->legalBizName,
+        //             'address1' => $account->bizStreetAdress,
+        //             'city' => $account->bizCity,
+        //             'state' => $account->bizState,
+        //             'zip' => $account->bizZip,
+        //             'country' => "USA",
+        //             'phone' => preg_replace("/[^0-9]/","", $account->phone),
+        //             'email' => $account->accountEmail,
+        //             'ein' => preg_replace("/[^0-9]/","", $account->bizTaxId),
+        //             'website' => $account->profile->website,
+        //             'accounts' => array(
+        //                 array(
+        //                     'primary' => 1,
+        //                     'account' => array(
+        //                         'method' => $account->method,
+        //                         'number' => Crypt::decrypt($account->accountNumber),
+        //                         'routing' => Crypt::decrypt($account->routing)
+        //                     )
+        //                 )
+        //             )
+        //         ),
+        //         'members' => array(
+        //             array(
+        //                 'first' => $account->accountUserFirst,
+        //                 'last' => $account->accountUserLast,
+        //                 'dob' => date_format(date_create($account->dateOfBirth), 'Ymd'),
+        //                 'ownership' => $account->ownership,
+        //                 'email' => $account->ownerEmail,
+        //                 'ssn' => preg_replace("/[^0-9]/","", Crypt::decrypt($account->ssn)),
+        //                 'primary' => 1
+        //             )
+        //         )
+        //     )
+        // );
+
+        // try {
+        //     $object->create();
+        // }
+        // catch (SplashPayments\Exceptions\Base $e) {
+
+        // }
+        
     }
 }
