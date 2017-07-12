@@ -86,13 +86,17 @@
   </div>
 </div>
 @stop
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-<script>
-	var attach = new Vue({
-		el: '#attach',
+@section('scripts.footer')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+	<script>
+		var attach = new Vue({
+			el: '#attach',
 
-		data: {
-			selectAccount: {}
-		}
-	})
-</script>
+			data: {
+				selectAccount: {}
+			}
+		})
+	</script>
+@stop
+
+
