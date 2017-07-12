@@ -8,7 +8,6 @@ use App\Profile;
 use Illuminate\Http\Request;
 use Validator;
 use Crypt;
-use SplashPayments;
 use App\Http\Requests;
 use App\Http\Requests\AccountRequest;
 use App\Http\Requests\AccountOwnerRequest;
@@ -190,8 +189,8 @@ class AccountsController extends Controller
     }
 
     public function sendToSplash($account, $mcc) {
-        SplashPayments\Utilities\Config::setSessionKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\merchants(
+        \SplashPayments\Utilities\Config::setSessionKey(env('SPLASH_KEY'));
+        $object = new \SplashPayments\merchants(
             array (
                 'new' => 0,
                 'established' => date_format(date_create($account->established), 'Ymd'),
@@ -239,7 +238,7 @@ class AccountsController extends Controller
         try {
             $object->create();
         }
-        catch (SplashPayments\Exceptions\Base $e) {
+        catch (\SplashPayments\Exceptions\Base $e) {
             dd($e);
         }
     }
