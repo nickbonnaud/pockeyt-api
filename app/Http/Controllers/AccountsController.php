@@ -182,7 +182,7 @@ class AccountsController extends Controller
 
     public function postApprove(Request $request) {
         $account = Account::findOrFail($request->accountId);
-        dd(preg_replace("/[^0-9]/","", $account->phone));
+        dd(preg_replace("/[^0-9]/","", Crypt::decrypt($account->ssn)));
         $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
