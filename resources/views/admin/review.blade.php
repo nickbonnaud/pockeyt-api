@@ -93,7 +93,7 @@
 			el: '#attach',
 
 			data: {
-				selectAccount: {}
+				selectedAccount: {}
 			}
 		})
 	</script>
