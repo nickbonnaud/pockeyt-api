@@ -240,7 +240,7 @@ class AccountsController extends Controller
             $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            SplashPayments\Utilities\Config::getApiKey();
+            dd(SplashPayments\Utilities\Config::getApiKey());
         }
         
     }
