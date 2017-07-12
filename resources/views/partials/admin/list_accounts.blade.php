@@ -20,7 +20,7 @@
         <td class="product-row-data"><span class="label label-danger">Incomplete</span></td>
       @endif
       <td class="product-row-data">{{ $account->profile->description }}</td>
-  		<td>@include('partials.admin.approve_account')</td>
+  		<td><button v-on:click="selectedAccount = {{ $account }}" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#mccModal">Approve</button></td>
   	</tr>
   @endforeach
 @endif
