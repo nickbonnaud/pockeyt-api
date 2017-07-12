@@ -241,8 +241,8 @@ class AccountsController extends Controller
             $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            dd(SplashPayments\Utilities\Config::getApiKey());
+
         }
-        
+        dd($object->getResponse());
     }
 }
