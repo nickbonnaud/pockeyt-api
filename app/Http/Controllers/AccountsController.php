@@ -182,7 +182,6 @@ class AccountsController extends Controller
 
     public function postApprove(Request $request) {
         $account = Account::findOrFail($request->accountId);
-        dd(preg_replace("/[^0-9]/","", Crypt::decrypt($account->ssn)));
         $mcc = $request->mcc;
         $account->status = 'pending';
         $account->save();
@@ -191,8 +190,8 @@ class AccountsController extends Controller
     }
 
     public function sendToSplash($account, $mcc) {
-        SplashPayments\Utilities\Config::setSessionKey("nsub8et5IuJ7JP3lvsWrQbK");
-        $object = new \SplashPayments\merchants(
+        SplashPayments\Utilities\Config::setSessionKey(env('SPLASH_KEY'));
+        $object = new SplashPayments\merchants(
             array (
                 'new' => 0,
                 'established' => date_format(date_create($account->established), 'Ymd'),
@@ -230,7 +229,7 @@ class AccountsController extends Controller
                         'dob' => date_format(date_create($account->dateOfBirth), 'Ymd'),
                         'ownership' => $account->ownership,
                         'email' => $account->ownerEmail,
-                        'ssn' => Crypt::decrypt($account->ssn),
+                        'ssn' => preg_replace("/[^0-9]/","", Crypt::decrypt($account->ssn)),
                         'primary' => 1
                     )
                 )
@@ -238,10 +237,11 @@ class AccountsController extends Controller
         );
 
         try {
-        $object->create();
+        $response = $object->create();
+            dd($response);
         }
-        catch (\SplashPayments\Exceptions\Base $e) {
-        // Handle Exceptions
+        catch (SplashPayments\Exceptions\Base $e) {
+            dd($e);
         }
     }
 }
