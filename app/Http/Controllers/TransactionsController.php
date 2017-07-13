@@ -204,7 +204,7 @@ class TransactionsController extends Controller
             $transaction->save();
             $result = $this->createCharge($transaction, $customer, $profile);
 
-            if ($result->success) {
+            if ($result) {
                 $transaction->paid = true;
                 $transaction->status = 20;
                 $transaction->save();
@@ -251,7 +251,7 @@ class TransactionsController extends Controller
                 $transaction->save();
                 $result = $this->createCharge($transaction, $customer, $profile);
 
-                if ($result->success) {
+                if ($result) {
                     $transaction->paid = true;
                     $transaction->status = 20;
                     $transaction->save();
@@ -345,7 +345,7 @@ class TransactionsController extends Controller
         $profile->transactions()->save($transaction);
         $result = $this->createCharge($transaction, $customer, $profile);
 
-        if ($result->success) {
+        if ($result) {
             $transaction->paid = true;
             $transaction->status = 20;
             $transaction->redeemed = false;
@@ -366,12 +366,13 @@ class TransactionsController extends Controller
         $result = new SplashPayments\txns(
             array (
                 'merchant' => $profile->account->splashId,
+                'descriptor' => $profile->business_name,
                 'type' => 1,
                 'origin' => 2,
                 'token' => $customer->customer_id,
                 'first' => $customer->first_name,
                 'last' => $customer->last_name,
-                'total' => $transaction->total,
+                'total' => $transaction->total
             )
         );
         try {
@@ -380,10 +381,20 @@ class TransactionsController extends Controller
         catch (SplashPayments\Exceptions\Base $e) {
 
         }
-        // Check Errors
-        // Check status
-        // Create splashId for transaction and save ID
-        return $result;
+        if ($result->hasErrors()) {
+            $success =  false;
+        } else {
+            $data = $result->getResponse();
+            $processedTransaction = $data[0];
+            if ($processedTransaction->status == 1) {
+                $success = true;
+            } else {
+                $success = false;
+            }
+            $transaction->splashId = $processedTransaction->id;
+            $transaction->save();
+        }
+        return $success;
     }
 
     public function checkLoyaltyProgram($customer, $profile, $transaction) {
