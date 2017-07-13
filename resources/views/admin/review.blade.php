@@ -8,9 +8,6 @@
         <h1>
           Businesses Pending Review
         </h1>
-        <a href="{{ action('AccountsController@enableWebhook') }}">
-	    		<button class="btn pull-right btn-primary">Webhook</button>
-	    	</a>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Business Review</li>

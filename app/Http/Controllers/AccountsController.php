@@ -233,30 +233,4 @@ class AccountsController extends Controller
     public function postStatus(Request $request) {
         return response('ok');
     }
-
-    public function enableWebhook() {
-        $client = new Client();
-        try {
-            $response = $client->post('https://api.splashpayments.com/alerts', [
-                'headers' => ['APIKEY' => env('SPLASH_KEY'), 'Content-Type' => 'application/json', 'Cache-Control' => 'no-cache'],
-                'json' => [
-                    'forlogin' => 'g15952a377cbdce',
-                    'alertTriggers' => array(
-                        'event' => 'board',
-                        'resource' => '9'
-                    ),
-                    'alertActions' => array(
-                        "type" => "web",
-                        "options" => "JSON",
-                        "value" => "https://pockeytbiz.com/accounts/status"
-                    )
-                ]
-            ]);
-        } catch(RequestException $e) {
-            if ($e->hasResponse()) {
-                dd($e->getResponse());
-            }
-        }
-        dd($response);
-    }
 }
