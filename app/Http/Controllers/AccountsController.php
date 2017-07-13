@@ -230,7 +230,9 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        return response('OK');
+        $user = $request->all();
+        $business = 1;
+        event(new CustomerEnterRadius($user, $business));
     }
 
     public function enableWebhook() {
