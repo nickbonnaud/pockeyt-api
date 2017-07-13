@@ -240,15 +240,10 @@ class AccountsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
 
         $object = new SplashPayments\alertActions(
-            array(
-                'alert' => 'g15967c95b83fd8',
-                'type' => 'web',
-                'options' => 'JSON',
-                'value' => 'https://pockeytbiz.com/accounts/status'
-            )
+           
         );
         try {
-            $object->create();
+            $object->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
