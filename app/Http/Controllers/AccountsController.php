@@ -240,11 +240,20 @@ class AccountsController extends Controller
 
         $object = new SplashPayments\alerts(
             array(
-                'forlogin' => 'g15952a377cbdce' 
+                'forlogin' => 'g15952a377cbdce',
+                "alertTriggers" => array(
+                    "event" => "board",
+                    "resource" => "9"
+                ),
+                "alertActions" => array(
+                    "type" => "web",
+                    "options" => "JSON",
+                    "value" => "https://pockeytbiz.com/accounts/status" 
+                )
             )
         );
         try {
-            $object->retrieve();
+            $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
