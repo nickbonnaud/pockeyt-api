@@ -230,7 +230,7 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        $user = $request->all();
+        $user = $request;
         $business = 1;
         event(new CustomerEnterRadius($user, $business));
     }
