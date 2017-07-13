@@ -73,9 +73,6 @@ Route::patch('accounts/create/owner', 'AccountsController@setOwnerInfo')->name('
 Route::get('accounts/create/bank', 'AccountsController@createBankInfo')->name('accounts.createBank');
 Route::patch('accounts/create/bank', 'AccountsController@setBankInfo')->name('accounts.setBank');
 
-
-Route::get('accounts/create/webhook', 'AccountsController@enableWebhook');
-
 Route::resource('accounts', 'AccountsController');
 
 // Transaction Routes

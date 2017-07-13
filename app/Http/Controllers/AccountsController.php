@@ -18,8 +18,6 @@ use App\Http\Requests\UpdateAccountBusinessRequest;
 use App\Http\Requests\UpdateAccountPayRequest;
 use App\Http\Controllers\Controller;
 
-use App\Events\CustomerEnterRadius;
-
 class AccountsController extends Controller
 {
     
@@ -230,28 +228,15 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        $user = $request->all();
-        $business = 1;
-        event(new CustomerEnterRadius($user, $business));
-    }
-
-    public function enableWebhook() {
-        SplashPayments\Utilities\Config::setTestMode(true);
-        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-
-        $object = new SplashPayments\alertActions(
-           
-        );
-        try {
-            $object->retrieve();
-        }
-        catch (SplashPayments\Exceptions\Base $e) {
-
-        }
-        if ($object->hasErrors()) {
-            dd($object->getErrors());
+        $business = $request->all();
+        $account = Account::where('splashId', '=', $business->id)->first();
+        if ($business->status == 2) {
+            $account->status = "active";
+        } elseif ($business->status == 4) {
+            $account->status = 'denied';
         } else {
-            dd($object->getResponse());
+            $account->status = 'pending';
         }
+        $account->save();
     }
 }
