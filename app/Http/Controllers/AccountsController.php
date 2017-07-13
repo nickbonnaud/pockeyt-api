@@ -240,9 +240,7 @@ class AccountsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
 
         $object = new SplashPayments\alertTriggers(
-            array(
-                'forlogin' => 'g15952a377cbdce',
-            )
+            
         );
         try {
             $object->retrieve();
