@@ -244,7 +244,7 @@ class AccountsController extends Controller
             )
         );
         try {
-            $object->query();
+            $object->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
