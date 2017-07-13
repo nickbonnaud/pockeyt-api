@@ -241,11 +241,13 @@ class AccountsController extends Controller
 
         $object = new SplashPayments\alertTriggers(
             array(
-                'id' => 'g15967c95b83fd8',
+                'alert' => 'g15967c95b83fd8',
+                'event' => 'board',
+                'resource' => '9'
             )
         );
         try {
-            $object->retrieve();
+            $object->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
