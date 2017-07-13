@@ -239,7 +239,7 @@ class AccountsController extends Controller
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
 
-        $object = new SplashPayments\alertTriggers(
+        $object = new SplashPayments\alertActions(
            
         );
         try {
