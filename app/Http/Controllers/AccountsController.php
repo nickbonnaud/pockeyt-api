@@ -233,4 +233,26 @@ class AccountsController extends Controller
     public function postStatus(Request $request) {
         return response('ok');
     }
+
+    public function enableWebhook() {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+
+        $object = new SplashPayments\alerts(
+            array(
+                'forlogin' => 'g15952a377cbdce' 
+            )
+        );
+        try {
+            $object->query();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($object->hasErrors()) {
+            dd($object->getErrors());
+        } else {
+            dd($object->getResponse());
+        }
+    }
 }
