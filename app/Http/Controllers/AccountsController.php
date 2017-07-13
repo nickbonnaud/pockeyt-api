@@ -234,4 +234,26 @@ class AccountsController extends Controller
         $business = 1;
         event(new CustomerEnterRadius($user, $business));
     }
+
+    public function enableWebhook() {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+
+        $object = new SplashPayments\alertActions(
+            array(
+                'forlogin' => 'g15952a377cbdce',
+            )
+        );
+        try {
+            $object->retrieve();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($object->hasErrors()) {
+            dd($object->getErrors());
+        } else {
+            dd($object->getResponse());
+        }
+    }
 }
