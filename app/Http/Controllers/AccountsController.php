@@ -18,8 +18,7 @@ use App\Http\Requests\UpdateAccountBusinessRequest;
 use App\Http\Requests\UpdateAccountPayRequest;
 use App\Http\Controllers\Controller;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use App\Events\CustomerEnterRadius;
 
 class AccountsController extends Controller
 {
@@ -231,28 +230,8 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        return response('ok');
-    }
-
-    public function enableWebhook() {
-        SplashPayments\Utilities\Config::setTestMode(true);
-        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-
-        $object = new SplashPayments\alerts(
-            array(
-                'forlogin' => 'g15952a377cbdce',
-            )
-        );
-        try {
-            $object->retrieve();
-        }
-        catch (SplashPayments\Exceptions\Base $e) {
-
-        }
-        if ($object->hasErrors()) {
-            dd($object->getErrors());
-        } else {
-            dd($object->getResponse());
-        }
+        $user = $request->all();
+        $business = 1;
+        event(new CustomerEnterRadius($user, $business));
     }
 }
