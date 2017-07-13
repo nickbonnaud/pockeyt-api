@@ -32,6 +32,7 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use SplashPayments;
 use App\Http\Controllers\Controller;
 
 class TransactionsController extends Controller
@@ -201,7 +202,7 @@ class TransactionsController extends Controller
             $transaction->tips = round($tip);
             $transaction->total = round($total + $tip);
             $transaction->save();
-            $result = $this->createCharge($transaction, $customer, $profile->id);
+            $result = $this->createCharge($transaction, $customer, $profile);
 
             if ($result->success) {
                 $transaction->paid = true;
@@ -248,7 +249,7 @@ class TransactionsController extends Controller
                 $transaction->tips = round($request->tips * 100);
                 $transaction->total = round($request->total * 100);
                 $transaction->save();
-                $result = $this->createCharge($transaction, $customer, $profile->id);
+                $result = $this->createCharge($transaction, $customer, $profile);
 
                 if ($result->success) {
                     $transaction->paid = true;
@@ -342,7 +343,7 @@ class TransactionsController extends Controller
         $transaction->total = $total;
 
         $profile->transactions()->save($transaction);
-        $result = $this->createCharge($transaction, $customer, $profile->id);
+        $result = $this->createCharge($transaction, $customer, $profile);
 
         if ($result->success) {
             $transaction->paid = true;
@@ -359,24 +360,29 @@ class TransactionsController extends Controller
         }
     }
 
-    private function createCharge($transaction, $customer, $profileId) {
-        $amount = (round($transaction->total)) / 100;
-        $serviceFee = round($amount * 0.02, 2);
-        $result = \Braintree_Transaction::sale([
-            'merchantAccountId' => $profileId,
-            'amount' => $amount,
-            'customerId' => $customer->customer_id,
-            'customer' => [
-                'firstName' => $customer->first_name,
-                'lastName' => $customer->last_name,
-                'email' => $customer->email,
-            ],
-            'serviceFeeAmount' => $serviceFee,
-            'options' => [
-                'submitForSettlement' => True
-            ]
-        ]);
+    private function createCharge($transaction, $customer, $profile) {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        $result = new SplashPayments\txns(
+            array (
+                'merchant' => $profile->account->splashId,
+                'type' => 1,
+                'origin' => 2,
+                'token' => $customer->customer_id,
+                'first' => $customer->first_name,
+                'last' => $customer->last_name,
+                'total' => $transaction->total,
+            )
+        );
+        try {
+            $result->create();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
 
+        }
+        // Check Errors
+        // Check status
+        // Create splashId for transaction and save ID
         return $result;
     }
 

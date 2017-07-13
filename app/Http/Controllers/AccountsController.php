@@ -18,6 +18,9 @@ use App\Http\Requests\UpdateAccountBusinessRequest;
 use App\Http\Requests\UpdateAccountPayRequest;
 use App\Http\Controllers\Controller;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
 class AccountsController extends Controller
 {
     
@@ -147,27 +150,6 @@ class AccountsController extends Controller
         return view('accounts.edit', compact('account'));
     }
 
-    public function postStatus(Request $request)
-    {
-        if (isset($request->bt_signature) && isset($request->bt_payload)) {
-            $signature = $request->bt_signature;
-            $payload = $request->bt_payload;
-            $notification = \Braintree_WebhookNotification::parse(
-                $signature, $payload
-            );
-            if ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_DECLINED) {
-                $id = $notification->merchantAccount->id;
-                $account = Profile::findOrFail($id)->account;
-                $account->status = $notification->message;
-                $account->save();
-            } elseif ($notification->kind == \Braintree_WebhookNotification::SUB_MERCHANT_ACCOUNT_APPROVED) {
-                $id = $notification->merchantAccount->id;
-                $account = Profile::findOrFail($id)->account;
-                $account->status = $notification->merchantAccount->status;
-                $account->save();
-            }
-        }
-    }
 
     public function getConnections() {
         return view('accounts.connections');
@@ -246,5 +228,34 @@ class AccountsController extends Controller
         $response = $object->getResponse();
         $account->splashId = $response[0]->id;
         return $account->save();
+    }
+
+    public function postStatus(Request $request) {
+        return response('ok');
+    }
+
+    public function enableWebhook() {
+        $client = new Client();
+        try {
+            $response = $client->post('https://api.splashpayments.com/alerts', [
+                'headers' => ['APIKEY' => env('SPLASH_KEY'), 'Content-Type' => 'application/json', 'Cache-Control' => 'no-cache'],
+                'json' => [
+                    'forlogin' => 'g15952a377cbdce',
+                    'alertTriggers' => array(
+                        'event' => 'board',
+                        'resource' => '9'
+                    ),
+                    'alertActions' => array(
+                        "type" => "web",
+                        "options" => "JSON",
+                        "value" => "https://pockeytbiz.com/accounts/status"
+                    )
+                ]
+            ]);
+        } catch(RequestException $e) {
+            if ($e->hasResponse()) {
+                dd($e->getResponse());
+            }
+        }
     }
 }
