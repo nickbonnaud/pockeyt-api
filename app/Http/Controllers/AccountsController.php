@@ -239,10 +239,8 @@ class AccountsController extends Controller
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
 
-        $object = new SplashPayments\alerts(
-            array(
-                'forlogin' => 'g15952a377cbdce',
-            )
+        $object = new SplashPayments\alertActions(
+            
         );
         try {
             $object->retrieve();
