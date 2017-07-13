@@ -241,7 +241,7 @@ class AccountsController extends Controller
 
         $object = new SplashPayments\alertTriggers(
             array(
-                'g15967c95b83fd8',
+                'id' => 'g15967c95b83fd8',
             )
         );
         try {
