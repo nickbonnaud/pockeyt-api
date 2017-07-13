@@ -230,20 +230,19 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        $user = $request;
-        $business = 1;
-        event(new CustomerEnterRadius($user, $business));
+        return response('OK');
     }
 
     public function enableWebhook() {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
 
-        $object = new SplashPayments\alertTriggers(
+        $object = new SplashPayments\alertActions(
             array(
                 'alert' => 'g15967c95b83fd8',
-                'event' => 'board',
-                'resource' => '9'
+                'type' => 'web',
+                'options' => 'JSON',
+                'value' => 'https://pockeytbiz.com/accounts/status'
             )
         );
         try {
