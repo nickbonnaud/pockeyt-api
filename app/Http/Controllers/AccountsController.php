@@ -228,7 +228,7 @@ class AccountsController extends Controller
     }
 
     public function postStatus(Request $request) {
-        $business = $request->all();
+        $business = json_decode($request->getContent());
         $account = Account::where('splashId', '=', $business->id)->first();
         if ($business->status == 2) {
             $account->status = "active";
