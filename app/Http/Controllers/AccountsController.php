@@ -257,5 +257,6 @@ class AccountsController extends Controller
                 dd($e->getResponse());
             }
         }
+        dd($response);
     }
 }
