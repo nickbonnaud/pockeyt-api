@@ -34,30 +34,7 @@
 
 
 
-    // Payline.openTokenizeCardForm({
-    //   applicationName: 'Secure Card Vault',
-    //   applicationId: 'AP3UKRi9QBmgAjv9v4iKuH7T',
-    // }, function (tokenizedResponse) {
-    //   $.ajax({
-    //     method: 'POST',
-    //     url: '/api/vault/card',
-    //     data: {
-    //       'tokenId' : tokenizedResponse.id,
-    //       'userId' : '{{ $authUser->id }}'
-    //     },
-    //     success: function(data) {
-    //     	console.log(data);
-    //       if (data == true) {
-    //         window.location.replace("mobile/close/success");
-    //       } else {
-    //         window.location.replace("mobile/close/fail");
-    //       }
-    //     },
-    //     error: function(data) {
-    //       console.log(data);
-    //     }
-    //   })
-    // });
+    
   });
   </script>
 
