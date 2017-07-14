@@ -28,7 +28,7 @@ class PaymentController extends Controller
     }
 
     public function setPayment(Request $request) {
-        $user = $request->all();
+        $user = 'ok';
         $business = 1;
         event(new CustomerEnterRadius($user, $business));
 

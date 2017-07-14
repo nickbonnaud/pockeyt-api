@@ -8,19 +8,26 @@
   <script>
     PaymentFrame.config = {
       onSuccess: function (response) {
-        $.ajax({
-          method: 'POST',
-          url: '/api/vault/card',
-          data: {
-            'response' : response
-          },
-          success: function(data) {
-            console.log(data);
-          },
-          error: function(data) {
-            console.log(data);
+         $.ajax({
+        method: 'POST',
+        url: 'https://pockeytbiz.com/api/vault/card',
+        data: {
+          'tokenId' : '12345',
+        },
+        success: function(data) {
+          console.log(data);
+          if (data == true) {
+            window.location.replace("mobile/close/success");
+          } else {
+            window.location.replace("mobile/close/fail");
           }
-        })
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      })
+        console.log("success");
+        console.log(response);
       },
       onFailure: function (response) {
         console.log("fail");
