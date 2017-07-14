@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use JWTAuth;
 use App\User;
-use Payline;
 use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
