@@ -23,7 +23,7 @@
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt";
-    PaymentFrame.config.description = "card vault";
+    PaymentFrame.config.description = "CARD VAULT";
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
