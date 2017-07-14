@@ -8,28 +8,25 @@
   <script>
     PaymentFrame.config = {
       onSuccess: function (response) {
-        console.log(response);
       },
       onFailure: function (response) {
-        console.log(response);
       },
       onFinish: function (response) {
-        console.log(response);
       }
     };
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.billingAddress = {
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-    email: "test@email.com",
-    phone: ""
-  };
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      email: "test@email.com",
+      phone: ""
+    };
 
-  document.addEventListener("DOMContentLoaded", function(event) {
-    PaymentFrame.popup();
-  });
+    document.addEventListener("DOMContentLoaded", function(event) {
+      PaymentFrame.popup();
+    });
   </script>
 </body>
