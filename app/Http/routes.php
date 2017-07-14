@@ -148,8 +148,8 @@ Route::group(['prefix' => 'api'], function() {
 
 // Payment Routes
 Route::group(['prefix' => 'api'], function() {
-    Route::get('card', 'PaymentController@cardForm');
-    Route::post('card', 'PaymentController@setPayment');
+    Route::get('vault/card', 'PaymentController@cardForm');
+    Route::post('vault/card', 'PaymentController@setPayment');
 });
 
 //geo routes

@@ -40,7 +40,7 @@
     // }, function (tokenizedResponse) {
     //   $.ajax({
     //     method: 'POST',
-    //     url: '/api/card',
+    //     url: '/api/vault/card',
     //     data: {
     //       'tokenId' : tokenizedResponse.id,
     //       'userId' : '{{ $authUser->id }}'

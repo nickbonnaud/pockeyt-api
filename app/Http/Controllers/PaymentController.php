@@ -13,22 +13,24 @@ class PaymentController extends Controller
 {
     
     public function cardForm(Request $request) {
-        if ($request->has('token')) {
-            $authUser = JWTAuth::parseToken()->authenticate();
-            if ($authUser) {
-                return view('app.cardInput', compact('authUser'));
-            } else {
-                return view ('errors.400');
-            }
-        } else {
-            return view ('errors.400');
-        }
+        return view('app.cardInput', compact('authUser'));
+
+
+        // if ($request->has('token')) {
+        //     $authUser = JWTAuth::parseToken()->authenticate();
+        //     if ($authUser) {
+        //         return view('app.cardInput', compact('authUser'));
+        //     } else {
+        //         return view ('errors.400');
+        //     }
+        // } else {
+        //     return view ('errors.400');
+        // }
     }
 
     public function setPayment(Request $request) {
-        $tokenId = $request->tokenId;
         $user = User::findOrFail($request->userId);
-        $this->initPayline();
+        
         if (!$user->payline_id) {
             $identity = $this->createPaylineID($user);
             $identityID = $identity->id;
