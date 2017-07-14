@@ -24,7 +24,7 @@
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt";
     PaymentFrame.config.description = "card vault";
-    PaymentFrame.config.image = "https://pockeytbiz.com/image/pockeyt-icon-square.png";
+    PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
