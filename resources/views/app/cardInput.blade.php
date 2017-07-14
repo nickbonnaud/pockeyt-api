@@ -1,26 +1,26 @@
+<!DOCTYPE html>
+<html>
 <head>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0' >
-<title>Card Info</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0' >
+  <title>Card Info</title>
 </head>
 <body>
   <h1 style="left: 0; line-height: 200px; margin-top: -100px; position: absolute; text-align: center; top: 50%; width: 100%;">Loading...</h1>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
-    PaymentFrame.config = {
-      onSuccess: function (response) {
-        console.log("success");
-        console.log(response);
-      },
-      onFailure: function (response) {
-        console.log("fail");
-        console.log(response);
-      },
-      onFinish: function (response) {
-        console.log("finish");
-        console.log(response);
-      }
+    PaymentFrame.onSuccess = function (response) {
+      var customer = res.response.data[0].customer;
+      var payment = res.response.data[0].payment;
+      sendResults(customer, payment);
     };
+   
+    PaymentFrame.onFailure = function (response) {
+      window.location.replace("mobile/close/fail");
+    };
+
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt";
@@ -30,5 +30,30 @@
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
     });
+
+    sendResults = function(customer, payment) {
+      $.ajax({
+        method: 'POST',
+        url: '/api/vault/card',
+        data: {
+          'cardEmail' : customer.email,
+          'cardType' : payment.method,
+          'number' : payment.number,
+          'userId' : '{{ $authUser->id }}'
+        },
+        success: function(data) {
+          console.log(data);
+          if (data == true) {
+            window.location.replace("mobile/close/success");
+          } else {
+            window.location.replace("mobile/close/fail");
+          }
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      })
+    };
   </script>
 </body>
+</html>
