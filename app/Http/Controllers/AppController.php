@@ -42,6 +42,6 @@ class AppController extends Controller {
     }
 
     public function unauthorized() {
-        return view('errors.400');
+        return view('errors.401');
     }
 }

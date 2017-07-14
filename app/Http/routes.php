@@ -4,7 +4,7 @@ Route::get('/', 'AppController@index')->name('app.index');
 Route::get('data_use_policy', 'AppController@privacyPolicy')->name('app.privacyPolicy');
 Route::get('end_use_policy', 'AppController@endPolicy')->name('app.endPolicy');
 Route::get('qb_disconnect', 'AppController@qbDisconnect')->name('app.qbDisconnect');
-Route::get('unauthorized', 'AppController@unauthorized')->name('errors.400');
+Route::get('unauthorized', 'AppController@unauthorized')->name('errors.401');
 
 // Auth routes...
 Route::get('auth/login',        'Auth\AuthController@getLogin')->name('auth.login');

@@ -17,10 +17,10 @@ class PaymentController extends Controller
             if ($authUser) {
                 return view('app.cardInput', compact('authUser'));
             } else {
-                return view ('errors.400');
+                return view ('errors.401');
             }
         } else {
-            return view ('errors.400');
+            return view ('errors.401');
         }
     }
 

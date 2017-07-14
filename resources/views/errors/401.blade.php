@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">400 Unauthorized</div>
+                <div class="title">401 Unauthorized</div>
             </div>
         </div>
     </body>
