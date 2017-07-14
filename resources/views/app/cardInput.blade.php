@@ -8,8 +8,19 @@
   <script>
     PaymentFrame.config = {
       onSuccess: function (response) {
-        console.log("success");
-        console.log(response);
+        $.ajax({
+          method: 'POST',
+          url: '/api/vault/card',
+          data: {
+            'response' : response
+          },
+          success: function(data) {
+            console.log(data);
+          },
+          error: function(data) {
+            console.log(data);
+          }
+        })
       },
       onFailure: function (response) {
         console.log("fail");
