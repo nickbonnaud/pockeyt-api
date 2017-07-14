@@ -8,10 +8,16 @@
   <script>
     PaymentFrame.config = {
       onSuccess: function (response) {
+        console.log("success");
+        console.log(response);
       },
       onFailure: function (response) {
+        console.log("fail");
+        console.log(response);
       },
       onFinish: function (response) {
+        console.log("finish");
+        console.log(response);
       }
     };
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
