@@ -6,17 +6,18 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
+   PaymentFrame.config.sessionKey = "6c5efd94b04e7ddc049ac0147c0fab01";
+  PaymentFrame.config.mode = "token";
+  PaymentFrame.config.billingAddress = {
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    email: "test@email.com",
+    phone: ""
+  };
+  
   document.addEventListener("DOMContentLoaded", function(event) {
-    PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
-    PaymentFrame.config.mode = "token";
-    PaymentFrame.config.billingAddress = {
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      email: "test@email.com",
-      phone: ""
-    };
     PaymentFrame.popup();
 
     PaymentFrame.config = {
