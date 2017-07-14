@@ -8,24 +8,6 @@
   <script>
     PaymentFrame.config = {
       onSuccess: function (response) {
-         $.ajax({
-        method: 'POST',
-        url: 'https://pockeytbiz.com/api/vault/card',
-        data: {
-          'tokenId' : '12345',
-        },
-        success: function(data) {
-          console.log(data);
-          if (data == true) {
-            window.location.replace("mobile/close/success");
-          } else {
-            window.location.replace("mobile/close/fail");
-          }
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      })
         console.log("success");
         console.log(response);
       },
@@ -40,14 +22,9 @@
     };
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
-    PaymentFrame.config.billingAddress = {
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      email: "test@email.com",
-      phone: ""
-    };
+    PaymentFrame.config.name = "Pockeyt";
+    PaymentFrame.config.description = "card vault";
+    PaymentFrame.config.image = "{{ asset('/images/pockeyt-icon-square.png' }}";
 
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
