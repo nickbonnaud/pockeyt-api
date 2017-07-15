@@ -65,7 +65,7 @@ class PaymentController extends Controller
     public function setAlert() {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\alertTriggers(
+        $object = new SplashPayments\alertActions(
             
         );
         try {
