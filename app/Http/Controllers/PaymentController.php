@@ -77,10 +77,10 @@ class PaymentController extends Controller
         catch (SplashPayments\Exceptions\Base $e) {
 
         }
-        if ($response->hasErrors()) {
-            dd($response->getErrors());
+        if ($object->hasErrors()) {
+            dd($object->getErrors());
         } else {
-            dd($response = $object->getResponse());
+            dd($object->getResponse());
         }
     }
 }
