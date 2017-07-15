@@ -62,22 +62,22 @@ class PaymentController extends Controller
         event(new CustomerEnterRadius($user, $business));
     }
 
-    public function setAlert() {
-        SplashPayments\Utilities\Config::setTestMode(true);
-        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\alertTriggers(
+    // public function setAlert() {
+    //     SplashPayments\Utilities\Config::setTestMode(true);
+    //     SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+    //     $object = new SplashPayments\alertTriggers(
 
-        );
-        try {
-            $object->retrieve();
-        }
-        catch (SplashPayments\Exceptions\Base $e) {
+    //     );
+    //     try {
+    //         $object->retrieve();
+    //     }
+    //     catch (SplashPayments\Exceptions\Base $e) {
 
-        }
-        if ($object->hasErrors()) {
-            dd($object->getErrors());
-        } else {
-            dd($object->getResponse());
-        }
-    }
+    //     }
+    //     if ($object->hasErrors()) {
+    //         dd($object->getErrors());
+    //     } else {
+    //         dd($object->getResponse());
+    //     }
+    // }
 }
