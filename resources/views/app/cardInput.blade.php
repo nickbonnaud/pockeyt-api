@@ -14,7 +14,7 @@
     PaymentFrame.onSuccess = function (response) {
       var customer = res.response.data[0].customer;
       var payment = res.response.data[0].payment;
-      sendResults(customer, payment);
+      console.log('success');
     };
    
     PaymentFrame.onFailure = function (response) {
@@ -25,7 +25,7 @@
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt Card Vault";
     PaymentFrame.config.description = "Address & Phone Optional";
-    PaymentFrame.config.billingAddress = { email: "{{ $authUser->email }}" };
+    PaymentFrame.config.billingAddress = { email: "test@email.com" };
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
