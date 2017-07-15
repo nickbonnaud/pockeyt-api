@@ -56,11 +56,10 @@ class PaymentController extends Controller
     }
 
     public function receiveSplashToken(Request $request) {
-        return response("ok");
-        // $tokenData = json_decode($request->getContent());
-        // $user = $tokenData;
-        // $business = 1;
-        // event(new CustomerEnterRadius($user, $business));
+        $tokenData = json_decode($request->getContent());
+        $user = $tokenData;
+        $business = 1;
+        event(new CustomerEnterRadius($user, $business));
     }
 
     public function setAlert() {
