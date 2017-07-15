@@ -205,6 +205,7 @@ class TransactionsController extends Controller
             $result = $this->createCharge($transaction, $customer, $profile);
 
             if ($result) {
+                $this->checkFirstTransaction($customer, $transaction);
                 $transaction->paid = true;
                 $transaction->status = 20;
                 $transaction->save();
@@ -252,6 +253,7 @@ class TransactionsController extends Controller
                 $result = $this->createCharge($transaction, $customer, $profile);
 
                 if ($result) {
+                    $this->checkFirstTransaction($customer, $transaction);
                     $transaction->paid = true;
                     $transaction->status = 20;
                     $transaction->save();
@@ -825,6 +827,16 @@ class TransactionsController extends Controller
         $profile->transactions()->save($transaction);
         event(new TransactionsChange($profile));
         return $this->confirmTransaction($transaction, $customer, $profile);
+    }
+
+    public function checkFirstTransaction($customer, $transaction) {
+        if ($customer->new_customer) {
+            $customer->new_customer = false;
+            $transaction->customer_first_transaction = true;
+            $customer->save();
+            $transaction->save();
+        }
+        return;
     }
 }
 
