@@ -23,8 +23,9 @@
 
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
-    PaymentFrame.config.name = "Pockeyt";
-    PaymentFrame.config.description = "CARD VAULT";
+    PaymentFrame.config.name = "Pockeyt Card Vault";
+    PaymentFrame.config.description = "Address & Phone Optional";
+    PaymentFrame.config.billingAddress = { email: "{{ $authUser->email }}" };
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -36,7 +37,6 @@
         method: 'POST',
         url: '/api/vault/card',
         data: {
-          'cardEmail' : customer.email,
           'cardType' : payment.method,
           'number' : payment.number,
           'userId' : '{{ $authUser->id }}'

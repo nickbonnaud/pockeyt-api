@@ -28,7 +28,6 @@ class PaymentController extends Controller
     public function setPayment(Request $request) {
         $user = User::findOrFail($request->userId);
         $user->last_four_card = $request->number;
-        $user->card_email = $request->cardEmail;
         switch ($request->cardType) {
             case 1:
                 $user->card_type = 'AMERICAN_EXPRESS';
