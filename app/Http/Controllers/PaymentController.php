@@ -56,21 +56,22 @@ class PaymentController extends Controller
     }
 
     public function receiveSplashToken(Request $request) {
-        $tokenData = json_decode($request->getContent());
-        $user = $tokenData;
-        $business = 1;
-        event(new CustomerEnterRadius($user, $business));
+        return response("ok");
+        // $tokenData = json_decode($request->getContent());
+        // $user = $tokenData;
+        // $business = 1;
+        // event(new CustomerEnterRadius($user, $business));
     }
 
     public function setAlert() {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\alertTriggers(
+        $object = new SplashPayments\AlertActions (
             array(
                 'alert' => 'g1596a82a7e6a8a',
-                "event" => 'create',
-                'resource' => '17',
-                'name' => 'token webhook trigger'
+                "type" => 'web',
+                'options' => 'JSON',
+                'value' => 'https://pockeytbiz.com/vault/token'
             )
         );
         try {
