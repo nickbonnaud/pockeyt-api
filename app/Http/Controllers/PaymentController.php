@@ -61,28 +61,4 @@ class PaymentController extends Controller
         $business = 1;
         event(new CustomerEnterRadius($user, $business));
     }
-
-    public function setAlert() {
-        SplashPayments\Utilities\Config::setTestMode(true);
-        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\alertActions (
-            array(
-                'alert' => 'g1596a82a7e6a8a',
-                "type" => 'web',
-                'options' => 'JSON',
-                'value' => 'https://pockeytbiz.com/vault/token'
-            )
-        );
-        try {
-            $object->create();
-        }
-        catch (SplashPayments\Exceptions\Base $e) {
-
-        }
-        if ($object->hasErrors()) {
-            dd($object->getErrors());
-        } else {
-            dd($object->getResponse());
-        }
-    }
 }
