@@ -8,6 +8,9 @@ use JWTAuth;
 use App\User;
 use App\Http\Controllers\Controller;
 
+use App\Events\CustomerEnterRadius;
+use SplashPayments;
+
 class PaymentController extends Controller
 {
     
@@ -50,5 +53,34 @@ class PaymentController extends Controller
         $updatedUser = $user->save();
         
         return response()->json($updatedUser); 
+    }
+
+    public function receiveSplashToken(Request $request) {
+        $tokenData = json_decode($request->getContent());
+        $user = $tokenData;
+        $business = 1;
+        event(new CustomerEnterRadius($user, $business));
+    }
+
+    public function setAlert() {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        $object = new SplashPayments\alerts(
+            array(
+                "forlogin" => 'g15952a377cbdce',
+                'name' => 'token webhook'
+            )
+        );
+        try {
+            $object->create();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($response->hasErrors()) {
+            dd($response->getErrors());
+        } else {
+            dd($response = $object->getResponse());
+        }
     }
 }
