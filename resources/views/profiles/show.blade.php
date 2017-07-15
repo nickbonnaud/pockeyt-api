@@ -32,9 +32,11 @@
           </div>
         </form>
         <div class="invite-code-section">
-          <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()" style="padding: 8px;">New Invite Code</button>
-          <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
-          <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
+          <a href="{{ action('PaymentController@setAlert') }}">
+              <button type="button" class="btn btn-social btn-github">
+                DO
+              </button>
+            </a>
         </div>
         <div class="scroll-container">
           <div class="scroll-contents">

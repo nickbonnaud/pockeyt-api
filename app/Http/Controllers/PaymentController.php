@@ -61,4 +61,25 @@ class PaymentController extends Controller
         $business = 1;
         event(new CustomerEnterRadius($user, $business));
     }
+
+    public function setAlert() {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        $object = new SplashPayments\alerts(
+            array(
+                "forlogin" => 'g15952a377cbdce'
+            )
+        );
+        try {
+            $object->retrieve();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($object->hasErrors()) {
+            dd($object->getErrors());
+        } else {
+            dd($object->getResponse());
+        }
+    }
 }
