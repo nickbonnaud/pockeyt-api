@@ -8,7 +8,9 @@
             </div>
             <div class="box-body">
                 @if(! is_null($post->photo_path))
-                    <img src="{{ $post->photo_path}}">
+                    <div class="text-center">
+                        <img src="{{ $post->photo_path}}">
+                    </div>
                     <hr>
                 @endif
                 {{ $post->published_at->diffForHumans() }}
