@@ -65,10 +65,12 @@ class PaymentController extends Controller
     public function setAlert() {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $object = new SplashPayments\alerts(
+        $object = new SplashPayments\alertTriggers(
             array(
-                "forlogin" => 'g15952a377cbdce',
-                'name' => 'token webhook'
+                'alert' => 'g1596a82a7e6a8a',
+                "event" => 'create',
+                'resource' => '17',
+                'name' => 'token webhook trigger'
             )
         );
         try {
