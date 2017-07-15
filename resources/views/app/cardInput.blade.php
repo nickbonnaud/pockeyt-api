@@ -38,8 +38,7 @@
         url: '/api/vault/card',
         data: {
           'cardType' : payment.method,
-          'number' : payment.number,
-          'userId' : '{{ $authUser->id }}'
+          'number' : payment.number
         },
         success: function(data) {
           console.log(data);
