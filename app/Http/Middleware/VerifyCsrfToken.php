@@ -16,6 +16,7 @@ class VerifyCsrfToken extends BaseVerifier {
         'connect/subscribe/facebook',
         'connect/subscribe/instagram',
         'qbo/openid',
-        'square/transaction/receive'
+        'square/transaction/receive',
+        'vault/token'
     ];
 }
