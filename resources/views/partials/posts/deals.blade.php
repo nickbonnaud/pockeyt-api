@@ -8,8 +8,10 @@
       </div>
       <div class="box-body">
         @if(! is_null($post->photo_path))
+          <div class="text-center">
             <img src="{{ $post->photo_path}}">
-            <hr>
+          </div>
+          <hr>
         @endif
         <i>This post is redeemable for ${{ $post->price / 100 }}</i>
         @if($signedIn && ($isAdmin || $user->profile->owns($post)))
