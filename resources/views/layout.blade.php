@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ asset('/css/libs.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css"  />
 </head>
 
 <body>
@@ -72,7 +72,7 @@
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+<script src="{{ asset('/vendor/select2/select2.full.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
 <style>

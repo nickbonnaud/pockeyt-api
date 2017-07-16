@@ -14,11 +14,11 @@
   <link rel="stylesheet" href="{{ asset('/vendor/sweetalert/dist/sweetalert.css') }}">
   <link rel="stylesheet" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/vendor/daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" />
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -275,7 +275,7 @@
   <script src="{{ asset('/vendor/daterangepicker/daterangepicker.js') }}"></script>
   <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
   <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+	<script src="{{ asset('/vendor/select2/select2.full.min.js') }}"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
