@@ -76,11 +76,14 @@
 @stop
 @section('scripts.footer')
 <script>
-  console.log({!! $categories  !!});
-  $("#category").select2({
-    placeholder: 'Select or create a category',
-    tags: {!! $categories  !!},
-    maximumSelectionLength: 1
-  });
+  getCategories();
+
+  getCategories = function() {
+    var products = {!! $products !!};
+    products.forEach(function(product) {
+      console.log(product);
+    });
+  }
+
 </script>
 @stop

@@ -90,16 +90,10 @@ class ProductsController extends Controller {
   public function listProducts() {
       $profile = $this->user->profile;
       $products = Product::where('profile_id', '=', $profile->id)->orderBy('name', 'asc')->get();
-      $categories = [];
       foreach ($products as $product) {
         $product->price = ($product->price) / 100;
-        if ($product->category) {
-          if (! in_array($product->category, $categories)) {
-            array_push($categories, $product->category);
-          }
-        }
       }
-      return view('products.list', compact('products', 'profile', 'categories'));
+      return view('products.list', compact('products', 'profile'));
   }
 
   public function getInventory($id) {
