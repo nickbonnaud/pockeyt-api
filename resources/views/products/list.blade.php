@@ -76,13 +76,25 @@
 @stop
 @section('scripts.footer')
 <script>
-getCategories = function() {
+
+  getCategories = function() {
     var products = {!! $products !!};
+    var categories = [];
     products.forEach(function(product) {
-      console.log(product);
+      if (product.category) {
+        if (categories.indexOf(product.category) == -1) {
+          categories.push(product.category);
+        }
+      }
     });
+    return categories;
   };
-  getCategories();
+
+  $("#category").select2({
+    placeholder: 'Select or create a category',
+    tags: getCategories(),
+    maximumSelectionLength: 1
+  });
 
 </script>
 @stop
