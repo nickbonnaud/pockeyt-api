@@ -18,6 +18,12 @@
     </div>
 
     <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" class="form-control" name="category"></select>
+        <p class="help-block">Optional</p>
+    </div>
+
+    <div class="form-group">
         <label for="sku">SKU:</label>
         <input type="text" name="sku" id="sku" class="form-control" value="{{ $product->sku }}">
         <p class="help-block">Optional</p>
