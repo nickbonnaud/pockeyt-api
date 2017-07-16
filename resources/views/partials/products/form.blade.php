@@ -6,7 +6,7 @@
 
 <div class="form-group">
     <label for="price">Price:</label>
-    <input type="number" name="price" id="price" class="form-control" value="{{ old('price') }}" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
+    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" id="annualCCSales" class="form-control" required>
 </div>
 
 <div class="form-group">
