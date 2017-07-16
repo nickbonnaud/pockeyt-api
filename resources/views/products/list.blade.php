@@ -76,7 +76,7 @@
 @stop
 @section('scripts.footer')
 <script>
-
+  $.fn.modal.Constructor.prototype.enforceFocus = function() {};
   getCategories = function() {
     var products = {!! $products !!};
     var categories = [];
@@ -91,7 +91,8 @@
   };
 
   $("#category").select2({
-    tags: ['red', 'green']
+    tags: getCategories(),
+    maximumSelectionLength: 1
   });
 
 </script>
