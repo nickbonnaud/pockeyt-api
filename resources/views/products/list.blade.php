@@ -76,14 +76,13 @@
 @stop
 @section('scripts.footer')
 <script>
-  getCategories();
-
-  getCategories = function() {
+getCategories = function() {
     var products = {!! $products !!};
     products.forEach(function(product) {
       console.log(product);
     });
-  }
+  };
+  getCategories();
 
 </script>
 @stop
