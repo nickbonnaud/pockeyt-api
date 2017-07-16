@@ -90,6 +90,7 @@
   };
 
   $("#category").select2({
+    width: '100%',
     tags: true,
     data: getCategories(),
     maximumSelectionLength: 1
