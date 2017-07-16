@@ -16,6 +16,12 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('category', 'Category:') !!}
+    {!! Form::select('category[]', $categories, null, ['id' => 'category', 'class' => 'form-control', 'required' => 'required']) !!}
+     <p class="help-block">Optional</p>
+</div>
+
+<div class="form-group">
     <label for="sku">SKU:</label>
     <input type="text" name="sku" id="sku" class="form-control" value="{{ old('sku') }}">
     <p class="help-block">Optional</p>

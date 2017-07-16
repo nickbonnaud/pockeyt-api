@@ -45,3 +45,11 @@
   </div>
 </div>
 @stop
+@section('scripts.footer')
+<script>
+  $("#category").select2({
+    placeholder: 'Select or create a category',
+    maximumSelectionLength: 1
+  });
+</script>
+@stop

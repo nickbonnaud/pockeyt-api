@@ -275,7 +275,7 @@
   <script src="{{ asset('/vendor/daterangepicker/daterangepicker.js') }}"></script>
   <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
   <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
-	<script src="{{ asset('/vendor/select2/select2.full.min.js') }}"></script>
+	<script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
