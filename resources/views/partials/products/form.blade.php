@@ -16,8 +16,8 @@
 </div>
 
 <div class="form-group">
-    <label for="category">Category:</label>
-    <input type="hidden" id="category" name="category">
+    <label for="category">Category</label>
+    <select id="category" class="form-control" name="category"></select>
     <p class="help-block">Optional</p>
 </div>
 

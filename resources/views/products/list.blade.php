@@ -91,7 +91,7 @@
   };
 
   $("#category").select2({
-    tags: getCategories(),
+    tags: ['red', 'green'],
     maximumSelectionLength: 1
   });
 
