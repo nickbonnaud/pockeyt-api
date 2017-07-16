@@ -75,7 +75,8 @@ class ProductsController extends Controller {
       $updatedProduct['photo_id'] = $photo->id;
     }
   	$product->update($updatedProduct);
-  	return redirect()->route('products.edit', compact('product'));
+    $profile->$this->user->profile;
+  	return redirect()->route('products.list', compact('products', 'profile'));
   }
 
   public function destroy(DeleteProductRequest $request, $id) {
