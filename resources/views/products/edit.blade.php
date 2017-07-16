@@ -48,11 +48,22 @@
 
 @section('scripts.footer')
 <script>
-  var categories = {!! $categories !!};
-  console.log(categories);
+  
+  getCategories = function() {
+    var categoryObjects = {!! $categories !!};
+    var categories = [];
+    categoryObjects.forEach(function(categoryObject) {
+      if (categoryObject.category) {
+        if (categories.indexOf(categoryObject.category) == -1) {
+          categories.push(categoryObject.category);
+        }
+      }
+    });
+    return categories;
+  }
   $("#category").select2({
     tags: true,
-    data: ['green', 'blue', 'red'],
+    data: getCategories(),
     maximumSelectionLength: 1
   });
 
