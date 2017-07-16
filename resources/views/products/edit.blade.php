@@ -45,3 +45,15 @@
   </div>
 </div>
 @stop
+
+@section('scripts.footer')
+<script>
+
+  $("#category").select2({
+    tags: true,
+    data: [{ id: 'green', text:'Green'}, { id: 'blue', text:'Blue'}],
+    maximumSelectionLength: 1
+  });
+
+</script>
+@stop
