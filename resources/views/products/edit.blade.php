@@ -65,7 +65,7 @@
     tags: true,
     data: getCategories(),
     maximumSelectionLength: 1
-  }).select2('val', '{{ $product->category }}');
+  }).val('{{ $product->category }}').trigger('change');
 
 </script>
 @stop
