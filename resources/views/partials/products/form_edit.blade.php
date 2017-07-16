@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-         {!! Form::select('category',[], $product->category, ['class' => 'form-control']) !!}
+         {!! Form::select('category', $product->category, ['class' => 'form-control']) !!}
         <p class="help-block">Optional</p>
     </div>
 
