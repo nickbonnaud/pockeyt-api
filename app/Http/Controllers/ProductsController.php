@@ -43,8 +43,7 @@ class ProductsController extends Controller {
           $product['product_tn_photo_path'] = url($photo->thumbnail_path);
           $product['photo_id'] = $photo->id;
       }
-      dd($request->price);
-      $product->price = preg_replace("/[^0-9]/","",$request->price)  * 100;
+      $product->price = preg_replace("/[^0-9\.]/","",$request->price)  * 100;
       $this->user->profile->products()->save($product);
       return redirect()->back();
   }
@@ -61,7 +60,7 @@ class ProductsController extends Controller {
 
     $oldPhoto = $product->product_photo_path;
     $updatedProduct = $request->except('photo', 'price');
-    $updatedProduct['price'] = preg_replace("/[^0-9]/","",$request->price)  * 100;
+    $updatedProduct['price'] = preg_replace("/[^0-9\.]/","",$request->price)  * 100;
     $file = $request->photo;
 
     if($file != null) {
