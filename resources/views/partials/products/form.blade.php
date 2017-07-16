@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group">
-    <label for="category">Category</label>
+    <label for="category">Category:</label>
     <select id="category" class="form-control" name="category"></select>
     <p class="help-block">Optional</p>
 </div>

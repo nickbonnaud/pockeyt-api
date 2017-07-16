@@ -91,7 +91,6 @@
   };
 
   $("#category").select2({
-    placeholder: 'Select or create a category',
     tags: getCategories(),
     maximumSelectionLength: 1
   });
