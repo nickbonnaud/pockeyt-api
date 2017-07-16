@@ -8,7 +8,7 @@
 
     <div class="form-group">
         <label for="price">Price:</label>
-        <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="price" id="price" class="form-control" required>
+        <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="price" id="price" value="{{ $product->price }}" class="form-control" required>
     </div>
 
     <div class="form-group">
