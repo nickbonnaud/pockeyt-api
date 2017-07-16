@@ -19,11 +19,9 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-         {!! Form::select('category', $product->category, ['class' => 'form-control']) !!}
+        <select id="category" class="js-example-tags form-control" multiple="multiple" name="category"></select>
         <p class="help-block">Optional</p>
     </div>
-
-    
 
     <div class="form-group">
         <label for="sku">SKU:</label>
