@@ -19,9 +19,11 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-        <select id="category" class="js-example-tags form-control" multiple="multiple" name="category"></select>
+         {!! Form::select('category',[], $product->category, ['class' => 'form-control']) !!}
         <p class="help-block">Optional</p>
     </div>
+
+    
 
     <div class="form-group">
         <label for="sku">SKU:</label>
