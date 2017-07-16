@@ -75,7 +75,7 @@ class ProductsController extends Controller {
       $updatedProduct['photo_id'] = $photo->id;
     }
   	$product->update($updatedProduct);
-    $profile->$this->user->profile;
+    $profile = $this->user->profile;
   	return redirect()->route('products.list', compact('products', 'profile'));
   }
 
