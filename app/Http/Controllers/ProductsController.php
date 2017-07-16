@@ -50,6 +50,7 @@ class ProductsController extends Controller {
 
   public function edit (Request $request, $id) {
   	$product = Product::findOrFail($id);
+    $profile = $this->user->profile;
     $categories = Product::where('profile_id', '=', $profile->id)->pluck('category');
     dd($categories);
     $product->price = $product->price / 100;
