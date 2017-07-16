@@ -33,7 +33,7 @@ class ProductsController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function store(ProductRequest $request) {
-      $product = new Product($request->all());
+      $product = new Product($request->except('price'));
       $file = $request->photo;
       
       if($file != null) {
@@ -43,7 +43,7 @@ class ProductsController extends Controller {
           $product['product_tn_photo_path'] = url($photo->thumbnail_path);
           $product['photo_id'] = $photo->id;
       }
-      $product->price = $product->price * 100;
+      $product->price = preg_replace("/[^0-9]/","",$request->price)  * 100;
       $this->user->profile->products()->save($product);
       return redirect()->back();
   }
@@ -59,8 +59,8 @@ class ProductsController extends Controller {
     $product = Product::findOrFail($id);
 
     $oldPhoto = $product->product_photo_path;
-    $updatedProduct = $request->except('photo');
-    $updatedProduct['price'] = $updatedProduct['price'] * 100;
+    $updatedProduct = $request->except('photo', 'price');
+    $updatedProduct['price'] = preg_replace("/[^0-9]/","",$request->price)  * 100;
     $file = $request->photo;
 
     if($file != null) {
