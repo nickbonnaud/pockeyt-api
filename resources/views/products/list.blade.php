@@ -74,3 +74,12 @@
   </div>
 </div>
 @stop
+@section('scripts.footer')
+<script>
+  $("#category").select2({
+    placeholder: 'Select or create a category',
+    tags: {!! $categories  !!},
+    maximumSelectionLength: 1
+  });
+</script>
+@stop
