@@ -50,8 +50,7 @@
 <script>
 
   $("#category").select2({
-    tags: ['one', 'two'],
-    maximumSelectionLength: 1
+    tags: ['one', 'two']
   });
 
 </script>
