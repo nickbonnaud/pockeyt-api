@@ -103,7 +103,7 @@ class PostsController extends Controller {
         return redirect()->back();
     }
     public function storeDeal(DealRequest $request) {
-        $post = new Post($request->all());
+        $post = new Post($request->except('price'));
         $file = $request->photo;
         
         if($file != null) {
@@ -118,7 +118,7 @@ class PostsController extends Controller {
         $post['published_at'] = Carbon::now(new DateTimeZone(config('app.timezone')));
         $post['title'] = $request->message;
         $post['body'] = $request->message;
-        $post['price'] = $request->price * 100;
+        $post['price'] = preg_replace("/[^0-9\.]/","",$request->price) * 100;
 
         $this->user->profile->posts()->save($post);
         return redirect()->back();
