@@ -78,7 +78,7 @@
 <script>
   $("#category").select2({
     placeholder: 'Select or create a category',
-    tags: {!! $categories  !!},
+    tags: {{ $categories  }},
     maximumSelectionLength: 1
   });
 </script>
