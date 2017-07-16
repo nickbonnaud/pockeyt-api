@@ -48,7 +48,8 @@
 
 @section('scripts.footer')
 <script>
-
+  var categories = {!! $categories !!};
+  console.log(categories);
   $("#category").select2({
     tags: true,
     data: ['green', 'blue', 'red'],
