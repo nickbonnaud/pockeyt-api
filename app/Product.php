@@ -15,6 +15,7 @@ class Product extends Model {
         'name',
         'price',
         'description',
+        'category',
         'sku',
         'product_photo_path',
     ];
