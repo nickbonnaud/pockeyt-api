@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="category">Category</label>
-        <select id="category" class="js-example-tags form-control" name="category"></select>
+        <select id="category" class="js-example-tags form-control" multiple="multiple" name="category"></select>
         <p class="help-block">Optional</p>
     </div>
 
