@@ -99,7 +99,6 @@ class ProductsController extends Controller {
           }
         }
       }
-      dd($categories);
       return view('products.list', compact('products', 'profile', 'categories'));
   }
 
