@@ -58,7 +58,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addProductModal" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header-timeline">
@@ -76,7 +76,6 @@
 @stop
 @section('scripts.footer')
 <script>
-  $.fn.modal.Constructor.prototype.enforceFocus = function() {};
   getCategories = function() {
     var products = {!! $products !!};
     var categories = [];
