@@ -90,7 +90,8 @@
   };
 
   $("#category").select2({
-    tags: getCategories(),
+    tags: true,
+    data: getCategories(),
     maximumSelectionLength: 1
   });
 

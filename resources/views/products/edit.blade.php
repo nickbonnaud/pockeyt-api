@@ -45,13 +45,3 @@
   </div>
 </div>
 @stop
-
-@section('scripts.footer')
-<script>
-
-  $("#category").select2({
-    tags: ['one', 'two']
-  });
-
-</script>
-@stop
