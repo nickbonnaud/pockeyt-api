@@ -52,7 +52,6 @@ class ProductsController extends Controller {
   	$product = Product::findOrFail($id);
     $profile = $this->user->profile;
     $categories = Product::where('profile_id', '=', $profile->id)->whereNotNull('category')->select('category')->distinct()->get();
-    dd($categories);
     $product->price = $product->price / 100;
   	return view('products.edit', compact('product', 'categories'));
   }
