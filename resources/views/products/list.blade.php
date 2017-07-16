@@ -91,8 +91,7 @@
   };
 
   $("#category").select2({
-    tags: ['red', 'green'],
-    maximumSelectionLength: 1
+    tags: ['red', 'green']
   });
 
 </script>
