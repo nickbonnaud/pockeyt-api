@@ -51,7 +51,7 @@
 
   $("#category").select2({
     tags: true,
-    data: [{ id: 'green', text:'Green'}, { id: 'blue', text:'Blue'}],
+    data: ['green', 'blue', 'red'],
     maximumSelectionLength: 1
   });
 
