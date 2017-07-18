@@ -71,7 +71,7 @@ class PaymentController extends Controller
             )
         );
         try {
-            $object->retrieve();
+            $object->delete();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
