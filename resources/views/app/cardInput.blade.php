@@ -42,7 +42,7 @@
           'token' : token,
           'number' : number,
           'cardType' : method,
-          'userId' : {{ $authUser.id }}
+          'userId' : '{{ $authUser.id }}'
         },
         success: function(data) {
           console.log(data);
