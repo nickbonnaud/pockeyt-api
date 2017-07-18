@@ -66,12 +66,10 @@ class PaymentController extends Controller
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $object = new SplashPayments\alertActions(
-            array(
-                'id' => 'g1596a85fbe4aa2'
-            )
+
         );
         try {
-            $object->delete();
+            $object->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
