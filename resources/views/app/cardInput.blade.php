@@ -12,12 +12,12 @@
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
     PaymentFrame.onSuccess = function (response) {
-      var customer = res.response.data[0].customer;
-      var payment = res.response.data[0].payment;
-      console.log('success');
+      console.log(response);
+      
     };
    
     PaymentFrame.onFailure = function (response) {
+      console.log(response);
       window.location.replace("mobile/close/fail");
     };
 
