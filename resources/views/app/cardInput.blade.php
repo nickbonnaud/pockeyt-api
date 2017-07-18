@@ -12,8 +12,8 @@
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
     PaymentFrame.onSuccess = function (res) {
-      console.log(res.response.data[0].token);
-      
+      console.log(res);
+      var token = res.response.data[0].token;
     };
    
     PaymentFrame.onFailure = function (response) {
