@@ -15,6 +15,7 @@ class PaymentController extends Controller
     public function cardForm(Request $request) {
         if ($request->has('token')) {
             $authUser = JWTAuth::parseToken()->authenticate();
+            dd($authUser);
             if ($authUser) {
                 return view('app.cardInput', compact('authUser'));
             } else {
