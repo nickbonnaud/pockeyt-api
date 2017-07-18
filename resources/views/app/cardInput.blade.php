@@ -12,8 +12,10 @@
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
     PaymentFrame.onSuccess = function (res) {
-      console.log(res);
       var token = res.response.data[0].token;
+      var number = res.response.data[0].payment.number;
+      var method = res.response.data[0].payment.method;
+      sendResults(token, number, method);
     };
    
     PaymentFrame.onFailure = function (response) {
@@ -25,20 +27,22 @@
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt Card Vault";
     PaymentFrame.config.description = "Address & Phone Optional";
-    PaymentFrame.config.billingAddress = { email: "tester@email.com" };
+    PaymentFrame.config.billingAddress = { email: {{ $authUser.email }} };
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
     });
 
-    sendResults = function(customer, payment) {
+    sendResults = function(token, number, method) {
       $.ajax({
         method: 'POST',
         url: '/api/vault/card',
         data: {
-          'cardType' : payment.method,
-          'number' : payment.number
+          'token' : token,
+          'number' : number,
+          'cardType' : method,
+          'userId' : {{ $authUser.id }}
         },
         success: function(data) {
           console.log(data);

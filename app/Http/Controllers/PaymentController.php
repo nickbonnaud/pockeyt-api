@@ -15,7 +15,6 @@ class PaymentController extends Controller
 {
     
     public function cardForm(Request $request) {
-        return view('app.cardInput');
         if ($request->has('token')) {
             $authUser = JWTAuth::parseToken()->authenticate();
             if ($authUser) {
@@ -31,6 +30,7 @@ class PaymentController extends Controller
     public function setPayment(Request $request) {
         $user = User::findOrFail($request->userId);
         $user->last_four_card = $request->number;
+        $user->customer_id = $request->token;
         switch ($request->cardType) {
             case 1:
                 $user->card_type = 'AMERICAN_EXPRESS';
@@ -62,22 +62,22 @@ class PaymentController extends Controller
         event(new CustomerEnterRadius($user, $business));
     }
 
-    // public function setAlert() {
-    //     SplashPayments\Utilities\Config::setTestMode(true);
-    //     SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-    //     $object = new SplashPayments\alertTriggers(
+    public function setAlert() {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        $object = new SplashPayments\alertActions(
 
-    //     );
-    //     try {
-    //         $object->retrieve();
-    //     }
-    //     catch (SplashPayments\Exceptions\Base $e) {
+        );
+        try {
+            $object->retrieve();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
 
-    //     }
-    //     if ($object->hasErrors()) {
-    //         dd($object->getErrors());
-    //     } else {
-    //         dd($object->getResponse());
-    //     }
-    // }
+        }
+        if ($object->hasErrors()) {
+            dd($object->getErrors());
+        } else {
+            dd($object->getResponse());
+        }
+    }
 }
