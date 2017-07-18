@@ -151,8 +151,6 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('vault/card', 'PaymentController@cardForm');
     Route::post('vault/card', 'PaymentController@setPayment');
 });
-Route::post('vault/token', 'PaymentController@receiveSplashToken');
-Route::get('payment/setAlert', 'PaymentController@setAlert');
 
 //geo routes
 Route::group(['prefix' => 'api'], function() {

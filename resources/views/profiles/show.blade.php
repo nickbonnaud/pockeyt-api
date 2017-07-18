@@ -32,9 +32,9 @@
           </div>
         </form>
         <div class="invite-code-section">
-          <a href="{{ action('PaymentController@setAlert') }}">
-            <button class="btn btn-danger">Do</button>
-          </a>
+          <button type="button" class="btn btn-warning btn-flat" v-if="!inviteCodeGenerated" v-on:click="createInviteCode()" style="padding: 8px;">New Invite Code</button>
+          <h4 class="invite-code" v-if="inviteCodeGenerated">Single use invite code: <strong style="color:#000000;">@{{ inviteCodeGenerated }}</strong></h4>
+          <a class="invite-code-hide" href="#" v-if="inviteCodeGenerated" v-on:click="inviteCodeGenerated = null">Hide</a>
         </div>
         <div class="scroll-container">
           <div class="scroll-contents">
@@ -411,8 +411,32 @@
           },
 
           addUser: function(data) {
-            console.log(data);
-
+            if (data.user) {
+              var activeCustomer = data.user;
+            } else {
+              var activeCustomer = data;
+            }
+            var users = this.users;
+            console.log(users);
+            var purchases = this.purchases;
+            if(users.length == 0) {
+              activeCustomer['lastActive'] = Date.now();
+              users.push(activeCustomer);
+            } else {
+              var found = false;
+              for (i=users.length - 1; i >= 0; i --) {
+                if(users[i].id == activeCustomer.id) {
+                  users[i].lastActive = Date.now();
+                  found = true;
+                }
+              }
+              if(!found) {
+                activeCustomer['lastActive'] = Date.now();
+                users.push(activeCustomer);
+              }
+            }
+            console.log(users);
+            customer.getRedeemableDeals(activeCustomer.id);
           },
           
           removeUser: function(data) {
