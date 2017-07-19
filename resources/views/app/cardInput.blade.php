@@ -41,7 +41,7 @@
         data: {
           'token' : token,
           'number' : number,
-          'cardType' : method
+          'cardType' : method,
           'userId' : '{{ $authUser->id }}'
         },
         success: function(data) {
