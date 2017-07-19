@@ -8,6 +8,8 @@
 </head>
 <body>
   <h1 style="left: 0; line-height: 200px; margin-top: -100px; position: absolute; text-align: center; top: 50%; width: 100%;">Loading...</h1>
+  <a href="/api/mobile/close/fail">Fail</a>
+  <a href="/api/mobile/close/success">Success</a>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
@@ -31,7 +33,7 @@
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
-      window.location.replace("/api/mobile/close/success");
+      
     });
 
     sendResults = function(token, number, method) {
