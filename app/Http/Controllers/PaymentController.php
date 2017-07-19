@@ -53,12 +53,4 @@ class PaymentController extends Controller
         
         return response()->json($updatedUser); 
     }
-
-    public function vaultSuccess() {
-        return; 
-    }
-
-    public function vaultFail() {
-        return;
-    }    
 }
