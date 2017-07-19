@@ -20,7 +20,7 @@
    
     PaymentFrame.onFailure = function (response) {
       console.log(response);
-      window.location.replace("mobile/close/fail");
+      window.location.replace("/mobile/close/fail");
     };
 
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
@@ -32,7 +32,7 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
-      window.location.replace("mobile/close/fail");
+      window.location.replace("/mobile/close/success");
     });
 
     sendResults = function(token, number, method) {
@@ -48,9 +48,9 @@
         success: function(data) {
           console.log(data);
           if (data == true) {
-            window.location.replace("mobile/close/success");
+            window.location.replace("/mobile/close/success");
           } else {
-            window.location.replace("mobile/close/fail");
+            window.location.replace("/mobile/close/fail");
           }
         },
         error: function(data) {
