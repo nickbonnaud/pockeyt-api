@@ -32,6 +32,7 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
       PaymentFrame.popup();
+      window.location.replace("/mobile/close/success");
     });
 
     sendResults = function(token, number, method) {
