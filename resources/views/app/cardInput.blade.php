@@ -27,11 +27,10 @@
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt Card Vault";
     PaymentFrame.config.description = "Address & Phone Optional";
-    PaymentFrame.config.billingAddress = { email: 'test@email.com' };
+    PaymentFrame.config.billingAddress = { email: '{{ $authUser->email }}' };
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
-      window.location.replace("/mobile/close/success");
       PaymentFrame.popup();
     });
 
@@ -42,7 +41,8 @@
         data: {
           'token' : token,
           'number' : number,
-          'cardType' : method
+          'cardType' : method,
+          'userId' : '{{ $authUser->id }}'
         },
         success: function(data) {
           console.log(data);
