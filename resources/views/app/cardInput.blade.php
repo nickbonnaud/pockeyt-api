@@ -8,8 +8,6 @@
 </head>
 <body>
   <h1 style="left: 0; line-height: 200px; margin-top: -100px; position: absolute; text-align: center; top: 50%; width: 100%;">Loading...</h1>
-  <a href="mobile/close/fail">Fail</a>
-  <a href="mobile/close/success">Success</a>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script type="text/javascript" src="https://test-api.splashpayments.com/paymentScript"></script>
   <script>
@@ -22,18 +20,18 @@
    
     PaymentFrame.onFailure = function (response) {
       console.log(response);
-      window.location.replace("/api/mobile/close/fail");
+      window.location.replace("mobile/close/fail");
     };
 
     PaymentFrame.config.apiKey = "6c5efd94b04e7ddc049ac0147c0fab01";
     PaymentFrame.config.mode = "token";
     PaymentFrame.config.name = "Pockeyt Card Vault";
     PaymentFrame.config.description = "Address & Phone Optional";
-    PaymentFrame.config.billingAddress = { email: 'test@email.com' };
+    PaymentFrame.config.billingAddress = { email: '{{ $authUser->email }}' };
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
-      
+      PaymentFrame.popup();
     });
 
     sendResults = function(token, number, method) {
@@ -44,14 +42,14 @@
           'token' : token,
           'number' : number,
           'cardType' : method
-          
+          'userId' : '{{ $authUser->id }}'
         },
         success: function(data) {
           console.log(data);
           if (data == true) {
-            window.location.replace("/api/mobile/close/success");
+            window.location.replace("mobile/close/success");
           } else {
-            window.location.replace("/api/mobile/close/fail");
+            window.location.replace("mobile/close/fail");
           }
         },
         error: function(data) {
