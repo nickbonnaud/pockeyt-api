@@ -150,6 +150,9 @@ Route::group(['prefix' => 'api'], function() {
 Route::group(['prefix' => 'api'], function() {
     Route::get('vault/card', 'PaymentController@cardForm');
     Route::post('vault/card', 'PaymentController@setPayment');
+
+    Route::get('vault/mobile/close/success', 'PaymentController@success');
+    Route::get('vault/mobile/close/fail', 'PaymentController@fail');
 });
 
 //geo routes

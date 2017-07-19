@@ -53,4 +53,12 @@ class PaymentController extends Controller
         
         return response()->json($updatedUser); 
     }
+
+    public function success() {
+        return; 
+    }
+
+    public function fail() {
+        return;
+    }    
 }
