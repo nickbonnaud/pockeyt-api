@@ -31,7 +31,6 @@
     PaymentFrame.config.image = "https://pockeytbiz.com/images/pockeyt-icon-square.png";
 
     document.addEventListener("DOMContentLoaded", function(event) {
-      PaymentFrame.popup();
       window.location.replace("/api/mobile/close/success");
     });
 
