@@ -390,6 +390,9 @@ class TransactionsController extends Controller
             $err = $result->getErrors();
         } else {
             $data = $result->getResponse();
+            $user = $data[0]->status;
+            $business = 134;
+            event(new CustomerEnterRadius($user, $business));
             $processedTransaction = $data[0];
             if ($processedTransaction->status == '1') {
                 $success = true;
