@@ -393,7 +393,7 @@ class TransactionsController extends Controller
             event(new CustomerEnterRadius($user, $business));
         } else {
             $data = $result->getResponse();
-            $user = $data;
+            $user = $data[0];
             $business = 134;
             event(new CustomerEnterRadius($user, $business));
             $processedTransaction = $data[0];
