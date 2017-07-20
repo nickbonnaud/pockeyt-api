@@ -98,7 +98,7 @@ class GeoController extends Controller
             $storedLocations = Location::where('user_id', '=', $user->id)->get();
             if (!isset($storedLocations)) { return response('none');}
             foreach ($storedLocations as $storedLocation) {
-                $business = $storedLocation->profile_id;
+                $business = $storedLocation->location_id;
                 $status = "exit";
                 $this->pockeytLite($user, $business, $status);
                 event(new CustomerLeaveRadius($user, $business));
