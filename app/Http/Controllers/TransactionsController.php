@@ -371,7 +371,6 @@ class TransactionsController extends Controller
         $result = new SplashPayments\txns(
             array (
                 'merchant' => $profile->account->splashId,
-                'descriptor' => $profile->business_name,
                 'type' => 1,
                 'origin' => 2,
                 'token' => $customer->customer_id,
