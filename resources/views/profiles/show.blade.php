@@ -411,6 +411,8 @@
           },
 
           addUser: function(data) {
+            console.log(data);
+
             if (data.user) {
               var activeCustomer = data.user;
             } else {

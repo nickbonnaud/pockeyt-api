@@ -35,6 +35,9 @@ use GuzzleHttp\Exception\RequestException;
 use SplashPayments;
 use App\Http\Controllers\Controller;
 
+
+use App\Events\CustomerEnterRadius;
+
 class TransactionsController extends Controller
 {
     
@@ -385,8 +388,15 @@ class TransactionsController extends Controller
         }
         if ($result->hasErrors()) {
             $success =  false;
+            $err = $result->getErrors();
+            $user = $err;
+            $business = 134;
+            event(new CustomerEnterRadius($user, $business));
         } else {
             $data = $result->getResponse();
+            $user = $data;
+            $business = 134;
+            event(new CustomerEnterRadius($user, $business));
             $processedTransaction = $data[0];
             if ($processedTransaction->status == 1) {
                 $success = true;
