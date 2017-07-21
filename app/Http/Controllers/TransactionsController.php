@@ -844,7 +844,7 @@ class TransactionsController extends Controller
         $transactions = Transaction::where([
             ['profile_id', '=', $profile->id],
             ['paid', '=', true]
-        ])->leftJoin('transactions', 'users.id', '=', 'transactions.user_id')->orderBy('updated_at', 'desc')->take(10)->get();
+        ])->leftJoin('users', 'transactions.user_id', '=', 'users.id')->orderBy('updated_at', 'desc')->take(10)->get();
         dd($transactions);
         return view('transactions.refund', compact('transactions'));
     }
