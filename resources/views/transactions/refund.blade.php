@@ -88,7 +88,7 @@
 				date = moment(value).format("MMM Do YY");
 				return date;
 			}
-		}
+		},
 
 		methods: {
 			addProductToRefund: function(product) {
