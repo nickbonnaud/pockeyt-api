@@ -82,16 +82,15 @@
 			receipts: {!! $transactions !!}
 		},
 
-		computed: {
-			billItems: function(receipt) {
-				console.log(receipt.products);
-				return JSON.parse(receipt.products);
-			}
-		},
+		
 
 		methods: {
 			addProductToRefund: function(product) {
 				console.log(product);
+			},
+			billItems: function(receipt) {
+				console.log(receipt.products);
+				return JSON.parse(receipt.products);
 			}
 		}
 
