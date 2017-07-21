@@ -1,3 +1,5 @@
+@extends('layoutDashboard')
+@section('content')
 <div class="content-wrapper-scroll">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
@@ -95,8 +97,8 @@
 	})
 
 
-
 </script>
+@stop
 
 
 
