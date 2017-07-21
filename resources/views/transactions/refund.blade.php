@@ -84,6 +84,7 @@
 
 		computed: {
 			billItems: function(receipt) {
+				console.log(receipt.products);
 				return JSON.parse(receipt.products);
 			}
 		},
