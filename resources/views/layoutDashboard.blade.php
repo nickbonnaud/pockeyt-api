@@ -157,11 +157,11 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('sales.show') }}"><i class="fa fa-calculator"></i> <span class="menu-text">Sales Breakdown</span></a></li>
+                <li><a href="{{ route('sales.show') }}"><i class="fa fa-circle-o"></i> Sales Breakdown</a></li>
                 @if($user->profile->tip_tracking_enabled)
-                  <li><a href="{{ route('employees.show') }}"><i class="fa fa-users"></i> <span class="menu-text">Team</span></a></li>
+                  <li><a href="{{ route('employees.show') }}"><i class="fa fa-circle-o"></i> Team</a></li>
                 @endif
-                <li><a href="{{ route('transactions.refund') }}"><i class="fa fa-undo"></i> <span class="menu-text">Issue Refund</span></a></li>
+                <li><a href="{{ route('transactions.refund') }}"><i class="fa fa-circle-o"></i> Issue Refund</a></li>
               </ul>
             </li>
             @if($user->is_admin)
