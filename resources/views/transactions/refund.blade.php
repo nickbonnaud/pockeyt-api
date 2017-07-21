@@ -35,7 +35,7 @@
 					                <th>Price</th>
 					                <th></th>
 					              </tr>
-					              <template v-for="product in billItems">
+					              <template v-for="product in billItems(receipt)">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
