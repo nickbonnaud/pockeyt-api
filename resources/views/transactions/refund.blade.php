@@ -79,7 +79,7 @@
 		el: '#refund',
 
 		data: {
-			receipts: {{ $transactions }}
+			receipts: {!! $transactions !!}
 		},
 
 		computed: {
