@@ -841,10 +841,10 @@ class TransactionsController extends Controller
 
     public function issueRefund() {
         $profile = $this->user->profile;
-        $transactions = DB::table('transactions')->where([
-            ['profile_id', '=', $profile->id],
-            ['paid', '=', 1]
-        ])->orderBy('updated_at', 'desc')->take(10)->get();
+        $transactions = Transaction::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+                ->where('paid', '=', true);
+        })->orderBy('updated_at', 'desc')->take(10)->get();
         dd($transactions);
         return view('transactions.refund', compact('transactions'));
     }
