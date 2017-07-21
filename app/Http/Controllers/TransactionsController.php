@@ -841,7 +841,7 @@ class TransactionsController extends Controller
 
     public function issueRefund() {
         $profile = $this->user->profile;
-        $transactions = Transaction::where([
+        $transactions = DB::table('transactions')->where([
             ['profile_id', '=', $profile->id],
             ['paid', '=', 1]
         ])->orderBy('updated_at', 'desc')->take(10)->get();
