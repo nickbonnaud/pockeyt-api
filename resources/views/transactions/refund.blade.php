@@ -25,7 +25,10 @@
 								<div class="box box-black">
 					        <div class="box-header with-border">
 					          <h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
-					          <h4 class="receipt-date">@{{ receipt.updated_at | setDate }}</h4>
+					          <h4>@{{ receipt.updated_at | setDate }}</h4>
+					          <div class="receipt-date">
+					          	<button class="btn btn-block btn-success btn-xs">Refund All</button>
+					          </div>
 					        </div>
 					        <div class="box-body no-padding">
 					          <table class="table table-striped">
