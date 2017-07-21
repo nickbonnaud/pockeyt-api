@@ -147,10 +147,23 @@
             <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span class="menu-text">Loyalty Program</span></a></li>
             <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span class="menu-text">Deals</span></a></li>
             <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span class="menu-text">Analytics Dashboard</span></a></li>
-            <li><a href="{{ route('sales.show') }}"><i class="fa fa-calculator"></i> <span class="menu-text">Sales Center</span></a></li>
-            @if($user->profile->tip_tracking_enabled)
-              <li><a href="{{ route('employees.show') }}"><i class="fa fa-users"></i> <span class="menu-text">Team</span></a></li>
-            @endif
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-archive"></i>
+                <span class="menu-text">Sales Center</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('sales.show') }}"><i class="fa fa-calculator"></i> <span class="menu-text">Sales Breakdown</span></a></li>
+                @if($user->profile->tip_tracking_enabled)
+                  <li><a href="{{ route('employees.show') }}"><i class="fa fa-users"></i> <span class="menu-text">Team</span></a></li>
+                @endif
+                <li><a href="{{ route('transactions.refund') }}"><i class="fa fa-undo"></i> <span class="menu-text">Issue Refund</span></a></li>
+              </ul>
+            </li>
             @if($user->is_admin)
               <li><a href="{{ route('businesses.review') }}"><i class="fa fa-key"></i> <span class="menu-text">Pending Businesses</span></a></li>
             @endif

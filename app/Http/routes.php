@@ -87,8 +87,9 @@ Route::post('user/deals', 'TransactionsController@getUserDeals');
 Route::post('user/deal/redeem', 'TransactionsController@redeemUserDeal');
 Route::post('business/transactions', 'TransactionsController@getTransactions');
 Route::post('business/transactions/finalized', 'TransactionsController@getFinalizedTransactions');
-
 Route::post('square/transaction/receive', 'TransactionsController@receiveSquareTransaction');
+
+Route::get('transactions/refunds', 'TransactionsController@issueRefund')->name('transactions.refund');
 
 
 // Connect Routes

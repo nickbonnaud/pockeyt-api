@@ -35,9 +35,6 @@ use GuzzleHttp\Exception\RequestException;
 use SplashPayments;
 use App\Http\Controllers\Controller;
 
-
-use App\Events\CustomerEnterRadius;
-
 class TransactionsController extends Controller
 {
     
@@ -840,6 +837,16 @@ class TransactionsController extends Controller
             $transaction->save();
         }
         return;
+    }
+
+    public function issueRefund() {
+        $profile = $this->user->profile;
+        $transactions = Transaction::where([
+            ['profile_id', '=', $profile->id],
+            ['paid', '=', true]
+        ])->orderBy('updated_at', 'desc')->take(10)->leftJoin('transactions', 'users.id', '=', 'transactions.user_id')->get();
+
+        return view('transactions.refund', compact('transactions'));
     }
 }
 
