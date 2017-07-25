@@ -26,7 +26,7 @@
 					        <div class="box-header with-border">
 				        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 				        		<div class="receipt-date">
-					          	<button class="btn btn-block btn-success btn-xs">Refund All</button>
+					          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
 					          </div>
 					          <h4>@{{ receipt.updated_at | setDate }}</h4>
 					        </div>
@@ -37,14 +37,12 @@
 					                <th>Quantity</th>
 					                <th>Name</th>
 					                <th>Price</th>
-					                <th></th>
 					              </tr>
 					              <template v-for="product in billItems(receipt)">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
 														<td class="product-row-data">$@{{ (product.price / 100).toFixed(2) }}</td>
-														<td class="product-row-data"><span class="glyphicon glyphicon-plus-sign" v-on:click="addProductToRefund(product)"></span></td>
 													</tr>
 												</template>
 					            </tbody>
