@@ -25,7 +25,10 @@
 										<li><a href="#" v-on:click="setSelection('ID')">Receipt ID</a></li>
 									</ul>
 								</div>
-								<input type="text" class="form-control" :disabled="searchSelection == 'Search By'">
+								<input v-model="searchInput" type="text" class="form-control" :disabled="searchSelection == 'Search By'">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-success btn-flat">Search</button>
+								</span>
 							</div>
 							
 						</div>
@@ -92,7 +95,8 @@
 
 		data: {
 			receipts: {!! $transactions !!},
-			searchSelection: "Search By"
+			searchSelection: "Search By",
+			searchInput: ''
 		},
 
 		filters: {
@@ -107,7 +111,6 @@
 				console.log(product);
 			},
 			billItems: function(receipt) {
-				console.log(receipt.products);
 				return JSON.parse(receipt.products);
 			},
 			setSelection: function(selection) {
