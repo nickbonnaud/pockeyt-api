@@ -24,7 +24,7 @@
 					</div>
 					<input v-model="searchInput" type="text" class="form-control" :disabled="searchSelection == 'Search By'">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-success btn-flat">Search</button>
+						<button type="button" class="btn btn-success btn-flat" :disabled="searchInput == ''">Search</button>
 					</span>
 				</div>
 				<div class="scroll-container-analytics">
@@ -35,6 +35,7 @@
 						</div>
 
 						<div class="col-md-6">
+							<h4>Recent Transactions</h4>
 							<div v-for="receipt in receipts">
 								<div class="box box-black">
 					        <div class="box-header with-border">
