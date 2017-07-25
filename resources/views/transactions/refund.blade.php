@@ -11,29 +11,29 @@
 		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Refunds</li>
 		    </ol>
+		    <div class="input-group input-group-lg">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#" v-on:click="setSelection('Email')">Customer Email</a></li>
+							<li><a href="#" v-on:click="setSelection('ID')">Receipt ID</a></li>
+						</ul>
+					</div>
+					<input v-model="searchInput" type="text" class="form-control" :disabled="searchSelection == 'Search By'">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-success btn-flat">Search</button>
+					</span>
+				</div>
 		  </section>
 		  @include ('errors.form')
 			<section class="content" id="refund">
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
-						<div class="col-md-8">
-							<div class="input-group input-group-lg">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
-									<ul class="dropdown-menu">
-										<li><a href="#" v-on:click="setSelection('Email')">Customer Email</a></li>
-										<li><a href="#" v-on:click="setSelection('ID')">Receipt ID</a></li>
-									</ul>
-								</div>
-								<input v-model="searchInput" type="text" class="form-control" :disabled="searchSelection == 'Search By'">
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-success btn-flat">Search</button>
-								</span>
-							</div>
+						<div class="col-md-6">
 							
 						</div>
 
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div v-for="receipt in receipts">
 								<div class="box box-black">
 					        <div class="box-header with-border">
