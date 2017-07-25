@@ -21,8 +21,8 @@
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Search By <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
-										<li>Customer Email</li>
-										<li>Receipt Number</li>
+										<li><a href="#">Customer Email</a></li>
+										<li><a href="#">Receipt Number</a></li>
 									</ul>
 								</div>
 								<input type="text" class="form-control">
