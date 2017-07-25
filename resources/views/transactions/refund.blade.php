@@ -19,7 +19,7 @@
 						<div class="col-md-6">
 							<div class="input-group input-group-lg">
 								<div class="input-group-btn">
-									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Search By <span class="fa fa-caret-down"></span></button>
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
 										<li><a href="#">Customer Email</a></li>
 										<li><a href="#">Receipt Number</a></li>
@@ -91,7 +91,8 @@
 		el: '#refund',
 
 		data: {
-			receipts: {!! $transactions !!}
+			receipts: {!! $transactions !!},
+			searchSelection: "Search By"
 		},
 
 		filters: {
