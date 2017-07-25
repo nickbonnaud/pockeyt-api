@@ -35,7 +35,7 @@
 						</div>
 
 						<div class="col-md-6">
-							<h4>Recent Transactions</h4>
+							<h3 class="learn-bottom">Recent Transactions</h3>
 							<div v-for="receipt in receipts">
 								<div class="box box-black">
 					        <div class="box-header with-border">
