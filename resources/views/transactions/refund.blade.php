@@ -16,8 +16,8 @@
 			<section class="content" id="refund">
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
-						<div class="col-md-6">
-							<div class="input-group">
+						<div class="col-md-8">
+							<div class="input-group input-group-lg">
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
@@ -33,7 +33,7 @@
 							
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div v-for="receipt in receipts">
 								<div class="box box-black">
 					        <div class="box-header with-border">
