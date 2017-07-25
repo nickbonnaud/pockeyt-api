@@ -77,9 +77,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					
-				</div>
 			</section>
 		</div>
 	</div>
