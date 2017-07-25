@@ -22,12 +22,12 @@
 							<li><a href="#" v-on:click="setSelection('ID')">Receipt ID</a></li>
 						</ul>
 					</div>
-					<input v-model="searchData" type="text" class="form-control" :disabled="searchSelection == 'Search By'">
+					<input v-model="searchInput" name="searchInput" type="search" class="form-control" :disabled="searchSelection == 'Search By'">
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-success btn-flat" :disabled="searchInput == ''">Search</button>
 					</span>
 				</div>
-				<p>Is @{{ searchData }}</p>
+				<p>is: @{{ searchInput }}</p>
 				<div class="col-md-6">
 				
 					
