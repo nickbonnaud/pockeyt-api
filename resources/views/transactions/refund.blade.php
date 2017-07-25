@@ -21,8 +21,8 @@
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
-										<li><a href="#">Customer Email</a></li>
-										<li><a href="#">Receipt Number</a></li>
+										<li><a href="#" v-on:click="setSelection('email')">Customer Email</a></li>
+										<li><a href="#" v-on:click="setSelection('number')">Receipt Number</a></li>
 									</ul>
 								</div>
 								<input type="text" class="form-control">
@@ -109,6 +109,9 @@
 			billItems: function(receipt) {
 				console.log(receipt.products);
 				return JSON.parse(receipt.products);
+			},
+			setSelection: function(selection) {
+				this.searchSelection = selection;
 			}
 		}
 
