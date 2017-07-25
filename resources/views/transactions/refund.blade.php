@@ -17,7 +17,7 @@
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
 						<div class="col-md-6">
-							<div class="input-group input-group-lg">
+							<div class="input-group">
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
