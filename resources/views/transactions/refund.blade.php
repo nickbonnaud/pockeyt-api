@@ -17,6 +17,16 @@
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
 						<div class="col-md-6">
+							<div class="input-group input-group-lg">
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Search By <span class="fa fa-caret-down"></span></button>
+									<ul class="dropdown-menu">
+										<li>Customer Email</li>
+										<li>Receipt Number</li>
+									</ul>
+								</div>
+								<input type="text" class="form-control">
+							</div>
 							
 						</div>
 
