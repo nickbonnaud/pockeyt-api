@@ -24,10 +24,9 @@
 					</div>
 					<input v-model="searchInput" name="searchInput" type="search" class="form-control" :disabled="searchSelection == 'Search By'">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-success btn-flat" :disabled="searchInput == ''">Search</button>
+						<button v-on:click="searchReceipts()" type="button" class="btn btn-success btn-flat" :disabled="searchInput == ''">Search</button>
 					</span>
 				</div>
-				<p>is: @{{ searchInput }}</p>
 				<div class="col-md-6">
 				
 					
@@ -111,6 +110,9 @@
 			},
 			setSelection: function(selection) {
 				this.searchSelection = selection;
+			},
+			searchReceipts: function() {
+				console.log("set");
 			}
 		}
 
