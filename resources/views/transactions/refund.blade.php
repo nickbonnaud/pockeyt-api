@@ -36,13 +36,13 @@
 					              <tr>
 					                <th>Quantity</th>
 					                <th>Name</th>
-					                <th>Price</th>
+					                <th class="text-right">Price</th>
 					              </tr>
 					              <template v-for="product in billItems(receipt)">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
-														<td class="product-row-data">$@{{ (product.price / 100).toFixed(2) }}</td>
+														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
 													</tr>
 												</template>
 					            </tbody>
