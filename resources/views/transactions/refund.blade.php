@@ -27,13 +27,12 @@
 						<button type="button" class="btn btn-success btn-flat" :disabled="searchInput == ''">Search</button>
 					</span>
 				</div>
+				<div class="col-md-6">
+				
+					
+				</div>
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
-						<div class="col-md-6">
-						
-							
-						</div>
-
 						<div class="col-md-6">
 							<h3 class="learn-bottom">Recent Transactions</h3>
 							<div v-for="receipt in receipts">
@@ -76,11 +75,10 @@
 					      </div>
 							</div>
 						</div>
-
-						<div class="col-md-6">
-							
-						</div>
 					</div>
+				</div>
+				<div class="col-md-6">
+					
 				</div>
 			</section>
 		</div>
