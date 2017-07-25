@@ -276,7 +276,7 @@
 <div style="padding-bottom: 20px;">
   <img style="border-radius: 50%; width:70px; height:70px; margin-top: 20px; margin-left: 25px; float: left; display: inline-block;" src="{{ $profile->logo->url }}">
   <h4 style="font-size: 16px; display: inline-block; margin-top: 70px; color: #3a3a3a;">Purchase on {{ date_format($transaction->updated_at, 'M-d-Y') }}</h4>
-  <h4 style="font-size: 14px; margin-top: 0px">Receipt number: {{ substr($transaction->splash_id, -5) }}</h4>
+  <h4 style="font-size: 14px; margin-top: 0px">Receipt ID: {{ substr($transaction->splash_id, -5) }}</h4>
 </div>
 <div style="clear: both;">
   <div style="border-top: 2px solid #7f7f7f; border-bottom: 2px solid #7f7f7f; margin-left: 10px; margin-right: 10px;">

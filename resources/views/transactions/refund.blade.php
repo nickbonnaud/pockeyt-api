@@ -21,11 +21,11 @@
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">@{{ searchSelection }} <span class="fa fa-caret-down"></span></button>
 									<ul class="dropdown-menu">
-										<li><a href="#" v-on:click="setSelection('email')">Customer Email</a></li>
-										<li><a href="#" v-on:click="setSelection('number')">Receipt Number</a></li>
+										<li><a href="#" v-on:click="setSelection('Email')">Customer Email</a></li>
+										<li><a href="#" v-on:click="setSelection('ID')">Receipt ID</a></li>
 									</ul>
 								</div>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" :disabled="searchSelection == 'Search By'">
 							</div>
 							
 						</div>
