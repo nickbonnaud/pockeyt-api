@@ -271,7 +271,7 @@
 				this.refundReceiptItems = JSON.parse(receipt.products);
 				var refundReceiptItems = this.refundReceiptItems;
 				for(var i = 0; i < refundReceiptItems.length; i++) {
-          selectedReceiptItems[i].quantity = 0; 
+          refundReceiptItems[i].quantity = 0; 
         }
 			},
 			refundAll: function(receipt) {
