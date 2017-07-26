@@ -861,7 +861,7 @@ class TransactionsController extends Controller
                     $query->where('profile_id', '=', $businessId)
                     ->where('user_id', '=', $userId);
                 })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
-                if ($transactions) {
+                if (count($transactions) > 0) {
                     return response()->json($transactions);
                 } else {
                     return response('Not Found');
