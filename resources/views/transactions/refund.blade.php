@@ -28,7 +28,7 @@
 					</span>
 				</div>
 				<div class="col-md-6">
-					<div class="box box-black">
+					<div class="box box-black" v-if="selectedReceipt != {}">
 		        <div class="box-header with-border">
 	        		<h3 class="box-title">@{{ selectedReceipt.first_name }} @{{ selectedReceipt.last_name }}'s Receipt</h3>
 		          <h4>@{{ selectedReceipt.updated_at | setDate }}</h4>
