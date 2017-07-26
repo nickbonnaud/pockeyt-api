@@ -359,7 +359,7 @@
       	this.refundReceiptActive = true;
       },
       resetReceipt: function() {
-      	console.log();
+      	this.selectedReceiptItems = JSON.parse(this.selectedReceipt[0].products);
       }
 		}
 	})
