@@ -43,17 +43,17 @@
 				          <table class="table table-striped">
 				            <tbody>
 				              <tr>
+				              	<th>Refund Item</th>
 				                <th>Quantity</th>
 				                <th>Name</th>
 				                <th class="text-right">Price</th>
-				                <th>Refund Item</th>
 				              </tr>
 				              <template v-for="product in selectedReceiptItems">
 												<tr class="product-row" v-cloak>
+													<td class="product-row-data"><span class="glyphicon glyphicon-plus-sign" v-on:click="subtractProduct(product)"></span></td>
 													<td class="product-row-data">@{{ product.quantity }}</td>
 													<td class="product-row-data">@{{ product.name }}</td>
 													<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
-													<td class="product-row-data"><span class="glyphicon glyphicon-plus-sign" v-on:click="subtractProduct(product)"></span></td>
 												</tr>
 											</template>
 				            </tbody>
@@ -195,7 +195,8 @@
 			searchInput: '',
 			searchResult: [],
 			selectedReceipt: [],
-			selectedReceiptItems: []
+			selectedReceiptItems: [],
+			refundReceipt: []
 		},
 
 		filters: {
@@ -271,6 +272,9 @@
         var result = $.grep(selectedReceiptItems, function(item) { return item.id === product.id});
         if (result[0].quantity !== 1) {
           result[0].quantity--
+          var refundItem = result[0];
+          refundItem.quantity = 1;
+          this.addToRefundReceipt(refundItem);
         } else {
           for(var i = 0; i < selectedReceiptItems.length; i++) {
             if(selectedReceiptItems[i].id == product.id) {
@@ -280,6 +284,16 @@
           }
         }
       },
+      addToRefundReceipt: function(refundItem) {
+      	var refundReceipt = this.refundReceipt;
+      	var result = $.grep(refundReceipt, function(item) { return item.id === refundItem.id});
+        if (result[0].quantity !== 0) {
+          result[0].quantity++
+        } else {
+          refundReceipt.push(refundItem);
+        }
+        console.log(refundReceipt);
+      }
 		}
 	})
 
