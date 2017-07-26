@@ -46,12 +46,14 @@
 				                <th>Quantity</th>
 				                <th>Name</th>
 				                <th class="text-right">Price</th>
+				                <th>Refund Item</th>
 				              </tr>
 				              <template v-for="product in selectedReceiptItems">
 												<tr class="product-row" v-cloak>
 													<td class="product-row-data">@{{ product.quantity }}</td>
 													<td class="product-row-data">@{{ product.name }}</td>
 													<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													<td class="product-row-data"><span class="glyphicon glyphicon-plus-sign" v-on:click="subtractProduct(product)"></span></td>
 												</tr>
 											</template>
 				            </tbody>
@@ -263,7 +265,21 @@
 			},
 			refundAll: function(receipt) {
 				console.log(receipt);
-			}
+			},
+			subtractProduct: function(product) {
+        var selectedReceiptItems = this.selectedReceiptItems;
+        var result = $.grep(selectedReceiptItems, function(item) { return item.id === product.id});
+        if (result[0].quantity !== 1) {
+          result[0].quantity--
+        } else {
+          for(var i = 0; i < selectedReceiptItems.length; i++) {
+            if(selectedReceiptItems[i].id == product.id) {
+              selectedReceiptItems.splice(i, 1);
+              break;
+            }
+          }
+        }
+      },
 		}
 	})
 
