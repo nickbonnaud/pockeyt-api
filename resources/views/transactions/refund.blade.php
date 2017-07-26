@@ -41,13 +41,7 @@
 		                <th>Name</th>
 		                <th class="text-right">Price</th>
 		              </tr>
-		              <template v-for="product in billItems(selectedReceipt)">
-										<tr class="product-row" v-cloak>
-											<td class="product-row-data">@{{ product.quantity }}</td>
-											<td class="product-row-data">@{{ product.name }}</td>
-											<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
-										</tr>
-									</template>
+		              
 		            </tbody>
 		          </table>
 		        </div>
