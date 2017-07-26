@@ -236,6 +236,7 @@
 			searchInput: '',
 			searchResult: [],
 			selectedReceipt: [],
+			selectedReceiptId: '',
 			selectedReceiptItems: [],
 			refundReceiptItems: [],
 			refundReceiptActive: false
@@ -298,6 +299,7 @@
 				this.selectedReceipt = [];
 				this.selectedReceiptItems = [];
 				this.refundReceiptItems = [];
+				this.selectedReceiptId = '';
 				this.refundReceiptActive = false;
 				$.ajax({
 					method: 'POST',
@@ -322,6 +324,7 @@
 			},
 			selectReceipt: function(receipt) {
 				this.selectedReceipt = [];
+				this.selectedReceiptId = receipt.id;
 				this.selectedReceiptItems = JSON.parse(receipt.products);
 				this.selectedReceipt.push(receipt);
 				this.setRefundReceiptItems(receipt);

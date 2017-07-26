@@ -7,7 +7,7 @@
   <input type="hidden" name="tax_new" :value="totalTaxRefund">
   <input type="hidden" name="net_sales_new" :value="subTotalRefund">
   <input type="hidden" name="total_new" :value="totalBillRefund">
-  <input type="hidden" name="splash_id" :value="selectedReceipt[0].splash_id">
+  <input type="hidden" name="splash_id" :value="selectedReceiptId">
   {{ csrf_field() }}
   <input type="submit" value="Process Refund" class="btn btn-success btn-block btn-lg media">
 </form>
