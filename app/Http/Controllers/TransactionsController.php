@@ -870,7 +870,7 @@ class TransactionsController extends Controller
                 return response('Not Found');
             }
         } else {
-            $transactions = Transaction::where('splash_id', 'like', '%' . $searchInput)->get();
+            $transactions = Transaction::where('splash_id', 'like', '%' . $searchInput)->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
             if (count($transactions) > 0) {
                 return response()->json($transactions);
             } else {
