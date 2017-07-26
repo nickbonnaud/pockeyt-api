@@ -860,7 +860,7 @@ class TransactionsController extends Controller
                 $transactions = Transaction::where(function($query) use ($userId, $businessId) {
                     $query->where('profile_id', '=', $businessId)
                     ->where('user_id', '=', $userId);
-                })->get();
+                })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
                 if ($transactions) {
                     return response()->json($transactions);
                 } else {
