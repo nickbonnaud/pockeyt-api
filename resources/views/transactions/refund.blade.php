@@ -134,7 +134,7 @@
 					                <th>Name</th>
 					                <th class="text-right">Price</th>
 					              </tr>
-					              <template v-for="product in billItems(receipt)">
+					              <template v-for="product in selectedReceiptItems">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
@@ -147,11 +147,11 @@
 					        <div class="box-footer-receipt">
 					          <div class="tax-section">
 					            <span>Tax:</span>
-					            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+					            <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
 					          </div>
 					          <b>Total:</b>
 					          <div class="receipt-total">
-					            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
+					            <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
 					          </div>
 					        </div>
 					      </div>
@@ -180,7 +180,8 @@
 			searchSelection: "Search By",
 			searchInput: '',
 			searchResult: [],
-			selectedReceipt: []
+			selectedReceipt: [],
+			selectedReceiptItems: []
 		},
 
 		filters: {
@@ -189,6 +190,25 @@
 				return date;
 			}
 		},
+
+		computed: {
+			subTotal: function() {
+        var bill = this.selectedReceiptItems;
+        var total = 0;
+        bill.forEach(function(product) {
+          total = total + (product.quantity * product.price)
+        });
+        return total;
+      },
+      totalTax: function() {
+        var tax = this.subTotal * {{ ($profile->tax_rate) / 10000 }};
+        return tax;
+      },
+      totalBill: function() {
+        var total = this.subTotal + this.totalTax;
+        return total;
+      },
+		}
 
 		methods: {
 			addProductToRefund: function(product) {
@@ -202,6 +222,7 @@
 			},
 			searchReceipts: function() {
 				this.searchResult = [];
+				this.selectedReceipt = [];
 				$.ajax({
 					method: 'POST',
 					url: '/refunds/search',
@@ -225,6 +246,7 @@
 			},
 			selectReceipt: function(receipt) {
 				this.selectedReceipt = [];
+				this.selectedReceiptItems = JSON.parse(receipt.products);
 				this.selectedReceipt.push(receipt);
 			},
 			refundAll: function(receipt) {
