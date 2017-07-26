@@ -295,6 +295,9 @@
 			searchReceipts: function() {
 				this.searchResult = [];
 				this.selectedReceipt = [];
+				this.selectedReceiptItems: [],
+				this.refundReceiptItems: [],
+				this.refundReceiptActive: false
 				$.ajax({
 					method: 'POST',
 					url: '/refunds/search',
