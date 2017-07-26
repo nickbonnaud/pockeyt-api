@@ -320,7 +320,7 @@
 				this.selectedReceipt = [];
 				this.selectedReceiptItems = JSON.parse(receipt.products);
 				this.selectedReceipt.push(receipt);
-
+				console.log(this.selectedReceipt);
 				this.setRefundReceiptItems(receipt);
 			},
 			setRefundReceiptItems: function(receipt) {
@@ -357,6 +357,9 @@
       	var result = $.grep(refundReceiptItems, function(item) { return item.id === refundItem.id});
       	result[0].quantity++
       	this.refundReceiptActive = true;
+      },
+      resetReceipt: function() {
+      	console.log();
       }
 		}
 	})
