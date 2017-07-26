@@ -196,7 +196,7 @@
 			searchResult: [],
 			selectedReceipt: [],
 			selectedReceiptItems: [],
-			refundReceipt: []
+			refundReceiptItems: []
 		},
 
 		filters: {
@@ -263,6 +263,16 @@
 				this.selectedReceipt = [];
 				this.selectedReceiptItems = JSON.parse(receipt.products);
 				this.selectedReceipt.push(receipt);
+
+				this.setRefundReceiptItems(receipt);
+			},
+			setRefundReceiptItems: function(receipt) {
+				this.refundReceiptItems = [];
+				this.refundReceiptItems = JSON.parse(receipt.products);
+				var refundReceiptItems = this.refundReceiptItems;
+				for(var i = 0; i < refundReceiptItems.length; i++) {
+          selectedReceiptItems[i].quantity = 0; 
+        }
 			},
 			refundAll: function(receipt) {
 				console.log(receipt);
@@ -277,6 +287,8 @@
         } else {
           for(var i = 0; i < selectedReceiptItems.length; i++) {
             if(selectedReceiptItems[i].id == product.id) {
+            	var refundItem = selectedReceiptItems[i];
+            	this.addToRefundReceipt(refundItem);
               selectedReceiptItems.splice(i, 1);
               break;
             }
@@ -284,15 +296,10 @@
         }
       },
       addToRefundReceipt: function(refundItem) {
-      	var refundReceipt = this.refundReceipt;
-      	var result = $.grep(refundReceipt, function(item) { return item.id === refundItem.id});
-        if (result.length !== 0) {
-          result[0].quantity++
-        } else {
-        	refundItem.quantity = 1;
-          refundReceipt.push(refundItem);
-        }
-        console.log(refundReceipt);
+      	var refundReceiptItems = this.refundReceiptItems;
+      	var result = $.grep(refundReceiptItems, function(item) { return item.id === refundItem.id});
+      	result.quantity++
+        console.log(refundReceiptItems);
       }
 		}
 	})
