@@ -73,7 +73,7 @@
 				</div>
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
-						<div v-show="searchResult.length == 0">
+						<div v-show="(searchResult.length == 0) && (selectedReceipt.length == 0)">
 							<h3 class="learn-bottom">Recent Transactions</h3>
 							<div v-for="receipt in receipts">
 								<div class="box box-black">
@@ -115,7 +115,7 @@
 					      </div>
 							</div>
 						</div>
-						<div v-show="(searchResult.length > 0) && (typeof searchResult != 'string')">
+						<div v-show="(searchResult.length > 0) && (typeof searchResult != 'string') && (selectedReceipt.length == 0)">
 							<h3 class="learn-bottom">Search Results</h3>
 							<div v-for="receipt in searchResult">
 								<div class="box box-black">
