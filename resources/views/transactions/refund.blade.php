@@ -175,7 +175,9 @@
 							refund.$data.searchResult = data;
 						} else {
 							console.log(data);
-							refund.$data.searchResult.push(data);
+							data.forEach(function(receipt) {
+								refund.$data.searchResult.push(receipt);
+							});
 						}
 					}
 				})
