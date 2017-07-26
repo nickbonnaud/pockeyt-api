@@ -298,7 +298,7 @@
       addToRefundReceipt: function(refundItem) {
       	var refundReceiptItems = this.refundReceiptItems;
       	var result = $.grep(refundReceiptItems, function(item) { return item.id === refundItem.id});
-      	result.quantity++
+      	result[0].quantity++
         console.log(refundReceiptItems);
       }
 		}
