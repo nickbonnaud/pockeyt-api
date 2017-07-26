@@ -208,7 +208,7 @@
 				          <div class="receipt-total">
 				            <b>$@{{ (totalBillRefund / 100).toFixed(2) }}</b>
 				          </div>
-				          <button type="button" class="btn btn-success btn-block btn-lg media">Process Refund</button>
+				          @include ('partials.transactions.submit_refund')
 				        </div>
 				      </div>
 						</div>

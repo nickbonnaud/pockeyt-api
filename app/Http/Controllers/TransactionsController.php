@@ -878,6 +878,10 @@ class TransactionsController extends Controller
             }
         }
     }
+
+    public function refundSubmit(Request $request) {
+        dd($request->all());
+    }
 }
 
 
