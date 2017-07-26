@@ -34,6 +34,9 @@
 							<div class="box box-primary">
 				        <div class="box-header with-border">
 			        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
+			        		<div class="receipt-date">
+				          	<button v-on:click="refundAll(receipt)" class="btn btn-block btn-danger btn-xs">Refund All</button>
+				          </div>
 				          <h4>@{{ receipt.updated_at | setDate }}</h4>
 				        </div>
 				        <div class="box-body no-padding">
@@ -223,6 +226,9 @@
 			selectReceipt: function(receipt) {
 				this.selectedReceipt = [];
 				this.selectedReceipt.push(receipt);
+			},
+			refundAll: function(receipt) {
+				console.log(receipt);
 			}
 		}
 	})
