@@ -845,7 +845,38 @@ class TransactionsController extends Controller
             $query->where('profile_id', '=', $profile->id)
                 ->where('paid', '=', true);
         })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
-        return view('transactions.refund', compact('transactions'));
+        return view('transactions.refund', compact('transactions', 'profile'));
+    }
+
+    public function searchRefunds(Request $request) {
+        $searchSelection = $request->searchSelection;
+        $searchInput = $request->searchInput;
+        $businessId = $request->businessId;
+
+        if ($searchSelection == 'Email') {
+            $user = User::where('email', '=', $searchInput)->first();
+            if ($user) {
+                $userId = $user->id;
+                $transactions = Transaction::where(function($query) use ($userId, $businessId) {
+                    $query->where('profile_id', '=', $businessId)
+                    ->where('user_id', '=', $userId);
+                })->get();
+                if ($transactions) {
+                    return response()->json($transactions);
+                } else {
+                    return response('Not Found');
+                }
+            } else {
+                return response('Not Found');
+            }
+        } else {
+            $transactions = Transaction::where('splash_id', 'like', '%' . $searchInput)->get();
+            if ($transactions) {
+                return response()->json($transactions);
+            } else {
+                return response('Not Found');
+            }
+        }
     }
 }
 

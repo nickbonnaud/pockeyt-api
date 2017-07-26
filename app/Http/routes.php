@@ -90,6 +90,7 @@ Route::post('business/transactions/finalized', 'TransactionsController@getFinali
 Route::post('square/transaction/receive', 'TransactionsController@receiveSquareTransaction');
 
 Route::get('transactions/refunds', 'TransactionsController@issueRefund')->name('transactions.refund');
+Route::post('refunds/search', 'TransactionsController@searchRefunds');
 
 
 // Connect Routes

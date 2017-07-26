@@ -91,7 +91,8 @@
 		data: {
 			receipts: {!! $transactions !!},
 			searchSelection: "Search By",
-			searchInput: ''
+			searchInput: '',
+			searchResult: []
 		},
 
 		filters: {
@@ -112,10 +113,27 @@
 				this.searchSelection = selection;
 			},
 			searchReceipts: function() {
-				console.log("set");
+				this.searchResult = [];
+				$.ajax({
+					method: 'POST',
+					url: '/refunds/search',
+					data: {
+						'searchSelection': this.searchSelection,
+						'searchInput' : this.searchInput,
+						'businessId' : {!! $profile->id !!}
+					},
+					success: function(data) {
+						if (data == 'Not Found') {
+							console.log(data);
+							refund.$data.searchResult = data;
+						} else {
+							console.log(data);
+							refund.$data.searchResult.push(data);
+						}
+					}
+				})
 			}
 		}
-
 	})
 
 
