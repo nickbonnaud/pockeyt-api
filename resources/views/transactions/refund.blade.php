@@ -171,6 +171,46 @@
 					      </div>
 							</div>
 						</div>
+						<div v-show="refundReceiptActive === true">
+							<h3 class="learn-bottom">Items for Refund</h3>
+							<div class="box box-black">
+				        <div class="box-header with-border">
+			        		<h3 class="box-title">Refund Receipt</h3>
+			        		<div class="receipt-date">
+				          	<button v-on:click="resetReceipt()" class="btn btn-block btn-danger btn-xs">Clear</button>
+				          </div>
+				          <h4>@{{ new Date() | setDate }}</h4>
+				        </div>
+				        <div class="box-body no-padding">
+				          <table class="table table-striped">
+				            <tbody>
+				              <tr>
+				                <th>Quantity</th>
+				                <th>Name</th>
+				                <th class="text-right">Price</th>
+				              </tr>
+				              <template v-for="product in refundReceiptItems">
+												<tr class="product-row" v-if="product.quantity !== 0" v-cloak>
+													<td class="product-row-data">@{{ product.quantity }}</td>
+													<td class="product-row-data">@{{ product.name }}</td>
+													<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+												</tr>
+											</template>
+				            </tbody>
+				          </table>
+				        </div>
+				        <div class="box-footer-receipt">
+				          <div class="tax-section">
+				            <span>Tax:</span>
+				            <span class="pull-right">$@{{ (totalTaxRefund / 100).toFixed(2) }}</span>
+				          </div>
+				          <b>Total:</b>
+				          <div class="receipt-total">
+				            <b>$@{{ (totalBillRefund / 100).toFixed(2) }}</b>
+				          </div>
+				        </div>
+				      </div>
+						</div>
 						<div v-show="(searchResult.length > 0) && (typeof searchResult == 'string')">
 							<h3 class="learn-bottom">No Results</h3>
 						</div>
@@ -196,7 +236,8 @@
 			searchResult: [],
 			selectedReceipt: [],
 			selectedReceiptItems: [],
-			refundReceiptItems: []
+			refundReceiptItems: [],
+			refundReceiptActive: false
 		},
 
 		filters: {
@@ -215,14 +256,30 @@
         });
         return total;
       },
+      subTotalRefund: function() {
+        var bill = this.refundReceiptItems;
+        var total = 0;
+        bill.forEach(function(product) {
+          total = total + (product.quantity * product.price)
+        });
+        return total;
+      },
       totalTax: function() {
         var tax = this.subTotal * {{ ($profile->tax_rate) / 10000 }};
+        return tax;
+      },
+      totalTaxRefund: function() {
+        var tax = this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }};
         return tax;
       },
       totalBill: function() {
         var total = this.subTotal + this.totalTax;
         return total;
       },
+      totalBillRefund: function() {
+        var total = this.subTotalRefund + this.totalTaxRefund;
+        return total;
+      }
 		},
 
 		methods: {
@@ -299,7 +356,7 @@
       	var refundReceiptItems = this.refundReceiptItems;
       	var result = $.grep(refundReceiptItems, function(item) { return item.id === refundItem.id});
       	result[0].quantity++
-        console.log(refundReceiptItems);
+      	this.refundReceiptActive = true;
       }
 		}
 	})
