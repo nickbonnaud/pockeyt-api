@@ -47,7 +47,7 @@
 				                <th>Name</th>
 				                <th class="text-right">Price</th>
 				              </tr>
-				              <template v-for="product in billItems(receipt)">
+				              <template v-for="product in selectedReceiptItems">
 												<tr class="product-row" v-cloak>
 													<td class="product-row-data">@{{ product.quantity }}</td>
 													<td class="product-row-data">@{{ product.name }}</td>
@@ -60,11 +60,15 @@
 				        <div class="box-footer-receipt">
 				          <div class="tax-section">
 				            <span>Tax:</span>
-				            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+				            <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
+				          </div>
+				          <div class="tax-section">
+				            <span>Tip:</span>
+				            <span class="pull-right">$@{{ (receipt.tips / 100).toFixed(2) }}</span>
 				          </div>
 				          <b>Total:</b>
 				          <div class="receipt-total">
-				            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
+				            <b>$@{{ ((totalBill + receipt.tips) / 100).toFixed(2) }}</b>
 				          </div>
 				        </div>
 				      </div>
@@ -107,6 +111,10 @@
 					            <span>Tax:</span>
 					            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
 					          </div>
+					          <div class="tax-section">
+					            <span>Tip:</span>
+					            <span class="pull-right">$@{{ (receipt.tips / 100).toFixed(2) }}</span>
+					          </div>
 					          <b>Total:</b>
 					          <div class="receipt-total">
 					            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
@@ -134,7 +142,7 @@
 					                <th>Name</th>
 					                <th class="text-right">Price</th>
 					              </tr>
-					              <template v-for="product in selectedReceiptItems">
+					              <template v-for="product in billItems(receipt)">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
@@ -147,11 +155,15 @@
 					        <div class="box-footer-receipt">
 					          <div class="tax-section">
 					            <span>Tax:</span>
-					            <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
+					            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+					          </div>
+					          <div class="tax-section">
+					            <span>Tip:</span>
+					            <span class="pull-right">$@{{ (receipt.tips / 100).toFixed(2) }}</span>
 					          </div>
 					          <b>Total:</b>
 					          <div class="receipt-total">
-					            <b>$@{{ (totalBill / 100).toFixed(2) }}</b>
+					            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
 					          </div>
 					        </div>
 					      </div>
