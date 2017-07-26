@@ -28,8 +28,40 @@
 					</span>
 				</div>
 				<div class="col-md-6">
-				
-					
+					<div class="box box-black">
+		        <div class="box-header with-border">
+	        		<h3 class="box-title">@{{ selectedReceipt.first_name }} @{{ selectedReceipt.last_name }}'s Receipt</h3>
+		          <h4>@{{ selectedReceipt.updated_at | setDate }}</h4>
+		        </div>
+		        <div class="box-body no-padding">
+		          <table class="table table-striped">
+		            <tbody>
+		              <tr>
+		                <th>Quantity</th>
+		                <th>Name</th>
+		                <th class="text-right">Price</th>
+		              </tr>
+		              <template v-for="product in billItems(selectedReceipt)">
+										<tr class="product-row" v-cloak>
+											<td class="product-row-data">@{{ product.quantity }}</td>
+											<td class="product-row-data">@{{ product.name }}</td>
+											<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+										</tr>
+									</template>
+		            </tbody>
+		          </table>
+		        </div>
+		        <div class="box-footer-receipt">
+		          <div class="tax-section">
+		            <span>Tax:</span>
+		            <span class="pull-right">$@{{ (selectedReceipt.tax / 100).toFixed(2) }}</span>
+		          </div>
+		          <b>Total:</b>
+		          <div class="receipt-total">
+		            <b>$@{{ (selectedReceipt.total / 100).toFixed(2) }}</b>
+		          </div>
+		        </div>
+		      </div>
 				</div>
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
@@ -184,7 +216,7 @@
 				})
 			},
 			selectReceipt: function(receipt) {
-				console.log(receipt);
+				this.selectedReceipt = receipt;
 			}
 		}
 	})
