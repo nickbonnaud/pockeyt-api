@@ -861,7 +861,7 @@ class TransactionsController extends Controller
                     $query->where('profile_id', '=', $businessId)
                     ->where('user_id', '=', $userId);
                 })->get();
-                if ($transactions) {
+                if (count($transactions) > 0) {
                     return response()->json($transactions);
                 } else {
                     return response('Not Found');
