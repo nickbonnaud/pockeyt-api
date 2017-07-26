@@ -40,7 +40,7 @@
 					        <div class="box-header with-border">
 				        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 				        		<div class="receipt-date">
-					          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
+					          	<button v-on:click="selectReceipt(receipt)" class="btn btn-block btn-success btn-xs">Select Receipt</button>
 					          </div>
 					          <h4>@{{ receipt.updated_at | setDate }}</h4>
 					        </div>
@@ -82,7 +82,7 @@
 					        <div class="box-header with-border">
 				        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 				        		<div class="receipt-date">
-					          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
+					          	<button v-on:click="selectReceipt(receipt)" class="btn btn-block btn-success btn-xs">Select Receipt</button>
 					          </div>
 					          <h4>@{{ receipt.updated_at | setDate }}</h4>
 					        </div>
@@ -139,7 +139,8 @@
 			receipts: {!! $transactions !!},
 			searchSelection: "Search By",
 			searchInput: '',
-			searchResult: []
+			searchResult: [],
+			selectedReceipt: {}
 		},
 
 		filters: {
@@ -181,6 +182,9 @@
 						}
 					}
 				})
+			},
+			selectReceipt: function(receipt) {
+				console.log(receipt);
 			}
 		}
 	})
