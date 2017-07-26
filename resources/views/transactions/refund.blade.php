@@ -28,7 +28,7 @@
 					</span>
 				</div>
 				<div class="col-md-6">
-					<div class="box box-black" v-if="selectedReceipt != {}">
+					<div class="box box-black" v-if="selectedReceipt.length > 0">
 		        <div class="box-header with-border">
 	        		<h3 class="box-title">@{{ selectedReceipt.first_name }} @{{ selectedReceipt.last_name }}'s Receipt</h3>
 		          <h4>@{{ selectedReceipt.updated_at | setDate }}</h4>
@@ -41,7 +41,13 @@
 		                <th>Name</th>
 		                <th class="text-right">Price</th>
 		              </tr>
-		              
+		              <template v-for="product in billItems(selectedReceipt)">
+										<tr class="product-row" v-cloak>
+											<td class="product-row-data">@{{ product.quantity }}</td>
+											<td class="product-row-data">@{{ product.name }}</td>
+											<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+										</tr>
+									</template>
 		            </tbody>
 		          </table>
 		        </div>
