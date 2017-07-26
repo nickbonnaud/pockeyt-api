@@ -208,7 +208,7 @@
         var total = this.subTotal + this.totalTax;
         return total;
       },
-		}
+		},
 
 		methods: {
 			addProductToRefund: function(product) {
