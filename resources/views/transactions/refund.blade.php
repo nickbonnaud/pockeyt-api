@@ -361,6 +361,7 @@
       	var receipt = this.selectedReceipt[0];
       	this.selectedReceiptItems = JSON.parse(receipt.products);
       	this.setRefundReceiptItems(receipt);
+      	this.refundReceiptActive = false;
       }
 		}
 	})
