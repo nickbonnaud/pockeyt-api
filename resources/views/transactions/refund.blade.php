@@ -271,10 +271,9 @@
         var selectedReceiptItems = this.selectedReceiptItems;
         var result = $.grep(selectedReceiptItems, function(item) { return item.id === product.id});
         if (result[0].quantity !== 1) {
-          result[0].quantity--
-          var refundItem = result[0];
-          refundItem.quantity = 1;
+        	var refundItem = result[0];
           this.addToRefundReceipt(refundItem);
+          result[0].quantity--
         } else {
           for(var i = 0; i < selectedReceiptItems.length; i++) {
             if(selectedReceiptItems[i].id == product.id) {
@@ -287,9 +286,10 @@
       addToRefundReceipt: function(refundItem) {
       	var refundReceipt = this.refundReceipt;
       	var result = $.grep(refundReceipt, function(item) { return item.id === refundItem.id});
-        if (result[0].quantity !== 0) {
+        if (result.length !== 0) {
           result[0].quantity++
         } else {
+        	refundItem.quantity = 1;
           refundReceipt.push(refundItem);
         }
         console.log(refundReceipt);
