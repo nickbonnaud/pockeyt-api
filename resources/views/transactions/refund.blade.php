@@ -33,45 +33,92 @@
 				</div>
 				<div class="scroll-container-analytics">
 					<div class="scroll-contents">
-						<h3 class="learn-bottom">Recent Transactions</h3>
-						<div v-for="receipt in receipts">
-							<div class="box box-black">
-				        <div class="box-header with-border">
-			        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
-			        		<div class="receipt-date">
-				          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
-				          </div>
-				          <h4>@{{ receipt.updated_at | setDate }}</h4>
-				        </div>
-				        <div class="box-body no-padding">
-				          <table class="table table-striped">
-				            <tbody>
-				              <tr>
-				                <th>Quantity</th>
-				                <th>Name</th>
-				                <th class="text-right">Price</th>
-				              </tr>
-				              <template v-for="product in billItems(receipt)">
-												<tr class="product-row" v-cloak>
-													<td class="product-row-data">@{{ product.quantity }}</td>
-													<td class="product-row-data">@{{ product.name }}</td>
-													<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
-												</tr>
-											</template>
-				            </tbody>
-				          </table>
-				        </div>
-				        <div class="box-footer-receipt">
-				          <div class="tax-section">
-				            <span>Tax:</span>
-				            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
-				          </div>
-				          <b>Total:</b>
-				          <div class="receipt-total">
-				            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
-				          </div>
-				        </div>
-				      </div>
+						<div v-show="searchResult.length == 0">
+							<h3 class="learn-bottom">Recent Transactions</h3>
+							<div v-for="receipt in receipts">
+								<div class="box box-black">
+					        <div class="box-header with-border">
+				        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
+				        		<div class="receipt-date">
+					          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
+					          </div>
+					          <h4>@{{ receipt.updated_at | setDate }}</h4>
+					        </div>
+					        <div class="box-body no-padding">
+					          <table class="table table-striped">
+					            <tbody>
+					              <tr>
+					                <th>Quantity</th>
+					                <th>Name</th>
+					                <th class="text-right">Price</th>
+					              </tr>
+					              <template v-for="product in billItems(receipt)">
+													<tr class="product-row" v-cloak>
+														<td class="product-row-data">@{{ product.quantity }}</td>
+														<td class="product-row-data">@{{ product.name }}</td>
+														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													</tr>
+												</template>
+					            </tbody>
+					          </table>
+					        </div>
+					        <div class="box-footer-receipt">
+					          <div class="tax-section">
+					            <span>Tax:</span>
+					            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+					          </div>
+					          <b>Total:</b>
+					          <div class="receipt-total">
+					            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
+					          </div>
+					        </div>
+					      </div>
+							</div>
+						</div>
+						<div v-show="(searchResult.length > 0) && (typeof searchResult != 'string')">
+							<h3 class="learn-bottom">Search Results</h3>
+							<div v-for="receipt in searchResult">
+								<div class="box box-black">
+					        <div class="box-header with-border">
+				        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
+				        		<div class="receipt-date">
+					          	<button class="btn btn-block btn-success btn-xs">Select Receipt</button>
+					          </div>
+					          <h4>@{{ receipt.updated_at | setDate }}</h4>
+					        </div>
+					        <div class="box-body no-padding">
+					          <table class="table table-striped">
+					            <tbody>
+					              <tr>
+					                <th>Quantity</th>
+					                <th>Name</th>
+					                <th class="text-right">Price</th>
+					              </tr>
+					              <template v-for="product in billItems(receipt)">
+													<tr class="product-row" v-cloak>
+														<td class="product-row-data">@{{ product.quantity }}</td>
+														<td class="product-row-data">@{{ product.name }}</td>
+														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													</tr>
+												</template>
+					            </tbody>
+					          </table>
+					        </div>
+					        <div class="box-footer-receipt">
+					          <div class="tax-section">
+					            <span>Tax:</span>
+					            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+					          </div>
+					          <b>Total:</b>
+					          <div class="receipt-total">
+					            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
+					          </div>
+					        </div>
+					      </div>
+							</div>
+						</div>
+						<div v-show="(searchResult.length > 0) && (typeof searchResult == 'string')">
+							<h3 class="learn-bottom">No Results</h3>
 						</div>
 					</div>
 				</div>
