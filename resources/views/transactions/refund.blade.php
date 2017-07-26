@@ -31,7 +31,7 @@
 					<div v-if="selectedReceipt.length > 0">
 						<h3 class="learn-bottom">Selected Receipt</h3>
 						<div v-for="receipt in selectedReceipt">
-							<div class="box box-black">
+							<div class="box box-primary">
 				        <div class="box-header with-border">
 			        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 				          <h4>@{{ receipt.updated_at | setDate }}</h4>
