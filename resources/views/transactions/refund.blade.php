@@ -35,7 +35,7 @@
 				        <div class="box-header with-border">
 			        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 			        		<div class="receipt-date">
-				          	<button v-on:click="refundAll(receipt)" class="btn btn-block btn-danger btn-xs">Refund All</button>
+				          	<button v-on:click="refundAll(receipt)" class="btn btn-block btn-success btn-xs">Refund All</button>
 				          </div>
 				          <h4>@{{ receipt.updated_at | setDate }}</h4>
 				        </div>
@@ -208,6 +208,7 @@
 				          <div class="receipt-total">
 				            <b>$@{{ (totalBillRefund / 100).toFixed(2) }}</b>
 				          </div>
+				          <button type="button" class="btn btn-default btn-block">Process Refund</button>
 				        </div>
 				      </div>
 						</div>
@@ -295,9 +296,9 @@
 			searchReceipts: function() {
 				this.searchResult = [];
 				this.selectedReceipt = [];
-				this.selectedReceiptItems = [],
-				this.refundReceiptItems = [],
-				this.refundReceiptActive = false
+				this.selectedReceiptItems = [];
+				this.refundReceiptItems = [];
+				this.refundReceiptActive = false;
 				$.ajax({
 					method: 'POST',
 					url: '/refunds/search',
