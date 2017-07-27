@@ -899,8 +899,8 @@ class TransactionsController extends Controller
         $refundAmount = $request->total_new;
         $profile = $this->user->profile;
         $businessSplashId = $profile->account->splashId;
-        $customer = User::findOrFail($transaction->user_id);
-        $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
+        $transactionSplashId = $transaction->splash_id;
+        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
 
         if ($result) {
             $transaction->refunded = true;
@@ -925,8 +925,8 @@ class TransactionsController extends Controller
         $refundAmount = $transaction->total;
         $profile = $this->user->profile;
         $businessSplashId = $profile->account->splashId;
-        $customer = User::findOrFail($transaction->user_id);
-        $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
+        $transactionSplashId = $transaction->splash_id;
+        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
 
         if ($result) {
             $transaction->refunded = true;
@@ -946,17 +946,15 @@ class TransactionsController extends Controller
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
-    private function createRefund($refundAmount, $businessSplashId, $customer) {
+    private function createRefund($refundAmount, $businessSplashId, $transactionSplashId) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
             array (
                 'merchant' => $businessSplashId,
+                'fortxn' => $transactionSplashId,
                 'type' => 5,
                 'origin' => 2,
-                'token' => $customer->customer_id,
-                'first' => $customer->first_name,
-                'last' => $customer->last_name,
                 'total' => $refundAmount
             )
         );
