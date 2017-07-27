@@ -98,15 +98,13 @@
 					                <th>Name</th>
 					                <th class="text-right">Price</th>
 					              </tr>
-					              <div v-if="receipt.deal_id === null">
-					              	<template v-for="product in billItems(receipt)">
-														<tr class="product-row" v-cloak>
-															<td class="product-row-data">@{{ product.quantity }}</td>
-															<td class="product-row-data">@{{ product.name }}</td>
-															<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
-														</tr>
-													</template>
-					              </div>
+					              <template v-for="product in billItems(receipt)">
+													<tr class="product-row" v-cloak>
+														<td class="product-row-data">@{{ product.quantity }}</td>
+														<td class="product-row-data">@{{ product.name }}</td>
+														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													</tr>
+												</template>
 					            </tbody>
 					          </table>
 					        </div>
@@ -291,7 +289,11 @@
 				console.log(product);
 			},
 			billItems: function(receipt) {
-				return JSON.parse(receipt.products);
+				if (receipt.deal_id === null) {
+					return JSON.parse(receipt.products);
+				} else {
+					console.log(receipt.products);
+				}
 			},
 			setSelection: function(selection) {
 				this.searchSelection = selection;
