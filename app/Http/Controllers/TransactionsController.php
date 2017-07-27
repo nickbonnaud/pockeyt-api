@@ -880,7 +880,54 @@ class TransactionsController extends Controller
     }
 
     public function refundSubmit(Request $request) {
-        dd($request->all());
+        $transaction = Transaction::findOrFail($request->id);
+        $transaction->products = $request->products_old;
+        $transaction->tax = $request->tax_old;
+        $transaction->net_sales = $request->net_sales_old;
+        $transaction->total = $request->total_old;
+        $transaction->save();
+
+        $refundAmount = $request->only('total_new')
+        $result = $this->createRefund($transaction, $refundAmount);
+
+        $profile = $this->user->profile;
+        $transactions = Transaction::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+                ->where('paid', '=', true);
+        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
+
+        if ($result) {
+            flash()->success('Success', 'Refund Complete');
+        } else {
+            flash()->error('Unable to Refund', 'Please Contact Customer Support');
+        }
+        return redirect()->route('transactions.refund', compact('transactions', 'profile'));
+    }
+
+    private function createRefund($transaction, $refundAmount) {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        $result = new SplashPayments\refunds(
+            array (
+                'entry' => $transaction->splash_id,
+                'amount' => $refundAmount
+            )
+        );
+        try {
+            $result->create();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($result->hasErrors()) {
+            $success =  false;
+            $err = $result->getErrors();
+            dd($err);
+        } else {
+            $data = $result->getResponse();
+            dd($data);
+        }
+        return $success;
     }
 }
 
