@@ -950,17 +950,11 @@ class TransactionsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
             array (
-                'merchant' => $businessSplashId,
-                'type' => 5,
-                'origin' => 2,
-                'token' => $customer->customer_id,
-                'first' => $customer->first_name,
-                'last' => $customer->last_name,
-                'total' => $refundAmount
+                
             )
         );
          try {
-            $result->create();
+            $result->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
