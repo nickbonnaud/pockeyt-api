@@ -98,7 +98,7 @@
 					                <th>Name</th>
 					                <th class="text-right">Price</th>
 					              </tr>
-					              <template v-for="product in billItems(receipt)" v-if="receipt.deal_id !== null">
+					              <template v-for="product in billItems(receipt)" v-if="receipt.deal_id === null">
 													<tr class="product-row" v-cloak>
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
