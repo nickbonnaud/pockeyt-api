@@ -584,7 +584,7 @@ class TransactionsController extends Controller
         $redeemableDeals = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId)
-                ->where('refunded', '=', false);
+                ->where('refunded', '=', false)
                 ->where('redeemed', '=', false)
                 ->where('paid', '=', true);     
         })->get();
