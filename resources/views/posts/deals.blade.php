@@ -141,7 +141,7 @@
     });
 
 
-		var wrapper = new Vue({
+		var deals = new Vue({
 			el: "#deals",
 
 			data: {
