@@ -186,7 +186,7 @@
 						},
 						success: function(data) {
 							console.log(data);
-							this.purchasedDeals = data
+							deals.$data.purchasedDeals = data
 						}
 					})
 				}
