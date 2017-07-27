@@ -967,14 +967,14 @@ class TransactionsController extends Controller
             $err = $result->getErrors();
             dd($err);
         } else {
-            $success = true;
-            // $data = $result->getResponse();
-            // $processedTransaction = $data[0];
-            // if ($processedTransaction->status == '1') {
-            //     $success = true;
-            // } else {
-            //     $success = false;
-            // }
+            dd($data);
+            $data = $result->getResponse();
+            $processedTransaction = $data[0];
+            if ($processedTransaction->status == '1') {
+                $success = true;
+            } else {
+                $success = false;
+            }
         }
         return $success;
     }
