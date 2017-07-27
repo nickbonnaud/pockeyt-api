@@ -13,7 +13,7 @@
 		      <li class="active">Deals</li>
 		    </ol>
 		  </section>
-			<section class="content">
+			<section class="content" id="deals">
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
@@ -141,7 +141,7 @@
 
 
 		var wrapper = new Vue({
-			el: "#wrapper",
+			el: "#deals",
 
 			data: {
 				purchasedDeals: []
