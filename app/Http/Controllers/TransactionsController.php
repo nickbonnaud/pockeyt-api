@@ -885,7 +885,7 @@ class TransactionsController extends Controller
         $transaction->tax = $request->tax_old;
         $transaction->net_sales = $request->net_sales_old;
         $transaction->total = $request->total_old;
-        $transaction->save();
+        
 
         $refundAmount = $request->only('total_new');
         $result = $this->createRefund($transaction, $refundAmount);
