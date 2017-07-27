@@ -879,7 +879,7 @@ class TransactionsController extends Controller
         }
     }
 
-    public function refundSubmit(Request $request) {
+    public function refundSubmitPartial(Request $request) {
         $transaction = Transaction::findOrFail($request->id);
         $transaction->products = $request->products_old;
         $transaction->tax = $request->tax_old;
@@ -888,11 +888,32 @@ class TransactionsController extends Controller
         
 
         $refundAmount = $request->total_new;
-        $businessSplashId = $this->user->profile->account->splashId;
+        $profile = $this->user->profile;
+        $businessSplashId = $profile->account->splashId;
         $customer = User::findOrFail($transaction->user_id);
         $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
 
+        $transactions = Transaction::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+                ->where('paid', '=', true);
+        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
+
+        if ($result) {
+            flash()->success('Success', 'Refund Complete');
+        } else {
+            flash()->error('Unable to Refund', 'Please Contact Customer Support');
+        }
+        return redirect()->route('transactions.refund', compact('transactions', 'profile'));
+    }
+
+    public function refundSubmitAll(Request $request) {
+        $transaction = Transaction::findOrFail($request->id);
+        $refundAmount = $transaction->total;
         $profile = $this->user->profile;
+        $businessSplashId = $profile->account->splashId;
+        $customer = User::findOrFail($transaction->user_id);
+        $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
+
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
                 ->where('paid', '=', true);
@@ -911,12 +932,17 @@ class TransactionsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
             array (
-                'id' => 'g15979377ec7216',
-                
+                'merchant' => $businessSplashId,
+                'type' => 5,
+                'origin' => 2,
+                'token' => $customer->customer_id,
+                'first' => $customer->first_name,
+                'last' => $customer->last_name,
+                'total' => $refundAmount
             )
         );
          try {
-            $result->retrieve();
+            $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 

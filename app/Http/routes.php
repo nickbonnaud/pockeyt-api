@@ -91,7 +91,8 @@ Route::post('square/transaction/receive', 'TransactionsController@receiveSquareT
 
 Route::get('transactions/refunds', 'TransactionsController@issueRefund')->name('transactions.refund');
 Route::post('refunds/search', 'TransactionsController@searchRefunds');
-Route::post('refunds/submit', 'TransactionsController@refundSubmit')->name('refund.submit');
+Route::post('refunds/submit/partial', 'TransactionsController@refundSubmitPartial')->name('refund.submit_partial');
+Route::post('refunds/submit/all', 'TransactionsController@refundSubmitAll')->name('refund.submit_all');
 
 
 // Connect Routes

@@ -1,4 +1,4 @@
-<form action="{{ route('refund.submit') }}" method="post">
+<form action="{{ route('refund.submit_partial') }}" method="post">
   <input type="hidden" name="products_old" :value="JSON.stringify(selectedReceiptItems)">
   <input type="hidden" name="tax_old" :value="totalTax">
   <input type="hidden" name="net_sales_old" :value="subTotal">

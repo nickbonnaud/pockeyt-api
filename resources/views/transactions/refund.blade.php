@@ -35,7 +35,7 @@
 				        <div class="box-header with-border">
 			        		<h3 class="box-title">@{{ receipt.first_name }} @{{ receipt.last_name }}'s Receipt</h3>
 			        		<div class="receipt-date">
-				          	<button v-on:click="refundAll(receipt)" class="btn btn-block btn-success btn-xs">Refund All</button>
+				          	@include ('partials.transactions.submit_refund_all')
 				          </div>
 				          <h4>@{{ receipt.updated_at | setDate }}</h4>
 				        </div>
@@ -208,7 +208,7 @@
 				          <div class="receipt-total">
 				            <b>$@{{ (totalBillRefund / 100).toFixed(2) }}</b>
 				          </div>
-				          @include ('partials.transactions.submit_refund')
+				          @include ('partials.transactions.submit_refund_partial')
 				        </div>
 				      </div>
 						</div>
