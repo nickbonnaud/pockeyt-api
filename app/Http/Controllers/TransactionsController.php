@@ -337,7 +337,9 @@ class TransactionsController extends Controller
         $transaction->profile_id = $profile->id;
         $transaction->user_id = $customer->id;
         $transaction->paid = false;
-        $transaction->deal_id = $request->id;
+        $post = Post::findOrFail($request->id);
+        $transaction->deal_id = $post->id;
+        $transaction->products = $post->deal_item;
         $transaction->net_sales = $request->price;
 
         $tax = round(($profile->tax_rate / 10000) * $transaction->net_sales);
