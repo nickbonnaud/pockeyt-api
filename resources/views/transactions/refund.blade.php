@@ -40,7 +40,7 @@
 				          <h4>@{{ receipt.updated_at | setDate }}</h4>
 				        </div>
 				        <div class="box-body no-padding">
-				          <table class="table table-striped">
+				          <table class="table table-striped" v-if="receipt.deal_id === null">
 				            <tbody>
 				              <tr>
 				              	<th>Refund Item</th>
@@ -58,8 +58,24 @@
 											</template>
 				            </tbody>
 				          </table>
+				          <table class="table table-striped" v-else>
+				            <tbody>
+				              <tr>
+				                <th>Quantity</th>
+				                <th>Name</th>
+				                <th class="text-right">Price</th>
+				              </tr>
+				              <template>
+												<tr class="product-row" v-cloak>
+													<td class="product-row-data">1</td>
+													<td class="product-row-data">@{{ receipt.products }}</td>
+													<td class="product-row-data text-right">$@{{ (receipt.net_sales / 100).toFixed(2) }}</td>
+												</tr>
+											</template>
+				            </tbody>
+				          </table>
 				        </div>
-				        <div class="box-footer-receipt">
+				        <div class="box-footer-receipt" v-if="receipt.deal_id === null">
 				          <div class="tax-section">
 				            <span>Tax:</span>
 				            <span class="pull-right">$@{{ (totalTax / 100).toFixed(2) }}</span>
@@ -71,6 +87,16 @@
 				          <b>Total:</b>
 				          <div class="receipt-total">
 				            <b>$@{{ ((totalBill + receipt.tips) / 100).toFixed(2) }}</b>
+				          </div>
+				        </div>
+				        <div class="box-footer-receipt" v-else>
+				          <div class="tax-section">
+				            <span>Tax:</span>
+				            <span class="pull-right">$@{{ (receipt.tax / 100).toFixed(2) }}</span>
+				          </div>
+				          <b>Total:</b>
+				          <div class="receipt-total">
+				            <b>$@{{ (receipt.total / 100).toFixed(2) }}</b>
 				          </div>
 				        </div>
 				      </div>
