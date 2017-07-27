@@ -885,7 +885,6 @@ class TransactionsController extends Controller
         $transaction->tax = $request->tax_old;
         $transaction->net_sales = $request->net_sales_old;
         $transaction->total = $request->total_old;
-        
 
         $refundAmount = $request->total_new;
         $profile = $this->user->profile;
@@ -893,16 +892,20 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($transaction->user_id);
         $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
 
-        $transactions = Transaction::where(function($query) use ($profile) {
-            $query->where('profile_id', '=', $profile->id)
-                ->where('paid', '=', true);
-        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
-
         if ($result) {
+            $transaction->refunded = true;
+            $transaction->refund_full = false;
+            $transaction->refund_amount = $refundAmount;
+            $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
+
+        $transactions = Transaction::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+                ->where('paid', '=', true);
+        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
@@ -914,16 +917,20 @@ class TransactionsController extends Controller
         $customer = User::findOrFail($transaction->user_id);
         $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
 
-        $transactions = Transaction::where(function($query) use ($profile) {
-            $query->where('profile_id', '=', $profile->id)
-                ->where('paid', '=', true);
-        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
-
         if ($result) {
+            $transaction->refunded = true;
+            $transaction->refund_full = true;
+            $transaction->refund_amount = $refundAmount;
+            $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
+
+        $transactions = Transaction::where(function($query) use ($profile) {
+            $query->where('profile_id', '=', $profile->id)
+                ->where('paid', '=', true);
+        })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
