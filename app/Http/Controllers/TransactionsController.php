@@ -887,7 +887,7 @@ class TransactionsController extends Controller
         $transaction->total = $request->total_old;
         
 
-        $refundAmount = $request->only('total_new');
+        $refundAmount = $request->total_new;
         $result = $this->createRefund($transaction, $refundAmount);
 
         $profile = $this->user->profile;
