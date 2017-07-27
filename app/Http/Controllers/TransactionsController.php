@@ -532,6 +532,7 @@ class TransactionsController extends Controller
         $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId)
+                ->where('refund_full', '=', false)
                 ->where('products', '!=', '');
         })->orderBy('updated_at', 'desc')->take(5)->get();
 
@@ -625,12 +626,14 @@ class TransactionsController extends Controller
         $businessId = $request->businessId;
         $transactionsPending = Transaction::where(function($query) use ($businessId) {
             $query->where('profile_id', '=', $businessId)
-                ->where('status', '<', '20');
+                ->where('status', '<', '20')
+                ->where('refund_full', '=', false);
         })->orderBy('status', 'asc')->get();
 
         $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
             $query->where('profile_id', '=', $businessId)
-                ->where('status', '>=', '20');
+                ->where('status', '>=', '20')
+                ->where('refund_full', '=', false);
         })->orderBy('updated_at', 'desc')->take(10)->get();
 
         foreach ($transactionsPending as $transaction) {
@@ -685,7 +688,8 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $paginator = Transaction::where(function($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
-                ->where('paid', '=', true);
+                ->where('paid', '=', true)
+                ->where('refund_full', '=', false);
         })->orderBy('updated_at', 'desc')->paginate(10);
 
         $transactions = $paginator->getCollection();
@@ -843,7 +847,8 @@ class TransactionsController extends Controller
         $profile = $this->user->profile;
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
-                ->where('paid', '=', true);
+                ->where('paid', '=', true)
+                ->where('refund_full', '=', false);
         })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
         return view('transactions.refund', compact('transactions', 'profile'));
     }
@@ -859,7 +864,8 @@ class TransactionsController extends Controller
                 $userId = $user->id;
                 $transactions = Transaction::where(function($query) use ($userId, $businessId) {
                     $query->where('profile_id', '=', $businessId)
-                    ->where('user_id', '=', $userId);
+                    ->where('user_id', '=', $userId)
+                    ->where('refund_full', '=', false);
                 })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
                 if (count($transactions) > 0) {
                     return response()->json($transactions);
@@ -904,7 +910,8 @@ class TransactionsController extends Controller
 
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
-                ->where('paid', '=', true);
+                ->where('paid', '=', true)
+                ->where('refund_full', '=', false);
         })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
@@ -929,7 +936,8 @@ class TransactionsController extends Controller
 
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
-                ->where('paid', '=', true);
+                ->where('paid', '=', true)
+                ->where('refund_full', '=', false);
         })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->take(10)->get();
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
