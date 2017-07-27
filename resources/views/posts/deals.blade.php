@@ -186,7 +186,7 @@
 						},
 						success: function(data) {
 							console.log(data);
-							deals.$data.purchasedDeals = data
+							deals.$data.purchasedDeals = data;
 						}
 					})
 				}
