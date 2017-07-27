@@ -888,7 +888,9 @@ class TransactionsController extends Controller
         
 
         $refundAmount = $request->total_new;
-        $result = $this->createRefund($transaction, $refundAmount);
+        $businessSplashId = $this->user->profile->account->splashId;
+        $customer = User::findOrFail($transaction->user_id);
+        $result = $this->createRefund($refundAmount, $businessSplashId, $customer);
 
         $profile = $this->user->profile;
         $transactions = Transaction::where(function($query) use ($profile) {
@@ -904,17 +906,21 @@ class TransactionsController extends Controller
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
-    private function createRefund($transaction, $refundAmount) {
-        dd($refundAmount);
+    private function createRefund($refundAmount, $businessSplashId, $customer) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $result = new SplashPayments\refunds(
+        $result = new SplashPayments\txns(
             array (
-                'entry' => $transaction->splash_id,
-                'amount' => $refundAmount
+                'merchant' => $businessSplashId,
+                'type' => 5,
+                'origin' => 2,
+                'token' => $customer->customer_id,
+                'first' => $customer->first_name,
+                'last' => $customer->last_name,
+                'total' => $refundAmount
             )
         );
-        try {
+         try {
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
@@ -927,6 +933,12 @@ class TransactionsController extends Controller
         } else {
             $data = $result->getResponse();
             dd($data);
+            $processedTransaction = $data[0];
+            if ($processedTransaction->status == '1') {
+                $success = true;
+            } else {
+                $success = false;
+            }
         }
         return $success;
     }
