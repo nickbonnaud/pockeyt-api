@@ -718,7 +718,7 @@ class TransactionsController extends Controller
 
     public function getDeals(Request $request) {
         $user = JWTAuth::parseToken()->authenticate();
-        $paginator = Transaction::with([])
+        $paginator = Transaction::where('refunded', '=', false)
             ->join('posts', function($join) use ($user) {
                 $join->on('transactions.deal_id', '=', 'posts.id')
                     ->where('transactions.user_id', '=', $user->id);
