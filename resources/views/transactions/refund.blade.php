@@ -91,7 +91,7 @@
 					          <h4>@{{ receipt.updated_at | setDate }}</h4>
 					        </div>
 					        <div class="box-body no-padding">
-					          <table class="table table-striped">
+					          <table class="table table-striped" v-if="receipt.deal_id === null">
 					            <tbody>
 					              <tr>
 					                <th>Quantity</th>
@@ -103,6 +103,22 @@
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
 														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													</tr>
+												</template>
+					            </tbody>
+					          </table>
+					          <table class="table table-striped" v-else>
+					            <tbody>
+					              <tr>
+					                <th>Quantity</th>
+					                <th>Name</th>
+					                <th class="text-right">Price</th>
+					              </tr>
+					              <template>
+													<tr class="product-row" v-cloak>
+														<td class="product-row-data">1</td>
+														<td class="product-row-data">@{{ receipt.products }}</td>
+														<td class="product-row-data text-right">$@{{ (receipt.net_sales / 100).toFixed(2) }}</td>
 													</tr>
 												</template>
 					            </tbody>
@@ -137,7 +153,7 @@
 					          <h4>@{{ receipt.updated_at | setDate }}</h4>
 					        </div>
 					        <div class="box-body no-padding">
-					          <table class="table table-striped">
+					          <table class="table table-striped" v-if="receipt.deal_id === null">
 					            <tbody>
 					              <tr>
 					                <th>Quantity</th>
@@ -149,6 +165,22 @@
 														<td class="product-row-data">@{{ product.quantity }}</td>
 														<td class="product-row-data">@{{ product.name }}</td>
 														<td class="product-row-data text-right">$@{{ (product.price / 100).toFixed(2) }}</td>
+													</tr>
+												</template>
+					            </tbody>
+					          </table>
+					          <table class="table table-striped" v-else>
+					            <tbody>
+					              <tr>
+					                <th>Quantity</th>
+					                <th>Name</th>
+					                <th class="text-right">Price</th>
+					              </tr>
+					              <template>
+													<tr class="product-row" v-cloak>
+														<td class="product-row-data">1</td>
+														<td class="product-row-data">@{{ receipt.products }}</td>
+														<td class="product-row-data text-right">$@{{ (receipt.net_sales / 100).toFixed(2) }}</td>
 													</tr>
 												</template>
 					            </tbody>
@@ -289,11 +321,7 @@
 				console.log(product);
 			},
 			billItems: function(receipt) {
-				if (receipt.deal_id === null) {
-					return JSON.parse(receipt.products);
-				} else {
-					console.log(receipt.products);
-				}
+				return JSON.parse(receipt.products);
 			},
 			setSelection: function(selection) {
 				this.searchSelection = selection;
