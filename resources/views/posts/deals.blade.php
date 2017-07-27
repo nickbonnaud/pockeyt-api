@@ -185,6 +185,7 @@
 							'postId' : postId
 						},
 						success: function(data) {
+							console.log(data);
 							this.purchasedDeals = data
 						}
 					})
