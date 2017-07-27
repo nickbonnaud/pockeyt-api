@@ -383,9 +383,11 @@
 			selectReceipt: function(receipt) {
 				this.selectedReceipt = [];
 				this.selectedReceiptId = receipt.id;
-				this.selectedReceiptItems = JSON.parse(receipt.products);
 				this.selectedReceipt.push(receipt);
-				this.setRefundReceiptItems(receipt);
+				if (receipt.deal_id === null) {
+					this.selectedReceiptItems = JSON.parse(receipt.products);
+					this.setRefundReceiptItems(receipt);
+				}
 			},
 			setRefundReceiptItems: function(receipt) {
 				this.refundReceiptItems = [];
