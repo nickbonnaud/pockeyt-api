@@ -260,6 +260,7 @@ class TransactionsController extends Controller
                     event(new TransactionsChange($profile));
                     $this->checkRecentViewedPosts($customer, $profile, $transaction);
                     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
+                    $this->sendEmailReceipt($customer, $profile, $transaction);
                     return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
                 } else {
                     $transaction->paid = false;
@@ -967,15 +968,14 @@ class TransactionsController extends Controller
             $err = $result->getErrors();
             dd($err);
         } else {
-            $success = true;
-            // $data = $result->getResponse();
-            // dd($data);
-            // $processedTransaction = $data[0];
-            // if ($processedTransaction->status == '1') {
-            //     $success = true;
-            // } else {
-            //     $success = false;
-            // }
+            $data = $result->getResponse();
+            dd($data);
+            $processedTransaction = $data[0];
+            if ($processedTransaction->status == '1') {
+                $success = true;
+            } else {
+                $success = false;
+            }
         }
         return $success;
     }
