@@ -955,7 +955,6 @@ class TransactionsController extends Controller
     private function createRefund($refundAmount, $businessSplashId, $transactionSplashId) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        dd($businessSplashId, $transactionSplashId, $refundAmount);
         $result = new SplashPayments\txns(
             array (
                 'fortxn' => $transactionSplashId,
