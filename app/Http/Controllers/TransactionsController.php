@@ -951,12 +951,12 @@ class TransactionsController extends Controller
     private function createRefund($refundAmount, $transaction) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        dd($transaction->splash_id);
         if ($refundAmount === $transaction->total) {
             $result = new SplashPayments\txns(
                 array (
                     'fortxn' => $transaction->splash_id,
-                    'type' => 5
+                    'type' => 5,
+                    'total' => $refundAmount
                 )
             );
         } else {
