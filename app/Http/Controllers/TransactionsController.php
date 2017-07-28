@@ -897,10 +897,7 @@ class TransactionsController extends Controller
         $transaction->total = $request->total_old;
 
         $refundAmount = $request->total_new;
-        $profile = $this->user->profile;
-        $businessSplashId = $profile->account->splashId;
-        $transactionSplashId = $transaction->splash_id;
-        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
+        $result = $this->createRefund($refundAmount, $transaction);
 
         if ($result) {
             $transaction->refunded = true;
@@ -915,6 +912,7 @@ class TransactionsController extends Controller
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
 
+        $profile = $this->user->profile;
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
                 ->where('paid', '=', true)
@@ -926,10 +924,7 @@ class TransactionsController extends Controller
     public function refundSubmitAll(Request $request) {
         $transaction = Transaction::findOrFail($request->id);
         $refundAmount = $transaction->total;
-        $profile = $this->user->profile;
-        $businessSplashId = $profile->account->splashId;
-        $transactionSplashId = $transaction->splash_id;
-        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
+        $result = $this->createRefund($refundAmount, $transaction);
 
         if ($result) {
             $transaction->refunded = true;
@@ -944,6 +939,7 @@ class TransactionsController extends Controller
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
 
+        $profile = $this->user->profile;
         $transactions = Transaction::where(function($query) use ($profile) {
             $query->where('profile_id', '=', $profile->id)
                 ->where('paid', '=', true)
@@ -952,20 +948,24 @@ class TransactionsController extends Controller
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
-    private function createRefund($refundAmount, $businessSplashId, $transactionSplashId) {
+    private function createRefund($refundAmount, $transaction) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
-        $result = new SplashPayments\txns(
-            array (
-                'merchant' => $businessSplashId,
-                'fortxn' => $transactionSplashId,
-                'type' => 5,
-                'origin' => 2,
-                'total' => $refundAmount
-            )
-        );
+        if ($refundAmount === $transaction->total) {
+            $result = new SplashPayments\txns(
+                
+            );
+        } else {
+            $result = new SplashPayments\txns(
+                array (
+                    'fortxn' => $transaction->splash_id,
+                    'type' => 5,
+                    'total' => $refundAmount
+                )
+            );
+        }
          try {
-            $result->create();
+            $result->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
@@ -976,8 +976,9 @@ class TransactionsController extends Controller
             dd($err);
         } else {
             $data = $result->getResponse();
+            dd($data);
             $processedTransaction = $data[0];
-            if ($processedTransaction->status == '3') {
+            if ($processedTransaction->status == '0' || $processedTransaction->status == '3') {
                 $success = true;
             } else {
                 $success = false;
