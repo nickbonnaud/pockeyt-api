@@ -976,7 +976,6 @@ class TransactionsController extends Controller
             dd($err);
         } else {
             $data = $result->getResponse();
-            dd($data);
             $processedTransaction = $data[0];
             if ($processedTransaction->status == '0' || $processedTransaction->status == '3') {
                 $success = true;
