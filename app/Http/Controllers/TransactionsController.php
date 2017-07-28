@@ -953,7 +953,10 @@ class TransactionsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         if ($refundAmount === $transaction->total) {
             $result = new SplashPayments\txns(
-                
+                array (
+                    'fortxn' => $transaction->splash_id,
+                    'type' => 5
+                )
             );
         } else {
             $result = new SplashPayments\txns(
@@ -965,7 +968,7 @@ class TransactionsController extends Controller
             );
         }
          try {
-            $result->retrieve();
+            $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
