@@ -958,11 +958,8 @@ class TransactionsController extends Controller
         dd($businessSplashId, $transactionSplashId, $refundAmount);
         $result = new SplashPayments\txns(
             array (
-                'merchant' => $businessSplashId,
                 'fortxn' => $transactionSplashId,
-                'type' => 5,
-                'origin' => 2,
-                'total' => $refundAmount
+                'type' => 5
             )
         );
          try {
