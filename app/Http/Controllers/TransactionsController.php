@@ -906,9 +906,12 @@ class TransactionsController extends Controller
             $transaction->refunded = true;
             $transaction->refund_full = false;
             $transaction->refund_amount = $refundAmount;
+            $transaction->status = 3;
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
+            $transaction->status = 0;
+            $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
 
@@ -932,9 +935,12 @@ class TransactionsController extends Controller
             $transaction->refunded = true;
             $transaction->refund_full = true;
             $transaction->refund_amount = $refundAmount;
+            $transaction->status = 3;
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
+            $transaction->status = 0;
+            $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
 
@@ -970,9 +976,8 @@ class TransactionsController extends Controller
             dd($err);
         } else {
             $data = $result->getResponse();
-            dd($data);
             $processedTransaction = $data[0];
-            if ($processedTransaction->status == '1') {
+            if ($processedTransaction->status == '3') {
                 $success = true;
             } else {
                 $success = false;
