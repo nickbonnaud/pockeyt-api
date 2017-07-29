@@ -957,12 +957,11 @@ class TransactionsController extends Controller
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
             array (
-                'fortxn' => $transactionSplashId,
-                'type' => 5
+                'id' => $transactionSplashId
             )
         );
          try {
-            $result->create();
+            $result->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
 
@@ -973,6 +972,7 @@ class TransactionsController extends Controller
             dd($err);
         } else {
             $data = $result->getResponse();
+            dd($data);
             $processedTransaction = $data[0];
             if ($processedTransaction->status == '0' || $processedTransaction->status == '0') {
                 $success = true;
