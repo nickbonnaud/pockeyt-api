@@ -899,9 +899,9 @@ class TransactionsController extends Controller
         $status = $this->checkTxnStatus($transactionSplashId);
 
         if ($status === "captured") {
-            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial);
+            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial, $transaction);
         } else {
-            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount);
+            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount, $transaction);
         }
 
         if ($result) {
@@ -916,7 +916,7 @@ class TransactionsController extends Controller
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
-            $transaction->status = 0;
+            $transaction->status = 30;
             $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
@@ -939,9 +939,9 @@ class TransactionsController extends Controller
         $status = $this->checkTxnStatus($transactionSplashId);
 
         if ($status === "captured") {
-            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial);
+            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial, $transaction);
         } else {
-            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount);
+            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount, $transaction);
         }
 
         if ($result) {
@@ -952,7 +952,7 @@ class TransactionsController extends Controller
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
-            $transaction->status = 0;
+            $transaction->status = 30;
             $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
@@ -993,7 +993,7 @@ class TransactionsController extends Controller
         return $status;
     }
 
-    private function refundTransaction($refundAmount, $transactionSplashId, $partial) {
+    private function refundTransaction($refundAmount, $transactionSplashId, $partial, $transaction) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         if ($partial) {
@@ -1025,6 +1025,8 @@ class TransactionsController extends Controller
             $data = $result->getResponse();
             $response = $data[0];
             if ($response->status == '0' || $response->status == '3') {
+                $transaction->refund_id = $response->id;
+                $transaction->save();
                 $success = true;
             } else {
                 $success = false;
@@ -1033,7 +1035,7 @@ class TransactionsController extends Controller
         return $success;
     }
 
-    private function reverseAuth($transactionSplashId, $partial, $refundAmount) {
+    private function reverseAuth($transactionSplashId, $partial, $refundAmount, $transaction) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         if ($partial) {
@@ -1065,6 +1067,8 @@ class TransactionsController extends Controller
             $data = $result->getResponse();
             $response = $data[0];
             if ($response->status == '0' || $response->status == '1') {
+                $transaction->refund_id = $response->id;
+                $transaction->save();
                 $success = true;
             } else {
                 $success = false;
