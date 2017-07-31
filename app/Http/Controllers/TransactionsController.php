@@ -391,7 +391,7 @@ class TransactionsController extends Controller
         } else {
             $data = $result->getResponse();
             $processedTransaction = $data[0];
-            if ($processedTransaction->status == '1') {
+            if ($processedTransaction->status == '0' || $processedTransaction->status == '1') {
                 $success = true;
             } else {
                 $success = false;
@@ -891,22 +891,28 @@ class TransactionsController extends Controller
 
     public function refundSubmitPartial(Request $request) {
         $transaction = Transaction::findOrFail($request->id);
-        $transaction->products = $request->products_old;
-        $transaction->tax = $request->tax_old;
-        $transaction->net_sales = $request->net_sales_old;
-        $transaction->total = $request->total_old;
 
         $refundAmount = $request->total_new;
         $profile = $this->user->profile;
-        $businessSplashId = $profile->account->splashId;
         $transactionSplashId = $transaction->splash_id;
-        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
+        $partial = true;
+        $status = $this->checkTxnStatus($transactionSplashId);
+
+        if ($status === "captured") {
+            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial);
+        } else {
+            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount);
+        }
 
         if ($result) {
             $transaction->refunded = true;
             $transaction->refund_full = false;
             $transaction->refund_amount = $refundAmount;
             $transaction->status = 3;
+            $transaction->products = $request->products_old;
+            $transaction->tax = $request->tax_old;
+            $transaction->net_sales = $request->net_sales_old;
+            $transaction->total = $request->total_old;
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
@@ -925,11 +931,18 @@ class TransactionsController extends Controller
 
     public function refundSubmitAll(Request $request) {
         $transaction = Transaction::findOrFail($request->id);
+        
         $refundAmount = $transaction->total;
         $profile = $this->user->profile;
-        $businessSplashId = $profile->account->splashId;
         $transactionSplashId = $transaction->splash_id;
-        $result = $this->createRefund($refundAmount, $businessSplashId, $transactionSplashId);
+        $partial = false;
+        $status = $this->checkTxnStatus($transactionSplashId);
+
+        if ($status === "captured") {
+            $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial);
+        } else {
+            $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount);
+        }
 
         if ($result) {
             $transaction->refunded = true;
@@ -952,7 +965,7 @@ class TransactionsController extends Controller
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
-    private function createRefund($refundAmount, $businessSplashId, $transactionSplashId) {
+    private function checkTxnStatus($transactionSplashId) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
@@ -967,14 +980,92 @@ class TransactionsController extends Controller
 
         }
         if ($result->hasErrors()) {
-            $success =  false;
             $err = $result->getErrors();
             dd($err);
         } else {
             $data = $result->getResponse();
-            dd($data);
-            $processedTransaction = $data[0];
-            if ($processedTransaction->status == '0' || $processedTransaction->status == '0') {
+            $response = $data[0];
+            if ($response->status == '3' || $response->status == '4') {
+                $status = "captured";
+            } elseif ($response->status == '0' || $response->status == '1') {
+                $status = "pending";
+            }
+        }
+        return $status;
+    }
+
+    private function refundTransaction($refundAmount, $transactionSplashId, $partial) {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        if ($partial) {
+            $result = new SplashPayments\txns(
+                array (
+                    'fortxn' => $transactionSplashId,
+                    'type' => '5',
+                    'total' => $refundAmount
+                )
+            );
+        } else {
+            $result = new SplashPayments\txns(
+                array (
+                    'fortxn' => $transactionSplashId,
+                    'type' => '5'
+                )
+            );
+        }
+        try {
+            $result->create();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($result->hasErrors()) {
+            $err = $result->getErrors();
+            dd($err);
+        } else {
+            $data = $result->getResponse();
+            $response = $data[0];
+            if ($response->status == '0' || $response->status == '3') {
+                $success = true;
+            } else {
+                $success = false;
+            }
+        }
+        return $success;
+    }
+
+    private function reverseAuth($transactionSplashId, $partial, $refundAmount) {
+        SplashPayments\Utilities\Config::setTestMode(true);
+        SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
+        if ($partial) {
+            $result = new SplashPayments\txns(
+                array (
+                    'fortxn' => $transactionSplashId,
+                    'type' => '4',
+                    'total' => $refundAmount
+                )
+            );
+        } else {
+            $result = new SplashPayments\txns(
+                array (
+                    'fortxn' => $transactionSplashId,
+                    'type' => '4'
+                )
+            );
+        }
+        try {
+            $result->create();
+        }
+        catch (SplashPayments\Exceptions\Base $e) {
+
+        }
+        if ($result->hasErrors()) {
+            $err = $result->getErrors();
+            dd($err);
+        } else {
+            $data = $result->getResponse();
+            $response = $data[0];
+            if ($response->status == '0' || $response->status == '1') {
                 $success = true;
             } else {
                 $success = false;
