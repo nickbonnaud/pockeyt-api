@@ -969,7 +969,9 @@ class TransactionsController extends Controller
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
-            
+            array (
+                'id' => $transactionSplashId
+            )
         );
          try {
             $result->retrieve();
@@ -982,7 +984,6 @@ class TransactionsController extends Controller
             dd($err);
         } else {
             $data = $result->getResponse();
-            dd($data);
             $response = $data[0];
             if ($response->status == '3' || $response->status == '4') {
                 $status = "captured";
