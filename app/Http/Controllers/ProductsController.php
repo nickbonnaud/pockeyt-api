@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DeleteProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\EditProductRequest;
 use App\Product;
 use App\Photo;
 use App\Profile;
@@ -48,7 +49,7 @@ class ProductsController extends Controller {
       return redirect()->back();
   }
 
-  public function edit (Request $request, $id) {
+  public function edit (EditProductRequest $request, $id) {
   	$product = Product::findOrFail($id);
     $profile = $this->user->profile;
     $categories = Product::where('profile_id', '=', $profile->id)->whereNotNull('category')->select('category')->distinct()->get();
