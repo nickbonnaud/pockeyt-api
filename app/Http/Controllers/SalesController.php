@@ -32,7 +32,8 @@ class SalesController extends Controller
 
     $salesToday = Transaction::where(function($query) use ($fromDate, $currentDate, $profile) {
       $query->whereBetween('updated_at', [$fromDate, $currentDate])
-        ->where('profile_id', '=', $profile->id);
+        ->where('profile_id', '=', $profile->id)
+        ->where('refund_full', '=', false);
     })->get();
 
     if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
