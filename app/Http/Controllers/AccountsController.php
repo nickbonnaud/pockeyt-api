@@ -16,6 +16,7 @@ use App\Http\Requests\AccountBankRequest;
 use App\Http\Requests\UpdateAccountIndividualRequest;
 use App\Http\Requests\UpdateAccountBusinessRequest;
 use App\Http\Requests\UpdateAccountPayRequest;
+use App\Http\Requests\EditAccountRequest;
 use App\Http\Controllers\Controller;
 
 class AccountsController extends Controller
@@ -97,11 +98,9 @@ class AccountsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(EditAccountRequest $request, $id)
     {
         $account = Account::findOrFail($id);
-        $owned = $account->ownedBy($this->user->profile);
-        dd($owned);
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }
