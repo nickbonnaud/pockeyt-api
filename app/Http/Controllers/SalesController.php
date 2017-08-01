@@ -31,7 +31,7 @@ class SalesController extends Controller
     $profile = $this->user->profile;
 
     $salesToday = Transaction::where(function($query) use ($fromDate, $currentDate, $profile) {
-      $query->whereBetween('updated_at', [$fromDate, $currentDate])
+      $query->whereBetween('created_at', [$fromDate, $currentDate])
         ->where('profile_id', '=', $profile->id)
         ->where('refund_full', '=', false);
     })->get();
@@ -39,7 +39,7 @@ class SalesController extends Controller
     if (($profile->tip_tracking_enabled) && (count($salesToday) != 0)) {
     	$employees = DB::table('users')
         ->leftJoin('transactions', 'users.id', '=', 'employee_id')
-        ->whereBetween('transactions.updated_at', [$fromDate, $currentDate])
+        ->whereBetween('transactions.created_at', [$fromDate, $currentDate])
         ->where('refund_full', '=', false)
         ->select('users.id', 'first_name', 'last_name', 'photo_path', 'role', 'employer_id', 'on_shift')
         ->groupBy('users.id')
@@ -58,14 +58,16 @@ class SalesController extends Controller
   	$profile = Profile::findOrFail($profileId);
 
   	$sales = Transaction::where(function($query) use ($fromDate, $toDate, $profileId) {
-      $query->whereBetween('updated_at', [$fromDate, $toDate])
-        ->where('profile_id', '=', $profileId);
+      $query->whereBetween('created_at', [$fromDate, $toDate])
+        ->where('profile_id', '=', $profileId)
+        ->where('refund_full', '=', false);
     })->get();
 
     if ($profile->tip_tracking_enabled && (count($sales) != 0)) {
     	$employees = DB::table('users')
         ->leftJoin('transactions', 'users.id', '=', 'employee_id')
-        ->whereBetween('transactions.updated_at', [$fromDate, $currentDate])
+        ->whereBetween('transactions.created_at', [$fromDate, $currentDate])
+        ->where('refund_full', '=', false)
         ->select('users.id', 'first_name', 'last_name', 'photo_path', 'role', 'employer_id', 'on_shift')
         ->groupBy('users.id')
         ->get();
