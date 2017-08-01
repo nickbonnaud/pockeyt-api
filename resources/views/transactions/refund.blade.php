@@ -326,16 +326,14 @@
         return total;
       },
       totalTax: function() {
-        var tax = this.subTotal * {{ ($profile->tax_rate) / 10000 }};
+        var tax = Math.round(this.subTotal * {{ ($profile->tax_rate) / 10000 }});
         return tax;
       },
       totalTaxRefund: function() {
       	var tax = this.selectReceiptTax - this.totalTax;
-        var tax = Math.round(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
         return tax;
       },
       totalBill: function() {
-      	console.log(this.subTotal + this.totalTax);
         var total = this.subTotal + this.totalTax;
         return total;
       },
