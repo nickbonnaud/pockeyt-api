@@ -8,6 +8,7 @@ use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdateBusinessLocationRequest;
 use App\Http\Requests\UpdateBusinessTagsRequest;
+use App\Http\Requests\ShowProfileRequest;
 use App\Photo;
 use App\Post;
 use App\Profile;
