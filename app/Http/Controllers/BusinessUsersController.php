@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateBusinessUserRequest;
 use App\Http\Requests\AddUserPhotoRequest;
 use App\Http\Requests\BusinessUserRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\ShowUserRequest;
 use Validator;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Hash;
@@ -31,10 +32,9 @@ class BusinessUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShowUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
-
         return view('users.show', compact('user'));
     }
 
