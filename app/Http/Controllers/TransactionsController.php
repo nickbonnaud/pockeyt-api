@@ -918,7 +918,7 @@ class TransactionsController extends Controller
         } else {
             $transaction->status = 31;
             $transaction->save();
-            flash()->error('Unable to Refund', 'Please Contact Customer Support');
+            flash()->overlay('Unable to Refund', 'Please Contact Customer Support', 'error');
         }
 
         $transactions = Transaction::where(function($query) use ($profile) {
@@ -954,7 +954,7 @@ class TransactionsController extends Controller
         } else {
             $transaction->status = 31;
             $transaction->save();
-            flash()->error('Unable to Refund', 'Please Contact Customer Support');
+            flash()->overlay('Unable to Refund', 'Please Contact Customer Support', 'error');
         }
 
         $transactions = Transaction::where(function($query) use ($profile) {

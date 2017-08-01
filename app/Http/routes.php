@@ -6,8 +6,6 @@ Route::get('end_use_policy', 'AppController@endPolicy')->name('app.endPolicy');
 Route::get('qb_disconnect', 'AppController@qbDisconnect')->name('app.qbDisconnect');
 Route::get('unauthorized', 'AppController@unauthorized')->name('errors.401');
 
-Route::get('test/flash', 'ProfilesController@testFlash')->name('test.flash');
-
 // Auth routes...
 Route::get('auth/login',        'Auth\AuthController@getLogin')->name('auth.login');
 Route::post('auth/login',       'Auth\AuthController@postLogin');
