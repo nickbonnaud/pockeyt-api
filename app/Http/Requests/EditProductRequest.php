@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 use App\Product;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class EditProductRequest extends Request {
   /**
@@ -11,7 +13,11 @@ class EditProductRequest extends Request {
    */
   public function authorize() {
   	$user = \Auth::user();
-  	return !is_null($product = Product::find($this->route('products'))) && ($user->profile->id == $product->profile_id);
+    try {
+      return !is_null($product = Product::find(Crypt::decrypt($this->route('products')))) && ($user->profile->id == $product->profile_id);
+    } catch(DecryptException $e) {
+      return false;
+    }
   }
 
   /**
