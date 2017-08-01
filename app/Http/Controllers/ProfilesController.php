@@ -119,6 +119,12 @@ class ProfilesController extends Controller {
         return view('profiles.show', compact('profile'));
     }
 
+    public function testFlash() {
+        $profile = $this->user->profile;
+        flash()->overlay('Oops!', 'An error occurred while sending Bill to the customer. Please contact customer support.', 'error');
+        return view('profiles.show', compact('profile'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
