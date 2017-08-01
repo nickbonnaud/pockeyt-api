@@ -295,6 +295,7 @@
 			searchResult: [],
 			selectedReceipt: [],
 			selectedReceiptId: '',
+			selectReceiptTax: '',
 			selectedReceiptItems: [],
 			refundReceiptItems: [],
 			refundReceiptActive: false
@@ -325,11 +326,11 @@
         return total;
       },
       totalTax: function() {
-        var tax = Math.round(this.subTotal * {{ ($profile->tax_rate) / 10000 }});
+        var tax = this.subTotal * {{ ($profile->tax_rate) / 10000 }};
         return tax;
       },
       totalTaxRefund: function() {
-      	console.log(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
+      	var tax = this.selectReceiptTax - this.totalTax;
         var tax = Math.round(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
         return tax;
       },
@@ -384,6 +385,7 @@
 			selectReceipt: function(receipt) {
 				this.selectedReceipt = [];
 				this.selectedReceiptId = receipt.id;
+				this.selectReceiptTax = receipt.tax;
 				this.selectedReceipt.push(receipt);
 				if (receipt.deal_id === null) {
 					this.selectedReceiptItems = JSON.parse(receipt.products);
