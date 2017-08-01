@@ -113,8 +113,8 @@ class ProfilesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $profile = (!is_null($this->user) && $this->user->is_admin) ? Profile::find($id) : Profile::visible()->find($id);
+    public function show(ShowProfileRequest $request, $id) {
+        $profile = Profile::find($id);
 
         return view('profiles.show', compact('profile'));
     }
