@@ -153,8 +153,8 @@ class ProfilesController extends Controller {
         if (isset($tag_list)) {
             $this->syncTags($profile, $tag_list);
         }
-        $tags = \App\Tag::lists('name', 'id');
-        return view('profiles.edit', compact('profile', 'tags'));
+
+        return redirect()->route('profiles.edit');
     }
 
     /**************************
