@@ -154,7 +154,7 @@ class ProfilesController extends Controller {
             $this->syncTags($profile, $tag_list);
         }
 
-        return redirect()->route('profiles.edit', compact('profile', 'tags'));
+        return view('profiles.edit', compact('profile', 'tags'));
     }
 
     /**************************
