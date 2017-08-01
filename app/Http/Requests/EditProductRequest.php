@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use App\Product;
 
 class EditProductRequest extends Request {
   /**
@@ -9,7 +10,7 @@ class EditProductRequest extends Request {
    * @return bool
    */
   public function authorize() {
-  	$product = \Product::find($this->route('products'));
+  	$product = Product::find($this->route('products'));
   	$profileId = $produt->profile_id;
   	$user = \Auth::user();
   	return $user->profile->id == $profileId;
