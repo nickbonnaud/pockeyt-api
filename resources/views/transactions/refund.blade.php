@@ -335,8 +335,7 @@
         return tax;
       },
       totalBill: function() {
-      	console.log(this.subTotal);
-      	console.log(this.totalTax);
+      	console.log(this.subTotal + this.totalTax);
         var total = this.subTotal + this.totalTax;
         return total;
       },
