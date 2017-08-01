@@ -209,7 +209,7 @@ class ProfilesController extends Controller {
         $profile = Profile::findOrFail($id);
         $this->syncTags($profile, $request->input('tag_list'));
 
-        return redirect()->route('profiles.edit', compact('profile', 'tags'));
+        return redirect()->route('profiles.edit', ['profiles' => Crypt::encrypt($profile->id)]);
     }
     
 
@@ -248,7 +248,7 @@ class ProfilesController extends Controller {
             $profile->geoLocation()->save($geoLocation);
         }
 
-        return redirect()->route('profiles.edit', compact('profile', 'tags'));
+        return redirect()->route('profiles.edit', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     public function postPhotos(AddProfilePhotoRequest $request, $profile_id) {
