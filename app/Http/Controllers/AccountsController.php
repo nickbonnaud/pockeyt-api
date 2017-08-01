@@ -129,7 +129,7 @@ class AccountsController extends Controller
         $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
-        return view('accounts.edit', compact('account'));
+        return redirect()->route('accounts.edit', ['accounts' => Crypt::encrypt($account->id)]);
     }
 
     public function changePay(UpdateAccountPayRequest $request, $id)
@@ -145,7 +145,7 @@ class AccountsController extends Controller
         $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
-        return view('accounts.edit', compact('account'));
+        return redirect()->route('accounts.edit', ['accounts' => Crypt::encrypt($account->id)]);
     }
 
 
