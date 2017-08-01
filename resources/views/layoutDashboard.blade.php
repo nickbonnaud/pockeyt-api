@@ -128,7 +128,7 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('profiles.edit', ['profiles' => $user->profile->id])  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
+                <li><a href="{{ route('profiles.edit', ['profiles' => Crypt::encrypt($user->profile->id)])  }}"><i class="fa fa-circle-o"></i> Profile Info</a></li>
                 @if(!$user->profile->account)
                   <li><a href="{{ route('accounts.create') }}"><i class="fa fa-circle-o"></i> Create Payment Account</a></li>
                 @elseif($user->profile->account->accountEmail && !$user->profile->account->ssn)

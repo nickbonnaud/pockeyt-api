@@ -13,6 +13,7 @@ use App\Photo;
 use App\Post;
 use App\Profile;
 use App\Tax;
+use Crypt;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -127,7 +128,7 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(EditProfileRequest $request, $id) {
-        $profile = Profile::findOrFail($id);
+        $profile = Profile::findOrFail(Crypt::decrypt($id));
         $tags = \App\Tag::lists('name', 'id');
         return view('profiles.edit', compact('profile', 'tags'));
     }
