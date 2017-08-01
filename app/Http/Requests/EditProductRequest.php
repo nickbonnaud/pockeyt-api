@@ -11,7 +11,7 @@ class EditProductRequest extends Request {
    */
   public function authorize() {
   	$user = \Auth::user();
-  	return !is_null($product = Product::find($this->route('products')) && ($user->profile->id == $product->profile_id));
+  	return !is_null($product = Product::find($this->route('products'))) && ($user->profile->id == $product->profile_id);
   }
 
   /**
