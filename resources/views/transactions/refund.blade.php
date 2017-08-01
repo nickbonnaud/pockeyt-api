@@ -329,8 +329,8 @@
         return tax;
       },
       totalTaxRefund: function() {
+      	console.log(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
         var tax = this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }};
-        console.log(tax);
         return tax;
       },
       totalBill: function() {
