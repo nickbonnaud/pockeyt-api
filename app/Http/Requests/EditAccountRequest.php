@@ -10,9 +10,13 @@ class EditAccountRequest extends Request {
      * @return bool
      */
     public function authorize() {
-    	$accountId = Crypt::decrypt($this->route()->parameter('accounts'));
-    	$user = \Auth::user();
-    	return $user->profile->account->id == $accountId;
+        try {
+            $accountId = Crypt::decrypt($this->route()->parameter('accounts'));
+            $user = \Auth::user();
+            return $user->profile->account->id == $accountId;
+        } catch(DecryptException $e) {
+            return false;
+        }
     }
 
     /**
