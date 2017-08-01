@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use DateTimeZone;
 use App\Post;
 use App\Profile;
-use App\Transaction;
 use App\PostAnalytic;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
