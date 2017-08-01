@@ -636,7 +636,7 @@ class TransactionsController extends Controller
 
         $transactionsFinalized = Transaction::where(function($query) use ($businessId) {
             $query->where('profile_id', '=', $businessId)
-                ->where('status', '>=', '20')
+                ->where('status', '=', '20')
                 ->where('refund_full', '=', false);
         })->orderBy('updated_at', 'desc')->take(10)->get();
 
@@ -908,7 +908,7 @@ class TransactionsController extends Controller
             $transaction->refunded = true;
             $transaction->refund_full = false;
             $transaction->refund_amount = $refundAmount;
-            $transaction->status = 3;
+            $transaction->status = 30;
             $transaction->products = $request->products_old;
             $transaction->tax = $request->tax_old;
             $transaction->net_sales = $request->net_sales_old;
@@ -916,7 +916,7 @@ class TransactionsController extends Controller
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
-            $transaction->status = 30;
+            $transaction->status = 31;
             $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
@@ -948,11 +948,11 @@ class TransactionsController extends Controller
             $transaction->refunded = true;
             $transaction->refund_full = true;
             $transaction->refund_amount = $refundAmount;
-            $transaction->status = 3;
+            $transaction->status = 30;
             $transaction->save();
             flash()->success('Success', 'Refund Complete');
         } else {
-            $transaction->status = 30;
+            $transaction->status = 31;
             $transaction->save();
             flash()->error('Unable to Refund', 'Please Contact Customer Support');
         }
