@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class EditAccountRequest extends Request {
     /**
