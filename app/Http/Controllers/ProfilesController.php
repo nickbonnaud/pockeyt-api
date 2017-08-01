@@ -116,10 +116,7 @@ class ProfilesController extends Controller {
     public function show($id) {
         $profile = (!is_null($this->user) && $this->user->is_admin) ? Profile::find($id) : Profile::visible()->find($id);
 
-        flash()->error('Oops', 'Customer not in business radius!');
-        return redirect()->route('profiles.show', compact('profile'));
-
-        // return view('profiles.show', compact('profile'));
+        return view('profiles.show', compact('profile'));
     }
 
     /**
