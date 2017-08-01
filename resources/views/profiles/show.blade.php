@@ -118,7 +118,7 @@
                   <div class="info-box-content">
                     <span class="info-box-text">Date Last Purchase</span>
                     <span v-if="purchases.length == 0" class="info-box-number">No Purchases</span>
-                    <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.updated_at | setDateTime }}</span>
+                    <span v-if="purchases.length != 0" class="info-box-number">@{{ lastPurchase.created_at | setDateTime }}</span>
                   </div>
                 </div>
                 <div v-if="purchases.length != 0" class="box box-aqua collapsed-box">

@@ -537,7 +537,7 @@ class TransactionsController extends Controller
                 ->where('profile_id', '=', $businessId)
                 ->where('refund_full', '=', false)
                 ->where('products', '!=', '');
-        })->orderBy('updated_at', 'desc')->take(5)->get();
+        })->orderBy('created_at', 'desc')->take(5)->get();
 
         $lastPostViewed = PostAnalytic::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
@@ -694,7 +694,7 @@ class TransactionsController extends Controller
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', true)
                 ->where('refund_full', '=', false);
-        })->orderBy('updated_at', 'desc')->paginate(10);
+        })->orderBy('created_at', 'desc')->paginate(10);
 
         $transactions = $paginator->getCollection();
         return fractal()
@@ -710,7 +710,7 @@ class TransactionsController extends Controller
                         'tips' => $transaction->tips,
                         'net_sales' => $transaction->net_sales,
                         'total' => $transaction->total,
-                        'updated_at' => $transaction->updated_at,
+                        'updated_at' => $transaction->created_at,
                     ];
             })
         ->paginateWith(new IlluminatePaginatorAdapter($paginator))
