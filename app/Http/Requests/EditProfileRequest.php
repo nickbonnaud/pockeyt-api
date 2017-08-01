@@ -13,10 +13,10 @@ class EditProfileRequest extends Request {
     public function authorize() {
         try {
             $profileId = Crypt::decrypt($this->route()->parameter('profiles'));
+            return !is_null($user = \Auth::user()) && ($user->is_admin || $profileId == $user->profile->id);
         } catch(DecryptException $e) {
             return false;
         }
-        return !is_null($user = \Auth::user()) && ($user->is_admin || $profileId == $user->profile->id);
     }
 
     /**
