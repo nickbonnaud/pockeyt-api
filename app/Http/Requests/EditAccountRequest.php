@@ -9,7 +9,7 @@ class EditAccountRequest extends Request {
      * @return bool
      */
     public function authorize() {
-    	return !is_null($user = \Auth::user()) && ($user->is_admin);
+    	return !is_null($user = \Auth::user());
     }
 
     /**
