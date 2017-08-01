@@ -100,6 +100,8 @@ class AccountsController extends Controller
     public function edit(Request $request, $id)
     {
         $account = Account::findOrFail($id);
+        $owned = $account->ownedBy($this->user->profile);
+        dd($owned);
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }

@@ -37,4 +37,8 @@ class Account extends Model
   public function profile() {
     return $this->belongsTo('App\Profile');
  	}
+
+  public function ownedBy(Profile $profile) {
+    return $this->profile_id == $profile->id;
+  }
 }
