@@ -11,7 +11,7 @@ class EditAccountRequest extends Request {
     public function authorize() {
     	$account = $this->route()->parameter('accounts');
     	$user = \Auth::user();
-    	dd($user->profile->id);
+    	dd($account);
     	return $user->profile()->id == $account->profile_id;
     }
 
