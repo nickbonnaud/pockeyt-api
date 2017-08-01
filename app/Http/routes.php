@@ -34,7 +34,7 @@ Route::post('deals/store', 'PostsController@storeDeal')->name('deals.store');
 Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'destroy']]);
 
 // Products routes
-Route::get('products/list', 'ProductsController@listProducts')->name('products.list');
+Route::get('products/{profiles}/list', 'ProductsController@listProducts')->name('products.list');
 Route::post('products/{products}/photos', 'ProductsController@postPhotos')->name('products.photos');
 Route::get('products/inventory/{profiles}', 'ProductsController@getInventory');
 Route::get('products/square/sync', 'ProductsController@syncSquareItems');

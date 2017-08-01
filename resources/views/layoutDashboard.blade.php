@@ -143,7 +143,7 @@
             </li>
             <li><a href="{{ route('posts.list') }}"><i class="fa fa-rss"></i> <span class="menu-text">Posts</span></a></li>
             <li><a href="{{ route('posts.events') }}"><i class="fa fa-calendar"></i> <span class="menu-text">Events</span></a></li>
-            <li><a href="{{ route('products.list') }}"><i class="fa fa-shopping-cart"></i> <span class="menu-text">Inventory</span></a></li>
+            <li><a href="{{ route('products.list', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-shopping-cart"></i> <span class="menu-text">Inventory</span></a></li>
             <li><a href="{{ route('loyalty-programs.create') }}"><i class="fa fa-trophy"></i> <span class="menu-text">Loyalty Program</span></a></li>
             <li><a href="{{ route('posts.deals') }}"><i class="fa fa-bolt"></i> <span class="menu-text">Deals</span></a></li>
             <li><a href="{{ route('analytics.show') }}"><i class="fa fa-line-chart"></i> <span class="menu-text">Analytics Dashboard</span></a></li>

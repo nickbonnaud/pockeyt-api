@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\EditProductRequest;
+use App\Http\Requests\ListProductsRequest;
 use App\Product;
 use App\Photo;
 use App\Profile;
@@ -79,7 +80,12 @@ class ProductsController extends Controller {
     }
   	$product->update($updatedProduct);
 
-  	return redirect()->back();
+    $profile = $this->user->profile;
+    $products = Product::where('profile_id', '=', $profile->id)->orderBy('name', 'asc')->get();
+      foreach ($products as $product) {
+        $product->price = ($product->price) / 100;
+      }
+  	return view('products.list', compact('products', 'profile'));
   }
 
   public function destroy(DeleteProductRequest $request, $id) {
@@ -90,8 +96,8 @@ class ProductsController extends Controller {
       return redirect()->back();
   }
 
-  public function listProducts() {
-      $profile = $this->user->profile;
+  public function listProducts(ListProductsRequest $request, $id) {
+      $profile = Profile::find(Crypt::decrypt($id));
       $products = Product::where('profile_id', '=', $profile->id)->orderBy('name', 'asc')->get();
       foreach ($products as $product) {
         $product->price = ($product->price) / 100;
