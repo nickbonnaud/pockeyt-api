@@ -79,7 +79,7 @@ class ProductsController extends Controller {
     }
   	$product->update($updatedProduct);
     $profile = $this->user->profile;
-  	return redirect()->route('products.list', compact('products', 'profile'));
+  	return view('products.list', compact('products', 'profile'));
   }
 
   public function destroy(DeleteProductRequest $request, $id) {
