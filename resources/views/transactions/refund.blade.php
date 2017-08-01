@@ -325,12 +325,12 @@
         return total;
       },
       totalTax: function() {
-        var tax = this.subTotal * {{ ($profile->tax_rate) / 10000 }};
+        var tax = Math.round(this.subTotal * {{ ($profile->tax_rate) / 10000 }});
         return tax;
       },
       totalTaxRefund: function() {
       	console.log(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
-        var tax = this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }};
+        var tax = Math.round(this.subTotalRefund * {{ ($profile->tax_rate) / 10000 }});
         return tax;
       },
       totalBill: function() {
