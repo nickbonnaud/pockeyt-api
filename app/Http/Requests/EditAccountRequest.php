@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use Crypt;
 
 class EditAccountRequest extends Request {
     /**
@@ -9,7 +10,7 @@ class EditAccountRequest extends Request {
      * @return bool
      */
     public function authorize() {
-    	$accountId = $this->route()->parameter('accounts');
+    	$accountId = Crypt::decrypt($this->route()->parameter('accounts'));
     	$user = \Auth::user();
     	return $user->profile->account->id == $accountId;
     }

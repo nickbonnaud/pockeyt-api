@@ -100,7 +100,7 @@ class AccountsController extends Controller
      */
     public function edit(EditAccountRequest $request, $id)
     {
-        $account = Account::findOrFail($id);
+        $account = Account::findOrFail(Crypt::decrypt($id));
         $account = $this->shortenSensitive($account);
         return view('accounts.edit', compact('account'));
     }

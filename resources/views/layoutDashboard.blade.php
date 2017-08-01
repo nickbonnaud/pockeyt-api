@@ -136,7 +136,7 @@
                 @elseif($user->profile->account->ssn && !$user->profile->account->routing)
                   <li><a href="{{ route('accounts.createBank') }}"><i class="fa fa-circle-o"></i> Finish Payment Account</a></li>
                 @elseif($user->profile->account->routing)
-                  <li><a href="{{ route('accounts.edit', ['account' => $user->profile->account->id]) }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
+                  <li><a href="{{ route('accounts.edit', ['account' => Crypt::encrypt($user->profile->account->id)]) }}"><i class="fa fa-circle-o"></i> Payment Account Info</a></li>
                 @endif
                   <li><a href="{{ route('accounts.connections') }}"><i class="fa fa-circle-o"></i> Account Connections</a></li>
               </ul>
