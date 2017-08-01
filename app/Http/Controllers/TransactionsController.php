@@ -890,7 +890,6 @@ class TransactionsController extends Controller
     }
 
     public function refundSubmitPartial(Request $request) {
-        dd($request->all());
         $transaction = Transaction::findOrFail($request->id);
 
         $refundAmount = $request->total_new;
