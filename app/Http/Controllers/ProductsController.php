@@ -78,7 +78,12 @@ class ProductsController extends Controller {
       $updatedProduct['photo_id'] = $photo->id;
     }
   	$product->update($updatedProduct);
+
     $profile = $this->user->profile;
+    $products = Product::where('profile_id', '=', $profile->id)->orderBy('name', 'asc')->get();
+      foreach ($products as $product) {
+        $product->price = ($product->price) / 100;
+      }
   	return view('products.list', compact('products', 'profile'));
   }
 
