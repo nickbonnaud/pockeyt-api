@@ -9,7 +9,10 @@ class EditAccountRequest extends Request {
      * @return bool
      */
     public function authorize() {
-    	return !is_null($user = \Auth::user());
+    	$account = $this->route()->parameter('accounts');
+    	$user = \Auth::user();
+    	dd($user->profile);
+    	return $user->profile()->id == $account->profile_id;
     }
 
     /**
