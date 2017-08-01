@@ -86,7 +86,7 @@
 				          </div>
 				          <b>Total:</b>
 				          <div class="receipt-total">
-				            <b>$@{{ ((totalBill + receipt.tips) / 100).toFixed(2) }}</b>
+				            <b>$@{{ ((totalBill) / 100).toFixed(2) }}</b>
 				          </div>
 				        </div>
 				        <div class="box-footer-receipt" v-else>
@@ -296,6 +296,7 @@
 			selectedReceipt: [],
 			selectedReceiptId: '',
 			selectReceiptTax: '',
+			selectReceiptTip: '',
 			selectedReceiptItems: [],
 			refundReceiptItems: [],
 			refundReceiptActive: false
@@ -334,7 +335,7 @@
         return tax;
       },
       totalBill: function() {
-        var total = this.subTotal + this.totalTax;
+        var total = this.subTotal + this.totalTax + this.selectReceiptTip;
         return total;
       },
       totalBillRefund: function() {
@@ -385,6 +386,7 @@
 				this.selectedReceipt = [];
 				this.selectedReceiptId = receipt.id;
 				this.selectReceiptTax = receipt.tax;
+				this.selectReceiptTip = receipt.tips;
 				this.selectedReceipt.push(receipt);
 				if (receipt.deal_id === null) {
 					this.selectedReceiptItems = JSON.parse(receipt.products);
