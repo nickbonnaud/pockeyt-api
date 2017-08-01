@@ -10,10 +10,8 @@ class EditProductRequest extends Request {
    * @return bool
    */
   public function authorize() {
-  	$product = Product::find($this->route('products'));
-  	$profileId = $product->profile_id;
   	$user = \Auth::user();
-  	return $user->profile->id == $profileId;
+  	return !is_null($product = Product::find($this->route('products')) && ($user->profile->id == $product->profile_id));
   }
 
   /**
