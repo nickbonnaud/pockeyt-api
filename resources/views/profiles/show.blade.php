@@ -556,7 +556,7 @@
             var purchaseHistoryCanvas = $("#purchaseHistory").get(0).getContext("2d");
             var purchasesData = [];
             dataStorage.purchases.forEach(function(purchase) {
-              var point = {x: purchase.updated_at, y: 0};
+              var point = {x: purchase.created_at, y: 0};
               purchasesData.push(point);
             });
             var today = {x: moment().format(), y: 0};
