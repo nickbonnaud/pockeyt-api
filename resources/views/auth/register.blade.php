@@ -48,7 +48,7 @@
                 <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-info pull-right">Next</button>
+                    <button type="submit" :disabled="errors.has('password')" class="btn btn-info pull-right">Next</button>
                 </div>
             </form>
 
