@@ -6,9 +6,6 @@
             <h1>Register</h1>
 
             <hr>
-            <input v-validate="'confirmed:pw_confirm'" :class="{'input': true, 'is-danger': errors.has('confirm_field') }" name="confirm_field" type="password" placeholder="Enter The Password">
-<span v-show="errors.has('confirm_field')" class="help is-danger">@{{ errors.first('confirm_field') }}</span>
-<input name="pw_confirm" :class="{'input': true, 'is-danger': errors.has('confirm_field') }" type="password" placeholder="Confirm the password">
 
             <form method="POST" action="{{ route('auth.register') }}">
                 {!! csrf_field() !!}
