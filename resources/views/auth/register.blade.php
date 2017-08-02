@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                        <input class="form-control"> v-validate="{
+                        <input class="form-control" v-validate="{
                             rules: 
                                 { 
                                     regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
