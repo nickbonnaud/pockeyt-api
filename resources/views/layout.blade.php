@@ -81,6 +81,11 @@
     html { display:none; }
 </style>
 <script>
+    Vue.use(VeeValidate);
+    var main = new Vue({
+        el: '#main'
+    });
+
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
     });
@@ -90,12 +95,6 @@
     } else {
         top.location = self.location;
     }
-
-    var main = new Vue({
-        el: '#main',
-
-        Vue.use(VeeValidate);
-    });
 
 
 </script>
