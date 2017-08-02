@@ -26,26 +26,9 @@
                            required>
                 </div>
 
-                <div class="form-group">
-                    <label for="password_test">Password:</label>
-                        <input class="form-control" v-validate="{
-                            rules: 
-                                { 
-                                    regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
-                                    required: true,
-                                    confirmed: 'password_confirmation',
-                                    min: 9,
-                                    max: 72, 
-                                }
-                            }"
-                            name="password_test" type="password" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" name="password_confirmation" type="password" required>
-                </div>
-                <span v-show="errors.has('password_test')">@{{ errors.first('password_test') }}</span>
+                <input v-validate="'confirmed:pw_confirm'" :class="{'input': true, 'is-danger': errors.has('confirm_field') }" name="confirm_field" type="password" placeholder="Enter The Password">
+<span v-show="errors.has('confirm_field')" class="help is-danger">@{{ errors.first('confirm_field') }}</span>
+<input name="pw_confirm" :class="{'input': true, 'is-danger': errors.has('confirm_field') }" type="password" placeholder="Confirm the password">
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-info pull-right">Next</button>
