@@ -15,7 +15,7 @@
 
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container-fluid" id="main">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
@@ -70,6 +70,8 @@
 <script src="{{ asset('/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/js/libs.js') }}"></script>
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
 <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
@@ -88,6 +90,13 @@
     } else {
         top.location = self.location;
     }
+
+    var main = new Vue({
+
+    });
+
+
+
 </script>
 </body>
 </html>
