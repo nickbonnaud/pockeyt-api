@@ -70,7 +70,7 @@
 <script src="{{ asset('/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/js/libs.js') }}"></script>
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
 <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
