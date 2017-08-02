@@ -84,14 +84,14 @@
 
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
-    });
-    
-    if (self == top) {
-        document.documentElement.style.display = 'block'; 
         Vue.use(VeeValidate);
     var main = new Vue({
         el: '#main'
     });
+    });
+    
+    if (self == top) {
+        document.documentElement.style.display = 'block'; 
     } else {
         top.location = self.location;
     }
