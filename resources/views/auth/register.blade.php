@@ -42,7 +42,7 @@
                     <label for="password_confirmation">Confirm Password:</label>
                     <input name="password_confirmation" type="password" class="form-control">
                 </div>
-                <span v-show="fields.failed('password')">@{{ errors.first('password') }}</span>
+                <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-info pull-right">Next</button>
