@@ -91,10 +91,6 @@
         top.location = self.location;
     }
 
-    var main = new Vue({
-        el: '#main'
-    });
-
     Vue.use(VeeValidate);
 
 
