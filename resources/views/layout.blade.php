@@ -87,11 +87,11 @@
     });
     
     if (self == top) {
+        document.documentElement.style.display = 'block'; 
         Vue.use(VeeValidate);
     var main = new Vue({
         el: '#main'
     });
-        document.documentElement.style.display = 'block'; 
     } else {
         top.location = self.location;
     }
