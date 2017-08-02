@@ -95,6 +95,8 @@
         el: '#main'
     });
 
+    Vue.use(VeeValidate);
+
 
 
 </script>
