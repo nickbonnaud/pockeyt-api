@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password:</label>
-                    <input name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password') }" type="password" 
+                    <input class="form-control" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password') }" type="password" 
                            required>
                 </div>
 
