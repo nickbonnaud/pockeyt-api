@@ -50,7 +50,7 @@ class BusinessUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->update($request->all());
-        return view('users.show', compact('user'));
+        return redirect()->route('users.show', ['users' => Crypt::encrypt($user->id)]);
     }
 
     public function postPhotos(AddUserPhotoRequest $request, $id) {
@@ -80,7 +80,7 @@ class BusinessUsersController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('users.show', ['users' => $this->user->id])
+            return redirect()->route('users.show', ['users' => Crypt::encrypt($this->user->id)])
                 ->withErrors($validator);
         } else {
             $user = User::findOrFail($id);
@@ -91,13 +91,13 @@ class BusinessUsersController extends Controller
                 $user->password = Hash::make($new_password);
 
                 if ($user->save()) {
-                    return redirect()->route('users.show', ['users' => $this->user->id]);
+                    return redirect()->route('users.show', ['users' => Crypt::encrypt($user->id)]);
                 } else {
-                     return redirect()->route('users.show', ['users' => $this->user->id])
+                    return redirect()->route('users.show', ['users' => Crypt::encrypt($user->id)])
                         ->withErrors("Oops Something went wrong. Try again later");
                 }
             } else {
-                return redirect()->route('users.show', ['users' => $this->user->id])
+                return redirect()->route('users.show', ['users' => Crypt::encrypt($user->id)])
                     ->withErrors('Incorrect Password');
             }
         }
