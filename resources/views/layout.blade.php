@@ -84,12 +84,22 @@
 
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
+        const dict = {
+            en: {
+                custom: {
+                    password: {
+                        regex: 'Custom Message' // messages can be strings as well.
+                    }
+                }
+            }
+        };
         Vue.use(VeeValidate);
-       
-       const validator = new Validator();
+        Validator.updateDictionary(dict);
         var main = new Vue({
             el: '#main'
         });
+
+        main.$validator.updateDictionary(dict);
     });
     
     if (self == top) {
