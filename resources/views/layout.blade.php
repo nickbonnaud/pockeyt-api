@@ -85,9 +85,9 @@
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
         Vue.use(VeeValidate);
-    var main = new Vue({
-        el: '#main'
-    });
+        var main = new Vue({
+            el: '#main'
+        });
     });
     
     if (self == top) {
