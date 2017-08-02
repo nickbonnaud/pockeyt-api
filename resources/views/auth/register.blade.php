@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <p :class="{ 'control': true }"></p>
+                    <p :class="{ 'form-control': true }"></p>
                         <input v-validate="{
                             rules: 
                                 { 
