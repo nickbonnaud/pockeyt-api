@@ -29,12 +29,12 @@
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <p :class="{ 'control': true }"></p>
-                        <input v-validate="{ rules: 
+                        <input v-validate="{ rules: {
                             required,
                             confirmed:password_confirmation,
                             min:9,
                             max:72, 
-                            }" :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required>
+                            }}" :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required>
                         
                         <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
                 </div>
