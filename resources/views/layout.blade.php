@@ -93,13 +93,12 @@
                 }
             }
         };
+        VeeValidate.Validator.updateDictionary(dictionary);
         Vue.use(VeeValidate);
         Validator.updateDictionary(dict);
         var main = new Vue({
             el: '#main'
         });
-
-        main.$validator.updateDictionary(dict);
     });
     
     if (self == top) {
