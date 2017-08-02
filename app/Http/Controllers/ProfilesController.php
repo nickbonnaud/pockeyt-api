@@ -106,7 +106,7 @@ class ProfilesController extends Controller {
         else
             $this->syncTags($profile, $request->input('tag_list'));
 
-        return redirect()->route('profiles.show', ['profiles' => $profile->id]);
+        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     /**
@@ -116,8 +116,7 @@ class ProfilesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(ShowProfileRequest $request, $id) {
-        $profile = Profile::find($id);
-
+        $profile = Profile::findOrFail(Crypt::decrypt($id));
         return view('profiles.show', compact('profile'));
     }
 
