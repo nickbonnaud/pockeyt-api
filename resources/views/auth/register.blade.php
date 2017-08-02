@@ -38,7 +38,7 @@
                                     max: 72, 
                                 }
                             }"
-                            name="password" type="password" required>
+                            name="password" type="password" :class="{'input': true, 'is-danger': errors.has('email') }" required>
                 </div>
 
                 <div class="form-group">

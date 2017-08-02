@@ -8855,3 +8855,16 @@ img {
   margin-top: 0px;
 }
 
+.help.is-danger {
+  color: #ff3860;
+}
+
+.help {
+  display: block;
+  margin-top: 5px;
+}
+
+.input.is-danger, .textarea.is-danger {
+  border-color: #ff3860;
+}
+
