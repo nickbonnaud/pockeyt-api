@@ -28,8 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <div class="form-control">
-                        <input v-validate="{
+                        <input class="form-control"> v-validate="{
                             rules: 
                                 { 
                                     regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
@@ -42,7 +41,6 @@
                             :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required
                         />
                         <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
-                    </div>
                 </div>
 
                 <div class="form-group">
