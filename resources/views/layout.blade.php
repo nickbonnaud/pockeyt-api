@@ -77,15 +77,13 @@
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
-<style>
-    html { display:none; }
-</style>
+
 <script>
     Vue.use(VeeValidate);
     var main = new Vue({
         el: '#main'
     });
-    
+
 
 
 </script>
