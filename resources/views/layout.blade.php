@@ -71,7 +71,7 @@
 <script src="{{ asset('/js/libs.js') }}"></script>
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-<script src="https://unpkg.com/vee-validate@2.0.0-rc.7"></script>
+<script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
