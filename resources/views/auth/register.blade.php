@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" v-validate="'required|confirmed: password'" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password_confirmation'') }" type="password" required>
+                    <input class="form-control" v-validate="'required|confirmed: password'" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password_confirmation') }" type="password" required>
                     <span v-show="errors.has('password_confirmation')" class="help is-danger">@{{ errors.first('password_confirmation') }}</span>
                 </div>
 
