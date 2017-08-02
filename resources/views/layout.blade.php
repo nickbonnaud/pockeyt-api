@@ -77,13 +77,24 @@
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
-
+<style>
+    html { display:none; }
+</style>
 <script>
-    Vue.use(VeeValidate);
+
+    $(document).ready(function(){
+        Inputmask().mask(document.querySelectorAll("input"));
+    });
+    
+    if (self == top) { 
+        document.documentElement.style.display = 'block'; 
+    } else {
+        Vue.use(VeeValidate);
     var main = new Vue({
         el: '#main'
     });
-
+        top.location = self.location;
+    }
 
 
 </script>
