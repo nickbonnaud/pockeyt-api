@@ -31,9 +31,11 @@
                         <input class="form-control" v-validate="{
                             rules: 
                                 { 
-                                    
-                                    confirmed: 'password_confirmation',
-                                    
+                                    regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
+                                    required: true,
+                                    confirmed: password_confirmation,
+                                    min: 9,
+                                    max: 72, 
                                 }
                             }"
                             name="password" type="password" required>
