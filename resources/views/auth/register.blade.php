@@ -29,10 +29,10 @@
                 <div class="form-group">
                     <label for="password">Password:</label>
                         <input v-validate data-vv-rules="required|confirmed:password_confirmation" name="password" type="password" class="form-control">
-<input name="password_confirmation" type="password" class="form-control">
-                  <span v-show="fields.failed('password')">@{{ errors.first('password') }}</span>
-                </div>
 
+                    <input name="password_confirmation" type="password" class="form-control">
+                    <span v-show="errors.has('password')">@{{ errors.first('password') }}</span>
+                </div>
                 
 
                 <div class="form-group">
