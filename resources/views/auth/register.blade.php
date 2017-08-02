@@ -39,13 +39,11 @@
                                 }
                             }"
                             name="password" type="password">
-                </div>
-
-                <div class="form-group">
-                    <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" name="password_confirmation" type="password">
-                </div>
+                <label for="password_confirmation">Confirm Password:</label>
+                <input class="form-control" name="password_confirmation" type="password">
                 <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
+                </div>
+                
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-info pull-right">Next</button>
