@@ -38,12 +38,12 @@
                                     max: 72, 
                                 }
                             }"
-                            name="password" type="password" :class="{'input': true, 'is-danger': errors.has('email') }" required>
+                            name="password" type="password" :class="{'input': true, 'is-danger': errors.has('password') }" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" name="password_confirmation" type="password" required>
+                    <input class="form-control" :class="{'input': true, 'is-danger': errors.has('password') }" name="password_confirmation" type="password" required>
                 </div>
                 <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
 
