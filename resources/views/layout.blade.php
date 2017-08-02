@@ -85,16 +85,7 @@
     var main = new Vue({
         el: '#main'
     });
-
-    $(document).ready(function(){
-        Inputmask().mask(document.querySelectorAll("input"));
-    });
     
-    if (self == top) { 
-        document.documentElement.style.display = 'block'; 
-    } else {
-        top.location = self.location;
-    }
 
 
 </script>
