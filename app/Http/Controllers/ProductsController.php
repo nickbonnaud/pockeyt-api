@@ -85,7 +85,7 @@ class ProductsController extends Controller {
       foreach ($products as $product) {
         $product->price = ($product->price) / 100;
       }
-  	return view('products.list', compact('products', 'profile'));
+  	return redirect()->route('products.list', ['profiles' => Crypt::encrypt($user->profile->id)]);
   }
 
   public function destroy(DeleteProductRequest $request, $id) {
