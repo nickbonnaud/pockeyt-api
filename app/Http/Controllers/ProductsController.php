@@ -215,6 +215,7 @@ class ProductsController extends Controller {
 
   public function matchLocation($locations) {
     $businessLocation = $this->user->profile->account->bizStreetAdress;
+    $profile = $this->user->profile;
     if(isset($businessLocation)) {
       foreach ($locations as $location) {
         if ($location->business_address->address_line_1 == $businessLocation) {
@@ -225,17 +226,18 @@ class ProductsController extends Controller {
         } 
       }
       flash()->overlay('Oops', "Your business street address in Pockeyt, " . $businessLocation . ", does not match your saved street address in Square. Please change your address in Pockeyt or Square to match in order to continue.", 'error');
-      return redirect()->route('products.list');
+      return redirect()->route('products.list', ['profiles' => Crypt::encrypt($profile->id)]);
     } else {
       flash()->overlay('Oops! Please finish your account', 'Set your business address in the Payment Account Info tab in the Business Info section.', 'error');
-      return redirect()->route('products.list');
+      return redirect()->route('products.list', ['profiles' => Crypt::encrypt($profile->id)]);
     }
   }
 
   public function syncPockeytInventory($items){
     if ($items === []) {
       flash()->overlay('Oops', "This location has no inventory on Square.", 'error');
-      return redirect()->route('products.list');
+      $profile = $this->user->profile;
+      return redirect()->route('products.list', ['profiles' => Crypt::encrypt($profile->id)]);
     } else {
       foreach ($items as $item) {
         $name = $item->name;
@@ -273,7 +275,8 @@ class ProductsController extends Controller {
 
   public function syncSuccess() {
     flash()->success('Synced!', 'Pockeyt Inventory updated.');
-    return redirect()->route('products.list');
+    $profile = $this->user->profile;
+    return redirect()->route('products.list', ['profiles' => Crypt::encrypt($profile->id)]);
   }
 
 }
