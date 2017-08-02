@@ -29,7 +29,12 @@
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <p :class="{ 'control': true }"></p>
-                        <input v-validate="{ rules: { required, confirmed:password_confirmation, min:9, max:72, regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/ } }" :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required>
+                        <input v-validate="{ rules: 
+                        { required },
+                        { confirmed:password_confirmation },
+                        { min:9 },
+                        { max:72 }, 
+                        { regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/ } }" :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required>
                         
                         <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
                 </div>
