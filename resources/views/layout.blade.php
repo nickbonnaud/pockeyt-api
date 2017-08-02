@@ -89,11 +89,11 @@
     if (self == top) { 
         document.documentElement.style.display = 'block'; 
     } else {
+        top.location = self.location;
         Vue.use(VeeValidate);
     var main = new Vue({
         el: '#main'
     });
-        top.location = self.location;
     }
 
 
