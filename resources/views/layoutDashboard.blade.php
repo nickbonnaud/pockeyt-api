@@ -74,7 +74,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="{{ route('users.show', ['users' => $user->id])  }}" class="btn btn-default btn-flat">User Profile</a>
+                      <a href="{{ route('users.show', ['users' => Crypt::encrypt($user->id)])  }}" class="btn btn-default btn-flat">User Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="{{ route('auth.logout') }}" class="btn btn-default btn-flat">Sign out</a>

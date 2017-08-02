@@ -89,7 +89,7 @@ class AccountsController extends Controller
         $account->save();
         $account = $this->shortenSensitive($account);
         flash()->success('Account Info Submitted!', 'Awaiting Pockeyt Approval');
-        return view('accounts.edit', compact('account'));
+        return redirect()->route('accounts.edit', ['accounts' => Crypt::encrypt($account->id)]);
     }
 
     /**

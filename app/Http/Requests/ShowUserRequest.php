@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ShowUserRequest extends Request {
     /**
@@ -9,8 +11,12 @@ class ShowUserRequest extends Request {
      * @return bool
      */
     public function authorize() {
-    	$user = \Auth::user();
-    	return $user->id == $this->route()->parameter('users');
+        try {
+            $user = \Auth::user();
+            return Crypt::decrypt($this->route('users')) == $user->id;
+        } catch(DecryptException $e) {
+            return false;
+        }
     }
 
     /**

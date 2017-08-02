@@ -10,6 +10,7 @@ use App\Account;
 use App\Transaction;
 use Carbon\Carbon;
 use DateTimeZone;
+use Crypt;
 
 class QuickBookController extends Controller
 {
@@ -105,7 +106,7 @@ class QuickBookController extends Controller
     $profile = $this->user->profile;
     $profile->connected_qb = false;
     $profile->save();
-    return view('accounts.edit', compact('account'));
+    return redirect()->route('accounts.edit', ['accounts' => Crypt::encrypt($account->id)]);
   }
 
   public function setPockeytId() {

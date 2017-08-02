@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Photo;
+use Crypt;
 use Illuminate\Http\Request;
 use App\Http\Requests\EditBusinessUserRequest;
 use App\Http\Requests\UpdateBusinessUserRequest;
@@ -34,7 +35,7 @@ class BusinessUsersController extends Controller
      */
     public function show(ShowUserRequest $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(Crypt::decrypt($id));
         return view('users.show', compact('user'));
     }
 
