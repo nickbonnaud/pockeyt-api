@@ -93,9 +93,8 @@
                 }
             }
         };
-        VeeValidate.Validator.updateDictionary(dictionary);
+        VeeValidate.Validator.updateDictionary(dict);
         Vue.use(VeeValidate);
-        Validator.updateDictionary(dict);
         var main = new Vue({
             el: '#main'
         });
