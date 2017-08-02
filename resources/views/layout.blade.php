@@ -95,7 +95,7 @@
             }
           }
         };
-        this.$validator.updateDictionary(dict);
+        Validator.updateDictionary(dict);
         var main = new Vue({
             el: '#main'
         });
