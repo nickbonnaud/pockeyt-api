@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <p :class="{ 'control': true }"></p>
+                    <p :class="{ 'control': true }">
                         <input v-validate="{
                             rules: 
                                 { 
@@ -39,9 +39,10 @@
                                     max: 72, 
                                 }
                             }"
-                            :class="{'input': true, 'is-danger': errors.has('password') } form-control" name="password" type="password" required>
-                        
+                            :class="{'input': true, 'is-danger': errors.has('password') } form-control" name="password" type="password" required
+                        />
                         <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
+                    </p>
                 </div>
 
                 <div class="form-group">
