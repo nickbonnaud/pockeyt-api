@@ -81,7 +81,7 @@ class TransactionsController extends Controller
         $profile = $this->user->profile;
         $profile->transactions()->save($transaction);
 
-        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($business->id)]);
+        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     public function update(UpdateTransactionRequest $request, $id) {
@@ -89,7 +89,7 @@ class TransactionsController extends Controller
         $transaction->update($request->all());
         $profile = $this->user->profile;
 
-        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($business->id)]);
+        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     public function charge(ChargeRequest $request) {
@@ -182,12 +182,12 @@ class TransactionsController extends Controller
 
     public function flashSuccessPush($customer, $profile) {
         flash()->success('Bill created!', 'Waiting for ' . $customer->first_name . ' to approve bill');
-        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($business->id)]);
+        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     public function flashErrorPush($profile) {
         flash()->overlay('Oops!', 'An error occurred while sending Bill to the customer. Please contact customer support.', 'error');
-        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($business->id)]);
+        return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
     }
 
     public function userConfirmBill(Request $request) {

@@ -51,7 +51,7 @@ class ProfilesController extends Controller {
      */
     public function create() {
         if(!is_null($this->user->profile))
-            return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
+            return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($this->user->profile->id)]);
 
         $tags = \App\Tag::lists('name', 'id');
         return view('profiles.create', compact('tags'));
@@ -65,7 +65,7 @@ class ProfilesController extends Controller {
      */
     public function store(ProfileRequest $request) {
         if(!is_null($this->user->profile))
-            return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
+            return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($this->user->profile->id)]);
 
         $profile = $this->user->publish(
             new Profile($request->except(['lat', 'lng', 'county', 'state', 'website']))

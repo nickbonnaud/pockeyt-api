@@ -118,7 +118,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)])  }}"><i class="fa fa-dashboard"></i> <span class="menu-text">Dashboard</span></a></li>
+            <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> <span class="menu-text">Dashboard</span></a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-building"></i>
