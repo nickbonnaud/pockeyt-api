@@ -85,7 +85,7 @@
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
         Vue.use(VeeValidate);
-
+        Validator.create();
         const dict = {
             en: {
             custom: {
