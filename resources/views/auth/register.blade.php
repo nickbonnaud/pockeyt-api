@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="row" id="main">
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h1>Register</h1>
 
@@ -40,7 +40,6 @@
                             }"
                             :class="{'input': true, 'is-danger': errors.has('password') }" name="password" type="password" required
                         />
-                        <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
                 </div>
 
                 <div class="form-group">
@@ -48,6 +47,7 @@
                     <input class="form-control" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password') }" type="password" 
                            required>
                 </div>
+                <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-info pull-right">Next</button>
@@ -57,12 +57,4 @@
             @include ('errors.form')
         </div>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
-<script>
-    Vue.use(VeeValidate);
-    var main = new Vue({
-        el: '#main'
-    });
-</script>
 @stop
