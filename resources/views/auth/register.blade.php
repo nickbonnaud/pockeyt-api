@@ -28,24 +28,12 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                        <input class="form-control" v-validate="{
-                            rules: 
-                                { 
-                                    regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
-                                    required: true,
-                                    confirmed: password_confirmation,
-                                    min: 9,
-                                    max: 72, 
-                                }
-                            }"
-                            name="password" type="password" required>
+                        <input v-validate data-vv-rules="required|confirmed:password_confirmation" name="password" type="password" class="form-control">
+<input name="password_confirmation" type="password" class="form-control">
+                  <span v-show="fields.failed('password')">{{ errors.first('password') }}</span>
                 </div>
 
-                <div class="form-group">
-                    <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" name="password_confirmation" type="password" required>
-                </div>
-                <span v-show="errors.has('password')" class="help is-danger">@{{ errors.first('password') }}</span>
+                
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-info pull-right">Next</button>
