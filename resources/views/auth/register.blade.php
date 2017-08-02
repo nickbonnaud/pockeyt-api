@@ -32,6 +32,8 @@
                             rules: 
                                 { 
                                     regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
+                                    required: true,
+                                    confirmed: 'password_confirmation',
                                     min: 9,
                                     max: 72, 
                                 }
@@ -43,8 +45,8 @@
 
                 <div class="form-group">
                     <label for="password_confirmation">Confirm Password:</label>
-                    <input class="form-control" v-validate="'required|confirmed: password'" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password_confirmation') }" type="password" required>
-                    <span v-show="errors.has('password_confirmation')" class="help is-danger">@{{ errors.first('password_confirmation') }}</span>
+                    <input class="form-control" name="password_confirmation" :class="{'input': true, 'is-danger': errors.has('password') }" type="password" 
+                           required>
                 </div>
 
                 <div class="form-group">
