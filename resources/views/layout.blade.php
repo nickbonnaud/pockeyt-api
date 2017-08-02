@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @if ($signedIn)
                     @if($hasProfile)
-                        <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id]) }}">My Profile</a></li>
+                        <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}">My Profile</a></li>
                     @elseif(!$isAdmin)
                         <li><a href="{{ route('profiles.create') }}">Create Profile</a></li>
                     @endif

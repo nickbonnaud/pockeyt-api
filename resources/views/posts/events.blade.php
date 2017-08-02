@@ -26,7 +26,7 @@
             @endif
           @endif
 		    <ol class="breadcrumb">
-		      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+		      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Events</li>
 		    </ol>
 		  </section>

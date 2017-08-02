@@ -26,7 +26,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('profiles.show', ['profiles' => $user->profile->id]) }}" class="logo">
+        <a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">
             <img src="{{ asset('/images/white-logo.png') }}">

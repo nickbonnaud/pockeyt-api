@@ -19,7 +19,7 @@
 		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
 		    	</a>
 			    <ol class="breadcrumb">
-			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+			      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Team</li>
 			    </ol>
 			  </section>

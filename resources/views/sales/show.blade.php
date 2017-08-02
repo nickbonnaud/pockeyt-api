@@ -23,7 +23,7 @@
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
 			    <input style="display: inline-block;" v-show="customDate" type="text" id="dateRange" value=""/>
 			    <ol class="breadcrumb">
-			      <li><a href="{{ route('profiles.show', ['profiles' => $user->profile->id])  }}"><i class="fa fa-dashboard"></i> Home</a></li>
+			      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
 			    </ol>
 			  </section>

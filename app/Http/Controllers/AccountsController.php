@@ -49,7 +49,7 @@ class AccountsController extends Controller
         
 
         if(!is_null($this->user->profile->account))
-            return redirect()->route('profiles.show', ['profiles' => $this->user->profile->id]);
+            return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($this->user->profile->id)]);
 
         $account = $this->user->profile->publish(
             new Account($request->except('annualCCSales'))
