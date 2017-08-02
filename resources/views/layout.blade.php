@@ -85,6 +85,17 @@
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
         Vue.use(VeeValidate);
+
+        const dict = {
+            en: {
+            custom: {
+              password: {
+                regex: 'Custom Message' // messages can be strings as well.
+              }
+            }
+          }
+        };
+        this.$validator.updateDictionary(dict);
         var main = new Vue({
             el: '#main'
         });
