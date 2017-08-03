@@ -63,24 +63,6 @@
       </div>
       @include ('errors.form')
     </div>
-    <div class="col-md-6" id="main">
-      <input class="form-control" 
-      v-validate="{
-        rules: 
-            { 
-              regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/,
-              required: true,
-              confirmed: 'password_confirm',
-              min: 9,
-              max: 72, 
-            }
-        }"
-      name="new_password" type="password" :class="{'input': true, 'is-danger': errors.has('new_password') }" required>
-
-      <input class="form-control" :class="{'input': true, 'is-danger': errors.has('new_password') }" name="password_confirm" type="password" required>
-
-      <span v-show="errors.has('new_password')" class="help is-danger">@{{ errors.first('new_password') }}</span>
-    </div>
     <!-- /.box -->
   </section>
   <!-- /.content -->
@@ -107,7 +89,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPasswordModalLabel">Change Password</h4>
       </div>
-      <div class="modal-body-customer-info">
+      <div class="modal-body-customer-info" id="main">
         {!! Form::open(['method' => 'PATCH', 'route' => ['users.credentials', $user->id], 'class' => 'form-horizontal']) !!}
           @include ('users.passwordForm')
         {!! Form::close() !!}
@@ -144,6 +126,7 @@
 
 <script>
   $(document).ready(function(){
+    console.log("ready");
     Dropzone.options.uploadProfilePhoto = {
       paramName: 'photo',
       maxFilesize: 3,
