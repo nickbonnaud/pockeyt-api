@@ -143,16 +143,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
 <script>
-  Dropzone.options.uploadProfilePhoto = {
-      paramName: 'photo',
-      maxFilesize: 3,
-      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-      init: function() {
-          this.on('success', function() {
-              window.location.reload();
-          });
-      }
-  };
   const dict = {
     en: {
       custom: {
@@ -167,5 +157,16 @@
   var main = new Vue({
       el: '#main'
   });
+
+  Dropzone.options.uploadProfilePhoto = {
+      paramName: 'photo',
+      maxFilesize: 3,
+      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+      init: function() {
+          this.on('success', function() {
+              window.location.reload();
+          });
+      }
+  };
 </script>
 @stop

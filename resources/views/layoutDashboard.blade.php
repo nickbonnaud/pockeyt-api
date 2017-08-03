@@ -299,6 +299,17 @@
   <script>
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
+        const dict = {
+    en: {
+      custom: {
+        password: {
+            regex: 'Password does not meet requirements'
+        }
+      }
+    }
+  };
+  VeeValidate.Validator.updateDictionary(dict);
+  Vue.use(VeeValidate);
     });
 
     if (self == top) { 
