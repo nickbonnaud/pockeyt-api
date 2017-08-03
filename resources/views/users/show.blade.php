@@ -137,10 +137,13 @@
   </div>
 </div>
 <!-- /.content-wrapper -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
-<script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
+@stop
+
+@section('scripts.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
+
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   const dict = {
     en: {
       custom: {
@@ -155,13 +158,7 @@
   var main = new Vue({
       el: '#main'
   });
-  });
-</script>
-@stop
-@section('scripts.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-
-<script>
+});
 
   Dropzone.options.uploadProfilePhoto = {
       paramName: 'photo',
