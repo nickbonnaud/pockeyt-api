@@ -138,10 +138,6 @@
 </div>
 <!-- /.content-wrapper -->
 @stop
-
-@section('scripts.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-
 <script>
   const dict = {
     en: {
@@ -157,6 +153,12 @@
   var main = new Vue({
       el: '#main'
   });
+</script>
+
+@section('scripts.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
+
+<script>
 
   Dropzone.options.uploadProfilePhoto = {
       paramName: 'photo',
