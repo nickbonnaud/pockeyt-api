@@ -63,24 +63,6 @@
       </div>
       @include ('errors.form')
     </div>
-    <div class="col-md-6" id="main">
-      <input class="form-control" 
-      v-validate="{
-        rules: 
-            { 
-              regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/,
-              required: true,
-              confirmed: 'password_confirm',
-              min: 9,
-              max: 72, 
-            }
-        }"
-      name="new_password" type="password" :class="{'input': true, 'is-danger': errors.has('new_password') }" required>
-
-      <input class="form-control" :class="{'input': true, 'is-danger': errors.has('new_password') }" name="password_confirm" type="password" required>
-
-      <span v-show="errors.has('new_password')" class="help is-danger">@{{ errors.first('new_password') }}</span>
-    </div>
     <!-- /.box -->
   </section>
   <!-- /.content -->
@@ -140,37 +122,18 @@
 @stop
 
 @section('scripts.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
-  Dropzone.options.uploadProfilePhoto = {
-      paramName: 'photo',
-      maxFilesize: 3,
-      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-      init: function() {
-          this.on('success', function() {
-              window.location.reload();
-          });
-      }
-  };
-</script>
+    <script>
+        Dropzone.options.uploadProfilePhoto = {
+            paramName: 'photo',
+            maxFilesize: 3,
+            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+            init: function() {
+                this.on('success', function() {
+                    window.location.reload();
+                });
+            }
+        };
+    </script>
 @stop
-<script>
-$(document).ready(function(){
-    const dict = {
-      en: {
-        custom: {
-          new_password: {
-              regex: 'Password does not meet requirements'
-          }
-        }
-      }
-    };
-    VeeValidate.Validator.updateDictionary(dict);
-    Vue.use(VeeValidate);
-    var main = new Vue({
-        el: '#main'
-    });
-  });
-
-</script>
