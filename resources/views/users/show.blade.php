@@ -137,7 +137,6 @@
   </div>
 </div>
 <!-- /.content-wrapper -->
-@stop
 <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
 <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
 <script src="{{ asset('/vendor/jquery/jquery-2.2.3.min.js') }}"></script>
@@ -159,6 +158,7 @@
     });
   });
 </script>
+@stop
 @section('scripts.footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
