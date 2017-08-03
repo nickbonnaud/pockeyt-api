@@ -140,7 +140,7 @@
 @stop
 <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
 <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
-<script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/vendor/jquery/jquery-2.2.3.min.js') }}"></script>
 <script>
    $(document).ready(function(){
     const dict = {
