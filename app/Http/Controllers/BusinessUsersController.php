@@ -74,8 +74,9 @@ class BusinessUsersController extends Controller
 
     public function changePassword(UpdatePasswordRequest $request, $id) {
         $validator = Validator::make($request->all(), [
-            'new_password' => 'required|confirmed|min:9|max:72|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/',
-            'old_password' => 'required'
+            'new_password' => 'required|min:9|max:72|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/',
+            'old_password' => 'required',
+            'password_confirm' => 'required|same:new_password'
         ]);
 
         if ($validator->fails()) {
