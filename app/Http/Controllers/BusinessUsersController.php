@@ -98,7 +98,7 @@ class BusinessUsersController extends Controller
                 }
             } else {
                 return redirect()->route('users.show', ['users' => Crypt::encrypt($user->id)])
-                    ->withErrors('Incorrect Password');
+                    ->withErrors('Incorrect Old Password');
             }
         }
     }
