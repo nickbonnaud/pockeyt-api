@@ -122,17 +122,18 @@
 @stop
 
 @section('scripts.footer')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
-  <script>
+<script>
+  $(document).ready(function(){
     const dict = {
-        en: {
-            custom: {
-                password: {
-                    regex: 'Password does not meet requirements'
-                }
-            }
+      en: {
+        custom: {
+          password: {
+              regex: 'Password does not meet requirements'
+          }
         }
+      }
     };
     VeeValidate.Validator.updateDictionary(dict);
     Vue.use(VeeValidate);
@@ -150,5 +151,6 @@
             });
         }
     };
-  </script>
+  });
+</script>
 @stop
