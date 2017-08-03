@@ -173,24 +173,6 @@
       </aside>
 
   @yield('content')
-    <div class="col-md-6" id="main">
-      <input class="form-control" 
-      v-validate="{
-        rules: 
-            { 
-              regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/,
-              required: true,
-              confirmed: 'password_confirm',
-              min: 9,
-              max: 72, 
-            }
-        }"
-      name="new_password" type="password" :class="{'input': true, 'is-danger': errors.has('new_password') }" required>
-
-      <input class="form-control" :class="{'input': true, 'is-danger': errors.has('new_password') }" name="password_confirm" type="password" required>
-
-      <span v-show="errors.has('new_password')" class="help is-danger">@{{ errors.first('new_password') }}</span>
-    </div>
   
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
@@ -317,20 +299,6 @@
   <script>
     $(document).ready(function(){
       Inputmask().mask(document.querySelectorAll("input"));
-      const dict = {
-    en: {
-      custom: {
-        password: {
-            regex: 'Password does not meet requirements'
-        }
-      }
-    }
-  };
-  VeeValidate.Validator.updateDictionary(dict);
-  Vue.use(VeeValidate);
-  var main = new Vue({
-      el: '#main'
-  });
     });
 
     if (self == top) { 

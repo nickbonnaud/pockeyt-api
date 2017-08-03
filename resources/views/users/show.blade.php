@@ -143,22 +143,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
 <script>
-$(document).ready(function(){
-  const dict = {
-    en: {
-      custom: {
-        password: {
-            regex: 'Password does not meet requirements'
-        }
+    var main = new Vue({
+      el: '#main',
+
+      mounted: function() {
+        const dict = {
+          en: {
+            custom: {
+              password: {
+                  regex: 'Password does not meet requirements'
+              }
+            }
+          }
+        };
+        VeeValidate.Validator.updateDictionary(dict);
+        Vue.use(VeeValidate);
       }
-    }
-  };
-  VeeValidate.Validator.updateDictionary(dict);
-  Vue.use(VeeValidate);
-  var main = new Vue({
-      el: '#main'
-  });
-});
+    });
 
   Dropzone.options.uploadProfilePhoto = {
       paramName: 'photo',
