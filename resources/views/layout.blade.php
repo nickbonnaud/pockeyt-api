@@ -88,7 +88,7 @@
             en: {
                 custom: {
                     password: {
-                        regex: 'Custom Message' // messages can be strings as well.
+                        regex: 'Password does not meet requirements'
                     }
                 }
             }

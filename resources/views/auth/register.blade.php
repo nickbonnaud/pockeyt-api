@@ -28,17 +28,18 @@
 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                        <input class="form-control" v-validate="{
-                            rules: 
-                                { 
-                                    regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=]).*$/,
-                                    required: true,
-                                    confirmed: 'password_confirmation',
-                                    min: 9,
-                                    max: 72, 
-                                }
-                            }"
-                            name="password" type="password" :class="{'input': true, 'is-danger': errors.has('password') }" required>
+                    <input class="form-control" v-validate="{
+                        rules: 
+                            { 
+                                regex: /^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%=@&?]).*$/,
+                                required: true,
+                                confirmed: 'password_confirmation',
+                                min: 9,
+                                max: 72, 
+                            }
+                        }"
+                        name="password" type="password" :class="{'input': true, 'is-danger': errors.has('password') }" required>
+                    <p class="form-text text-muted">Password must be at least 9 characters long and contain 3 of the 4 categories: uppercase, lowercase, numbers, special characters.</p>
                 </div>
 
                 <div class="form-group">
