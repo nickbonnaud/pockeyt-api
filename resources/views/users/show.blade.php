@@ -20,6 +20,7 @@
 
     <!-- Default box -->
     <div class="col-md-6">
+      @include ('errors.form')
       <div class="box box-primary">
         <div class="box-body box-profile">
           <div class="change-pass">
@@ -61,7 +62,6 @@
           </a>
         </div>
       </div>
-      @include ('errors.form')
     </div>
     <!-- /.box -->
   </section>
