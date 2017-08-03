@@ -143,11 +143,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
 <script>
-    var main = new Vue({
-      el: '#main',
-
-      mounted: function() {
-        const dict = {
+    const dict = {
           en: {
             custom: {
               password: {
@@ -156,6 +152,10 @@
             }
           }
         };
+    var main = new Vue({
+      el: '#main',
+
+      mounted: function() {
         VeeValidate.Validator.updateDictionary(dict);
         Vue.use(VeeValidate);
       }
