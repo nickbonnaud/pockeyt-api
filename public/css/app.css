@@ -8857,6 +8857,7 @@ img {
 
 .help.is-danger {
   color: #ff3860;
+  text-align: center;
 }
 
 .help {

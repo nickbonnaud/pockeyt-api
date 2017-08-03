@@ -89,7 +89,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPasswordModalLabel">Change Password</h4>
       </div>
-      <div class="modal-body-customer-info">
+      <div class="modal-body-customer-info" id="main">
         {!! Form::open(['method' => 'PATCH', 'route' => ['users.credentials', $user->id], 'class' => 'form-horizontal']) !!}
           @include ('users.passwordForm')
         {!! Form::close() !!}
@@ -122,18 +122,33 @@
 @stop
 
 @section('scripts.footer')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
-    <script>
-        Dropzone.options.uploadProfilePhoto = {
-            paramName: 'photo',
-            maxFilesize: 3,
-            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-            init: function() {
-                this.on('success', function() {
-                    window.location.reload();
-                });
+  <script>
+    const dict = {
+        en: {
+            custom: {
+                password: {
+                    regex: 'Password does not meet requirements'
+                }
             }
-        };
-    </script>
+        }
+    };
+    VeeValidate.Validator.updateDictionary(dict);
+    Vue.use(VeeValidate);
+    var main = new Vue({
+        el: '#main'
+    });
+
+    Dropzone.options.uploadProfilePhoto = {
+        paramName: 'photo',
+        maxFilesize: 3,
+        acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+        init: function() {
+            this.on('success', function() {
+                window.location.reload();
+            });
+        }
+    };
+  </script>
 @stop

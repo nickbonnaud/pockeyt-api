@@ -281,6 +281,7 @@
 	<script src="{{ asset('/js/app.min.js') }}"></script>
 	<script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
+  <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
   <script src="{{ asset('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
   <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
