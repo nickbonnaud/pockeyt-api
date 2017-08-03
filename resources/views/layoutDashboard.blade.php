@@ -280,7 +280,7 @@
 	<script src="{{ asset('/vendor/fastclick/fastclick.js') }}"></script>
 	<script src="{{ asset('/js/app.min.js') }}"></script>
 	<script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
-  <script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
   <script src="{{ asset('/vendor/sweetalert/dist/sweetalert.min.js') }}"></script>
   <script src="{{ asset('/vendor/moment/min/moment.min.js') }}"></script>
