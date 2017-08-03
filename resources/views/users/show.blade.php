@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper" id="main">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -66,7 +66,7 @@
     <!-- /.box -->
   </section>
   <!-- /.content -->
-</div>
+
 <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -89,7 +89,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userPasswordModalLabel">Change Password</h4>
       </div>
-      <div class="modal-body-customer-info" id="main">
+      <div class="modal-body-customer-info">
         {!! Form::open(['method' => 'PATCH', 'route' => ['users.credentials', $user->id], 'class' => 'form-horizontal']) !!}
           @include ('users.passwordForm')
         {!! Form::close() !!}
@@ -117,6 +117,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- /.content-wrapper -->
 @stop
