@@ -9,6 +9,7 @@
 	<div class="col-sm-10">
 		<input type="password" name="new_password" class="form-control" id="new_password" required>
 	</div>
+	<p class="form-text text-muted">Password must be at least 9 characters long and contain 3 of the 4 categories: uppercase, lowercase, numbers, special characters.</p>
 </div>
 <div class="form-group">
 	<label for="password_confirm" class="col-sm-2 control-label">Confirm Password</label>
