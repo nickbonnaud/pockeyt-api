@@ -293,19 +293,11 @@
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
-  <style>
-    html { display:none; }
-  </style>
+  
   <script>
     $(document).ready(function(){
         Inputmask().mask(document.querySelectorAll("input"));
     });
-
-    if (self == top) { 
-      document.documentElement.style.display = 'block'; 
-    } else {
-      top.location = self.location;
-    };
 
     $.ajaxSetup({
         headers: {
