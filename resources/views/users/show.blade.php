@@ -137,11 +137,26 @@
   </div>
 </div>
 <!-- /.content-wrapper -->
-<script src="{{ asset('/vendor/vue/vue.min.js') }}"></script>
-<script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
-<script src="{{ asset('/vendor/jquery/jquery-2.2.3.min.js') }}"></script>
+@stop
+
+@section('scripts.footer')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 <script>
-   $(document).ready(function(){
+
+  Dropzone.options.uploadProfilePhoto = {
+      paramName: 'photo',
+      maxFilesize: 3,
+      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+      init: function() {
+          this.on('success', function() {
+              window.location.reload();
+          });
+      }
+  };
+</script>
+@stop
+<script>
+$(document).ready(function(){
     const dict = {
       en: {
         custom: {
@@ -157,22 +172,5 @@
         el: '#main'
     });
   });
-</script>
-@stop
-@section('scripts.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
 
-<script>
-
-  Dropzone.options.uploadProfilePhoto = {
-      paramName: 'photo',
-      maxFilesize: 3,
-      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
-      init: function() {
-          this.on('success', function() {
-              window.location.reload();
-          });
-      }
-  };
 </script>
-@stop
