@@ -156,7 +156,7 @@
     VeeValidate.Validator.updateDictionary(dict);
     Vue.use(VeeValidate);
     var main = new Vue({
-        el: '#shhit'
+        el: '#main'
     });
   });
 
