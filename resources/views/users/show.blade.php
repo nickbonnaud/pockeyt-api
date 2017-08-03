@@ -140,6 +140,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
 <script>
+  $(document).ready(function(){
   const dict = {
     en: {
       custom: {
@@ -153,6 +154,7 @@
   Vue.use(VeeValidate);
   var main = new Vue({
       el: '#main'
+  });
   });
 </script>
 @stop
