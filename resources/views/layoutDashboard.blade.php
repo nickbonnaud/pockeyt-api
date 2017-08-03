@@ -299,20 +299,6 @@
   <script>
     $(document).ready(function(){
       Inputmask().mask(document.querySelectorAll("input"));
-      const dict = {
-      en: {
-        custom: {
-          new_password: {
-              regex: 'Password does not meet requirements'
-          }
-        }
-      }
-    };
-    VeeValidate.Validator.updateDictionary(dict);
-    Vue.use(VeeValidate);
-    var main = new Vue({
-        el: '#main'
-    });
     });
 
     if (self == top) { 
