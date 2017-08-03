@@ -147,7 +147,7 @@
     const dict = {
       en: {
         custom: {
-          password: {
+          new_password: {
               regex: 'Password does not meet requirements'
           }
         }
@@ -160,6 +160,15 @@
     });
   });
 
-  
+  Dropzone.options.uploadProfilePhoto = {
+      paramName: 'photo',
+      maxFilesize: 3,
+      acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+      init: function() {
+          this.on('success', function() {
+              window.location.reload();
+          });
+      }
+  };
 </script>
 @stop
