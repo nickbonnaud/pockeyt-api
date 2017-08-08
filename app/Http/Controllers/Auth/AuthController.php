@@ -81,6 +81,6 @@ class AuthController extends Controller {
     }
 
     protected function checkSession() {
-        return response()->json(['guest' => Auth::guest()]);
+        return response("hello");
     }
 }
