@@ -302,10 +302,12 @@
 
       var idleInterval = setInterval(timerIncrement, 60000);
       $(this).mousemove(function (e) {
+        console.log("mouse");
         idleTime = 0;
       });
       $(this).keypress(function (e) {
-          idleTime = 0;
+        console.log("key");
+        idleTime = 0;
       });
 
       function timerIncrement() {
