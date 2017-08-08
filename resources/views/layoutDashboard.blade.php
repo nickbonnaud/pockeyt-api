@@ -337,7 +337,7 @@
         pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
           .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
 
-        window.setInterval(this.checkSession, 60000);
+        window.setInterval(this.checkSession, 120000);
       },
 
       methods: {
@@ -399,7 +399,7 @@
 
         checkSession: function() {
           $.ajax({
-            method: 'POST',
+            method: 'GET',
             url: '/auth/session',
             success: function(data) {
              console.log(data);

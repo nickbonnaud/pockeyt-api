@@ -12,7 +12,7 @@ Route::post('auth/login',       'Auth\AuthController@postLogin');
 Route::get('auth/logout',       'Auth\AuthController@getLogout')->name('auth.logout');
 Route::get('auth/register',     'Auth\AuthController@getRegister')->name('auth.register');
 Route::post('auth/register',    'Auth\AuthController@postRegister');
-Route::post('auth/session',     'Auth\AuthController@checkSession');
+Route::get('auth/session',      'Auth\AuthController@checkSession');
 
 // Password reset link request routes...
 Route::get('password/email', 'Auth\PasswordController@getEmail')->name('password.email');
