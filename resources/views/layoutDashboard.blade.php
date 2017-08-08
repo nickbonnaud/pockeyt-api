@@ -309,6 +309,7 @@
       });
 
       function timerIncrement() {
+        console.log("time");
         idleTime = idleTime + 1;
         if (idleTime > 2) {
           window.location.reload();
