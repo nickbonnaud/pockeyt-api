@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Lang;
@@ -33,7 +34,7 @@ class AuthController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout', 'checkSession']]);
 
         parent::__construct();
     }
@@ -77,5 +78,9 @@ class AuthController extends Controller {
         return Lang::has('auth.throttle')
             ? Lang::get('auth.throttle', ['seconds' => $minutes])
             : 'Too many login attempts. Please try again in '.$minutes.' minutes.';
+    }
+
+    protected function checkSession() {
+        return response()->json(['guest' => Auth::guest()]);
     }
 }
