@@ -80,6 +80,6 @@ class AuthController extends Controller {
     }
 
     protected function checkSession() {
-        return Response::json(['guest' => Auth::guest()]);
+        return response()->json(['guest' => Auth::guest()]);
     }
 }
