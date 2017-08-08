@@ -296,9 +296,25 @@
     html { display:none; }
   </style>
   <script>
+    var idleTime = 0;
     $(document).ready(function(){
       Inputmask().mask(document.querySelectorAll("input"));
+
+      var idleInterval = setInterval(timerIncrement, 60000);
+      $(this).mousemove(function (e) {
+        idleTime = 0;
+      });
+      $(this).keypress(function (e) {
+          idleTime = 0;
+      });
     });
+
+    function timerIncrement() {
+      idleTime = idleTime + 1;
+      if (idleTime > 2) {
+        window.location.reload();
+      }
+    }
 
     if (self == top) { 
       document.documentElement.style.display = 'block'; 
