@@ -74,7 +74,6 @@
           </div>
         </div>
       </section>
-      <form><input type="hidden" name="_token" value="{{ csrf_token() }}"></form>
     </div>
   </div>
   <div class="modal fade" id="redeemDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
