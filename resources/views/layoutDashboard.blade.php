@@ -337,7 +337,7 @@
         pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
           .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
 
-        window.setInterval(this.checkSession, 180000);
+        window.setInterval(this.checkSession, 1920000);
       },
 
       methods: {
