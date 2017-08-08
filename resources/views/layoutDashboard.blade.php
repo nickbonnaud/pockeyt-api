@@ -296,28 +296,8 @@
     html { display:none; }
   </style>
   <script>
-    var idleTime = 0;
     $(document).ready(function(){
       Inputmask().mask(document.querySelectorAll("input"));
-
-      var idleInterval = setInterval(timerIncrement, 60000);
-      $(this).mousemove(function (e) {
-        console.log("mouse");
-        idleTime = 0;
-      });
-      $(this).keypress(function (e) {
-        console.log("key");
-        idleTime = 0;
-      });
-
-      function timerIncrement() {
-        idleTime = idleTime + 1;
-        console.log(idleTime);
-        if (idleTime > 2) {
-          console.log("inside");
-          window.location.reload();
-        }
-      }
     });
 
 
@@ -356,6 +336,8 @@
 
         pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
           .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
+
+        window.setInterval(this.checkSession, 60000);
       },
 
       methods: {
@@ -408,6 +390,19 @@
             success: function(data) {
               tab.$data.transactionsPending = data.transactionsPending;
               tab.$data.transactionsFinalized = data.transactionsFinalized;
+            },
+            error: function(data) {
+              console.log(data);
+            }
+          })
+        },
+
+        checkSession: function() {
+          $.ajax({
+            method: 'GET',
+            url: '/auth/session',
+            success: function(data) {
+             console.log(data);
             },
             error: function(data) {
               console.log(data);
