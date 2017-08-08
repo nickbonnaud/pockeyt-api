@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
+use Session;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Lang;
@@ -81,6 +81,6 @@ class AuthController extends Controller {
     }
 
     protected function checkSession() {
-        return response()->json(['guest' => Auth::guest()]);
+        return response()->json(['session' => Session::get('name')]);
     }
 }
