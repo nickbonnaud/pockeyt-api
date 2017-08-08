@@ -309,9 +309,10 @@
       });
 
       function timerIncrement() {
-        console.log("time");
         idleTime = idleTime + 1;
-        if (idleTime >= 2) {
+        console.log(idleTime);
+        if (idleTime > 2) {
+          console.log("inside");
           window.location.reload();
         }
       }
