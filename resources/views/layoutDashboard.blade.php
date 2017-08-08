@@ -402,10 +402,13 @@
             method: 'GET',
             url: '/auth/session',
             success: function(data) {
-             console.log(data);
+              if (data.guest) {
+                location.reload();
+              }
             },
             error: function(data) {
               console.log(data);
+              location.reload();
             }
           })
         }
