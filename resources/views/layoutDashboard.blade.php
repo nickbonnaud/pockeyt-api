@@ -336,8 +336,6 @@
 
         pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
           .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
-
-        window.setInterval(this.checkSession, 60000);
       },
 
       methods: {
@@ -396,19 +394,6 @@
             }
           })
         },
-
-        checkSession: function() {
-          $.ajax({
-            method: 'GET',
-            url: '/auth/session',
-            success: function(data) {
-             console.log(data);
-            },
-            error: function(data) {
-              console.log(data);
-            }
-          })
-        }
       }
     });
     tab.loadTransactions();
