@@ -20,7 +20,7 @@
 <div class="form-group">
  <label for="bizTaxId" class="col-sm-2 control-label">Business Tax ID (EIN)</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '99-9999999'" type="tel" name="bizTaxId" class="form-control" id="bizTaxId" value="{{ $account->bizTaxId }}" required>
+    <input v-mask="'##-#######'" v-model="bizTaxId" type="tel" name="bizTaxId" class="form-control" id="bizTaxId" required>
   </div>
 </div>
 <div class="form-group">
@@ -32,7 +32,7 @@
 <div class="form-group">
  <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
-    <input data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" value="{{ $account->annualCCSales }}" required>
+    <input v-mask="'$ #?#?#??#?#?#??#?#?#'" v-model="annualCCSales" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" required>
   </div>
 </div>
 <div class="form-group">
@@ -50,19 +50,19 @@
 <div class="form-group">
  <label for="bizState" class="col-sm-2 control-label">State</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': 'aa'" type="string" name="bizState" class="form-control" id="bizState" value="{{ $account->bizState }}" required>
+    <input v-mask="'AA'" v-model="bizState" type="string" name="bizState" class="form-control" id="bizState" required>
   </div>
 </div>
 <div class="form-group">
  <label for="bizZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '99999'" type="tel" name="bizZip" class="form-control" id="bizZip" value="{{ $account->bizZip }}" required>
+    <input v-mask="'#####'" v-model="bizZip" type="tel" name="bizZip" class="form-control" id="bizZip" required>
   </div>
 </div>
 <div class="form-group">
  <label for="phone" class="col-sm-2 control-label">Business Phone Number</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '(999) 999-9999'" type="tel" name="phone" class="form-control" id="phone" value="{{ $account->phone }}" required>
+    <input v-mask="'(###) ###-####'" v-model="phone" type="tel" name="phone" class="form-control" id="phone" required>
   </div>
 </div>
 <div class="form-group">
