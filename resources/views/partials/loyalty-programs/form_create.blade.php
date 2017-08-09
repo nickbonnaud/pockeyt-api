@@ -17,14 +17,14 @@
 		<label for="purchases_required">Number of Purchases required for reward</label>
 		<div class="input-group col-xs-5 col-md-3">
 			<span class="input-group-addon">#</span>
-			<input class="form-control" type="tel" name="purchases_required" id="purchases_required" placeholder="20">
+			<input class="form-control" type="number" min="1" step="1" name="purchases_required" id="purchases_required" placeholder="20">
 		</div>
 	</div>
 	<div class="form-group" v-if= "selection == 'amounts'">
 		<label for="amount_required">Total amount customers must spend to receive reward</label>
 		<div class="input-group col-xs-5 col-md-3">
 			<span class="input-group-addon">$</span>
-			<input class="form-control" type="tel" name="amount_required" id="amount_required" pattern="^\$?(([1-9](\d*|\d{0,2}(,\d{3})*))|0)(\.\d{1,2})?$" step="any" placeholder="50.00">
+			<input class="form-control" type="tel" name="amount_required" id="amount_required" pattern="^\$?(([1-9](\d*|\d{0,2}(,\d{3})*))|0)(\.\d{1,2})?$" placeholder="50.00">
 		</div>
 	</div>
 	<div class="form-group">
