@@ -270,7 +270,7 @@ $qbo_connect = $qbo_obj->qboConnect();
         indivState: '{!! $account->indivState !!}',
         indivZip: {!! $account->indivZip !!},
         ssn: 'XXXXX' + {!! $account->ssn !!},
-        bizTaxId: {!! $account->bizTaxId !!},
+        bizTaxId: '{!! $account->bizTaxId !!}',
         annualCCSales: {!! $account->annualCCSales !!},
         bizState: '{!! $account->bizState !!}',
         bizZip: {!! $account->bizZip !!},
