@@ -267,9 +267,9 @@ $qbo_connect = $qbo_obj->qboConnect();
 
       data: {
         ownership: {!! $account->ownership / 100 !!},
-        indivState: '',
-        indivZip: '',
-        ssn: ''
+        indivState: {!! $account->indivState !!},
+        indivZip: {!! $account->indivZip !!},
+        ssn: 'XXXXX' + {!! $account->ssn !!}
       },
     });
 </script>

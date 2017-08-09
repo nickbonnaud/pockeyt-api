@@ -37,13 +37,13 @@
 <div class="form-group">
  <label for="indivState" class="col-sm-2 control-label">State</label>
   <div class="col-sm-10">
-    <input v-mask="'AA'" v-model="indivState" type="text" name="indivState" class="form-control" id="indivState" value="{{ $account->indivState }}" required>
+    <input v-mask="'AA'" v-model="indivState" type="text" name="indivState" class="form-control" id="indivState" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input v-mask="'#####'" v-model="indivZip" type="tel" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
+    <input v-mask="'#####'" v-model="indivZip" type="tel" name="indivZip" class="form-control" id="indivZip" required>
   </div>
 </div>
 <div class="form-group">
@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input v-mask="'###-##-####'" v-model="ssn" type="tel" name="ssn" class="form-control" id="ssn" value="XXXXX{{$account->ssn}}" required>
+    <input v-mask="'###-##-####'" v-model="ssn" type="tel" name="ssn" class="form-control" id="ssn" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
