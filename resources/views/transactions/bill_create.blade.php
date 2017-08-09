@@ -110,8 +110,6 @@
       data: {
         inventory: {!! $inventory !!},
         bill: [],
-        name: [],
-        price: [],
         query: ''
       },
 
