@@ -403,12 +403,12 @@
             url: '/auth/session',
             success: function(data) {
               if (data.guest) {
-                location.reload();
+                window.location.replace('https://pockeytbiz.com');
               }
             },
             error: function(data) {
               console.log(data);
-              location.reload();
+              window.location.replace('https://pockeytbiz.com');
             }
           })
         }
