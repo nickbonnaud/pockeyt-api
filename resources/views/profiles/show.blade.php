@@ -25,7 +25,6 @@
         </ol>
       </section>
       <section class="content">
-        <p>Query: @{{ query }}</p>
         <form class="customer-search">
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
