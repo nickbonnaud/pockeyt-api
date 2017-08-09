@@ -53,7 +53,7 @@ class LoyaltyProgramsController extends Controller
             $loyaltyProgram->is_increment = true;
        } else {
             $loyaltyProgram->is_increment = false;
-            $loyaltyProgram->amount_required = ($loyaltyProgram->amount_required) * 100;
+            $loyaltyProgram->amount_required = preg_replace("/[^0-9\.]/","",$loyaltyProgram->amount_required) * 100;
        }
        $loyaltyProgram->reward = lcfirst($loyaltyProgram->reward);
        $this->user->profile->loyaltyProgram()->save($loyaltyProgram);
