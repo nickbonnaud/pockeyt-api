@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="row">
+    <div class="row" id="register">
         <div class="col-md-6 col-md-offset-3">
             <h1>Register</h1>
 
@@ -56,4 +56,26 @@
             @include ('errors.form')
         </div>
     </div>
+@stop
+@section('scripts.footer')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+    <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+        const dict = {
+            en: {
+                custom: {
+                    password: {
+                        regex: 'Password does not meet requirements'
+                    }
+                }
+            }
+        };
+        VeeValidate.Validator.updateDictionary(dict);
+        Vue.use(VeeValidate);
+        var register = new Vue({
+            el: '#register'
+        });
+    });
+    </script>
 @stop
