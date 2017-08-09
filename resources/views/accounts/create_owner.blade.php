@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-  <div class="row">
+  <div class="row" id="owner">
     <div class="col-md-12">
       <h1>Payment Account Setup</h1>
       <h4>Business Owner Info</h4>
@@ -19,4 +19,23 @@
       {!! Form::close() !!}
     </div>
   </div>
+@stop
+@section('scripts.footer')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+  <script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
+  <script>
+      
+    Vue.use(VueMask.VueMaskPlugin);
+    var owner = new Vue({
+      el: '#owner',
+
+      data: {
+        ownership: '',
+        indivState: '',
+        indivZip: '',
+        ssn: ''
+      },
+    });
+
+  </script>
 @stop

@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="ownership">Percentage of Business Owned</label>
-    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
+    <input v-mask="'#?#?#%'" v-model="ownership" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
 </div>
 
 <div class="form-group">
@@ -30,12 +30,12 @@
 
 <div class="form-group">
     <label for="indivState">State</label>
-    <input data-inputmask="'mask': 'aa'" type="text" name="indivState" id="indivState" placeholder="NC" maxlength="2" class="form-control" required>
+    <input v-mask="'AA'" v-model="indivState" type="text" name="indivState" id="indivState" placeholder="NC" maxlength="2" class="form-control" required>
 </div>
 
 <div class="form-group">
     <label for="indivZip">Zip</label>
-    <input data-inputmask="'mask': '99999'" type="tel" name="indivZip" id="indivZip" class="form-control" required>
+    <input v-mask="'#####'" v-model="indivZip" type="tel" name="indivZip" id="indivZip" class="form-control" required>
 </div>
 
 <div class="form-group">
@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label for="ssn">Owner SSN:</label>
-    <input data-inputmask="'mask': '999-99-9999'" type="tel" name="ssn" id="ssn" class="form-control" required>
+    <input v-mask="'###-##-####'" v-model="ssn" type="tel" name="ssn" id="ssn" class="form-control" required>
 </div>
 
 <div class="form-group">
