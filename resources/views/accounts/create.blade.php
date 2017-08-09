@@ -32,7 +32,15 @@
         
         Vue.use(VueMask.VueMaskPlugin);
         var payment = new Vue({
-            el: '#payment'
+            el: '#payment',
+
+            data: {
+              bizTaxId: '',
+              annualCCSales: '',
+              bizState: '',
+              bizZip: '',
+              phone: ''
+            },
         });
 
     </script>
