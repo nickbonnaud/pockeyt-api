@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="ownership">Percentage of Business Owned</label>
-    <input v-mask="'###%'" v-model="ownership" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
+    <input v-mask="'#?##%'" v-model="ownership" type="tel" name="ownership" id="ownership" placeholder="100" class="form-control" required>
 </div>
 
 <div class="form-group">
