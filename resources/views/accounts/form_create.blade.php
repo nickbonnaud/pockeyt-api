@@ -23,7 +23,7 @@
 </div>
 <div class="form-group">
     <label for="annualCCSales">Estimate of Annual Credit Card Sales</label>
-    <input v-mask="'$ #?#?#?,?#?#?#?,?#?#?#'" v-model="annualCCSales" type="tel" name="annualCCSales" id="annualCCSales" class="form-control" required>
+    <input v-mask="'$ #?#?#?,?#?#?#?,?#?#?#'" v-model="annualCCSales" type="tel" name="annualCCSales" id="annualCCSales" placeholder="$ 10,000" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="bizStreetAdress">Business Street Address</label>
@@ -39,11 +39,11 @@
 </div>
 <div class="form-group">
     <label for="bizZip">Zip</label>
-    <input v-mask="'#####'" v-model="bizZip" type="tel" name="bizZip" id="bizZip" class="form-control" required>
+    <input v-mask="'#####'" v-model="bizZip" type="tel" name="bizZip" id="bizZip" placeholder="12345" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="phone">Business Phone Number</label>
-    <input v-mask="'(###) ###-####'" v-model="phone" type="tel" name="phone" id="phone" class="form-control" required>
+    <input v-mask="'(###) ###-####'" v-model="phone" type="tel" name="phone" id="phone" placeholder="(111) 222-3333" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="accountEmail">Business Email</label>
