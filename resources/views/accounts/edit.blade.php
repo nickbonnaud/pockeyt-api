@@ -261,7 +261,8 @@ $qbo_connect = $qbo_obj->qboConnect();
     grantUrl: '{{ env("QBO_OAUTH_URL") }}'
   });
 
-  Vue.use(VueMask.VueMaskPlugin);
+  	Vue.use(VueMask.VueMaskPlugin);
+  	Vue.use(money, {precision: 2})
     var account = new Vue({
       el: '#account',
 
@@ -271,7 +272,6 @@ $qbo_connect = $qbo_obj->qboConnect();
         indivZip: {!! $account->indivZip !!},
         ssn: 'XXXXX' + {!! $account->ssn !!},
         bizTaxId: '{!! $account->bizTaxId !!}',
-        annualCCSales: {!! $account->annualCCSales !!},
         bizState: '{!! $account->bizState !!}',
         bizZip: {!! $account->bizZip !!},
         phone: '{!! $account->phone !!}',
