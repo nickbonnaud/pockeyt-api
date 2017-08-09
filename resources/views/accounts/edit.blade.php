@@ -274,7 +274,8 @@ $qbo_connect = $qbo_obj->qboConnect();
         annualCCSales: {!! $account->annualCCSales !!},
         bizState: '{!! $account->bizState !!}',
         bizZip: {!! $account->bizZip !!},
-        phone: '{!! $account->phone !!}'
+        phone: '{!! $account->phone !!}',
+        routing: 'XXXXX' + {!! $account->routing !!}
       },
     });
 </script>
