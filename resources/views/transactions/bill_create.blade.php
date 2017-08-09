@@ -69,8 +69,6 @@
           <div class="modal-header-timeline">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h3 class="modal-title" id="customItem">Custom Amount</h3>
-              <p>Name: @{{ name }}</p>
-              <p>Price: @{{ price }}</p>
           </div>
           <div class="modal-body-custom-amount">
             <section class="content custom-amount">
