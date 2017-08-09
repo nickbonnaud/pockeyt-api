@@ -20,7 +20,7 @@
 <div class="form-group">
  <label for="routing" class="col-sm-2 control-label">Full Routing Number</label>
   <div class="col-sm-10">
-    <input v-mask="'NNNNN9999'" v-model="routing" type="tel" name="routing" class="form-control" id="routing" required>
+    <input v-mask="'NNNNN####'" v-model="routing" type="tel" name="routing" class="form-control" id="routing" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
