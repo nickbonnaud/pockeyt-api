@@ -23,7 +23,7 @@
 </div>
 <div class="form-group">
     <label for="annualCCSales">Estimate of Annual Credit Card Sales</label>
-    <input v-mask="'$ #?#?#?,?#?#?#?,?#?#?#'" v-model="annualCCSales" type="tel" name="annualCCSales" id="annualCCSales" placeholder="$ 10,000" class="form-control" required>
+    <input v-mask="'$ #?#?#??#?#?#??#?#?#'" v-model="annualCCSales" type="tel" name="annualCCSales" id="annualCCSales" placeholder="$ 10,000" class="form-control" required>
 </div>
 <div class="form-group">
     <label for="bizStreetAdress">Business Street Address</label>
