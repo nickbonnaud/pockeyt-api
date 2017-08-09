@@ -75,12 +75,5 @@
 @yield('scripts.footer')
 @include('flash')
 
-<script>
-
-    var main = new Vue({
-            el: '#main'
-        });
-
-</script>
 </body>
 </html>
