@@ -296,9 +296,7 @@
     html { display:none; }
   </style>
   <script>
-    $(document).ready(function(){
-      Inputmask().mask(document.querySelectorAll("input"));
-    });
+    
 
 
     if (self == top) { 
