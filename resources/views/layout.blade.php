@@ -72,7 +72,8 @@
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
-<script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
+<script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
+<script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
@@ -82,6 +83,18 @@
 <script>
 
     $(document).ready(function(){
+        Inputmask().mask(document.querySelectorAll("input"));
+        const dict = {
+            en: {
+                custom: {
+                    password: {
+                        regex: 'Password does not meet requirements'
+                    }
+                }
+            }
+        };
+        VeeValidate.Validator.updateDictionary(dict);
+        Vue.use(VeeValidate);
         var main = new Vue({
             el: '#main'
         });
