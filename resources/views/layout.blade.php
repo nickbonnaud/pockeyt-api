@@ -72,18 +72,14 @@
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script src="{{ asset('/vendor/veeValidate/vee-validate.js') }}"></script>
-<script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
-<script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
+<script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
-<style>
-    html { display:none; }
-</style>
+
 <script>
 
     $(document).ready(function(){
-        Inputmask().mask(document.querySelectorAll("input"));
         const dict = {
             en: {
                 custom: {
@@ -99,13 +95,6 @@
             el: '#main'
         });
     });
-    
-    if (self == top) {
-        document.documentElement.style.display = 'block'; 
-    } else {
-        top.location = self.location;
-    }
-
 
 </script>
 </body>
