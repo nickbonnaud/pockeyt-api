@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input v-mask="'###-##-####'" v-model="ssn" type="tel" name="ssn" class="form-control" id="ssn" required>
+    <input v-mask="'NNN-NN-####'" v-model="ssn" type="tel" name="ssn" class="form-control" id="ssn" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">
