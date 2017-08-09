@@ -71,6 +71,8 @@
 <script src="{{ asset('/js/libs.js') }}"></script>
 <script src="{{ asset('/vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
 <style>

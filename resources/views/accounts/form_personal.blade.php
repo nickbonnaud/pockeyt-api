@@ -19,7 +19,7 @@
 <div class="form-group">
  <label for="ownership" class="col-sm-2 control-label">Percentage Ownership</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '9[9][9]%', 'greedy': 'false'" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}" required>
+    <input v-mask="'#?#?#'" v-model="ownership" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}" required>
   </div>
 </div>
 <div class="form-group">
@@ -37,13 +37,13 @@
 <div class="form-group">
  <label for="indivState" class="col-sm-2 control-label">State</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': 'aa'" type="text" name="indivState" class="form-control" id="indivState" value="{{ $account->indivState }}" required>
+    <input v-mask="'AA'" v-model="indivState" type="text" name="indivState" class="form-control" id="indivState" value="{{ $account->indivState }}" required>
   </div>
 </div>
 <div class="form-group">
  <label for="indivZip" class="col-sm-2 control-label">Zip</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '99999'" type="tel" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
+    <input v-mask="'#####'" v-model="indivZip" type="tel" name="indivZip" class="form-control" id="indivZip" value="{{ $account->indivZip }}" required>
   </div>
 </div>
 <div class="form-group">
@@ -55,7 +55,7 @@
 <div class="form-group">
  <label for="ssn" class="col-sm-2 control-label">Full SSN</label>
   <div class="col-sm-10">
-    <input data-inputmask="'mask': '***-**-9999'" type="tel" name="ssn" class="form-control" id="ssn" value="XXXXX{{$account->ssn}}" required>
+    <input v-mask="'###-##-####'" v-model="ssn" type="tel" name="ssn" class="form-control" id="ssn" value="XXXXX{{$account->ssn}}" required>
   </div>
 </div>
 <div class="modal-footer modal-footer-form-tags">

@@ -4,7 +4,7 @@
 $qbo_obj = new \App\Http\Controllers\QuickBookController();
 $qbo_connect = $qbo_obj->qboConnect();
 ?>
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="account">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
 			<section class="content-header">
@@ -203,54 +203,53 @@ $qbo_connect = $qbo_obj->qboConnect();
 			</section>
 		</div>
 	</div>
-</div>
+	<div class="modal fade" id="individualAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-timeline">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="individualAccountInfoModal">Edit Your Personal Info</h4>
+	      </div>
+	      <div class="modal-body-customer-info">
+	        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.personal', $account->id], 'class' => 'form-horizontal']) !!}
+	          @include ('accounts.form_personal')
+	        {!! Form::close() !!}
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-<div class="modal fade" id="individualAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header-timeline">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="individualAccountInfoModal">Edit Your Personal Info</h4>
-      </div>
-      <div class="modal-body-customer-info">
-        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.personal', $account->id], 'class' => 'form-horizontal']) !!}
-          @include ('accounts.form_personal')
-        {!! Form::close() !!}
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="modal fade" id="businessAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-timeline">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="businessAccountInfoModal">Edit Business Info</h4>
+	      </div>
+	      <div class="modal-body-customer-info">
+	        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.business', $account->id], 'class' => 'form-horizontal']) !!}
+	          @include ('accounts.form_business')
+	        {!! Form::close() !!}
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-<div class="modal fade" id="businessAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header-timeline">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="businessAccountInfoModal">Edit Business Info</h4>
-      </div>
-      <div class="modal-body-customer-info">
-        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.business', $account->id], 'class' => 'form-horizontal']) !!}
-          @include ('accounts.form_business')
-        {!! Form::close() !!}
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="sensitiveAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header-timeline">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="sensitiveAccountInfoModal">Edit Business Info</h4>
-      </div>
-      <div class="modal-body-customer-info">
-        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.pay', $account->id], 'class' => 'form-horizontal']) !!}
-          @include ('accounts.form_sensitive')
-        {!! Form::close() !!}
-      </div>
-    </div>
-  </div>
+	<div class="modal fade" id="sensitiveAccountInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header-timeline">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="sensitiveAccountInfoModal">Edit Business Info</h4>
+	      </div>
+	      <div class="modal-body-customer-info">
+	        {!! Form::model($account, ['method' => 'PATCH', 'route' => ['accounts.pay', $account->id], 'class' => 'form-horizontal']) !!}
+	          @include ('accounts.form_sensitive')
+	        {!! Form::close() !!}
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 @stop
 @section('scripts.footer')
@@ -261,6 +260,18 @@ $qbo_connect = $qbo_obj->qboConnect();
     menuProxy: '{{ env("QBO_MENU_URL") }}',
     grantUrl: '{{ env("QBO_OAUTH_URL") }}'
   });
+
+  Vue.use(VueMask.VueMaskPlugin);
+    var account = new Vue({
+      el: '#account',
+
+      data: {
+        ownership: '',
+        indivState: '',
+        indivZip: '',
+        ssn: ''
+      },
+    });
 </script>
 
 

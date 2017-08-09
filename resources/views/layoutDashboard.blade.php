@@ -308,7 +308,6 @@
         }
     });
 
-    Vue.use(VueMask.VueMaskPlugin);
     var tab = new Vue({
       el: '#tab',
 
