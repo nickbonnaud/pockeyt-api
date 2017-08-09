@@ -88,14 +88,14 @@
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
                 </form>
+                <p>@{{ price }}</p>
+                <p>@{{ name }}</p>
               </div>
             </section>
           </div>
         </div>
       </div>
     </div>
-    <p>@{{ price }}</p>
-    <p>@{{ name }}</p>
   </section>
 </div>
 @stop
