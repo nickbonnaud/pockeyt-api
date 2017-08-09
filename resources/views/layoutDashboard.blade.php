@@ -286,8 +286,7 @@
   <script src="{{ asset('/vendor/toastr/toastr.min.js') }}"></script>
   <script src="{{ asset('/vendor/chart.js/dist/Chart.min.js') }}"></script>
   <script src="{{ asset('/vendor/daterangepicker/daterangepicker.js') }}"></script>
-  <script src="{{ asset('/vendor/inputMask/jquery.inputmask.bundle.min.js') }}"></script>
-  <script src="{{ asset('/vendor/inputMask/inputmask.binding.min.js') }}"></script>
+  <script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
 	<script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
@@ -313,6 +312,7 @@
         }
     });
 
+    Vue.use(VueMask);
     var tab = new Vue({
       el: '#tab',
 
