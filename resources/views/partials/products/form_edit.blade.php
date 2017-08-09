@@ -8,9 +8,9 @@
 
     <div class="form-group">
         <label for="price">Price:</label>
-         <div class="input-group">
+        <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input pattern="^\$?(([1-9](\d*|\d{0,2}(,\d{3})*))|0)(\.\d{1,2})?$" type="tel" name="price" id="price" class="form-control" required>
+            <input pattern="^\$?(([1-9](\d*|\d{0,2}(,\d{3})*))|0)(\.\d{1,2})?$" type="tel" name="price" id="price" value="{{ $product->price }}" class="form-control" required>
         </div>
     </div>
 
