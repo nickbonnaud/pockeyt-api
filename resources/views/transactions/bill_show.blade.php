@@ -173,6 +173,7 @@
       methods: {
 
         findBy: function(list, value, column) {
+          console.log("hello");
           return list.filter(function(product) {
             return product[column].toLowerCase().includes(value.toLowerCase());
           });
