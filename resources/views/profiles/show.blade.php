@@ -309,6 +309,7 @@
         }
     });
 
+      Vue.use(VueInputmask);
       var customer = new Vue({
         el: '#customer',
 
