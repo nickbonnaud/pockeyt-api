@@ -314,6 +314,7 @@
         }
     });
 
+    Vue.use(VueInputmask);
     var tab = new Vue({
       el: '#tab',
 
