@@ -69,27 +69,27 @@
           <div class="modal-header-timeline">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h3 class="modal-title" id="customItem">Custom Amount</h3>
+              <p>@{{ price }}</p>
+              <p>@{{ name }}</p>
           </div>
           <div class="modal-body-custom-amount">
             <section class="content custom-amount">
               <div class="col-md-12">
                 <form class="form-horizontal">
                   <div class="form-group" style="margin-left: 15%;">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                      <input v-model="name" name="name" type="text" class="form-control" style="width: 50%;" id="inputName" placeholder="Name" required>
+                      <input v-model="name" name="name" type="text" class="form-control" style="width: 50%;" id="name" placeholder="Name" required>
                     </div>
                   </div>
                   <div class="form-group" style="margin-left: 15%;">
-                    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                    <label for="price" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input v-model="price" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="price" class="form-control" style="width: 50%;" id="inputPrice" required>
+                      <input v-model="price" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'" type="tel" name="price" class="form-control" style="width: 50%;" id="price" required>
                     </div>
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
                 </form>
-                <p>@{{ price }}</p>
-                <p>@{{ name }}</p>
               </div>
             </section>
           </div>
