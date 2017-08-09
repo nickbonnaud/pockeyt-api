@@ -19,7 +19,7 @@
 <div class="form-group">
  <label for="ownership" class="col-sm-2 control-label">Percentage Ownership</label>
   <div class="col-sm-10">
-    <input v-mask="'#?#?#'" v-model="ownership" type="tel" name="ownership" class="form-control" id="ownership" value="{{ $account->ownership / 100 }}" required>
+    <input v-mask="'#?#?#'" v-model="ownership" type="tel" name="ownership" class="form-control" id="ownership" required>
   </div>
 </div>
 <div class="form-group">
