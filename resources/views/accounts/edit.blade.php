@@ -262,13 +262,7 @@ $qbo_connect = $qbo_obj->qboConnect();
   });
 
   	Vue.use(VueMask.VueMaskPlugin);
-  	Vue.use(window['money'], {
-			decimal: '.',
-      thousands: ',',
-      prefix: '$ ',
-      precision: 2,
-      masked: false
-    });
+  	Vue.use(window['money']);
     var account = new Vue({
       el: '#account',
 
