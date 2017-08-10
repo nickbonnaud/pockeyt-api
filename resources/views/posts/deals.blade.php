@@ -143,8 +143,20 @@
 		var deals = new Vue({
 			el: "#deals",
 
+			components: {
+	      VMoney
+	    },
+
 			data: {
-				purchasedDeals: []
+				purchasedDeals: [],
+				price: '',
+				money: {
+	        decimal: '.',
+	        thousands: ',',
+	        prefix: '$ ',
+	        precision: 2,
+	        masked: false
+	      }
 			},
 
 			computed: {
