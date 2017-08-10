@@ -894,9 +894,9 @@ class TransactionsController extends Controller
 
     public function refundSubmitPartial(Request $request) {
         $refundedProducts = json_decode($request->products_new);
-        foreach ($refundedProducts as $i => $product) {
+        foreach ($refundedProducts as $product) {
             if ($product->quantity == 0) {
-                unset($product[$i]);
+                unset($product);
             }
         }
         dd($refundedProducts);
