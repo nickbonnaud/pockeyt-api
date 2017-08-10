@@ -279,7 +279,7 @@ $qbo_connect = $qbo_obj->qboConnect();
       },
 
       directives: {
-      	{money: VMoney}
+      	money: VMoney
       }
     });
 </script>
