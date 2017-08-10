@@ -99,7 +99,6 @@
 @stop
 
 @section('scripts.footer')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
     var inventory = new Vue({
