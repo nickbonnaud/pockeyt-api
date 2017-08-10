@@ -333,10 +333,21 @@
         pusher.subscribe("{!! 'billRequest' . $user->profile->id !!}")
           .bind('App\\Events\\CustomerRequestBill', this.notifyBill);
 
+        pusher.subscribe("{!! 'paymentSuccess' . $user->profile->id !!}")
+          .bind('App\\Events\\PaymentSuccessNotification', this.notifyPaymentSuccess);
+
         window.setInterval(this.checkSession, 1920000);
       },
 
       methods: {
+        notifyPaymentSuccess: function(data) {
+          toastr["success"]("Payment Received!<br /><br /><button type='button' class='btn btn-default'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has paid their bill.", {
+            "newestOnTop": true,
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+          })
+        },
+
         notifyReward: function(data) {
           toastr["info"]("Loyalty reward earned!<br /><br /><button type='button' class='btn btn-default'>Ok</button>", data.user.first_name + " " + data.user.last_name + " has earned: " + data.loyaltyProgram.reward, {
             "newestOnTop": true,

@@ -22,6 +22,7 @@ use App\Http\Requests;
 use App\Events\RewardNotification;
 use App\Events\TransactionsChange;
 use App\Events\ErrorNotification;
+use App\Events\PaymentSuccessNotification;
 use Illuminate\Support\Facades\DB;
 use App\Events\CustomerRequestBill;
 use App\Http\Requests\TransactionRequest;
@@ -210,6 +211,7 @@ class TransactionsController extends Controller
                 $transaction->status = 20;
                 $transaction->save();
                 event(new TransactionsChange($profile));
+                event(new PaymentSuccessNotification($customer, $profile));
                 $this->checkRecentViewedPosts($customer, $profile, $transaction);
                 $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                 $this->sendEmailReceipt($customer, $profile, $transaction);
@@ -258,6 +260,7 @@ class TransactionsController extends Controller
                     $transaction->status = 20;
                     $transaction->save();
                     event(new TransactionsChange($profile));
+                    event(new PaymentSuccessNotification($customer, $profile));
                     $this->checkRecentViewedPosts($customer, $profile, $transaction);
                     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                     $this->sendEmailReceipt($customer, $profile, $transaction);
