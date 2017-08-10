@@ -268,7 +268,7 @@ $qbo_connect = $qbo_obj->qboConnect();
       prefix: '$ ',
       precision: 2,
       masked: false
-    })
+    });
     var account = new Vue({
       el: '#account',
 
