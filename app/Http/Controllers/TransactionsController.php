@@ -221,7 +221,8 @@ class TransactionsController extends Controller
                 $transaction->status = 1;
                 $transaction->save();
                 event(new TransactionsChange($profile));
-                return event(new ErrorNotification($customer, $profile, $transaction));
+                event(new ErrorNotification($customer, $profile, $transaction));
+                return response("error");
             }
         }
     }
@@ -1007,11 +1008,7 @@ class TransactionsController extends Controller
             $result->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            $msg = $e;
-            $code = "Fail to Send to Splash";
-            $customer = User::findOrFail($transaction->user_id);
-            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
-            return $status = "failed";
+            
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
@@ -1055,12 +1052,7 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            $msg = $e;
-            $code = "Fail to Send to Splash Refund";
-            $profile = Profile::findOrFail($transaction->profile_id);
-            $customer = User::findOrFail($transaction->user_id);
-            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
-            return $success = false;
+            
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
@@ -1113,12 +1105,7 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            $msg = $e;
-            $code = "Fail to Send to Splash Reverse Auth";
-            $profile = Profile::findOrFail($transaction->profile_id);
-            $customer = User::findOrFail($transaction->user_id);
-            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
-            return $success = false;
+           
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
