@@ -896,7 +896,7 @@ class TransactionsController extends Controller
         $refundedProducts = json_decode($request->products_new);
         foreach ($refundedProducts as $i => $product) {
             if ($product->quantity == 0) {
-                unset($quantity[$i]);
+                unset($product[$i]);
             }
         }
         dd($refundedProducts);
