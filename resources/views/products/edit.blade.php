@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="product">
   <div class="scroll-main">
     <div class="scroll-main-contents">
     	<section class="content-header">
@@ -49,6 +49,25 @@
 @section('scripts.footer')
 <script>
   
+  var product = new Vue({
+    el: '#product',
+
+    components: {
+      VMoney
+    },
+
+    data: {
+      price: '',
+      money: {
+        decimal: '.',
+        thousands: ',',
+        prefix: '$ ',
+        precision: 2,
+        masked: false
+      }
+    }
+  });
+
   getCategories = function() {
     var categoryObjects = {!! $categories !!};
     var categories = [];
