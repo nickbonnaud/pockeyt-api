@@ -21,10 +21,10 @@
 		</div>
 	</div>
 	<div class="form-group" v-if= "selection == 'amounts'">
-		<label for="amountRequired">Total amount customers must spend to receive reward</label>
+		<label for="amount_required">Total amount customers must spend to receive reward</label>
 		<div class="input-group col-xs-5 col-md-3">
 			<span class="input-group-addon">$</span>
-			<money v-model="amountRequired" v-bind="money" type="tel" name="amountRequired" class="form-control" id="amountRequired" required></money>
+			<money v-model="amount_required" v-bind="money" type="tel" name="amount_required" class="form-control" id="amount_required" required></money>
 		</div>
 	</div>
 	<div class="form-group">

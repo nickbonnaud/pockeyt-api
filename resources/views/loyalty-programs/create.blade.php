@@ -42,7 +42,7 @@
 		
 		data: {
 			selection: "",
-			amountRequired: "",
+			amount_required: "",
 			money: {
         decimal: '.',
         thousands: ',',
