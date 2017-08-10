@@ -122,7 +122,7 @@ class AccountsController extends Controller
 
     public function changeBusiness(UpdateAccountBusinessRequest $request, $id)
     {
-        dd(round(preg_replace("/[^0-9\.]/","",$request->annualCCSales)));
+        dd(round(preg_replace("/[^0-9\.]/","",$request->annualCCSales), 0));
 
         $account = Account::findOrFail($id);
         $account->update($request->except('annualCCSales'));
