@@ -261,8 +261,9 @@ $qbo_connect = $qbo_obj->qboConnect();
     grantUrl: '{{ env("QBO_OAUTH_URL") }}'
   });
 
+  	import money from 'v-money'
   	Vue.use(VueMask.VueMaskPlugin);
-  	Vue.use(v-money.money, {
+  	Vue.use(money, {
 			decimal: '.',
       thousands: ',',
       prefix: '$ ',
