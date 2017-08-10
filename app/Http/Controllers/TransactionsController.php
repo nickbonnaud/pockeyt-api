@@ -893,14 +893,6 @@ class TransactionsController extends Controller
     }
 
     public function refundSubmitPartial(Request $request) {
-        $refundedProducts = json_decode($request->products_new);
-        foreach ($refundedProducts as $i => $product) {
-            if ($product->quantity == 0) {
-                unset($refundedProducts[$i]);
-            }
-        }
-        dd($refundedProducts);
-
         $transaction = Transaction::findOrFail($request->id);
 
         $refundAmount = $request->total_new;
@@ -924,7 +916,15 @@ class TransactionsController extends Controller
             $transaction->tax = $request->tax_old;
             $transaction->net_sales = $request->net_sales_old;
             $transaction->total = $request->total_old;
-            $transaction->refund_products = $request->products_new;
+
+            $refundedProducts = json_decode($request->products_new);
+            foreach ($refundedProducts as $i => $product) {
+                if ($product->quantity == 0) {
+                    unset($refundedProducts[$i]);
+                }
+            }
+
+            $transaction->refund_products = json_encode($refundedProducts);
             $transaction->refund_tax = $request->tax_new;
             $transaction->save();
             $customer = User::findOrFail($transaction->user_id);
