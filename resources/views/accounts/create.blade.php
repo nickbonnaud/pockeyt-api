@@ -32,12 +32,23 @@
         var payment = new Vue({
             el: '#payment',
 
+            components: {
+                VMoney
+            },
+
             data: {
-              bizTaxId: '',
-              annualCCSales: '',
-              bizState: '',
-              bizZip: '',
-              phone: ''
+                bizTaxId: '',
+                annualCCSales: '',
+                bizState: '',
+                bizZip: '',
+                phone: '',
+                money: {
+                    decimal: '.',
+                    thousands: ',',
+                    prefix: '$ ',
+                    precision: 2,
+                    masked: false
+                }
             },
         });
 

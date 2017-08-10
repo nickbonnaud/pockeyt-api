@@ -55,7 +55,7 @@ class AccountsController extends Controller
             new Account($request->except('annualCCSales'))
         );
 
-        $account->annualCCSales = preg_replace("/[^0-9]/","",$request->annualCCSales);
+        $account->annualCCSales = round(preg_replace("/[^0-9\.]/","",$request->annualCCSales));
         $account->status = 'review';
         $account->save();
 
