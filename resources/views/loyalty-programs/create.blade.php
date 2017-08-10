@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll" id="content">
+<div class="content-wrapper-scroll" id="loyalty">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
 			<section class="content-header">
@@ -31,7 +31,6 @@
 </div>
 @stop
 @section('scripts.footer')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 <script>
 	
 	var content = new Vue({
