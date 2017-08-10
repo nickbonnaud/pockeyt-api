@@ -57,7 +57,7 @@
     },
 
     data: {
-      price: '',
+      price: {!! $product->price !!},
       money: {
         decimal: '.',
         thousands: ',',
