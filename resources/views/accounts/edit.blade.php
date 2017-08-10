@@ -265,6 +265,10 @@ $qbo_connect = $qbo_obj->qboConnect();
     var account = new Vue({
       el: '#account',
 
+      components: {
+      	money: Money
+      },
+
       data: {
         ownership: {!! $account->ownership / 100 !!},
         indivState: '{!! $account->indivState !!}',
@@ -284,10 +288,6 @@ $qbo_connect = $qbo_obj->qboConnect();
           precision: 2,
           masked: false
         }
-      },
-
-      directives: {
-      	money: VMoney
       }
     });
 </script>
