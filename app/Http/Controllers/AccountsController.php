@@ -122,11 +122,12 @@ class AccountsController extends Controller
 
     public function changeBusiness(UpdateAccountBusinessRequest $request, $id)
     {
-        dd($request->all());
+        dd(round(preg_replace("/[^0-9\.]/","",$request->annualCCSales)));
+
         $account = Account::findOrFail($id);
         $account->update($request->except('annualCCSales'));
 
-        $account->annualCCSales = preg_replace("/[^0-9]/","",$request->annualCCSales);
+        $account->annualCCSales = round(preg_replace("/[^0-9\.]/","",$request->annualCCSales));
         $account->status = 'review';
         $account->save();
         $account = $this->shortenSensitive($account);
