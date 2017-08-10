@@ -1040,7 +1040,12 @@ class TransactionsController extends Controller
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
-            dd($err);
+            $msg = $err[0]['msg'];
+            $code = $err[0]['code'];
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            $success = false;
         } else {
             $data = $result->getResponse();
             $response = $data[0];
@@ -1049,6 +1054,12 @@ class TransactionsController extends Controller
                 $transaction->save();
                 $success = true;
             } else {
+                $msg = "Processed and Failed";
+                $code = $response->status;
+                $splashId = $response->id;
+                $profile = Profile::findOrFail($transaction->profile_id);
+                $customer = User::findOrFail($transaction->user_id);
+                $this->sendEmailError($profile, $customer, $transaction, $msg, $code, $splashId);
                 $success = false;
             }
         }
@@ -1082,7 +1093,12 @@ class TransactionsController extends Controller
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
-            dd($err);
+            $msg = $err[0]['msg'];
+            $code = $err[0]['code'];
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            $success = false;
         } else {
             $data = $result->getResponse();
             $response = $data[0];
@@ -1091,6 +1107,12 @@ class TransactionsController extends Controller
                 $transaction->save();
                 $success = true;
             } else {
+                $msg = "Processed and Failed";
+                $code = $response->status;
+                $splashId = $response->id;
+                $profile = Profile::findOrFail($transaction->profile_id);
+                $customer = User::findOrFail($transaction->user_id);
+                $this->sendEmailError($profile, $customer, $transaction, $msg, $code, $splashId);
                 $success = false;
             }
         }
@@ -1104,7 +1126,14 @@ class TransactionsController extends Controller
         return Mail::send('emails.refund', ['items' => $items, 'profile' => $profile, 'transaction' => $transaction], function($m) use ($customer, $profile) {
             $m->from('refunds@pockeyt.com', 'Pockeyt Refunds');
             $m->to($customer->email, $customer->first_name)->subject('Refund from Pockeyt');
-      });
+        });
+    }
+
+    public function sendEmailError($profile, $customer, $transaction, $msg, $code, $splashId = 0) {
+        return Mail::send('emails.error', ['profile' => $profile, 'customer' => $customer, 'transaction' => $transaction, 'msg' => $msg, 'code' => $code, 'splashId' => $splashId], function($m) use ($profile) {
+            $m->from('error@pockeyt.com', 'Error Notification');
+            $m->to("nick.bonnaud@pockeyt.com", "admin")->subject('Error Notification');
+        });
     }
 }
 

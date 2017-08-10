@@ -1,3 +1,6 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <title>
 {{ $profile->business_name }}
 </title>
@@ -490,3 +493,5 @@ Email the Pockeyt team
 </td>
 </tr>
 </table>
+</body>
+</html>
