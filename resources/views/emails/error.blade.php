@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h4>Customer: {{ $customer->first_name }} {{ $customer->last_name }}</h4>
-		<h3>{{ HTML::mailto($customer->email, $customer->email) }}</h3>
+		<h3>Email: {{ $customer->email }}</h3>
 		<hr>
 		<h4>Business: {{ $profile->business_name }}</h4>
 		<h3>Business Phone: {{ $profile->account->phone }}</h3>
