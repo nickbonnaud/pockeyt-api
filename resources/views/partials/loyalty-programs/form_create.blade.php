@@ -13,18 +13,18 @@
 			</label>
 		</div>
 	</div>
-	<div class="form-group" >
+	<div class="form-group" v-if= "selection == 'increments'">
 		<label for="purchases_required">Number of Purchases required for reward</label>
 		<div class="input-group col-xs-5 col-md-3">
 			<span class="input-group-addon">#</span>
 			<input class="form-control" type="number" min="1" step="1" name="purchases_required" id="purchases_required" placeholder="20">
 		</div>
 	</div>
-	<div class="form-group" >
-		<label for="amount_required">Total amount customers must spend to receive reward</label>
+	<div class="form-group" v-if= "selection == 'amounts'">
+		<label for="amountRequired">Total amount customers must spend to receive reward</label>
 		<div class="input-group col-xs-5 col-md-3">
 			<span class="input-group-addon">$</span>
-			<money v-model="amount_required" v-bind="money" type="tel" name="amount_required" class="form-control" id="amount_required" required></money>
+			<money v-model="amountRequired" v-bind="money" type="tel" name="amountRequired" class="form-control" id="amountRequired" required></money>
 		</div>
 	</div>
 	<div class="form-group">

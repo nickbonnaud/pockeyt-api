@@ -43,7 +43,7 @@
 		
 		data: {
 			selection: "",
-			amount_required: "",
+			amountRequired: "",
 			money: {
         decimal: '.',
         thousands: ',',
@@ -52,7 +52,7 @@
         masked: false
       }
 		}
-	})
+	});
 
 </script>
 @stop
