@@ -32,7 +32,7 @@
 <div class="form-group">
  <label for="annualCCSales" class="col-sm-2 control-label">Annual Credit Card Sales</label>
   <div class="col-sm-10">
-    <input v-model.lazy="annualCCSales" v-money="money" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" required>
+    <money v-model="annualCCSales" type="tel" name="annualCCSales" class="form-control" id="annualCCSales" required></money>
   </div>
 </div>
 <div class="form-group">
