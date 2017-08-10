@@ -122,6 +122,7 @@ class AccountsController extends Controller
 
     public function changeBusiness(UpdateAccountBusinessRequest $request, $id)
     {
+        dd($request->all());
         $account = Account::findOrFail($id);
         $account->update($request->except('annualCCSales'));
 
