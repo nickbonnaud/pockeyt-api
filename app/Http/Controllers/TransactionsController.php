@@ -386,17 +386,27 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-
+            $msg = $e;
+            $code = "Fail to Send to Splash Charge";
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            return $success = false;
         }
         if ($result->hasErrors()) {
-            $success =  false;
             $err = $result->getErrors();
+            $msg = $err[0]['msg'];
+            $code = $err[0]['code'];
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            $success = false;
         } else {
             $data = $result->getResponse();
             $processedTransaction = $data[0];
             if ($processedTransaction->status == '0' || $processedTransaction->status == '1') {
                 $success = true;
             } else {
+                $msg = "Processed and Failed";
+                $code = $processedTransaction->status;
+                $splashId = $processedTransaction->id;
+                $this->sendEmailError($profile, $customer, $transaction, $msg, $code, $splashId);
                 $success = false;
             }
             $transaction->splash_id = $processedTransaction->id;
@@ -899,12 +909,14 @@ class TransactionsController extends Controller
         $profile = $this->user->profile;
         $transactionSplashId = $transaction->splash_id;
         $partial = true;
-        $status = $this->checkTxnStatus($transactionSplashId);
+        $status = $this->checkTxnStatus($transactionSplashId, $transaction, $profile);
 
         if ($status === "captured") {
             $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial, $transaction);
-        } else {
+        } elseif($status === "pending") {
             $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount, $transaction);
+        } else {
+            $result = false;
         }
 
         if ($result) {
@@ -951,12 +963,14 @@ class TransactionsController extends Controller
         $profile = $this->user->profile;
         $transactionSplashId = $transaction->splash_id;
         $partial = false;
-        $status = $this->checkTxnStatus($transactionSplashId);
+        $status = $this->checkTxnStatus($transactionSplashId, $transaction, $profile);
 
         if ($status === "captured") {
             $result = $this->refundTransaction($refundAmount, $transactionSplashId, $partial, $transaction);
-        } else {
+        } elseif($status === "pending") {
             $result = $this->reverseAuth($transactionSplashId, $partial, $refundAmount, $transaction);
+        } else {
+            $result = false;
         }
 
         if ($result) {
@@ -984,7 +998,7 @@ class TransactionsController extends Controller
         return redirect()->route('transactions.refund', compact('transactions', 'profile'));
     }
 
-    private function checkTxnStatus($transactionSplashId) {
+    private function checkTxnStatus($transactionSplashId, $transaction, $profile) {
         SplashPayments\Utilities\Config::setTestMode(true);
         SplashPayments\Utilities\Config::setApiKey(env('SPLASH_KEY'));
         $result = new SplashPayments\txns(
@@ -996,11 +1010,19 @@ class TransactionsController extends Controller
             $result->retrieve();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-
+            $msg = $e;
+            $code = "Fail to Send to Splash";
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            return $status = "failed";
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
-            dd($err);
+            $msg = $err[0]['msg'];
+            $code = $err[0]['code'];
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            $status = "failed";
         } else {
             $data = $result->getResponse();
             $response = $data[0];
@@ -1036,7 +1058,12 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-
+            $msg = $e;
+            $code = "Fail to Send to Splash Refund";
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            return $success = false;
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
@@ -1089,7 +1116,12 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-
+            $msg = $e;
+            $code = "Fail to Send to Splash Reverse Auth";
+            $profile = Profile::findOrFail($transaction->profile_id);
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
+            return $success = false;
         }
         if ($result->hasErrors()) {
             $err = $result->getErrors();
@@ -1132,7 +1164,7 @@ class TransactionsController extends Controller
     public function sendEmailError($profile, $customer, $transaction, $msg, $code, $splashId = 0) {
         return Mail::send('emails.error', ['profile' => $profile, 'customer' => $customer, 'transaction' => $transaction, 'msg' => $msg, 'code' => $code, 'splashId' => $splashId], function($m) use ($profile) {
             $m->from('error@pockeyt.com', 'Error Notification');
-            $m->to("nick.bonnaud@pockeyt.com", "admin")->subject('Error Notification');
+            $m->to("nick.bonnaud@pockeyt.com", "admin")->subject('Pockeyt Error Notification');
         });
     }
 }

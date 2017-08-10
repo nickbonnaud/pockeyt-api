@@ -6,17 +6,17 @@
 		</title>
 	</head>
 	<body>
-		<h4>Customer: {{ $customer->first_name }} {{ $customer->last_name }}</h4>
-		<h3>Email: {{ $customer->email }}</h3>
+		<h3>Customer: {{ $customer->first_name }} {{ $customer->last_name }}</h3>
+		<h4>Email: {{ $customer->email }}</h4>
 		<hr>
-		<h4>Business: {{ $profile->business_name }}</h4>
-		<h3>Business Phone: {{ $profile->account->phone }}</h3>
+		<h3>Business: {{ $profile->business_name }}</h3>
+		<h4>Business Phone: {{ $profile->account->phone }}</h4>
 		<hr>
-		<h4>Error: {{ $msg }}</h4>
-		<h4>Code: {{ $code }}</h4>
+		<h3>Error: {{ $msg }}</h3>
+		<h3>Code: {{ $code }}</h3>
 		@if($splashId != 0)
-			<h3>Splash ID: {{ $splashId }}</h3>
+			<h4>Splash ID: {{ $splashId }}</h4>
 		@endif
-		<h3>Transaction ID: {{ $transaction->id }}</h3>
+		<h4>Transaction ID: {{ $transaction->id }}</h4>
 	</body>
 </html>
