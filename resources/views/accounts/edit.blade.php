@@ -282,6 +282,7 @@ $qbo_connect = $qbo_obj->qboConnect();
           thousands: ',',
           prefix: '$ ',
           precision: 2,
+          masked: false
         }
       },
 
