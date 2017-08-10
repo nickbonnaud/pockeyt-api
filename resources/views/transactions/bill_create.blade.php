@@ -175,12 +175,10 @@
         },
 
         addCustomProduct: function() {
-          var price = this.price;
-          price = price.replace("/[^0-9\.]/","");
           var product = {
             quantity: 1,
             name: this.name,
-            price: price * 100
+            price: this.price.replace(/[^0-9\.]/,"") * 100
           };
           this.bill.push(product);
           this.name = '';
