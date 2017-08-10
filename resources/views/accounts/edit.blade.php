@@ -284,7 +284,7 @@ $qbo_connect = $qbo_obj->qboConnect();
           decimal: '.',
           thousands: ',',
           prefix: '$ ',
-          precision: 2,
+          precision: 0,
           masked: false
         }
       }
