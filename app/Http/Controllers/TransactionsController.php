@@ -266,13 +266,15 @@ class TransactionsController extends Controller
                     $this->checkRecentViewedPosts($customer, $profile, $transaction);
                     $newLoyaltyCard = $this->checkLoyaltyProgram($customer, $profile, $transaction);
                     $this->sendEmailReceipt($customer, $profile, $transaction);
-                    return $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
+                    $this->updateLoyaltyCard($newLoyaltyCard, $customer, $profile);
+                    return response()->json(['success' => true]);
                 } else {
                     $transaction->paid = false;
                     $transaction->status = 1;
                     $transaction->save();
                     event(new TransactionsChange($profile));
-                    return event(new ErrorNotification($customer, $profile, $transaction));
+                    event(new ErrorNotification($customer, $profile, $transaction));
+                    return response()->json(['success' => false]);
                 }
             }
         } else {
