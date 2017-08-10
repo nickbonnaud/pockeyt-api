@@ -281,10 +281,9 @@ $qbo_connect = $qbo_obj->qboConnect();
         phone: '{!! $account->phone !!}',
         routing: 'XXXXX' + {!! $account->routing !!},
         money: {
-          decimal: ',',
-          thousands: '.',
-          prefix: 'R$ ',
-          suffix: ' #',
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
           precision: 2,
           masked: false
         }
