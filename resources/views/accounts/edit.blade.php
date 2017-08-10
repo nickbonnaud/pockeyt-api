@@ -262,7 +262,7 @@ $qbo_connect = $qbo_obj->qboConnect();
   });
 
   	Vue.use(VueMask.VueMaskPlugin);
-  	Vue.use(VMoney);
+  	Vue.use(VMoney, {precision: 2});
     var account = new Vue({
       el: '#account',
 
