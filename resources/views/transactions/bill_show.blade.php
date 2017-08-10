@@ -81,9 +81,9 @@
                     </div>
                   </div>
                   <div class="form-group" style="margin-left: 15%;">
-                    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                    <label for="price" class="col-sm-2 control-label">Price</label>
                     <div class="col-sm-10">
-                      <input v-model="price" type="number" name="price" class="form-control" style="width: 50%;" id="inputPrice" placeholder="Price" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" step="any" required>
+                      <money v-model="price" v-bind="money" type="tel" name="price" class="form-control" id="price" placeholder="Price" style="width: 50%;" required></money>
                     </div>
                   </div>
                   <button v-bind:disabled="(name == '' || price == '')" type="button" class="btn btn-block btn-primary" v-on:click="addCustomProduct()">Add</button>
@@ -99,7 +99,6 @@
 @stop
 
 @section('scripts.footer')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
   <script>
 
     var currentBill = {
@@ -112,13 +111,24 @@
     var inventory = new Vue({
       el: "#inventory",
 
+      components: {
+        VMoney
+      },
+
       data: {
         inventory: {!! $inventory !!},
         bill: currentBill.fetch(),
         name: '',
         price: '',
         saved: false,
-        query: ''
+        query: '',
+        money: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          masked: false
+        }
       },
 
       mounted: function() {
@@ -177,10 +187,11 @@
         },
 
         addCustomProduct: function() {
+          var price = this.price.toString();
           var product = {
             quantity: 1,
             name: this.name,
-            price: this.price * 100
+            price: price.replace(/[^0-9\.]/,"") * 100
           };
           this.bill.push(product);
           this.name = '';
