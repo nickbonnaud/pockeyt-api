@@ -894,6 +894,11 @@ class TransactionsController extends Controller
 
     public function refundSubmitPartial(Request $request) {
         $refundedProducts = json_decode($request->products_new);
+        foreach ($refundedProducts as $i => $product) {
+            if ($product->quantity == 0) {
+                unset($quantity[$i]);
+            }
+        }
         dd($refundedProducts);
 
         $transaction = Transaction::findOrFail($request->id);
