@@ -916,7 +916,11 @@ class TransactionsController extends Controller
             $transaction->tax = $request->tax_old;
             $transaction->net_sales = $request->net_sales_old;
             $transaction->total = $request->total_old;
+            $transaction->refund_products = $request->products_new;
+            $transaction->refund_tax = $request->tax_new;
             $transaction->save();
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailRefund($customer, $profile, $transaction);
             flash()->success('Success', 'Refund Complete');
         } else {
             $transaction->status = 31;
@@ -951,8 +955,12 @@ class TransactionsController extends Controller
             $transaction->refunded = true;
             $transaction->refund_full = true;
             $transaction->refund_amount = $refundAmount;
+            $transaction->refund_products = $transaction->products;
+            $transaction->refund_tax = $transaction->tax;
             $transaction->status = 30;
             $transaction->save();
+            $customer = User::findOrFail($transaction->user_id);
+            $this->sendEmailRefund($customer, $profile, $transaction);
             flash()->success('Success', 'Refund Complete');
         } else {
             $transaction->status = 31;
@@ -1079,6 +1087,16 @@ class TransactionsController extends Controller
             }
         }
         return $success;
+    }
+
+    public function sendEmailRefund($customer, $profile, $transaction) {
+        $items = $transaction->refund_products;
+        $items = json_decode($items);
+
+        return Mail::send('emails.refund', ['items' => $items, 'profile' => $profile, 'transaction' => $transaction], function($m) use ($customer, $profile) {
+            $m->from('refunds@pockeyt.com', 'Pockeyt Refunds');
+            $m->to($customer->email, $customer->first_name)->subject('Refund from Pockeyt');
+      });
     }
 }
 
