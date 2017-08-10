@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="content">
 	<div class="scroll-main">
 		<div class="scroll-main-contents">
 			<section class="content-header">
@@ -14,7 +14,7 @@
 		    </ol>
 		  </section>
 		  @include ('errors.form')
-			<section class="content" id="content">
+			<section class="content">
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
