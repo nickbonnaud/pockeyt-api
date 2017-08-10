@@ -262,12 +262,15 @@ $qbo_connect = $qbo_obj->qboConnect();
   });
 
   	Vue.use(VueMask.VueMaskPlugin);
+  	Vue.use(money, {
+			decimal: '.',
+      thousands: ',',
+      prefix: '$ ',
+      precision: 2,
+      masked: false
+    })
     var account = new Vue({
       el: '#account',
-
-      components: {
-      	money: Money
-      },
 
       data: {
         ownership: {!! $account->ownership / 100 !!},
@@ -280,14 +283,6 @@ $qbo_connect = $qbo_obj->qboConnect();
         bizZip: {!! $account->bizZip !!},
         phone: '{!! $account->phone !!}',
         routing: 'XXXXX' + {!! $account->routing !!},
-
-        money: {
-        	decimal: '.',
-          thousands: ',',
-          prefix: '$ ',
-          precision: 2,
-          masked: false
-        }
       }
     });
 </script>
