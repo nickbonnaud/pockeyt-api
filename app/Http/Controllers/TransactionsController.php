@@ -386,7 +386,7 @@ class TransactionsController extends Controller
             $result->create();
         }
         catch (SplashPayments\Exceptions\Base $e) {
-            $msg = $e->getErrors();
+            $msg = $e->hasErrors();
             $code = "Fail to Send to Splash Charge";
             $this->sendEmailError($profile, $customer, $transaction, $msg, $code);
             return $success = false;
