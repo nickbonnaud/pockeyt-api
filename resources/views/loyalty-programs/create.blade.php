@@ -37,8 +37,20 @@
 	var content = new Vue({
 		el: '#content',
 
+		components: {
+    	VMoney
+    },
+		
 		data: {
-			selection: ""
+			selection: "",
+			amount_required: "",
+			money: {
+        decimal: '.',
+        thousands: ',',
+        prefix: '$ ',
+        precision: 2,
+        masked: false
+      }
 		}
 	})
 
