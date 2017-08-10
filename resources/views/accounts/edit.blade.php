@@ -275,7 +275,14 @@ $qbo_connect = $qbo_obj->qboConnect();
         bizState: '{!! $account->bizState !!}',
         bizZip: {!! $account->bizZip !!},
         phone: '{!! $account->phone !!}',
-        routing: 'XXXXX' + {!! $account->routing !!}
+        routing: 'XXXXX' + {!! $account->routing !!},
+
+        money: {
+        	decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+        }
       },
 
       directives: {
