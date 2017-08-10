@@ -33,8 +33,8 @@
 @section('scripts.footer')
 <script>
 	
-	var content = new Vue({
-		el: '#content',
+	var loyalty = new Vue({
+		el: '#loyalty',
 
 		components: {
     	VMoney
