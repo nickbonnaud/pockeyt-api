@@ -262,7 +262,6 @@ $qbo_connect = $qbo_obj->qboConnect();
   });
 
   	Vue.use(VueMask.VueMaskPlugin);
-  	Vue.use(money, {precision: 2})
     var account = new Vue({
       el: '#account',
 
@@ -272,11 +271,16 @@ $qbo_connect = $qbo_obj->qboConnect();
         indivZip: {!! $account->indivZip !!},
         ssn: 'XXXXX' + {!! $account->ssn !!},
         bizTaxId: '{!! $account->bizTaxId !!}',
+        annualCCSales: {!! $account->annualCCSales !!},
         bizState: '{!! $account->bizState !!}',
         bizZip: {!! $account->bizZip !!},
         phone: '{!! $account->phone !!}',
         routing: 'XXXXX' + {!! $account->routing !!}
       },
+
+      directives: {
+      	{money: VMoney}
+      }
     });
 </script>
 @stop
