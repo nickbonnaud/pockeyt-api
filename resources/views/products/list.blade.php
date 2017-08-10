@@ -1,7 +1,7 @@
 @extends('layoutDashboard')
 
 @section('content')
-<div class="content-wrapper-scroll">
+<div class="content-wrapper-scroll" id="product">
   <div class="scroll-main">
     <div class="scroll-main-contents">
     	<section class="content-header">
@@ -57,18 +57,18 @@
     	</section>
     </div>
   </div>
-</div>
-<div class="modal fade" id="addProductModal" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header-timeline">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="addProductModal">Add new product</h4>
-      </div>
-      <div class="modal-body-customer-info">
-        {!! Form::open(['method' => 'POST', 'route' => ['products.store'], 'files' => true]) !!}
-          @include ('partials.products.form')
-        {!! Form::close() !!}
+  <div class="modal fade" id="addProductModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header-timeline">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addProductModal">Add new product</h4>
+        </div>
+        <div class="modal-body-customer-info">
+          {!! Form::open(['method' => 'POST', 'route' => ['products.store'], 'files' => true]) !!}
+            @include ('partials.products.form')
+          {!! Form::close() !!}
+        </div>
       </div>
     </div>
   </div>
@@ -76,6 +76,26 @@
 @stop
 @section('scripts.footer')
 <script>
+
+  var product = new Vue({
+    el: '#product',
+
+    components: {
+      VMoney
+    },
+
+    data: {
+      price: '',
+      money: {
+        decimal: '.',
+        thousands: ',',
+        prefix: '$ ',
+        precision: 2,
+        masked: false
+      }
+    }
+  });
+
   getCategories = function() {
     var products = {!! $products !!};
     var categories = [];
