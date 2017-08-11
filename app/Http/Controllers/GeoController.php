@@ -81,16 +81,18 @@ class GeoController extends Controller
     	$userLng = $geoLocation->longitude;
         $inLocations = [];
     	foreach ($businessCoords as $businessCoord) {
-    		$businessLat = $businessCoord->latitude;
-    		$businessLng = $businessCoord->longitude;
-			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
-			if ($distance <= 50) {
-                if (!in_array($businessCoord->profile_id, $inLocations)) {
-                    array_push($inLocations, $businessCoord->profile_id);
-                    $business = $businessCoord->profile_id;
-                    $status = "enter";
-                    $this->pockeytLite($user, $business, $status);
-                    event(new CustomerEnterRadius($user, $business));
+            if ($businessCoord->profile->account->status === "active") {
+        		$businessLat = $businessCoord->latitude;
+        		$businessLng = $businessCoord->longitude;
+    			$distance = $this->getDistanceFromLatLng($businessLat, $businessLng, $userLat, $userLng);
+    			if ($distance <= 50) {
+                    if (!in_array($businessCoord->profile_id, $inLocations)) {
+                        array_push($inLocations, $businessCoord->profile_id);
+                        $business = $businessCoord->profile_id;
+                        $status = "enter";
+                        $this->pockeytLite($user, $business, $status);
+                        event(new CustomerEnterRadius($user, $business));
+                    }
                 }
             }
     	}
