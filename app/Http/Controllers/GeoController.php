@@ -31,19 +31,21 @@ class GeoController extends Controller
         $geoCoords = GeoLocation::with('profile.logo')->get();
         $geoFences = [];
         foreach ($geoCoords as $geoCoord) {
-            $thumbnail_url = $geoCoord->profile->logo->thumbnail_url;
-            $data['latitude'] = $geoCoord->latitude;
-            $data['longitude'] = $geoCoord->longitude;
-            $data['identifier'] = $geoCoord->identifier;
-            $data['radius'] = 50;
-            $data['notifyOnEntry'] = true;
-            $data['notifyOnExit'] = true;
-            $data['extras'] = (object) [
-                'business_logo' => $thumbnail_url,
-                'location_id' => $geoCoord->profile_id
-            ];
+            if ($geoCoord->profile->account->status === "active") {
+                $thumbnail_url = $geoCoord->profile->logo->thumbnail_url;
+                $data['latitude'] = $geoCoord->latitude;
+                $data['longitude'] = $geoCoord->longitude;
+                $data['identifier'] = $geoCoord->identifier;
+                $data['radius'] = 50;
+                $data['notifyOnEntry'] = true;
+                $data['notifyOnExit'] = true;
+                $data['extras'] = (object) [
+                    'business_logo' => $thumbnail_url,
+                    'location_id' => $geoCoord->profile_id
+                ];
 
-            array_push($geoFences, (object) $data);
+                array_push($geoFences, (object) $data);
+            }
         }
         return response()->json($geoFences);
     }
