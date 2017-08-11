@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-title" content="Pockeyt Business">
     <title>Pockeyt Business</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/libs.css') }}">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
+    <link rel="apple-touch-startup-image" href="/images/launch.png">
 </head>
 
 <body>
