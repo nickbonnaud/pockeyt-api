@@ -11,17 +11,17 @@
 			    </h1>
 			    @if(!$user->profile->tip_tracking_enabled)
 			    	<a href="{{ action('SalesController@toggleTipTracking') }}">
-			    		<button class="btn pull-right btn-primary">Enable Tip Tracking</button>
+			    		<button class="btn pull-right btn-primary quick-button">Enable Tip Tracking</button>
 			    	</a>
 			    @else
 			    	<a href="{{ action('SalesController@toggleTipTracking') }}">
-			    		<button class="btn pull-right btn-primary">Disable Tip Tracking</button>
+			    		<button class="btn pull-right btn-primary quick-button">Disable Tip Tracking</button>
 			    	</a>
 			    @endif
 			    <h4 style="display: inline-block;" v-show="!customDate">Date Range: Today</h4>
 			    <h4 style="display: inline-block;" v-show="customDate">Date Range: </h4>
 			    <a style="display: inline-block; font-size: 12px; margin-left: 2px;" v-show="!customDate" href="#" v-on:click="toggleDate()">Change</a>
-			    <input style="display: inline-block;" v-show="customDate" type="text" id="dateRange" value=""/>
+			    <input style="display: inline-block; width: 40%; font-size: 16px;" v-show="customDate" type="text" id="dateRange" value=""/>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			      <li class="active">Sales Center</li>
