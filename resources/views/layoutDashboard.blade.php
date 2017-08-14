@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <script src="{{ asset('/vendor/standAlone/stand-alone.js') }}"></script>
+  <meta name="apple-mobile-web-app-title" content="Pockeyt Business">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta property="og:site_name" content="Pockeyt" />
   <title>Pockeyt Business</title>
@@ -19,6 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
+  <link rel="apple-touch-startup-image" href="/images/launch.png">
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
