@@ -31,28 +31,30 @@
         </ol>
       </section>
     	<section class="content">
-      	<div class="col-md-12">
-      		<div class="box box-primary">
-      			<div class="box-header with-border">
-      				<h3 class="box-title-inventory">Products</h3>
-      				<div class="pull-right">
-      				<button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#addProductModal">Add</button>
-      				</div>
-      			</div>
-      			<div class="box-body no-padding">
-      				<table class="table table-striped">
-      					<tbody>
-      						<tr>
-      							<th>Name</th>
-      							<th>Price</th>
-      							<th>Photo</th>
-      							<th width="70px"></th>
-      						</tr>
-      						@include('partials.products.list', ['products' => $products])
-      					</tbody>
-      				</table>
-      			</div>
-      		</div>
+      	<div class="scroll-container-analytics col-md-12">
+          <div class="scroll-contents">
+        		<div class="box box-primary">
+        			<div class="box-header with-border">
+        				<h3 class="box-title-inventory">Products</h3>
+        				<div class="pull-right">
+        				<button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#addProductModal">Add</button>
+        				</div>
+        			</div>
+        			<div class="box-body no-padding">
+        				<table class="table table-striped">
+        					<tbody>
+        						<tr>
+        							<th>Name</th>
+        							<th>Price</th>
+        							<th>Photo</th>
+        							<th width="70px"></th>
+        						</tr>
+        						@include('partials.products.list', ['products' => $products])
+        					</tbody>
+        				</table>
+        			</div>
+        		</div>
+          </div>
       	</div>
     	</section>
     </div>
