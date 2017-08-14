@@ -15,18 +15,20 @@
         </ol>
       </section>
     	<section class="content">
-      	<div class="col-md-6">
-      		<div class="box box-primary">
-      			<div class="box-header with-border">
-      				<h3 class="box-title">Edit {{ $product->name }} info</h3>
-      			</div>
-      			<div class="box-body">
-            @include ('errors.form')
-      				{!! Form::model($product, ['method' => 'PATCH', 'route' => ['products.update', $product->id], 'files' => true, 'class' => 'form-horizontal']) !!}
-			          @include ('partials.products.form_edit')
-			        {!! Form::close() !!}
-			      </div>
-      		</div>
+      	<div class="scroll-container-analytics col-md-6">
+          <div class="scroll-contents">
+        		<div class="box box-primary">
+        			<div class="box-header with-border">
+        				<h3 class="box-title">Edit {{ $product->name }} info</h3>
+        			</div>
+        			<div class="box-body">
+              @include ('errors.form')
+        				{!! Form::model($product, ['method' => 'PATCH', 'route' => ['products.update', $product->id], 'files' => true, 'class' => 'form-horizontal']) !!}
+  			          @include ('partials.products.form_edit')
+  			        {!! Form::close() !!}
+  			      </div>
+        		</div>
+          </div>
       	</div>
       	@if(!is_null($product->product_photo_path))
           <div class="col-md-6">
