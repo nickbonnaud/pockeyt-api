@@ -10,13 +10,13 @@
 			      Team
 			    </h1>
 			    <a v-if="unlock != true" class="pull-right" v-if="employeesOn.length > 0 || employeesOff.length > 0" href="#" data-toggle="modal" data-target="#removeEmployeeModal" style="display: inline-block;">
-		    		<button class="btn btn-danger">Remove Team Member</button>
+		    		<button class="btn btn-danger quick-button">Remove Team Member</button>
 		    	</a>
 		    	<a v-if="unlock == true" class="pull-right" href="#" style="display: inline-block;" v-on:click="unlock = false">
-		    		<button class="btn btn-success">Finish</button>
+		    		<button class="btn btn-success quick-button">Finish</button>
 		    	</a>
 		    	<a href="#" data-toggle="modal" data-target="#addEmployeeModal" style="display: inline-block;">
-		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary">New Team Member</button>
+		    		<button v-on:click="this.searchResult = []" class="btn pull-left btn-primary quick-button">New Team Member</button>
 		    	</a>
 			    <ol class="breadcrumb">
 			      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>

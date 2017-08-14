@@ -8,23 +8,23 @@
 		    <h1>
 		      Add | Recent Events
 		    </h1>
-		     @if(!$user->profile->connected)
+		    @if(!$user->profile->connected)
           <a href="#" data-toggle="modal" data-target="#connectSocial">
-          	<h4>Enable Auto Posting</h4>
+          	<button class="btn btn-primary quick-button">Enable Auto Posting</button>
           </a>
         @else
-            @if($user->profile->connected == 'facebook')
-              <span class="icon-fb"></span>
-              <div class="auto-post">
-                <p class="auto-post-text">Auto Post</p>
-              </div>
-            @else
-              <span class="icon-insta"></span>
-              <div class="auto-post">
-                <p class="auto-post-text">Auto Post</p>
-              </div>
-            @endif
+          @if($user->profile->connected == 'facebook')
+            <span class="icon-fb"></span>
+            <div class="auto-post">
+              <p class="auto-post-text">Auto Post</p>
+            </div>
+          @else
+            <span class="icon-insta"></span>
+            <div class="auto-post">
+              <p class="auto-post-text">Auto Post</p>
+            </div>
           @endif
+        @endif
 		    <ol class="breadcrumb">
 		      <li><a href="{{ route('profiles.show', ['profiles' => Crypt::encrypt($user->profile->id)]) }}"><i class="fa fa-dashboard"></i> Home</a></li>
 		      <li class="active">Events</li>
