@@ -18,7 +18,7 @@
           // Condidions to do this only on links to your own app
           // if you want all links, use if('href' in curnode) instead.
           if(
-            'href' in curnode &&) {
+            'href' in curnode) {
             e.preventDefault();
             location.href = curnode.href;
           }
