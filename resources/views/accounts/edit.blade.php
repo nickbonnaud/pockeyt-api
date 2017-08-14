@@ -12,7 +12,7 @@ $qbo_connect = $qbo_obj->qboConnect();
 		      Your Business Account Profile
 		    </h1>
 		     @if(!$qbo_connect)
-		    	<span class="pull-right" style="margin-top: -5px;">
+		    	<span class="pull-right quick-button" style="margin-top: -5px;">
 						<ipp:connectToIntuit></ipp:connectToIntuit>
 					</span>
 				@else
