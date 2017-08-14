@@ -39,7 +39,7 @@
           <table class="table table-striped">
             <tbody>
               <tr>
-                <th>Quantity</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th></th>
