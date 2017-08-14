@@ -10,7 +10,7 @@
         </h1>
           @if(!$user->profile->connected)
             <a href="#" data-toggle="modal" data-target="#connectSocial">
-            	<button class="btn pull-right btn-primary">Enable Auto Posting</button>
+            	<button class="btn btn-primary quick-button">Enable Auto Posting</button>
             </a>
           @else
             @if($user->profile->connected == 'facebook')
