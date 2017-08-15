@@ -61,8 +61,8 @@
 </nav>
 
 <div class="wrapper">
-<div id="rainbow-progress-bar"></div>
     <div class="container">
+    <div id="rainbow-progress-bar"></div>
         @yield('content')
     </div>
 </div>
