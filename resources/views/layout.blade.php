@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/nprogress/nprogress.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/pace/pace-theme-minimal.css') }}">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
@@ -71,7 +71,7 @@
     <p>Made in Raleigh, NC</p>
     <p>Mentorship from endUp</p>
 </footer>
-
+<script src="{{ asset('/vendor/pace/pace.min.js') }}"></script>
 <script src="{{ asset('/vendor/jquery/jquery-1.12.0.min.js') }}"></script>
 <script src="{{ asset('/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/js/libs.js') }}"></script>
@@ -81,7 +81,6 @@
 <script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
 <script src="{{ asset('/vendor/vMask/v-money.js') }}"></script>
 <script src="{{ asset('/vendor/noBounce/inobounce.min.js') }}"></script>
-<script src="{{ asset('/vendor/nprogress/nprogress.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
 <style>
@@ -94,16 +93,6 @@
     } else {
         top.location = self.location;
     }
-
-    window.onbeforeunload = function() {
-        NProgress.start();
-        console.log("start");
-    };
-
-    window.onunload = function() {
-        NProgress.done();
-        console.log("finish");
-    };
 
 
 </script>
