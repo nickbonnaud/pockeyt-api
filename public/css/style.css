@@ -26,7 +26,8 @@
     font-style: normal
 }
 
-body {font-family: 'Gotham'; padding-top:43px;}
+html {overflow: hidden; height: 100%;}
+body {font-family: 'Gotham'; padding-top:43px; height: 100%; overflow: auto;}
 
 .wrapper {background:url(../images/pockeyt-bg.jpg) center center #f4ae33; background-size: cover ;padding:80px 0;}
 footer {text-align:center; font-size:12px; padding:15px 0;}
