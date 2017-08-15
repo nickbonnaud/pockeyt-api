@@ -59,6 +59,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+<div id="rainbow-progress-bar"></div>
 
 <div class="wrapper">
     <div class="container">
@@ -92,6 +93,11 @@
     } else {
         top.location = self.location;
     }
+
+    let progressBar = document.querySelector("#rainbow-progress-bar");
+    window.onload = function() {
+        progressBar.style.display = 'none';
+    };
 
 
 </script>
