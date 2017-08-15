@@ -7,6 +7,7 @@
   <script src="{{ asset('/vendor/standAlone/stand-alone.js') }}"></script>
   <meta name="apple-mobile-web-app-title" content="Pockeyt Business">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta property="og:site_name" content="Pockeyt" />
   <title>Pockeyt Business</title>
