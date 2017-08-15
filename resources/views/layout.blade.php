@@ -100,7 +100,7 @@
         console.log("start");
     };
 
-    window.onload = function() {
+    window.onunload = function() {
         NProgress.done();
         console.log("finish");
     };
