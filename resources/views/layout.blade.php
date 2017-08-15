@@ -87,18 +87,17 @@
     html { display:none; }
 </style>
 <script>
+
+    var progressBar = document.querySelector("#rainbow-progress-bar");
+    window.onload = function() {
+        progressBar.style.display = 'none';
+    };
     
     if (self == top) {
         document.documentElement.style.display = 'block'; 
     } else {
         top.location = self.location;
     }
-
-    var progressBar = document.querySelector("#rainbow-progress-bar");
-    window.onload = function() {
-        progressBar.style.display = 'none';
-    };
-
 
 </script>
 </body>
