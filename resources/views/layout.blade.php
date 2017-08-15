@@ -94,7 +94,7 @@
         top.location = self.location;
     }
 
-    let progressBar = document.querySelector("#rainbow-progress-bar");
+    var progressBar = document.querySelector("#rainbow-progress-bar");
     window.onload = function() {
         progressBar.style.display = 'none';
     };
