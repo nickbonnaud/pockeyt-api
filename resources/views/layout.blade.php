@@ -62,12 +62,12 @@
 
 <div class="wrapper">
     <div class="container">
-    <div id="rainbow-progress-bar"></div>
         @yield('content')
     </div>
 </div>
 
 <footer>
+<div id="rainbow-progress-bar"></div>
     <p>Made in Raleigh, NC</p>
     <p>Mentorship from endUp</p>
 </footer>
