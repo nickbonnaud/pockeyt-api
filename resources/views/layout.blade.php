@@ -59,9 +59,9 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div id="rainbow-progress-bar"></div>
 
 <div class="wrapper">
+<div id="rainbow-progress-bar"></div>
     <div class="container">
         @yield('content')
     </div>
