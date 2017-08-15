@@ -107,61 +107,63 @@ $qbo_connect = $qbo_obj->qboConnect();
 												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 											@endif
 										</tr>
-										<tr>
-											<td class="text-center"><span class="icon-square-connect"></span></td>
-											<td class="text-center">Inventory Import</td>
-											@if(isset($user->profile->square_token))
-												<td class="text-center"><span class="label label-success">Connected</span></td>
-												@if($user->profile->account->square_location_id)
-													<td class="text-center"><span class="label label-primary">Enabled while connected</span></td>
+										@if($user->profile->account)
+											<tr>
+												<td class="text-center"><span class="icon-square-connect"></span></td>
+												<td class="text-center">Inventory Import</td>
+												@if(isset($user->profile->square_token))
+													<td class="text-center"><span class="label label-success">Connected</span></td>
+													@if($user->profile->account->square_location_id)
+														<td class="text-center"><span class="label label-primary">Enabled while connected</span></td>
+													@else
+														<td class="text-center">
+															<a href="{{ action('ConnectController@getSquareLocationId') }}">
+																<button class="btn btn-success">Enable</button>
+															</a>
+														</td>
+													@endif
 												@else
 													<td class="text-center">
-														<a href="{{ action('ConnectController@getSquareLocationId') }}">
-															<button class="btn btn-success">Enable</button>
+														<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
+															<i class="fa fa-square-o"></i>
+															Connect With Square
 														</a>
 													</td>
+													<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 												@endif
-											@else
-												<td class="text-center">
-													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
-														<i class="fa fa-square-o"></i>
-														Connect With Square
-													</a>
-												</td>
-												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
-											@endif
-										</tr>
-										<tr>
-											<td class="text-center"><span class="icon-square-connect"></span></td>
-											<td class="text-center">Pockeyt Lite</td>
-											@if(isset($user->profile->square_token))
-												<td class="text-center"><span class="label label-success">Connected</span></td>
-												@if($user->profile->account->pockeyt_lite_enabled)
-													<td class="text-center"><a href="{{ action('ConnectController@disablePockeytLite') }}"><button class="btn btn-danger">Disable</button></a></td>
+											</tr>
+											<tr>
+												<td class="text-center"><span class="icon-square-connect"></span></td>
+												<td class="text-center">Pockeyt Lite</td>
+												@if(isset($user->profile->square_token))
+													<td class="text-center"><span class="label label-success">Connected</span></td>
+													@if($user->profile->account->pockeyt_lite_enabled)
+														<td class="text-center"><a href="{{ action('ConnectController@disablePockeytLite') }}"><button class="btn btn-danger">Disable</button></a></td>
+													@else
+														<td class="text-center"><a href="{{ action('ConnectController@subscribeSquare') }}"><button class="btn btn-success">Enable</button></a></td>
+													@endif
 												@else
-													<td class="text-center"><a href="{{ action('ConnectController@subscribeSquare') }}"><button class="btn btn-success">Enable</button></a></td>
+													<td class="text-center">
+														<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
+															<i class="fa fa-square-o"></i>
+															Connect With Square
+														</a>
+													</td>
+													<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
 												@endif
-											@else
-												<td class="text-center">
-													<a href="{{ 'https://connect.squareup.com/oauth2/authorize?client_id=' . env('SQUARE_ID') . '&scope=ITEMS_READ%20ITEMS_WRITE%20MERCHANT_PROFILE_READ%20PAYMENTS_READ&state=' . env('SQUARE_STATE') }}" class="btn btn-block btn-social btn-github">
-														<i class="fa fa-square-o"></i>
-														Connect With Square
-													</a>
-												</td>
-												<td class="text-center"><button class="btn btn-success disabled" disabled>Enable</button></td>
-											@endif
-										</tr>
-										<tr>
-											<td class="text-center"><span class="icon-quickbooks-connect"></span></td>
-											<td class="text-center">Pockeyt Sync</td>
-											@if($user->profile->connected_qb)
-												<td class="text-center"><button class="btn btn-danger" href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect</button></td>
-												<td class="text-center"><span class="label label-primary">Disable by disconnecting</span></td>
-											@else
-												<td class="text-center"><ipp:connectToIntuit></ipp:connectToIntuit></td>
-												<td class="text-center"><span class="label label-primary">Enable by connecting</span></td>
-											@endif
-										</tr>
+											</tr>
+											<tr>
+												<td class="text-center"><span class="icon-quickbooks-connect"></span></td>
+												<td class="text-center">Pockeyt Sync</td>
+												@if($user->profile->connected_qb)
+													<td class="text-center"><button class="btn btn-danger" href="{{ action('QuickBookController@qboDisconnect') }}">Disconnect</button></td>
+													<td class="text-center"><span class="label label-primary">Disable by disconnecting</span></td>
+												@else
+													<td class="text-center"><ipp:connectToIntuit></ipp:connectToIntuit></td>
+													<td class="text-center"><span class="label label-primary">Enable by connecting</span></td>
+												@endif
+											</tr>
+										@endif
 									</tbody>
 								</table>
 							</div>

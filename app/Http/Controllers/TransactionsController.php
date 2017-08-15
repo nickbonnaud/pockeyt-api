@@ -55,7 +55,7 @@ class TransactionsController extends Controller
                 ->where('paid', '=', false);
         })->first();
         $locationCheck = $this->userInLocationCheck($customer, $business);
-        if(isset($transaction) && isset($locationCheck)) {
+        if(isset($transaction)) {
             $bill = $transaction->products;
             $billId = $transaction->id;
             return view('transactions.bill_show', compact('customer', 'business', 'inventory', 'bill', 'billId'));
