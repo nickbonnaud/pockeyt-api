@@ -68,7 +68,6 @@
 
 <footer>
     <p>Made in Raleigh, NC</p>
-    <div id="rainbow-progress-bar"></div>
     <p>Mentorship from endUp</p>
 </footer>
 
@@ -87,17 +86,21 @@
     html { display:none; }
 </style>
 <script>
-
-    var progressBar = document.querySelector("#rainbow-progress-bar");
-    window.onload = function() {
-        console.log("hello");
-    };
     
     if (self == top) {
         document.documentElement.style.display = 'block'; 
     } else {
         top.location = self.location;
     }
+
+    window.onbeforeunload = function() {
+        console.log("start");
+    };
+
+    window.onload = function() {
+        console.log("finish");
+    };
+
 
 </script>
 </body>
