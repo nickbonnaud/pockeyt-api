@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/nprogress/nprogress.css') }}">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
@@ -80,6 +81,7 @@
 <script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
 <script src="{{ asset('/vendor/vMask/v-money.js') }}"></script>
 <script src="{{ asset('/vendor/noBounce/inobounce.min.js') }}"></script>
+<script src="{{ asset('/vendor/nprogress/nprogress.js') }}"></script>
 @yield('scripts.footer')
 @include('flash')
 <style>
@@ -94,10 +96,12 @@
     }
 
     window.onbeforeunload = function() {
+        NProgress.start();
         console.log("start");
     };
 
     window.onload = function() {
+        NProgress.done();
         console.log("finish");
     };
 
