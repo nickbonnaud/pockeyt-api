@@ -67,8 +67,8 @@
 </div>
 
 <footer>
-<div id="rainbow-progress-bar"></div>
     <p>Made in Raleigh, NC</p>
+    <div id="rainbow-progress-bar"></div>
     <p>Mentorship from endUp</p>
 </footer>
 
