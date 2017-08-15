@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/jqueryui/css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/icon" />
     <link rel="apple-touch-startup-image" href="/images/launch.png">

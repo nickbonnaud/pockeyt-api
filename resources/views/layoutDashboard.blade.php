@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('/vendor/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/vendor/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('/vendor/select2/select2.min.css') }}">
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.css">
