@@ -62,9 +62,13 @@
     </div>
 </nav>
 
-<div class="wrapper">
-    <div class="container">
-        @yield('content')
+<div class="content-wrapper-scroll">
+    <div class="scroll-main">
+        <div class="scroll-main-contents">
+            <div class="container">
+                @yield('content')
+            </div>
+        </div>
     </div>
 </div>
 

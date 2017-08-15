@@ -1,27 +1,29 @@
 @extends('layout')
-
 @section('content')
+<div class="scroll-container-analytics">
+    <div class="scroll-contents">
+        <div class="row">
 
-    <div class="row">
+            <div class="col-md-12">
 
-        <div class="col-md-12">
+                <h1>Create Business Profile</h1>
 
-            <h1>Create Business Profile</h1>
+                <hr>
 
-            <hr>
+                @if($isAdmin)
+                    <div class="alert alert-warning">
+                        Heads up! You're logged in as an administrator. This form will create a profile for you which is likely
+                        not what you want to do.
+                    </div>
+                @endif
 
-            @if($isAdmin)
-                <div class="alert alert-warning">
-                    Heads up! You're logged in as an administrator. This form will create a profile for you which is likely
-                    not what you want to do.
-                </div>
-            @endif
+                {!! Form::open(['route' => 'profiles.store']) !!}
+                    @include ('errors.form')
+                    @include ('profiles.form_create')
+                {!! Form::close() !!}
+            </div>
 
-            {!! Form::open(['route' => 'profiles.store']) !!}
-                @include ('errors.form')
-                @include ('profiles.form_create')
-            {!! Form::close() !!}
         </div>
-
     </div>
+</div>
 @stop
