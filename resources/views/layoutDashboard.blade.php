@@ -294,6 +294,7 @@
   <script src="{{ asset('/vendor/vMask/v-mask.min.js') }}"></script>
   <script src="{{ asset('/vendor/vMask/v-money.js') }}"></script>
 	<script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
+  <script src="{{ asset('/vendor/noBounce/inobounce.min.js') }}"></script>
   <script src="//js.pusher.com/3.2/pusher.min.js"></script>
 	@yield('scripts.footer')
   @include('flash')
