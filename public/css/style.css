@@ -26,6 +26,12 @@
     font-style: normal
 }
 
+html,
+body {
+    position: fixed;
+    overflow: hidden;
+}
+
 body {font-family: 'Gotham'; padding-top:43px;}
 
 .wrapper {background:url(../images/pockeyt-bg.jpg) center center #f4ae33; background-size: cover ;padding:80px 0;}
