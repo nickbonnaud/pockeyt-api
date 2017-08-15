@@ -6,7 +6,7 @@
     <script src="{{ asset('/vendor/standAlone/stand-alone.js') }}"></script>
     <meta name="apple-mobile-web-app-title" content="Pockeyt Business">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Pockeyt Business</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/libs.css') }}">
