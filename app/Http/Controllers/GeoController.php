@@ -96,17 +96,19 @@ class GeoController extends Controller
                 }
             }
     	}
+        $storedLocations = Location::where('user_id', '=', $user->id)->get();
+        if (isset($storedLocations)) {
+            $this->checkOpenBill($inLocations, $user, $storedLocations);
+        } else {
+            $this->checkOpenBill($inLocations, $user);
+        }
         if (count($inLocations) > 0) {
             return $this->checkIfUserInLocation($user, $inLocations);
         } else {
-            $storedLocations = Location::where('user_id', '=', $user->id)->get();
             if (!isset($storedLocations)) { return response('none');}
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->location_id;
-                $status = "exit";
-                $this->pockeytLite($user, $business, $status);
-                event(new CustomerLeaveRadius($user, $business));
-                $storedLocation->delete();
+                $this->customerExit($user, $business);
             }
             return response('none');
         }
@@ -122,10 +124,7 @@ class GeoController extends Controller
             foreach ($storedLocations as $storedLocation) {
                 $business = $storedLocation->location_id;
                 if (!in_array($business, $inLocations)) {
-                    $status = "exit";
-                    $this->pockeytLite($user, $business, $status);
-                    event(new CustomerLeaveRadius($user, $business));
-                    $storedLocation->delete();
+                    $this->customerExit($user, $business);
                 } else {
                     $storedLocation->touch();
                     $key = array_search($business, $inLocations);
@@ -155,22 +154,39 @@ class GeoController extends Controller
             $bill = Transaction::where(function($query) use ($user,$business) {
                 $query->where('user_id', '=', $user->id)
                     ->where('profile_id', '=', $business)
-                    ->where('paid', '=', false);
+                    ->where('paid', '=', false)
+                    ->whereIn('status', [2, 10, 11, 15]);
             })->first();
             if (!isset($bill)) {
                 $this->sendEnterNotif($user, $profile);
+            } else {
+                $bill->outside_geofence_count = 0;
+                $bill->save();
             }
         }
         return;
     }
 
-    public function removeSetLocation($user, $business) {
-        $location = Location::where(function($query) use ($user, $business) {
-            $query->where('user_id', '=', $user->id)
-                ->where('location_id', '=', $business);
-        })->first();
-        if (isset($location)) {
-           return $location->delete();
+    public function checkOpenBill($inLocations, $user, $storedLocations = []) {
+        $bills = Transaction::where('user_id', '=', $user->id)
+            ->where('paid', '=', false)
+            ->whereIn('status', [2, 10, 11, 15])
+        ->get();
+
+        if (isset($bills)) {
+            $storedLocationsIds = [];
+            if (count($storedLocations) > 0) {
+                foreach ($storedLocations as $storedLocation) {
+                    array_push($storedLocationsIds, $storedLocation->location_id);
+                }
+            }
+            foreach ($bills as $bill) {
+                $billBusinessId = $bill->profile_id;
+                if ((!in_array($billBusinessId, $inLocations)) && (!in_array($billBusinessId, $storedLocationsIds))) {
+                    $bill->outside_geofence_count = $bill->outside_geofence_count + 1;
+                    $bill->save();
+                }
+            }
         }
         return;
     }
@@ -215,6 +231,33 @@ class GeoController extends Controller
         $this->pockeytLite($user, $business, $status);
         event(new CustomerLeaveRadius($user, $business));
         return $this->removeSetLocation($user, $business);
+    }
+
+    public function removeSetLocation($user, $business) {
+        $location = Location::where(function($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('location_id', '=', $business);
+        })->first();
+        if (isset($location)) {
+            $this->incrementOutsideGeofenceCount($user, $business);
+            return $location->delete();
+        }
+        return;
+    }
+
+    public function incrementOutsideGeofenceCount($user, $business) {
+        $bill = Transaction::where(function($query) use ($user, $business) {
+            $query->where('user_id', '=', $user->id)
+                ->where('profile_id', '=', $business)
+                ->where('paid', '=', false)
+                ->whereIn('status', [2, 10, 11, 15]);
+        })->first();
+
+        if (isset($bill)) {
+            $bill->outside_geofence_count = $bill->outside_geofence_count + 1;
+            $bill->save();
+        }
+        return;
     }
 
     public function deleteInactiveUser(Request $request) {
@@ -280,7 +323,6 @@ class GeoController extends Controller
             $client = new Client([
                 'base_url' => ['https://connect.squareup.com/{version}/', ['version' => 'v1']]
             ]);
-            // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
             if ($status == "enter") {
                 try {
                     $response = $client->post($squareLocationId . '/items' . '/' . $itemId . '/variations', [
@@ -302,30 +344,6 @@ class GeoController extends Controller
                         return $e->getResponse();
                     }
                 }
-
-
-                // try {
-                //     $response = $client->request('POST', $squareLocationId . '/items' . '/' . $itemId . '/variations', [
-                //         'headers' => [
-                //             'Authorization' => 'Bearer ' . $token,
-                //             'Accept' => 'application/json'
-                //         ],
-                //         'json' => [
-                //             'id' => $variationId,
-                //             'name' => $user->first_name . ' ' . $user->last_name,
-                //             'price_money' => [
-                //                 'currency_code' => 'USD',
-                //                 'amount' => 0,
-                //             ]
-                //         ]
-                //     ]);
-                // } catch (RequestException $e) {
-                //     if ($e->hasResponse()) {
-                //         return $e->getResponse();
-                //     }
-                // }
-
-
                 return;
             } else {
                 try {
@@ -340,21 +358,6 @@ class GeoController extends Controller
                         return $e->getResponse();
                     }
                 }
-
-
-
-                // try {
-                //     $response = $client->request('DELETE', $squareLocationId . '/items' . '/' . $itemId . '/variations' . '/' . $variationId , [
-                //         'headers' => [
-                //             'Authorization' => 'Bearer ' . $token,
-                //             'Accept' => 'application/json'
-                //         ]
-                //     ]);
-                // } catch (RequestException $e) {
-                //     if ($e->hasResponse()) {
-                //         return $e->getResponse();
-                //     }
-                // }
                 return;
             }
         } else {

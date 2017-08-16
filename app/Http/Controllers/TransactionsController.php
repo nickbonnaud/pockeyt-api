@@ -52,8 +52,9 @@ class TransactionsController extends Controller
         $transaction = Transaction::where(function($query) use ($customer, $business) {
             $query->where('user_id', '=', $customer->id)
                 ->where('profile_id', '=', $business->id)
-                ->where('paid', '=', false);
-        })->first();
+                ->where('paid', '=', false)
+                ->where('status', '<', 20);
+        })->orderBy('updated_at', 'desc')->first();
         $locationCheck = $this->userInLocationCheck($customer, $business);
         if(isset($transaction)) {
             $bill = $transaction->products;
@@ -80,6 +81,7 @@ class TransactionsController extends Controller
             $transaction->employee_id = null;
         }
         $profile = $this->user->profile;
+        $transaction->status = 15;
         $profile->transactions()->save($transaction);
 
         return redirect()->route('profiles.show', ['profiles' => Crypt::encrypt($profile->id)]);
@@ -87,6 +89,7 @@ class TransactionsController extends Controller
 
     public function update(UpdateTransactionRequest $request, $id) {
         $transaction = Transaction::findOrFail($id);
+        $transaction->status = 15;
         $transaction->update($request->all());
         $profile = $this->user->profile;
 
@@ -292,8 +295,9 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::where(function ($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
-                ->where('paid', '=', false);
-        })->first();
+                ->where('paid', '=', false)
+                ->where('status', '<', 20);
+        })->orderBy('updated_at', 'desc')->first();
         if (isset($transaction)) {
             $profile = Profile::findOrFail($transaction->profile_id);
             $profile['logo_photo'] = $profile->logo->thumbnail_url;
@@ -308,8 +312,8 @@ class TransactionsController extends Controller
         $transaction = Transaction::where(function ($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', false)
-                ->where('status', '=', 11);
-        })->first();
+                ->whereIn('status', '=', 11);
+        })->orderBy('updated_at', 'desc')->first();
         if (!$transaction) {
             return response()->json(['noBill' => 'No Open Bills'], 200);
         } else {
@@ -323,12 +327,13 @@ class TransactionsController extends Controller
         $customer = JWTAuth::parseToken()->authenticate();
         $transaction = Transaction::where(function ($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
-                ->where('paid', '=', false);
-        })->first();
+                ->where('paid', '=', false)
+                ->whereIn('status', '<', 20);
+        })->orderBy('updated_at', 'desc')->first();
         if (!$transaction) {
             return response()->json(false, 200);
         } else {
-            if ($transaction->status == 11) {
+            if (($transaction->status == 11) || ($transaction->status == 2)) {
                 return response()->json(['billSent' => true], 200);
             } else {
                 return response()->json(['billSent' => false], 200);
@@ -540,7 +545,7 @@ class TransactionsController extends Controller
         return response()->json($purchased);
     }
 
-     public function getUserPurchases(Request $request) {
+    public function getUserPurchases(Request $request) {
         $customerId = $request->customerId;
         $businessId = $request->businessId;
         $currentDate = Carbon::now();
@@ -549,6 +554,7 @@ class TransactionsController extends Controller
         $purchases = Transaction::where(function($query) use ($customerId, $businessId) {
             $query->where('user_id', '=', $customerId)
                 ->where('profile_id', '=', $businessId)
+                ->where('paid', '=', true)
                 ->where('refund_full', '=', false)
                 ->where('products', '!=', '');
         })->orderBy('created_at', 'desc')->take(5)->get();
@@ -794,22 +800,6 @@ class TransactionsController extends Controller
         }
 
 
-        // $client = new \GuzzleHttp\Client(['base_uri' => 'https://connect.squareup.com/v1/']);
-        // try {
-        //   $response = $client->request('GET', $squareLocationId . '/payments' . '/' . $payment_id, [
-        //     'headers' => [
-        //       'Authorization' => 'Bearer ' . $token,
-        //       'Accept' => 'application/json'
-        //     ]
-        //   ]);
-        // } catch (RequestException $e) {
-        //   if ($e->hasResponse()) {
-        //     dd($e->getResponse());
-        //   }
-        // }
-
-
-
         $payment = json_decode($response->getBody());
         foreach ($payment->itemizations as $item) {
             if ($item->name == "Pockeyt Customer") {
@@ -883,6 +873,7 @@ class TransactionsController extends Controller
                 $transactions = Transaction::where(function($query) use ($userId, $businessId) {
                     $query->where('profile_id', '=', $businessId)
                     ->where('user_id', '=', $userId)
+                    ->where('paid', '=', true)
                     ->where('refund_full', '=', false);
                 })->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
                 if (count($transactions) > 0) {
@@ -894,7 +885,7 @@ class TransactionsController extends Controller
                 return response('Not Found');
             }
         } else {
-            $transactions = Transaction::where('splash_id', 'like', '%' . $searchInput)->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
+            $transactions = Transaction::where('splash_id', 'like', '%' . $searchInput)->where('paid', '=', true)->leftJoin('users', 'transactions.user_id', '=', 'users.id')->select('transactions.*', 'users.first_name', 'users.last_name', 'customer_id')->orderBy('transactions.updated_at', 'desc')->get();
             if (count($transactions) > 0) {
                 return response()->json($transactions);
             } else {
