@@ -312,7 +312,7 @@ class TransactionsController extends Controller
         $transaction = Transaction::where(function ($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', false)
-                ->whereIn('status', '=', 11);
+                ->where('status', '=', 11);
         })->orderBy('updated_at', 'desc')->first();
         if (!$transaction) {
             return response()->json(['noBill' => 'No Open Bills'], 200);
@@ -328,7 +328,7 @@ class TransactionsController extends Controller
         $transaction = Transaction::where(function ($query) use ($customer) {
             $query->where('user_id', '=', $customer->id)
                 ->where('paid', '=', false)
-                ->whereIn('status', '<', 20);
+                ->where('status', '<', 20);
         })->orderBy('updated_at', 'desc')->first();
         if (!$transaction) {
             return response()->json(false, 200);
